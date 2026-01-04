@@ -1,0 +1,10 @@
+{
+  "label": "Devops Platform",
+  "position": 4,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "doc",
+    "id": "devops-platform/index"
+  }
+}

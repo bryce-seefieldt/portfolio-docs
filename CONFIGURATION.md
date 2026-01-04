@@ -127,6 +127,6 @@ For enterprise-level polish, use `customProps` to record (and later render):
 Provides “evidence dashboard” feel without inventing a separate system.
 
 ## Enable Mermaid diagrams (architecture & flows)
-[Memaid Diagram and Charting Tool](https://mermaid.js.org/)
+[Mermaid Diagram and Charting Tool](https://mermaid.js.org/)
 - Install the **Mermaid theme package**
 - [Enable diagrams](https://docusaurus.io/docs/next/markdown-features/diagrams) (theme config supports Mermaid theming)

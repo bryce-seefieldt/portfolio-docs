@@ -1,0 +1,10 @@
+{
+  "label": "Portfolio Docs App",
+  "position": 7.0,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "doc",
+    "id": "projects/portfolio-docs-app/index"
+  }
+}
