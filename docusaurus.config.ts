@@ -5,9 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Bryce Seefieldt | Dev Documentation',
-  tagline: 'Full-Stack Developer, Tech Enthusiast, and Lifelong Learner',
-  favicon: 'img/favicon.ico',
+  title: 'Bryce Seefieldt | Portfolio Documentation',
+  tagline: 'Dev docs and resources for the development portfolio project',
+  favicon: 'img/favicon2.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -84,10 +84,10 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Bryce Seefieldt | Dev Documentation',
+      title: 'Portfolio Documentation',
       logo: {
         alt: 'Bryce Seefieldt Logo',
-        src: 'img/logo.svg',
+        src: 'img/seven30.png',
       },
       items: [
         {
@@ -96,7 +96,7 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        // {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/bryce-seefieldt/portfolio-docs',
           label: 'GitHub',
@@ -111,8 +111,8 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Portfolio Documentation',
+              to: '/docs',
             },
           ],
         },
@@ -132,10 +132,10 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
+            // {
+            //   label: 'Blog',
+            //   to: '/blog',
+            // },
             {
               label: 'GitHub',
               href: 'https://github.com/bryce-seefieldt/',
