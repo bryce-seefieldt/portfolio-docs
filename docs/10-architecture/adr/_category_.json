@@ -1,10 +1,10 @@
 {
-  "label": "Portfolio",
+  "label": "Architecture Decision Records (ADRs)",
   "position": 1,
   "collapsible": true,
   "collapsed": true,
   "link": {
     "type": "doc",
-    "id": "portfolio/index"
+    "id": "architecture/adr/index"
   }
 }

@@ -1,10 +1,10 @@
 {
-  "label": "Portfolio",
+  "label": "Threat Models",
   "position": 1,
   "collapsible": true,
   "collapsed": true,
   "link": {
     "type": "doc",
-    "id": "portfolio/index"
+    "id": "security/threat-models/index"
   }
 }
