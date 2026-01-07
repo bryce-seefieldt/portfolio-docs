@@ -24,19 +24,32 @@ pnpm build
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
 ## Deployment
+
+### Hosting and CI/CD
+
+The Portfolio Docs App is deployed to **Vercel** with the following workflow:
+
+- **Preview deployments** for all PR branches (one per PR)
+- **Production deployment** from `main` (automatic on merge)
+- **Deployment Checks** gate: production domain is assigned only after GitHub Actions `ci / build` checks pass
+- **Build determinism** via Corepack and pinned pnpm version (`package.json#packageManager: "pnpm@10.0.0"`)
+
+**Learn more:**
+- [Hosting & Deployment Decision](./docs/10-architecture/adr/adr-0003-hosting-vercel-with-preview-deployments.md) (ADR-0003)
+- [Portfolio Docs Deployment Model](./docs/60-projects/portfolio-docs-app/03-deployment.md) (dossier page)
+- [Deploy Runbook](./docs/50-operations/runbooks/rbk-docs-deploy.md) (step-by-step deployment guide)
+- [Rollback Runbook](./docs/50-operations/runbooks/rbk-docs-rollback.md) (emergency recovery)
+
+### Local build and test
+
+```bash
+pnpm build
+```
+This command generates static content into the `build` directory. The same command runs in CI and blocks merge if it fails (intentional safety gate for broken links).
+
+### Reference
+
 [Docusaurus Deployment Guide](https://docusaurus.io/docs/deployment)
-
-Using SSH:
-
-<!-- ```bash
-USE_SSH=true yarn deploy
-``` -->
-
-Not using SSH:
-
-<!-- ```bash
-GIT_USER=<Your GitHub username> yarn deploy
-``` -->
 
 ## Configuration
 Please see [`CONFIGURATION.md`](./CONFIGURATION.md) for details of the Docusaurus configuration, project structure and features., and other customizations.

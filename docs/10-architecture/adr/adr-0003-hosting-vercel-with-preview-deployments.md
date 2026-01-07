@@ -107,18 +107,71 @@ The primary rollback mechanism is reverting changes on `main` and redeploying.
   - CI/log outputs must avoid leaking identifiers
   - Dependency/supply chain and PR integrity remain key threats
 
-### Implementation notes (high-level)
+### Implementation notes
 
-- Decide and document `routeBasePath` strategy early (docs at `/` vs `/docs`).
-- Configure Vercel build:
-  - install: `pnpm install`
-  - build: `pnpm build`
-- Configure PR previews:
-  - reviewers validate navigation, rendering, and key pages prior to merge.
-- Ensure runbooks exist:
-  - deploy
-  - rollback
-  - broken-link triage
+#### Route base path strategy
+- Decide and document `routeBasePath` early (docs at `/` vs `/docs`).
+- Keep the decision consistent between local (`docusaurus.config.ts`) and Vercel deployment.
+
+#### Build configuration
+Configure Vercel with the following build contract:
+```yaml
+Install command: pnpm install
+Build command: pnpm build
+Output directory: build
+Node.js version: 20.x (or higher)
+```
+
+This ensures deterministic, reproducible builds across local and hosted environments.
+
+#### Deployment Checks: decoupling deployment creation from release promotion
+
+**Key decision:** Enable Vercel **Deployment Checks** and configure **Required checks** to decouple production deployment creation from release promotion.
+
+**Rationale:**
+Deployment Checks are Vercel's mechanism for blocking domain assignment and production promotion until specified GitHub checks pass. This allows us to:
+- Create a production deployment immediately upon merge to `main` (fast feedback loop)
+- Prevent domain assignment (public availability) until required checks pass (safety gate)
+- Maintain a clear audit trail: when exactly the site became publicly available
+
+**Configuration:**
+- Required checks: `ci / build` (from GitHub Actions workflow)
+- When checks are green: Vercel automatically assigns the production domain
+- When checks fail: deployment exists but remains unpromoted; reviewers see build failure before site goes live
+
+This pattern ensures that even if a critical link or configuration issue reaches `main`, it is caught and the site remains stable until the issue is resolved and checks pass.
+
+#### Build determinism: pnpm + Corepack
+
+To ensure identical builds across local, CI, and Vercel environments, configure package manager pinning:
+
+**Package manager pinning via `package.json`:**
+- `package.json` already specifies: `"packageManager": "pnpm@10.0.0"`
+- Vercel respects this field and automatically uses the pinned version ([Vercel | Package Managers](https://vercel.com/docs/package-managers))
+
+**Corepack integration (experimental):**
+- Enable `ENABLE_EXPERIMENTAL_COREPACK=1` as an environment variable in Vercel project settings
+- Corepack is Node's native package manager version manager; when enabled, it enforces the exact `pnpm@10.0.0` version specified in `package.json`
+
+**Risk/Benefit assessment:**
+- **Benefit:** eliminates "works on my machine but not in CI/Vercel" errors due to package manager version drift
+- **Risk:** Corepack is experimental ([Vercel | Corepack (experimental)](https://vercel.com/changelog/corepack-experimental-is-now-available)); Node team may change behavior or deprecate in favor of a stable alternative
+- **Mitigation:** pinned version in `package.json` provides a fallback; if Corepack behavior changes, we can disable it and rely on Vercel's default package manager resolver, or revert to explicit install via `pnpm install --frozen-lockfile`
+
+**Validation:**
+- Check Vercel build logs: confirm they show `pnpm 10.0.0` (or the pinned version)
+- Local validation: run `pnpm install --frozen-lockfile && pnpm build` to catch lockfile drift early
+
+#### PR preview deployments
+- Reviewers validate navigation, rendering, and key pages prior to merge
+- Preview URLs are unique per PR and branch, enabling parallel review
+- Failed builds block merge and are visible in the PR checks UI
+
+#### Operational runbooks
+Ensure the following runbooks exist and are maintained:
+- **Deploy runbook** — how to interpret Vercel deployment lifecycle and validate promotion
+- **Rollback runbook** — how to revert a merge and redeploy to restore production
+- **Broken-links triage runbook** — how to interpret CI build failures and resolve locally
 
 ## Validation / Expected outcomes
 

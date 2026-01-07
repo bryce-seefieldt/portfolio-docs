@@ -126,6 +126,57 @@ For enterprise-level polish, use `customProps` to record (and later render):
 
 Provides “evidence dashboard” feel without inventing a separate system.
 
+## CI and Deployment Configuration
+
+### Hard build gate (broken links == failure)
+
+- `docusaurus.config.ts` sets `onBrokenLinks: 'throw'`
+- This means the build fails if:
+  - any internal link target does not exist
+  - any doc ID in `_category_.json` link is missing
+  - any anchor link is invalid
+- This is **intentional and by design**; broken links are a hard failure
+- See [ADR-0003: Hosting Vercel with Preview Deployments](./docs/10-architecture/adr/adr-0003-hosting-vercel-with-preview-deployments.md) for rationale
+
+### Vercel Deployment Checks
+
+**Purpose:** decouple deployment creation from production release
+
+**Configuration:**
+- Vercel Git integration detects pushes to `main`
+- Production deployment created immediately
+- GitHub Actions `ci / build` workflow runs (required check)
+- Vercel assigns production domain only when checks pass
+- If checks fail: deployment exists but remains unpromoted
+
+**Learn more:**
+- [Deployment Checks flow diagram and explanation](./docs/60-projects/portfolio-docs-app/03-deployment.md#release-governance-vercel-deployment-checks)
+- [Deploy runbook](./docs/50-operations/runbooks/rbk-docs-deploy.md) with validation steps
+
+### Build determinism: pnpm + Corepack
+
+**Package manager pinning via `package.json`:**
+```json
+{
+  "packageManager": "pnpm@10.0.0",
+  "engines": { "node": ">=20.0" }
+}
+```
+
+**Vercel environment variable:**
+```
+ENABLE_EXPERIMENTAL_COREPACK=1
+```
+
+**Purpose:**
+- Ensures identical pnpm version across local, CI, and Vercel
+- Prevents "works on my machine but fails in CI" issues
+- Corepack is Node's native package manager version manager
+
+**Learn more:**
+- [Build Determinism details](./docs/60-projects/portfolio-docs-app/03-deployment.md#build-determinism-pnpm--corepack) in deployment dossier
+- [Risk/benefit assessment for experimental Corepack](./docs/10-architecture/adr/adr-0003-hosting-vercel-with-preview-deployments.md#corepack-integration-experimental)
+
 ## Enable Mermaid diagrams (architecture & flows)
 [Mermaid Diagram and Charting Tool](https://mermaid.js.org/)
 - Install the **Mermaid theme package**

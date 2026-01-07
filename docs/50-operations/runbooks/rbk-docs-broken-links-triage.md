@@ -40,7 +40,40 @@ This repository prefers avoiding links to pages that do not exist yet. Use plain
 
 ## Procedure / Content
 
+### 0) Check for toolchain-related failures first
+
+Before assuming link issues, verify package manager consistency:
+
+**If you recently changed dependencies or pnpm version:**
+
+1. Confirm Corepack pin in `package.json`:
+   ```bash
+   grep packageManager package.json
+   # Should output: "packageManager": "pnpm@10.0.0"
+   ```
+
+2. Verify local pnpm matches the pin:
+   ```bash
+   pnpm --version  # Should output: 10.0.0
+   ```
+   If it does not match, enable Corepack locally:
+   ```bash
+   corepack enable
+   corepack install
+   pnpm --version  # Should now match
+   ```
+
+3. Clean install and rebuild:
+   ```bash
+   rm -rf node_modules pnpm-lock.yaml
+   pnpm install
+   pnpm build
+   ```
+
+If the build now passes, the issue was toolchain-related, not link-related. Proceed to documenting the fix in a PR.
+
 ### 1) Reproduce the failure locally
+
 ```bash
 pnpm build
 ```
@@ -49,6 +82,8 @@ Capture:
 - the failing file path
 - the missing target (URL, doc ID, or path)
 - the error type (missing file vs invalid doc id vs anchor)
+
+**Expected behavior:** `pnpm build` fails deterministically on broken links. This is intentional and by design.
 
 ### 2) Classify the failure type
 #### Type A: Link points to a file that does not exist
@@ -93,11 +128,13 @@ Best practices:
 - avoid refactors during incident triage unless required to resolve the break
 
 ### 4) Validate fix locally
+
 ```bash
 pnpm build
 ```
+
 Expected outcome:
-- build succeeds.
+- build succeeds with no link or structural errors
 
 Optionally verify in preview:
 ```bash
@@ -105,6 +142,32 @@ pnpm start
 ```
 - click the affected navigation area
 - confirm the link now resolves
+
+### 4b) Interpret Vercel build logs (if failure occurred in CI/Vercel)
+
+If the issue was discovered in Vercel (not locally), review the build logs:
+
+1. Go to **Vercel Dashboard → Deployments**
+2. Locate the failed deployment from `main`
+3. Click **"View Build Logs"**
+4. Look for the error output:
+   - **Link error**: will show missing file path or doc ID
+   - **Pnpm error**: will show version mismatch or lockfile issue
+   - **Category error**: will show invalid `_category_.json` reference
+
+5. Compare error to local reproduction:
+   - If `pnpm build` fails locally with the same error: fix locally, commit, push
+   - If local build succeeds: environment mismatch → check Vercel pnpm version, Node version, or environment variables
+
+**Example error interpretation:**
+```
+[ERROR] File not found: ../some-missing-page.md (referenced in 10-architecture/index.md:42)
+```
+Action: fix the reference in `10-architecture/index.md` line 42 or create the missing file
+
+**Note:** A failed `pnpm build` is expected to block production promotion. This is the intended safety gate. The deployment is created but remains unpromoted; resolve the failure and either:
+- Fix forward: create new PR with the fix, merge, redeploy
+- Rollback: revert the PR, redeploy
 
 ### 5) Commit and PR (if required)
 

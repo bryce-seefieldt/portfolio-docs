@@ -87,18 +87,24 @@ If a PR touches multiple domains (`40-security` + `50-operations` + `30-devops-p
 A PR is merge-ready only if:
 
 1. Build passes
-- `pnpm build` succeeds (no broken links; no broken refs)
-2. Nav integrity
-- if adding a folder: `_category_.json` (or .yml) exists
-- any new section has an index hub (generated or curated)
-3. Evidence
-include at least one of:
-- link(s) to the rendered page(s)
-- local build output snippet
-- screenshot of the rendered page (optional, but great for PR review)
-4. Security statement
-- confirm: “No secrets added”
-- if security-related doc: link to updated threat model / control / test page (or state TBD + created issue)
+   - `pnpm build` succeeds (no broken links; no broken refs)
+   - CI workflow `ci / build` passes (GitHub Actions)
+2. Deployment Checks understanding
+   - Understand that after merge, production deployment is **automatic**
+   - Deployment domain assignment is **gated** by Deployment Checks passing
+   - If checks fail, deployment is created but remains unpromoted; site stays on prior version
+   - See [Deployment Checks flow](./docs/60-projects/portfolio-docs-app/03-deployment.md#release-governance-vercel-deployment-checks) for details
+3. Nav integrity
+   - if adding a folder: `_category_.json` (or .yml) exists
+   - any new section has an index hub (generated or curated)
+4. Evidence
+   - include at least one of:
+     - link(s) to the rendered page(s)
+     - local build output snippet
+     - screenshot of the rendered page (optional, but great for PR review)
+5. Security statement
+   - confirm: "No secrets added"
+   - if security-related doc: link to updated threat model / control / test page (or state TBD + created issue)
 
 ### Review rules (solo-friendly)
 
@@ -118,6 +124,19 @@ A doc PR is done only if:
     - threat model
     - secure SDLC controls
     - security testing notes
+
+### Toolchain consistency (build determinism)
+
+To ensure consistent builds across local, CI, and Vercel environments:
+
+- **Never** manually update pnpm or Node versions without updating `package.json`
+- Changes to `package.json` or `pnpm-lock.yaml` require:
+  - Local `pnpm install --frozen-lockfile` + `pnpm build` verification
+  - Commit of the updated lockfile
+  - Confirmation that CI passes
+- Corepack is enabled in Vercel (`ENABLE_EXPERIMENTAL_COREPACK=1`), which enforces `package.json#packageManager` pinning
+- If you see "version mismatch" errors in Vercel builds, see [Build Determinism](./docs/60-projects/portfolio-docs-app/03-deployment.md#build-determinism-pnpm--corepack) section of the deployment dossier
+- Lockfile/toolchain failures? See [Broken Links Triage Runbook Step 0](./docs/50-operations/runbooks/rbk-docs-broken-links-triage.md#0-check-for-toolchain-related-failures-first)
 
 ## Style Guide and Structure Rules
 ### File and folder conventions

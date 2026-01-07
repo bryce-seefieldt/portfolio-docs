@@ -39,6 +39,21 @@ Do not deploy changes that include secrets, internal endpoints, or sensitive log
 
 ## Procedure / Content
 
+### What causes a production deployment?
+
+Production deployments to the Portfolio Docs App are triggered by:
+
+1. **Merge to `main`**: Any PR merged to the `main` branch automatically triggers a Vercel production deployment
+2. **GitHub detects push**: Vercel webhook activates immediately
+3. **Build starts**: Vercel runs `pnpm install --frozen-lockfile` then `pnpm build`
+4. **Deployment Checks run**: GitHub Actions `ci / build` workflow executes
+5. **Conditional domain assignment**: Vercel assigns production domain only if checks pass
+
+This means:
+- Production deployments are **automatic** (not manual) once PR is merged
+- Deployment **creation** and **promotion** are decoupled
+- If checks fail, the deployment exists but remains **unpromoted** (site stays on previous version)
+
 ### 1) Pre-deploy validation (local)
 From repository root:
 
@@ -77,10 +92,56 @@ Expected outcome:
 After merge:
 
 - Confirm production deployment completed successfully (hosting provider status UI).
+- **Important:** Confirm Deployment Checks are green before considering the release complete.
 - Validate the site:
     - home/entry docs page renders
     - sidebar loads and navigation works
     - key sections (Portfolio, Projects) open without errors
+
+### 5) Verify build artifact and pnpm version
+
+To ensure deterministic builds and prevent toolchain-related regressions:
+
+**Check Vercel build logs:**
+1. Go to **Vercel Dashboard → Deployments**
+2. Open the latest deployment from `main`
+3. Click **"View Build Logs"**
+4. Confirm output shows:
+   ```
+   Enabling Corepack...
+   Resolving corepack shim for pnpm@10.0.0...
+   pnpm 10.0.0
+   ```
+5. Verify the pnpm version matches `package.json#packageManager`
+
+**Verify build artifact correctness:**
+- Output directory contains `build/` with expected static HTML/CSS/JS
+- No build errors in logs
+- No warnings about missing assets or broken links (these should fail the build)
+
+### 6) Validate key routes
+
+Perform spot-check navigation on production:
+- [ ] Home page (`/`) loads
+- [ ] Portfolio section (`/docs/portfolio` or equivalent) accessible
+- [ ] Projects dossier (`/docs/projects`) accessible
+- [ ] Architecture domain (`/docs/architecture`) with sidebar navigation works
+- [ ] Operations runbooks load (`/docs/operations/runbooks`)
+
+### 7) Roll forward or rollback decision
+
+If post-deploy validation discovers issues:
+
+**Option A: Roll forward (fix-forward, if minor)**
+- Create a new PR with the fix
+- Merge and redeploy once checks pass
+- Use when: issue is isolated and quick to fix
+
+**Option B: Rollback (if major or production-impacting)**
+- Use the rollback runbook: `docs/50-operations/runbooks/rbk-docs-rollback.md`
+- Revert the offending PR
+- Redeploy once rollback PR merges
+- Use when: site is broken, navigation corrupted, or sensitive content exposed
 
 ### 5) Post-deploy verification checklist
 
@@ -115,6 +176,133 @@ Rollback immediately if:
 - Confirm redeploy occurs from updated `main`.
 - Re-validate production site.
 
+## Common Deployment Failures
+
+This section documents Vercel-specific deployment failures and how to diagnose and recover from them.
+
+### Failure: Output directory mismatch (404 errors or missing pages)
+
+**Symptom:**
+- Site deploys successfully but returns 404 for routes that exist locally
+- Pages are missing or routing is broken in production
+
+**Likely cause:**
+- Vercel Output Directory is not set to `build/` (where Docusaurus outputs)
+- Vercel is serving a different directory, missing the compiled site
+
+**Diagnostics:**
+- Verify locally: `pnpm build` produces `build/` directory with `index.html` and assets
+- In Vercel Dashboard:
+  - Go to project settings → Build & Development
+  - Confirm "Output Directory" is set to `build`
+
+**Fix:**
+```
+Vercel Project Settings:
+  Build Command: pnpm build
+  Output Directory: build
+  Install Command: pnpm install --frozen-lockfile
+```
+
+See [Vercel Configure a build](https://vercel.com/docs/builds/configure-a-build) for details.
+
+See [Build Determinism](../../60-projects/portfolio-docs-app/03-deployment.md#build-contract-and-determinism) in the deployment dossier for more context.
+
+### Failure: pnpm lockfile drift or version mismatch
+
+**Symptom:**
+- Build passes locally but fails in Vercel with "dependency not found" or "version conflict" errors
+- Vercel build logs show pnpm version different from expected
+- Errors like: "could not resolve operator @ …" or similar lockfile-related failures
+
+**Likely cause:**
+- `pnpm-lock.yaml` is out of sync with `package.json`
+- Local pnpm version differs from Vercel's pinned version
+- Dependencies were updated locally but lockfile not committed
+
+**Diagnostics:**
+
+1. Check Vercel build logs:
+   - Vercel Dashboard → Deployments → failing deployment → View Build Logs
+   - Look for pnpm version output: `pnpm X.X.X`
+   - Compare to `package.json#packageManager` pinned version
+
+2. Reproduce locally:
+   ```bash
+   pnpm --version  # Should match package.json#packageManager
+   pnpm install --frozen-lockfile
+   pnpm build
+   ```
+
+**Fix:**
+
+**Option A: Lockfile drift (dependencies changed)**
+```bash
+# Locally
+pnpm install
+# This updates pnpm-lock.yaml to match package.json
+
+# Verify
+pnpm build  # Must pass locally
+
+# Commit and push
+git add pnpm-lock.yaml package.json
+git commit -m "deps: update dependencies"
+git push
+# Vercel redeploys with updated lockfile
+```
+
+**Option B: Corepack/pnpm version mismatch**
+```bash
+# Verify Corepack pin
+grep packageManager package.json
+# Expected: "packageManager": "pnpm@10.0.0"
+
+# Enable Corepack locally if needed
+corepack enable
+corepack install
+pnpm --version  # Should now match
+
+# Verify and rebuild
+pnpm install --frozen-lockfile
+pnpm build
+```
+
+See [Vercel Package Managers](https://vercel.com/docs/package-managers) and [Build Determinism](../../60-projects/portfolio-docs-app/03-deployment.md#build-contract-and-determinism) in the deployment dossier for details.
+
+### Failure: Missing build logs or build doesn't start
+
+**Symptom:**
+- Deployment shows no build output or minimal logs
+- "Build started" but no actual build output appears
+- Deployment status unclear (no error message)
+
+**Likely cause:**
+- Vercel "Ignored Build Step" misconfiguration
+- Build preconditions violated (e.g., branch filter blocking build)
+- Vercel webhook or Git integration issue
+
+**Diagnostics:**
+1. In Vercel Dashboard:
+   - Go to project settings → Git
+   - Confirm "Production Branch" is `main`
+   - Check for "Ignored Build Steps" (should be empty)
+
+2. In Vercel Dashboard → Deployments:
+   - Click the deployment
+   - Look for build status and any error messages
+
+**Fix:**
+- **Do not use Ignored Build Steps** for this repository initially
+- Keep the build pipeline transparent and predictable
+- If build doesn't start:
+  - Verify branch name and protection rules
+  - Confirm Vercel webhook is active in GitHub settings
+  - Redeploy manually from Vercel Dashboard as temporary recovery
+  - Create a runbook/postmortem if issue repeats
+
+See [Vercel Troubleshooting Build Errors](https://vercel.com/docs/deployments/troubleshoot-a-build) for more details.
+
 ## Failure modes / Troubleshooting
 
 - Build passes locally but fails in CI:
@@ -126,7 +314,7 @@ Rollback immediately if:
 
 ## References
 
-- Portfolio Docs App deployment model: docs/60-projects/portfolio-docs-app/deployment.md
-- Hosting ADR: docs/10-architecture/adr/adr-0003-hosting-vercel-with-preview-deployments.md
-- Rollback runbook: docs/50-operations/runbooks/rbk-docs-rollback.md
-- Broken link triage runbook: docs/50-operations/runbooks/rbk-docs-broken-links-triage.md
+- Portfolio Docs App deployment model: `docs/60-projects/portfolio-docs-app/deployment.md`
+- Hosting ADR: `docs/10-architecture/adr/adr-0003-hosting-vercel-with-preview-deployments.md`
+- Rollback runbook: `docs/50-operations/runbooks/rbk-docs-rollback.md`
+- Broken link triage runbook: `docs/50-operations/runbooks/rbk-docs-broken-links-triage.md`

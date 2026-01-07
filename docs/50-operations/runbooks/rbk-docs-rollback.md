@@ -60,15 +60,59 @@ Example:
 ```bash
 git checkout -b ops/docs-rollback-broken-nav
 ```
-### 3) Revert the offending change
+### 3) Choose rollback approach
 
-Option A (preferred): revert the merge commit / PR commit(s):
+#### Approach A: Git-based rollback (Source of Truth, Preferred)
+
+Use Git as the system of record by reverting commits on `main`:
+
 ```bash
 git revert <commit-sha>
 ```
+
 If multiple commits are involved, revert them in reverse order, or revert the merge commit that introduced them.
 
 If revert produces conflicts, resolve carefully and keep the rollback minimal.
+
+**When to use this approach:**
+- Default choice for any regression
+- ensures audit trail and clean source history
+- works for all failure types (broken links, routing changes, etc.)
+
+**Special case: Package manager / toolchain regressions**
+
+If the regression is caused by changes to package manager configuration or dependencies:
+- Rollback still uses Git revert (revert the commit that changed `package.json` or lockfile)
+- After rollback PR merges, Vercel redeploys from the corrected `main`
+- Vercel will use the reverted `package.json#packageManager` and `pnpm-lock.yaml`
+- Production will return to the prior working state
+
+Example:
+```bash
+# If dependency update caused broken build
+git revert <commit-that-updated-dependencies>
+# Verify locally: pnpm install && pnpm build succeeds
+# Merge rollback PR
+# Vercel redeploys with prior working lockfile and pnpm version
+```
+
+#### Approach B: Vercel deployment-level rollback (Delivery Approach, Optional)
+
+Vercel provides a "Rollback" button in the Deployments UI to revert to a prior deployment without modifying Git history:
+
+1. Go to **Vercel Dashboard → Deployments**
+2. Locate the last known good deployment
+3. Click **"Rollback to this deployment"**
+4. Vercel reassigns the production domain to the prior version
+
+**When to use this approach:**
+- Emergency: need fastest possible recovery, Git changes can follow
+- Operational flexibility: temporary recovery while figuring out the fix
+
+**Caveats:**
+- Does not update `main` branch; fix must still be applied and merged later
+- Creates potential drift between Git history and production state
+- Use sparingly; prefer Git rollback for audit trail
 
 Do not “fix forward” in the rollback PR—only restore the last known good state.
 
@@ -112,6 +156,15 @@ Rollback is successful when:
 - navigation is restored
 - build gate passes
 - the regression is removed from main
+
+## Deployment blocked? (Checks failed)
+
+If Deployment Checks fail after merge, the deployment is created but remains **unpromoted**:
+
+1. **Preferred:** Revert the offending PR on `main` (this runbook)
+2. **Alternative:** Use Vercel rollback UI to temporarily restore prior version while reviewing the fix
+3. Once rollback (or fix) is applied, Vercel redeploys and checks re-run
+4. When checks pass, Vercel assigns production domain
 
 ## Rollback / Recovery
 
