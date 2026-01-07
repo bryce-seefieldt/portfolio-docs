@@ -79,4 +79,6 @@ Project dossiers must align with:
 - security posture (`40-security/`)
 - operational readiness (`50-operations/`)
 
-[Project Dossier Template](../../docs/_meta/templates/template-project-dossier/)
+
+Project Dossier Template:
+- `docs/_meta/templates/template-project-dossier/`
