@@ -1,0 +1,52 @@
+name: CodeQL
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    # Weekly scan (Monday 14:20 UTC). Adjust if you prefer.
+    - cron: "20 14 * * 1"
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+      # Only required for private repos / private CodeQL packs, harmless for public repos:
+      packages: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Docusaurus / site code
+          - language: javascript-typescript
+            build-mode: none
+          # Your workflows are portfolio evidence too
+          - language: actions
+            build-mode: none
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+          # Stronger signal than the default suite:
+          # - security-extended adds more security coverage
+          # - security-and-quality adds quality checks (optional but good portfolio evidence)
+          queries: security-extended,security-and-quality
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:${{ matrix.language }}"
