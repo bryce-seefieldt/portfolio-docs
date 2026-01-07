@@ -33,6 +33,9 @@ jobs:
           version: "10.0.0"
           run_install: false
 
+      - name: Enable pnpm via corepack
+        run: corepack enable
+
       - name: Install (frozen)
         run: pnpm install --frozen-lockfile
 
