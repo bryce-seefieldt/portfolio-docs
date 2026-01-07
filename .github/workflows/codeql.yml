@@ -1,9 +1,9 @@
 name: CodeQL
 
 # Analyze your code with CodeQL for security vulnerabilities and code quality issues.
-# 
+#
 # IMPORTANT: Code scanning must be enabled in repository settings for results to upload.
-# 
+#
 # To enable code scanning:
 #   1. Go to your repository on GitHub (https://github.com/bryce-seefieldt/portfolio-docs)
 #   2. Click the "Settings" tab
@@ -13,18 +13,18 @@ name: CodeQL
 #   6. Select "CodeQL analysis" as the scanning tool
 #   7. Review the default CodeQL workflow (or keep it as-is)
 #   8. Click "Enable CodeQL"
-# 
+#
 # Once enabled, CodeQL results will appear in the "Security" tab under "Code scanning alerts"
 # and this workflow will automatically upload analysis results.
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   pull_request:
-    branches: ["main"]
+    branches: ['main']
   schedule:
     # Weekly scan (Monday 14:20 UTC). Adjust if you prefer.
-    - cron: "20 14 * * 1"
+    - cron: '20 14 * * 1'
 
 jobs:
   analyze:
@@ -67,4 +67,4 @@ jobs:
         uses: github/codeql-action/analyze@v4
         continue-on-error: true
         with:
-          category: "/language:${{ matrix.language }}"
+          category: '/language:${{ matrix.language }}'

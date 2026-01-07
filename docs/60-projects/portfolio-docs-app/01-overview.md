@@ -1,6 +1,6 @@
 ---
-title: "Portfolio Docs: Overview"
-description: "What the Portfolio Docs App is, why it exists, and what it proves — plus the minimum viable enterprise outcomes and evidence expectations."
+title: 'Portfolio Docs: Overview'
+description: 'What the Portfolio Docs App is, why it exists, and what it proves — plus the minimum viable enterprise outcomes and evidence expectations.'
 sidebar_position: 1
 collapsible: true
 collapsed: true
@@ -12,6 +12,7 @@ tags: [projects, documentation, docusaurus, governance, portfolio]
 This page frames the Portfolio Docs App as a portfolio-quality deliverable: a public documentation platform that demonstrates enterprise-grade process, governance, and operational maturity.
 
 It answers:
+
 - What is this system?
 - Why is it built this way?
 - What outcomes are required to claim “enterprise-grade”?
@@ -20,12 +21,14 @@ It answers:
 ## Scope
 
 ### In scope
+
 - product framing and success criteria
 - non-functional requirements (NFRs)
 - quality and governance expectations
 - evidence map (what artifacts should exist and where)
 
 ### Out of scope
+
 - detailed Docusaurus configuration (covered in `architecture.md` and `deployment.md`)
 - security threat enumeration (covered in `security.md`)
 
@@ -48,7 +51,9 @@ The Portfolio Docs App is a Docusaurus site that publishes a structured, version
 - engineering, DevOps, security, and operations standards
 
 ### Why Docusaurus
+
 Docusaurus is well-suited because it supports:
+
 - Markdown-first authoring at scale
 - hierarchical, filesystem-driven navigation
 - versioned documentation patterns (optional, if adopted later)
@@ -57,6 +62,7 @@ Docusaurus is well-suited because it supports:
 ## Success criteria
 
 ### Minimum viable enterprise outcomes
+
 The documentation system must be able to demonstrate:
 
 1. **Governance**
@@ -79,6 +85,7 @@ The documentation system must be able to demonstrate:
    - predictable maintenance (dependency updates, link rot management)
 
 ### Non-functional requirements (NFRs)
+
 - **Reliability:** site build is deterministic; deployment is repeatable
 - **Maintainability:** scale to large doc sets without manual sidebar curation
 - **Usability:** clear “start here” path for reviewers; consistent doc structure
@@ -109,6 +116,7 @@ The Portfolio Docs App should eventually be supported by these artifacts:
 ## Validation / Expected outcomes
 
 At a minimum:
+
 - `pnpm start` launches the site locally and renders sidebar navigation coherently
 - `pnpm build` succeeds consistently
 - A reviewer can:

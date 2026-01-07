@@ -1,6 +1,6 @@
 ---
-title: "Architecture Decision Records (ADRs)"
-description: "Decision traceability for the portfolio program: why key architectural choices were made, what alternatives were considered, and how decisions are validated and operationalized."
+title: 'Architecture Decision Records (ADRs)'
+description: 'Decision traceability for the portfolio program: why key architectural choices were made, what alternatives were considered, and how decisions are validated and operationalized.'
 sidebar_position: 1
 tags: [architecture, adr, governance, traceability, decision-making]
 ---
@@ -22,12 +22,14 @@ ADRs make the portfolio read like a real engineering organization: decisions are
 ## Scope
 
 ### In scope
+
 - technology and platform choices with lasting impact (frameworks, hosting, auth, CI gates)
 - changes to trust boundaries, data flows, and integration patterns
 - major documentation governance changes (IA, navigation, quality gates)
 - security controls with architectural implications
 
 ### Out of scope
+
 - minor refactors or changes with no long-term impact
 - “how-to” procedures (these belong in runbooks and reference docs)
 - security analysis without a concrete system boundary (belongs in threat models)
@@ -83,18 +85,21 @@ ADRs make the portfolio read like a real engineering organization: decisions are
 ## ADR lifecycle and statuses
 
 Use one of:
+
 - Proposed
 - Accepted
 - Superseded
 - Deprecated
 
 When superseding:
+
 - create a new ADR that references the old one by file name
 - update the old ADR status and add a pointer to the new ADR
 
 ## ADR quality bar (enterprise expectation)
 
 A high-quality ADR is:
+
 - specific and bounded (one decision per ADR)
 - explicit about constraints and assumptions
 - honest about tradeoffs

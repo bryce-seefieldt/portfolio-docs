@@ -1,6 +1,6 @@
 ---
-title: "Runbook: Rollback Portfolio Docs App"
-description: "Procedure to rollback a Portfolio Docs App deployment by reverting changes on main and validating recovery."
+title: 'Runbook: Rollback Portfolio Docs App'
+description: 'Procedure to rollback a Portfolio Docs App deployment by reverting changes on main and validating recovery.'
 tags: [operations, runbook, rollback, incident-response, documentation]
 ---
 
@@ -9,6 +9,7 @@ tags: [operations, runbook, rollback, incident-response, documentation]
 Provide a deterministic rollback procedure for the Portfolio Docs App using Git as the system of record.
 
 Rollback is designed to be:
+
 - fast
 - low-risk
 - auditable via PR history
@@ -17,12 +18,14 @@ Rollback is designed to be:
 ## Scope
 
 ### Use when
+
 - deployment introduced broken navigation or rendering
 - production route/base path changes broke URLs
 - CI/hosting shows failed deployment after merge
 - sensitive content may have been accidentally published (immediate rollback)
 
 ### Do not use when
+
 - issue is purely local and not deployed (fix on branch and redeploy normally)
 
 ## Prereqs / Inputs
@@ -37,29 +40,35 @@ Rollback is designed to be:
 
 :::danger
 If rollback is due to possible sensitive publication, treat as a security incident:
+
 - remove public exposure immediately
 - rotate any exposed secrets if applicable
 - document corrective actions (postmortem)
-:::
+  :::
 
 ## Procedure / Content
 
 ### 1) Identify rollback target
+
 - Determine what changed:
   - locate the PR that introduced the regression
 - Determine last known good state:
   - identify the commit immediately before the regression
 
 ### 2) Create a rollback branch
+
 ```bash
 git checkout main
 git pull
 git checkout -b ops/docs-rollback-<short-reason>
 ```
+
 Example:
+
 ```bash
 git checkout -b ops/docs-rollback-broken-nav
 ```
+
 ### 3) Choose rollback approach
 
 #### Approach A: Git-based rollback (Source of Truth, Preferred)
@@ -75,6 +84,7 @@ If multiple commits are involved, revert them in reverse order, or revert the me
 If revert produces conflicts, resolve carefully and keep the rollback minimal.
 
 **When to use this approach:**
+
 - Default choice for any regression
 - ensures audit trail and clean source history
 - works for all failure types (broken links, routing changes, etc.)
@@ -82,12 +92,14 @@ If revert produces conflicts, resolve carefully and keep the rollback minimal.
 **Special case: Package manager / toolchain regressions**
 
 If the regression is caused by changes to package manager configuration or dependencies:
+
 - Rollback still uses Git revert (revert the commit that changed `package.json` or lockfile)
 - After rollback PR merges, Vercel redeploys from the corrected `main`
 - Vercel will use the reverted `package.json#packageManager` and `pnpm-lock.yaml`
 - Production will return to the prior working state
 
 Example:
+
 ```bash
 # If dependency update caused broken build
 git revert <commit-that-updated-dependencies>
@@ -106,10 +118,12 @@ Vercel provides a "Rollback" button in the Deployments UI to revert to a prior d
 4. Vercel reassigns the production domain to the prior version
 
 **When to use this approach:**
+
 - Emergency: need fastest possible recovery, Git changes can follow
 - Operational flexibility: temporary recovery while figuring out the fix
 
 **Caveats:**
+
 - Does not update `main` branch; fix must still be applied and merged later
 - Creates potential drift between Git history and production state
 - Use sparingly; prefer Git rollback for audit trail
@@ -117,6 +131,7 @@ Vercel provides a "Rollback" button in the Deployments UI to revert to a prior d
 Do not “fix forward” in the rollback PR—only restore the last known good state.
 
 ### 4) Validate locally
+
 ```bash
 pnpm install
 pnpm build
@@ -129,29 +144,32 @@ Expected outcome:
 ### 5) Open a rollback PR
 
 Rollback PR must include:
+
 - what is being reverted
 - why (symptoms and impact)
 - evidence: local pnpm build passed
 - security statement: “No secrets added”
 
 ### 6) Merge rollback PR and verify redeploy
+
 - Merge rollback PR into `main`
 - Confirm hosting redeploys from updated main
 - Perform post-rollback validation:
-    - site loads
-    - navigation works
-    - key pages render
+  - site loads
+  - navigation works
+  - key pages render
 
 ### 7) Follow-up (after stability restored)
 
 - Decide whether to:
-    - fix forward in a new PR, OR
-    - document an ADR if the change was architectural, OR
-    - write a postmortem if user impact occurred
+  - fix forward in a new PR, OR
+  - document an ADR if the change was architectural, OR
+  - write a postmortem if user impact occurred
 
 ## Validation / Expected outcomes
 
 Rollback is successful when:
+
 - production site is stable and renders correctly
 - navigation is restored
 - build gate passes
@@ -169,6 +187,7 @@ If Deployment Checks fail after merge, the deployment is created but remains **u
 ## Rollback / Recovery
 
 Rollback procedure is itself the recovery mechanism. If rollback fails:
+
 - revert further back to last known good commit
 - temporarily disable risky features (e.g., remove MDX changes) via minimal reverts
 - consider a hotfix PR only after stability is restored
@@ -176,13 +195,13 @@ Rollback procedure is itself the recovery mechanism. If rollback fails:
 ## Failure modes / Troubleshooting
 
 - Revert conflicts:
-    - keep rollback minimal; avoid mixing fixes and rollback
-    - if needed, revert the merge commit rather than individual commits
+  - keep rollback minimal; avoid mixing fixes and rollback
+  - if needed, revert the merge commit rather than individual commits
 - Hosting does not redeploy:
-    - manually trigger redeploy (if available)
-    - confirm integration between repo and host is functioning
+  - manually trigger redeploy (if available)
+  - confirm integration between repo and host is functioning
 - Issue persists after rollback:
-    - regression may be unrelated; reassess changes; escalate to incident response
+  - regression may be unrelated; reassess changes; escalate to incident response
 
 ## References
 

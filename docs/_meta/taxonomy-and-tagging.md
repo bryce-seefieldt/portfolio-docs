@@ -1,10 +1,11 @@
 ---
-title: "Taxonomy and Tagging"
-description: "Standard taxonomy, naming conventions, and tag policies to keep documentation discoverable, navigable, and scalable."
+title: 'Taxonomy and Tagging'
+description: 'Standard taxonomy, naming conventions, and tag policies to keep documentation discoverable, navigable, and scalable.'
 sidebar_position: 2
 tags: [meta, governance, taxonomy, tags, information-architecture]
 ---
-# Taxonomy and Tagging 
+
+# Taxonomy and Tagging
 
 ## Purpose
 
@@ -18,6 +19,7 @@ This document defines the taxonomy used across the repository so that:
 ## Scope
 
 ### In scope
+
 - folder placement rules
 - naming conventions
 - tag vocabulary and rules
@@ -25,6 +27,7 @@ This document defines the taxonomy used across the repository so that:
 - “when to create a new folder” rules
 
 ### Out of scope
+
 - content-specific writing rules (see Documentation Style Guide)
 
 ## Folder placement rules (authoritative)
@@ -41,6 +44,7 @@ Use these domains:
 - `70-reference`: CLI/config/cheatsheets and fast diagnostics
 
 Rule of thumb:
+
 - If it changes how the system is **built** → Engineering / DevOps
 - If it changes how the system is **secured** → Security
 - If it changes how the system is **run** → Operations
@@ -49,15 +53,18 @@ Rule of thumb:
 ## Naming conventions
 
 ### File names
+
 - `kebab-case.md` or `kebab-case.mdx`
 - no spaces, no uppercase
 - keep names stable (renames create churn)
 
 ### Folder names
+
 - `kebab-case`
 - keep domain numeric prefixes at top level (00/10/20/…)
 
 ### Special collections
+
 - ADRs: `adr-0001-short-title.md`
 - Runbooks: `rbk-<system>-<task>.md`
 - Postmortems: `pm-YYYY-MM-DD-short-title.md`
@@ -66,29 +73,37 @@ Rule of thumb:
 ## Tag rules
 
 ### Principles
+
 - Tags are not decoration. They are for discovery and maintenance.
 - Use **3–8 tags** per page.
 - Prefer repository-standard tags over novel tags.
 
 ### Standard tag vocabulary (recommended)
+
 Use from this list whenever possible:
 
 **Domains**
+
 - `portfolio`, `architecture`, `engineering`, `devops`, `security`, `operations`, `projects`, `reference`
 
 **Delivery**
+
 - `roadmap`, `release-notes`, `cicd`, `observability`, `testing`, `deployment`, `rollback`
 
 **Security**
+
 - `threat-model`, `sdlc`, `supply-chain`, `sast`, `sca`, `sbom`, `privacy`, `headers`
 
 **Operations**
+
 - `runbook`, `incident-response`, `postmortem`, `drbcp`, `oncall`, `monitoring`
 
 **Tech stack (use sparingly)**
+
 - `node`, `typescript`, `react`, `nextjs`, `vercel`, `github-actions`, `docker`, `wsl2`
 
 ### Disallowed tag patterns
+
 - overly generic tags (`misc`, `random`, `stuff`)
 - one-off tags that duplicate a folder name
 - tags that contain sensitive info
@@ -96,11 +111,15 @@ Use from this list whenever possible:
 ## Page classification guidance
 
 ### Choose one primary domain tag
+
 Every page must include exactly one primary domain tag:
+
 - `portfolio` OR `architecture` OR `engineering` OR `devops` OR `security` OR `operations` OR `projects` OR `reference`
 
 ### Add secondary tags for topic and lifecycle
+
 Example:
+
 - A CI pipeline overview page:
   - primary: `devops`
   - secondary: `cicd`, `github-actions`, `deployment`, `rollback`
@@ -108,16 +127,19 @@ Example:
 ## When to create a new folder
 
 Create a new folder only if:
+
 - there are at least **3 pages** planned for that topic, OR
 - the topic represents a durable enterprise capability (e.g., `observability`, `incident-response`)
 
 When creating a new folder:
+
 - add `_category_.json`/`.yml`
 - include a folder `index.md` hub (or generated-index if using that approach)
 
 ## Validation and expected outcomes
 
 Taxonomy is “healthy” when:
+
 - pages are easy to locate via search and tags
 - new contributors can place content consistently
 - the sidebar remains coherent without manual curation

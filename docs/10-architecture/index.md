@@ -1,6 +1,6 @@
 ---
-title: "Architecture and Decision Traceability"
-description: "System design, C4 views, integrations, data flows, and Architecture Decision Records (ADRs) that establish clear, reviewable technical intent."
+title: 'Architecture and Decision Traceability'
+description: 'System design, C4 views, integrations, data flows, and Architecture Decision Records (ADRs) that establish clear, reviewable technical intent.'
 sidebar_position: 2
 tags: [architecture, c4, adr, design, integrations, data-flows]
 ---
@@ -17,6 +17,7 @@ This section defines the architecture of the portfolio web app (and associated d
 ## Scope
 
 ### In scope
+
 - C4 views (context, container, component)
 - critical subsystems and interfaces
 - integration contracts and dependencies
@@ -24,6 +25,7 @@ This section defines the architecture of the portfolio web app (and associated d
 - ADRs: why decisions were made and what alternatives were rejected
 
 ### Out of scope
+
 - procedural operations steps (belongs in `50-operations/`)
 - CI/CD implementation details (belongs in `30-devops-platform/`)
 - security controls detail (belongs in `40-security/`)
@@ -31,6 +33,7 @@ This section defines the architecture of the portfolio web app (and associated d
 ## Architecture artifact standards
 
 ### C4 documentation expectations
+
 - **Context (L1):** external actors, key system boundary, upstream/downstream dependencies
 - **Container (L2):** major deployable units and runtime environment
 - **Component (L3):** high-level internal subsystems and contracts
@@ -38,12 +41,15 @@ This section defines the architecture of the portfolio web app (and associated d
 Keep diagrams minimal, readable, and consistent in notation.
 
 ### ADR requirements (non-negotiable)
+
 An ADR must exist when you:
+
 - introduce or change the core stack, hosting model, auth model, persistence model
 - adopt a new security control with architectural impact
 - materially alter observability or incident-handling approach
 
 ADR must include:
+
 - context
 - decision
 - alternatives considered
@@ -60,6 +66,7 @@ ADR must include:
 ## Validation and expected outcomes
 
 Architecture content is correct when:
+
 - it enables implementers to build and operators to run without guessing
 - it supports threat modeling (assets, entry points, trust boundaries are clear)
 - it supports deployment and rollback planning (runtime dependencies are explicit)
@@ -73,6 +80,7 @@ Architecture content is correct when:
 ## References
 
 Planning dependency: meaningful architectural changes must trigger:
+
 - ADR updates (this section)
 - threat model updates (`40-security/`)
 - runbook or rollback updates (`50-operations/`)

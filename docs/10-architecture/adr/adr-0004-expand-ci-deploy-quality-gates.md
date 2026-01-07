@@ -1,8 +1,19 @@
 ---
-title: "ADR-0004: Expand CI and Deployment Quality Gates (Lint, Format, Typecheck, Docs Integrity)"
-description: "Decision to implement additional CI quality gates and Vercel deployment checks to enforce build determinism, code quality, and documentation integrity for the Documentation App."
+title: 'ADR-0004: Expand CI and Deployment Quality Gates (Lint, Format, Typecheck, Docs Integrity)'
+description: 'Decision to implement additional CI quality gates and Vercel deployment checks to enforce build determinism, code quality, and documentation integrity for the Documentation App.'
 sidebar_position: 4
-tags: [architecture, adr, cicd, quality-gates, linting, formatting, typecheck, vercel, governance]
+tags:
+  [
+    architecture,
+    adr,
+    cicd,
+    quality-gates,
+    linting,
+    formatting,
+    typecheck,
+    vercel,
+    governance,
+  ]
 ---
 
 ## Purpose
@@ -14,6 +25,7 @@ This ADR is a portfolio-critical “enterprise signal”: it demonstrates discip
 ## Scope
 
 ### In scope
+
 - GitHub Actions checks required on PRs and `main`
 - Vercel Deployment Checks required for promotion to production
 - Minimum set of additional gates:
@@ -24,6 +36,7 @@ This ADR is a portfolio-critical “enterprise signal”: it demonstrates discip
   - optional: Markdown lint, spelling, secrets scanning (phased)
 
 ### Out of scope
+
 - choosing a monorepo-wide “one tool to rule them all” (e.g., migrating to Biome) unless later justified by a separate ADR
 - detailed tool configuration contents (captured as implementation tasks and referenced from runbooks/docs)
 
@@ -47,13 +60,15 @@ This ADR is a portfolio-critical “enterprise signal”: it demonstrates discip
 ## Decision Record
 
 ### Title
+
 ADR-0004: Expand CI and Deployment Quality Gates (Lint, Format, Typecheck, Docs Integrity)
 
 ### Context
 
 The Documentation App is both:
-1) a production-like public system, and  
-2) a core portfolio artifact that must demonstrate enterprise delivery discipline.
+
+1. a production-like public system, and
+2. a core portfolio artifact that must demonstrate enterprise delivery discipline.
 
 As content and configuration scale (more docs, more automation, more contributor/agent activity), “build-only” gating is necessary but insufficient:
 
@@ -63,6 +78,7 @@ As content and configuration scale (more docs, more automation, more contributor
 - Vercel can create deployments even when GitHub checks are failing unless promotion is gated.
 
 We need a coherent, enforceable quality gate set that:
+
 - prevents regressions early (PR time)
 - produces deterministic, reproducible builds
 - scales to AI-assisted authoring without sacrificing quality
@@ -73,6 +89,7 @@ We need a coherent, enforceable quality gate set that:
 Implement an expanded CI quality gate framework and require these checks before production promotion:
 
 #### A) GitHub Actions (required on PR + `main`)
+
 Minimum required jobs:
 
 1. **Quality job** (fast fail)
@@ -85,7 +102,9 @@ Minimum required jobs:
    - `pnpm build` (must fail on broken links / structural issues)
 
 #### B) Vercel Deployment Checks (required for production promotion)
+
 Require the corresponding GitHub checks (at minimum):
+
 - `ci / quality`
 - `ci / build`
 
@@ -116,6 +135,7 @@ Production domains must not be assigned (“promoted”) until checks pass.
 ### Consequences
 
 #### Positive consequences
+
 - Stronger, more credible enterprise SDLC posture:
   - style consistency, reduced review overhead
   - type correctness in configuration/theme code
@@ -126,16 +146,19 @@ Production domains must not be assigned (“promoted”) until checks pass.
   - Vercel promotion is gated on verified checks
 
 #### Negative consequences / tradeoffs
+
 - CI runtime increases (more checks)
 - Tooling maintenance required:
   - eslint/prettier/typecheck configs must be kept current
 - Contributors must follow consistent local tooling setup (documented in contributor guides)
 
 #### Security impact
+
 - Reduced risk of unsafe/unstable build changes merging
 - Provides a platform for adding additional security controls later (e.g., secret scanning gate, dependency auditing gate)
 
 #### Operational impact
+
 - Runbooks must reflect new failure modes:
   - “quality job failing” becomes a deploy blocker
 - Triage paths must distinguish:
@@ -144,6 +167,7 @@ Production domains must not be assigned (“promoted”) until checks pass.
 ### Implementation notes (high-level)
 
 #### 1) Add canonical scripts in `package.json`
+
 Required scripts (names are part of the “contract”):
 
 - `lint` → ESLint
@@ -153,27 +177,32 @@ Required scripts (names are part of the “contract”):
 - `build` → Docusaurus build (already present)
 
 Optional phase 2:
+
 - `lint:md` → Markdown lint (markdownlint-cli2 or equivalent)
 - `lint:links` → external link checker (later; avoid gating early due to flakiness)
 
 #### 2) Add minimal configuration files (if not already present)
+
 - ESLint config (flat or legacy—choose one and standardize)
 - Prettier config
 - TypeScript config suitable for `tsc --noEmit` (if Docusaurus TS config exists, reuse it)
 - Editor settings (optional) for consistent formatting in VS Code
 
 #### 3) Update GitHub Actions workflow
+
 - Add a `quality` job and keep `build` job.
 - Ensure both run on:
   - `pull_request`
   - `push` to `main`
 
 #### 4) Update Vercel Deployment Checks
+
 - Import the two checks as requirements for production promotion:
   - `ci / quality`
   - `ci / build`
 
 #### 5) Update documentation + runbooks (required for acceptance)
+
 - Dossier:
   - `docs/60-projects/documentation-app/testing.md` (describe gates + commands)
   - `docs/60-projects/documentation-app/deployment.md` (describe promotion gating)

@@ -1,6 +1,6 @@
 ---
-title: "ADR-0001: Adopt Docusaurus for Portfolio Documentation"
-description: "Decision to use Docusaurus as the docs-as-code platform for the portfolio documentation system."
+title: 'ADR-0001: Adopt Docusaurus for Portfolio Documentation'
+description: 'Decision to use Docusaurus as the docs-as-code platform for the portfolio documentation system.'
 sidebar_position: 1
 tags: [architecture, adr, documentation, docusaurus, governance]
 ---
@@ -12,10 +12,12 @@ Record the decision to use **Docusaurus** as the documentation platform for the 
 ## Scope
 
 ### Use when
+
 - establishing the baseline documentation platform for the portfolio program
 - selecting a documentation tool that supports enterprise navigation, governance, and CI gates
 
 ### Do not use when
+
 - selecting minor plugins or small presentation tweaks (unless they materially change the platform posture)
 
 ## Prereqs / Inputs
@@ -32,6 +34,7 @@ Record the decision to use **Docusaurus** as the documentation platform for the 
 ## Decision Record
 
 ### Title
+
 ADR-0001: Adopt Docusaurus for Portfolio Documentation
 
 ### Context

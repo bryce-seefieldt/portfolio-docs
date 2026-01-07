@@ -1,19 +1,19 @@
 ---
-title: "Project Dossier: Portfolio Docs App"
-description: "Enterprise-grade documentation system built with Docusaurus to serve as the portfolio’s evidence and governance platform."
+title: 'Project Dossier: Portfolio Docs App'
+description: 'Enterprise-grade documentation system built with Docusaurus to serve as the portfolio’s evidence and governance platform.'
 sidebar_position: 0
 tags: [projects, documentation, docusaurus, devops, security, operations]
 ---
 
 ## Dossier Contents
 
-  - [Overview](01-overview.md)
-  - [Architecture](02-architecture.md)
-  - [Deployment](03-deployment.md)
-  - [Security](04-security.md)    
-  - [Testing](05-testing.md)
-  - [Operations](06-operations.md)
-  - [Troubleshooting](07-troubleshooting.md)
+- [Overview](01-overview.md)
+- [Architecture](02-architecture.md)
+- [Deployment](03-deployment.md)
+- [Security](04-security.md)
+- [Testing](05-testing.md)
+- [Operations](06-operations.md)
+- [Troubleshooting](07-troubleshooting.md)
 
 ## Purpose
 
@@ -31,6 +31,7 @@ This dossier is intentionally written as a **microcosm** of how the larger portf
 ## Scope
 
 ### In scope
+
 - what the Portfolio Docs App is and what it proves
 - architecture and content domain model
 - deployment model and pipeline contract
@@ -40,6 +41,7 @@ This dossier is intentionally written as a **microcosm** of how the larger portf
 - troubleshooting for common Docusaurus/docs-as-code failure modes
 
 ### Out of scope
+
 - full portfolio web app product documentation (documented as its own dossier later)
 - detailed hosting vendor-specific secrets or account configuration
 - any internal-only authoring scaffolding stored under `docs/_meta/` (non-public)
@@ -60,6 +62,7 @@ This dossier is intentionally written as a **microcosm** of how the larger portf
 ## Procedure / Content
 
 ### Dossier structure (this folder)
+
 This dossier is organized as a set of reviewer-navigable pages:
 
 - `overview.md` — product framing, goals, NFRs, and evidence map
@@ -71,6 +74,7 @@ This dossier is organized as a set of reviewer-navigable pages:
 - `troubleshooting.md` — common problems + deterministic fixes
 
 ### Where supporting enterprise artifacts live
+
 This dossier references and depends on domain-level artifacts:
 
 - ADRs: `docs/10-architecture/adr/`

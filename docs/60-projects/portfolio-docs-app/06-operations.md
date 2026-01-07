@@ -1,6 +1,6 @@
 ---
-title: "Portfolio Docs: Operations"
-description: "How the Portfolio Docs App is operated: deploy/rollback posture, maintenance cadence, ownership model, and recovery assumptions."
+title: 'Portfolio Docs: Operations'
+description: 'How the Portfolio Docs App is operated: deploy/rollback posture, maintenance cadence, ownership model, and recovery assumptions.'
 sidebar_position: 6
 tags: [projects, operations, runbooks, reliability, maintenance]
 ---
@@ -17,12 +17,14 @@ This page documents how to operate the Portfolio Docs App like a production serv
 ## Scope
 
 ### In scope
+
 - operational procedures at a high level
 - required runbooks and their minimum content
 - maintenance cadence and responsibilities
 - recovery and DR assumptions suitable for a static docs platform
 
 ### Out of scope
+
 - step-by-step runbook procedures (these should live in `docs/50-operations/runbooks/`)
 - vendor-specific hosting details containing sensitive information
 
@@ -37,12 +39,15 @@ This page documents how to operate the Portfolio Docs App like a production serv
 ## Operational model
 
 ### Service definition
+
 The Portfolio Docs App is a public static documentation site with:
+
 - content stored in Git
 - builds producing a static deployable artifact
 - hosting publishing the built output
 
 ### Ownership
+
 - “Owner” is the portfolio maintainer.
 - Operational responsibilities include:
   - ensuring build integrity
@@ -51,6 +56,7 @@ The Portfolio Docs App is a public static documentation site with:
   - keeping dependencies and platform posture current
 
 ## Required runbooks (minimum viable)
+
 Create these runbooks under `docs/50-operations/runbooks/`:
 
 1. Deploy runbook
@@ -63,6 +69,7 @@ Create these runbooks under `docs/50-operations/runbooks/`:
    - describes response to accidental sensitive publication
 
 Runbooks must include:
+
 - prerequisites and access requirements
 - step-by-step procedure
 - validation
@@ -71,18 +78,22 @@ Runbooks must include:
 ## Maintenance cadence (recommended)
 
 ### Weekly / bi-weekly
+
 - review dependency update signals (as applicable)
 - review open documentation “TBD” items and convert to tracked work
 - ensure navigation remains coherent as content expands
 
 ### Monthly
+
 - check for link rot (external links) and update where necessary
 - refresh governance pages (if any are public) and ensure they reflect reality
 
 ### On-demand
+
 - immediately respond to any accidental publication risk (treat as incident)
 
 ## Recovery posture (DR/BCP for docs platform)
+
 This is a low-complexity DR model:
 
 - System of record: Git repository
@@ -91,11 +102,13 @@ This is a low-complexity DR model:
   - redeploy from `main`
 
 If hosting fails:
+
 - redeploy to alternative static hosting target using the same build output
 
 ## Validation / Expected outcomes
 
 Operations posture is acceptable when:
+
 - deploy and rollback are documented and repeatable
 - site can be restored from repository state quickly
 - routine maintenance prevents drift (link rot, outdated governance)
