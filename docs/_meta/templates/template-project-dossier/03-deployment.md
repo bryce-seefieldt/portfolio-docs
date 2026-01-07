@@ -7,7 +7,6 @@ tags: [projects, devops, cicd, deployment, vercel, github-actions]
 
 ## Purpose
 
-
 ## Scope
 
 ### In scope
@@ -25,7 +24,6 @@ tags: [projects, devops, cicd, deployment, vercel, github-actions]
 - operational runbook step-by-step commands (see `operations.md`)
 
 ## Prereqs / Inputs
-
 
 ## Procedure / Content
 

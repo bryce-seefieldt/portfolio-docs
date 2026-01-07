@@ -61,11 +61,8 @@ This scaffold is designed to scale without becoming a “notes dump.”
 
 ## Navigation and discoverability strategy
 
-
 ## Validation / Expected outcomes
 
-
 ## Failure modes / Troubleshooting
-
 
 ## References

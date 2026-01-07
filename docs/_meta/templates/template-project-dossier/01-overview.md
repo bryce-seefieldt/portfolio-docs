@@ -41,13 +41,11 @@ It answers:
 
 ## System definition
 
-
-### Why 
+### Why
 
 ## Success criteria
 
 ### Minimum viable enterprise outcomes
-
 
 ### Non-functional requirements (NFRs)
 
@@ -75,7 +73,6 @@ Should eventually be supported by these artifacts:
 ## Validation / Expected outcomes
 
 At a minimum:
-
 
 ## Failure modes / Troubleshooting
 

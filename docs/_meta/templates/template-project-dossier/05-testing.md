@@ -27,7 +27,6 @@ This page defines what “testing” means and what quality gates must be satisf
 
 ## Quality gate framework (CI + Local)
 
-
 ### Quality gates overview
 
 | Gate          | Command             | What it validates                                 | When it runs   |
@@ -94,8 +93,8 @@ Examples:
 - **Typecheck failure**: TypeScript compilation errors in config or components
 - **Format failure**: Code doesn't match Prettier style (inconsistent spacing, quotes, line breaks)
 - **Build failure**: Broken internal links, missing required front matter, invalid MDX syntax
-- **Navigation failure**: 
-- **Structure failure**: 
+- **Navigation failure**:
+- **Structure failure**:
 
 ## Tooling configuration
 

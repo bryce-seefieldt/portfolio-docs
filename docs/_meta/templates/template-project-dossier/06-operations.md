@@ -40,7 +40,6 @@ This page documents how to operate the App like a production service:
 
 ### Service definition
 
-
 ### Ownership
 
 - “Owner” is the portfolio maintainer.
@@ -112,7 +111,7 @@ Operations posture is acceptable when:
 ## Failure modes / Troubleshooting
 
 - **Broken build blocks deploy:** use triage runbook; fix or revert.
-- **Navigation becomes inconsistent:** 
+- **Navigation becomes inconsistent:**
 - **Accidental sensitive content published:** remove immediately, revert history as needed, rotate exposed secrets if applicable, and document corrective actions.
 
 ## References

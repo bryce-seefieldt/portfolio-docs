@@ -42,6 +42,7 @@ This page documents the security posture of the App as a public-facing system:
 ### Supply chain and dependency risk
 
 Dependencies/ packages.
+
 - Risks include:
   - compromised dependencies
   - vulnerable transitive packages
@@ -56,7 +57,6 @@ Dependencies/ packages.
   - build steps running untrusted scripts without controls
 
 ### Content publication risk
-
 
 - This includes:
   - API keys

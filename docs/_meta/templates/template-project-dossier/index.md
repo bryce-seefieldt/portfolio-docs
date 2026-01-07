@@ -17,7 +17,6 @@ tags: [projects]
 
 ## Purpose
 
-
 ## Scope
 
 ### In scope

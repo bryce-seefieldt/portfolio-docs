@@ -19,7 +19,6 @@ The intent is to reduce time-to-fix and standardize responses to predictable pro
 - broken link failures during `pnpm build`
 - routing and base path confusion
 
-
 ### Out of scope
 
 - hosting vendor incidents requiring account-level access (document separately if needed)
@@ -30,7 +29,6 @@ The intent is to reduce time-to-fix and standardize responses to predictable pro
 - Ability to run:
   - `pnpm start`
   - `pnpm build`
-
 
 ## Procedure / Content
 
@@ -59,7 +57,6 @@ pnpm install
 ```
 
 - If persistent, clear local caches carefully (avoid destructive actions unless necessary) and re-run install.
-
 
 ## Validation / Expected outcomes
 
