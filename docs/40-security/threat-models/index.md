@@ -1,6 +1,6 @@
 ---
-title: "Threat Models"
-description: "Actionable threat models for portfolio systems: assets, trust boundaries, entry points, risks, mitigations, and validation procedures aligned to secure SDLC controls."
+title: 'Threat Models'
+description: 'Actionable threat models for portfolio systems: assets, trust boundaries, entry points, risks, mitigations, and validation procedures aligned to secure SDLC controls.'
 sidebar_position: 1
 tags: [security, threat-model, sdlc, governance, risk-management]
 ---
@@ -22,12 +22,14 @@ Threat models are a cornerstone of demonstrating enterprise-grade security disci
 ## Scope
 
 ### In scope
+
 - system-specific threat models (one model per system boundary)
 - security controls tied to architecture and pipeline gates
 - mitigations with validation steps and evidence expectations
 - residual risk statements and review cadence
 
 ### Out of scope
+
 - generic security advice not tied to a concrete system
 - operational “how-to” procedures (belongs in runbooks)
 - incident retrospectives (belongs in postmortems)
@@ -44,6 +46,7 @@ To create or update a threat model, you should have:
   - deployment model and CI pipeline behavior
 
 Recommended supporting artifacts:
+
 - ADRs: `docs/10-architecture/adr/`
 - Ops runbooks: `docs/50-operations/runbooks/`
 - DevOps platform docs: `docs/30-devops-platform/`
@@ -82,7 +85,9 @@ Recommended supporting artifacts:
 ## Threat model review and maintenance
 
 ### When to update
+
 Update the relevant model when:
+
 - trust boundaries change (new integrations, new hosting posture)
 - auth/session behavior changes
 - new data flows or storage are introduced
@@ -90,13 +95,16 @@ Update the relevant model when:
 - new externally reachable entry points are added
 
 ### Residual risk discipline
+
 Every model must include:
+
 - explicit residual risk statements (or “none identified”)
 - a review cadence (e.g., quarterly or on major changes)
 
 ## Validation / Expected outcomes
 
 Threat modeling is effective when:
+
 - security controls are not merely described but **enforced**
 - validation steps are reproducible
 - changes to system boundaries trigger corresponding updates

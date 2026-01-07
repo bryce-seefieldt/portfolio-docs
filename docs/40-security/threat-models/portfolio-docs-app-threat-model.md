@@ -1,6 +1,6 @@
 ---
-title: "Threat Model: Portfolio Docs App"
-description: "Threat model for the Docusaurus documentation platform, focused on supply chain risk, CI integrity, public content safety, and deployment surface controls."
+title: 'Threat Model: Portfolio Docs App'
+description: 'Threat model for the Docusaurus documentation platform, focused on supply chain risk, CI integrity, public content safety, and deployment surface controls.'
 tags: [security, threat-model, sdlc, supply-chain, documentation, projects]
 ---
 
@@ -18,12 +18,14 @@ This threat model is designed to be actionable and verifiable.
 ## Scope
 
 ### Use when
+
 - changing documentation platform tooling, plugins, or build chain
 - changing hosting/deployment model
 - introducing MDX interactivity or external embedded content
 - changing contributor workflow and PR policies
 
 ### Do not use when
+
 - documenting generic security best practices not tied to this system boundary
 
 ## Prereqs / Inputs
@@ -69,6 +71,7 @@ This threat model is designed to be actionable and verifiable.
 ## Threat analysis
 
 ### Threat 1: Malicious dependency / supply chain compromise
+
 - **Threat:** A dependency (direct or transitive) is compromised and executes malicious code during build.
 - **Asset impacted:** Build integrity, pipeline integrity, publication safety
 - **Scenario:** A compromised package runs post-install scripts or modifies build artifacts.
@@ -87,6 +90,7 @@ This threat model is designed to be actionable and verifiable.
   - CI runs dependency audit; dependency PRs reviewed; build remains deterministic
 
 ### Threat 2: Malicious PR content attempting to introduce unsafe behavior
+
 - **Threat:** A PR introduces MDX/JS that performs unsafe client-side actions or embeds untrusted content.
 - **Asset impacted:** Trustworthiness, publication safety, user safety
 - **Scenario:** MDX embeds scripts or unsafe components, causing client-side risk.
@@ -104,6 +108,7 @@ This threat model is designed to be actionable and verifiable.
   - PR template requires “No risky embeds” statement; build passes; reviewer confirms MDX usage is justified
 
 ### Threat 3: Accidental publication of secrets or sensitive internal information
+
 - **Threat:** A contributor pastes tokens, keys, internal endpoints, or sensitive screenshots into docs.
 - **Asset impacted:** Publication safety, trustworthiness
 - **Scenario:** A page includes an API key or internal hostname, becomes publicly accessible after deploy.
@@ -122,6 +127,7 @@ This threat model is designed to be actionable and verifiable.
   - scanning runs; manual review confirms; incident runbook exists
 
 ### Threat 4: CI workflow compromise or unsafe execution context
+
 - **Threat:** CI executes untrusted code with elevated access or leaks sensitive logs.
 - **Asset impacted:** Pipeline integrity, build integrity
 - **Scenario:** A workflow uses overly broad permissions; logs expose environment details.
@@ -139,6 +145,7 @@ This threat model is designed to be actionable and verifiable.
   - workflow permissions reviewed; no secret values printed in logs; builds remain reproducible
 
 ### Threat 5: Deployment misconfiguration (routing/base path) causing broken site or confusing URLs
+
 - **Threat:** Misconfigured base paths break navigation or produce unexpected public routing.
 - **Asset impacted:** Availability, trustworthiness
 - **Scenario:** routeBasePath mismatch causes broken links or missing pages in production.
@@ -158,6 +165,7 @@ This threat model is designed to be actionable and verifiable.
 ## Mitigation plan and SDLC controls
 
 ### Enforceable controls (minimum)
+
 - PR-only merges to `main`
 - `pnpm build` must pass in CI
 - dependency changes require review
@@ -166,6 +174,7 @@ This threat model is designed to be actionable and verifiable.
 - routeBasePath changes require ADR and explicit review
 
 ### Residual risk
+
 - Residual risk: dependency supply chain cannot be reduced to zero
   - Mitigation: audit/update cadence + review discipline
   - Review cadence: monthly posture review or on major changes

@@ -1,12 +1,15 @@
 ---
-title: "Template: Threat Model"
-description: "Threat model template aligned to practical secure SDLC: assets, entry points, trust boundaries, threats, mitigations, and validation."
+title: 'Template: Threat Model'
+description: 'Threat model template aligned to practical secure SDLC: assets, entry points, trust boundaries, threats, mitigations, and validation.'
 tags: [meta, template, security, threat-model, sdlc]
 ---
+
 # Template: Threat Model
+
 ## Purpose
 
 Use this template to capture a practical threat model that supports:
+
 - secure architecture decisions
 - enforceable SDLC controls
 - security testing and validation
@@ -17,12 +20,14 @@ Threat models must drive action, not just documentation.
 ## Scope
 
 ### Use when
+
 - introducing/changing authentication, sessions, or identity flows
 - integrating third-party services or external APIs
 - changing data storage or data flows
 - changing deployment environment or edge controls (headers, CDN rules)
 
 ### Do not use when
+
 - documenting generic security guidance unrelated to a concrete system boundary
 
 ## Prereqs / Inputs
@@ -37,7 +42,9 @@ Threat models must drive action, not just documentation.
 ## System overview
 
 ### Assets to protect
+
 List assets explicitly (examples):
+
 - user identity/session tokens
 - source code integrity
 - build pipeline integrity
@@ -46,13 +53,17 @@ List assets explicitly (examples):
 - any stored data (even if minimal)
 
 ### Trust boundaries
+
 Describe where trust changes. Examples:
+
 - browser → edge/CDN → app runtime
 - app runtime → third-party API
 - CI runner → artifact registry → deployment target
 
 ### Entry points
+
 List entry points:
+
 - web routes and APIs
 - webhook endpoints
 - authentication endpoints
@@ -64,6 +75,7 @@ List entry points:
 Use a simple STRIDE-like structure (or your preferred structure) but keep it actionable.
 
 For each threat:
+
 - Threat:
 - Asset impacted:
 - Attack scenario:
@@ -77,22 +89,25 @@ For each threat:
 Example structure:
 
 ### Threat 1: <short name>
-- **Threat:**  
-- **Asset impacted:**  
-- **Scenario:**  
-- **Impact:**  
-- **Likelihood:**  
-- **Mitigations:**  
-- **Gaps:**  
-- **Controls required:**  
-- **Validation:**  
+
+- **Threat:**
+- **Asset impacted:**
+- **Scenario:**
+- **Impact:**
+- **Likelihood:**
+- **Mitigations:**
+- **Gaps:**
+- **Controls required:**
+- **Validation:**
 
 Repeat for all meaningful threats.
 
 ## Mitigation plan and SDLC controls
 
 ### Enforceable controls
+
 List controls that should be automated or required:
+
 - code review requirements
 - dependency scanning rules
 - secrets detection policy
@@ -101,7 +116,9 @@ List controls that should be automated or required:
 - auth/session hardening expectations
 
 ### Residual risk
+
 State any accepted risks and the justification:
+
 - Risk:
 - Why accepted:
 - Mitigation/monitoring:

@@ -1,6 +1,6 @@
 ---
-title: "Runbooks"
-description: "Operational procedures for portfolio systems: deploy, rollback, maintenance, incident response, and deterministic troubleshooting—written for repeatability under pressure."
+title: 'Runbooks'
+description: 'Operational procedures for portfolio systems: deploy, rollback, maintenance, incident response, and deterministic troubleshooting—written for repeatability under pressure.'
 sidebar_position: 1
 tags: [operations, runbook, reliability, incident-response, governance]
 ---
@@ -19,12 +19,14 @@ Runbooks demonstrate enterprise operational maturity by ensuring that:
 ## Scope
 
 ### In scope
+
 - deployment and rollback procedures
 - incident response playbooks and triage flows
 - maintenance operations (dependency updates, planned changes)
 - deterministic troubleshooting for common failure modes
 
 ### Out of scope
+
 - architecture rationale (belongs in ADRs)
 - security threat enumeration (belongs in threat models)
 - reference-only command lists (belongs in `70-reference/`)
@@ -39,6 +41,7 @@ A runbook author should know:
 - what constitutes failure and when rollback is required
 
 Supporting artifacts that runbooks should reference (by path):
+
 - project dossier(s): `docs/60-projects/`
 - ADRs: `docs/10-architecture/adr/`
 - threat models: `docs/40-security/threat-models/`
@@ -92,6 +95,7 @@ A runbook is acceptable only if:
 ## Runbook maintenance
 
 Update runbooks when:
+
 - pipeline steps change
 - deployment mechanics change
 - monitoring/alerts change
@@ -100,6 +104,7 @@ Update runbooks when:
 ## Validation / Expected outcomes
 
 Operations documentation is effective when:
+
 - deploy and rollback are routine, not heroic
 - common failures are fixed quickly with deterministic steps
 - PRs include evidence that runbooks remain accurate

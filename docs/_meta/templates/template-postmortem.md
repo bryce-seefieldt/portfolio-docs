@@ -1,9 +1,11 @@
 ---
-title: "Template: Postmortem"
-description: "Blameless postmortem template for incidents with timelines, contributing factors, corrective actions, and verification."
+title: 'Template: Postmortem'
+description: 'Blameless postmortem template for incidents with timelines, contributing factors, corrective actions, and verification.'
 tags: [meta, template, operations, incident-response, postmortem]
 ---
+
 # Template: Postmortem
+
 ## Purpose
 
 Use this template to document an incident in a blameless, enterprise-style format that:
@@ -15,11 +17,13 @@ Use this template to document an incident in a blameless, enterprise-style forma
 ## Scope
 
 ### Use when
+
 - user-visible incident occurred (availability, security, correctness)
 - deployment caused regression requiring rollback
 - operational failure required manual intervention
 
 ### Do not use when
+
 - issue was caught before reaching users and required no operational response (use a short incident note)
 
 ## Prereqs / Inputs
@@ -58,23 +62,28 @@ List key events with timestamps:
 ## Root cause analysis
 
 ### Primary cause
+
 - Describe the primary cause clearly.
 
 ### Contributing factors
+
 - Process gaps (e.g., missing checks, unclear runbook)
 - Technical debt or complexity
 - Monitoring/alerting gaps
 - Documentation gaps
 
 ### What went well
+
 - What worked in detection/response?
 
 ### What went poorly
+
 - Where did the process or system fail?
 
 ## Corrective actions
 
 Each action item must include:
+
 - Action:
 - Owner:
 - Priority:
@@ -83,9 +92,9 @@ Each action item must include:
 
 Example:
 
-| Action | Owner | Priority | Due date | Verification |
-|---|---|---:|---|---|
-| Add CI gate for X | Platform | High | YYYY-MM-DD | `pnpm build` + gate output |
+| Action            | Owner    | Priority | Due date   | Verification               |
+| ----------------- | -------- | -------: | ---------- | -------------------------- |
+| Add CI gate for X | Platform |     High | YYYY-MM-DD | `pnpm build` + gate output |
 
 ## Validation / Expected outcomes
 

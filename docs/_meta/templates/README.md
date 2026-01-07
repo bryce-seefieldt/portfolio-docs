@@ -1,9 +1,10 @@
 ---
-title: "Templates Guide and Definitions of Done"
-description: "How to use documentation templates in this repository, including when to use each artifact type and the minimum Definition of Done (DoD) required for acceptance."
+title: 'Templates Guide and Definitions of Done'
+description: 'How to use documentation templates in this repository, including when to use each artifact type and the minimum Definition of Done (DoD) required for acceptance.'
 
 tags: [meta, templates, governance, definition-of-done, documentation]
 ---
+
 # Templates Guide and Definitions of Done
 
 ## Purpose
@@ -19,12 +20,14 @@ These templates are not optional. They enforce enterprise-level structure, trace
 ## Scope
 
 ### In scope
+
 - ADRs (Architecture Decision Records)
 - Runbooks (Operational procedures)
 - Threat models (Security analysis tied to a system boundary)
 - Postmortems (Incident analysis and corrective action tracking)
 
 ### Out of scope
+
 - general page writing rules (see `docs/_meta/doc-style-guide.md`)
 - taxonomy and tagging rules (see `docs/_meta/taxonomy-and-tagging.md`)
 
@@ -38,6 +41,7 @@ Current templates:
 - `template-postmortem.md`
 
 Recommended conventions:
+
 - Copy the template into the correct target directory.
 - Fill all required sections.
 - Remove placeholder text and “TBD” items unless explicitly tracked as planned work.
@@ -45,13 +49,17 @@ Recommended conventions:
 ## Global rules (apply to all artifact types)
 
 ### Required front matter
+
 All artifacts must have valid front matter with:
+
 - `title`
 - `description`
 - `tags` (including the domain tag: `architecture` / `operations` / `security`)
 
 ### Standard section shape
+
 Artifacts must maintain the repository’s standard shape:
+
 1. Purpose
 2. Scope
 3. Prereqs / Inputs
@@ -63,18 +71,23 @@ Artifacts must maintain the repository’s standard shape:
 Templates may add sections, but should not remove these headings.
 
 ### Public safety (non-negotiable)
+
 Artifacts must not contain:
+
 - secrets/tokens/private keys
 - internal hostnames/private IPs
 - raw logs with identifiers
 - proprietary or sensitive details that should not be public
 
 ### Build hygiene
+
 - Do not add markdown links to files that do not exist yet.
 - The site must pass `pnpm build` before merge.
 
 ### PR expectations
+
 Each PR must include:
+
 - What changed
 - Why
 - Evidence (`pnpm build` passed)
@@ -85,24 +98,30 @@ Each PR must include:
 ## ADR (Architecture Decision Record)
 
 ### When to use
+
 Create an ADR when you:
+
 - introduce or change core stack components (framework, hosting model, identity/auth, persistence)
 - materially change system boundaries, trust boundaries, or data flows
 - adopt/replace major platform capabilities (CI/CD gates, observability stack, deployment strategy)
 - introduce a security control that has architectural implications
 
 Do **not** create ADRs for:
+
 - small refactors with no lasting implications
 - purely editorial doc changes
 - reversible experiments with no architectural consequences (use a short proposal note instead)
 
 ### Where it lives
+
 - Primary: `docs/10-architecture/adr/`
 
 ### Naming convention
+
 - `adr-0001-short-title.md`
 
 ### Minimum Definition of Done (ADR)
+
 An ADR is complete only if it includes:
 
 - **Context**: what problem and constraints exist
@@ -114,6 +133,7 @@ An ADR is complete only if it includes:
 - **References**: related architecture pages and impacted domains (security/runbooks/pipeline docs)
 
 Quality checks:
+
 - No implementation-level secrets
 - Consequences include at least one operational and one security consideration (or explicitly “not applicable”)
 
@@ -122,24 +142,30 @@ Quality checks:
 ## Runbook
 
 ### When to use
+
 Create a runbook for any procedure that:
+
 - an operator must execute under time pressure (deploy, rollback, triage)
 - changes production-like state (config changes, dependency changes)
 - is required to restore service or validate health
 
 Do **not** use runbooks for:
+
 - conceptual explanations
 - raw command lists without a procedure (use Reference)
 - one-off tasks that will never recur (unless it is likely to recur later)
 
 ### Where it lives
+
 - Primary: `docs/50-operations/runbooks/`
 
 ### Naming convention
+
 - `rbk-<system>-<task>.md`
   - e.g., `rbk-portfolio-deploy.md`, `rbk-portfolio-rollback.md`
 
 ### Minimum Definition of Done (Runbook)
+
 A runbook is complete only if it includes:
 
 - **Prereqs**: required access, tools, environment, and preconditions
@@ -150,6 +176,7 @@ A runbook is complete only if it includes:
 - **References**: relevant pipeline docs, architecture notes, and security considerations
 
 Quality checks:
+
 - Destructive steps have `:::warning` or `:::danger` admonitions
 - Validation steps are executable and unambiguous
 - Rollback is at least as detailed as deploy steps
@@ -159,7 +186,9 @@ Quality checks:
 ## Threat Model
 
 ### When to use
+
 Create or update a threat model when you:
+
 - add/modify authentication/session handling
 - introduce a new external integration or API boundary
 - change data storage or data movement
@@ -167,17 +196,21 @@ Create or update a threat model when you:
 - change CI/build integrity approach (supply chain posture)
 
 Do **not** use threat models for:
+
 - generic security advice without a defined system boundary
 - purely theoretical risks unrelated to the service
 
 ### Where it lives
+
 - Primary: `docs/40-security/threat-models/` (or `docs/40-security/` if you keep a single model)
 
 ### Naming convention
+
 - `<system>-threat-model.md`
   - e.g., `portfolio-app-threat-model.md`
 
 ### Minimum Definition of Done (Threat Model)
+
 A threat model is complete only if it includes:
 
 - **System overview**: what is in scope, what is out of scope
@@ -190,6 +223,7 @@ A threat model is complete only if it includes:
 - **Residual risk**: explicit accepted risks with review notes (or “none”)
 
 Quality checks:
+
 - Threats are tied to entry points and assets (no free-floating lists)
 - Mitigations are actionable, not vague
 - Validation includes at least one reproducible check or evidence artifact expectation
@@ -199,23 +233,29 @@ Quality checks:
 ## Postmortem
 
 ### When to use
+
 Create a postmortem when:
+
 - users experienced an outage, security event, or correctness issue
 - a deploy required rollback or caused a material regression
 - manual intervention was required to restore service or integrity
 - monitoring/alerting failed to detect a meaningful issue in time
 
 Do **not** use postmortems for:
+
 - issues caught before user impact and resolved without incident response
 - purely editorial documentation issues (use a normal PR note)
 
 ### Where it lives
+
 - Primary: `docs/50-operations/incident-response/postmortems/`
 
 ### Naming convention
+
 - `pm-YYYY-MM-DD-short-title.md`
 
 ### Minimum Definition of Done (Postmortem)
+
 A postmortem is complete only if it includes:
 
 - **Executive summary**: what happened, impact, duration, detection method
@@ -228,6 +268,7 @@ A postmortem is complete only if it includes:
 - **References**: related PR/release/runbook/threat model (public-safe references)
 
 Quality checks:
+
 - Action items are verifiable (not “improve monitoring” without specifics)
 - Postmortem is blameless and process-oriented
 - Sensitive details are redacted/summarized appropriately
@@ -252,13 +293,16 @@ Use this as a final scan before opening a PR:
 ## Troubleshooting
 
 ### “Where should this go?”
+
 - Decisions → ADR
 - How to do something safely and repeatedly → Runbook
 - Security analysis tied to a boundary → Threat model
 - User-impacting incident retrospective → Postmortem
 
 ### “This feels too heavy for a small change.”
+
 Use the lightest artifact that still preserves traceability:
+
 - small decision with lasting impact → ADR
 - one operational action you might repeat → Runbook
 - new entry point / integration → Threat model update

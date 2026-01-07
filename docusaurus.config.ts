@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -26,9 +26,9 @@ const config: Config = {
   projectName: 'portfolio-docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
-  onBrokenAnchors: "warn",  
+  onBrokenAnchors: 'warn',
   // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. 
+  // useful metadata like html lang.
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -75,7 +75,7 @@ const config: Config = {
 
   themeConfig: {
     mermaid: {
-      theme: {light: 'default', dark: 'dark'},
+      theme: { light: 'default', dark: 'dark' },
     },
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',

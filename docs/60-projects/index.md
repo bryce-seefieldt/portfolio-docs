@@ -1,6 +1,6 @@
 ---
-title: "Project Dossiers"
-description: "Standardized, repeatable project documentation packages for the portfolio app and each demo project, organized for fast review and deep technical validation."
+title: 'Project Dossiers'
+description: 'Standardized, repeatable project documentation packages for the portfolio app and each demo project, organized for fast review and deep technical validation.'
 sidebar_position: 7
 tags: [projects, portfolio, demos, documentation, delivery]
 ---
@@ -18,6 +18,7 @@ This section contains project-specific dossiers. Each dossier is a structured pa
 ## Scope
 
 ### In scope
+
 - dossier-level documentation for:
   - the portfolio web app
   - each linked demo project
@@ -25,6 +26,7 @@ This section contains project-specific dossiers. Each dossier is a structured pa
 - cross-cutting references to architecture/devops/security/ops domains
 
 ### Out of scope
+
 - generic standards and policies (belong in top-level domains)
 - ad-hoc notes not tied to an identifiable project outcome
 
@@ -45,6 +47,7 @@ If a project is intentionally minimal, explicitly state what is omitted and why.
 ## Evidence-first documentation rule
 
 For each claim (performance, security, reliability, DX), include at least one of:
+
 - a reproducible procedure to validate
 - an artifact location (scan result summary, configuration evidence, test output)
 - an ADR or runbook reference
@@ -54,6 +57,7 @@ This keeps dossiers credible and audit-friendly.
 ## Validation and expected outcomes
 
 A dossier is “complete” when:
+
 - a reviewer can understand the project in 2–5 minutes
 - deeper detail exists for architecture/devops/security/ops validation
 - build and deployment posture is clear (including rollback)
@@ -68,6 +72,7 @@ A dossier is “complete” when:
 ## References
 
 Project dossiers must align with:
+
 - architecture decisions (`10-architecture/`)
 - engineering standards (`20-engineering/`)
 - delivery platform (`30-devops-platform/`)

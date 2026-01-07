@@ -1,9 +1,10 @@
 # Documentation Structure
 
 ## Rationale
-- Enforce a stable, predictable navigation order (and avoids “misc” sprawl). 
+
+- Enforce a stable, predictable navigation order (and avoids “misc” sprawl).
 - Reads like an enterprise binder:  
-Product → Architecture → Engineering → Platform → Security → Ops → Projects → Reference.
+  Product → Architecture → Engineering → Platform → Security → Ops → Projects → Reference.
 
 ## Architecture
 
@@ -177,7 +178,9 @@ docs/
 ```
 
 ### `src/`
+
 **_Custom Pages and Polish_**
+
 ```makefile
 src/
   pages/
@@ -192,8 +195,10 @@ src/
     custom.css
 ```
 
-### `static/` 
+### `static/`
+
 **_diagrams, artifacts, downloadable evidence_**
+
 ```makefile
 static/
   img/
@@ -211,6 +216,7 @@ static/
 _**Tip:** Keep “evidence artifacts” in static/artifacts/ and link them from security/DevOps pages in order to publish sanitized reports._
 
 ### CI/CD and Repo Hygiene
+
 ```makefile
 .github/
   workflows/
@@ -221,11 +227,11 @@ _**Tip:** Keep “evidence artifacts” in static/artifacts/ and link them from 
 ```
 
 #### Templates
+
 ```makefile
 .github/ISSUE_TEMPLATE/
   bug_report.yml
   doc_improvement.yml
   security_issue.yml
   proposal.yml
-  ```
-  
+```

@@ -1,6 +1,6 @@
 ---
-title: "Portfolio Documentation System"
-description: "How to use this Docusaurus repository as an enterprise-grade, docs-as-code evidence system for the portfolio web app and linked demo projects."
+title: 'Portfolio Documentation System'
+description: 'How to use this Docusaurus repository as an enterprise-grade, docs-as-code evidence system for the portfolio web app and linked demo projects.'
 sidebar_position: 0
 tags: [portfolio, documentation, governance, devops, security, operations]
 ---
@@ -20,6 +20,7 @@ This is not “notes.” It is a living, version-controlled evidence system.
 ## Scope
 
 ### In scope
+
 - end-to-end documentation for the portfolio web app as a production-like service
 - documentation for linked demo projects (each with a consistent dossier format)
 - delivery artifacts (roadmap, release notes, ADRs, runbooks, threat models, postmortems)
@@ -27,6 +28,7 @@ This is not “notes.” It is a living, version-controlled evidence system.
 - engineering standards and reproducible local development practices
 
 ### Out of scope
+
 - private secrets or internal-only environment details
 - proprietary or sensitive data
 - unstructured “dumping ground” content without a defined section home
@@ -59,16 +61,18 @@ This repository follows a strict docs-as-code workflow:
 - Trunk-based workflow with short-lived branches
 - Required front matter on every doc
 - Required standardized page shape:
-  1) Purpose
-  2) Scope
-  3) Prereqs / Inputs
-  4) Procedure / Content
-  5) Validation / Expected outcomes
-  6) Failure modes / Troubleshooting
-  7) References
+  1. Purpose
+  2. Scope
+  3. Prereqs / Inputs
+  4. Procedure / Content
+  5. Validation / Expected outcomes
+  6. Failure modes / Troubleshooting
+  7. References
 
 ### Non-negotiable publication safety rules
+
 Never commit:
+
 - secrets, tokens, private keys
 - private IPs/internal hostnames
 - sensitive logs or customer-like data
@@ -99,6 +103,7 @@ This loop ensures every “build” is paired with “run” and “secure.”
 ## Validation expectations
 
 A change is acceptable only if:
+
 - the documentation site builds successfully (`pnpm build`)
 - navigation remains coherent (categories and indexes are present)
 - new procedures include validation steps and rollback notes
@@ -107,6 +112,7 @@ A change is acceptable only if:
 ## Next actions (recommended first population steps)
 
 Create these foundational artifacts early:
+
 - portfolio product brief + capability map
 - system context (C4 L1) and a small set of ADRs
 - CI/CD pipeline overview + rollback strategy

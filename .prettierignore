@@ -1,0 +1,17 @@
+# Build outputs
+.docusaurus/
+build/
+node_modules/
+
+# Lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Generated files
+.cache/
+*.min.js
+*.min.css
+
+# Logs
+*.log

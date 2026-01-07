@@ -1,4 +1,5 @@
 # Contributing to Development Documentation
+
 ## Authoring Guidance (Reduce Noise)
 
 - Every major folder has an `index.md` that acts as a “section hub.”
@@ -6,7 +7,9 @@
 - Enforce templates (ADR/runbook/postmortem/threat model) via `docs/_meta/templates/`.
 
 - Treat `60-projects/portfolio-web-app/` as the canonical service doc set; each demo project mirrors the same headings (architecture, deployment, ops, security).
+
 ## Content
+
 - Product/portfolio narrative → docs/00-portfolio/
 - System design → docs/10-architecture/
 - Engineering practices & local dev → docs/20-engineering/
@@ -19,11 +22,13 @@
 ## Branch Discipline
 
 ### Default model
+
 - Default branch: `main`
 - Branching approach: trunk-based (short-lived branches, small PRs)
 - No direct pushes to `main`
 
 ### Branch Name Rules
+
 Use one of the following prefixes:
 
 - `docs/`: normal documentation additions/updates
@@ -34,6 +39,7 @@ Use one of the following prefixes:
 - `ref/`: reference material (CLI cheatsheets, config references)
 
 Format:
+
 ```text
 <prefix>/<area>-<short-topic>
 ```
@@ -47,12 +53,14 @@ Examples:
 - `ref/wsl2-workstation-cheatsheet`
 
 Hard rules:
+
 - lowercase only
 - no spaces
 - keep under ~60 chars
 - one topic per branch (avoid “mega branches”)
 
 ## PR Discipline
+
 All doc changes go through PRs (even solo)
 
 PR must include:
@@ -71,7 +79,7 @@ Use Conventional Commit-like phrasing:
 - arch: add ADR for hosting choice
 - ci: add docs build/link-check workflow
 
-### PR Scope rules 
+### PR Scope rules
 
 A PR should typically be one of:
 
@@ -86,29 +94,43 @@ If a PR touches multiple domains (`40-security` + `50-operations` + `30-devops-p
 
 A PR is merge-ready only if:
 
-1. Build passes
+1. **Quality gates pass**
+   - `pnpm lint` succeeds (ESLint)
+   - `pnpm typecheck` succeeds (TypeScript)
+   - `pnpm format:check` succeeds (Prettier)
+   - CI workflow `ci / quality` passes (GitHub Actions)
+2. **Build passes**
    - `pnpm build` succeeds (no broken links; no broken refs)
    - CI workflow `ci / build` passes (GitHub Actions)
-2. Deployment Checks understanding
+3. **Deployment Checks understanding**
    - Understand that after merge, production deployment is **automatic**
-   - Deployment domain assignment is **gated** by Deployment Checks passing
+   - Deployment domain assignment is **gated** by **both** Deployment Checks passing (`ci / quality` and `ci / build`)
    - If checks fail, deployment is created but remains unpromoted; site stays on prior version
    - See [Deployment Checks flow](./docs/60-projects/portfolio-docs-app/03-deployment.md#release-governance-vercel-deployment-checks) for details
-3. Nav integrity
+4. **Nav integrity**
    - if adding a folder: `_category_.json` (or .yml) exists
    - any new section has an index hub (generated or curated)
-4. Evidence
+5. **Evidence**
    - include at least one of:
      - link(s) to the rendered page(s)
      - local build output snippet
      - screenshot of the rendered page (optional, but great for PR review)
-5. Security statement
+6. **Security statement**
    - confirm: "No secrets added"
    - if security-related doc: link to updated threat model / control / test page (or state TBD + created issue)
+
+**Quick check command:**
+
+```bash
+pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
+```
+
+All four must pass before opening a PR.
 
 ### Review rules (solo-friendly)
 
 Even as a solo maintainer, act like a team:
+
 - Leave at least one review comment on your own PR before merging (e.g., “Checked nav, build ok”).
 - Use squash merge to keep history clean
 
@@ -116,14 +138,16 @@ Even as a solo maintainer, act like a team:
 
 A doc PR is done only if:
 
-- pnpm build succeeds [(no broken links)](https://docusaurus.io/docs/3.2.1/api/docusaurus-config)
+- All quality gates pass (`pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`)
+- CI checks pass (`ci / quality` and `ci / build`)
 - New pages have front matter (title + sidebar rules)
 - The page is placed in the correct domain folder
+- Code follows ESLint/Prettier standards (auto-fixable with `pnpm lint:fix` and `pnpm format:write`)
 - Any new process includes a rollback or recovery note (runbook mindset)
 - Any security-relevant change updates at least one of:
-    - threat model
-    - secure SDLC controls
-    - security testing notes
+  - threat model
+  - secure SDLC controls
+  - security testing notes
 
 ### Toolchain consistency (build determinism)
 
@@ -131,29 +155,68 @@ To ensure consistent builds across local, CI, and Vercel environments:
 
 - **Never** manually update pnpm or Node versions without updating `package.json`
 - Changes to `package.json` or `pnpm-lock.yaml` require:
-  - Local `pnpm install --frozen-lockfile` + `pnpm build` verification
+  - Local `pnpm install --frozen-lockfile` + all quality gates verification
   - Commit of the updated lockfile
   - Confirmation that CI passes
 - Corepack is enabled in Vercel (`ENABLE_EXPERIMENTAL_COREPACK=1`), which enforces `package.json#packageManager` pinning
-- If you see "version mismatch" errors in Vercel builds, see [Build Determinism](./docs/60-projects/portfolio-docs-app/03-deployment.md#build-determinism-pnpm--corepack) section of the deployment dossier
-- Lockfile/toolchain failures? See [Broken Links Triage Runbook Step 0](./docs/50-operations/runbooks/rbk-docs-broken-links-triage.md#0-check-for-toolchain-related-failures-first)
+- If you see "version mismatch" errors in Vercel builds, see [Build Determinism](./docs/60-projects/portfolio-docs-app/03-deployment.md#build-contract-and-determinism) section of the deployment dossier
+- Lockfile/toolchain failures? See [Broken Links Triage Runbook](./docs/50-operations/runbooks/rbk-docs-broken-links-triage.md)
+
+### Code quality and formatting
+
+The project enforces code quality through automated gates:
+
+**Linting (ESLint):**
+
+- Configuration: `eslint.config.mjs`
+- Run: `pnpm lint`
+- Auto-fix: `pnpm lint:fix`
+- Enforces: TypeScript best practices, React/Hooks rules, code quality standards
+
+**Type checking (TypeScript):**
+
+- Configuration: `tsconfig.json`
+- Run: `pnpm typecheck`
+- Validates: Type safety in config files and React components
+
+**Formatting (Prettier):**
+
+- Configuration: `.prettierrc.json`
+- Run check: `pnpm format:check`
+- Auto-format: `pnpm format:write`
+- Standards: Single quotes, semicolons, 2-space indent, 80-char width, LF endings
+
+**Before committing:**
+
+```bash
+# Auto-fix formatting and linting where possible
+pnpm format:write
+pnpm lint:fix
+
+# Verify all gates pass
+pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
+```
+
+See [ADR-0004](/docs/architecture/adr/adr-0004-expand-ci-deploy-quality-gates) for quality gate rationale and [Testing](./docs/60-projects/portfolio-docs-app/05-testing.md) for details.
 
 ## Style Guide and Structure Rules
+
 ### File and folder conventions
 
 - Folders: kebab-case (and use your numeric top-level ordering: 00-, 10-, etc.)
 - Docs: kebab-case.md or kebab-case.mdx
-    - Prefer .md unless you need React components; MDX is powerful but should be intentional.
+  - Prefer .md unless you need React components; MDX is powerful but should be intentional.
 
 ### Front matter (required fields)
 
 At top of every doc:
+
 ```yaml
 ---
-title: "Short, specific title"
-description: "1–2 sentence summary of why this page exists."
+title: 'Short, specific title'
+description: '1–2 sentence summary of why this page exists.'
 sidebar_position: 10
-sidebar_label: "Optional shorter label"
+sidebar_label: 'Optional shorter label'
 tags: [devops, security, portfolio]
 ---
 ```
@@ -168,6 +231,7 @@ Notes:
 In each directory that appears in navigation, add `_category_.json` (or .yml) to control label/position and [optionally generate an index page](https://docusaurus.io/pt-BR/docs/sidebar/autogenerated)
 
 Example:
+
 ```json
 {
   "label": "CI/CD",
@@ -175,6 +239,7 @@ Example:
   "link": { "type": "generated-index" }
 }
 ```
+
 ### Writing style (strict)
 
 **Default voice:** professional, technical, operational.
@@ -187,13 +252,15 @@ Example:
 - First-person is allowed only in 00-portfolio/ pages (interactive narrative).
 
 ### Standard page shape (use this everywhere)
+
 **Every page should follow:**
+
 1. Purpose (1–3 bullets)
 2. Scope (what’s in/out)
 3. Prereqs / Inputs
 4. Procedure / Content
-5.  Validation / Expected outcomes
-6.  Failure modes / Troubleshooting
+5. Validation / Expected outcomes
+6. Failure modes / Troubleshooting
 7. References (links to ADRs, runbooks, upstream docs)
 
 ### Admonitions (use consistently)
@@ -201,10 +268,11 @@ Example:
 Use [Docusaurus admonitions](https://docusaurus.io/docs/next/markdown-features/admonitions) for operational clarity (notes, warnings, dangers). Syntax is triple-colon blocks like `:::note`, `:::tip`, etc.
 
 Examples:
+
 ```md
 :::note
 
-Some **content** with _Markdown_ `syntax`. 
+Some **content** with _Markdown_ `syntax`.
 
 :::
 
@@ -222,7 +290,7 @@ Some **content** with _Markdown_ `syntax`.
 
 :::warning
 
-Some **content** with _Markdown_ `syntax`. 
+Some **content** with _Markdown_ `syntax`.
 :::
 
 :::danger
@@ -234,8 +302,7 @@ Some **content** with _Markdown_ `syntax`.
 ### Code blocks and command examples (non-negotiable)
 
 - Always specify the language fence:
-
-    - `bash`, `powershell`, `yaml`, `json`, `ts`, `tsx`
+  - `bash`, `powershell`, `yaml`, `json`, `ts`, `tsx`
 
 - Commands must be copy/paste safe.
 - If a command is destructive, prefix with a warning admonition and include a rollback.
@@ -248,6 +315,7 @@ Never commit:
 - internal hostnames, private IPs, personal emails, or proprietary logs
 
 For evidence artifacts:
+
 - Publish sanitized SAST/SCA summaries and SBOM excerpts
 - Keep raw reports private unless redacted
 
@@ -265,6 +333,7 @@ Agent must:
 - produce a short PR summary + a checklist mapping to “Definition of Done”
 
 Agent must not:
+
 - invent system details (if unknown, mark as `TBD:` and create a tracking issue)
 - include secrets or pseudo-secrets
 - change taxonomy without updating `docs/_meta/taxonomy-and-tagging.md`

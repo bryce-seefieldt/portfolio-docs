@@ -1,6 +1,6 @@
 ---
-title: "Portfolio Docs: Deployment"
-description: "Delivery model for the Portfolio Docs App: CI/CD contract, environments, hosting expectations, release discipline, and rollback posture."
+title: 'Portfolio Docs: Deployment'
+description: 'Delivery model for the Portfolio Docs App: CI/CD contract, environments, hosting expectations, release discipline, and rollback posture.'
 sidebar_position: 3
 tags: [projects, devops, cicd, deployment, vercel, github-actions]
 ---
@@ -17,6 +17,7 @@ This page documents how the Portfolio Docs App is built and deployed as a produc
 ## Scope
 
 ### In scope
+
 - CI/CD stages and required checks
 - hosting model (high-level, public-safe)
 - preview deployments and PR workflow
@@ -24,6 +25,7 @@ This page documents how the Portfolio Docs App is built and deployed as a produc
 - rollback posture and expected recovery steps
 
 ### Out of scope
+
 - vendor-specific secrets, tokens, or account details
 - deep security control detail (see `security.md`)
 - operational runbook step-by-step commands (see `operations.md`)
@@ -51,7 +53,7 @@ graph LR
     C -->|Checks Fail| E["⚠️ Vercel: Unpromoted Deployment"]
     D --> F["🌍 Production: Live"]
     E --> G["🔄 Await Fix or Rollback"]
-    
+
     style A fill:#0066cc,stroke:#003d7a,color:#fff
     style B fill:#0066cc,stroke:#003d7a,color:#fff
     style C fill:#ff6b00,stroke:#cc5500,color:#fff
@@ -66,12 +68,14 @@ This architecture decouples **deployment creation** (immediate) from **release p
 ### Environment strategy
 
 #### Preview environment (PR branches)
+
 - Every PR branch automatically triggers a Vercel preview deployment
 - Preview URL: unique per branch (e.g., `<branch-name>-<random>.vercel.app`)
 - Objective: reviewers can validate navigation, rendering, and content coherence before merge
 - Failed builds produce a visible error state in PR checks
 
 #### Production environment (`main`)
+
 - `main` represents the single source of truth for published documentation
 - Deployment flow:
   1. PR merges to `main`
@@ -93,6 +97,7 @@ Environment variables: ENABLE_EXPERIMENTAL_COREPACK=1
 ```
 
 These settings ensure:
+
 - **Determinism**: frozen lockfile prevents dependency version drift
 - **Reproducibility**: local `pnpm build` matches Vercel build exactly
 - **Safety**: Docusaurus build fails on broken links, preventing invalid HTML from serving
@@ -101,17 +106,35 @@ These settings ensure:
 
 **Key pattern:** Vercel Deployment Checks enforce a safety gate between deployment creation and production release.
 
+### Required GitHub checks
+
+Vercel is configured to require **two GitHub Actions checks** before promoting a deployment to production:
+
+1. **`ci / quality`** — Fast-fail quality gates (lint, typecheck, format)
+2. **`ci / build`** — Documentation build integrity (broken links, structure validation)
+
+Both checks must pass for production promotion. This ensures:
+
+- Code quality standards are met
+- TypeScript type safety is maintained
+- Code style is consistent
+- Documentation builds successfully
+- No broken links or navigation errors
+
+See [ADR-0004](/docs/architecture/adr/adr-0004-expand-ci-deploy-quality-gates) for rationale and [Testing](./05-testing.md) for quality gate details.
+
 ### Deployment Checks flow
 
-| Step | What happens | Who/What? |
-|------|-------------|----------|
-| 1. Merge to `main` | PR merged; `main` moves forward | Developer (via GitHub UI) |
-| 2. Deployment created | Vercel detects push, starts build | Vercel automation |
-| 3. Checks run | GitHub Actions workflow `ci / build` executes | CI pipeline |
-| 4. Domain assignment | Vercel assigns production domain (only if checks pass) | Vercel automation |
-| 5. Site is live | Production site updated and served | Vercel edge network |
+| Step                  | What happens                                                     | Who/What?                 |
+| --------------------- | ---------------------------------------------------------------- | ------------------------- |
+| 1. Merge to `main`    | PR merged; `main` moves forward                                  | Developer (via GitHub UI) |
+| 2. Deployment created | Vercel detects push, starts build                                | Vercel automation         |
+| 3. Checks run         | GitHub Actions workflows `ci / quality` and `ci / build` execute | CI pipeline               |
+| 4. Domain assignment  | Vercel assigns production domain (only if **both** checks pass)  | Vercel automation         |
+| 5. Site is live       | Production site updated and served                               | Vercel edge network       |
 
 If checks **fail** at step 3:
+
 - Production deployment is created but remains **unpromoted**
 - Production domain continues serving the **previous stable version**
 - Reviewers see build failure in PR / commit status
@@ -134,6 +157,7 @@ If checks **fail** at step 3:
 ### Evidence
 
 To verify a release is complete:
+
 - Confirm Vercel Deployments UI shows **"Promoted"** status
 - Confirm deployment timestamp matches the merge time
 - Confirm GitHub commit shows ✓ all checks passed
@@ -145,6 +169,7 @@ To ensure identical builds across local development, CI, and production hosting,
 ### Package manager specification
 
 **In `package.json`:**
+
 ```json
 {
   "packageManager": "pnpm@10.0.0",
@@ -159,27 +184,30 @@ This field tells both Node's package manager ecosystem (Corepack) and Vercel to 
 ### Corepack integration (experimental)
 
 **In Vercel environment variables:**
+
 ```
 ENABLE_EXPERIMENTAL_COREPACK=1
 ```
 
 When enabled:
+
 - Node's native Corepack reads the `packageManager` field from `package.json`
 - Enforces the exact pnpm version, downloading it if needed
 - Eliminates "works on my machine but fails in Vercel" errors due to package manager version drift
 
 **Why Corepack?**
+
 - Corepack is built into Node; no additional tools required
 - Provides a single source of truth (the `packageManager` field) for all environments
 - Standardizes the versioning approach across teams
 
 ### Corepack risk assessment
 
-| Aspect | Benefit | Risk | Mitigation |
-|--------|---------|------|-----------|
-| **Stability** | Exact versions enforced | Corepack is experimental ([Vercel changelog](https://vercel.com/changelog/corepack-experimental-is-now-available)) | If Corepack behavior changes, fallback to explicit `pnpm install --frozen-lockfile` in build script |
-| **Maintenance** | No manual pinning per environment | Node team may deprecate Corepack | Pinned `packageManager` field provides escape hatch |
-| **Determinism** | Guaranteed consistency | Rare: Node version updates can affect Corepack behavior | Use stable LTS Node version (20.x); validate before updating |
+| Aspect          | Benefit                           | Risk                                                                                                               | Mitigation                                                                                          |
+| --------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| **Stability**   | Exact versions enforced           | Corepack is experimental ([Vercel changelog](https://vercel.com/changelog/corepack-experimental-is-now-available)) | If Corepack behavior changes, fallback to explicit `pnpm install --frozen-lockfile` in build script |
+| **Maintenance** | No manual pinning per environment | Node team may deprecate Corepack                                                                                   | Pinned `packageManager` field provides escape hatch                                                 |
+| **Determinism** | Guaranteed consistency            | Rare: Node version updates can affect Corepack behavior                                                            | Use stable LTS Node version (20.x); validate before updating                                        |
 
 ### Build verification
 
@@ -196,6 +224,7 @@ When enabled:
 4. Confirm it matches the pinned version in `package.json`
 
 **To reproduce locally:**
+
 ```bash
 # Verify local pnpm version
 pnpm --version  # Should output: 10.0.0 (or the pinned version)
@@ -206,6 +235,7 @@ pnpm build
 ```
 
 If local pnpm differs from the pinned version, enable Corepack locally:
+
 ```bash
 corepack enable
 corepack install  # Installs the pinned version
@@ -217,6 +247,7 @@ pnpm --version    # Should now match package.json
 Vercel uses `--frozen-lockfile` by default in CI environments, treating lockfile drift as a hard failure.
 
 **If you update dependencies locally:**
+
 ```bash
 # Update locally
 pnpm add <package>            # Updates pnpm-lock.yaml
@@ -233,13 +264,13 @@ Vercel will respect the updated lockfile on next deployment.
 
 The Vercel build contract specifies exactly what Vercel executes to produce the deployable artifact:
 
-| Setting | Value | Purpose |
-|---------|-------|---------|
-| **Install Command** | `pnpm install --frozen-lockfile` | Installs dependencies without modifying lockfile (CI discipline) |
-| **Build Command** | `pnpm build` | Generates the deployable site in `build/` directory |
-| **Output Directory** | `build` | Tells Vercel where compiled site is (must match Docusaurus output) |
-| **Node.js version** | `20.x` (LTS) | Runtime (matches `package.json#engines`) |
-| **Corepack** | `ENABLE_EXPERIMENTAL_COREPACK=1` (env var) | Enforces exact pnpm version via `package.json#packageManager` |
+| Setting              | Value                                      | Purpose                                                            |
+| -------------------- | ------------------------------------------ | ------------------------------------------------------------------ |
+| **Install Command**  | `pnpm install --frozen-lockfile`           | Installs dependencies without modifying lockfile (CI discipline)   |
+| **Build Command**    | `pnpm build`                               | Generates the deployable site in `build/` directory                |
+| **Output Directory** | `build`                                    | Tells Vercel where compiled site is (must match Docusaurus output) |
+| **Node.js version**  | `20.x` (LTS)                               | Runtime (matches `package.json#engines`)                           |
+| **Corepack**         | `ENABLE_EXPERIMENTAL_COREPACK=1` (env var) | Enforces exact pnpm version via `package.json#packageManager`      |
 
 ### How to verify contract in Vercel
 
@@ -250,6 +281,7 @@ The Vercel build contract specifies exactly what Vercel executes to produce the 
 ### What "Build contract" guarantees
 
 When the contract is stable and followed:
+
 - Local builds produce identical output to Vercel builds
 - `pnpm-lock.yaml` is the source of truth for dependency versions
 - No surprises during deployment (what builds locally will build on Vercel)
@@ -269,7 +301,9 @@ If Vercel "Output Directory" is set incorrectly (e.g., `public/` or `.docusaurus
 ## Hosting expectations (public-safe)
 
 ### Primary target: Vercel
+
 Vercel provides:
+
 - static site hosting with fast global delivery (CDN)
 - branch preview deployments for every PR
 - simple integration with GitHub repositories
@@ -280,12 +314,15 @@ The Portfolio Docs App uses Vercel's Git integration ([Vercel Deploying Git Repo
 (Do not document account identifiers, secrets, or private configuration.)
 
 ### Alternative target (fallback)
+
 - GitHub Pages is a viable fallback for a pure static doc site.
 
 ## Release discipline
 
 ### What constitutes a “release” for docs?
+
 Any meaningful change that affects:
+
 - information architecture
 - governance rules
 - security posture documentation
@@ -293,9 +330,11 @@ Any meaningful change that affects:
 - public-facing portfolio claims
 
 …should update release notes under:
+
 - `docs/00-portfolio/release-notes/`
 
 ### Recommended release notes content
+
 - what changed
 - why it changed
 - how to validate the change (review path and build verification)
@@ -304,10 +343,12 @@ Any meaningful change that affects:
 ## Rollback posture
 
 ### Rollback strategy (minimum viable)
+
 - Primary rollback mechanism is **Git revert** of the offending PR on `main`.
 - Production hosting should redeploy automatically from the corrected `main`.
 
 ### Rollback triggers
+
 - broken site rendering
 - navigation corruption
 - accidental publication of sensitive content (treat as security incident)
@@ -316,6 +357,7 @@ Any meaningful change that affects:
 ## Validation / Expected outcomes
 
 Deployment model is correct when:
+
 - PRs cannot merge without a passing `pnpm build`
 - preview builds are available or reproducible locally
 - production publishes from `main` deterministically
@@ -324,11 +366,13 @@ Deployment model is correct when:
 ## Failure modes / Troubleshooting
 
 See the deployment runbook for detailed diagnosis and recovery procedures:
+
 - [Output directory mismatch](../../50-operations/runbooks/rbk-docs-deploy.md#failure-output-directory-mismatch-404-errors-or-missing-pages) (404 errors, missing pages)
 - [pnpm lockfile drift](../../50-operations/runbooks/rbk-docs-deploy.md#failure-pnpm-lockfile-drift-or-version-mismatch) (dependency/version conflicts in Vercel)
 - [Missing build logs](../../50-operations/runbooks/rbk-docs-deploy.md#failure-missing-build-logs-or-build-doesnt-start) (build doesn't output or complete)
 
 Additional considerations:
+
 - **Build passes locally but fails in CI:** environment mismatch → pin node/pnpm versions and document the expected toolchain.
 - **Preview differs from production:** configuration drift → ensure build command and environment variables are consistent.
 - **Broken links introduced:** Docusaurus build fails → fix links or remove premature references to uncreated pages.
