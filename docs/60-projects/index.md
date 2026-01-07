@@ -78,3 +78,7 @@ Project dossiers must align with:
 - delivery platform (`30-devops-platform/`)
 - security posture (`40-security/`)
 - operational readiness (`50-operations/`)
+
+Project Dossier Template:
+
+- `docs/_meta/templates/template-project-dossier/`
