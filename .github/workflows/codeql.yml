@@ -1,10 +1,21 @@
 name: CodeQL
 
 # Analyze your code with CodeQL for security vulnerabilities and code quality issues.
-# Note: Code scanning must be enabled in repository settings for results to upload:
-#   1. Go to Settings → Code security and analysis
-#   2. Enable "Code scanning" and choose "Set up code scanning" → "CodeQL"
-#   3. CodeQL workflow will then successfully upload results to GitHub
+# 
+# IMPORTANT: Code scanning must be enabled in repository settings for results to upload.
+# 
+# To enable code scanning:
+#   1. Go to your repository on GitHub (https://github.com/bryce-seefieldt/portfolio-docs)
+#   2. Click the "Settings" tab
+#   3. In the left sidebar, click "Code security and analysis"
+#   4. Find "Code scanning" section
+#   5. Click "Set up code scanning"
+#   6. Select "CodeQL analysis" as the scanning tool
+#   7. Review the default CodeQL workflow (or keep it as-is)
+#   8. Click "Enable CodeQL"
+# 
+# Once enabled, CodeQL results will appear in the "Security" tab under "Code scanning alerts"
+# and this workflow will automatically upload analysis results.
 
 on:
   push:
