@@ -1,6 +1,7 @@
 ---
 title: 'Threat Model: Portfolio Docs App'
 description: 'Threat model for the Docusaurus documentation platform, focused on supply chain risk, CI integrity, public content safety, and deployment surface controls.'
+sidebar_position: 1
 tags: [security, threat-model, sdlc, supply-chain, documentation, projects]
 ---
 
