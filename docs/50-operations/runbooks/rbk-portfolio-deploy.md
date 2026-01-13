@@ -105,7 +105,51 @@ Expected outcome:
 
 - production domains are assigned only after checks pass.
 
-### 6) Post-deploy validation
+### 6) Env var verification (required)
+
+Validate that the deployment environment is configured with the expected **public-safe** environment variables. This prevents broken evidence links and inconsistent metadata between Preview and Production.
+
+#### A) Verify Vercel environment variables (Preview + Production)
+
+In Vercel Project Settings → Environment Variables, confirm these are present:
+
+Required (recommended minimum):
+
+- `NEXT_PUBLIC_DOCS_BASE_URL`
+
+Recommended for production polish:
+
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_GITHUB_URL`
+- `NEXT_PUBLIC_LINKEDIN_URL`
+
+Optional:
+
+- `NEXT_PUBLIC_CONTACT_EMAIL`
+
+Expected outcome:
+
+- Values are set for **Preview** and **Production** (unless intentionally different).
+- No sensitive values are stored in any `NEXT_PUBLIC_*` variable.
+
+#### B) Verify runtime behavior in the deployed site
+
+From the deployed environment (Preview or Production), validate behavior that depends on env:
+
+- Documentation link(s) resolve correctly:
+  - clicking “Docs” or “Evidence” navigates to the Documentation App host derived from `NEXT_PUBLIC_DOCS_BASE_URL`
+- Profile links resolve correctly:
+  - GitHub/LinkedIn links (if present) go to the configured destinations
+- Optional mail link:
+  - contact email (if configured) generates a correct `mailto:` link
+
+If validation fails:
+
+- treat this as a release-blocking configuration defect
+- correct env vars in Vercel and trigger a new deployment (or redeploy from the same commit)
+- re-run post-deploy validation steps
+
+### 7) Post-deploy validation
 
 Validate production:
 
@@ -113,7 +157,7 @@ Validate production:
 - evidence links to docs remain correct
 - no broken images/assets
 
-### 7) Record release evidence (recommended)
+### 8) Record release evidence (recommended)
 
 If change is material:
 
