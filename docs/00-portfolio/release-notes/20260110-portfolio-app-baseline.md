@@ -48,6 +48,10 @@ This release establishes the Portfolio App as a production-quality, public-facin
   - `src/data/projects.ts` defines `Project` and `EvidenceLinks`
   - featured project entries include stable slugs and evidence paths
 
+### Repository documentation
+
+- README updated with repository overview, local development commands, and links to evidence and runbooks.
+
 ---
 
 ## Changed

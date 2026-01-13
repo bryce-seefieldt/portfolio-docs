@@ -97,6 +97,8 @@ Rollback PR must include:
 - evidence: build passed
 - security note: “No secrets added”
 
+CI is the release gate: do not bypass required checks. The rollback PR must pass `ci / quality` and `ci / build` before production promotion.
+
 ### 6) Merge rollback PR and confirm production recovery
 
 - Merge rollback PR to `main`.

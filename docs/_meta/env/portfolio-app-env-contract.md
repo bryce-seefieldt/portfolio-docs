@@ -88,6 +88,23 @@ Minimum recommended in Vercel:
 - `NEXT_PUBLIC_LINKEDIN_URL`
 - Optional: `NEXT_PUBLIC_CONTACT_EMAIL`
 
+## CI determinism (required)
+
+To keep builds reproducible and trustworthy:
+
+- CI installs MUST use a frozen lockfile:
+
+  ```bash
+  pnpm install --frozen-lockfile
+  ```
+
+- Commit lockfile updates deliberately in a PR with rationale when dependency graphs change.
+- Before opening a PR, run the local quality contract:
+
+  ```bash
+  pnpm lint && pnpm format:check && pnpm typecheck && pnpm build
+  ```
+
 ## Validation
 
 A configuration is considered valid when:
@@ -99,6 +116,10 @@ A configuration is considered valid when:
 
 ## References
 
-- Portfolio App config module: `../portfolio/portfolio-app/src/lib/config.ts`
-- Portfolio App dossier (Deployment): `docs/60-projects/portfolio-app/deployment.md`
-- Portfolio App dossier (Security): `docs/60-projects/portfolio-app/security.md`
+- Portfolio App config module: `portfolio-app/src/lib/config.ts`
+- Portfolio App dossier (Deployment): `docs/60-projects/portfolio-app/03-deployment.md`
+- Portfolio App dossier (Security): `docs/60-projects/portfolio-app/04-security.md`
+- Runbooks:
+  - Deploy: `docs/50-operations/runbooks/rbk-portfolio-deploy.md`
+  - CI triage: `docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`
+  - Rollback: `docs/50-operations/runbooks/rbk-portfolio-rollback.md`

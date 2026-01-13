@@ -5,6 +5,8 @@ sidebar_position: 3
 tags: [projects, deployment, cicd, vercel, github-actions, governance]
 ---
 
+Status: Live — CI quality/build gates with frozen installs; Staged — Vercel promotion checks and release automation.
+
 ## Purpose
 
 Define how the Portfolio App is built and deployed with enterprise-grade governance:
@@ -79,6 +81,14 @@ The Portfolio App should never merge changes that:
 - drift formatting standards
 - introduce type errors
 - violate documented governance requirements
+
+## Pre-deployment governance (required)
+
+- Check names must remain stable and match the branch ruleset and any deployment checks:
+  - `ci / quality`
+  - `ci / build`
+- These checks must run on PRs and on pushes to `main` so they are selectable as required and usable by Vercel promotion checks later.
+- Deterministic installs are required in CI (`pnpm install --frozen-lockfile`). Changing dependency graphs must be intentional and reviewed.
 
 ## Vercel promotion governance
 

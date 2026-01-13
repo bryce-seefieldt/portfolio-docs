@@ -5,6 +5,8 @@ sidebar_position: 4
 tags: [projects, security, sdlc, supply-chain, web, portfolio]
 ---
 
+Status: Live — Dependabot + CodeQL + public-safe env policy; Staged — additional hardening and threat model expansion.
+
 ## Purpose
 
 Document the Portfolio App security posture as a public-facing site without authentication.
@@ -86,6 +88,26 @@ The security objective is to demonstrate credible enterprise practices:
 - avoid inline scripts and unsafe external embeds
 - ensure no sensitive runtime env vars leak to client
 - keep public logs minimal and non-sensitive
+
+## Step 3 security posture (baseline)
+
+### Supply chain controls
+
+- Dependabot policy: weekly updates for npm and GitHub Actions.
+- Grouped update strategy for production/dev dependencies; majors intentionally excluded by default and reviewed separately.
+- Evidence: Dependabot configuration in the app repository.
+
+### Static analysis
+
+- CodeQL workflow enabled on PRs, pushes to `main`, and a weekly scheduled run.
+- Scope: JavaScript/TypeScript.
+- Evidence: CodeQL workflow in the app repository.
+
+### Public-safe config policy
+
+- `NEXT_PUBLIC_*` variables are client-visible and must not contain secrets or sensitive endpoints.
+- Public configuration is centralized in the app at `src/lib/config.ts` with helpers for docs URLs and mailto links.
+- Internal-only details of the env contract are tracked in: `docs/_meta/env/portfolio-app-env-contract.md` (plain-text path; keep internal to avoid public leakage).
 
 ## Validation / Expected outcomes
 
