@@ -11,12 +11,14 @@ workspace-repos:
 ## Current State
 
 ### Active Branches
+
 - **portfolio-app:** `main` (PR merged: chore/phase1-governance-quality-script)
 - **portfolio-docs:** `main` (working branch: feat/portfolio-app-phase-1-update)
 
 ### Phase Progress: Phase 1 (Near Completion)
 
 #### ✅ Completed (Portfolio App)
+
 - Routes implemented: `/`, `/cv`, `/projects`, `/projects/[slug]`, `/contact`
 - Config contract: `src/lib/config.ts` with `NEXT_PUBLIC_*` and `docsUrl()` helper
 - Project registry placeholder: `src/data/projects.ts` with types and helpers
@@ -28,6 +30,7 @@ workspace-repos:
 - Quality script: `pnpm quality` runs lint + format:check + typecheck
 
 #### ✅ Completed (Portfolio Docs)
+
 - Dossier updates (8 pages):
   - index.md: Current State + Reviewer path
   - architecture.md: Repository structure, routing/evidence strategy, route list annotated
@@ -41,10 +44,11 @@ workspace-repos:
   - rbk-portfolio-ci-triage.md: CI topology, known Prettier failure, re-run checks guidance
   - rbk-portfolio-rollback.md: CI gate enforcement, revert-based recovery
 - ADR-0008: CI quality gates (Purpose/Scope + decision body complete)
-- Internal env contract: `docs/_meta/env/portfolio-app-env-contract.md` with NEXT_PUBLIC_* rules, CI determinism, references
+- Internal env contract: `docs/_meta/env/portfolio-app-env-contract.md` with NEXT*PUBLIC*\* rules, CI determinism, references
 - Release note: `docs/00-portfolio/release-notes/20260110-portfolio-app-baseline.md` (includes README section)
 
 #### ⏳ In Progress / Pending
+
 - Vercel deployment (not yet connected)
 - GitHub Ruleset enforcement (not yet configured with required checks)
 - Public repo URLs (pending in `src/data/projects.ts`: repoUrl, demoUrl)
@@ -55,6 +59,7 @@ workspace-repos:
 ## Integration Contract
 
 ### Evidence Link Strategy
+
 - Portfolio App links to docs via: `NEXT_PUBLIC_DOCS_BASE_URL` (env var)
 - Helper function: `docsUrl(pathname)` in `src/lib/config.ts`
 - Evidence paths in `src/data/projects.ts` align with docs structure:
@@ -64,6 +69,7 @@ workspace-repos:
   - Runbooks: `operations/runbooks/`
 
 ### CI Check Names (Stable API)
+
 - `ci / quality` — lint, format:check, typecheck
 - `ci / build` — Next.js build (depends on quality)
 - Frozen installs: `pnpm install --frozen-lockfile`
@@ -72,6 +78,7 @@ workspace-repos:
   - Vercel Deployment Checks (promotion gating)
 
 ### Config Contract
+
 - All client-visible config: `NEXT_PUBLIC_*` prefix only
 - No secrets in env vars
 - Centralized in `src/lib/config.ts`
@@ -98,6 +105,7 @@ workspace-repos:
 ## Known Gaps (Phase 1)
 
 ### Out-of-Repo Admin Tasks
+
 1. **Vercel Deployment:**
    - Connect portfolio-app repo to Vercel
    - Configure env vars: `NEXT_PUBLIC_DOCS_BASE_URL`, `NEXT_PUBLIC_SITE_URL` (optional)
@@ -124,6 +132,7 @@ workspace-repos:
 ## Quick Resume Commands
 
 ### Start of Session
+
 ```bash
 # Navigate to workspace
 cd /home/seven30/src/portfolio/portfolio-docs
@@ -142,6 +151,7 @@ cd ../portfolio-docs && git status && git log -1 --oneline
 ```
 
 ### Phase 1 Verification
+
 ```bash
 # Portfolio-app local verification
 cd /home/seven30/src/portfolio/portfolio-app
@@ -158,6 +168,7 @@ pnpm build      # Docusaurus build
 ## Context for Next Session
 
 ### Immediate Next Steps (Priority Order)
+
 1. **Deploy portfolio-app to Vercel** (admin task, out-of-repo)
 2. **Configure GitHub Ruleset** (admin task, requires repo settings access)
 3. **Configure Vercel promotion checks** (admin task, Vercel UI)
@@ -165,13 +176,16 @@ pnpm build      # Docusaurus build
 5. **Populate public URLs** in `src/data/projects.ts` once deployed
 
 ### Phase 1 Acceptance Criteria (Roadmap Reference)
+
 - [x] Portfolio App can be deployed and validated end-to-end with preview-to-prod governance
 - [x] CI gates are enforceable and stable (check names consistent)
-- [ ] Routes render in preview and production *(pending Vercel deployment)*
+- [ ] Routes render in preview and production _(pending Vercel deployment)_
 - [x] Portfolio App pages include correct evidence-link placeholders to docs
 
 ### Phase 2 Readiness
+
 Once Phase 1 is complete (deployed + validated):
+
 - Begin "gold standard" project planning
 - Choose exemplar project for deep evidence trail
 - Expand CV page with real capability-to-proof mapping
@@ -197,6 +211,7 @@ Once Phase 1 is complete (deployed + validated):
 ## Session History (Brief)
 
 ### 2026-01-13 Session
+
 - Completed Phase 1 documentation alignment
 - Updated all dossier pages, runbooks, ADR-0008, env contract, release note
 - Added status notes to Deployment and Security docs
@@ -206,10 +221,12 @@ Once Phase 1 is complete (deployed + validated):
 - Established this session context file for future resumption
 
 ### What Changed Since Last Commit
+
 - Portfolio-app: README governance section + quality script in package.json
 - Portfolio-docs: Multiple dossier pages, runbooks, ADR, env contract, release note
 
 ### Lessons Learned
+
 - Stable CI check names are an operational API
 - Wire runbook references across docs to reduce broken links
 - Annotate docs to distinguish implemented vs planned to avoid reviewer confusion
