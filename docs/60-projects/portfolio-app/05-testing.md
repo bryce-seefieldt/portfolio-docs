@@ -73,10 +73,53 @@ These checks must run on:
 - PRs targeting `main`
 - pushes to `main`
 
+### Linting
+
+Configuration approach:
+
+- ESLint 9+ with flat config (`eslint.config.mjs`)
+- Presets:
+  - `eslint-config-next/core-web-vitals` (Next.js recommended rules)
+  - `eslint-config-next/typescript` (TypeScript integration)
+- Custom global ignores: `.next/`, `out/`, `dist/`, `coverage/`, `.vercel/`, `next-env.d.ts`
+
+Command:
+
+```bash
+pnpm lint  # fails on warnings (--max-warnings=0)
+```
+
+Rationale:
+
+- Flat config is the modern ESLint standard (ESLint 9+)
+- Next.js presets provide sensible defaults for App Router + TypeScript
+- Zero warnings enforced to maintain code quality
+
 ### Formatting
 
-- Prettier uses an ESM config (`prettier.config.mjs`) to satisfy plugin ESM/TLA requirements; plugins are declared as strings.
-- `pnpm format:check` is a required gate in CI and must stay stable to avoid check-name drift.
+Configuration (`prettier.config.mjs`):
+
+```javascript
+{
+  semi: true,
+  singleQuote: false,
+  trailingComma: "all",
+  printWidth: 100,
+  tabWidth: 2,
+  plugins: ["prettier-plugin-tailwindcss"]
+}
+```
+
+- Prettier uses an ESM config (`prettier.config.mjs`) to satisfy plugin ESM/TLA requirements
+- **Tailwind plugin:** `prettier-plugin-tailwindcss` automatically sorts Tailwind utility classes for consistency
+- `pnpm format:check` is a required gate in CI and must stay stable to avoid check-name drift
+
+Commands:
+
+```bash
+pnpm format:check  # CI gate
+pnpm format:write  # local fix
+```
 
 ### Merge gates (GitHub ruleset)
 

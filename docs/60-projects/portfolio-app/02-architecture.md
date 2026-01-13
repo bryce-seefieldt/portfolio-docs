@@ -135,14 +135,104 @@ Key paths and roles in the Portfolio App repo:
 - Project pages should derive evidence links from `src/data/projects.ts` where possible to keep slugs and paths consistent with the Documentation App.
 - This separation keeps the Portfolio App concise while ensuring every major claim links to verifiable evidence in the docs site.
 
+## Component architecture and design system
+
+### Principle: Utility-first composition
+
+The Portfolio App uses **Tailwind CSS v4** with a utility-first approach to styling and component composition.
+
+Reusable component primitives:
+
+- `<Callout>` — styled content container for emphasis (announcements, warnings, key takeaways)
+- `<Section>` — page section with title, optional subtitle, and consistent spacing/borders
+
+Component organization:
+
+- Route-level components: page.tsx files in `src/app/*`
+- Layout components: `src/app/layout.tsx` (navigation, footer, metadata)
+- Shared primitives: `src/components/*`
+
+### Dark mode strategy
+
+- System preference-based (uses `prefers-color-scheme` media query)
+- No explicit toggle UI in Phase 1 (intentional minimalism)
+- All components use Tailwind `dark:` variants for dark mode styling
+- Future: consider explicit toggle with local storage (Phase 2+)
+
+### Styling patterns
+
+- Tailwind utility classes for all styling (no CSS modules or styled-components)
+- Consistent design tokens: spacing, colors, borders, shadows
+- Automatic class sorting via `prettier-plugin-tailwindcss`
+- Responsive design: mobile-first with `sm:`, `md:`, `lg:` breakpoints
+
+## Navigation and information architecture
+
+### Top navigation
+
+Fixed header with:
+
+- Portfolio branding/logo (links to `/`)
+- CV, Projects, Evidence (Docs), Contact
+- Evidence link opens Documentation App in same/new tab
+
+### Footer
+
+- Social links: GitHub, LinkedIn (if configured)
+- Documentation App link
+- Enterprise evidence model statement
+
+### Intentional omissions (Phase 1)
+
+- No dark mode toggle (system preference only)
+- No authentication or user accounts
+- No search (deferred to docs app or Phase 3+)
+
+## Metadata and SEO strategy
+
+### Current approach
+
+Metadata configured in `src/app/layout.tsx`:
+
+- Title template: `"%s | Portfolio"` (appended to page-level titles)
+- Description: concise value proposition
+- `metadataBase`: intentionally `undefined` (deferred until production domain finalized)
+
+### Future enhancements (Phase 2+)
+
+- OpenGraph tags for social sharing
+- Twitter card metadata
+- Structured data (JSON-LD) for projects and CV
+- Canonical URLs once domain is live
+
+## Toolchain and runtime
+
+### Node version policy
+
+- Node 20 LTS (pinned in `.nvmrc`)
+- Rationale: Deterministic builds, active LTS with security support
+- Upgrade policy: Follow Node.js LTS schedule; document via ADR
+
+### React Compiler
+
+- Enabled via `next.config.ts` (`reactCompiler: true`)
+- Automatic optimization of components and hooks
+- See ADR-0009 for decision rationale and validation criteria
+
+### Package manager
+
+- pnpm 10 (pinned in `package.json` `packageManager` field)
+- Deterministic installs with frozen lockfile in CI
+
 ## Scalability considerations
 
-- adding projects should be “cheap”:
+- adding projects should be "cheap":
   - add metadata + assets + evidence links; page generates automatically
 - avoid heavy dynamic backend early:
   - keep the system static-first; add APIs only via ADR
 - keep performance strong:
   - minimize client-side JS; prefer server components where appropriate
+  - React Compiler optimizes re-renders automatically
 
 ## Validation / Expected outcomes
 

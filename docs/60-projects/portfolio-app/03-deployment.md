@@ -56,6 +56,67 @@ Define how the Portfolio App is built and deployed with enterprise-grade governa
 - `main` is the published production branch.
 - Production domains are assigned only after required checks pass (see below).
 
+## Environment variable configuration
+
+### Required variables (all environments)
+
+**`NEXT_PUBLIC_DOCS_BASE_URL`**
+
+- Documentation App base URL for evidence links
+- Must be set in all environments (local, preview, production)
+
+Examples by environment:
+
+```bash
+# Local development (docs running on localhost:3001)
+NEXT_PUBLIC_DOCS_BASE_URL=http://localhost:3001
+
+# Preview deployments (Vercel preview URL or dedicated preview docs domain)
+NEXT_PUBLIC_DOCS_BASE_URL=https://portfolio-docs-git-preview-branch.vercel.app
+
+# Production (final docs domain)
+NEXT_PUBLIC_DOCS_BASE_URL=https://docs.yourdomain.com
+# OR path-based:
+NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
+```
+
+### Optional variables (recommended for production)
+
+**`NEXT_PUBLIC_SITE_URL`**
+
+- Canonical site URL for metadata and absolute links
+- Example: `https://portfolio.yourdomain.com`
+
+**`NEXT_PUBLIC_GITHUB_URL`**
+
+- Public GitHub profile or repo URL
+- Example: `https://github.com/your-handle`
+
+**`NEXT_PUBLIC_LINKEDIN_URL`**
+
+- Public LinkedIn profile URL
+- Example: `https://www.linkedin.com/in/your-handle/`
+
+**`NEXT_PUBLIC_CONTACT_EMAIL`**
+
+- Public contact email (appears as mailto link; no form)
+- Example: `contact@yourdomain.com`
+
+### Variable validation
+
+- All `NEXT_PUBLIC_*` variables are **client-visible**
+- **Never** place secrets, tokens, or sensitive endpoints in these variables
+- Missing required variables should degrade gracefully (app links to `/docs` by default)
+
+### Setting variables in Vercel
+
+1. Navigate to Vercel project → Settings → Environment Variables
+2. Add variables for each environment scope:
+   - **Production**: final public URLs
+   - **Preview**: preview/staging URLs
+   - **Development**: optional (can use `.env.local`)
+3. Redeploy after variable changes to apply
+
 ## CI contract (GitHub Actions)
 
 ### Minimum required checks
