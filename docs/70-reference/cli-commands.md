@@ -54,8 +54,9 @@ git branch | grep -vE '^\*?\s*main$' | xargs -r git branch -D
 
 This command safely deletes all local Git branches except the main branch.
 It works by:
+
 1. `git branch` - lists all local branches
-2. `grep -vE '^\*?\s*main$'` - filters out the main branch (and current branch indicator *)
+2. `grep -vE '^\*?\s*main$'` - filters out the main branch (and current branch indicator \*)
 3. `xargs -r git branch -D` - deletes each remaining branch forcefully (-D flag)
 
 The `-r` flag in xargs prevents errors if no branches match the filter.
