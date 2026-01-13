@@ -71,6 +71,20 @@ Portfolio App must link to evidence pages for each project:
 - “See the threat model”
 - “View runbooks / release notes”
 
+## Current State
+
+- Route skeleton implemented: `/`, `/cv`, `/projects`, `/projects/[slug]`, `/contact`.
+- Public-safe config contract in place via `NEXT_PUBLIC_*` envs and centralized helpers (see Portfolio App `src/lib/config.ts`).
+- CI gates enforced: `ci / quality` (lint, format check, typecheck) → `ci / build` (Next build), frozen lockfile installs.
+- CodeQL and Dependabot baselines present; branch protection/ruleset requires required checks before merge.
+
+## Reviewer path
+
+- Open the Portfolio App repo and inspect CI workflows (`ci`, CodeQL, Dependabot) for required checks and naming stability.
+- Review PR discipline and branch protection/ruleset settings to confirm required checks are enforced.
+- Validate build determinism locally with `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` (frozen lockfile).
+- Follow evidence links from the app into this dossier, ADR index, threat model, and runbooks to confirm traceability.
+
 ## Validation / Expected outcomes
 
 - A reviewer can understand value, role, and proof within 2 minutes

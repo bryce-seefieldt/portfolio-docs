@@ -1,0 +1,14 @@
+
+> portfolio-docs@0.0.0 build /home/seven30/src/portfolio/portfolio-docs
+> docusaurus build
+
+[INFO] [en] Creating an optimized production build...
+[webpackbar] ℹ Compiling Client
+[webpackbar] ℹ Compiling Server
+[WARNING] Docusaurus found 1 unused Markdown directives in file "docs/70-reference/cli-commands.md"
+- :::Note (41:1)
+Your content might render in an unexpected way. Visit https://github.com/facebook/docusaurus/pull/9394 to find out why and how to fix it.
+[webpackbar] ✔ Server: Compiled successfully in 43.09s
+[webpackbar] ✔ Client: Compiled successfully in 47.37s
+[SUCCESS] Generated static files in "build".
+[INFO] Use `npm run serve` command to test your build locally.

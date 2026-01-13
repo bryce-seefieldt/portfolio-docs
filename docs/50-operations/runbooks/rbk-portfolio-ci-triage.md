@@ -34,6 +34,17 @@ CI failures are treated as “stop-the-line” events. The correct response is t
 
 ## Procedure / Content
 
+### CI topology (for context)
+
+- `ci / quality` job runs:
+  - `pnpm lint`
+  - `pnpm format:check`
+  - `pnpm typecheck`
+- `ci / build` job runs:
+  - `pnpm install --frozen-lockfile`
+  - `pnpm build`
+  - depends on `ci / quality` being green
+
 ### 1) Identify the failing check and error class
 
 In the PR or `main` workflow run, identify:
@@ -73,6 +84,12 @@ Fix:
   - `pnpm format:write`
 - re-run:
   - `pnpm format:check`
+
+Known failure mode:
+
+- Prettier fails with ESM plugin / require() errors:
+  - ensure config file is `prettier.config.mjs`
+  - ensure plugins are specified as strings (e.g., `"prettier-plugin-tailwindcss"`)
 
 #### B) Lint failures (`lint`)
 
@@ -161,6 +178,17 @@ If the fix is non-trivial and production is impacted:
   - ensure editor integration and formatting scripts are documented and used
 - Type errors cascade:
   - reduce scope; fix incrementally; avoid mixing large refactors with feature changes
+
+- Merge is blocked because required checks are unavailable to select in the ruleset:
+  - ensure checks exist with the exact names `ci / quality` and `ci / build`
+  - run the workflow on a PR and on `main` so GitHub can offer them as Required
+
+### How to re-run checks
+
+- From the GitHub Actions UI:
+  - Use “Re-run all jobs” on the failed workflow run (preferred for transient issues).
+- Push a no-op change if necessary to retrigger (e.g., amend commit message or whitespace change). Avoid `ci skip` patterns since required checks must execute for promotion.
+- If checks are still not appearing as Required candidates, ensure a recent successful run exists on both a PR and a push to `main` with the exact job names.
 
 ## References
 

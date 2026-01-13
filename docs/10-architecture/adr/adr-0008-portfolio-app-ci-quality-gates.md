@@ -19,7 +19,16 @@ tags:
 
 ## Purpose
 
+Establish mandatory CI quality gates, deterministic installs, and baseline supply-chain controls for the Portfolio App, and formalize enforcement via GitHub Rulesets with stable check names that can be consumed by downstream promotion checks (e.g., Vercel). This provides an enterprise-credible governance contract for merges and releases.
+
 ## Scope
+
+Applies to the Portfolio App repository CI configuration, branch protection, and related supply-chain automation. Excludes the Documentation App except where referenced for evidence. Covers:
+
+- Required CI checks and their stable names
+- Deterministic install policy (`--frozen-lockfile`)
+- Baseline CodeQL and Dependabot posture
+- Enforcement via GitHub Rulesets (not classic branch protection)
 
 ## Prereqs / Inputs
 

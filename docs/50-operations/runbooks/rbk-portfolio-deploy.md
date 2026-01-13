@@ -44,6 +44,18 @@ If suspected, stop and treat as an incident.
 
 ## Procedure / Content
 
+### Pre-merge checklist (quick)
+
+- Local validation passed:
+  - `pnpm lint && pnpm format:check && pnpm typecheck && pnpm build`
+- PR readiness:
+  - PR template completed with security note (“No secrets added”)
+  - Vercel preview exists and routes render (`/`, `/cv`, `/projects`, one project detail)
+  - Evidence links to docs resolve
+- CI governance:
+  - Required checks green: `ci / quality`, `ci / build`
+  - Branch ruleset active (e.g., `main-protection`) and required checks selected
+
 ### 1) Local preflight validation (required)
 
 From repository root:
@@ -104,6 +116,8 @@ After merge:
 Expected outcome:
 
 - production domains are assigned only after checks pass.
+
+Additionally confirm branch ruleset enforcement is active (e.g., `main-protection`) and that these checks are configured as Required in the ruleset. If Required checks are not selectable in GitHub, ensure they have executed recently on PRs and on pushes to `main`.
 
 ### 6) Env var verification (required)
 

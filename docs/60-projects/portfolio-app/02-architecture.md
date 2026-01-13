@@ -50,15 +50,17 @@ Describe the Portfolio App architecture at a level that is:
   - dossiers, ADRs, threat models, runbooks, postmortems
 - provide traceability and enterprise governance narrative
 
-## Routing and UX architecture (recommended)
+## Routing and UX architecture (recommended vs current)
 
-- `/` — landing, “Start Here,” primary narrative
-- `/cv` — interactive CV (timeline + skill proof)
-- `/projects` — curated gallery
-- `/projects/[slug]` — project details (evidence links)
-- `/labs` — experiments / prototypes / R&D notes (optional)
-- `/security` — public security posture summary (high-level, safe)
-- `/contact` — static contact method (no auth, no form initially)
+Note: Items marked (implemented) exist in Phase 1. Items marked (planned) are illustrative and not yet implemented.
+
+- `/` — landing, “Start Here,” primary narrative (implemented)
+- `/cv` — interactive CV (timeline + skill proof) (implemented)
+- `/projects` — curated gallery (implemented)
+- `/projects/[slug]` — project details (evidence links) (implemented)
+- `/contact` — static contact method (no auth, no form initially) (implemented)
+- `/labs` — experiments / prototypes / R&D notes (optional) (planned)
+- `/security` — public security posture summary (high-level, safe) (planned)
 
 ## Content model (pragmatic and scalable)
 
@@ -107,6 +109,31 @@ Example evidence link types:
   - static assets with stable names
 - `tests/`:
   - unit and e2e tests (phased)
+
+## Repository structure (current)
+
+Key paths and roles in the Portfolio App repo:
+
+- `src/app/*` — App Router pages and layouts (implemented routes):
+  - `/` — landing
+  - `/cv` — interactive CV scaffold
+  - `/projects` — project index
+  - `/projects/[slug]` — project details
+  - `/contact` — static contact surface
+- `src/lib/config.ts` — public-safe configuration contract and helpers:
+  - reads `NEXT_PUBLIC_*` env vars
+  - provides `DOCS_BASE_URL`, `docsUrl(path)`, and `mailtoUrl()`
+  - normalizes/validates public URLs
+- `src/data/projects.ts` — project registry placeholder:
+  - stable slugs, titles, summaries, tags, status
+  - optional evidence link paths into the Documentation App (dossier, ADR index, threat models, runbooks)
+
+## Routing and evidence-link strategy
+
+- Documentation base URL is configured via environment variable `NEXT_PUBLIC_DOCS_BASE_URL`.
+- The app centralizes this via `src/lib/config.ts` and the `docsUrl()` helper to build stable evidence links.
+- Project pages should derive evidence links from `src/data/projects.ts` where possible to keep slugs and paths consistent with the Documentation App.
+- This separation keeps the Portfolio App concise while ensuring every major claim links to verifiable evidence in the docs site.
 
 ## Scalability considerations
 

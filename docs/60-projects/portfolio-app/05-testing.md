@@ -56,6 +56,8 @@ pnpm dev
 
 ## CI quality gates (required)
 
+Status: Implemented in Phase 1.
+
 ### Gate 1: Quality
 
 - `pnpm lint`
@@ -71,9 +73,22 @@ These checks must run on:
 - PRs targeting `main`
 - pushes to `main`
 
+### Formatting
+
+- Prettier uses an ESM config (`prettier.config.mjs`) to satisfy plugin ESM/TLA requirements; plugins are declared as strings.
+- `pnpm format:check` is a required gate in CI and must stay stable to avoid check-name drift.
+
+### Merge gates (GitHub ruleset)
+
+- Required checks: `ci / quality`, `ci / build` (must exist and run to be selectable as required).
+- Checks run on PRs and on pushes to `main` to gate production promotion and keep ruleset enforcement valid.
+- Check naming stability is mandatory; changing names would break required-check enforcement and Vercel promotion alignment.
+
 ## Phased testing strategy
 
-### Phase 1 (MVP): Gates + smoke checks
+Note: Items marked (implemented) are in the current state. Others are (planned).
+
+### Phase 1 (MVP): Gates + smoke checks (implemented)
 
 - quality + build gates
 - manual review on preview deployments:
@@ -81,7 +96,7 @@ These checks must run on:
   - page rendering
   - key links to `/docs`
 
-### Phase 2: Unit tests
+### Phase 2: Unit tests (planned)
 
 - add Vitest for:
   - slug generation
@@ -89,7 +104,7 @@ These checks must run on:
   - components with business logic
 - CI adds `pnpm test`
 
-### Phase 3: E2E tests
+### Phase 3: E2E tests (planned)
 
 - add Playwright:
   - landing page loads
@@ -128,5 +143,7 @@ A PR is acceptable when:
 ## References
 
 - CI policy ADR (create): `docs/10-architecture/adr/`
-- Runbooks: `docs/50-operations/runbooks/`
-- Porfolio Docs App CI posture: `docs/60-projects/portfolio-docs-app/testing.md`
+- CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- Deploy runbook: [docs/50-operations/runbooks/rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md)
+- Rollback runbook: [docs/50-operations/runbooks/rbk-portfolio-rollback.md](docs/50-operations/runbooks/rbk-portfolio-rollback.md)
+- Portfolio Docs App CI posture: [docs/60-projects/portfolio-docs-app/05-testing.md](docs/60-projects/portfolio-docs-app/05-testing.md)
