@@ -55,7 +55,17 @@ Recommended initial files (create these first):
 - `product-brief.md` — one-page narrative of the product and its differentiators
 - `capabilities-map.md` — “proof matrix” mapping skills → artifacts → evidence
 - `roadmap.md` — a living plan for delivery increments and maturity milestones
+- `phase-1-completion-checklist.md` — master checklist for Phase 1 final validation (admin tasks)
 - `release-notes/` — versioned release notes (e.g., v0.1.0, v0.2.0)
+
+## Current Status (Phase 1)
+
+**Phase 1 Validation:**
+
+- **Quick Start:** See [phase-1-quick-reference.md](./phase-1-quick-reference.md) for a one-page summary of all 5 admin tasks with copy-paste instructions.
+- **Detailed Procedures:** See [phase-1-completion-checklist.md](./phase-1-completion-checklist.md) for the comprehensive checklist.
+
+Portfolio App foundation code is complete. **In progress:** Vercel deployment + production promotion gating.
 
 ## Portfolio writing guidelines (strict)
 

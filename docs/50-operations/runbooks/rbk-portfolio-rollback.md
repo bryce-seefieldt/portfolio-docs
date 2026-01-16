@@ -14,6 +14,16 @@ Provide a deterministic rollback method for the Portfolio App that is:
 - reproducible
 - aligned to Git as the system of record
 
+## Governance Context
+
+This runbook uses Git revert as the primary rollback mechanism, which works within the established governance:
+
+- Rollback PR must pass `ci / quality` and `ci / build` checks (same as any other PR)
+- Rollback PR must pass GitHub Ruleset requirements (review + checks)
+- Production promotion proceeds automatically once checks pass
+
+See [rbk-vercel-setup-and-promotion-validation.md](./rbk-vercel-setup-and-promotion-validation.md) for governance setup and [rbk-portfolio-deploy.md](./rbk-portfolio-deploy.md) for normal deployment workflow.
+
 ## Scope
 
 ### Use when

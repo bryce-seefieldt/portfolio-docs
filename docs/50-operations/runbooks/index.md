@@ -122,5 +122,10 @@ Operations documentation is effective when:
   - `docs/50-operations/runbooks/rbk-docs-deploy.md`
   - `docs/50-operations/runbooks/rbk-docs-rollback.md`
   - `docs/50-operations/runbooks/rbk-docs-broken-links-triage.md`
+- Portfolio App runbooks:
+  - `docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md` (Vercel initial setup)
+  - `docs/50-operations/runbooks/rbk-portfolio-deploy.md`
+  - `docs/50-operations/runbooks/rbk-portfolio-rollback.md`
+  - `docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`
 - ADRs: `docs/10-architecture/adr/`
 - Threat models: `docs/40-security/threat-models/`

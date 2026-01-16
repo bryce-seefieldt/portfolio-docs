@@ -353,9 +353,9 @@ Deployment model is correct when:
 
 See the deployment runbook for detailed diagnosis and recovery procedures:
 
-- [Output directory mismatch](../../50-operations/runbooks/rbk-docs-deploy.md#failure-output-directory-mismatch-404-errors-or-missing-pages) (404 errors, missing pages)
-- [pnpm lockfile drift](../../50-operations/runbooks/rbk-docs-deploy.md#failure-pnpm-lockfile-drift-or-version-mismatch) (dependency/version conflicts in Vercel)
-- [Missing build logs](../../50-operations/runbooks/rbk-docs-deploy.md#failure-missing-build-logs-or-build-doesnt-start) (build doesn't output or complete)
+- [Output directory mismatch](docs/50-operations/runbooks/rbk-docs-deploy.md#failure-output-directory-mismatch-404-errors-or-missing-pages) (404 errors, missing pages)
+- [pnpm lockfile drift](docs/50-operations/runbooks/rbk-docs-deploy.md#failure-pnpm-lockfile-drift-or-version-mismatch) (dependency/version conflicts in Vercel)
+- [Missing build logs](docs/50-operations/runbooks/rbk-docs-deploy.md#failure-missing-build-logs-or-build-doesnt-start) (build doesn't output or complete)
 
 Additional considerations:
 

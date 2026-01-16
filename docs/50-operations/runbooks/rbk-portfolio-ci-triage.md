@@ -11,6 +11,15 @@ Provide a fast and repeatable procedure to diagnose and resolve CI failures for 
 
 CI failures are treated as “stop-the-line” events. The correct response is to fix the root cause or rollback—not to weaken gates.
 
+## Governance Context
+
+This runbook assumes Vercel and GitHub governance are already configured per [rbk-vercel-setup-and-promotion-validation.md](./rbk-vercel-setup-and-promotion-validation.md). Required checks are:
+
+- `ci / quality` (lint, format:check, typecheck)
+- `ci / build` (Next.js build)
+
+When either check fails, this runbook provides deterministic diagnosis and fix procedures. See [rbk-portfolio-deploy.md](./rbk-portfolio-deploy.md) for the deploy workflow where CI gating is enforced.
+
 ## Scope
 
 ### Use when

@@ -259,7 +259,7 @@ git add .
 git commit -m "style: apply prettier formatting"
 ```
 
-See [Testing](../../60-projects/portfolio-docs-app/05-testing.md) for quality gate details.
+See [Testing](docs/60-projects/portfolio-docs-app/05-testing.md) for quality gate details.
 
 ### Failure: Output directory mismatch (404 errors or missing pages)
 
@@ -291,7 +291,7 @@ Vercel Project Settings:
 
 See [Vercel Configure a build](https://vercel.com/docs/builds/configure-a-build) for details.
 
-See [Build Determinism](../../60-projects/portfolio-docs-app/03-deployment.md#build-contract-and-determinism) in the deployment dossier for more context.
+See [Build Determinism](docs/60-projects/portfolio-docs-app/03-deployment.md#build-contract-and-determinism) in the deployment dossier for more context.
 
 ### Failure: pnpm lockfile drift or version mismatch
 
@@ -357,7 +357,7 @@ pnpm install --frozen-lockfile
 pnpm build
 ```
 
-See [Vercel Package Managers](https://vercel.com/docs/package-managers) and [Build Determinism](../../60-projects/portfolio-docs-app/03-deployment.md#build-contract-and-determinism) in the deployment dossier for details.
+See [Vercel Package Managers](https://vercel.com/docs/package-managers) and [Build Determinism](docs/60-projects/portfolio-docs-app/03-deployment.md#build-contract-and-determinism) in the deployment dossier for details.
 
 ### Failure: Missing build logs or build doesn't start
 
