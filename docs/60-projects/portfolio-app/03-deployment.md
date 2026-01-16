@@ -5,7 +5,7 @@ sidebar_position: 3
 tags: [projects, deployment, cicd, vercel, github-actions, governance]
 ---
 
-Status: Live — CI quality/build gates with frozen installs; Staged — Vercel promotion checks and release automation.
+Status: Live — CI quality/build gates with frozen installs; Vercel preview + production promotion with Deployment Checks configured (see [rbk-vercel-setup-and-promotion-validation.md](../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)).
 
 ## Purpose
 
@@ -196,6 +196,10 @@ Outcome:
 
 ## References
 
-- CI governance ADR (create): `docs/10-architecture/adr/`
-- Ops runbooks (to create): `docs/50-operations/runbooks/`
-- Documentation App deployment governance: `docs/60-projects/portfolio-docs-app/deployment.md`
+- CI governance ADR: `docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md`
+- Vercel hosting ADR: `docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md`
+- Vercel setup runbook: `docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md`
+- Portfolio deploy runbook: `docs/50-operations/runbooks/rbk-portfolio-deploy.md`
+- Portfolio rollback runbook: `docs/50-operations/runbooks/rbk-portfolio-rollback.md`
+- CI triage runbook: `docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`
+- Documentation App deployment governance: `docs/60-projects/portfolio-docs-app/03-deployment.md`
