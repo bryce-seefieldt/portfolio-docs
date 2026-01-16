@@ -14,7 +14,7 @@ Provide a deterministic procedure to:
 3. Set up GitHub Deployment Checks to gate production promotion on CI checks
 4. Validate end-to-end that preview deployments work and production is gated correctly
 
-This runbook implements the decision in [ADR-0007: Host Portfolio App on Vercel with Promotion Gated by GitHub Checks](../../../10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md).
+This runbook implements the decision in [ADR-0007: Host Portfolio App on Vercel with Promotion Gated by GitHub Checks](docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md).
 
 ## Scope
 
@@ -47,12 +47,12 @@ This runbook implements the decision in [ADR-0007: Host Portfolio App on Vercel 
 
 ### Key constants (from documentation)
 
-| Item | Value | Reference |
-|------|-------|-----------|
-| **Required CI checks** | `ci / quality`, `ci / build` | [CI workflow](../../../07-reference/portfolio-app-config-reference.md) |
-| **Environment variables** | See [Environment Variable Contract](../../../_meta/env/portfolio-app-env-contract.md) | `.env.example` in repo |
-| **Docs base URL (local dev)** | `http://localhost:3001` | Portfolio Docs local default |
-| **Documentation repo URL** | (URL of portfolio-docs Vercel deployment) | To be determined during setup |
+| Item                          | Value                                                                                 | Reference                                                              |
+| ----------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| **Required CI checks**        | `ci / quality`, `ci / build`                                                          | [CI workflow](/docs/70-reference/portfolio-app-config-reference.md) |
+| **Environment variables**     | See Environment Variable Contract (`/docs/_meta/env/portfolio-app-env-contract.md`) | `.env.example` in repo                                                 |
+| **Docs base URL (local dev)** | `http://localhost:3001`                                                               | Portfolio Docs local default                                           |
+| **Documentation repo URL**    | (URL of portfolio-docs Vercel deployment)                                             | To be determined during setup                                          |
 
 ## Procedure / Content
 
@@ -70,24 +70,25 @@ This runbook implements the decision in [ADR-0007: Host Portfolio App on Vercel 
 
 :::info
 If the repo is not listed, ensure:
+
 - Your GitHub account is connected to Vercel (check **Settings** → **Git Integrations**)
 - The repository is public
-:::
+  :::
 
 #### Step 1.2: Configure build settings
 
 On the **"Import Project"** page, configure:
 
-| Setting | Value | Notes |
-|---------|-------|-------|
-| **Framework Preset** | Next.js | Auto-detected from `next.config.ts` |
-| **Build Command** | `pnpm build` | Uses pnpm (per package.json) |
-| **Output Directory** | `.next` | Default for Next.js |
-| **Install Command** | `pnpm install --frozen-lockfile` | Matches CI determinism requirement |
-| **Node Version** | `20.x` | Must match `.nvmrc` in repo |
+| Setting              | Value                            | Notes                               |
+| -------------------- | -------------------------------- | ----------------------------------- |
+| **Framework Preset** | Next.js                          | Auto-detected from `next.config.ts` |
+| **Build Command**    | `pnpm build`                     | Uses pnpm (per package.json)        |
+| **Output Directory** | `.next`                          | Default for Next.js                 |
+| **Install Command**  | `pnpm install --frozen-lockfile` | Matches CI determinism requirement  |
+| **Node Version**     | `20.x`                           | Must match `.nvmrc` in repo         |
 
 :::warning
-**IMPORTANT:** Set **Install Command** to `pnpm install --frozen-lockfile` to enforce determinism (matching CI contract in [ADR-0008](../../../10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)).
+**IMPORTANT:** Set **Install Command** to `pnpm install --frozen-lockfile` to enforce determinism (matching CI contract in [ADR-0008](../../../docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)).
 :::
 
 #### Step 1.3: Complete project creation
@@ -108,23 +109,25 @@ On the **"Import Project"** page, configure:
 
 Before configuring Vercel, gather the following URLs:
 
-| Variable | Local Dev | Preview | Production | Example |
-|----------|-----------|---------|------------|---------|
-| `NEXT_PUBLIC_DOCS_BASE_URL` | `http://localhost:3001` | `https://portfolio-docs-preview.vercel.app` OR `https://preview-docs.yourdomain.com` | `https://docs.yourdomain.com` OR `https://yourdomain.com/docs` | See below |
-| `NEXT_PUBLIC_SITE_URL` | (optional) | `https://portfolio-app-git-main.vercel.app` | `https://portfolio.yourdomain.com` (if using custom domain) | See below |
-| `NEXT_PUBLIC_GITHUB_URL` | (same across environments) | `https://github.com/bryce-seefieldt` | `https://github.com/bryce-seefieldt` | — |
-| `NEXT_PUBLIC_LINKEDIN_URL` | (same across environments) | `https://www.linkedin.com/in/your-handle/` | `https://www.linkedin.com/in/your-handle/` | — |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | (same across environments) | `your-email@example.com` | `your-email@example.com` | — |
+| Variable                    | Local Dev                  | Preview                                                                              | Production                                                     | Example   |
+| --------------------------- | -------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------- | --------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | `http://localhost:3001`    | `https://portfolio-docs-preview.vercel.app` OR `https://preview-docs.yourdomain.com` | `https://docs.yourdomain.com` OR `https://yourdomain.com/docs` | See below |
+| `NEXT_PUBLIC_SITE_URL`      | (optional)                 | `https://portfolio-app-git-main.vercel.app`                                          | `https://portfolio.yourdomain.com` (if using custom domain)    | See below |
+| `NEXT_PUBLIC_GITHUB_URL`    | (same across environments) | `https://github.com/bryce-seefieldt`                                                 | `https://github.com/bryce-seefieldt`                           | —         |
+| `NEXT_PUBLIC_LINKEDIN_URL`  | (same across environments) | `https://www.linkedin.com/in/your-handle/`                                           | `https://www.linkedin.com/in/your-handle/`                     | —         |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | (same across environments) | `your-email@example.com`                                                             | `your-email@example.com`                                       | —         |
 
 **For NEXT_PUBLIC_DOCS_BASE_URL, decide your strategy:**
 
 **Option A: Subdomain (recommended for clarity)**
+
 ```
 Preview: https://portfolio-docs-git-preview.vercel.app
 Production: https://docs.yourdomain.com
 ```
 
 **Option B: Path-based (simpler DNS)**
+
 ```
 Production: https://yourdomain.com/docs
 ```
@@ -144,33 +147,34 @@ For now, **use Vercel's default preview URLs** and finalize domain strategy late
 
 1. Click **"Add New"** for each variable:
 
-| Name | Value | Environment Scope |
-|------|-------|-------------------|
-| `NEXT_PUBLIC_DOCS_BASE_URL` | Portfolio Docs preview URL (e.g., `https://portfolio-docs-git-preview.vercel.app`) | **Preview** |
-| `NEXT_PUBLIC_SITE_URL` | (leave empty or use Vercel preview URL) | **Preview** |
-| `NEXT_PUBLIC_GITHUB_URL` | Your GitHub profile URL | **Preview** |
-| `NEXT_PUBLIC_LINKEDIN_URL` | Your LinkedIn profile URL | **Preview** |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email | **Preview** |
+| Name                        | Value                                                                              | Environment Scope |
+| --------------------------- | ---------------------------------------------------------------------------------- | ----------------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | Portfolio Docs preview URL (e.g., `https://portfolio-docs-git-preview.vercel.app`) | **Preview**       |
+| `NEXT_PUBLIC_SITE_URL`      | (leave empty or use Vercel preview URL)                                            | **Preview**       |
+| `NEXT_PUBLIC_GITHUB_URL`    | Your GitHub profile URL                                                            | **Preview**       |
+| `NEXT_PUBLIC_LINKEDIN_URL`  | Your LinkedIn profile URL                                                          | **Preview**       |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email                                                          | **Preview**       |
 
 ##### Production (`main`)
 
 1. Click **"Add New"** for each variable:
 
-| Name | Value | Environment Scope |
-|------|-------|-------------------|
-| `NEXT_PUBLIC_DOCS_BASE_URL` | Final docs URL (subdomain or path-based) | **Production** |
-| `NEXT_PUBLIC_SITE_URL` | Your portfolio domain (e.g., `https://portfolio.yourdomain.com`) | **Production** |
-| `NEXT_PUBLIC_GITHUB_URL` | Your GitHub profile URL | **Production** |
-| `NEXT_PUBLIC_LINKEDIN_URL` | Your LinkedIn profile URL | **Production** |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email | **Production** |
+| Name                        | Value                                                            | Environment Scope |
+| --------------------------- | ---------------------------------------------------------------- | ----------------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | Final docs URL (subdomain or path-based)                         | **Production**    |
+| `NEXT_PUBLIC_SITE_URL`      | Your portfolio domain (e.g., `https://portfolio.yourdomain.com`) | **Production**    |
+| `NEXT_PUBLIC_GITHUB_URL`    | Your GitHub profile URL                                          | **Production**    |
+| `NEXT_PUBLIC_LINKEDIN_URL`  | Your LinkedIn profile URL                                        | **Production**    |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email                                        | **Production**    |
 
 :::tip
 **Deployment Trigger:** After adding/modifying environment variables, you must redeploy:
+
 1. Go to **Deployments** tab
 2. Find the most recent deployment
 3. Click **"…"** → **"Redeploy"**
 4. Wait for build to complete with new variables
-:::
+   :::
 
 **Outcome:** Environment variables are configured per scope and deployments will use them on next build.
 
@@ -178,7 +182,7 @@ For now, **use Vercel's default preview URLs** and finalize domain strategy late
 
 ### Phase 3: Set up GitHub Deployment Checks (Production Promotion Gating)
 
-This phase implements the decision in [ADR-0007](../../../10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) to gate production promotion on `ci / quality` and `ci / build` passing.
+This phase implements the decision in [ADR-0007](../../10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) to gate production promotion on `ci / quality` and `ci / build` passing.
 
 #### Step 3.1: Enable Deployment Checks in Vercel
 
@@ -233,10 +237,10 @@ This phase adds an additional safeguard: GitHub branch protection rules to preve
 3. Click **"New ruleset"** → **"New branch ruleset"**
 4. Configure:
 
-| Setting | Value |
-|---------|-------|
-| **Ruleset name** | `main-protection` |
-| **Enforcement** | **Active** |
+| Setting             | Value                                     |
+| ------------------- | ----------------------------------------- |
+| **Ruleset name**    | `main-protection`                         |
+| **Enforcement**     | **Active**                                |
 | **Target branches** | Targeting rule: `Branch name is` → `main` |
 
 #### Step 4.2: Add required checks to ruleset
@@ -301,10 +305,11 @@ git push origin test/vercel-setup
 
 :::info
 If checks don't appear after 3 minutes, verify:
+
 - `.github/workflows/ci.yml` exists in repo
 - Workflow triggers on `pull_request` event
 - No syntax errors in workflow file
-:::
+  :::
 
 #### Step 5.3: Verify Vercel preview deployment
 
@@ -364,6 +369,7 @@ If checks don't appear after 3 minutes, verify:
    - ✅ Evidence links use `NEXT_PUBLIC_DOCS_BASE_URL` for production scope
 
 **Outcome:** End-to-end validation confirms:
+
 - ✅ Preview deployments work on PRs
 - ✅ CI checks gate merge to `main`
 - ✅ Production promotion is automatic after checks pass
@@ -395,25 +401,25 @@ Update the team documentation with your actual URLs:
 ## Production URLs (2026-01-16)
 
 - **Portfolio App Production:** https://portfolio-app.vercel.app
-- **Portfolio App Preview:** https://portfolio-app-git-*.vercel.app (dynamic per PR)
+- **Portfolio App Preview:** https://portfolio-app-git-\*.vercel.app (dynamic per PR)
 - **Portfolio Docs Production:** https://docs.yourdomain.com
-- **Portfolio Docs Preview:** https://portfolio-docs-git-*.vercel.app (dynamic per PR)
+- **Portfolio Docs Preview:** https://portfolio-docs-git-\*.vercel.app (dynamic per PR)
 
 ### Environment Variables Configured
 
-| Variable | Preview | Production |
-|----------|---------|------------|
-| `NEXT_PUBLIC_DOCS_BASE_URL` | https://portfolio-docs-git-preview.vercel.app | https://docs.yourdomain.com |
-| `NEXT_PUBLIC_SITE_URL` | (auto-generated) | https://portfolio.yourdomain.com |
-| `NEXT_PUBLIC_GITHUB_URL` | https://github.com/your-handle | https://github.com/your-handle |
-| ... | ... | ... |
+| Variable                    | Preview                                       | Production                       |
+| --------------------------- | --------------------------------------------- | -------------------------------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | https://portfolio-docs-git-preview.vercel.app | https://docs.yourdomain.com      |
+| `NEXT_PUBLIC_SITE_URL`      | (auto-generated)                              | https://portfolio.yourdomain.com |
+| `NEXT_PUBLIC_GITHUB_URL`    | https://github.com/your-handle                | https://github.com/your-handle   |
+| ...                         | ...                                           | ...                              |
 ```
 
 #### Step 6.3: Mark deployment as complete
 
 **In portfolio-docs dossier:**
 
-Update the status line in [`03-deployment.md`](../../60-projects/portfolio-app/03-deployment.md):
+Update the status line in [`03-deployment.md`](docs/60-projects/portfolio-app/03-deployment.md):
 
 ```markdown
 Status: Live — CI quality/build gates with frozen installs; **Vercel preview + production promotion with Deployment Checks** (validated 2026-01-16).
@@ -428,6 +434,7 @@ Status: Live — CI quality/build gates with frozen installs; **Vercel preview +
 ### Vercel waits indefinitely for checks
 
 **Symptoms:**
+
 - PR preview deploys fine
 - Merge to `main` succeeds
 - Production deployment stays in "Waiting for checks" state
@@ -463,6 +470,7 @@ Status: Live — CI quality/build gates with frozen installs; **Vercel preview +
 ### Evidence links are broken in preview
 
 **Symptoms:**
+
 - Links to `/docs` return 404 in preview
 
 **Root causes:**
@@ -474,6 +482,36 @@ Status: Live — CI quality/build gates with frozen installs; **Vercel preview +
 2. **Portfolio Docs preview is not deployed**
    - Ensure portfolio-docs Vercel project has preview deployments enabled
    - Create a test PR in portfolio-docs to generate a preview URL
+
+### GitHub checks not running
+
+**Symptoms:**
+
+- PR created but no CI checks appear after 3–5 minutes
+- PR shows "Waiting for status to report" indefinitely
+
+**Root causes & fixes:**
+
+1. **CI workflow file syntax error**
+   - Check `.github/workflows/ci.yml` for YAML formatting
+   - Look for build errors in **Actions** tab
+
+2. **Wrong trigger event**
+   - Verify workflow triggers on `pull_request` event:
+     ```yaml
+     on:
+       pull_request:
+       push:
+         branches: [main]
+     ```
+
+3. **Jobs not named correctly**
+   - Ensure job IDs match what Vercel expects: `quality` and `build`
+   - (They appear as `ci / quality` and `ci / build` in Vercel)
+
+4. **GitHub Actions not enabled**
+   - Go to repo **Settings** → **Actions** → **General**
+   - Ensure **"Allow all actions and reusable workflows"** is selected
 
 ---
 
@@ -498,8 +536,8 @@ Status: Live — CI quality/build gates with frozen installs; **Vercel preview +
 
 ## Related artifacts
 
-- [ADR-0007: Portfolio App Hosting on Vercel](../../../10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
-- [Portfolio App Deployment Dossier](../../60-projects/portfolio-app/03-deployment.md)
-- [Portfolio App Config Reference](../../../70-reference/portfolio-app-config-reference.md)
-- [Portfolio App Environment Contract](../../../_meta/env/portfolio-app-env-contract.md)
-- [CI Workflow](../../../07-reference/portfolio-app-config-reference.md)
+- [ADR-0007: Portfolio App Hosting on Vercel](docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+- [Portfolio App Deployment Dossier](/docs/60-projects/portfolio-app/03-deployment.md)
+- [Portfolio App Config Reference](/docs/70-reference/portfolio-app-config-reference.md)
+- Portfolio App Environment Contract (`/docs/_meta/env/portfolio-app-env-contract.md`)
+- [CI Triage Runbook](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)

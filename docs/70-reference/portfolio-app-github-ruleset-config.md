@@ -14,7 +14,7 @@ This guide configures GitHub branch protection **rulesets** to enforce:
 - Block force-push and branch deletion
 - Automatic stale review dismissal
 
-This implements the governance model described in [ADR-0008: Portfolio App CI Quality Gates](../../../10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md).
+This implements the governance model described in [ADR-0008: Portfolio App CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md).
 
 ## Prerequisites
 
@@ -35,10 +35,10 @@ This implements the governance model described in [ADR-0008: Portfolio App CI Qu
 
 ### Step 2: Name and Enable the Ruleset
 
-| Field | Value |
-|-------|-------|
-| **Ruleset name** | `main-protection` |
-| **Enforcement** | **Active** (not disabled or in "evaluate" mode) |
+| Field            | Value                                           |
+| ---------------- | ----------------------------------------------- |
+| **Ruleset name** | `main-protection`                               |
+| **Enforcement**  | **Active** (not disabled or in "evaluate" mode) |
 
 ### Step 3: Define Target Branch
 
@@ -67,10 +67,11 @@ This ensures the ruleset applies only to the `main` branch. Other branches remai
 
 :::warning
 If checks don't appear in the dropdown, ensure:
+
 - The CI workflow (`ci.yml`) has been executed at least once
 - Check names in the workflow match exactly: `name: quality` and `name: build`
 - The latest commit on `main` has successful check results
-:::
+  :::
 
 **Outcome:** Both checks must be green before merge is allowed.
 
@@ -82,12 +83,12 @@ If checks don't appear in the dropdown, ensure:
 2. Click to enable
 3. Configure:
 
-| Setting | Value | Notes |
-|---------|-------|-------|
-| **Required reviewers** | `1` | At minimum, one approval required |
-| **Require code owners review** | (optional) | Disable for now; can add later with CODEOWNERS file |
-| **Dismiss stale reviews** | **ON** | Auto-dismiss approvals when new commits are pushed |
-| **Require review from code owner** | (optional) | Disable |
+| Setting                            | Value      | Notes                                               |
+| ---------------------------------- | ---------- | --------------------------------------------------- |
+| **Required reviewers**             | `1`        | At minimum, one approval required                   |
+| **Require code owners review**     | (optional) | Disable for now; can add later with CODEOWNERS file |
+| **Dismiss stale reviews**          | **ON**     | Auto-dismiss approvals when new commits are pushed  |
+| **Require review from code owner** | (optional) | Disable                                             |
 
 **Outcome:** At least one reviewer must approve before merge.
 
@@ -190,6 +191,7 @@ Click **"Create"** to save the ruleset.
 **Cause:** Ruleset is in "Evaluate" mode or is disabled.
 
 **Fix:**
+
 - Go to **Settings** → **Rules** → **Rulesets**
 - Click `main-protection`
 - Set **Enforcement** to **Active**
@@ -200,6 +202,7 @@ Click **"Create"** to save the ruleset.
 **Diagnosis:** One of the required rules is not satisfied.
 
 **Steps:**
+
 1. Read the full error message to see which rule failed
 2. Common causes:
    - CI checks not passing → wait for checks or fix errors
@@ -210,10 +213,10 @@ Click **"Create"** to save the ruleset.
 
 ## Related Artifacts
 
-- [ADR-0008: Portfolio App CI Quality Gates](../../../10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)
-- [ADR-0007: Portfolio App Hosting on Vercel](../../../10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
-- [Vercel Setup Runbook](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
-- [Portfolio App Deployment Dossier](../../../60-projects/portfolio-app/03-deployment.md)
+- [ADR-0008: Portfolio App CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)
+- [ADR-0007: Portfolio App Hosting on Vercel](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+- [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
+- [Portfolio App Deployment Dossier](/docs/60-projects/portfolio-app/03-deployment.md)
 - [GitHub Rulesets Documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets)
 
 ---

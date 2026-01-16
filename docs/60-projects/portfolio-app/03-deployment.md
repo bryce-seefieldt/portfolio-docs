@@ -5,7 +5,7 @@ sidebar_position: 3
 tags: [projects, deployment, cicd, vercel, github-actions, governance]
 ---
 
-Status: Live — CI quality/build gates with frozen installs; Vercel preview + production promotion with Deployment Checks configured (see [rbk-vercel-setup-and-promotion-validation.md](../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)).
+Status: Live — CI quality/build gates with frozen installs; Vercel preview + production promotion with Deployment Checks configured (see [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)).
 
 ## Purpose
 
@@ -25,18 +25,20 @@ The Portfolio App deployment model consists of two distinct phases:
 **When:** Initial Vercel project configuration and GitHub governance setup
 
 **What:** Establish the governance infrastructure:
+
 - Connect repository to Vercel
 - Configure environment variables (preview + production scopes)
 - Import GitHub Deployment Checks into Vercel
 - Create GitHub Ruleset for branch protection
 
-**Document:** [rbk-vercel-setup-and-promotion-validation.md](../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (6 phases, ~100 minutes)
+**Document:** [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (6 phases, ~100 minutes)
 
 ### Phase 2: Steady-State Operations (Repeated)
 
 **When:** Making code changes, deploying, triaging CI failures, rolling back
 
 **What:** Operate within established governance:
+
 - Create PR with code changes
 - Validate preview deployment
 - Merge when CI checks pass (GitHub Ruleset enforces this)
@@ -44,9 +46,10 @@ The Portfolio App deployment model consists of two distinct phases:
 - If needed: triage CI failures or rollback
 
 **Documents:**
-- Deploy: [rbk-portfolio-deploy.md](../../50-operations/runbooks/rbk-portfolio-deploy.md)
-- CI Triage: [rbk-portfolio-ci-triage.md](../../50-operations/runbooks/rbk-portfolio-ci-triage.md)
-- Rollback: [rbk-portfolio-rollback.md](../../50-operations/runbooks/rbk-portfolio-rollback.md)
+
+- Deploy: [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md)
+- CI Triage: [rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- Rollback: [rbk-portfolio-rollback.md](docs/50-operations/runbooks/rbk-portfolio-rollback.md)
 
 ## Scope
 
@@ -228,13 +231,13 @@ Outcome:
 
 ## Quick Decision Tree: Which Runbook Do I Need?
 
-| Scenario | Runbook | Time |
-|----------|---------|------|
-| **First time setting up Vercel and GitHub checks** | [rbk-vercel-setup-and-promotion-validation.md](../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) | ~90 min |
-| **Making a code change and deploying to production** | [rbk-portfolio-deploy.md](../../50-operations/runbooks/rbk-portfolio-deploy.md) | ~15 min |
-| **CI check failed (lint/format/typecheck/build)** | [rbk-portfolio-ci-triage.md](../../50-operations/runbooks/rbk-portfolio-ci-triage.md) | ~10 min |
-| **Need to rollback production** | [rbk-portfolio-rollback.md](../../50-operations/runbooks/rbk-portfolio-rollback.md) | ~10 min |
-| **Need to configure environment variables after setup** | See [Phase 2 in setup runbook](../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables) | ~15 min |
+| Scenario                                                | Runbook                                                                                                                                           | Time    |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| **First time setting up Vercel and GitHub checks**      | [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)                         | ~90 min |
+| **Making a code change and deploying to production**    | [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md)                                                                   | ~15 min |
+| **CI check failed (lint/format/typecheck/build)**       | [rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)                                                             | ~10 min |
+| **Need to rollback production**                         | [rbk-portfolio-rollback.md](docs/50-operations/runbooks/rbk-portfolio-rollback.md)                                                               | ~10 min |
+| **Need to configure environment variables after setup** | See [Phase 2 in setup runbook](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables) | ~15 min |
 
 ## References
 

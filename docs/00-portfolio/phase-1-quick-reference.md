@@ -17,13 +17,13 @@ tags: [portfolio, phase-1, quick-reference, deployment, admin-tasks]
 
 ## 📋 5 Admin Tasks (in order)
 
-| # | Task | Time | Links | Status |
-|---|------|------|-------|--------|
-| **1** | Connect portfolio-app to Vercel | 10–15 min | [Runbook Phase 1](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-1-connect-portfolio-app-to-vercel) | ⏳ |
-| **2** | Configure environment variables (preview + production) | 10–15 min | [Runbook Phase 2](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables) | ⏳ |
-| **3** | Set up GitHub Deployment Checks | 5–10 min | [Runbook Phase 3](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-3-set-up-github-deployment-checks-production-promotion-gating) | ⏳ |
-| **4** | Configure GitHub Ruleset for `main` branch | 10–15 min | [Ruleset Guide](../portfolio-app-github-ruleset-config.md) OR [Runbook Phase 4](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-4-configure-github-ruleset-optional-but-recommended) | ⏳ |
-| **5** | Validate end-to-end (test PR + production promotion) | 15–20 min | [Runbook Phase 5 & 6](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-5-end-to-end-validation) | ⏳ |
+| #     | Task                                                   | Time      | Links                                                                                                                                                                                                                   | Status |
+| ----- | ------------------------------------------------------ | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **1** | Connect portfolio-app to Vercel                        | 10–15 min | [Runbook Phase 1](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-1-connect-portfolio-app-to-vercel)                                                                                 | ⏳     |
+| **2** | Configure environment variables (preview + production) | 10–15 min | [Runbook Phase 2](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables)                                                                                 | ⏳     |
+| **3** | Set up GitHub Deployment Checks                        | 5–10 min  | [Runbook Phase 3](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-3-set-up-github-deployment-checks-production-promotion-gating)                                                     | ⏳     |
+| **4** | Configure GitHub Ruleset for `main` branch             | 10–15 min | [Ruleset Guide](/docs/70-reference/portfolio-app-github-ruleset-config.md) OR [Runbook Phase 4](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-4-configure-github-ruleset-optional-but-recommended) | ⏳     |
+| **5** | Validate end-to-end (test PR + production promotion)   | 15–20 min | [Runbook Phase 5 & 6](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-5-end-to-end-validation)                                                                                       | ⏳     |
 
 ---
 
@@ -36,10 +36,10 @@ Required CI Checks:  ci / quality
                      ci / build
 
 Environment Variables (NEXT_PUBLIC_ prefix = client-visible):
-  
+
   Required:
     NEXT_PUBLIC_DOCS_BASE_URL = [preview/production docs URL]
-  
+
   Recommended:
     NEXT_PUBLIC_SITE_URL = [your portfolio domain]
     NEXT_PUBLIC_GITHUB_URL = https://github.com/your-handle
@@ -209,13 +209,13 @@ git push origin --delete test/vercel-setup
 
 ## 🆘 Quick Troubleshooting
 
-| Problem | Quick Fix | Full Guide |
-|---------|-----------|-----------|
-| Vercel waits for checks indefinitely | Verify `ci.yml` runs on `push: [main]` and check names are exact | [Runbook](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#vercel-waits-indefinitely-for-checks) |
-| Preview deployment fails | Verify Node version and pnpm version match (Node 20, pnpm 10.0.0) | [Runbook](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#preview-deployment-fails-but-ci-checks-pass) |
-| Evidence links broken in preview | Verify `NEXT_PUBLIC_DOCS_BASE_URL` is set for Preview scope | [Runbook](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#evidence-links-are-broken-in-preview) |
-| Merge button disabled when checks pass | Verify ruleset is **Active** (not Evaluate/Disabled) | [Ruleset Guide](../portfolio-app-github-ruleset-config.md#merge-button-stays-disabled-even-after-checks-pass) |
-| CI checks don't appear in PR | Wait 3 min; check `.github/workflows/ci.yml` exists and is valid | [Runbook](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#github-checks-not-running) |
+| Problem                                | Quick Fix                                                         | Full Guide                                                                                                                          |
+| -------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Vercel waits for checks indefinitely   | Verify `ci.yml` runs on `push: [main]` and check names are exact  | [Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#vercel-waits-indefinitely-for-checks)        |
+| Preview deployment fails               | Verify Node version and pnpm version match (Node 20, pnpm 10.0.0) | [Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#preview-deployment-fails-but-ci-checks-pass) |
+| Evidence links broken in preview       | Verify `NEXT_PUBLIC_DOCS_BASE_URL` is set for Preview scope       | [Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#evidence-links-are-broken-in-preview)        |
+| Merge button disabled when checks pass | Verify ruleset is **Active** (not Evaluate/Disabled)              | [Ruleset Guide](/docs/70-reference/portfolio-app-github-ruleset-config.md#merge-button-stays-disabled-even-after-checks-pass)                       |
+| CI checks don't appear in PR           | Wait 3 min; check `.github/workflows/ci.yml` exists and is valid  | [Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#github-checks-not-running)                   |
 
 ---
 
@@ -223,11 +223,11 @@ git push origin --delete test/vercel-setup
 
 All details here (no other docs needed):
 
-- **Full Procedures:** [rbk-vercel-setup-and-promotion-validation.md](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (6 phases, all steps)
-- **GitHub Ruleset Setup:** [portfolio-app-github-ruleset-config.md](../portfolio-app-github-ruleset-config.md) (detailed + validation)
+- **Full Procedures:** [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (6 phases, all steps)
+- **GitHub Ruleset Setup:** [portfolio-app-github-ruleset-config.md](/docs/70-reference/portfolio-app-github-ruleset-config.md) (detailed + validation)
 - **Full Checklist:** [phase-1-completion-checklist.md](./phase-1-completion-checklist.md) (master task list)
-- **Deployment Policy:** [Portfolio App Deployment Dossier](../../../60-projects/portfolio-app/03-deployment.md)
-- **ADR-0007:** [Vercel + Promotion Checks](../../../10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+- **Deployment Policy:** [Portfolio App Deployment Dossier](/docs/60-projects/portfolio-app/03-deployment.md)
+- **ADR-0007:** [Vercel + Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
 
 ---
 
@@ -246,7 +246,8 @@ See [roadmap.md](./roadmap.md#phase-2--gold-standard-project-and-credibility-bas
 ## 💬 Questions?
 
 Refer to:
-- Detailed procedure: [rbk-vercel-setup-and-promotion-validation.md](../../../50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
+
+- Detailed procedure: [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
 - Troubleshooting section in same runbook
 - GitHub Ruleset guide (if GitHub-specific)
 - ADR-0007 (if design questions)

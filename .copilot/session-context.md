@@ -46,7 +46,7 @@ workspace-repos:
 - ADRs:
   - ADR-0008: CI quality gates (Purpose/Scope + decision body complete)
   - ADR-0009: React Compiler (decision, rationale, validation, rollback criteria)
-- Internal env contract: `docs/_meta/env/portfolio-app-env-contract.md` with NEXT_PUBLIC_* rules, CI determinism, references
+- Internal env contract: `docs/_meta/env/portfolio-app-env-contract.md` with NEXT*PUBLIC*\* rules, CI determinism, references
 - Release note: `docs/00-portfolio/release-notes/20260110-portfolio-app-baseline.md` (comprehensive, includes README section)
 - Configuration reference: `docs/70-reference/portfolio-app-config-reference.md` (next.config.ts, eslint.config.mjs, prettier.config.mjs, postcss.config.mjs, tsconfig.json, .nvmrc)
 
@@ -216,6 +216,7 @@ Once Phase 1 is complete (deployed + validated):
 ### 2026-01-16 Session (Current — COMPLETED)
 
 **Priorities 1–3 Completed in Earlier Part of Session:**
+
 - ✅ Created ADR-0009: React Compiler enablement decision
 - ✅ Updated architecture.md: Added components, dark mode, navigation IA, metadata, toolchain sections
 - ✅ Updated testing.md: Added ESLint/Prettier config details with rationale
@@ -228,6 +229,7 @@ Once Phase 1 is complete (deployed + validated):
 Created comprehensive **Phase 1 Completion Documentation** to support admin tasks (Vercel deployment + GitHub ruleset):
 
 **Main Documents Created:**
+
 1. **rbk-vercel-setup-and-promotion-validation.md** (6 phases, ~400 lines)
    - Complete step-by-step Vercel setup (connect repo, env vars, deployment checks)
    - GitHub Ruleset configuration via Vercel or separate
@@ -260,11 +262,13 @@ Created comprehensive **Phase 1 Completion Documentation** to support admin task
    - Pro tips and troubleshooting
 
 **Documentation Updates:**
+
 - Updated `docs/00-portfolio/index.md` with Phase 1 status and quick reference link
 - Updated `docs/60-projects/portfolio-app/03-deployment.md` with Vercel runbook reference
 - Updated `docs/50-operations/runbooks/index.md` to list all Portfolio App runbooks
 
 **Git State (after all work):**
+
 - portfolio-app: main (no new changes)
 - portfolio-docs: main (3 new commits)
   - a576d04: docs/add Phase 1 completion procedures

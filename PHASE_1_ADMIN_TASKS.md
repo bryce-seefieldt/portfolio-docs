@@ -9,6 +9,7 @@ You now have **comprehensive documentation** for Phase 1 final deployment. This 
 ## 🎯 What Phase 1 Completion Means
 
 **Phase 1 code is 100% complete:**
+
 - ✅ Portfolio App repository created with 5 core routes
 - ✅ CI/CD governance with `ci / quality` and `ci / build` checks
 - ✅ CodeQL + Dependabot configured
@@ -16,6 +17,7 @@ You now have **comprehensive documentation** for Phase 1 final deployment. This 
 - ✅ All evidence documentation complete (dossiers, ADRs, runbooks, threat models)
 
 **Phase 1 deployment requires 5 admin tasks (this is what you're doing now):**
+
 1. Connect portfolio-app to Vercel
 2. Configure environment variables
 3. Set up GitHub Deployment Checks
@@ -27,7 +29,8 @@ You now have **comprehensive documentation** for Phase 1 final deployment. This 
 ## 📚 Documentation You Have
 
 ### **For Quick Reference: Read FIRST**
-- **[phase-1-quick-reference.md](./portfolio-docs/docs/00-portfolio/phase-1-quick-reference.md)** 
+
+- **[phase-1-quick-reference.md](./portfolio-docs/docs/00-portfolio/phase-1-quick-reference.md)**
   - ⏱️ 5-minute read
   - 📋 One-page exec summary
   - 🔑 Copy-paste instructions for all 5 tasks
@@ -36,6 +39,7 @@ You now have **comprehensive documentation** for Phase 1 final deployment. This 
   - **START HERE if you're short on time**
 
 ### **For Detailed Procedures: Follow These**
+
 1. **[rbk-vercel-setup-and-promotion-validation.md](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)**
    - ⏱️ 20–30 minute read
    - 📖 6 complete phases with all steps
@@ -52,6 +56,7 @@ You now have **comprehensive documentation** for Phase 1 final deployment. This 
    - **USE THIS for detailed GitHub Ruleset configuration (task 4)**
 
 ### **For Master Checklist: Tick Off Your Progress**
+
 - **[phase-1-completion-checklist.md](./portfolio-docs/docs/00-portfolio/phase-1-completion-checklist.md)**
   - ⏱️ 5–10 minute scan
   - ✅ 6 phases with detailed checklists
@@ -60,24 +65,27 @@ You now have **comprehensive documentation** for Phase 1 final deployment. This 
   - **USE THIS to track what you've completed**
 
 ### **For Policy Reference: Understand the Why**
+
 - **[ADR-0007: Vercel + Promotion Checks](./portfolio-docs/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)** — Decision rationale
 - **[ADR-0008: CI Quality Gates](./portfolio-docs/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)** — CI governance rationale
 - **[Portfolio App Deployment Dossier](./portfolio-docs/docs/60-projects/portfolio-app/03-deployment.md)** — Deployment policy document
-- **[Environment Variable Contract](./portfolio-docs/docs/_meta/env/portfolio-app-env-contract.md)** — NEXT_PUBLIC_* requirements
+- **[Environment Variable Contract](./portfolio-docs/docs/_meta/env/portfolio-app-env-contract.md)** — NEXT*PUBLIC*\* requirements
 
 ---
 
 ## 🚀 Recommended Reading Order (by Use Case)
 
 ### **If you have 10 minutes:**
+
 1. Read: [phase-1-quick-reference.md](./portfolio-docs/docs/00-portfolio/phase-1-quick-reference.md)
 2. Execute: Tasks 1–5 using copy-paste commands
 3. Validate: Check the 11 success criteria
 4. Done!
 
 ### **If you have 45 minutes:**
+
 1. Read: [phase-1-quick-reference.md](./portfolio-docs/docs/00-portfolio/phase-1-quick-reference.md) (5 min)
-2. Detailed procedures: 
+2. Detailed procedures:
    - [rbk-vercel-setup-and-promotion-validation.md](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phases 1–3 (15 min)
    - [portfolio-app-github-ruleset-config.md](./portfolio-docs/docs/70-reference/portfolio-app-github-ruleset-config.md) — Detailed ruleset setup (10 min)
    - [rbk-vercel-setup-and-promotion-validation.md](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phases 5–6 (15 min)
@@ -85,6 +93,7 @@ You now have **comprehensive documentation** for Phase 1 final deployment. This 
 4. Done!
 
 ### **If you want to understand the policy first:**
+
 1. Read: [ADR-0007](./portfolio-docs/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) (why Vercel + checks)
 2. Read: [ADR-0008](./portfolio-docs/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md) (why CI checks matter)
 3. Read: [Portfolio App Deployment Dossier](./portfolio-docs/docs/60-projects/portfolio-app/03-deployment.md) (policy doc)
@@ -95,13 +104,13 @@ You now have **comprehensive documentation** for Phase 1 final deployment. This 
 
 ## 📊 5 Admin Tasks: At a Glance
 
-| # | Task | Docs | Time | What It Does |
-|---|------|------|------|------------|
-| **1** | Connect to Vercel | [Runbook Phase 1](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-1-connect-portfolio-app-to-vercel) | 10–15 min | Import repo, configure build settings, deploy |
-| **2** | Configure env vars | [Runbook Phase 2](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables) | 10–15 min | Set `NEXT_PUBLIC_DOCS_BASE_URL` etc. for preview + production |
-| **3** | GitHub Deployment Checks | [Runbook Phase 3](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-3-set-up-github-deployment-checks-production-promotion-gating) | 5–10 min | Import `ci / quality` and `ci / build` to Vercel; gate production |
-| **4** | GitHub Ruleset | [Ruleset Guide](./portfolio-docs/docs/70-reference/portfolio-app-github-ruleset-config.md) | 10–15 min | Create `main-protection` ruleset; require checks + review |
-| **5** | E2E Validation | [Runbook Phase 5 & 6](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-5-end-to-end-validation) | 15–20 min | Test PR → preview → merge → production promotion |
+| #     | Task                     | Docs                                                                                                                                                                             | Time      | What It Does                                                      |
+| ----- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------------------------------------------- |
+| **1** | Connect to Vercel        | [Runbook Phase 1](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-1-connect-portfolio-app-to-vercel)                             | 10–15 min | Import repo, configure build settings, deploy                     |
+| **2** | Configure env vars       | [Runbook Phase 2](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables)                             | 10–15 min | Set `NEXT_PUBLIC_DOCS_BASE_URL` etc. for preview + production     |
+| **3** | GitHub Deployment Checks | [Runbook Phase 3](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-3-set-up-github-deployment-checks-production-promotion-gating) | 5–10 min  | Import `ci / quality` and `ci / build` to Vercel; gate production |
+| **4** | GitHub Ruleset           | [Ruleset Guide](./portfolio-docs/docs/70-reference/portfolio-app-github-ruleset-config.md)                                                                                       | 10–15 min | Create `main-protection` ruleset; require checks + review         |
+| **5** | E2E Validation           | [Runbook Phase 5 & 6](./portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-5-end-to-end-validation)                                   | 15–20 min | Test PR → preview → merge → production promotion                  |
 
 ---
 
@@ -128,23 +137,27 @@ After completing all 5 tasks, verify:
 ## 🔗 Directory of All Docs
 
 **Quick Reference:**
+
 - `/portfolio-docs/docs/00-portfolio/phase-1-quick-reference.md` ← **START HERE**
 - `/portfolio-docs/docs/00-portfolio/phase-1-completion-checklist.md`
 
 **Detailed Procedures:**
+
 - `/portfolio-docs/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md` ← **MAIN PROCEDURE**
 - `/portfolio-docs/docs/70-reference/portfolio-app-github-ruleset-config.md` ← **GITHUB RULESET DETAILS**
 
 **Governance & Policy:**
+
 - `/portfolio-docs/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md`
 - `/portfolio-docs/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md`
 - `/portfolio-docs/docs/60-projects/portfolio-app/03-deployment.md`
 - `/portfolio-docs/docs/_meta/env/portfolio-app-env-contract.md`
 
 **Portfolio App Configuration:**
+
 - `/portfolio-app/.env.example` ← Environment variable examples
 - `/portfolio-app/.github/workflows/ci.yml` ← CI check definitions
-- `/portfolio-app/src/lib/config.ts` ← Config contract (NEXT_PUBLIC_* usage)
+- `/portfolio-app/src/lib/config.ts` ← Config contract (NEXT*PUBLIC*\* usage)
 
 ---
 
@@ -245,4 +258,4 @@ Phase 2 involves selecting an exemplar project and creating deep evidence artifa
 
 ---
 
-*Last updated: 2026-01-16 with full Phase 1 admin task documentation*
+_Last updated: 2026-01-16 with full Phase 1 admin task documentation_
