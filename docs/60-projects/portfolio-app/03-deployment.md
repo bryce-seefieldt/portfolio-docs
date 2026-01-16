@@ -231,8 +231,8 @@ Outcome:
 
 ## Quick Decision Tree: Which Runbook Do I Need?
 
-| Scenario                                                | Runbook                                                                                                                                           | Time    |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| Scenario                                                | Runbook                                                                                                                                          | Time    |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
 | **First time setting up Vercel and GitHub checks**      | [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)                         | ~90 min |
 | **Making a code change and deploying to production**    | [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md)                                                                   | ~15 min |
 | **CI check failed (lint/format/typecheck/build)**       | [rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)                                                             | ~10 min |

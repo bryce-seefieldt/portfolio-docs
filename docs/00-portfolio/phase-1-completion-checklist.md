@@ -36,14 +36,14 @@ Upon completion, Phase 1 will be fully validated and ready for Phase 2.
 
 ## Quick Links to Procedures
 
-| Step                         | Procedure                                                                                                                                                                   |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1. Connect to Vercel**     | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 1                                                              |
-| **2. Configure Env Vars**    | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 2                                                              |
-| **3. Set Deployment Checks** | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 3                                                              |
+| Step                         | Procedure                                                                                                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Connect to Vercel**     | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 1                                                                              |
+| **2. Configure Env Vars**    | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 2                                                                              |
+| **3. Set Deployment Checks** | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 3                                                                              |
 | **4. GitHub Ruleset**        | [GitHub Ruleset Config](/docs/70-reference/portfolio-app-github-ruleset-config.md) + [Vercel Runbook Phase 4](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
-| **5. E2E Validation**        | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 5                                                              |
-| **6. Documentation**         | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 6                                                              |
+| **5. E2E Validation**        | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 5                                                                              |
+| **6. Documentation**         | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) — Phase 6                                                                              |
 
 ---
 
@@ -300,13 +300,13 @@ Upon completion, Phase 1 will be fully validated and ready for Phase 2.
 
 ## Troubleshooting Quick Links
 
-| Issue                                | Troubleshooting Section                                                                                                                          |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Issue                                | Troubleshooting Section                                                                                                                       |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Vercel waits indefinitely for checks | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#vercel-waits-indefinitely-for-checks)        |
 | Preview deployment fails             | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#preview-deployment-fails-but-ci-checks-pass) |
 | Evidence links broken                | [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#evidence-links-are-broken-in-preview)        |
-| Merge button disabled unexpectedly   | [GitHub Ruleset Config](/docs/70-reference/portfolio-app-github-ruleset-config.md#merge-button-stays-disabled-even-after-checks-pass)                            |
-| Force-push still works               | [GitHub Ruleset Config](/docs/70-reference/portfolio-app-github-ruleset-config.md#force-push-still-works)                                                        |
+| Merge button disabled unexpectedly   | [GitHub Ruleset Config](/docs/70-reference/portfolio-app-github-ruleset-config.md#merge-button-stays-disabled-even-after-checks-pass)         |
+| Force-push still works               | [GitHub Ruleset Config](/docs/70-reference/portfolio-app-github-ruleset-config.md#force-push-still-works)                                     |
 
 ---
 
