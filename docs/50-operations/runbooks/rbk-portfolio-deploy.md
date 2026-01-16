@@ -14,6 +14,16 @@ Provide a deterministic deployment procedure for the Portfolio App that ensures:
 - production promotion is gated by imported checks
 - post-deploy validation is explicit
 
+## Governance Context
+
+This runbook assumes Vercel and GitHub governance are already configured per [rbk-vercel-setup-and-promotion-validation.md](./rbk-vercel-setup-and-promotion-validation.md). Key governance already in place:
+
+- **Vercel Deployment Checks:** `ci / quality` and `ci / build` are required for production promotion
+- **GitHub Ruleset:** `main-protection` requires both checks to pass and 1 PR approval before merge
+- **Environment Variables:** Configured per scope (preview and production)
+
+If governance has not been set up, see the [setup runbook](./rbk-vercel-setup-and-promotion-validation.md) first (~90 minutes).
+
 ## Scope
 
 ### Use when
