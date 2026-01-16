@@ -1,6 +1,6 @@
 ---
-last-updated: 2026-01-13
-active-phase: Phase 1 (near completion)
+last-updated: 2026-01-16
+active-phase: Phase 1 (documentation complete; deployment pending)
 workspace-repos:
   - portfolio-app (Next.js + TypeScript)
   - portfolio-docs (Docusaurus)
@@ -33,19 +33,22 @@ workspace-repos:
 
 - Dossier updates (8 pages):
   - index.md: Current State + Reviewer path
-  - architecture.md: Repository structure, routing/evidence strategy, route list annotated
-  - testing.md: Formatting, quality gates, merge gates, phased testing (annotated)
+  - architecture.md: Repository structure, routing/evidence strategy, route list annotated; + Component architecture, dark mode, navigation IA, metadata strategy, toolchain/Node policy
+  - testing.md: Formatting, quality gates, merge gates, phased testing (annotated); + ESLint/Prettier config details
   - operations.md: CI release gate, branch governance, runbook references
-  - deployment.md: Pre-deployment governance, stable check names, status note
+  - deployment.md: Pre-deployment governance, stable check names, status note; + Environment variable examples by environment
   - security.md: Step 3 posture (Dependabot, CodeQL, public-safe env), status note
   - (other pages baseline complete)
 - Runbooks updated:
   - rbk-portfolio-deploy.md: Pre-merge checklist, ruleset confirmation, env validation
   - rbk-portfolio-ci-triage.md: CI topology, known Prettier failure, re-run checks guidance
   - rbk-portfolio-rollback.md: CI gate enforcement, revert-based recovery
-- ADR-0008: CI quality gates (Purpose/Scope + decision body complete)
-- Internal env contract: `docs/_meta/env/portfolio-app-env-contract.md` with NEXT*PUBLIC*\* rules, CI determinism, references
-- Release note: `docs/00-portfolio/release-notes/20260110-portfolio-app-baseline.md` (includes README section)
+- ADRs:
+  - ADR-0008: CI quality gates (Purpose/Scope + decision body complete)
+  - ADR-0009: React Compiler (decision, rationale, validation, rollback criteria)
+- Internal env contract: `docs/_meta/env/portfolio-app-env-contract.md` with NEXT_PUBLIC_* rules, CI determinism, references
+- Release note: `docs/00-portfolio/release-notes/20260110-portfolio-app-baseline.md` (comprehensive, includes README section)
+- Configuration reference: `docs/70-reference/portfolio-app-config-reference.md` (next.config.ts, eslint.config.mjs, prettier.config.mjs, postcss.config.mjs, tsconfig.json, .nvmrc)
 
 #### ⏳ In Progress / Pending
 
@@ -210,6 +213,22 @@ Once Phase 1 is complete (deployed + validated):
 
 ## Session History (Brief)
 
+### 2026-01-16 Session (Current)
+
+- **Priority 1 Complete:**
+  - Created ADR-0009: React Compiler enablement decision
+  - Updated architecture.md: Added components, dark mode, navigation IA, metadata, toolchain sections
+  - Updated testing.md: Added ESLint/Prettier config details with rationale
+- **Priority 2 Complete:**
+  - Updated deployment.md: Added env var examples for local/preview/production
+  - Updated architecture.md: Added Node version policy
+- **Priority 3 Complete:**
+  - Created comprehensive config-reference.md (all config files documented)
+- **Git State:**
+  - portfolio-app: main (PR #6 merged: chore/phase1-governance-quality-script)
+  - portfolio-docs: main (PR #20 merged: docs/phase-1-updates)
+  - No uncommitted changes in either repo
+
 ### 2026-01-13 Session
 
 - Completed Phase 1 documentation alignment
@@ -222,13 +241,16 @@ Once Phase 1 is complete (deployed + validated):
 
 ### What Changed Since Last Commit
 
-- Portfolio-app: README governance section + quality script in package.json
-- Portfolio-docs: Multiple dossier pages, runbooks, ADR, env contract, release note
+- Portfolio-docs: ADR-0009, enhanced architecture.md, updated testing.md and deployment.md, created config-reference.md
+- Portfolio-app: Already merged (no new changes since last session)
+- Session context: Updated with latest completions
 
 ### Lessons Learned
 
 - Stable CI check names are an operational API
 - Wire runbook references across docs to reduce broken links
 - Annotate docs to distinguish implemented vs planned to avoid reviewer confusion
+- Configuration files need explicit documentation for enterprise credibility
+- React Compiler and toolchain decisions warrant explicit ADRs
 - Frozen lockfile in CI is a determinism requirement
 - Internal env contract should be non-public but documented
