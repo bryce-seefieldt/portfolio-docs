@@ -60,7 +60,9 @@ Recommended initial files (create these first):
 
 ## Current Status (Phase 1)
 
-**Phase 1 Validation:** See [phase-1-completion-checklist.md](./phase-1-completion-checklist.md) for the master admin tasks checklist to deploy to Vercel and validate end-to-end governance.
+**Phase 1 Validation:** 
+- **Quick Start:** See [phase-1-quick-reference.md](./phase-1-quick-reference.md) for a one-page summary of all 5 admin tasks with copy-paste instructions.
+- **Detailed Procedures:** See [phase-1-completion-checklist.md](./phase-1-completion-checklist.md) for the comprehensive checklist.
 
 Portfolio App foundation code is complete. **In progress:** Vercel deployment + production promotion gating.
 
