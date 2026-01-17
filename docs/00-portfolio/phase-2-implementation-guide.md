@@ -241,20 +241,20 @@ playwright-report/
 
 **Success check:**
 
-- [ ] Playwright installed and configured
-- [ ] Smoke test suite runs locally: `pnpm test`
-- [ ] Tests pass on `pnpm dev` server
-- [ ] Test script added to package.json
-- [ ] Tests integrated into CI workflow
-- [ ] PR created with test infrastructure
+- [x] Playwright installed and configured
+- [x] Smoke test suite runs locally: `pnpm test`
+- [x] Tests pass on `pnpm dev` server
+- [x] Test script added to package.json
+- [x] Tests integrated into CI workflow
+- [x] PR created with test infrastructure ([PR #10](https://github.com/bryce-seefieldt/portfolio-app/pull/10))
 
 **Files to create/modify:**
 
-- `playwright.config.ts` (new)
-- `tests/e2e/smoke.spec.ts` (new)
-- `package.json` (update scripts)
-- `.github/workflows/ci.yml` (add test step)
-- `.gitignore` (add test results)
+- [x] `playwright.config.ts` (new)
+- [x] `tests/e2e/smoke.spec.ts` (new)
+- [x] `package.json` (update scripts)
+- [x] `.github/workflows/ci.yml` (add test step)
+- [x] `.gitignore` (add test results)
 
 ---
 
