@@ -7,11 +7,11 @@ tags: [portfolio, phase-1, quick-reference, deployment, admin-tasks]
 
 ## 🚀 Phase 1 Final Push: Admin Tasks Only
 
-**Status:** Portfolio App code is 100% complete. Deployment to Vercel (admin tasks) is the final blocker for Phase 1 completion.
+**Status:** ✅ **COMPLETE** (2026-01-17) — Portfolio App fully deployed to Vercel with production promotion checks and branch protection gated by CI.
 
-**Goal:** Deploy to Vercel with production promotion checks and branch protection gated by CI.
+**Completed:** All admin tasks completed successfully; Phase 1 ready for team announcement.
 
-**Total Time:** ~60–90 minutes | **Complexity:** Medium | **Risk:** Low (all changes are additive; no production data involved)
+**Completed Tasks:** ~60–90 minutes total | **Complexity:** Medium (handled well) | **Risk:** Low (all changes were additive; no production data impacted)
 
 ---
 
@@ -19,11 +19,11 @@ tags: [portfolio, phase-1, quick-reference, deployment, admin-tasks]
 
 | #     | Task                                                   | Time      | Links                                                                                                                                                                                                                                | Status |
 | ----- | ------------------------------------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ |
-| **1** | Connect portfolio-app to Vercel                        | 10–15 min | [Runbook Phase 1](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-1-connect-portfolio-app-to-vercel)                                                                                                 | ⏳     |
-| **2** | Configure environment variables (preview + production) | 10–15 min | [Runbook Phase 2](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables)                                                                                                 | ⏳     |
-| **3** | Set up GitHub Deployment Checks                        | 5–10 min  | [Runbook Phase 3](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-3-set-up-github-deployment-checks-production-promotion-gating)                                                                     | ⏳     |
-| **4** | Configure GitHub Ruleset for `main` branch             | 10–15 min | [Ruleset Guide](/docs/70-reference/portfolio-app-github-ruleset-config.md) OR [Runbook Phase 4](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-4-configure-github-ruleset-optional-but-recommended) | ⏳     |
-| **5** | Validate end-to-end (test PR + production promotion)   | 15–20 min | [Runbook Phase 5 & 6](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-5-end-to-end-validation)                                                                                                       | ⏳     |
+| **1** | Connect portfolio-app to Vercel                        | 10–15 min | [Runbook Phase 1](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-1-connect-portfolio-app-to-vercel)                                                                                                 | ✅     |
+| **2** | Configure environment variables (preview + production) | 10–15 min | [Runbook Phase 2](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables)                                                                                                 | ✅     |
+| **3** | Set up GitHub Deployment Checks                        | 5–10 min  | [Runbook Phase 3](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-3-set-up-github-deployment-checks-production-promotion-gating)                                                                     | ✅     |
+| **4** | Configure GitHub Ruleset for `main` branch             | 10–15 min | [Ruleset Guide](/docs/70-reference/portfolio-app-github-ruleset-config.md) OR [Runbook Phase 4](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-4-configure-github-ruleset-optional-but-recommended) | ✅     |
+| **5** | Validate end-to-end (test PR + production promotion)   | 15–20 min | [Runbook Phase 5 & 6](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-5-end-to-end-validation)                                                                                                       | ✅     |
 
 ---
 
