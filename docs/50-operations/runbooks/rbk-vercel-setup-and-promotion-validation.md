@@ -206,7 +206,7 @@ With Deployment Checks enabled, you can now import GitHub checks:
 3. Vercel will offer two options:
    - **"Send workflow updates to Vercel"** — Vercel modifies your CI workflow (advanced)
    - **"Select Checks to Add"** — Manually select existing checks (recommended for MVP)
-   
+
    **For MVP, choose "Select Checks to Add"** (simpler, doesn't modify your workflow)
 
 4. From the list of available checks, select:
@@ -217,10 +217,11 @@ With Deployment Checks enabled, you can now import GitHub checks:
    - Toggle **"Show All Checks"** switch to ON (Vercel fetches all checks from GitHub)
    - Use the **"Search for GitHub Checks"** field to filter (type `ci / quality` or `ci / build`)
    - OR enter a **GitHub SHA** from a recent commit on `main` (copy from **Commits** tab in GitHub)
-   
+
    **Note:** The SHA is only used to populate the list of available checks. Once you select checks by name, Vercel will monitor those check names on **all future commits**, not just that specific SHA. You can modify your CI workflow without updating Deployment Checks, as long as the job names (`quality` and `build`) remain the same.
-   
+
    After checks appear, select both `ci / quality` and `ci / build`
+
 5. Set environment scope:
    - ✅ **Production** (so preview deployments are not gated)
 6. Click **"Save"** or **"Add Check"**
@@ -239,10 +240,12 @@ ci / build       | production | blocking
 ```
 
 **What these labels mean:**
+
 - **"production"** = Scope – checks only gate production deployments (preview PRs deploy immediately)
 - **"blocking"** = Behavior – production promotion waits until checks pass
 
 **Expected behavior:**
+
 - ✅ Preview deployments (PRs) → Deploy immediately, checks run in parallel
 - ✅ Production deployments (`main`) → Blocked until both checks pass
 - ✅ If either check fails → Production promotion prevented
