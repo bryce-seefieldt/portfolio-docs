@@ -5,7 +5,7 @@ sidebar_position: 3
 tags: [projects, deployment, cicd, vercel, github-actions, governance]
 ---
 
-Status: Live — CI quality/build gates with frozen installs; Vercel preview + production promotion with Deployment Checks configured (see [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)).
+**Status:** ✅ **Phase 1 COMPLETE (2026-01-17)** — CI quality/build gates with frozen installs; Vercel preview + production promotion with Deployment Checks configured; GitHub Ruleset protects main branch (see [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [portfolio-app-github-ruleset-config.md](/docs/70-reference/portfolio-app-github-ruleset-config.md)).
 
 ## Purpose
 
