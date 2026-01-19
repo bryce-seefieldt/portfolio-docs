@@ -53,30 +53,30 @@ graph LR
     subgraph dev["Developer Environment"]
         local["Local Workstation<br/>(source code)"]
     end
-    
+
     subgraph gh["GitHub"]
         repo["Repository Main<br/>(reviewed source)"]
     end
-    
+
     subgraph ci["CI/CD Pipeline"]
         actions["GitHub Actions<br/>(build & test)"]
     end
-    
+
     subgraph deploy["Vercel Deployment"]
         preview["Preview Deployment<br/>(test & review)"]
         prod["Production<br/>(public domain)"]
     end
-    
+
     subgraph pub["Public Internet"]
         users["End Users<br/>(read-only)"]
     end
-    
+
     local -->|PR with review| repo
     repo -->|merge + checks pass| actions
     actions --> preview
     preview -->|all checks OK| prod
     prod --> users
-    
+
     style dev fill:#e1f5ff
     style gh fill:#fff3e0
     style ci fill:#f3e5f5
@@ -85,6 +85,7 @@ graph LR
 ```
 
 **Key trust boundaries:**
+
 - **Developer → GitHub:** source code integrity, PR review gating
 - **GitHub → CI:** build pipeline integrity, artifact signing, permissions (OIDC tokens)
 - **CI → Vercel:** promotion checks, deployment gating
@@ -432,7 +433,9 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
 - [ADR-0007: Portfolio App Hosting (Vercel) with Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
 
 ### Operational Runbooks
+
 60-projects/portfolio-app
+
 - [Deploy](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
 - [Rollback](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
 - [CI Triage](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
