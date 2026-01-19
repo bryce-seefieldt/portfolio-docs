@@ -154,11 +154,13 @@ pnpm format:write  # local fix
    - Required for CI to push auto-format commits to Dependabot PR branches
 
 **Impact:**
+
 - Future Dependabot PRs will auto-fix formatting issues without manual intervention
 - Quality gate failures due to lockfile formatting eliminated
 - Maintains zero-tolerance formatting enforcement for non-generated code
 
 **Evidence:**
+
 - PR #15: https://github.com/bryce-seefieldt/portfolio-app/pull/15
 - Fixed PRs #12 and #13 (manual fixes before automation)
 - Configuration files: `.prettierignore`, `.github/workflows/ci.yml`
@@ -184,12 +186,14 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
 **Framework:** Playwright (multi-browser E2E testing)
 
 **Coverage:**
+
 - 6 smoke test cases (12 total executions across 2 browsers)
 - Core routes: `/`, `/cv`, `/projects`, `/contact`
 - Dynamic routes: `/projects/[slug]` (example: `/projects/portfolio-app`)
 - Evidence link resolution validation
 
 **Configuration:**
+
 - Test directory: `tests/e2e/`
 - Config file: `playwright.config.ts`
 - Browsers: Chromium, Firefox (WebKit excluded for stability)
@@ -198,6 +202,7 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
 - Base URL: `http://localhost:3000` (local/CI dev server)
 
 **CI Integration:**
+
 - Tests run in `ci / build` job after successful build
 - Playwright browsers installed via `npx playwright install --with-deps`
 - Dev server started with `pnpm dev &` and readiness check via `wait-on http://localhost:3000`
@@ -205,6 +210,7 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
 - HTML test reports generated (`.gitignored`)
 
 **Test Scripts:**
+
 ```bash
 pnpm test        # Run all tests headlessly
 pnpm test:ui     # Open Playwright UI mode (local dev)
@@ -212,11 +218,13 @@ pnpm test:debug  # Run tests in debug mode
 ```
 
 **Evidence:**
+
 - PR #10: https://github.com/bryce-seefieldt/portfolio-app/pull/10
 - Test runtime: ~10 seconds for 12 tests
 - All tests passing in CI and local environments
 
 **Next.js 15 Compatibility Fix:**
+
 - Fixed dynamic route params (now async in Next.js 15)
 - Changed `params: { slug: string }` to `params: Promise<{ slug: string }>`
 - Added `await` for params destructuring in `[slug]/page.tsx`

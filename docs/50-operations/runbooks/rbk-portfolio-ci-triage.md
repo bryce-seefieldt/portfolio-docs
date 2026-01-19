@@ -142,6 +142,7 @@ Fix:
 - reproduce with `pnpm build`
 - correct the root cause
 - do not “paper over” build errors by weakening the build process
+
 #### E) Smoke test failures (`pnpm test`)
 
 **Status:** Smoke tests implemented in Phase 2 (PR #10).
@@ -199,6 +200,7 @@ Fix workflow:
 - Update tests or fix routes as needed
 - Re-run locally to confirm fix
 - Push and verify CI passes
+
 #### 4) Validate and push fix
 
 After changes:
