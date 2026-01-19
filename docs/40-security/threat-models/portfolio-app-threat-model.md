@@ -1,6 +1,6 @@
 ---
 title: 'Threat Model: Portfolio App'
-description: 'Threat model for the Portfolio App (Next.js): assets, trust boundaries, entry points, threats, mitigations, and validation aligned to enterprise SDLC controls.'
+description: 'STRIDE threat model for the Portfolio App (Next.js): trust boundaries, assets, threats, mitigations, and residual risks aligned to enterprise SDLC controls.'
 sidebar_position: 2
 tags: [security, threat-model, portfolio-app, web, sdlc, supply-chain]
 ---
@@ -31,20 +31,60 @@ This model is written to be public-safe and verifiable.
 - contact form and backend services (deferred)
 - vendor account configuration details and secrets (never documented)
 
-## Prereqs / Inputs
+## Metadata
 
 - Owner: portfolio maintainer
-- Date: 2026-01-10
-- Status: Draft (ready for review)
+- Date: 2026-01-19
+- Status: **Live — Phase 2** (STRIDE-aligned; reviewed and validated)
+- Last reviewed: 2026-01-19
+- Next review: after Phase 3 (when new features introduced)
 - Architecture references:
-  - Portfolio App dossier: `docs/60-projects/portfolio-app/architecture.md`
+  - Portfolio App dossier: `docs/60-projects/portfolio-app/`
   - ADRs: ADR-0005, ADR-0006, ADR-0007
 - Operational references:
-  - Runbooks: deploy/rollback/CI triage (this set)
+  - Runbooks: deploy/rollback/CI triage
 
-## System overview
+---
 
-## Assets to protect
+## Trust Boundaries Diagram
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│                    Portfolio Delivery Ecosystem                     │
+└────────────────────────────────────────────────────────────────────┘
+
+   Developer Workstation               GitHub                 CI/CD
+  ┌──────────────────┐            ┌─────────────┐         ┌────────┐
+  │   Local env      │────(PR)───>│  Repo main  │────────>│ GH Actn│
+  │  (source code)   │            │   (source)  │    |     │ (build)│
+  └──────────────────┘            └─────────────┘    |     └────────┘
+                                                      |          |
+                                                      v          v
+                                                   Vercel Preview
+                                                   (test & review)
+                                                      |
+                                                      | (merge + checks pass)
+                                                      v
+                                                   Vercel Production
+                                                   (public domain)
+                                                      |
+                                                      v
+                                                   ┌─────────────────┐
+                                                   │ Public Internet │
+                                                   │  (read-only)    │
+                                                   └─────────────────┘
+
+Key trust boundaries:
+• Developer → GitHub: source code integrity, PR review gating
+• GitHub → CI: build pipeline integrity, artifact signing, permissions
+• CI → Vercel: promotion checks, deployment gating, OIDC tokens
+• Vercel → Public: HTTPS/TLS, CDN security, DDoS protection
+• Portfolio App ↔ Documentation App: hyperlinks only (no privileged integration)
+```
+
+---
+
+## Assets to Protect
 
 - **Source integrity**: repository content (app code, content metadata, config)
 - **Build integrity**: deterministic build artifact from reviewed sources
@@ -53,159 +93,342 @@ This model is written to be public-safe and verifiable.
 - **Availability and UX trust**: site must be reliably accessible and correct
 - **Reputation and credibility**: portfolio must remain trustworthy and tamper-resistant
 
-## Trust boundaries
+---
 
-- Developer workstation → Git provider (PR)
-- PR branch → CI runner (build/test/scan)
-- CI output → Vercel deployment pipeline
-- Public internet → Portfolio App (read-only access)
+## Threat Analysis (STRIDE)
 
-Cross-system boundary:
+STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R**epudiation (accountability), **I**nformation Disclosure (confidentiality), **D**enial of Service (availability), **E**levation of Privilege (authorization).
 
-- Portfolio App → Documentation App (links only; no privileged integration)
+### Spoofing (Identity)
 
-## Entry points
+#### Threat: Attacker spoofs the Portfolio App domain
 
-- GitHub pull requests and commits (primary change vector)
-- Dependency updates (Dependabot PRs)
-- CI workflow changes (`.github/workflows/*`)
-- Build scripts / postinstall hooks (supply chain vector)
-- Public web surface:
-  - request routing
-  - rendered content
-  - external embeds (should be minimized)
+- **Scenario:** Attacker registers or hijacks a domain similar to the portfolio domain (typosquatting or DNS hijacking).
+- **Impact:** Medium—users may visit a fake portfolio and believe they are viewing legitimate content; reputational damage.
+- **Likelihood:** Low (domain registration is under owner control; DNS is managed by Vercel).
+- **Mitigations:**
+  - Use HTTPS/TLS with a valid certificate (Vercel automatic)
+  - Enable HSTS header to enforce HTTPS (Vercel default)
+  - Register domain against typosquatting (owner responsibility)
+  - Domain registration lock enabled
+  - DNS security best practices (MX record discipline, SPF/DKIM if needed)
+- **Validation:**
+  - HSTS header present in response
+  - SSL certificate is valid and not self-signed
+  - DNS records are as intended
 
-## Threat analysis
+---
 
-### Threat 1: Dependency / supply chain compromise
+### Tampering (Data Integrity)
 
-- **Scenario**: a compromised dependency executes malicious code during install/build.
-- **Impact**: high (tampered build, exfiltration, reputational damage)
-- **Likelihood**: medium
-- **Mitigations**:
-  - pin toolchain (Node/pnpm) and commit lockfile
-  - Dependabot with review discipline
-  - CodeQL and (optional) dependency auditing in CI
-  - minimize dependencies and plugins
-- **Validation**:
-  - CI uses frozen lockfile install
-  - dependency PRs require review + build evidence
+#### Threat 1: Attacker modifies deployed portfolio content
 
-### Threat 2: Malicious PR modifies CI or build pipeline
+- **Scenario:** Attacker modifies Portfolio App files on disk or in transit (MITM or compromised deployment system).
+- **Impact:** High—malicious content could be served; reputation damage; potential malware distribution.
+- **Likelihood:** Low–Medium (depends on Vercel security posture and CI access model).
+- **Mitigations:**
+  - Deployments only via authenticated Git + GitHub Actions + Vercel
+  - No manual SSH/FTP deployments allowed
+  - Vercel uses immutable, content-addressed deployments
+  - Git commit audit trail (SHA-256, signed commits optional)
+  - GitHub Rulesets enforce PR review before merge
+  - Required checks must pass before production promotion
+- **Validation:**
+  - all deployments are traced back to a GitHub merge
+  - promotion checks are visible in deployment logs
+  - manual override to production is not possible
 
-- **Scenario**: PR changes workflows to run untrusted actions or exfiltrate data.
-- **Impact**: high
-- **Likelihood**: low–medium (depends on collaborator model)
-- **Mitigations**:
-  - least-privilege workflow permissions
-  - review required for workflow changes
-  - protect `main` with required checks
-- **Validation**:
-  - workflow permissions are restricted
-  - required checks cannot be bypassed for merge
+#### Threat 2: Attacker modifies CI workflows or build scripts to inject malicious code
 
-### Threat 3: Accidental publication of sensitive information
+- **Scenario:** PR modifies `.github/workflows/*` or `package.json` scripts to run untrusted code or exfiltrate secrets.
+- **Impact:** High—tampered build artifact, potential secret exfiltration.
+- **Likelihood:** Low–Medium (depends on collaborator trust model; restricted in single-maintainer setup).
+- **Mitigations:**
+  - Workflows use least-privilege permissions (contents: read, specific OIDC tokens)
+  - No long-lived secrets or SSH keys in workflows; use Vercel OIDC if available
+  - All workflow changes require PR review
+  - Avoid pinning to `@latest` tags; pin actions by SHA or use Dependabot
+  - postinstall hooks minimized; dependency audits recommended
+- **Validation:**
+  - workflow permissions are restricted (visible in workflow file)
+  - no plaintext secrets in logs
+  - dependency update PRs are reviewed before merge
 
-- **Scenario**: secrets, internal endpoints, or sensitive logs get committed or displayed.
-- **Impact**: high
-- **Likelihood**: medium
-- **Mitigations**:
-  - explicit “no secrets” policy with PR checklist statement
-  - secrets scanning (phase 2 recommended)
-  - avoid embedding internal screenshots/logs in public content
-- **Validation**:
-  - PRs include “No secrets added”
+#### Threat 3: Attacker modifies dependencies via compromised package registry
+
+- **Scenario:** A dependency is compromised or a typosquatted package is installed.
+- **Impact:** High—malicious code in build or runtime.
+- **Likelihood:** Medium—supply chain attacks are known to occur.
+- **Mitigations:**
+  - pin all dependency versions (no `*` or `^` in production; use lockfile)
+  - frozen lockfile install in CI (`pnpm install --frozen-lockfile`)
+  - Dependabot scans for security advisories (enabled, required review)
+  - CodeQL scanning of JavaScript/TypeScript (GH native)
+  - minimize dependencies (reduce attack surface)
+  - consider npm audit or Snyk checks (optional hardening phase 3+)
+- **Validation:**
+  - CI uses `--frozen-lockfile` (visible in workflow)
+  - dependency PRs require review before merge
+  - CodeQL scans pass before merge
+
+---
+
+### Repudiation (Accountability)
+
+#### Threat: Attacker performs unauthorized action and claims they did not
+
+- **Scenario:** Malicious actor modifies Portfolio App or CI, later denies the change.
+- **Impact:** Low–Medium—affects accountability and incident investigation.
+- **Likelihood:** Low (in small team settings; higher in open-source).
+- **Mitigations:**
+  - Git commit audit trail (immutable, signed with SHA-256)
+  - GitHub PR/merge history visible and persistent
+  - GitHub Actions logs retained and queryable
+  - Enforce PR review and sign-off (GitHub requires at least 1 approval before merge)
+  - commit messages include issue references and context
+- **Validation:**
+  - git log --oneline shows traceable history
+  - GitHub PR template requires confirmation of PR security checklist
+  - Actions logs are accessible for post-incident review
+
+---
+
+### Information Disclosure (Confidentiality)
+
+#### Threat 1: Attacker exfiltrates secrets from environment or repository
+
+- **Scenario:** API keys, deployment tokens, or secrets are hardcoded, committed, or logged.
+- **Impact:** High—compromised credentials can be used to impersonate the service or access internal systems.
+- **Likelihood:** Medium (human error is common).
+- **Mitigations:**
+  - No secrets in `NEXT_PUBLIC_*` environment variables (these are public)
+  - `.env.local` and `.env*.local` are gitignored (not committed)
+  - `.env.example` documents required variables without values
+  - CI does not log environment variable values
+  - GitHub Actions use OIDC or limited-lifetime tokens (Vercel OIDC)
+  - PR template includes "No secrets added" checklist
+  - secrets scanning gate recommended (phase 2+)
+- **Validation:**
+  - `grep -r "SECRET\|TOKEN\|API_KEY" src/` returns no hardcoded values
+  - `.env.local` is in `.gitignore`
+  - CI logs do not include plaintext secrets
   - postmortem procedure exists for suspected publication
 
-### Threat 4: Content injection via unsafe rendering / MDX misuse
+#### Threat 2: Attacker reads private GitHub Actions logs or deployment logs
 
-- **Scenario**: untrusted HTML/MDX leads to XSS or unsafe client behavior.
-- **Impact**: medium–high
-- **Likelihood**: low (if Markdown-first and MDX minimized)
-- **Mitigations**:
-  - treat MDX as code; restrict and review carefully
-  - avoid `dangerouslySetInnerHTML`
-  - avoid untrusted third-party embeds
-- **Validation**:
-  - code review policy flags MDX/component changes
-  - CSP/hardening considered where practical
+- **Scenario:** CI/deployment logs contain sensitive information (internal URLs, debug output, etc.).
+- **Impact:** Medium—internal details could inform further attacks.
+- **Likelihood:** Low (logs are not public; requires attacker access to GitHub account).
+- **Mitigations:**
+  - CI logs are stored in private GitHub (accessible only to collaborators)
+  - do not log environment variable values
+  - avoid printing internal URLs or PII in logs
+  - use GitHub Secrets for sensitive values (Vercel API tokens, etc.)
+- **Validation:**
+  - CI workflow logs are reviewed for accidental leaks
+  - postmortem procedure in place
 
-### Threat 5: Route/base path misconfiguration breaks availability or trust
+#### Threat 3: Attacker performs content injection to steal data or redirect users
 
-- **Scenario**: deployment config causes 404s, broken assets, or mismatched docs links.
-- **Impact**: medium
-- **Likelihood**: medium
-- **Mitigations**:
-  - PR previews + production promotion checks
-  - explicit runbooks for deploy/rollback
-  - treat base path changes as breaking changes requiring ADR + release notes
-- **Validation**:
-  - preview validated before merge
-  - promotion gated by `ci / quality` and `ci / build`
+- **Scenario:** MDX, unsanitized HTML, or third-party embeds are used to inject malicious scripts (XSS).
+- **Impact:** Medium—could exfiltrate user session tokens (low risk here; no auth) or redirect to phishing.
+- **Likelihood:** Low (Markdown-first, minimal MDX, no third-party ad networks).
+- **Mitigations:**
+  - Markdown-first content model (safe by default)
+  - MDX used only for component demos; treated as code (strict review)
+  - Avoid `dangerouslySetInnerHTML` or equivalent
+  - No third-party trackers or ad services
+  - Content Security Policy (CSP) headers (optional, phase 3+)
+  - Vercel provides DDoS and request filtering
+- **Validation:**
+  - PR review flags MDX changes
+  - no untrusted embeds or inline script in deployed pages
 
-### Threat 6: Availability risks from excessive client payload or regressions
+---
 
-- **Scenario**: performance regression degrades UX and credibility.
-- **Impact**: medium
-- **Likelihood**: medium
-- **Mitigations**:
-  - performance budget mindset (lightweight UI)
-  - basic e2e smoke tests (phase 3)
-  - measured rollout via previews; rollback readiness
-- **Validation**:
-  - spot-check core routes
-  - add performance checks later if warranted
+### Denial of Service (Availability)
 
-## Mitigation plan and enforceable SDLC controls
+#### Threat 1: Attacker floods the Portfolio App domain with requests
 
-### Minimum enforceable controls (Phase 1)
+- **Scenario:** Attacker sends high-volume traffic to degrade availability.
+- **Impact:** Medium—site becomes unavailable; credibility damage.
+- **Likelihood:** Low–Medium (low targeting; medium in case of viral mention).
+- **Mitigations:**
+  - Vercel provides DDoS protection and rate limiting (built-in)
+  - static-first content model (no heavy compute per request)
+  - minimal client-side JavaScript (fast render)
+  - rollback readiness (revert PR and redeploy within 1 minute)
+- **Validation:**
+  - Vercel DDoS protections are enabled (visible in Vercel dashboard)
+  - rollback runbook is tested and usable
 
-- PR-only merges to `main`
-- CI checks required:
-  - lint + format check + typecheck
-  - build
-- Vercel production promotion gated on imported checks
-- Dependabot enabled; dependency PR review required
-- No secrets policy with explicit PR checklist line item
+#### Threat 2: Attacker introduces a performance regression to degrade UX
 
-### Recommended Phase 2 controls
+- **Scenario:** PR merges code that causes slow load times or excessive client JS.
+- **Impact:** Medium—poor credibility, user frustration.
+- **Likelihood:** Medium (human error in dependency updates or code changes).
+- **Mitigations:**
+  - performance budget mindset (keep JS minimal)
+  - spot-check core routes in preview (reviewer responsibility)
+  - consider adding performance budget checks (phase 3+)
+  - Playwright smoke tests validate route load (phase 2+)
+  - rollback procedure (fast revert)
+- **Validation:**
+  - core routes load in &lt;2 seconds locally and in preview
+  - smoke tests pass (validate route availability)
 
-- secrets scanning gate (CI)
-- dependency auditing (CI) for high-severity advisories
-- e2e smoke tests for key routes
+---
 
-## Residual risk
+### Elevation of Privilege (Authorization)
 
-- Supply chain risk remains non-zero.
-- Public sites always face reputational risk from errors/regressions.
-- Mitigation is continuous: disciplined updates, scanning, and rollback readiness.
+#### Threat 1: Attacker gains elevated permissions in the GitHub organization or Vercel
 
-## Validation / Expected outcomes
+- **Scenario:** Attacker compromises a collaborator account or discovers a token with excessive permissions.
+- **Impact:** Critical—attacker can deploy malicious code to production.
+- **Likelihood:** Low–Medium (depends on account security practices and token scope).
+- **Mitigations:**
+  - GitHub Rulesets enforce PR review and required checks (bypass prevention)
+  - minimal repository collaborators (principle of least privilege)
+  - GitHub branch protection rules prevent direct pushes to `main`
+  - Vercel deployment tokens are scoped (not global; production-only if possible)
+  - GitHub Actions use OIDC tokens (short-lived, scoped to specific workflow)
+  - Enable 2FA on GitHub account (owner responsibility)
+  - audit GitHub collaborators and permissions regularly
+- **Validation:**
+  - GitHub Rulesets prevent bypassing required checks
+  - branch protection is visible and enforced
+  - no long-lived tokens are stored in GitHub Secrets
 
-- CI blocks unsafe or broken changes from merging
-- production promotion is gated by checks
-- no sensitive data is published
-- runbooks and postmortem process are usable under pressure
+#### Threat 2: Attacker escalates from a feature branch to `main` via social engineering or process bypass
 
-## Failure modes / Troubleshooting
+- **Scenario:** Attacker tricks a reviewer into merging an unreviewed or malicious PR.
+- **Impact:** High—malicious code in production.
+- **Likelihood:** Low (single-maintainer or trusted team model).
+- **Mitigations:**
+  - PR template includes security checklist (raises awareness)
+  - GitHub Rulesets require 1+ approval (adjustable, but required)
+  - dismissal of stale reviews (recommended)
+  - require status checks to pass (ci / quality, ci / build, CodeQL)
+  - provide reviewer guidance (ADR-0007 documents promotion gates)
+- **Validation:**
+  - merge without approval is prevented by Rulesets
+  - checks cannot be bypassed (green check required)
 
-- If sensitive publication suspected:
-  - revert immediately
-  - rotate secrets if applicable
-  - write a postmortem with corrective actions
-- If promotion blocked:
-  - follow CI triage runbook; fix forward or rollback
+---
+
+## Mitigation Summary: Enforceable SDLC Controls
+
+### Phase 1 Controls (Baseline — Currently Implemented)
+
+- ✅ PR-only merges to `main` (branch protection, GitHub Rulesets)
+- ✅ CI quality gates required:
+  - `ci / quality`: lint + format:check + typecheck
+  - `ci / build`: Next.js build + smoke tests
+- ✅ CodeQL enabled (JavaScript/TypeScript scanning)
+- ✅ Dependabot enabled (dependency review required)
+- ✅ Vercel production promotion gated by checks
+- ✅ No secrets policy with explicit PR template checklist
+- ✅ `.env.local` and secrets gitignored
+
+### Phase 2 Recommended Controls (Planned)
+
+- secrets scanning gate (CI) — e.g., `git-secrets`, `truffleHog`, or GitHub's native scanner
+- dependency auditing for high-severity advisories (npm audit or Snyk)
+- e2e smoke tests for all core routes (Playwright — 100% coverage)
+
+### Phase 3+ Enhancements (Future)
+
+- Performance budget checks (Lighthouse CI or similar)
+- Content Security Policy (CSP) hardening
+- Automated link validation between Portfolio App and Docs App
+- Secrets rotation and key management improvements
+
+---
+
+## Residual Risks (Accepted)
+
+- **Supply chain risk:** Dependabot alerts may not catch all zero-days immediately. Mitigation is continuous.
+- **Public site risks:** All public sites face reputational risk from errors, regressions, or compromises. Rollback readiness is essential.
+- **Account compromise:** If a collaborator account is compromised, checks can be bypassed. Mitigation: 2FA, limited collaborators, audit logging.
+- **Vercel platform risk:** Vercel is trusted to provide secure deployment. Mitigation: Vercel's security practices and SLAs are beyond Portfolio App scope but monitored.
+
+---
+
+## Validation & Testing
+
+### Pre-deployment validation
+
+- [ ] PR preview deployment succeeds
+- [ ] core routes render correctly in preview
+- [ ] evidence links to docs app are reachable
+- [ ] no console errors or security warnings in browser
+- [ ] spot-check mobile/responsive layout
+
+### CI validation
+
+- [ ] lint passes (`pnpm lint`)
+- [ ] format check passes (`pnpm format:check`)
+- [ ] typecheck passes (`pnpm typecheck`)
+- [ ] build succeeds (`pnpm build`)
+- [ ] smoke tests pass (Playwright — Chromium + Firefox)
+- [ ] CodeQL scan passes
+
+### Post-deployment validation
+
+- [ ] production domain is accessible
+- [ ] HSTS header is present (`curl -I https://...`)
+- [ ] SSL certificate is valid
+- [ ] routes match preview (no 404s)
+- [ ] evidence links work end-to-end
+
+---
+
+## Incident Response
+
+### Suspected secret publication
+
+1. **Immediate:** Revert the PR (`git revert <commit>`; push to main)
+2. **Investigation:** Determine what was exposed and for how long
+3. **Rotation:** Rotate any compromised credentials
+4. **Communication:** Notify stakeholders if needed
+5. **Postmortem:** Write a brief postmortem identifying what went wrong and how to prevent recurrence
+
+### Suspected malicious deployment
+
+1. **Immediate:** Revert to last known good (`git revert <commit>`; redeploy via CI)
+2. **Investigation:** Review the PR and commit history; check CI logs
+3. **Review:** Audit who approved the PR and whether checks passed
+4. **Postmortem:** Document and prevent similar escalations
+
+### Production availability issue
+
+1. Follow [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+2. Use [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md) if needed
+3. Post-incident: Review and update runbooks
+
+---
 
 ## References
 
-- Portfolio App dossier:
-  - `docs/60-projects/portfolio-app/security.md`
-  - `docs/60-projects/portfolio-app/deployment.md`
-- ADRs:
-  - `docs/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md`
-  - `docs/10-architecture/adr/adr-0006-separate-portfolio-app-from-evidence-engine-docs.md`
-  - `docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md`
-- Runbooks:
-  - `docs/50-operations/runbooks/rbk-portfolio-deploy.md`
-  - `docs/50-operations/runbooks/rbk-portfolio-rollback.md`
-  - `docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`
+### Portfolio App Dossier
+
+- [Security](/docs/60-projects/portfolio-app/04-security.md)
+- [Deployment](/docs/60-projects/portfolio-app/03-deployment.md)
+- [Architecture](/docs/60-projects/portfolio-app/02-architecture.md)
+
+### Architecture Decision Records (ADRs)
+
+- [ADR-0005: Portfolio App Stack (Next.js + TypeScript)](/docs/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md)
+- [ADR-0006: Separate Portfolio App from Evidence Engine (Docs)](/docs/10-architecture/adr/adr-0006-separate-portfolio-app-from-evidence-engine-docs.md)
+- [ADR-0007: Portfolio App Hosting (Vercel) with Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+
+### Operational Runbooks
+60-projects/portfolio-app
+- [Deploy](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
+- [Rollback](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
+- [CI Triage](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+
+### Phase 2 Planning
+
+- [Roadmap](/docs/00-portfolio/roadmap.md)
+- [Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md)
