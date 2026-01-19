@@ -76,6 +76,7 @@ pnpm lint
 pnpm format:check
 pnpm typecheck
 pnpm build
+pnpm test  # Smoke tests (Playwright - 12 tests)
 ```
 
 Optional local preview:
@@ -87,6 +88,7 @@ pnpm dev
 Expected outcome:
 
 - all commands succeed with no errors.
+- smoke tests: 12/12 passing (6 routes × 2 browsers)
 
 ### 2) Open a PR (required)
 

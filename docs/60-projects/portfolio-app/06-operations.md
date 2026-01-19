@@ -56,8 +56,20 @@ Responsibilities:
 
 - CI is a hard release gate. Merges and promotions must not proceed if required checks fail.
 - Required checks (by contract): `ci / quality`, `ci / build`.
-- Quality runs `pnpm lint`, `pnpm format:check`, `pnpm typecheck`; Build runs `pnpm build` with frozen lockfile installs.
+- Quality runs `pnpm lint`, `pnpm format:check`, `pnpm typecheck`
+- Build runs `pnpm build` with frozen lockfile installs, then smoke tests:
+  - Playwright browser installation (`npx playwright install --with-deps`)
+  - Dev server startup (`pnpm dev &` + `wait-on http://localhost:3000`)
+  - Smoke tests execution (`pnpm test` - 12 tests across 2 browsers)
 - If CI fails: follow the CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
+
+### Dependabot automation
+
+- Dependabot PRs are auto-formatted in CI to prevent lockfile formatting failures
+- Auto-format runs only when `github.actor == 'dependabot[bot]'`
+- Human PRs require manual formatting to maintain developer discipline
+- Configuration: `.prettierignore` excludes lockfiles; CI workflow has `contents: write` permission
+- See PR #15 for implementation details
 
 ## Required runbooks (minimum viable)
 

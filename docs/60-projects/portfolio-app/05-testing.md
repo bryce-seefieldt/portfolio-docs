@@ -127,11 +127,49 @@ pnpm format:write  # local fix
 - Checks run on PRs and on pushes to `main` to gate production promotion and keep ruleset enforcement valid.
 - Check naming stability is mandatory; changing names would break required-check enforcement and Vercel promotion alignment.
 
+### Dependabot CI hardening (implemented)
+
+**Status:** Implemented in PR #15 (merged 2026-01-19).
+
+**Problem:** Dependabot PRs fail quality checks due to `pnpm-lock.yaml` formatting violations. Dependabot regenerates lockfiles but does not run Prettier, causing `pnpm format:check` to fail.
+
+**Solution implemented:**
+
+1. **Lockfile exclusions in `.prettierignore`:**
+   - Added `pnpm-lock.yaml`, `package-lock.json`, `yarn.lock`
+   - Rationale: Machine-generated files don't benefit from formatting; prevents CI failures
+
+2. **Auto-format step for Dependabot PRs in CI:**
+   - Runs in `ci / quality` job before lint/format/typecheck steps
+   - Conditional execution: `if: ${{ github.actor == 'dependabot[bot]' }}`
+   - Actions:
+     - Runs `pnpm format:write || true`
+     - Detects changes with `git status --porcelain`
+     - Auto-commits formatting fixes as `chore: auto-format (CI)`
+     - Pushes to PR branch
+   - Permissions: Workflow has `contents: write` to enable auto-commit
+
+3. **Workflow permissions:**
+   - Changed from `contents: read` to `contents: write`
+   - Required for CI to push auto-format commits to Dependabot PR branches
+
+**Impact:**
+- Future Dependabot PRs will auto-fix formatting issues without manual intervention
+- Quality gate failures due to lockfile formatting eliminated
+- Maintains zero-tolerance formatting enforcement for non-generated code
+
+**Evidence:**
+- PR #15: https://github.com/bryce-seefieldt/portfolio-app/pull/15
+- Fixed PRs #12 and #13 (manual fixes before automation)
+- Configuration files: `.prettierignore`, `.github/workflows/ci.yml`
+
+**Governance note:** Auto-format only runs for Dependabot; human PRs still require manual formatting to maintain developer discipline.
+
 ## Phased testing strategy
 
 Note: Items marked (implemented) are in the current state. Others are (planned).
 
-### Phase 1 (MVP): Gates + smoke checks (implemented)
+### Phase 1 (MVP): Gates + manual smoke checks (implemented)
 
 - quality + build gates
 - manual review on preview deployments:
@@ -139,34 +177,81 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
   - page rendering
   - key links to `/docs`
 
-### Phase 2: Unit tests (planned)
+### Phase 2: Automated smoke tests with Playwright (implemented)
+
+**Status:** Implemented in PR #10 (merged 2026-01-17).
+
+**Framework:** Playwright (multi-browser E2E testing)
+
+**Coverage:**
+- 6 smoke test cases (12 total executions across 2 browsers)
+- Core routes: `/`, `/cv`, `/projects`, `/contact`
+- Dynamic routes: `/projects/[slug]` (example: `/projects/portfolio-app`)
+- Evidence link resolution validation
+
+**Configuration:**
+- Test directory: `tests/e2e/`
+- Config file: `playwright.config.ts`
+- Browsers: Chromium, Firefox (WebKit excluded for stability)
+- Retries: 2 in CI, 0 locally
+- Workers: 1 in CI (sequential for stability), unlimited locally
+- Base URL: `http://localhost:3000` (local/CI dev server)
+
+**CI Integration:**
+- Tests run in `ci / build` job after successful build
+- Playwright browsers installed via `npx playwright install --with-deps`
+- Dev server started with `pnpm dev &` and readiness check via `wait-on http://localhost:3000`
+- Tests execute with `pnpm test` (runs `playwright test`)
+- HTML test reports generated (`.gitignored`)
+
+**Test Scripts:**
+```bash
+pnpm test        # Run all tests headlessly
+pnpm test:ui     # Open Playwright UI mode (local dev)
+pnpm test:debug  # Run tests in debug mode
+```
+
+**Evidence:**
+- PR #10: https://github.com/bryce-seefieldt/portfolio-app/pull/10
+- Test runtime: ~10 seconds for 12 tests
+- All tests passing in CI and local environments
+
+**Next.js 15 Compatibility Fix:**
+- Fixed dynamic route params (now async in Next.js 15)
+- Changed `params: { slug: string }` to `params: Promise<{ slug: string }>`
+- Added `await` for params destructuring in `[slug]/page.tsx`
+
+### Phase 3: Unit tests (planned)
 
 - add Vitest for:
   - slug generation
   - project metadata validation
   - components with business logic
-- CI adds `pnpm test`
+- CI adds `pnpm test:unit`
 
-### Phase 3: E2E tests (planned)
+### Phase 4: Extended E2E coverage (planned)
 
-- add Playwright:
-  - landing page loads
-  - `/cv` renders
-  - `/projects` lists projects
-  - at least one project detail page loads and contains evidence links
-- CI adds `pnpm test:e2e` (nightly or required depending on runtime)
+- Expand Playwright coverage:
+  - form submissions (contact page)
+  - navigation flows (multi-page journeys)
+  - accessibility checks
+  - visual regression tests (if needed)
 
 ## Definition of Done for changes
 
 A PR is acceptable when:
 
-- CI gates pass
+- CI gates pass:
+  - `ci / quality` (lint, format, typecheck)
+  - `ci / build` (build + smoke tests)
 - preview deployment renders as expected
+- smoke tests pass (12/12 tests)
 - no broken evidence links are introduced
 - if behavior changes materially:
   - dossier updated
   - runbooks updated (if ops changes)
   - ADR added/updated (if architectural)
+  - smoke tests updated if routes/navigation changes
 
 ## Validation / Expected outcomes
 
