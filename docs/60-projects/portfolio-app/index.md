@@ -78,6 +78,18 @@ Portfolio App must link to evidence pages for each project:
 - CI gates enforced: `ci / quality` (lint, format check, typecheck) → `ci / build` (Next build), frozen lockfile installs.
 - CodeQL and Dependabot baselines present; branch protection/ruleset requires required checks before merge.
 
+### Current State (Phase 2)
+
+- ✅ Route skeleton: 5 core routes implemented and smoke-tested
+- ✅ CI quality gates: lint, format, typecheck, build, smoke tests (all enforced)
+- ✅ Smoke test coverage: 100% routes (12 tests, Chromium + Firefox)
+- ✅ Dependabot hardening: Auto-format + lockfile exclusions
+- ✅ Deployment governance: Vercel promotion gated by required checks
+- ✅ Dossier enhancement: All 7 pages updated to gold standard
+- 🟡 Threat model: Planned for Step 4 (STRIDE analysis)
+- 🟡 Enhanced project page: Planned for Step 7 (gold standard badge)
+- 🟡 Meaningful CV page: Planned for Step 8 (capability-to-proof mapping)
+
 ## Reviewer path
 
 - Open the Portfolio App repo and inspect CI workflows (`ci`, CodeQL, Dependabot) for required checks and naming stability.

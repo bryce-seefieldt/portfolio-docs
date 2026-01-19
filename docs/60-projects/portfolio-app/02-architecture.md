@@ -252,3 +252,124 @@ Metadata configured in `src/app/layout.tsx`:
 - Portfolio App dossier hub: `docs/60-projects/portfolio-app/index.md`
 - Documentation App dossier: `docs/60-projects/portfolio-docs-app/`
 - ADRs: `docs/10-architecture/adr/`
+
+---
+
+## Technology Stack (Complete Inventory)
+
+### Core Framework
+
+- Next.js: v16.1.3 (App Router, React Server Components, static optimization)
+- React: v19.2.3 (concurrent features, automatic batching)
+- TypeScript: v5+ (strict mode, noEmit for type-only checks)
+
+### Styling & UI
+
+- Tailwind CSS: v4 (utility-first, JIT compilation)
+- @tailwindcss/postcss: v4 (CSS processing)
+- CSS Modules: Built-in (component-scoped styles)
+
+### Build & Development
+
+- pnpm: v10.0.0 (fast, efficient, frozen lockfiles in CI)
+- Next.js Compiler: SWC-based (Rust)
+- React Compiler: babel-plugin-react-compiler v1.0.0 (optimization)
+
+### Testing & Quality
+
+- Playwright: v1.57.0 (E2E smoke tests, multi-browser)
+- ESLint: v9 (flat config, Next.js presets, TypeScript integration)
+- Prettier: v3.8.0 (code formatting, Tailwind plugin)
+- wait-on: v9.0.3 (dev server readiness in CI)
+
+### CI/CD & Governance
+
+- GitHub Actions: Quality + build jobs
+- Vercel: Preview + production deployments
+- CodeQL: JavaScript/TypeScript security scanning
+- Dependabot: Weekly dependency updates (grouped, majors excluded)
+
+### Notable Decisions
+
+- No authentication: Intentionally deferred (public portfolio)
+- No database: Static content model (scalable via data files)
+- No form backend: Contact via static methods (email link)
+- Evidence links: Deep integration with Docusaurus documentation
+
+## High-Level Request Flow
+
+```
+┌─────────────┐
+│  Browser    │
+└──────┬──────┘
+  │ HTTPS GET /projects/portfolio-app
+  ↓
+┌─────────────────────┐
+│   Vercel Edge       │ (CDN, SSL termination)
+└──────┬──────────────┘
+  │
+  ↓
+┌─────────────────────────────────────┐
+│   Next.js App Router                │
+│   - Route: /projects/[slug]         │
+│   - Server Component (async params) │
+│   - getProjectBySlug(slug)          │
+│   - notFound() if missing           │
+└──────┬──────────────────────────────┘
+  │
+  ↓
+┌─────────────────────────────┐
+│   Project Data (src/data/)  │
+│   - PROJECTS array          │
+│   - Static metadata         │
+└──────┬──────────────────────┘
+  │
+  ↓
+┌──────────────────────────────────┐
+│   Component Rendering            │
+│   - Section components           │
+│   - Evidence links (to /docs)    │
+│   - Tailwind styling             │
+└──────┬───────────────────────────┘
+  │
+  ↓
+┌──────────────────────┐
+│   HTML Response      │ (static-optimized, RSC payload)
+└──────────────────────┘
+```
+
+## Component Architecture
+
+```
+src/
+├── app/ # Next.js App Router
+│   ├── layout.tsx      # Root layout (global nav, metadata)
+│   ├── page.tsx        # Landing page (/)
+│   ├── cv/
+│   │   └── page.tsx    # CV route
+│   ├── projects/
+│   │   ├── page.tsx    # Projects list
+│   │   └── [slug]/
+│   │       └── page.tsx# Dynamic project detail
+│   └── contact/
+│       └── page.tsx    # Contact page
+├── components/         # Reusable components
+│   ├── Section.tsx     # Content section wrapper
+│   └── Callout.tsx     # Highlighted content blocks
+├── data/
+│   └── projects.ts     # Project registry (typed)
+└── lib/
+    └── config.ts       # Environment config helpers
+```
+
+## Scalability Patterns
+
+Current (Phase 2):
+- Static project data in TypeScript (typed, version-controlled)
+- Manual content updates via code changes + PRs
+- Evidence links hardcoded per project
+
+Planned (Phase 3+):
+- CMS or API-driven project data (Contentful, headless CMS)
+- Automated evidence link validation
+- Tag-based filtering and search
