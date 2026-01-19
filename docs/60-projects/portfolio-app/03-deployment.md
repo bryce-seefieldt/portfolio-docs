@@ -156,24 +156,42 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 
 ### Minimum required checks
 
-1. **Quality gate**
+1. **Quality gate** (`ci / quality`)
+   - Auto-format step (Dependabot PRs only)
    - lint (ESLint)
    - format check (Prettier)
    - typecheck (TypeScript)
-2. **Build gate**
+2. **Build gate** (`ci / build`)
    - Next.js build must succeed
+   - Playwright browser installation
+   - Dev server startup
+   - Smoke tests (12 tests across 2 browsers)
 
-Optional later:
+**Status:** Smoke tests implemented in Phase 2 (PR #10, merged 2026-01-17).
 
-- unit tests
-- e2e tests
-- dependency auditing gates
+### Test coverage (smoke tests)
+
+- 6 test cases, 12 total executions (Chromium + Firefox)
+- Routes tested: `/`, `/cv`, `/projects`, `/contact`, `/projects/portfolio-app`
+- Evidence link resolution validation
+- Runtime: ~10 seconds
+- CI integration: Tests run in `ci / build` job after successful build
+
+### Dependabot automation
+
+**Status:** Implemented in PR #15 (merged 2026-01-19).
+
+- Auto-format step runs only for Dependabot PRs
+- Prevents lockfile formatting failures
+- Conditional execution: `if: ${{ github.actor == 'dependabot[bot]' }}`
+- Workflow permissions: `contents: write` (allows auto-commits)
 
 ### Principle
 
 The Portfolio App should never merge changes that:
 
 - break build
+- fail smoke tests
 - drift formatting standards
 - introduce type errors
 - violate documented governance requirements

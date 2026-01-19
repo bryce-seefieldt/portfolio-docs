@@ -46,12 +46,16 @@ When either check fails, this runbook provides deterministic diagnosis and fix p
 ### CI topology (for context)
 
 - `ci / quality` job runs:
+  - Auto-format step (Dependabot PRs only)
   - `pnpm lint`
   - `pnpm format:check`
   - `pnpm typecheck`
 - `ci / build` job runs:
   - `pnpm install --frozen-lockfile`
   - `pnpm build`
+  - Playwright browser installation (`npx playwright install --with-deps`)
+  - Dev server startup (`pnpm dev &` + readiness check via `wait-on`)
+  - Smoke tests (`pnpm test` - 12 tests across Chromium + Firefox)
   - depends on `ci / quality` being green
 
 ### 1) Identify the failing check and error class
@@ -72,12 +76,14 @@ pnpm lint
 pnpm format:check
 pnpm typecheck
 pnpm build
+pnpm test  # Smoke tests (Playwright)
 ```
 
 If local results differ from CI:
 
 - confirm Node and pnpm versions match project standards
 - ensure lockfile is committed and install is deterministic
+- for smoke test failures: ensure dev server is running (`pnpm dev`) or Playwright will start it automatically
 
 ### 3) Fix by failure type
 
@@ -137,6 +143,64 @@ Fix:
 - correct the root cause
 - do not “paper over” build errors by weakening the build process
 
+#### E) Smoke test failures (`pnpm test`)
+
+**Status:** Smoke tests implemented in Phase 2 (PR #10).
+
+Symptoms:
+
+- Playwright tests fail (route rendering, navigation, evidence links)
+- Browser launch failures in CI
+- Server connection errors
+
+Common failure modes:
+
+1. **Browser binaries missing in CI:**
+   - Error: `browserType.launch: Executable doesn't exist`
+   - Fix: Ensure `npx playwright install --with-deps` runs in CI before tests
+   - Verification: Check CI workflow includes installation step
+
+2. **Dev server not running:**
+   - Error: `NS_ERROR_CONNECTION_REFUSED` or `net::ERR_CONNECTION_REFUSED`
+   - Fix: Ensure dev server starts before tests (`pnpm dev &` + `wait-on http://localhost:3000`)
+   - Local: Playwright auto-starts server via `webServer` config (disabled in CI)
+
+3. **Route rendering failures:**
+   - Error: Test expects status < 400 but receives 404 or 500
+   - Fix: Verify route exists and renders correctly locally
+   - Check: Dynamic routes may need param fixes (Next.js 15 async params)
+
+4. **Evidence link resolution failures:**
+   - Error: `a[href*="/docs/"]` locator not found
+   - Fix: Verify project pages include documentation links
+   - Check: `NEXT_PUBLIC_DOCS_BASE_URL` is configured correctly
+
+5. **Timeout failures:**
+   - Error: Test timeout exceeded (default 30s per test)
+   - Fix: Increase timeout in `playwright.config.ts` or optimize slow routes
+   - CI: Reduce parallelism (already set to 1 worker in CI for stability)
+
+Debugging smoke tests:
+
+```bash
+# Local debugging
+pnpm test:debug      # Opens Playwright inspector
+pnpm test:ui         # Opens Playwright UI mode
+
+# CI debugging
+# - Download HTML test report artifact from failed CI run
+# - Open playwright-report/index.html locally to see screenshots/traces
+```
+
+Fix workflow:
+
+- Reproduce locally with `pnpm test`
+- Check Playwright config (`playwright.config.ts`) for environment differences
+- Verify test file (`tests/e2e/smoke.spec.ts`) expectations match actual behavior
+- Update tests or fix routes as needed
+- Re-run locally to confirm fix
+- Push and verify CI passes
+
 #### 4) Validate and push fix
 
 After changes:
@@ -146,6 +210,7 @@ pnpm lint
 pnpm format:check
 pnpm typecheck
 pnpm build
+pnpm test  # Smoke tests
 ```
 
 Commit and push to PR branch.
