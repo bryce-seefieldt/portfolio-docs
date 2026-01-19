@@ -48,39 +48,48 @@ This model is written to be public-safe and verifiable.
 
 ## Trust Boundaries Diagram
 
+```mermaid
+graph LR
+    subgraph dev["Developer Environment"]
+        local["Local Workstation<br/>(source code)"]
+    end
+    
+    subgraph gh["GitHub"]
+        repo["Repository Main<br/>(reviewed source)"]
+    end
+    
+    subgraph ci["CI/CD Pipeline"]
+        actions["GitHub Actions<br/>(build & test)"]
+    end
+    
+    subgraph deploy["Vercel Deployment"]
+        preview["Preview Deployment<br/>(test & review)"]
+        prod["Production<br/>(public domain)"]
+    end
+    
+    subgraph pub["Public Internet"]
+        users["End Users<br/>(read-only)"]
+    end
+    
+    local -->|PR with review| repo
+    repo -->|merge + checks pass| actions
+    actions --> preview
+    preview -->|all checks OK| prod
+    prod --> users
+    
+    style dev fill:#e1f5ff
+    style gh fill:#fff3e0
+    style ci fill:#f3e5f5
+    style deploy fill:#e8f5e9
+    style pub fill:#fce4ec
 ```
-┌────────────────────────────────────────────────────────────────────┐
-│                    Portfolio Delivery Ecosystem                     │
-└────────────────────────────────────────────────────────────────────┘
 
-   Developer Workstation               GitHub                 CI/CD
-  ┌──────────────────┐            ┌─────────────┐         ┌────────┐
-  │   Local env      │────(PR)───>│  Repo main  │────────>│ GH Actn│
-  │  (source code)   │            │   (source)  │    |     │ (build)│
-  └──────────────────┘            └─────────────┘    |     └────────┘
-                                                      |          |
-                                                      v          v
-                                                   Vercel Preview
-                                                   (test & review)
-                                                      |
-                                                      | (merge + checks pass)
-                                                      v
-                                                   Vercel Production
-                                                   (public domain)
-                                                      |
-                                                      v
-                                                   ┌─────────────────┐
-                                                   │ Public Internet │
-                                                   │  (read-only)    │
-                                                   └─────────────────┘
-
-Key trust boundaries:
-• Developer → GitHub: source code integrity, PR review gating
-• GitHub → CI: build pipeline integrity, artifact signing, permissions
-• CI → Vercel: promotion checks, deployment gating, OIDC tokens
-• Vercel → Public: HTTPS/TLS, CDN security, DDoS protection
-• Portfolio App ↔ Documentation App: hyperlinks only (no privileged integration)
-```
+**Key trust boundaries:**
+- **Developer → GitHub:** source code integrity, PR review gating
+- **GitHub → CI:** build pipeline integrity, artifact signing, permissions (OIDC tokens)
+- **CI → Vercel:** promotion checks, deployment gating
+- **Vercel → Public:** HTTPS/TLS, CDN security, DDoS protection
+- **Portfolio App ↔ Docs App:** hyperlinks only (no privileged integration)
 
 ---
 
