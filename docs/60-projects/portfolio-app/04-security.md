@@ -5,7 +5,7 @@ sidebar_position: 4
 tags: [projects, security, sdlc, supply-chain, web, portfolio]
 ---
 
-Status: Live — Dependabot + CodeQL + public-safe env policy; Staged — additional hardening and threat model expansion.
+Status: **Live — Phase 2** — Dependabot + CodeQL + public-safe env policy + comprehensive threat model (STRIDE).
 
 ## Purpose
 
@@ -17,6 +17,7 @@ The security objective is to demonstrate credible enterprise practices:
 - dependency and supply chain hygiene
 - CI integrity
 - practical web hardening where appropriate
+- comprehensive threat analysis and mitigation
 
 ## Scope
 
@@ -29,8 +30,34 @@ The security objective is to demonstrate credible enterprise practices:
 
 ### Out of scope
 
-- exhaustive threat enumeration (belongs in a dedicated threat model)
+- exhaustive threat enumeration (moved to dedicated threat model)
 - private vendor configuration and secrets
+
+---
+
+## Threat Model Reference
+
+**Comprehensive threat analysis:** See [Threat Model: Portfolio App](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+
+The dedicated threat model uses the **STRIDE** methodology to enumerate threats across six categories:
+
+- **S**poofing (Identity)
+- **T**ampering (Data Integrity)
+- **R**epudiation (Accountability)
+- **I**nformation Disclosure (Confidentiality)
+- **D**enial of Service (Availability)
+- **E**levation of Privilege (Authorization)
+
+For each threat, the model documents:
+
+- scenario and impact
+- likelihood and risk
+- implemented mitigations
+- validation procedures
+
+**Status:** Live and aligned with Phase 2 baseline and Phase 2+ recommended controls.
+
+---
 
 ## Prereqs / Inputs
 

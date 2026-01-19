@@ -672,13 +672,14 @@ tags: [security, threat-model, portfolio-app]
 
 **Success check:**
 
-- [ ] Threat model document created
-- [ ] Trust boundaries identified
-- [ ] STRIDE analysis complete
-- [ ] Mitigations documented
-- [ ] Residual risks accepted and reviewed
-- [ ] Linked from dossier
-- [ ] Build verification passes
+- [x] Threat model document created (comprehensive STRIDE analysis)
+- [x] Trust boundaries identified and diagrammed
+- [x] STRIDE analysis complete (6 categories, 12 threats with mitigations)
+- [x] Mitigations documented (Phase 1 baseline + Phase 2+ recommended)
+- [x] Residual risks accepted and reviewed
+- [x] Linked from dossier security page
+- [x] Build verification passes
+- [x] PR created with threat model enhancements (PR #32 — pending)
 
 ---
 

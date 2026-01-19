@@ -86,7 +86,7 @@ Portfolio App must link to evidence pages for each project:
 - ✅ Dependabot hardening: Auto-format + lockfile exclusions
 - ✅ Deployment governance: Vercel promotion gated by required checks
 - ✅ Dossier enhancement: All 7 pages updated to gold standard
-- 🟡 Threat model: Planned for Step 4 (STRIDE analysis)
+- ✅ Threat model: Complete (STRIDE analysis, Phase 2 baseline controls)
 - 🟡 Enhanced project page: Planned for Step 7 (gold standard badge)
 - 🟡 Meaningful CV page: Planned for Step 8 (capability-to-proof mapping)
 
@@ -96,6 +96,7 @@ Portfolio App must link to evidence pages for each project:
 - Review PR discipline and branch protection/ruleset settings to confirm required checks are enforced.
 - Validate build determinism locally with `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` (frozen lockfile).
 - Follow evidence links from the app into this dossier, ADR index, threat model, and runbooks to confirm traceability.
+- **Review the [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)** to understand security assumptions and mitigations across STRIDE categories.
 
 ## Validation / Expected outcomes
 
