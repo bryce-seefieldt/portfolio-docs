@@ -130,3 +130,59 @@ The security objective is to demonstrate credible enterprise practices:
 - Threat models: `docs/40-security/threat-models/portfolio-app-threat-model.md`
 - Secure SDLC documentation: `docs/40-security/`
 - Operations and incident response: `docs/50-operations/`
+
+---
+
+## Public-Safety Rules (Enforced)
+
+### Environment Variables
+
+- All `NEXT_PUBLIC_*` variables are client-visible by design.
+- No secrets in any `NEXT_PUBLIC_*` variable.
+- `.env.example` documents all required variables.
+- Local `.env.local` is gitignored.
+
+Validation procedure:
+
+```bash
+# Check for secrets in env vars
+grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
+# Should return: no results
+```
+
+### Code Scanning
+
+- CodeQL enabled (JavaScript/TypeScript).
+- Runs on every push to main and PR.
+- Scans for: SQL injection, XSS, path traversal, hardcoded secrets.
+
+### Supply Chain Security
+
+- Dependabot enabled (weekly updates, grouped by type).
+- Major version updates excluded (manual review required).
+- Lockfile formatting automated (prevents CI failures).
+- Frozen lockfile installs in CI (`--frozen-lockfile`).
+
+### PR Security Checklist
+
+Every PR must confirm:
+
+- [ ] No secrets added
+- [ ] No sensitive endpoints added
+- [ ] Environment variables documented in `.env.example`
+- [ ] CodeQL scan passes
+
+## Known Limitations & Accepted Risks
+
+### Out of Scope (Intentional)
+
+- No authentication: Public portfolio, no user accounts.
+- No backend processing: Static content, no server-side logic.
+- No database: No persistent user data or state.
+- No contact form backend: Email link only (prevents spam/abuse surface).
+
+### Residual Risks (Acceptable)
+
+- Dependency vulnerabilities: Mitigated by Dependabot + CodeQL.
+- DDoS: Mitigated by Vercel's edge network.
+- Content injection: Not applicable (static content, no UGC).

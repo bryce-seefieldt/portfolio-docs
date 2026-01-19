@@ -115,3 +115,59 @@ Every significant claim should map to one of:
 - Portfolio program overview: `docs/00-portfolio/index.md`
 - Evidence engine dossier: `docs/60-projects/portfolio-docs-app/index.md`
 - Templates (internal-only): `docs/_meta/templates/`
+
+---
+
+## Executive Summary
+
+The Portfolio App is a production TypeScript web application that serves as an interactive CV and project showcase, intentionally designed to demonstrate enterprise-grade engineering discipline. Built with Next.js and deployed on Vercel with comprehensive CI/CD governance, it proves competency across modern web development, security hygiene, operational maturity, and evidence-first documentation practices.
+
+Key value: Not just a portfolio site—a working exemplar of how senior engineers build, secure, operate, and document production systems.
+
+## Key Metrics (Phase 2 Baseline)
+
+- Lines of code: ~500 (application), ~200 (tests)
+- Routes: 5 core routes (/, /cv, /projects, /contact, /projects/[slug])
+- CI checks: 2 required (quality, build)
+- Test coverage: 100% route coverage (Playwright smoke tests - 12 tests)
+- Deployment frequency: On every merge to main (automatic)
+- Mean time to rollback: ~1 minute (Git revert + CI)
+- Quality gates: lint, format, typecheck, build, smoke tests (all enforced)
+- Dependencies: 17 production, 11 dev (Dependabot weekly updates)
+
+## What This Project Proves
+
+### Technical Competency
+
+- Modern full-stack web development (Next.js 15+, React 19+, TypeScript 5+)
+- Component-driven architecture with App Router
+- Responsive design with Tailwind CSS
+- Evidence-first UX (deep links to documentation)
+
+### Engineering Discipline
+
+- CI quality gates (ESLint max-warnings=0, Prettier, TypeScript strict)
+- Automated smoke testing (Playwright multi-browser)
+- Frozen lockfile installs (deterministic builds)
+- PR-only merge discipline (GitHub Ruleset enforcement)
+
+### Security Awareness
+
+- Public-safe by design (no secrets, internal endpoints, or auth)
+- CodeQL + Dependabot enabled (supply chain hardening)
+- Environment variable hygiene (documented, validated)
+- PR template security checklist
+
+### Operational Maturity
+
+- Deploy/rollback runbooks (tested and documented)
+- CI triage procedures (deterministic troubleshooting)
+- Vercel production promotion gating (required checks)
+- Evidence-based release notes
+
+### Documentation Excellence
+
+- Complete dossier (7 comprehensive pages)
+- ADRs for durable decisions (hosting, CI gates, gold standard choice)
+- Threat model (STRIDE analysis - Step 4)
+- Operational runbooks (deploy, CI triage, rollback)
