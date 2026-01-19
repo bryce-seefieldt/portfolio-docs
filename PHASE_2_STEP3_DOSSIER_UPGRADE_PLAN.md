@@ -44,25 +44,25 @@ The portfolio-app documentation already exists in a modular form:
 ✅ **Enterprise perspective:** Written for senior reviewers, not hobbyists  
 ✅ **Governance emphasis:** Heavy focus on SDLC, CI gates, decision-making  
 ✅ **Already deployed:** This is live documentation supporting Phase 1  
-✅ **Linked from Phase 1 ADRs:** Already referenced in architectural decisions  
+✅ **Linked from Phase 1 ADRs:** Already referenced in architectural decisions
 
 ### Gaps for "Gold Standard" Compliance
 
 Based on Phase 2 Step 3 requirements, we need:
 
-| Section | Current State | Gap | Action |
-|---------|--------------|-----|--------|
-| **Executive Summary** | Implicit in index.md | No single compelling paragraph | Add concise summary section |
-| **I. Overview** | Exists (01-overview.md) | Mixed with audience/reviewer journey | Extract pure "what is it" section; enhance "what does it prove" |
-| **II. Architecture** | Exists (02-architecture.md) | Partial; missing deployment architecture | Consolidate + add deployment model |
-| **III. Security Posture** | Exists (04-security.md) | High-level; no STRIDE analysis | Add threat model link + summary |
-| **IV. Development & Testing** | Exists (05-testing.md) | Focuses on CI gates; missing dev workflow | Enhance local dev setup guidance |
-| **V. Deployment** | Exists (03-deployment.md) | Good; needs verification links | Ensure links to runbooks resolve |
-| **VI. Operations & Observability** | Exists (06-operations.md) | Good; runbooks referenced but not linked | Add runbook links |
-| **VII. Known Limitations** | Implicit only | Not listed explicitly | Extract and document clearly |
-| **VIII. Troubleshooting & Runbooks** | Partial (links mentioned) | Runbooks not yet created | Placeholder links; create in STEP 5 |
-| **IX. Related Artifacts** | Partial (scattered) | Not consolidated | Create comprehensive artifact index |
-| **X. Change History** | Implicit in release notes | No table | Create Phase 2 change log |
+| Section                              | Current State               | Gap                                       | Action                                                          |
+| ------------------------------------ | --------------------------- | ----------------------------------------- | --------------------------------------------------------------- |
+| **Executive Summary**                | Implicit in index.md        | No single compelling paragraph            | Add concise summary section                                     |
+| **I. Overview**                      | Exists (01-overview.md)     | Mixed with audience/reviewer journey      | Extract pure "what is it" section; enhance "what does it prove" |
+| **II. Architecture**                 | Exists (02-architecture.md) | Partial; missing deployment architecture  | Consolidate + add deployment model                              |
+| **III. Security Posture**            | Exists (04-security.md)     | High-level; no STRIDE analysis            | Add threat model link + summary                                 |
+| **IV. Development & Testing**        | Exists (05-testing.md)      | Focuses on CI gates; missing dev workflow | Enhance local dev setup guidance                                |
+| **V. Deployment**                    | Exists (03-deployment.md)   | Good; needs verification links            | Ensure links to runbooks resolve                                |
+| **VI. Operations & Observability**   | Exists (06-operations.md)   | Good; runbooks referenced but not linked  | Add runbook links                                               |
+| **VII. Known Limitations**           | Implicit only               | Not listed explicitly                     | Extract and document clearly                                    |
+| **VIII. Troubleshooting & Runbooks** | Partial (links mentioned)   | Runbooks not yet created                  | Placeholder links; create in STEP 5                             |
+| **IX. Related Artifacts**            | Partial (scattered)         | Not consolidated                          | Create comprehensive artifact index                             |
+| **X. Change History**                | Implicit in release notes   | No table                                  | Create Phase 2 change log                                       |
 
 ---
 
@@ -73,64 +73,64 @@ Based on Phase 2 Step 3 requirements, we need:
 **Required by Phase 2 Step 3:**
 
 1. **Executive Summary** (1 paragraph)
-   - What: Concise one-liner  
-   - Who built it: Author/team  
-   - Business value: Why it matters  
+   - What: Concise one-liner
+   - Who built it: Author/team
+   - Business value: Why it matters
 
 2. **I. Overview** (2–3 sections)
-   - What is this? (surfaces, use cases)  
-   - What does it prove? (senior engineering discipline)  
-   - Key metrics (LoC, routes, CI checks, deployment frequency, MTTR)  
+   - What is this? (surfaces, use cases)
+   - What does it prove? (senior engineering discipline)
+   - Key metrics (LoC, routes, CI checks, deployment frequency, MTTR)
 
 3. **II. Architecture** (3–4 subsections)
-   - Design goals (evidence-first, public-safe, scalable, enterprise SDLC)  
-   - Technology stack (Next.js, TypeScript, Tailwind, pnpm, Vercel, GitHub Actions)  
-   - High-level flow (ASCII diagram or detailed flow)  
-   - Key dependencies (next, react, typescript, tailwind, etc.)  
+   - Design goals (evidence-first, public-safe, scalable, enterprise SDLC)
+   - Technology stack (Next.js, TypeScript, Tailwind, pnpm, Vercel, GitHub Actions)
+   - High-level flow (ASCII diagram or detailed flow)
+   - Key dependencies (next, react, typescript, tailwind, etc.)
 
 4. **III. Security Posture** (4–5 subsections)
-   - Threat model (link to document)  
-   - Public-safety rules (enforced)  
-   - Authentication & authorization (intentionally not implemented)  
-   - Data handling (no user data collection)  
-   - Secrets scanning & supply chain (CodeQL, Dependabot)  
+   - Threat model (link to document)
+   - Public-safety rules (enforced)
+   - Authentication & authorization (intentionally not implemented)
+   - Data handling (no user data collection)
+   - Secrets scanning & supply chain (CodeQL, Dependabot)
 
 5. **IV. Development & Testing** (4–5 subsections)
-   - Local development setup (pnpm install, env setup)  
-   - Quality gates enforced (lint, format, typecheck, build, test)  
-   - Testing strategy (smoke, unit planned, e2e planned)  
-   - Test coverage (routes 100%, content partial, links spot-checked)  
+   - Local development setup (pnpm install, env setup)
+   - Quality gates enforced (lint, format, typecheck, build, test)
+   - Testing strategy (smoke, unit planned, e2e planned)
+   - Test coverage (routes 100%, content partial, links spot-checked)
 
 6. **V. Deployment** (3–4 subsections)
-   - Environments (Preview via PR, Production via main branch)  
-   - Deployment process (5 steps: PR → checks → Vercel → merge → production)  
-   - Environment variables (link to detailed config)  
-   - Rollback procedure (git revert, 1-minute MTTR)  
+   - Environments (Preview via PR, Production via main branch)
+   - Deployment process (5 steps: PR → checks → Vercel → merge → production)
+   - Environment variables (link to detailed config)
+   - Rollback procedure (git revert, 1-minute MTTR)
 
 7. **VI. Operations & Observability** (3–4 subsections)
-   - Monitoring (current: Vercel analytics, GH Actions logs, manual checks)  
-   - Observability (planned: logging, Web Vitals, error tracking)  
-   - Incidents & postmortems (process link, escalation policy)  
+   - Monitoring (current: Vercel analytics, GH Actions logs, manual checks)
+   - Observability (planned: logging, Web Vitals, error tracking)
+   - Incidents & postmortems (process link, escalation policy)
 
 8. **VII. Known Limitations** (bullet list)
-   - No backend processing  
-   - Static project registry (planned to evolve)  
-   - No user authentication  
-   - No database or persistent state  
+   - No backend processing
+   - Static project registry (planned to evolve)
+   - No user authentication
+   - No database or persistent state
 
 9. **VIII. Troubleshooting & Runbooks** (reference list)
-   - Deploy runbook (created in Step 5)  
-   - CI triage runbook (created in Step 5)  
-   - Rollback runbook (created in Step 5)  
+   - Deploy runbook (created in Step 5)
+   - CI triage runbook (created in Step 5)
+   - Rollback runbook (created in Step 5)
 
 10. **IX. Related Artifacts** (link index)
-    - ADR-0007, ADR-0008, ADR-0010  
-    - Threat Model  
-    - Deployment Dossier  
-    - Release Notes  
+    - ADR-0007, ADR-0008, ADR-0010
+    - Threat Model
+    - Deployment Dossier
+    - Release Notes
 
 11. **X. Change History** (table)
-    - Date, Change, PR  
+    - Date, Change, PR
 
 ### Success Criteria (STEP 3)
 
@@ -149,36 +149,41 @@ Based on Phase 2 Step 3 requirements, we need:
 **Approach:** Merge all 7 documents into one comprehensive `00-dossier.md`
 
 **Pros:**
-- Single point of entry for reviewers  
-- Comprehensive narrative flow  
-- Easy to reference all sections in one place  
+
+- Single point of entry for reviewers
+- Comprehensive narrative flow
+- Easy to reference all sections in one place
 
 **Cons:**
-- File becomes very long (~4000 words as spec'd)  
-- May be harder to update individual sections  
-- Harder to link to specific subsections  
+
+- File becomes very long (~4000 words as spec'd)
+- May be harder to update individual sections
+- Harder to link to specific subsections
 
 ### Option B: Keep Modular + Add Master Index
 
 **Approach:** Enhance existing 7 files + create `00-dossier.md` as true TOC/index that consolidates all sections
 
 **Pros:**
-- Maintains clean module structure  
-- Easier to update individual domains  
-- Better for cross-linking  
-- Readers can go deep or skim  
+
+- Maintains clean module structure
+- Easier to update individual domains
+- Better for cross-linking
+- Readers can go deep or skim
 
 **Cons:**
-- Requires readers to navigate multiple files  
-- May feel fragmented if TOC is not clear  
+
+- Requires readers to navigate multiple files
+- May feel fragmented if TOC is not clear
 
 ### Recommended: **Hybrid Approach**
 
 **Create** `00-dossier.md` as **1500–2000 word consolidated narrative** that:
-- Tells the **complete story** of the Portfolio App  
-- **Pulls snippets** from the existing 7 documents  
-- **Links to detailed sections** in 01–07 for deep dives  
-- Serves as the **"gold standard" landing page**  
+
+- Tells the **complete story** of the Portfolio App
+- **Pulls snippets** from the existing 7 documents
+- **Links to detailed sections** in 01–07 for deep dives
+- Serves as the **"gold standard" landing page**
 
 Keep existing 01–07 files for **detailed reference**, indexed from 00-dossier.
 
@@ -195,13 +200,13 @@ Keep existing 01–07 files for **detailed reference**, indexed from 00-dossier.
 ```markdown
 ## Executive Summary
 
-The **Portfolio App** is a production-grade TypeScript web application 
-serving as an interactive CV and showcase platform for verified project evidence. 
-Built with Next.js + TypeScript, it demonstrates senior-level engineering discipline 
-across architecture, SDLC, security, and operations. The app serves as the working 
-exemplar and gold standard for all future portfolio entries, proving that credible 
-engineering portfolio requires not just code, but comprehensive evidence artifacts 
-(dossiers, threat models, runbooks, ADRs) alongside delivery discipline 
+The **Portfolio App** is a production-grade TypeScript web application
+serving as an interactive CV and showcase platform for verified project evidence.
+Built with Next.js + TypeScript, it demonstrates senior-level engineering discipline
+across architecture, SDLC, security, and operations. The app serves as the working
+exemplar and gold standard for all future portfolio entries, proving that credible
+engineering portfolio requires not just code, but comprehensive evidence artifacts
+(dossiers, threat models, runbooks, ADRs) alongside delivery discipline
 (CI gates, PR governance, verifiable deployments).
 ```
 
@@ -212,16 +217,16 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section I: Overview (ENHANCE)
 
 **Current:** Exists (01-overview.md) but mixes audience/reviewer journey with product definition  
-**Required:** Pure product overview + what it proves + metrics  
+**Required:** Pure product overview + what it proves + metrics
 
 **Enhancement tasks:**
 
-| Task | Current | Target | Effort |
-|------|---------|--------|--------|
-| Executive one-liner | Implicit | "What is this in 1 sentence" section | 0.25h |
-| "What does it prove" | Vague | Explicit list: senior full-stack, SDLC discipline, security hygiene, ops maturity | 0.5h |
-| Key metrics | Partial (LoC ~500) | Complete: LoC, routes, CI checks, test %, deploy frequency, MTTR | 0.5h |
-| Move audience/journey | In 01-overview | Reference but don't repeat in dossier | – |
+| Task                  | Current            | Target                                                                            | Effort |
+| --------------------- | ------------------ | --------------------------------------------------------------------------------- | ------ |
+| Executive one-liner   | Implicit           | "What is this in 1 sentence" section                                              | 0.25h  |
+| "What does it prove"  | Vague              | Explicit list: senior full-stack, SDLC discipline, security hygiene, ops maturity | 0.5h   |
+| Key metrics           | Partial (LoC ~500) | Complete: LoC, routes, CI checks, test %, deploy frequency, MTTR                  | 0.5h   |
+| Move audience/journey | In 01-overview     | Reference but don't repeat in dossier                                             | –      |
 
 **Subtotal:** 1.25 hours
 
@@ -230,17 +235,17 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section II: Architecture (ENHANCE)
 
 **Current:** Exists (02-architecture.md) but architecture details scattered  
-**Required:** Consolidated tech stack + design goals + high-level flow + dependencies  
+**Required:** Consolidated tech stack + design goals + high-level flow + dependencies
 
 **Enhancement tasks:**
 
-| Task | Current | Target | Effort |
-|------|---------|--------|--------|
-| Design goals | Mentioned | Explicit bullet list (evidence-first, public-safe, scalable, enterprise SDLC) | 0.25h |
-| Tech stack | Partial (Next.js listed) | Complete table with all major deps + rationale | 0.5h |
-| Architecture diagram | ASCII suggestion | Create or describe text-based diagram (request → routing → render → output) | 0.75h |
-| Key dependencies | List exists | Annotate with version guidance + security notes | 0.5h |
-| Deployment architecture | In 03-deployment | Consolidate reference or brief summary | 0.25h |
+| Task                    | Current                  | Target                                                                        | Effort |
+| ----------------------- | ------------------------ | ----------------------------------------------------------------------------- | ------ |
+| Design goals            | Mentioned                | Explicit bullet list (evidence-first, public-safe, scalable, enterprise SDLC) | 0.25h  |
+| Tech stack              | Partial (Next.js listed) | Complete table with all major deps + rationale                                | 0.5h   |
+| Architecture diagram    | ASCII suggestion         | Create or describe text-based diagram (request → routing → render → output)   | 0.75h  |
+| Key dependencies        | List exists              | Annotate with version guidance + security notes                               | 0.5h   |
+| Deployment architecture | In 03-deployment         | Consolidate reference or brief summary                                        | 0.25h  |
 
 **Subtotal:** 2.25 hours
 
@@ -249,18 +254,18 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section III: Security Posture (ENHANCE)
 
 **Current:** Exists (04-security.md) with good threat surface coverage  
-**Required:** Threat model link + STRIDE summary + public-safety rules + supply chain  
+**Required:** Threat model link + STRIDE summary + public-safety rules + supply chain
 
 **Enhancement tasks:**
 
-| Task | Current | Target | Effort |
-|------|---------|--------|--------|
-| Threat model link | Referenced | Add link to detailed threat-models/portfolio-app-threat-model.md (created in STEP 4) | 0.1h |
-| STRIDE summary | Not in current | Add brief STRIDE summary with mitigations (spoofing, tampering, repudiation, info disclosure, DoS, elevation) | 0.75h |
-| Public-safety rules | Exists | Verify and consolidate (no NEXT_PUBLIC_ secrets, no internal endpoints, env docs, no DB) | 0.25h |
-| Auth & authz | Explicit | Confirm "intentionally not implemented" + future iteration notes | 0.1h |
-| Data handling | Exists | Confirm no user data collection, all content static | 0.1h |
-| Secrets scanning | Exists (CodeQL, Dependabot) | Link to GitHub Actions config; add supply chain narrative | 0.25h |
+| Task                | Current                     | Target                                                                                                        | Effort |
+| ------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------- | ------ |
+| Threat model link   | Referenced                  | Add link to detailed threat-models/portfolio-app-threat-model.md (created in STEP 4)                          | 0.1h   |
+| STRIDE summary      | Not in current              | Add brief STRIDE summary with mitigations (spoofing, tampering, repudiation, info disclosure, DoS, elevation) | 0.75h  |
+| Public-safety rules | Exists                      | Verify and consolidate (no NEXT*PUBLIC* secrets, no internal endpoints, env docs, no DB)                      | 0.25h  |
+| Auth & authz        | Explicit                    | Confirm "intentionally not implemented" + future iteration notes                                              | 0.1h   |
+| Data handling       | Exists                      | Confirm no user data collection, all content static                                                           | 0.1h   |
+| Secrets scanning    | Exists (CodeQL, Dependabot) | Link to GitHub Actions config; add supply chain narrative                                                     | 0.25h  |
 
 **Subtotal:** 1.55 hours
 
@@ -269,17 +274,17 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section IV: Development & Testing (ENHANCE)
 
 **Current:** Exists (05-testing.md) but focused on CI gates  
-**Required:** Local dev setup + full quality gate checklist + testing strategy + coverage  
+**Required:** Local dev setup + full quality gate checklist + testing strategy + coverage
 
 **Enhancement tasks:**
 
-| Task | Current | Target | Effort |
-|------|---------|--------|--------|
-| Local dev setup | Exists | Verify commands: `pnpm install`, `pnpm dev`, `.env.local` setup | 0.25h |
-| Quality gates checklist | Exists | Add step-by-step: lint, format:check, typecheck, build, test (NEW: with Playwright) | 0.5h |
-| Testing strategy | Exists (smoke mentioned) | Add phased approach: Phase 2 smoke tests (Playwright), Phase 3 unit tests (Vitest), Phase 3+ e2e | 0.25h |
-| Test coverage | Partial | Update with actual coverage: Routes 100% (12 tests), Content partial, Links spot-checked | 0.25h |
-| Playwright config reference | NEW (post-Phase 2 STEP 2) | Link to playwright.config.ts + test suite examples | 0.25h |
+| Task                        | Current                   | Target                                                                                           | Effort |
+| --------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------ | ------ |
+| Local dev setup             | Exists                    | Verify commands: `pnpm install`, `pnpm dev`, `.env.local` setup                                  | 0.25h  |
+| Quality gates checklist     | Exists                    | Add step-by-step: lint, format:check, typecheck, build, test (NEW: with Playwright)              | 0.5h   |
+| Testing strategy            | Exists (smoke mentioned)  | Add phased approach: Phase 2 smoke tests (Playwright), Phase 3 unit tests (Vitest), Phase 3+ e2e | 0.25h  |
+| Test coverage               | Partial                   | Update with actual coverage: Routes 100% (12 tests), Content partial, Links spot-checked         | 0.25h  |
+| Playwright config reference | NEW (post-Phase 2 STEP 2) | Link to playwright.config.ts + test suite examples                                               | 0.25h  |
 
 **Subtotal:** 1.5 hours
 
@@ -288,17 +293,17 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section V: Deployment (CONSOLIDATE)
 
 **Current:** Exists (03-deployment.md); is comprehensive  
-**Required:** Verify all links + runbook references resolve  
+**Required:** Verify all links + runbook references resolve
 
 **Enhancement tasks:**
 
-| Task | Current | Target | Effort |
-|------|---------|--------|--------|
-| Environments | Good | Verify: Preview (per PR), Production (main branch gated) | 0.1h |
-| Deployment process | Good | Verify 5-step flow + links to Vercel docs | 0.1h |
-| Environment variables | Link exists | Verify link works; ensure .env.example is current | 0.1h |
-| Rollback | Good | Update MTTR from "~1 minute" to reflect actual Git revert + CI re-run | 0.1h |
-| Promotion checks | Link exists | Verify ADR-0007 link is correct | 0.1h |
+| Task                  | Current     | Target                                                                | Effort |
+| --------------------- | ----------- | --------------------------------------------------------------------- | ------ |
+| Environments          | Good        | Verify: Preview (per PR), Production (main branch gated)              | 0.1h   |
+| Deployment process    | Good        | Verify 5-step flow + links to Vercel docs                             | 0.1h   |
+| Environment variables | Link exists | Verify link works; ensure .env.example is current                     | 0.1h   |
+| Rollback              | Good        | Update MTTR from "~1 minute" to reflect actual Git revert + CI re-run | 0.1h   |
+| Promotion checks      | Link exists | Verify ADR-0007 link is correct                                       | 0.1h   |
 
 **Subtotal:** 0.5 hours
 
@@ -307,16 +312,16 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section VI: Operations & Observability (CONSOLIDATE + ENHANCE)
 
 **Current:** Exists (06-operations.md); runbooks referenced but not created yet  
-**Required:** Runbook links (will be created in STEP 5) + observability roadmap  
+**Required:** Runbook links (will be created in STEP 5) + observability roadmap
 
 **Enhancement tasks:**
 
-| Task | Current | Target | Effort |
-|------|---------|--------|--------|
-| Monitoring (current) | Exists | Enhance: Vercel analytics + GitHub Actions logs + manual spot-checks + Phase 2 smoke tests | 0.25h |
-| Observability (planned) | Mentioned | Consolidate: Phase 3 logging, Web Vitals, error tracking | 0.1h |
-| Incidents & postmortems | Process link | Add placeholder for postmortem template link (will be created post-Phase 2) | 0.1h |
-| Runbook links | "Will be created" | Add placeholder paths for STEP 5 deliverables | 0.1h |
+| Task                    | Current           | Target                                                                                     | Effort |
+| ----------------------- | ----------------- | ------------------------------------------------------------------------------------------ | ------ |
+| Monitoring (current)    | Exists            | Enhance: Vercel analytics + GitHub Actions logs + manual spot-checks + Phase 2 smoke tests | 0.25h  |
+| Observability (planned) | Mentioned         | Consolidate: Phase 3 logging, Web Vitals, error tracking                                   | 0.1h   |
+| Incidents & postmortems | Process link      | Add placeholder for postmortem template link (will be created post-Phase 2)                | 0.1h   |
+| Runbook links           | "Will be created" | Add placeholder paths for STEP 5 deliverables                                              | 0.1h   |
 
 **Subtotal:** 0.55 hours
 
@@ -325,15 +330,15 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section VII: Known Limitations (NEW)
 
 **Current:** Implicit only in Scope sections  
-**Required:** Explicit bullet list of acknowledged constraints  
+**Required:** Explicit bullet list of acknowledged constraints
 
 **Enhancement tasks:**
 
-| Task | Action | Effort |
-|------|--------|--------|
-| Extract limitations | Scan all docs for out-of-scope items and consolidate | 0.25h |
-| Format as bullets | Create section 7 with clear list | 0.1h |
-| Add rationale | Brief note on why each is deferred (not blockers, intentional choices) | 0.25h |
+| Task                | Action                                                                 | Effort |
+| ------------------- | ---------------------------------------------------------------------- | ------ |
+| Extract limitations | Scan all docs for out-of-scope items and consolidate                   | 0.25h  |
+| Format as bullets   | Create section 7 with clear list                                       | 0.1h   |
+| Add rationale       | Brief note on why each is deferred (not blockers, intentional choices) | 0.25h  |
 
 **Subtotal:** 0.6 hours
 
@@ -342,15 +347,15 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section VIII: Troubleshooting & Runbooks (LINK + SCAFFOLD)
 
 **Current:** Mentioned but not created  
-**Required:** Placeholder links to runbooks created in STEP 5  
+**Required:** Placeholder links to runbooks created in STEP 5
 
 **Enhancement tasks:**
 
-| Task | Action | Effort |
-|------|--------|--------|
-| Add runbook links | Create section 8 with links to: rbk-portfolio-deploy, rbk-portfolio-ci-triage, rbk-portfolio-rollback | 0.25h |
-| Brief descriptions | 1-2 sentence description of each runbook's purpose | 0.25h |
-| Mark as "Created in STEP 5" | Note that runbooks are placeholders pending STEP 5 completion | 0.1h |
+| Task                        | Action                                                                                                | Effort |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- | ------ |
+| Add runbook links           | Create section 8 with links to: rbk-portfolio-deploy, rbk-portfolio-ci-triage, rbk-portfolio-rollback | 0.25h  |
+| Brief descriptions          | 1-2 sentence description of each runbook's purpose                                                    | 0.25h  |
+| Mark as "Created in STEP 5" | Note that runbooks are placeholders pending STEP 5 completion                                         | 0.1h   |
 
 **Subtotal:** 0.6 hours
 
@@ -359,18 +364,18 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section IX: Related Artifacts (CONSOLIDATE + COMPLETE)
 
 **Current:** Scattered across docs  
-**Required:** Comprehensive index of all supporting artifacts  
+**Required:** Comprehensive index of all supporting artifacts
 
 **Enhancement tasks:**
 
-| Task | Target | Effort |
-|------|--------|--------|
-| ADRs | ADR-0007 (Vercel), ADR-0008 (CI Gates), ADR-0010 (Gold Standard decision), ADR-TBD (Testing strategy — STEP 6) | 0.25h |
-| Threat Model | Link to 40-security/threat-models/portfolio-app-threat-model.md (STEP 4) | 0.1h |
-| Release Notes | Link to 00-portfolio/release-notes/20260117-portfolio-app-phase-1-complete.md + Phase 2 (STEP 9) | 0.1h |
-| Runbooks | Links to 50-operations/runbooks/rbk-portfolio-* (STEP 5) | 0.1h |
-| Other governance | PR template, branch protection rules, GitHub Actions config | 0.1h |
-| Create comprehensive index | Table format with all artifacts + brief purpose | 0.25h |
+| Task                       | Target                                                                                                         | Effort |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------- | ------ |
+| ADRs                       | ADR-0007 (Vercel), ADR-0008 (CI Gates), ADR-0010 (Gold Standard decision), ADR-TBD (Testing strategy — STEP 6) | 0.25h  |
+| Threat Model               | Link to 40-security/threat-models/portfolio-app-threat-model.md (STEP 4)                                       | 0.1h   |
+| Release Notes              | Link to 00-portfolio/release-notes/20260117-portfolio-app-phase-1-complete.md + Phase 2 (STEP 9)               | 0.1h   |
+| Runbooks                   | Links to 50-operations/runbooks/rbk-portfolio-\* (STEP 5)                                                      | 0.1h   |
+| Other governance           | PR template, branch protection rules, GitHub Actions config                                                    | 0.1h   |
+| Create comprehensive index | Table format with all artifacts + brief purpose                                                                | 0.25h  |
 
 **Subtotal:** 0.9 hours
 
@@ -379,15 +384,15 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ### Section X: Change History (NEW)
 
 **Current:** Implicit in release notes  
-**Required:** Table of major milestones + PRs  
+**Required:** Table of major milestones + PRs
 
 **Enhancement tasks:**
 
-| Task | Action | Effort |
-|------|--------|--------|
-| Create Phase 1 entry | Baseline: 2026-01-10, Phase 1 complete, PR #21 | 0.1h |
-| Create Phase 2 entry | Gold standard: 2026-01-17, Phase 2 dossier & tests, PR #TBD | 0.1h |
-| Format as table | Date, Change, PR | 0.1h |
+| Task                 | Action                                                      | Effort |
+| -------------------- | ----------------------------------------------------------- | ------ |
+| Create Phase 1 entry | Baseline: 2026-01-10, Phase 1 complete, PR #21              | 0.1h   |
+| Create Phase 2 entry | Gold standard: 2026-01-17, Phase 2 dossier & tests, PR #TBD | 0.1h   |
+| Format as table      | Date, Change, PR                                            | 0.1h   |
 
 **Subtotal:** 0.3 hours
 
@@ -400,6 +405,7 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 #### A. Preparation (0.5 hours)
 
 **Actions:**
+
 1. Read all 7 existing dossier files (01–07) to internalize current content
 2. Identify any broken links or outdated information
 3. Determine which enhancement tasks can be batched
@@ -601,47 +607,49 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 
 ### Detailed Time Estimation
 
-| Task | Subtotal | Cumulative |
-|------|----------|------------|
-| Preparation (read existing docs) | 0.5h | 0.5h |
-| **Dossier creation:** | | |
-| — Executive summary | 0.25h | 0.75h |
-| — Section I (Overview) | 1.25h | 2.0h |
-| — Section II (Architecture) | 2.25h | 4.25h |
-| — Section III (Security) | 1.55h | 5.8h |
-| — Section IV (Testing) | 1.5h | 7.3h |
-| — Section V (Deployment) | 0.5h | 7.8h |
-| — Section VI (Operations) | 0.55h | 8.35h |
-| — Section VII–X (Limitations, Runbooks, Artifacts, History) | 1.4h | 9.75h |
-| — Internal review & polish | 0.25h | 10.0h |
-| Index & navigation updates | 0.5h | 10.5h |
-| Build verification & link checking | 0.5h | 11.0h |
-| PR creation & documentation | 0.5h | 11.5h |
-| **TOTAL** | — | **11.5h** |
+| Task                                                        | Subtotal | Cumulative |
+| ----------------------------------------------------------- | -------- | ---------- |
+| Preparation (read existing docs)                            | 0.5h     | 0.5h       |
+| **Dossier creation:**                                       |          |            |
+| — Executive summary                                         | 0.25h    | 0.75h      |
+| — Section I (Overview)                                      | 1.25h    | 2.0h       |
+| — Section II (Architecture)                                 | 2.25h    | 4.25h      |
+| — Section III (Security)                                    | 1.55h    | 5.8h       |
+| — Section IV (Testing)                                      | 1.5h     | 7.3h       |
+| — Section V (Deployment)                                    | 0.5h     | 7.8h       |
+| — Section VI (Operations)                                   | 0.55h    | 8.35h      |
+| — Section VII–X (Limitations, Runbooks, Artifacts, History) | 1.4h     | 9.75h      |
+| — Internal review & polish                                  | 0.25h    | 10.0h      |
+| Index & navigation updates                                  | 0.5h     | 10.5h      |
+| Build verification & link checking                          | 0.5h     | 11.0h      |
+| PR creation & documentation                                 | 0.5h     | 11.5h      |
+| **TOTAL**                                                   | —        | **11.5h**  |
 
 ### Optimized Timeline (4–6 hour target)
 
 **Strategy:** Batch similar tasks, reuse content liberally from existing docs
 
-| Phase | Tasks | Time | Notes |
-|-------|-------|------|-------|
-| 1 | Read existing docs, prep outline | 0.5h | Parallel: identify reusable content |
-| 2 | Draft executive summary + Sections I–III | 2.5h | Main dossier narrative |
-| 3 | Draft Sections IV–VI (parallel with II) | 1.5h | Consolidate + link |
-| 4 | Add Sections VII–X + polish | 1.0h | Rapid completion |
-| 5 | Update index, verify build | 0.5h | Quick checks |
-| 6 | Create PR | 0.5h | — |
-| **TOTAL** | — | **6.5h** | Realistic for clean execution |
+| Phase     | Tasks                                    | Time     | Notes                               |
+| --------- | ---------------------------------------- | -------- | ----------------------------------- |
+| 1         | Read existing docs, prep outline         | 0.5h     | Parallel: identify reusable content |
+| 2         | Draft executive summary + Sections I–III | 2.5h     | Main dossier narrative              |
+| 3         | Draft Sections IV–VI (parallel with II)  | 1.5h     | Consolidate + link                  |
+| 4         | Add Sections VII–X + polish              | 1.0h     | Rapid completion                    |
+| 5         | Update index, verify build               | 0.5h     | Quick checks                        |
+| 6         | Create PR                                | 0.5h     | —                                   |
+| **TOTAL** | —                                        | **6.5h** | Realistic for clean execution       |
 
 ### If Time-Constrained (<4 hours)
 
 **Priority order:**
+
 1. Master dossier with Sections I–VI (enterprise-facing narrative)
 2. Index + navigation updates
 3. Build verification
 4. PR creation
 
 **Defer to STEP 4+:**
+
 - Deep STRIDE threat model integration (link only in STEP 3)
 - Full runbook scaffolding (link only in STEP 3)
 - Change history table (minimal version OK)
@@ -658,7 +666,7 @@ engineering portfolio requires not just code, but comprehensive evidence artifac
 ✅ **Reviewer journey:** Clear narrative for hiring managers, security reviewers, ops evaluators  
 ✅ **Maintainability:** Modular structure (01–07) + consolidated index (00-dossier)  
 ✅ **No stale content:** Links marked as TBD if artifacts not yet created  
-✅ **Consistent tone:** Enterprise language, assumption of senior-level audience  
+✅ **Consistent tone:** Enterprise language, assumption of senior-level audience
 
 ### Verification Checklist (for reviewer)
 
