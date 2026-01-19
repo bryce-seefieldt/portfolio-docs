@@ -583,14 +583,14 @@ Every PR must confirm:
 
 **Success check:**
 
-- [ ] `01-overview.md` enhanced with executive summary, key metrics, "what this proves"
-- [ ] `02-architecture.md` enhanced with complete tech stack, flow diagrams, component architecture
-- [ ] `04-security.md` enhanced with public-safety rules, controls, validation procedures
-- [ ] `index.md` updated with Phase 2 current state
-- [ ] All dossier files verified complete and aligned with project dossier contract
-- [ ] Links to ADRs, threat model (placeholder), runbooks verified
-- [ ] Build verification passes (`pnpm build`)
-- [ ] PR created with dossier enhancements
+- [x] `01-overview.md` enhanced with executive summary, key metrics, "what this proves"
+- [x] `02-architecture.md` enhanced with complete tech stack, flow diagrams, component architecture
+- [x] `04-security.md` enhanced with public-safety rules, controls, validation procedures
+- [x] `index.md` updated with Phase 2 current state
+- [x] All dossier files verified complete and aligned with project dossier contract
+- [x] Links to ADRs, threat model (placeholder), runbooks verified
+- [x] Build verification passes (`pnpm build`)
+- [x] PR created with dossier enhancements (PR #31)
 
 ---
 
