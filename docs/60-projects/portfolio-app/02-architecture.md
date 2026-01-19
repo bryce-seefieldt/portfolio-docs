@@ -365,11 +365,13 @@ src/
 ## Scalability Patterns
 
 Current (Phase 2):
+
 - Static project data in TypeScript (typed, version-controlled)
 - Manual content updates via code changes + PRs
 - Evidence links hardcoded per project
 
 Planned (Phase 3+):
+
 - CMS or API-driven project data (Contentful, headless CMS)
 - Automated evidence link validation
 - Tag-based filtering and search
