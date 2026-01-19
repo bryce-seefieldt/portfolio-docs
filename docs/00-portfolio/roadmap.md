@@ -211,6 +211,7 @@ Create one exemplary project case study that sets the standard for all future po
 
 - Project dossier for the chosen “gold standard” project:
   - overview, architecture, deployment, security, testing, operations, troubleshooting
+  - dossier contract: 7 standard pages; Step 3 enhances these pages rather than creating a single monolithic document
 - At least 1 ADR for a durable decision in that project
 - Threat model (if project introduces meaningful surface)
 - Runbooks (if project is deployed/operated)

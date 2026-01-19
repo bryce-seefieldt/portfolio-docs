@@ -258,241 +258,339 @@ playwright-report/
 
 ---
 
-### STEP 3: Create Gold Standard Project Dossier (4–6 hours)
+### STEP 3: Enhance Portfolio App Dossier to Gold Standard (4–6 hours)
 
-**Goal:** Document the chosen project comprehensively with enterprise-standard sections.
+**Goal:** Enhance the existing 7-file dossier structure with gold standard content, following the established project dossier contract.
 
-**Location:** `/portfolio-docs/docs/60-projects/portfolio-app/00-dossier.md` (or `01-overview.md`, depending on your naming)
+**Location:** `/portfolio-docs/docs/60-projects/portfolio-app/` (existing dossier files)
 
-**Structure:**
+**Approach:** The portfolio-app dossier already exists with the standard 7-file structure. This step enhances each file with comprehensive "gold standard" content that demonstrates senior-level engineering discipline.
 
-````markdown
+**Dossier Contract (from `/docs/60-projects/index.md`):**
+
+- ✅ `01-overview.md` — purpose, audiences, NFRs, evidence strategy
+- ✅ `02-architecture.md` — system design, content model, component boundaries
+- ✅ `03-deployment.md` — CI/CD, environments, release governance
+- ✅ `04-security.md` — threat surface, controls, validation
+- ✅ `05-testing.md` — quality gates, test strategy, coverage
+- ✅ `06-operations.md` — runbooks, maintenance, recovery
+- ✅ `07-troubleshooting.md` — failure modes, diagnostics, fixes
+
 ---
-title: 'Portfolio App: Complete Dossier'
-description: 'Comprehensive documentation of the Portfolio App...'
-tags: [projects, portfolio-app, dossier, governance]
----
 
-# Portfolio App: Complete Dossier
+#### 3a. Enhance `01-overview.md` with executive summary and key metrics
 
+**Add/Update sections:**
+
+```markdown
 ## Executive Summary
 
-[1 paragraph overview of what the app does, who built it, what business value it delivers]
+The Portfolio App is a production TypeScript web application that serves as an interactive CV and project showcase, intentionally designed to demonstrate enterprise-grade engineering discipline. Built with Next.js and deployed on Vercel with comprehensive CI/CD governance, it proves competency across modern web development, security hygiene, operational maturity, and evidence-first documentation practices.
 
-## I. Overview
+**Key value:** Not just a portfolio site—a working exemplar of how senior engineers build, secure, operate, and document production systems.
 
-### What is this?
+## Key Metrics (Phase 2 Baseline)
 
-[What the app does, core surfaces, who uses it]
+- **Lines of code:** ~500 (application), ~200 (tests)
+- **Routes:** 5 core routes (/, /cv, /projects, /contact, /projects/[slug])
+- **CI checks:** 2 required (quality, build)
+- **Test coverage:** 100% route coverage (Playwright smoke tests - 12 tests)
+- **Deployment frequency:** On every merge to main (automatic)
+- **Mean time to rollback:** ~1 minute (Git revert + CI)
+- **Quality gates:** Lint, format, typecheck, build, smoke tests (all enforced)
+- **Dependencies:** 17 production, 11 dev (Dependabot weekly updates)
 
-### What does it prove?
+## What This Project Proves
 
-[What this project demonstrates about engineering discipline]
+### Technical Competency
 
-### Key metrics
+- Modern full-stack web development (Next.js 15+, React 19+, TypeScript 5+)
+- Component-driven architecture with App Router
+- Responsive design with Tailwind CSS
+- Evidence-first UX (deep links to documentation)
 
-- Lines of code: ~500
-- Routes: 5 core routes
-- CI checks: 2 (quality, build)
-- Test coverage: Smoke tests (100% routes)
-- Deployment frequency: On every merge to main
-- Mean time to rollback: ~1 minute (Git revert)
+### Engineering Discipline
 
----
+- CI quality gates (ESLint max-warnings=0, Prettier, TypeScript strict)
+- Automated smoke testing (Playwright multi-browser)
+- Frozen lockfile installs (deterministic builds)
+- PR-only merge discipline (GitHub Ruleset enforcement)
 
-## II. Architecture
+### Security Awareness
 
-### Design goals
+- Public-safe by design (no secrets, internal endpoints, or auth)
+- CodeQL + Dependabot enabled (supply chain hardening)
+- Environment variable hygiene (documented, validated)
+- PR template security checklist
 
-- Evidence-first UX (links to deep technical artifacts)
-- Public-safe by design (no secrets, no internal endpoints)
-- Scalable project registry (static data → eventual CMS/API)
-- Enterprise SDLC posture (docs-as-code, governance, transparency)
+### Operational Maturity
 
-### Technology stack
+- Deploy/rollback runbooks (tested and documented)
+- CI triage procedures (deterministic troubleshooting)
+- Vercel production promotion gating (required checks)
+- Evidence-based release notes
 
-- **Framework:** Next.js (App Router)
-- **Language:** TypeScript (strict mode)
-- **Styling:** Tailwind CSS + custom CSS
-- **Build tool:** pnpm (frozen lockfile in CI)
-- **Hosting:** Vercel (preview + production)
-- **CI:** GitHub Actions
-- **Governance:** GitHub Rulesets, Deployment Checks
+### Documentation Excellence
 
-### High-level flow
+- Complete dossier (7 comprehensive pages)
+- ADRs for durable decisions (hosting, CI gates, gold standard choice)
+- Threat model (STRIDE analysis - Step 4)
+- Operational runbooks (deploy, CI triage, rollback)
+```
 
-[ASCII diagram or detailed description of request → routing → rendering → output]
+**Files to update:**
 
-### Key dependencies
-
-- next: v15+
-- react: v19+
-- typescript: v5.x
-- tailwind: latest
-- [List others briefly; note if any are notable for security/compliance]
-
----
-
-## III. Security Posture
-
-### Threat Model
-
-[Link to threat model document]
-
-### Public-safety rules (enforced)
-
-- No `NEXT_PUBLIC_*` variables contain secrets
-- No internal endpoints or API keys in code
-- All environment variables documented in `.env.example`
-- No database connections or backend logic
-
-### Authentication & authorization
-
-- Not implemented (intentionally)
-- Future iterations: Consider static site generation or API-based auth for optional "member-only" content
-
-### Data handling
-
-- No user data collection or storage
-- All content is static or environment-driven
-- Links to docs are public-safe (same origin or documented external domain)
-
-### Secrets scanning & supply chain
-
-- CodeQL enabled (JavaScript/TypeScript)
-- Dependabot enabled (weekly; majors excluded)
-- PR template includes "no secrets added" declaration
+- `docs/60-projects/portfolio-app/01-overview.md`
 
 ---
 
-## IV. Development & Testing
+#### 3b. Enhance `02-architecture.md` with detailed technology stack and flow diagrams
 
-### Local development
+**Add/Update sections:**
+
+```markdown
+## Technology Stack (Complete Inventory)
+
+### Core Framework
+
+- **Next.js:** v16.1.3 (App Router, React Server Components, static optimization)
+- **React:** v19.2.3 (concurrent features, automatic batching)
+- **TypeScript:** v5+ (strict mode, noEmit for type-only checks)
+
+### Styling & UI
+
+- **Tailwind CSS:** v4 (utility-first, JIT compilation)
+- **@tailwindcss/postcss:** v4 (CSS processing)
+- **CSS Modules:** Built-in (component-scoped styles)
+
+### Build & Development
+
+- **pnpm:** v10.0.0 (fast, efficient, frozen lockfiles in CI)
+- **Next.js Compiler:** SWC-based (Rust, faster than Babel)
+- **React Compiler:** babel-plugin-react-compiler v1.0.0 (optimization)
+
+### Testing & Quality
+
+- **Playwright:** v1.57.0 (E2E smoke tests, multi-browser)
+- **ESLint:** v9 (flat config, Next.js presets, TypeScript integration)
+- **Prettier:** v3.8.0 (code formatting, Tailwind plugin)
+- **wait-on:** v9.0.3 (dev server readiness in CI)
+
+### CI/CD & Governance
+
+- **GitHub Actions:** Quality + build jobs
+- **Vercel:** Preview + production deployments
+- **CodeQL:** JavaScript/TypeScript security scanning
+- **Dependabot:** Weekly dependency updates (grouped, majors excluded)
+
+### Notable Decisions
+
+- **No authentication:** Intentionally deferred (public portfolio)
+- **No database:** Static content model (scalable via data files)
+- **No form backend:** Contact via static methods (email link)
+- **Evidence links:** Deep integration with Docusaurus documentation
+
+## High-Level Request Flow
+```
+
+┌─────────────┐
+│ Browser │
+└──────┬──────┘
+│ HTTPS GET /projects/portfolio-app
+↓
+┌─────────────────────┐
+│ Vercel Edge │ (CDN, SSL termination)
+└──────┬──────────────┘
+│
+↓
+┌─────────────────────────────────────┐
+│ Next.js App Router │
+│ - Route: /projects/[slug] │
+│ - Server Component (async params) │
+│ - getProjectBySlug(slug) │
+│ - notFound() if missing │
+└──────┬──────────────────────────────┘
+│
+↓
+┌─────────────────────────────┐
+│ Project Data (src/data/) │
+│ - PROJECTS array │
+│ - Static metadata │
+└──────┬──────────────────────┘
+│
+↓
+┌──────────────────────────────────┐
+│ Component Rendering │
+│ - Section components │
+│ - Evidence links (to /docs) │
+│ - Tailwind styling │
+└──────┬───────────────────────────┘
+│
+↓
+┌──────────────────────┐
+│ HTML Response │ (static-optimized, RSC payload)
+└──────────────────────┘
+
+```
+
+## Component Architecture
+
+```
+
+src/
+├── app/ # Next.js App Router
+│ ├── layout.tsx # Root layout (global nav, metadata)
+│ ├── page.tsx # Landing page (/)
+│ ├── cv/
+│ │ └── page.tsx # CV route
+│ ├── projects/
+│ │ ├── page.tsx # Projects list
+│ │ └── [slug]/
+│ │ └── page.tsx # Dynamic project detail
+│ └── contact/
+│ └── page.tsx # Contact page
+├── components/ # Reusable components
+│ ├── Section.tsx # Content section wrapper
+│ └── Callout.tsx # Highlighted content blocks
+├── data/
+│ └── projects.ts # Project registry (typed)
+└── lib/
+└── config.ts # Environment config helpers
+
+```
+
+## Scalability Patterns
+
+**Current (Phase 2):**
+- Static project data in TypeScript (typed, version-controlled)
+- Manual content updates via code changes + PRs
+- Evidence links hardcoded per project
+
+**Planned (Phase 3+):**
+- CMS or API-driven project data (Contentful, headless CMS)
+- Automated evidence link validation
+- Tag-based filtering and search
+```
+
+**Files to update:**
+
+- `docs/60-projects/portfolio-app/02-architecture.md`
+
+---
+
+#### 3c. Update `04-security.md` with public-safety rules and controls
+
+**Add/Update sections:**
+
+````markdown
+## Public-Safety Rules (Enforced)
+
+### Environment Variables
+
+- ✅ All `NEXT_PUBLIC_*` variables are client-visible by design
+- ✅ No secrets in any `NEXT_PUBLIC_*` variable
+- ✅ `.env.example` documents all required variables
+- ✅ Local `.env.local` gitignored
+
+**Validation procedure:**
 
 ```bash
-pnpm install
-cp .env.example .env.local
-pnpm dev
+# Check for secrets in env vars
+grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
+# Should return: no results
 ```
 ````
 
-### Quality gates (enforced)
+### Code Scanning
 
-```bash
-pnpm lint       # ESLint
-pnpm format:check  # Prettier
-pnpm typecheck  # TypeScript
-pnpm build      # Next.js production build
-pnpm test       # Playwright smoke tests
-```
+- ✅ CodeQL enabled (JavaScript/TypeScript)
+- ✅ Runs on every push to main and PR
+- ✅ Scans for: SQL injection, XSS, path traversal, hardcoded secrets
 
-### Testing strategy
+### Supply Chain Security
 
-- **Smoke tests (Playwright):** Route accessibility, content rendering, evidence link integrity
-- **Unit tests (planned for Phase 3):** Content/slug validation, config module
-- **E2E tests (planned for Phase 3+):** Full user flows, evidence link resolution
+- ✅ Dependabot enabled (weekly updates, grouped by type)
+- ✅ Major version updates excluded (manual review required)
+- ✅ Lockfile formatting automated (prevents CI failures)
+- ✅ Frozen lockfile installs in CI (`--frozen-lockfile`)
 
-### Test coverage
+### PR Security Checklist
 
-- Core routes: ✅ 100% (smoke tests)
-- Content validation: 🟡 Partial (manual + data-driven validation)
-- Evidence links: ✅ Spot-checked in smoke tests
+Every PR must confirm:
 
----
+- [ ] No secrets added
+- [ ] No sensitive endpoints added
+- [ ] Environment variables documented in `.env.example`
+- [ ] CodeQL scan passes
 
-## V. Deployment
+## Known Limitations & Accepted Risks
 
-### Environments
+### Out of Scope (Intentional)
 
-- **Preview:** Auto-generated per PR (via Vercel)
-- **Production:** `main` branch, gated by required checks
+- **No authentication:** Public portfolio, no user accounts
+- **No backend processing:** Static content, no server-side logic
+- **No database:** No persistent user data or state
+- **No contact form backend:** Email link only (prevents spam/abuse surface)
 
-### Deployment process
+### Residual Risks (Acceptable)
 
-1. Create PR with code changes
-2. GitHub Actions runs `ci / quality` and `ci / build` checks
-3. Vercel creates preview deployment (auto-generated URL)
-4. Merge when checks pass (GitHub Ruleset enforces this)
-5. Vercel creates production deployment (automatic after merge)
-
-### Environment variables
-
-[Link to deployment dossier for complete environment configuration]
-
-### Rollback
-
-- Revert the commit: `git revert <hash>`
-- Wait for checks to pass
-- Merge revert PR
-- Vercel automatically deploys reverted code
-
-**Mean time to rollback:** ~1 minute
-
----
-
-## VI. Operations & Observability
-
-### Monitoring (current)
-
-- Vercel analytics (built-in)
-- GitHub Actions CI logs
-- Manual spot-checks of production domain
-
-### Observability (planned for Phase 3+)
-
-- Application logging (Vercel logs)
-- Performance metrics (Web Vitals)
-- Error tracking (optional, light-weight)
-
-### Incidents & postmortems
-
-- Process: [Link to incident response process or postmortem template]
-- Escalation: [Who to notify if production is down]
-
----
-
-## VII. Known Limitations
-
-- No backend processing
-- Static project registry (planned to evolve)
-- No user authentication
-- No database or persistent state
-
----
-
-## VIII. Troubleshooting & Runbooks
-
-[Links to operational runbooks — created in Phase 2, Step 5]
-
-- Deploy runbook (created in Phase 2)
-- CI triage runbook (created in Phase 2)
-- Rollback runbook (created in Phase 2)
-
----
-
-## IX. Related Artifacts
-
-- [ADR-0007: Vercel + Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
-- [ADR-0008: CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)
-- [Threat Model: Portfolio App](/docs/40-security/threat-models/portfolio-app-threat-model.md)
-- [Deployment Dossier](/docs/60-projects/portfolio-app/03-deployment.md)
-
----
-
-## X. Change History
-
-| Date       | Change                        | PR   |
-| ---------- | ----------------------------- | ---- |
-| 2026-01-10 | Phase 1 baseline              | #21  |
-| 2026-01-17 | Phase 2 gold standard dossier | #TBD |
+- **Dependency vulnerabilities:** Mitigated by Dependabot + CodeQL
+- **DDoS:** Mitigated by Vercel's edge network
+- **Content injection:** Not applicable (static content, no UGC)
 
 ````
+
+**Files to update:**
+- `docs/60-projects/portfolio-app/04-security.md`
+
+---
+
+#### 3d. Verify other dossier files are complete
+
+**Already comprehensive (no major changes needed):**
+- ✅ `03-deployment.md` — Updated in PR #29 with smoke tests, Dependabot hardening
+- ✅ `05-testing.md` — Updated in PR #29 with Playwright details, CI hardening
+- ✅ `06-operations.md` — Updated in PR #29 with smoke test requirements, Dependabot automation
+- ✅ `07-troubleshooting.md` — Existing comprehensive troubleshooting guide
+- ✅ `index.md` — Dossier hub with complete navigation
+
+**Minor additions needed:**
+
+**`index.md` — Add Phase 2 current state:**
+
+```markdown
+## Current State (Phase 2)
+
+- ✅ Route skeleton: 5 core routes implemented and smoke-tested
+- ✅ CI quality gates: lint, format, typecheck, build, smoke tests (all enforced)
+- ✅ Smoke test coverage: 100% routes (12 tests, Chromium + Firefox)
+- ✅ Dependabot hardening: Auto-format + lockfile exclusions
+- ✅ Deployment governance: Vercel promotion gated by required checks
+- ✅ Dossier enhancement: All 7 pages updated to gold standard
+- 🟡 Threat model: Planned for Step 4 (STRIDE analysis)
+- 🟡 Enhanced project page: Planned for Step 7 (gold standard badge)
+- 🟡 Meaningful CV page: Planned for Step 8 (capability-to-proof mapping)
+````
+
+**Files to update:**
+
+- `docs/60-projects/portfolio-app/index.md`
+- `docs/60-projects/portfolio-app/01-overview.md`
+- `docs/60-projects/portfolio-app/02-architecture.md`
+- `docs/60-projects/portfolio-app/04-security.md`
+
+---
 
 **Success check:**
-- [ ] Dossier document created with all 10 sections
-- [ ] Links to threat model, ADRs, runbooks added (placeholder if not yet created)
-- [ ] Build verification passes
-- [ ] PR created with dossier
+
+- [ ] `01-overview.md` enhanced with executive summary, key metrics, "what this proves"
+- [ ] `02-architecture.md` enhanced with complete tech stack, flow diagrams, component architecture
+- [ ] `04-security.md` enhanced with public-safety rules, controls, validation procedures
+- [ ] `index.md` updated with Phase 2 current state
+- [ ] All dossier files verified complete and aligned with project dossier contract
+- [ ] Links to ADRs, threat model (placeholder), runbooks verified
+- [ ] Build verification passes (`pnpm build`)
+- [ ] PR created with dossier enhancements
 
 ---
 
@@ -516,9 +614,11 @@ tags: [security, threat-model, portfolio-app]
 # Threat Model: Portfolio App
 
 ## Trust Boundaries Diagram
+
 [Simple ASCII diagram showing public users → portfolio app → docs app → GitHub]
 
 ## Assets at Risk
+
 - Source code (GitHub)
 - Deployment credentials (Vercel)
 - Custom domain (DNS)
@@ -527,40 +627,48 @@ tags: [security, threat-model, portfolio-app]
 ## Threats (STRIDE)
 
 ### Spoofing
+
 - **Threat:** Attacker spoofs the portfolio domain
 - **Mitigation:** Use TLS/HTTPS, HSTS header, domain registration lock
 
 ### Tampering
+
 - **Threat:** Attacker modifies deployed content
 - **Mitigation:** Deployments only via authenticated Git + Vercel; no manual edits
 
 ### Repudiation
+
 - **Threat:** Attacker denies making changes
 - **Mitigation:** Git commit audit trail; GitHub Actions logs
 
 ### Information Disclosure
+
 - **Threat:** Attacker exfiltrates environment variables or secrets
 - **Mitigation:** No secrets in `NEXT_PUBLIC_*` variables; secrets never committed
 
 ### Denial of Service
+
 - **Threat:** Attacker floods the app or docs domain
 - **Mitigation:** Vercel DDoS protection; docs served as static files
 
 ### Elevation of Privilege
+
 - **Threat:** Attacker gains elevated access to deployment pipeline
 - **Mitigation:** GitHub Rulesets enforce PR reviews; required checks gate merges
 
 ## Residual Risks (Accepted)
+
 - Dependabot alerts may not catch all zero-days immediately
 - Manual review required for major dependency updates
 
 ## Controls Summary
+
 - ✅ Code review (GitHub Rulesets + PR template)
 - ✅ CI/CD gating (required checks)
 - ✅ Supply chain: CodeQL + Dependabot
 - ✅ Static deployment (no runtime secrets)
 - ✅ Immutable deployments (Git revert only)
-````
+```
 
 **Success check:**
 
