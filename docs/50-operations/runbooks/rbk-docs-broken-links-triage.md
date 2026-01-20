@@ -98,7 +98,7 @@ Before assuming link issues, verify package manager consistency and environment 
    grep DOCUSAURUS_SITE_URL .env.local || echo "Missing DOCUSAURUS_SITE_URL"
    ```
 
-   See [Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md) for complete reference.
+  See [Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md) for complete reference.
 
 4. Clean install and rebuild:
    ```bash

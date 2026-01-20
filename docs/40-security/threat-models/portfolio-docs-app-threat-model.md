@@ -118,7 +118,7 @@ This threat model is designed to be actionable and verifiable.
 - **Likelihood:** Medium (very common operational failure mode)
 - **Mitigations:**
   - explicit policy: no secrets, no internal endpoints
-  - environment variables contract: public-safe variables only (see [Portfolio Docs Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md))
+  - environment variables contract: public-safe variables only (see [Portfolio Docs Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md))
   - `.env.local` is gitignored; production vars set in Vercel dashboard only
   - PR checklist with "No secrets added" 
   - secrets scanning (pre-commit and/or CI) recommended

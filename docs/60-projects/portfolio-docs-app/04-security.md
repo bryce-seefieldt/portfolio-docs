@@ -111,7 +111,7 @@ This page documents the security posture of the Portfolio Docs App as a public-f
 - **No hardcoded secrets**: Use environment files (`.env.local`, `.env.production.local`) for local-only overrides
 - **Verify at merge**: PR reviewers check that no sensitive URLs or endpoints are being added
 - **Protected in Vercel**: Production variables are restricted to authorized users only
-- See [Portfolio Docs Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md) for public-safe variable reference
+- See [Portfolio Docs Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md) for public-safe variable reference
 
 ### Control 6: MDX minimization
 

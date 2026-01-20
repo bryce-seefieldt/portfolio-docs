@@ -65,7 +65,7 @@ This page describes the Portfolio Docs App architecture at a practical level:
   - `.env.example`: Template with placeholders (committed to repo)
   - `.env.local`: Local development overrides (gitignored, not committed)
   - `.env.production.local`: Production-specific overrides (gitignored, optional)
-  - See [Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md) for full documentation
+  - See [Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md) for full documentation
 
 - **Static assets** (`static/`):
   - images and diagrams, stored with stable names

@@ -37,7 +37,7 @@ Rollback is designed to be:
   - `git`
 - Environment variables:
   - Local `.env.local` configuration (for local validation)
-  - Production variables should not need changes for rollback (see [Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md))
+  - Production variables should not need changes for rollback (see [Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md))
 - Inputs:
   - PR number or commit SHA introducing the regression
   - last known good state (prior commit or release)

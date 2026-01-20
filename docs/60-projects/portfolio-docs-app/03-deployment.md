@@ -122,7 +122,7 @@ DOCUSAURUS_PORTFOLIO_APP_URL=https://bns-portfolio-app.vercel.app
 1. Go to **Vercel Dashboard → Settings → Environment Variables**
 2. Add variables with scope: **Production + Preview**
 3. Variables are automatically available during `pnpm build`
-4. See [Portfolio Docs Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md) for full reference
+4. See [Portfolio Docs Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md) for full reference
 
 **For local testing:**
 
