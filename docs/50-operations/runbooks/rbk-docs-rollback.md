@@ -35,6 +35,9 @@ Rollback is designed to be:
   - ability to create and merge rollback PRs to `main`
 - Required tools:
   - `git`
+- Environment variables:
+  - Local `.env.local` configuration (for local validation)
+  - Production variables should not need changes for rollback (see [Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md))
 - Inputs:
   - PR number or commit SHA introducing the regression
   - last known good state (prior commit or release)

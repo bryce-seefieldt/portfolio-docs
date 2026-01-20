@@ -53,7 +53,19 @@ This page describes the Portfolio Docs App architecture at a practical level:
 
 - **Site configuration**:
   - `docusaurus.config.ts` defines global site settings and docs plugin behavior
+  - Environment variables enable configuration portability:
+    - `DOCUSAURUS_SITE_URL` (production domain vs local)
+    - `DOCUSAURUS_BASE_URL` (root vs subpath)
+    - `DOCUSAURUS_GITHUB_*` (GitHub links, edit URLs, navbars)
+    - `DOCUSAURUS_PORTFOLIO_APP_URL` (cross-linking to portfolio-app)
+  - Fallback values in config ensure robustness when environment files are absent
   - (optional) Mermaid enablement for diagrams, if adopted
+
+- **Environment configuration**:
+  - `.env.example`: Template with placeholders (committed to repo)
+  - `.env.local`: Local development overrides (gitignored, not committed)
+  - `.env.production.local`: Production-specific overrides (gitignored, optional)
+  - See [Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md) for full documentation
 
 - **Static assets** (`static/`):
   - images and diagrams, stored with stable names

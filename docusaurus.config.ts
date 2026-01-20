@@ -15,7 +15,8 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: process.env.DOCUSAURUS_SITE_URL || 'https://bns-portfolio-docs.vercel.app',
+  url:
+    process.env.DOCUSAURUS_SITE_URL || 'https://bns-portfolio-docs.vercel.app',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: process.env.DOCUSAURUS_BASE_URL || '/',
@@ -30,7 +31,9 @@ const config: Config = {
 
   // Custom fields for cross-repository linking
   customFields: {
-    portfolioAppUrl: process.env.DOCUSAURUS_PORTFOLIO_APP_URL || 'https://bns-portfolio-app.vercel.app',
+    portfolioAppUrl:
+      process.env.DOCUSAURUS_PORTFOLIO_APP_URL ||
+      'https://bns-portfolio-app.vercel.app',
     githubOrgUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}`,
     githubRepoDocsUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}`,
     githubRepoAppUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_APP || 'portfolio-app'}`,
@@ -68,8 +71,7 @@ const config: Config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}/tree/main/`,
+          editUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}/tree/main/`,
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',

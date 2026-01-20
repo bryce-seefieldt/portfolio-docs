@@ -400,19 +400,93 @@ When asked to implement deployment changes:
 
 ---
 
+# Environment Variables and Configuration
+
+## Standard Configuration Pattern
+
+The Portfolio Docs App uses environment variables to support portability across local, preview, and production deployments.
+
+### Variable Prefix Convention
+
+- **`DOCUSAURUS_*`**: Client-exposed variables (available in browser)
+- **Non-prefixed**: Build-time only (server-side, not available in React)
+- Analogous to Next.js `NEXT_PUBLIC_*` convention
+
+### Core Variables
+
+| Variable | Purpose | Local | Production |
+| --- | --- | --- | --- |
+| `DOCUSAURUS_SITE_URL` | Base URL for SEO, sitemap | `http://localhost:3000` | `https://bns-portfolio-docs.vercel.app` |
+| `DOCUSAURUS_BASE_URL` | Subpath (if any) | `/` | `/` |
+| `DOCUSAURUS_GITHUB_ORG` | GitHub org/user | your-username | bryce-seefieldt |
+| `DOCUSAURUS_GITHUB_REPO_DOCS` | Docs repo name | portfolio-docs | portfolio-docs |
+| `DOCUSAURUS_GITHUB_REPO_APP` | App repo name (cross-linking) | portfolio-app | portfolio-app |
+| `DOCUSAURUS_PORTFOLIO_APP_URL` | Portfolio App URL | `http://localhost:3000` | `https://bns-portfolio-app.vercel.app` |
+
+### File Structure
+
+- **`.env.example`**: Template (committed, no secrets)
+- **`.env.local`**: Local overrides (gitignored, not committed)
+- **`.env.production.local`**: Production overrides (gitignored, optional)
+
+### Enforcement
+
+- **Local development**: Always use `.env.local` (copied from `.env.example`)
+- **Production (Vercel)**: Set variables in Vercel Dashboard → **Settings → Environment Variables**
+- **CI**: Use production values automatically during build
+- **Security**: No secrets in any `.env` files; all values are public-safe
+
+### Full Reference
+
+See [Portfolio Docs Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md) for:
+
+- Complete variable documentation
+- Environment-specific examples
+- React component access via customFields
+- File precedence rules
+- Security guidelines
+- **Deployed URLs:** When constructing links to the deployed docs site, use environment variables (do **not** hardcode production host): `${DOCUSAURUS_SITE_URL}${DOCUSAURUS_BASE_URL}<path>` or the precomputed `NEXT_PUBLIC_DOCS_BASE_URL` pattern where applicable. The only exception is internal links inside authored docs that must remain relative `/docs/...`.
+
+---
+
 # URL Linking Standards (Required for All Documentation)
+
+**Env-first rule:** For any deployed URL (portfolio-docs or portfolio-app), build the URL using the appropriate environment variables (e.g., `${DOCUSAURUS_SITE_URL}${DOCUSAURUS_BASE_URL}` for docs, `NEXT_PUBLIC_DOCS_BASE_URL` from portfolio-app). Do **not** hardcode production hosts. The only exception is internal links within authored docs that are rendered on the site—those must stay as relative `/docs/...` links per the rules below.
+
+## Linking within portfolio-docs (authoring in this repository)
+
+When creating URLs inside portfolio-docs source (Markdown/MDX under `docs/`):
+
+- **Hosted docs pages (rendered on the site):**
+  - Use **relative paths starting with `/docs/`**
+  - **Include section prefix numbers** (e.g., `00-portfolio`, not `portfolio`)
+  - **Include `.md` file extension**
+  - Example: `[ADR-0001](/docs/10-architecture/adr/adr-0001-adopt-docusaurus-for-portfolio-docs.md)`
+
+- **Docs hub pages using `index.md`:**
+  - When constructing **published site URLs**, do **not** include `index.md` in the path.
+  - Example: `docs/00-portfolio/index.md` → published at `https://bns-portfolio-docs.vercel.app/docs/portfolio/` (built as `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/"`).
+
+- **Non-hosted files (e.g., `docs/_meta/**` or any file not rendered by the site):**
+  - Link to the GitHub blob URL: `https://github.com/<org>/<repo>/blob/main/<path>`
+  - Use environment-driven pattern when available: `https://github.com/${DOCUSAURUS_GITHUB_ORG}/${DOCUSAURUS_GITHUB_REPO_DOCS}/blob/main/<path>`
+  - Apply the same rule from portfolio-app when linking to `docs/_meta` (these files are not hosted on the site).
+
+These rules are **mandatory** for all links authored within the portfolio-docs repository.
 
 ## Linking within portfolio-docs (internal cross-references)
 
 When linking from one page to another **within** the portfolio-docs repository:
 
 **Rules:**
+
 - Use relative paths starting with `/docs/`
 - **DO include** section prefix numbers (e.g., `00-portfolio`, `10-architecture`)
 - **DO include** `.md` file extension
 - Use markdown link syntax: `[display text](path)`
 
 **Examples:**
+
 - ✅ `[roadmap.md](/docs/00-portfolio/roadmap.md)`
 - ✅ `[Architecture ADRs](/docs/10-architecture/adr/)`
 - ✅ `[Threat model](/docs/40-security/threat-models/portfolio-app-threat-model.md)`
@@ -424,12 +498,14 @@ When linking from one page to another **within** the portfolio-docs repository:
 When linking to files in portfolio-docs **outside** of `/docs/` (e.g., root config, CI workflows, package.json):
 
 **Rules:**
+
 - Use full GitHub repository URLs
 - Format: `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/<path>`
 - **DO include** file extensions
 - Use for: CI workflows, config files, metadata, root-level documentation
 
 **Examples:**
+
 - ✅ `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/package.json`
 - ✅ `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/.github/workflows/ci.yml`
 - ✅ `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docusaurus.config.ts`
@@ -440,12 +516,14 @@ When linking to files in portfolio-docs **outside** of `/docs/` (e.g., root conf
 When linking to the portfolio-app repository:
 
 **Rules:**
+
 - Use full GitHub repository URLs
 - Format: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/<path>`
 - **DO include** file extensions
 - Use for: CI workflows, source code, config files, non-rendered artifacts
 
 **Examples:**
+
 - ✅ `https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml`
 - ✅ `https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/config.ts`
 - ✅ `https://github.com/bryce-seefieldt/portfolio-app/blob/main/package.json`

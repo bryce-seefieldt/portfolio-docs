@@ -30,8 +30,9 @@ Provide a deterministic, reviewable deployment procedure for the Portfolio Docs 
 - Required access:
   - ability to open PRs and merge to `main` (per branch protection rules)
 - Required tools:
-  - `pnpm`, `node` (local validation)
-- Preconditions:
+  - `pnpm`, `node` (local validation)- Environment variables:
+  - Local: `.env.local` configured (see [Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md))
+  - Production: Variables set in Vercel dashboard- Preconditions:
   - Changes are on a feature branch
   - PR template completed, including “No secrets added”
   - Local build gate has passed
@@ -63,6 +64,10 @@ This means:
 From repository root:
 
 ```bash
+# First time setup
+cp .env.example .env.local
+# Edit .env.local with your local values (http://localhost:3000 for development)
+
 pnpm install
 pnpm start
 ```
@@ -115,6 +120,16 @@ After merge:
 ### 5) Verify build artifact and pnpm version
 
 To ensure deterministic builds and prevent toolchain-related regressions:
+
+**Check environment variables in Vercel:**
+
+1. Go to **Vercel Dashboard → Settings → Environment Variables**
+2. Confirm production variables are set for both Production and Preview scopes:
+   - `DOCUSAURUS_SITE_URL`
+   - `DOCUSAURUS_BASE_URL`
+   - `DOCUSAURUS_GITHUB_*`
+   - `DOCUSAURUS_PORTFOLIO_APP_URL`
+3. See [Portfolio Docs Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md) for complete reference
 
 **Check Vercel build logs:**
 

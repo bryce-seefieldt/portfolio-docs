@@ -61,6 +61,35 @@ Hard rules:
 
 ## PR Discipline
 
+### Local setup (before starting work)
+
+1. **Install and configure:**
+   ```bash
+   pnpm install
+   cp .env.example .env.local
+   ```
+
+2. **Edit `.env.local`** with your local development values:
+   ```env
+   DOCUSAURUS_SITE_URL=http://localhost:3000
+   DOCUSAURUS_GITHUB_ORG=your-github-username
+   DOCUSAURUS_GITHUB_REPO_DOCS=portfolio-docs
+   DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
+   DOCUSAURUS_PORTFOLIO_APP_URL=http://localhost:3000
+   ```
+   
+   See [Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md) for complete documentation and all available variables.
+
+3. **Test locally:**
+   ```bash
+   pnpm start     # preview
+   pnpm build     # required before PR
+   ```
+
+4. **Commit and push** (`.env.local` is gitignored; do not commit)
+
+### PR Discipline (no changes)
+
 All doc changes go through PRs (even solo)
 
 PR must include:
@@ -153,6 +182,7 @@ A doc PR is done only if:
 
 To ensure consistent builds across local, CI, and Vercel environments:
 
+- **Environment variables**: Use `.env.local` for local development (see [Local setup](#local-setup-before-starting-work))
 - **Never** manually update pnpm or Node versions without updating `package.json`
 - Changes to `package.json` or `pnpm-lock.yaml` require:
   - Local `pnpm install --frozen-lockfile` + all quality gates verification

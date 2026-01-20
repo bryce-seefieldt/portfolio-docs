@@ -102,6 +102,34 @@ These settings ensure:
 - **Reproducibility**: local `pnpm build` matches Vercel build exactly
 - **Safety**: Docusaurus build fails on broken links, preventing invalid HTML from serving
 
+### Environment variable configuration
+
+Vercel automatically loads environment variables for the build process. Key variables for the Portfolio Docs App:
+
+**Required for production promotion:**
+
+```env
+DOCUSAURUS_SITE_URL=https://bns-portfolio-docs.vercel.app
+DOCUSAURUS_BASE_URL=/
+DOCUSAURUS_GITHUB_ORG=bryce-seefieldt
+DOCUSAURUS_GITHUB_REPO_DOCS=portfolio-docs
+DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
+DOCUSAURUS_PORTFOLIO_APP_URL=https://bns-portfolio-app.vercel.app
+```
+
+**Configuration:**
+
+1. Go to **Vercel Dashboard → Settings → Environment Variables**
+2. Add variables with scope: **Production + Preview**
+3. Variables are automatically available during `pnpm build`
+4. See [Portfolio Docs Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md) for full reference
+
+**For local testing:**
+
+- Copy `.env.example` to `.env.local`
+- Edit with local values (e.g., `DOCUSAURUS_SITE_URL=http://localhost:3000`)
+- `.env.local` is gitignored; changes are not committed
+
 ## Release Governance: Vercel Deployment Checks
 
 **Key pattern:** Vercel Deployment Checks enforce a safety gate between deployment creation and production release.

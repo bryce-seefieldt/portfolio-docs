@@ -109,13 +109,16 @@ This is analogous to Next.js `NEXT_PUBLIC_*` convention in the Portfolio App.
 
 ```typescript
 const config: Config = {
-  url: process.env.DOCUSAURUS_SITE_URL || 'https://bns-portfolio-docs.vercel.app',
+  url:
+    process.env.DOCUSAURUS_SITE_URL || 'https://bns-portfolio-docs.vercel.app',
   baseUrl: process.env.DOCUSAURUS_BASE_URL || '/',
   organizationName: process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt',
   projectName: process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs',
 
   customFields: {
-    portfolioAppUrl: process.env.DOCUSAURUS_PORTFOLIO_APP_URL || 'https://bns-portfolio-app.vercel.app',
+    portfolioAppUrl:
+      process.env.DOCUSAURUS_PORTFOLIO_APP_URL ||
+      'https://bns-portfolio-app.vercel.app',
     githubOrgUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}`,
     githubRepoDocsUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}`,
     githubRepoAppUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_APP || 'portfolio-app'}`,
@@ -131,7 +134,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 function MyComponent() {
   const { siteConfig } = useDocusaurusContext();
   const portfolioAppUrl = siteConfig.customFields.portfolioAppUrl as string;
-  
+
   return <a href={portfolioAppUrl}>Visit Portfolio App</a>;
 }
 ```

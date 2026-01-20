@@ -10,11 +10,37 @@ pnpm install
 
 ## Local Development
 
-```bash
-pnpm start
-```
+### Setup (First Time)
+
+1. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+2. **Configure environment variables:**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Edit `.env.local` with your local development values:
+   ```env
+   DOCUSAURUS_SITE_URL=http://localhost:3000
+   DOCUSAURUS_GITHUB_ORG=your-github-username
+   DOCUSAURUS_GITHUB_REPO_DOCS=portfolio-docs
+   DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
+   DOCUSAURUS_PORTFOLIO_APP_URL=http://localhost:3000
+   ```
+   
+   **Note:** `.env.local` is gitignored. See [Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md) for full documentation.
+
+3. **Start the development server:**
+   ```bash
+   pnpm start
+   ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+The dev server uses the environment variables from `.env.local` to configure site URLs, GitHub links, and cross-repository linking.
 
 ## Build
 

@@ -110,22 +110,25 @@ This threat model is designed to be actionable and verifiable.
 
 ### Threat 3: Accidental publication of secrets or sensitive internal information
 
-- **Threat:** A contributor pastes tokens, keys, internal endpoints, or sensitive screenshots into docs.
+- **Threat:** A contributor pastes tokens, keys, internal endpoints, or sensitive screenshots into docs. Also: environment variables containing secrets are misconfigured in Vercel.
 - **Asset impacted:** Publication safety, trustworthiness
-- **Scenario:** A page includes an API key or internal hostname, becomes publicly accessible after deploy.
+- **Scenario 1:** A page includes an API key or internal hostname, becomes publicly accessible after deploy.
+- **Scenario 2:** A production environment variable is hardcoded with a secret or internal endpoint.
 - **Impact:** High (credential compromise, privacy breach, reputational damage)
 - **Likelihood:** Medium (very common operational failure mode)
 - **Mitigations:**
   - explicit policy: no secrets, no internal endpoints
-  - PR checklist with “No secrets added”
+  - environment variables contract: public-safe variables only (see [Portfolio Docs Environment Variables Contract](../../_meta/env/portfolio-docs-env-contract.md))
+  - `.env.local` is gitignored; production vars set in Vercel dashboard only
+  - PR checklist with "No secrets added" 
   - secrets scanning (pre-commit and/or CI) recommended
   - keep internal scaffolding in `docs/_meta/` and avoid publishing raw logs
 - **Gaps:**
   - CI-based secret scanning may not be implemented yet (should be)
 - **Controls required:**
-  - secrets scanning gate + incident response plan
+  - secrets scanning gate + environment variable security review + incident response plan
 - **Validation:**
-  - scanning runs; manual review confirms; incident runbook exists
+  - scanning runs; manual review confirms environment variables are public-safe; incident runbook exists
 
 ### Threat 4: CI workflow compromise or unsafe execution context
 
