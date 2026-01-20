@@ -280,18 +280,120 @@ Exceptions:
 
 ## Diagram standards (mandatory)
 
-When creating architectural, flow, or decision diagrams in portfolio-docs:
+**ALL diagrams created within `docs/` subdirectories MUST use Mermaid format exclusively — never PNG, SVG, ASCII art, or external tools.**
 
-- **Use Mermaid diagram format** exclusively
-- Place Mermaid blocks in markdown using triple-backtick syntax with \`\`\`mermaid language identifier
-- Supported Mermaid diagram types:
-  - `graph LR/TD` — trust boundaries, system context, data flow
-  - `flowchart` — process flows, runbook steps, incident response procedures
-  - `sequenceDiagram` — interaction sequences, deployment flows
-  - `classDiagram` — architecture and component relationships
-- All diagrams must be readable in the rendered HTML (Docusaurus natively supports Mermaid)
-- Prefer simple, clear diagrams over complex ASCII art
-- Every diagram must have a caption explaining its purpose
+### Why Mermaid
+
+- Natively supported by Docusaurus (v3.9+)
+- Source code is version-controlled (no binary images)
+- Renders consistently across light/dark modes
+- Collaborative and maintainable alongside documentation
+
+### Mermaid syntax and placement
+
+- Place Mermaid code blocks using triple-backtick syntax: \`\`\`mermaid ... \`\`\`
+- Example:
+  ```
+  \`\`\`mermaid
+  graph LR
+    A[System A] -->|HTTP| B[System B]
+  \`\`\`
+  ```
+- All diagrams must render cleanly in HTML output
+- Test locally: `pnpm build && pnpm serve` (verify both light and dark modes)
+
+### Diagram types and use cases
+
+| Type              | Use Case                                                  | Examples                                                      |
+| ----------------- | --------------------------------------------------------- | ------------------------------------------------------------- |
+| `graph LR/TD`     | Architecture, trust boundaries, system context, data flow | C4 system context, service dependencies, integration topology |
+| `flowchart`       | Procedures, decision trees, workflows                     | Runbook steps, deployment procedures, incident triage         |
+| `sequenceDiagram` | Temporal interactions, multi-step sequences               | Deployment flows, authentication handshakes, service calls    |
+| `classDiagram`    | Component relationships, inheritance, layers              | Architecture patterns, service structure                      |
+| `stateDiagram`    | State machines, lifecycle transitions                     | Build job states, deployment stages, service lifecycle        |
+| `timeline`        | Historical events, phases, milestones                     | Roadmap timeline, release schedule, capability rollout        |
+
+### Mandatory quality standards
+
+1. **Context:** Every diagram MUST have explanatory text (caption or surrounding paragraph)
+   - Explain what the diagram shows, why it matters, and any assumptions
+2. **Focus:** Keep each diagram focused on a single concept; break large flows into multiple diagrams
+3. **Labels:** Use descriptive node labels; avoid abbreviations where possible
+4. **Readability:** Test locally (`pnpm build && pnpm serve`) in both light and dark modes; ensure text doesn’t overlap
+5. **Accuracy:** Ensure labels and relationships reflect the actual system; indicate directionality and async/sync where relevant
+
+### Common Mermaid patterns for portfolio-docs
+
+**System context (graph):**
+
+```
+\`\`\`mermaid
+graph LR
+  User[User] -->|Browse| App[Portfolio App]
+  App -->|Read| Docs[Portfolio Docs]
+  App -->|Deploy| Vercel[Vercel Platform]
+  Docs -->|Deploy| Vercel
+\`\`\`
+```
+
+**Deployment workflow (flowchart):**
+
+```
+\`\`\`mermaid
+flowchart TD
+  A[PR Created] --> B{CI Checks Pass?}
+  B -->|No| C[Fix Errors]
+  C --> A
+  B -->|Yes| D[Preview Deploy]
+  D --> E{Merge Approved?}
+  E -->|No| F[Iterate]
+  F --> A
+  E -->|Yes| G[Prod Deploy]
+\`\`\`
+```
+
+**Runbook triage (flowchart):**
+
+```
+\`\`\`mermaid
+flowchart TD
+  A[Incident Detected] --> B[Check Logs]
+  B --> C{Root Cause?}
+  C -->|Config| D[Update Config]
+  C -->|Code| E[Revert Deployment]
+  C -->|Dependency| F[Pin Version]
+  D --> G[Monitor]
+  E --> G
+  F --> G
+  G --> H{Resolved?}
+  H -->|Yes| I[Close Incident]
+  H -->|No| J[Escalate]
+\`\`\`
+```
+
+### Anti-patterns (never do these)
+
+- ❌ Never commit PNG/SVG/image exports — always commit Mermaid source syntax
+- ❌ Never use ASCII art or hand-drawn diagrams in source docs
+- ❌ Never create diagrams without surrounding explanation text
+- ❌ Never link to external diagram services (Lucidchart, Draw.io, etc.)
+- ❌ Never use unsupported Mermaid features — test locally first
+
+### Updating diagrams
+
+When modifying an existing diagram:
+
+1. Edit the Mermaid syntax directly in the `.md` file
+2. Run `pnpm build` locally to verify rendering
+3. Check both light and dark modes: `pnpm serve`
+4. Include diagram changes in the same PR as content changes
+5. Update caption/explanation if scope or purpose changed
+
+### References and learning resources
+
+- [Mermaid.js Official Documentation](https://mermaid.js.org/)
+- [Docusaurus Mermaid Diagram Support](https://docusaurus.io/docs/markdown-features/diagrams)
+- Portfolio-docs examples: `docs/10-architecture/` and `docs/50-operations/runbooks/`
 
 ---
 

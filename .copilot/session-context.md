@@ -1,6 +1,6 @@
 ---
 last-updated: 2026-01-20
-active-phase: Phase 1 (documentation complete; deployment pending) → Phase 2 (environment variables implemented)
+active-phase: Phase 2 (security hardening + gold standard prep)
 workspace-repos:
   - portfolio-app (Next.js + TypeScript)
   - portfolio-docs (Docusaurus)
@@ -8,62 +8,44 @@ workspace-repos:
 
 # Copilot Session Context
 
-## Current State (Phase 2 — Environment Variables Implementation)
+## Current State (Phase 2 — Security Hardening & Gold Standard Prep)
 
 ### Active Branches
 
 - **portfolio-app:** `main`
 - **portfolio-docs:** `main`
 
-### Phase Progress: Phase 2 (Environment Variables — COMPLETED)
+### Phase Progress: Phase 2 (security hardening completed; gold-standard content in progress)
 
 #### ✅ Completed (Portfolio App)
 
-- Routes implemented: `/`, `/cv`, `/projects`, `/projects/[slug]`, `/contact`
-- Config contract: `src/lib/config.ts` with `NEXT_PUBLIC_*` and `docsUrl()` helper
-- Project registry placeholder: `src/data/projects.ts` with types and helpers
-- CI workflows: `ci / quality` (lint, format:check, typecheck) and `ci / build` (Next.js build)
-- CodeQL scanning: JS/TS on PR/main + weekly schedule
-- Dependabot: weekly, majors excluded, grouped updates
-- PR template: includes local quality checklist and docs impact checklist
-- README governance: marked as Implemented with required checks and local quality snippet
-- Quality script: `pnpm quality` runs lint + format:check + typecheck
+- Core routes delivered: `/`, `/cv`, `/projects`, `/projects/[slug]`, `/contact`
+- Governance + config: `src/lib/config.ts` with `NEXT_PUBLIC_*` helpers (`docsUrl()`), `src/data/projects.ts` registry scaffold
+- CI/CD + security gates:
+  - `ci / quality` (lint, format:check, typecheck) and `ci / build` (Next.js build + Playwright smoke tests)
+  - `secrets-scan` (TruffleHog, PR-only) with least-privilege job permissions; frozen installs (`pnpm install --frozen-lockfile`)
+  - CodeQL scanning (PR + weekly); Dependabot weekly (majors excluded, grouped)
+  - Local hygiene: `.pre-commit-config.yaml` (TruffleHog hook) + `pnpm secrets:scan`
+- Testing: Playwright smoke tests cover core routes and evidence links (run in build job)
 
 #### ✅ Completed (Portfolio Docs)
 
-- Dossier updates (8 pages):
-  - index.md: Current State + Reviewer path
-  - architecture.md: Repository structure, routing/evidence strategy, route list annotated; + Component architecture, dark mode, navigation IA, metadata strategy, toolchain/Node policy
-  - testing.md: Formatting, quality gates, merge gates, phased testing (annotated); + ESLint/Prettier config details
-  - operations.md: CI release gate, branch governance, runbook references
-  - deployment.md: Pre-deployment governance, stable check names, status note; + Environment variable examples by environment
-  - security.md: Step 3 posture (Dependabot, CodeQL, public-safe env), status note
-  - (other pages baseline complete)
-- Runbooks updated:
-  - rbk-portfolio-deploy.md: Pre-merge checklist, ruleset confirmation, env validation
-  - rbk-portfolio-ci-triage.md: CI topology, known Prettier failure, re-run checks guidance
-  - rbk-portfolio-rollback.md: CI gate enforcement, revert-based recovery
-- ADRs:
-  - ADR-0008: CI quality gates (Purpose/Scope + decision body complete)
-  - ADR-0009: React Compiler (decision, rationale, validation, rollback criteria)
-- Internal env contract: `docs/_meta/env/portfolio-app-env-contract.md` with NEXT*PUBLIC*\* rules, CI determinism, references
-- Release note: `docs/00-portfolio/release-notes/20260110-portfolio-app-baseline.md` (comprehensive, includes README section)
-- Configuration reference: `docs/70-reference/portfolio-app-config-reference.md` (next.config.ts, eslint.config.mjs, prettier.config.mjs, postcss.config.mjs, tsconfig.json, .nvmrc)
+- Phase 1 dossier/runbooks/ADRs baseline intact (8 dossier pages, ADR-0008/0009, deploy/rollback/CI triage runbooks)
+- Phase 2 planning and hardening artifacts:
+  - [docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/phase-2-implementation-guide.md) (step-by-step execution)
+  - [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md) (CI/security hardening summary)
+  - Threat model expanded with STRIDE analysis (PR #32 pending merge)
+  - [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) added + runbook index updated
 
 #### ⏳ In Progress / Pending
 
-- Vercel deployment (not yet connected)
-- GitHub Ruleset enforcement (not yet configured with required checks)
-- Public repo URLs (pending in `src/data/projects.ts`: repoUrl, demoUrl)
-- Docs site deployment (pending final Vercel link)
+- Gold-standard project content: finalize portfolio-app exemplar page, dossier enhancements, capability-to-proof CV mapping, release note
+- Merge threat model PR #32 and align references
+- Confirm branch protections require `ci / quality`, `ci / build`, `secrets-scan`, and CodeQL; align Vercel promotion checks accordingly
+- Publish public repo/demo URLs in `src/data/projects.ts` once deployments are live
+- Connect Vercel deployments for portfolio-app and docs (if not already in place)
 
 ---
-
-## Integration Contract
-
-### Environment Variables Configuration (NEW — Phase 2)
-
-The Portfolio Docs App now supports environment variable configuration for portability across environments.
 
 **Standard Prefix Convention:**
 
@@ -104,6 +86,13 @@ The Portfolio Docs App now supports environment variable configuration for porta
 
 **These rules are enforced in both repository's copilot-instructions files.**
 
+### Diagram authoring standard (Docs repository)
+
+- All diagrams in `docs/` must be Mermaid code blocks (no PNG/SVG/ASCII/external tools)
+- Use triple-backtick fenced blocks with `mermaid` language id
+- Keep a short caption explaining the diagram’s purpose; test render via `pnpm build && pnpm serve`
+- Full requirements live in [portfolio-docs/.github/copilot-instructions.md](.github/copilot-instructions.md)
+
 #### Within portfolio-docs (internal):
 
 - Use relative paths: `/docs/00-portfolio/roadmap.md` (include prefix numbers + .md extension)
@@ -139,8 +128,10 @@ The Portfolio Docs App now supports environment variable configuration for porta
 ### CI Check Names (Stable API)
 
 - `ci / quality` — lint, format:check, typecheck
-- `ci / build` — Next.js build (depends on quality)
+- `secrets-scan` — TruffleHog (PR-only gate; Information Disclosure mitigation)
+- `ci / build` — Next.js build + Playwright smoke tests (depends on quality)
 - Frozen installs: `pnpm install --frozen-lockfile`
+- CodeQL: JS/TS (PR + scheduled) — keep as a required check in branch protections
 - These names are used by:
   - GitHub Rulesets (required checks before merge)
   - Vercel Deployment Checks (promotion gating)
@@ -183,12 +174,12 @@ The Portfolio Docs App now supports environment variable configuration for porta
 2. **GitHub Ruleset:**
    - Create ruleset: `main-protection`
    - Require PR before merge
-   - Require checks: `ci / quality`, `ci / build`
+   - Require checks: `ci / quality`, `secrets-scan`, `ci / build`, CodeQL
    - Block force-push and deletion
 
 3. **Vercel Promotion Checks:**
    - Import GitHub checks into Vercel
-   - Require `ci / quality` and `ci / build` before production promotion
+   - Require `ci / quality` and `ci / build` before production promotion (align with secrets-scan as a PR gate)
 
 4. **Public Repo URLs:**
    - Finalize public repo URLs (if making repos public)
@@ -237,11 +228,11 @@ pnpm build      # Docusaurus build
 
 ### Immediate Next Steps (Priority Order)
 
-1. **Deploy portfolio-app to Vercel** (admin task, out-of-repo)
-2. **Configure GitHub Ruleset** (admin task, requires repo settings access)
-3. **Configure Vercel promotion checks** (admin task, Vercel UI)
-4. **Validate end-to-end:** PR → preview → CI pass → merge → production
-5. **Populate public URLs** in `src/data/projects.ts` once deployed
+1. **Finalize gold-standard project content**: portfolio-app exemplar page, dossier enhancements, release note, CV capability-to-proof mapping
+2. **Merge threat model PR #32** and ensure docs/ADR references match (STRIDE + Phase 2 controls)
+3. **Enforce branch protections** for `ci / quality`, `secrets-scan`, `ci / build`, and CodeQL; align Vercel promotion checks
+4. **Validate pipelines locally**: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` (includes Playwright smoke tests)
+5. **Update public repo/demo URLs** in `src/data/projects.ts` after deployments are live (app + docs)
 
 ### Phase 1 Acceptance Criteria (Roadmap Reference)
 
@@ -277,6 +268,19 @@ Once Phase 1 is complete (deployed + validated):
 ---
 
 ## Session History (Brief)
+
+### 2026-01-20 Session (Phase 2 Security & Testing Hardening)
+
+**Objective:** Add CI security gates and operational readiness controls for Phase 2.
+
+**Scope:**
+
+- Added TruffleHog `secrets-scan` CI job with per-job least-privilege permissions; build continues to run Playwright smoke tests
+- Added local hygiene: `.pre-commit-config.yaml` (TruffleHog hook) and `pnpm secrets:scan`
+- Authored [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md) and updated [docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/phase-2-implementation-guide.md) Step 4a/4b for hardening
+- Created [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md); threat model expanded (PR #32 pending)
+
+**Validation:** `pnpm build` (includes Playwright smoke tests) succeeded; secrets-scan gate runs on PRs.
 
 ### 2026-01-20 Session (CURRENT — Phase 2 Environment Variables Documentation Review & Update)
 
@@ -399,9 +403,9 @@ Created comprehensive **Phase 1 Completion Documentation** to support admin task
 
 ### What Changed Since Last Commit
 
-- Portfolio-docs: ADR-0009, enhanced architecture.md, updated testing.md and deployment.md, created config-reference.md
-- Portfolio-app: Already merged (no new changes since last session)
-- Session context: Updated with latest completions
+- Portfolio-app: CI hardened with TruffleHog `secrets-scan` (PR-only), per-job least-privilege permissions, Playwright smoke tests in build, `.pre-commit-config.yaml`, and `pnpm secrets:scan`
+- Portfolio-docs: Added Phase 2 artifacts ([docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/phase-2-implementation-guide.md), [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md), [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)); threat model expansion PR #32 pending
+- Session context: Updated for Phase 2 hardening status, required checks, and remaining gold-standard deliverables
 
 ### Lessons Learned
 
