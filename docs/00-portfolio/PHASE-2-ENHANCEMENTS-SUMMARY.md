@@ -22,10 +22,11 @@ This page summarizes the Phase 2 hardening efforts applied to the Portfolio App 
 
 ### CI/CD
 
-- Added `secrets-scan` job using TruffleHog with verified detectors.
+- Added `secrets-scan` job using TruffleHog with verified detectors; **runs on pull requests only** to avoid TruffleHog BASE==HEAD failures on direct pushes to main (where base and head commits are identical).
 - Removed global workflow permissions; added minimal job-level permissions.
 - Ensured `pnpm install --frozen-lockfile` to prevent dependency drift.
 - Required checks before merge: `ci / quality`, `ci / build`, `secrets-scan`, CodeQL.
+  - Note: `secrets-scan` is enforced on all PRs via branch protection rules, ensuring all production code is scanned before merge.
 
 ### Developer Workflow
 

@@ -74,13 +74,14 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 #### Threat 2: Modify CI Workflows or Build Scripts
 
-| Mitigation                             | Required | Implemented    | Evidence                                                                           |
-| -------------------------------------- | -------- | -------------- | ---------------------------------------------------------------------------------- |
-| Least-privilege workflow permissions   | ✅       | ✅ **Phase 2** | Global permissions removed; jobs specify: `contents: read` or `write` as needed    |
-| No long-lived secrets in workflows     | ✅       | ✅             | No secrets stored in `.github/workflows`; Vercel uses OIDC tokens (short-lived)    |
-| All workflow changes require PR review | ✅       | ✅             | GitHub Ruleset enforces PR review on all branches including `.github/`             |
-| Actions pinned by SHA (or Dependabot)  | ⚠️       | ⚠️             | Actions currently pinned to `@v<N>` tags; Dependabot can be enabled for future PRs |
-| Minimize postinstall hooks             | ✅       | ✅             | `pnpm` config: `enable-pre-post-scripts: false` (blocks unsafe hooks)              |
+| Mitigation                             | Required | Implemented    | Evidence                                                                                                     |
+| -------------------------------------- | -------- | -------------- | ------------------------------------------------------------------------------------------------------------ |
+| Least-privilege workflow permissions   | ✅       | ✅ **Phase 2** | Global permissions removed; jobs specify: `contents: read` or `write` as needed                              |
+| No long-lived secrets in workflows     | ✅       | ✅             | No secrets stored in `.github/workflows`; Vercel uses OIDC tokens (short-lived)                              |
+| All workflow changes require PR review | ✅       | ✅             | GitHub Ruleset enforces PR review on all branches including `.github/`                                       |
+| Actions pinned by SHA (or Dependabot)  | ⚠️       | ⚠️             | Actions currently pinned to `@v<N>` tags; Dependabot can be enabled for future PRs                           |
+| Minimize postinstall hooks             | ✅       | ✅             | `pnpm` config: `enable-pre-post-scripts: false` (blocks unsafe hooks)                                        |
+| Secrets scanning gate enforced         | ✅       | ✅ **Phase 2** | TruffleHog job added to CI; runs on all PRs (PR-only conditional prevents BASE==HEAD failure on push events) |
 
 **Compliance Status:** ✅ **95% — Phase 2 enhancements complete; optional SHA pinning deferred**
 

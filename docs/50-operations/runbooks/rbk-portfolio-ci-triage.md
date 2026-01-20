@@ -50,6 +50,9 @@ When either check fails, this runbook provides deterministic diagnosis and fix p
   - `pnpm lint`
   - `pnpm format:check`
   - `pnpm typecheck`
+- `ci / secrets-scan` job runs **on pull requests only** (not on push to main)
+  - TruffleHog secret scanning with verified detectors
+  - reason: TruffleHog requires a diff between base and head; direct pushes to main have identical references and would fail
 - `ci / build` job runs:
   - `pnpm install --frozen-lockfile`
   - `pnpm build`
@@ -57,6 +60,7 @@ When either check fails, this runbook provides deterministic diagnosis and fix p
   - Dev server startup (`pnpm dev &` + readiness check via `wait-on`)
   - Smoke tests (`pnpm test` - 12 tests across Chromium + Firefox)
   - depends on `ci / quality` being green
+  - note: `secrets-scan` is not a strict dependency (only runs on PRs, but all PRs require it via branch protection)
 
 ### 1) Identify the failing check and error class
 
