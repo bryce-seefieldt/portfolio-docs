@@ -12,12 +12,14 @@ date: 2026-01-20
 **Current Phase:** Phase 2 (Gold Standard Project + Credibility Baseline)
 
 **Completed Steps:**
+
 - ✅ STEP 1: Gold standard project decided (portfolio-app via ADR-0010)
 - ✅ STEP 2: Smoke test infrastructure (Playwright + CI integration)
 - ✅ STEP 4a: Phase 2 security enhancements (secrets scanning, CI hardening)
 - ✅ STEP 4b: Secrets incident response runbook
 
 **Remaining Steps:**
+
 - 🟡 STEP 3: Enhance portfolio-app dossier to gold standard
 - 🟡 STEP 4: Complete/merge threat model PR #32
 - 🟡 STEP 6: Create gold standard project page in portfolio-app
@@ -35,6 +37,7 @@ date: 2026-01-20
 **Action Items:**
 
 1. **Review and merge PR #32** (portfolio-docs threat model enhancement)
+
    ```bash
    cd /home/seven30/src/portfolio/portfolio-docs
    gh pr view 32
@@ -48,6 +51,7 @@ date: 2026-01-20
 3. **Update session-context.md** to mark threat model as completed
 
 **Success Criteria:**
+
 - [ ] PR #32 merged
 - [ ] Threat model accessible at `/docs/40-security/threat-models/portfolio-app-threat-model`
 - [ ] Dossier security page links correctly to threat model
@@ -68,18 +72,20 @@ date: 2026-01-20
 **Add/Update Sections:**
 
 1. **Executive Summary** (new section, top of file)
+
    ```markdown
    ## Executive Summary
-   
+
    The Portfolio App is a production TypeScript web application that serves as an interactive CV and project showcase, intentionally designed to demonstrate enterprise-grade engineering discipline. Built with Next.js and deployed on Vercel with comprehensive CI/CD governance, it proves competency across modern web development, security hygiene, operational maturity, and evidence-first documentation practices.
-   
+
    **Key value:** Not just a portfolio site—a working exemplar of how senior engineers build, secure, operate, and document production systems.
    ```
 
 2. **Key Metrics (Phase 2 Baseline)** (new section)
+
    ```markdown
    ## Key Metrics (Phase 2 Baseline)
-   
+
    - **Lines of code:** ~500 (application), ~200 (tests)
    - **Routes:** 5 core routes (/, /cv, /projects, /contact, /projects/[slug])
    - **CI checks:** 4 required (quality, secrets-scan, build w/smoke tests, CodeQL)
@@ -91,37 +97,43 @@ date: 2026-01-20
    ```
 
 3. **What This Project Proves** (new section)
+
    ```markdown
    ## What This Project Proves
-   
+
    ### Technical Competency
+
    - Modern full-stack web development (Next.js 15+, React 19+, TypeScript 5+)
    - Component-driven architecture with App Router
    - Responsive design with Tailwind CSS
    - Evidence-first UX (deep links to documentation)
-   
+
    ### Engineering Discipline
+
    - CI quality gates (ESLint max-warnings=0, Prettier, TypeScript strict)
    - Automated smoke testing (Playwright multi-browser)
    - Secrets scanning (TruffleHog CI + pre-commit)
    - Frozen lockfile installs (deterministic builds)
    - PR-only merge discipline (GitHub Ruleset enforcement)
-   
+
    ### Security Awareness
+
    - Public-safe by design (no secrets, internal endpoints, or auth)
    - CodeQL + Dependabot enabled (supply chain hardening)
    - Least-privilege CI permissions (scoped per job)
    - Environment variable hygiene (documented, validated)
    - Secrets incident response runbook
-   
+
    ### Operational Maturity
+
    - Deploy/rollback runbooks (tested and documented)
    - CI triage procedures (deterministic troubleshooting)
    - Secrets incident response (5-phase procedure)
    - Vercel production promotion gating (required checks)
    - Evidence-based release notes
-   
+
    ### Documentation Excellence
+
    - Complete dossier (7 comprehensive pages)
    - ADRs for durable decisions (hosting, CI gates, testing strategy, gold standard choice)
    - Threat model (STRIDE analysis with 12 threat scenarios)
@@ -129,6 +141,7 @@ date: 2026-01-20
    ```
 
 **Action:**
+
 ```bash
 # Edit file with comprehensive enhancements
 code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/01-overview.md
@@ -147,9 +160,10 @@ code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/0
    - Include: Next.js, React, TypeScript, Tailwind, Playwright, ESLint, Prettier, pnpm, Vercel
 
 2. **High-Level Request Flow** (new section with Mermaid diagram)
+
    ````markdown
    ## High-Level Request Flow
-   
+
    ```mermaid
    graph TD
      A[Browser] -->|HTTPS GET /projects/portfolio-app| B[Vercel Edge CDN]
@@ -160,8 +174,9 @@ code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/0
      F --> G[HTML Response with RSC payload]
      G --> A
    ```
-   
+
    **Flow explanation:**
+
    1. Browser requests project detail page
    2. Vercel Edge CDN terminates SSL, serves cached response if available
    3. Next.js App Router matches `/projects/[slug]` route
@@ -171,48 +186,55 @@ code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/0
    ````
 
 3. **Component Architecture** (new section)
+
    ```markdown
    ## Component Architecture
-   
    ```
+
    src/
-   ├── app/                # Next.js App Router
-   │   ├── layout.tsx      # Root layout (global nav, metadata)
-   │   ├── page.tsx        # Landing page (/)
-   │   ├── cv/
-   │   │   └── page.tsx    # CV route
-   │   ├── projects/
-   │   │   ├── page.tsx    # Projects list
-   │   │   └── [slug]/
-   │   │       └── page.tsx  # Dynamic project detail
-   │   └── contact/
-   │       └── page.tsx    # Contact page
-   ├── components/         # Reusable components
-   │   ├── Section.tsx     # Content section wrapper
-   │   └── Callout.tsx     # Highlighted content blocks
+   ├── app/ # Next.js App Router
+   │ ├── layout.tsx # Root layout (global nav, metadata)
+   │ ├── page.tsx # Landing page (/)
+   │ ├── cv/
+   │ │ └── page.tsx # CV route
+   │ ├── projects/
+   │ │ ├── page.tsx # Projects list
+   │ │ └── [slug]/
+   │ │ └── page.tsx # Dynamic project detail
+   │ └── contact/
+   │ └── page.tsx # Contact page
+   ├── components/ # Reusable components
+   │ ├── Section.tsx # Content section wrapper
+   │ └── Callout.tsx # Highlighted content blocks
    ├── data/
-   │   └── projects.ts     # Project registry (typed)
+   │ └── projects.ts # Project registry (typed)
    └── lib/
-       └── config.ts       # Environment config helpers
+   └── config.ts # Environment config helpers
+
    ```
+
    ```
 
 4. **Scalability Patterns** (new section)
+
    ```markdown
    ## Scalability Patterns
-   
+
    **Current (Phase 2):**
+
    - Static project data in TypeScript (typed, version-controlled)
    - Manual content updates via code changes + PRs
    - Evidence links hardcoded per project
-   
+
    **Planned (Phase 3+):**
+
    - CMS or API-driven project data (Contentful, headless CMS)
    - Automated evidence link validation
    - Tag-based filtering and search
    ```
 
 **Action:**
+
 ```bash
 code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/02-architecture.md
 ```
@@ -226,53 +248,62 @@ code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/0
 **Add/Update Sections:**
 
 1. **Public-Safety Rules (Enforced)** (new section)
-   ```markdown
+
+   ````markdown
    ## Public-Safety Rules (Enforced)
-   
+
    ### Environment Variables
+
    - ✅ All `NEXT_PUBLIC_*` variables are client-visible by design
    - ✅ No secrets in any `NEXT_PUBLIC_*` variable
    - ✅ `.env.example` documents all required variables
    - ✅ Local `.env.local` gitignored
-   
+
    **Validation procedure:**
+
    ```bash
    # Check for secrets in env vars
    grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
    # Should return: no results
-   
+
    # Verify secrets scanning gate
    pnpm secrets:scan
    # Should pass with no detections
    ```
-   
+   ````
+
    ### Dependencies
    - ✅ CodeQL scanning (JS/TS) on PR + weekly schedule
    - ✅ Dependabot weekly updates (grouped, majors excluded)
    - ✅ Frozen lockfile in CI (`pnpm install --frozen-lockfile`)
-   
+
    ### CI/CD Pipeline
    - ✅ Least-privilege permissions (scoped per job)
    - ✅ Secrets scanning gate (TruffleHog, PR-only)
    - ✅ Required checks before merge (quality, secrets-scan, build, CodeQL)
+
+   ```
+
    ```
 
 2. **Security Controls (Phase 2)** (update existing or new)
+
    ```markdown
    ## Security Controls (Phase 2)
-   
-   | Control | Status | Evidence |
-   |---------|--------|----------|
-   | Secrets scanning (CI) | ✅ Enforced | [ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml) |
-   | Pre-commit secrets scan | ✅ Available | [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) |
-   | Least-privilege CI perms | ✅ Enforced | [ci.yml job permissions](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L19-L22) |
-   | CodeQL scanning | ✅ Enforced | [codeql.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/codeql.yml) |
-   | Dependabot updates | ✅ Enabled | [dependabot.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/dependabot.yml) |
-   | Threat model | ✅ Complete | [portfolio-app-threat-model.md](/docs/40-security/threat-models/portfolio-app-threat-model.md) |
-   | Incident response | ✅ Ready | [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) |
+
+   | Control                  | Status       | Evidence                                                                                                              |
+   | ------------------------ | ------------ | --------------------------------------------------------------------------------------------------------------------- |
+   | Secrets scanning (CI)    | ✅ Enforced  | [ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)                         |
+   | Pre-commit secrets scan  | ✅ Available | [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml)         |
+   | Least-privilege CI perms | ✅ Enforced  | [ci.yml job permissions](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L19-L22) |
+   | CodeQL scanning          | ✅ Enforced  | [codeql.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/codeql.yml)                 |
+   | Dependabot updates       | ✅ Enabled   | [dependabot.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/dependabot.yml)                   |
+   | Threat model             | ✅ Complete  | [portfolio-app-threat-model.md](/docs/40-security/threat-models/portfolio-app-threat-model.md)                        |
+   | Incident response        | ✅ Ready     | [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                   |
    ```
 
 **Action:**
+
 ```bash
 code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/04-security.md
 ```
@@ -282,6 +313,7 @@ code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/0
 #### 3d. Verify Other Dossier Pages (30 min)
 
 **Files to review (should already be comprehensive):**
+
 - ✅ `03-deployment.md` — Verify smoke test references, CI hardening notes
 - ✅ `05-testing.md` — Verify Playwright details, Phase 2 enhancements
 - ✅ `06-operations.md` — Verify runbook references
@@ -289,6 +321,7 @@ code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/0
 - ✅ `index.md` — Update with Phase 2 current state
 
 **Action:**
+
 ```bash
 # Quick review of each file
 cat /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/03-deployment.md | head -50
@@ -297,6 +330,7 @@ cat /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/05
 ```
 
 **Success Criteria:**
+
 - [ ] All 7 dossier files enhanced to gold standard
 - [ ] Executive summary, key metrics, "what this proves" added to overview
 - [ ] Technology stack inventory and flow diagrams added to architecture
@@ -383,7 +417,7 @@ export default function PortfolioAppProjectPage() {
               <li>• Evidence-first UX</li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-medium text-zinc-900 dark:text-white">
               Engineering Discipline
@@ -395,7 +429,7 @@ export default function PortfolioAppProjectPage() {
               <li>• PR-only merge discipline</li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-medium text-zinc-900 dark:text-white">
               Security Awareness
@@ -407,7 +441,7 @@ export default function PortfolioAppProjectPage() {
               <li>• Secrets incident response runbook</li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-medium text-zinc-900 dark:text-white">
               Operational Maturity
@@ -426,7 +460,7 @@ export default function PortfolioAppProjectPage() {
         <Callout type="info">
           Independent reviewers can validate these claims by following the evidence links below.
         </Callout>
-        
+
         <div className="mt-4 space-y-2 text-sm">
           <div className="flex items-start gap-2">
             <span className="text-zinc-500">✓</span>
@@ -437,7 +471,7 @@ export default function PortfolioAppProjectPage() {
               </a>
             </span>
           </div>
-          
+
           <div className="flex items-start gap-2">
             <span className="text-zinc-500">✓</span>
             <span>
@@ -447,7 +481,7 @@ export default function PortfolioAppProjectPage() {
               </a>
             </span>
           </div>
-          
+
           <div className="flex items-start gap-2">
             <span className="text-zinc-500">✓</span>
             <span>
@@ -457,7 +491,7 @@ export default function PortfolioAppProjectPage() {
               </a>
             </span>
           </div>
-          
+
           <div className="flex items-start gap-2">
             <span className="text-zinc-500">✓</span>
             <span>
@@ -467,7 +501,7 @@ export default function PortfolioAppProjectPage() {
               </a>
             </span>
           </div>
-          
+
           <div className="flex items-start gap-2">
             <span className="text-zinc-500">✓</span>
             <span>
@@ -504,7 +538,7 @@ export default function PortfolioAppProjectPage() {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-medium text-zinc-900 dark:text-white">
               Source & CI
@@ -548,6 +582,7 @@ export default function PortfolioAppProjectPage() {
 ```
 
 **Action:**
+
 ```bash
 # Create badge component
 code /home/seven30/src/portfolio/portfolio-app/src/components/GoldStandardBadge.tsx
@@ -557,6 +592,7 @@ code /home/seven30/src/portfolio/portfolio-app/src/app/projects/portfolio-app/pa
 ```
 
 **Success Criteria:**
+
 - [ ] Gold standard badge component created
 - [ ] Project detail page enhanced with comprehensive sections
 - [ ] Verification checklist guides independent reviewers
@@ -710,6 +746,7 @@ export default function CVPage() {
 ```
 
 **Action:**
+
 ```bash
 # Create CV data file
 code /home/seven30/src/portfolio/portfolio-app/src/data/cv.ts
@@ -719,6 +756,7 @@ code /home/seven30/src/portfolio/portfolio-app/src/app/cv/page.tsx
 ```
 
 **Success Criteria:**
+
 - [ ] CV data structure created with capability-to-proof mapping
 - [ ] CV page displays timeline with evidence links
 - [ ] Each entry links to dossiers, threat models, runbooks
@@ -815,16 +853,19 @@ Phase 2 establishes credibility through one exemplary "gold standard" project. T
 ## Changed
 
 ### Project Detail Page
+
 - Added gold standard badge
 - Enhanced evidence links section
 - Added verification checklist
 
 ### CV Page
+
 - Converted from skeleton to comprehensive timeline
 - Added capability-to-proof mapping
 - Linked each role to evidence artifacts
 
 ### Dossier Pages
+
 - Overview: Added executive summary, key metrics, "what this proves"
 - Architecture: Added tech stack inventory, flow diagrams, scalability patterns
 - Security: Added public-safety rules, Phase 2 controls table
@@ -872,11 +913,13 @@ Phase 2 establishes credibility through one exemplary "gold standard" project. T
 ```
 
 **Action:**
+
 ```bash
 code /home/seven30/src/portfolio/portfolio-docs/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md
 ```
 
 **Success Criteria:**
+
 - [ ] Release note created with comprehensive Phase 2 summary
 - [ ] All deliverables documented
 - [ ] Evidence links verified
@@ -890,6 +933,7 @@ code /home/seven30/src/portfolio/portfolio-docs/docs/00-portfolio/release-notes/
 Use this checklist to track overall Phase 2 completion:
 
 ### Documentation (portfolio-docs)
+
 - [ ] Threat model PR #32 merged
 - [ ] Dossier `01-overview.md` enhanced (executive summary, metrics, "what this proves")
 - [ ] Dossier `02-architecture.md` enhanced (tech stack, flow diagrams, scalability)
@@ -898,6 +942,7 @@ Use this checklist to track overall Phase 2 completion:
 - [ ] Release note created (Phase 2 completion)
 
 ### Application (portfolio-app)
+
 - [ ] Gold standard badge component created
 - [ ] Project detail page enhanced (gold standard content)
 - [ ] CV data structure created (`src/data/cv.ts`)
@@ -906,12 +951,14 @@ Use this checklist to track overall Phase 2 completion:
 - [ ] Build passes locally (`pnpm build`)
 
 ### PRs Created
+
 - [ ] portfolio-docs: Dossier enhancements PR
 - [ ] portfolio-app: Gold standard project page PR
 - [ ] portfolio-app: CV enhancement PR
 - [ ] portfolio-docs: Phase 2 release note PR
 
 ### Final Validation
+
 - [ ] All evidence links resolve correctly
 - [ ] Smoke tests cover all routes (including enhanced pages)
 - [ ] CI passes on all PRs
@@ -921,14 +968,14 @@ Use this checklist to track overall Phase 2 completion:
 
 ## Estimated Timeline
 
-| Task | Estimated Time | Priority |
-|------|---------------|----------|
-| Merge threat model PR #32 | 1 hour | P1 |
-| Enhance dossier (3 files) | 4–6 hours | P2 |
-| Create gold standard project page | 2–3 hours | P3 |
-| Enhance CV page | 2–3 hours | P4 |
-| Create Phase 2 release note | 1–2 hours | P5 |
-| **Total** | **10–15 hours** | |
+| Task                              | Estimated Time  | Priority |
+| --------------------------------- | --------------- | -------- |
+| Merge threat model PR #32         | 1 hour          | P1       |
+| Enhance dossier (3 files)         | 4–6 hours       | P2       |
+| Create gold standard project page | 2–3 hours       | P3       |
+| Enhance CV page                   | 2–3 hours       | P4       |
+| Create Phase 2 release note       | 1–2 hours       | P5       |
+| **Total**                         | **10–15 hours** |          |
 
 ---
 
