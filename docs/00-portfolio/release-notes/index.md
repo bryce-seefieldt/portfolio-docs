@@ -67,5 +67,12 @@ Release notes are public. Do not include:
 
 Add new entries at the top.
 
+- **2026-01-20 — Portfolio App Phase 2 Complete (Gold Standard Project)**
+  - `20260120-portfolio-app-phase-2-gold-standard.md`
+  - Comprehensive dossier, STRIDE threat model, enhanced CV, gold standard project page, smoke tests
+- **2026-01-17 — Portfolio App Phase 1 Complete (Foundation)**
+  - `20260117-portfolio-app-phase-1-complete.md`
+  - Smoke test infrastructure, initial dossier, operational runbooks, CI quality gates
 - **2026-01-10 — Portfolio App baseline (App skeleton + governance + supply-chain controls)**
-  - `2026-01-10-portfolio-app-baseline.md`
+  - `20260110-portfolio-app-baseline.md`
+  - Initial deployment with Next.js, TypeScript, Tailwind CSS, CI/CD foundation
