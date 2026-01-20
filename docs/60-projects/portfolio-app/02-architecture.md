@@ -257,86 +257,54 @@ Metadata configured in `src/app/layout.tsx`:
 
 ## Technology Stack (Complete Inventory)
 
-### Core Framework
+| Category               | Technology           | Version  | Rationale                                                                   |
+| ---------------------- | -------------------- | -------- | --------------------------------------------------------------------------- |
+| **Framework**          | Next.js              | v16.1.3  | App Router, React Server Components, static optimization, industry standard |
+| **UI Library**         | React                | v19.2.3  | Concurrent features, automatic batching, modern rendering                   |
+| **Language**           | TypeScript           | v5+      | Strict mode, type safety, developer experience                              |
+| **Styling**            | Tailwind CSS         | v4       | Utility-first, JIT compilation, minimal CSS bundle                          |
+| **CSS Processing**     | @tailwindcss/postcss | v4       | CSS transformation and optimization                                         |
+| **Package Manager**    | pnpm                 | v10.0.0  | Fast, efficient, frozen lockfiles in CI                                     |
+| **Compiler**           | Next.js SWC          | Built-in | Rust-based, 17x faster than Babel                                           |
+| **React Optimizer**    | React Compiler       | v1.0.0   | Automatic memoization, ADR-0009                                             |
+| **E2E Testing**        | Playwright           | v1.57.0  | Multi-browser smoke tests, 100% route coverage                              |
+| **Linting**            | ESLint               | v9       | Flat config, Next.js presets, TypeScript integration                        |
+| **Formatting**         | Prettier             | v3.8.0   | Code formatting, Tailwind class sorting                                     |
+| **CI/CD**              | GitHub Actions       | -        | Quality + build jobs, frozen lockfiles                                      |
+| **Hosting**            | Vercel               | -        | Preview + production, edge CDN, promotion checks                            |
+| **Security Scanning**  | CodeQL               | -        | JavaScript/TypeScript static analysis                                       |
+| **Dependency Updates** | Dependabot           | -        | Weekly updates, grouped, majors excluded                                    |
+| **Secrets Scanning**   | TruffleHog           | v3.85.0  | CI gate + pre-commit hook                                                   |
 
-- Next.js: v16.1.3 (App Router, React Server Components, static optimization)
-- React: v19.2.3 (concurrent features, automatic batching)
-- TypeScript: v5+ (strict mode, noEmit for type-only checks)
+### Notable Architectural Decisions
 
-### Styling & UI
-
-- Tailwind CSS: v4 (utility-first, JIT compilation)
-- @tailwindcss/postcss: v4 (CSS processing)
-- CSS Modules: Built-in (component-scoped styles)
-
-### Build & Development
-
-- pnpm: v10.0.0 (fast, efficient, frozen lockfiles in CI)
-- Next.js Compiler: SWC-based (Rust)
-- React Compiler: babel-plugin-react-compiler v1.0.0 (optimization)
-
-### Testing & Quality
-
-- Playwright: v1.57.0 (E2E smoke tests, multi-browser)
-- ESLint: v9 (flat config, Next.js presets, TypeScript integration)
-- Prettier: v3.8.0 (code formatting, Tailwind plugin)
-- wait-on: v9.0.3 (dev server readiness in CI)
-
-### CI/CD & Governance
-
-- GitHub Actions: Quality + build jobs
-- Vercel: Preview + production deployments
-- CodeQL: JavaScript/TypeScript security scanning
-- Dependabot: Weekly dependency updates (grouped, majors excluded)
-
-### Notable Decisions
-
-- No authentication: Intentionally deferred (public portfolio)
-- No database: Static content model (scalable via data files)
-- No form backend: Contact via static methods (email link)
-- Evidence links: Deep integration with Docusaurus documentation
+- **No authentication**: Intentionally deferred (public portfolio, ADR pending)
+- **No database**: Static content model (scalable via data files)
+- **No form backend**: Contact via static methods (email link)
+- **Evidence links**: Deep integration with Docusaurus documentation
+- **React Compiler**: Enabled for automatic optimization (ADR-0009)
 
 ## High-Level Request Flow
 
+```mermaid
+graph TD
+    A[Browser] -->|HTTPS GET /projects/portfolio-app| B[Vercel Edge CDN]
+    B --> C[Next.js App Router]
+    C --> D["Route: /projects/[slug]"]
+    D --> E[getProjectBySlug from src/data/projects.ts]
+    E --> F[Server Component Rendering]
+    F --> G[HTML Response with RSC payload]
+    G --> A
 ```
-┌─────────────┐
-│  Browser    │
-└──────┬──────┘
-  │ HTTPS GET /projects/portfolio-app
-  ↓
-┌─────────────────────┐
-│   Vercel Edge       │ (CDN, SSL termination)
-└──────┬──────────────┘
-  │
-  ↓
-┌─────────────────────────────────────┐
-│   Next.js App Router                │
-│   - Route: /projects/[slug]         │
-│   - Server Component (async params) │
-│   - getProjectBySlug(slug)          │
-│   - notFound() if missing           │
-└──────┬──────────────────────────────┘
-  │
-  ↓
-┌─────────────────────────────┐
-│   Project Data (src/data/)  │
-│   - PROJECTS array          │
-│   - Static metadata         │
-└──────┬──────────────────────┘
-  │
-  ↓
-┌──────────────────────────────────┐
-│   Component Rendering            │
-│   - Section components           │
-│   - Evidence links (to /docs)    │
-│   - Tailwind styling             │
-└──────┬───────────────────────────┘
-  │
-  ↓
-┌──────────────────────┐
-│   HTML Response      │ (static-optimized, RSC payload)
-└──────────────────────┘
-```
+
+**Flow explanation:**
+
+1. Browser requests project detail page
+2. Vercel Edge CDN terminates SSL, serves cached response if available
+3. Next.js App Router matches `/projects/[slug]` route
+4. Server component fetches project metadata from static registry
+5. Component renders with Section/Callout components and evidence links
+6. Static-optimized HTML + RSC payload returned to browser
 
 ## Component Architecture
 

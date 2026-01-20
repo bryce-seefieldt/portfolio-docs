@@ -80,15 +80,21 @@ Portfolio App must link to evidence pages for each project:
 
 ### Current State (Phase 2)
 
-- ✅ Route skeleton: 5 core routes implemented and smoke-tested
-- ✅ CI quality gates: lint, format, typecheck, build, smoke tests (all enforced)
-- ✅ Smoke test coverage: 100% routes (12 tests, Chromium + Firefox)
-- ✅ Dependabot hardening: Auto-format + lockfile exclusions
-- ✅ Deployment governance: Vercel promotion gated by required checks
-- ✅ Dossier enhancement: All 7 pages updated to gold standard
-- ✅ Threat model: Complete (STRIDE analysis, Phase 2 baseline controls)
-- 🟡 Enhanced project page: Planned for Step 7 (gold standard badge)
-- 🟡 Meaningful CV page: Planned for Step 8 (capability-to-proof mapping)
+- ✅ **Route skeleton**: 5 core routes implemented and smoke-tested
+- ✅ **CI quality gates**: lint, format, typecheck, secrets-scan, build with smoke tests (all enforced)
+- ✅ **Smoke test coverage**: 100% routes (12 tests, Chromium + Firefox)
+- ✅ **Secrets scanning**: TruffleHog CI gate + pre-commit hook configured
+- ✅ **Security hardening**: Least-privilege CI permissions, CodeQL, Dependabot
+- ✅ **Deployment governance**: Vercel promotion gated by required checks
+- ✅ **Dossier enhancement**: All 7 pages updated to gold standard (Phase 2)
+  - Executive summary, key metrics, "what this proves" framework
+  - Comprehensive tech stack table with 16+ dependencies
+  - Mermaid flow diagrams for request routing
+  - Security controls table with 10+ enforced controls
+- ✅ **Threat model**: Complete STRIDE analysis with 12 threat scenarios
+- ✅ **Incident response**: Secrets incident runbook (5-phase procedure)
+- 🟡 **Enhanced project page**: Planned (Priority 3 - gold standard badge)
+- 🟡 **Meaningful CV page**: Planned (Priority 4 - capability-to-proof mapping)
 
 ## Reviewer path
 
