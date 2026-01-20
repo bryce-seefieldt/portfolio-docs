@@ -81,6 +81,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | All workflow changes require PR review | ✅       | ✅             | GitHub Ruleset enforces PR review on all branches including `.github/`             |
 | Actions pinned by SHA (or Dependabot)  | ⚠️       | ⚠️             | Actions currently pinned to `@v<N>` tags; Dependabot can be enabled for future PRs |
 | Minimize postinstall hooks             | ✅       | ✅             | `pnpm` config: `enable-pre-post-scripts: false` (blocks unsafe hooks)              |
+| Secrets scanning gate enforced         | ✅       | ✅ **Phase 2** | TruffleHog job added to CI; runs on all PRs (PR-only conditional prevents BASE==HEAD failure on push events) |
 
 **Compliance Status:** ✅ **95% — Phase 2 enhancements complete; optional SHA pinning deferred**
 
