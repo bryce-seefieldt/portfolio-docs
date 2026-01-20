@@ -132,6 +132,88 @@ For enterprise-level polish, use `customProps` to record (and later render):
 
 Provides “evidence dashboard” feel without inventing a separate system.
 
+## Environment Variables Configuration
+
+The Portfolio Docs App uses environment variables to support portability across local, preview, and production environments.
+
+### Variable Prefix Convention
+
+Docusaurus uses `DOCUSAURUS_` prefix convention for client-exposed variables:
+
+- **`DOCUSAURUS_*`**: Exposed to client-side code (browser)
+- **Non-prefixed**: Build-time only (server-side, not available in React)
+
+This is analogous to Next.js `NEXT_PUBLIC_*` convention.
+
+### Core Variables
+
+#### `DOCUSAURUS_SITE_URL`
+
+- **Purpose**: Base URL of the deployed site (SEO, sitemap, canonical URLs)
+- **Local**: `http://localhost:3000`
+- **Production**: `https://bns-portfolio-docs.vercel.app`
+- **Default**: `https://bns-portfolio-docs.vercel.app` (fallback if not set)
+
+#### `DOCUSAURUS_BASE_URL`
+
+- **Purpose**: Base path under which site is served (for subpath deployments)
+- **Default**: `/` (root)
+- **Use case**: GitHub Pages subpath like `/portfolio-docs/`
+
+#### `DOCUSAURUS_GITHUB_ORG`, `DOCUSAURUS_GITHUB_REPO_DOCS`, `DOCUSAURUS_GITHUB_REPO_APP`
+
+- **Purpose**: GitHub organization and repository names for linking
+- **Used in**: GitHub URLs, edit links, navbar/footer links
+- **Default values**: `bryce-seefieldt`, `portfolio-docs`, `portfolio-app`
+
+#### `DOCUSAURUS_PORTFOLIO_APP_URL`
+
+- **Purpose**: URL of the Portfolio App for cross-linking from docs to live app
+- **Local**: `http://localhost:3000`
+- **Production**: `https://bns-portfolio-app.vercel.app`
+
+### File Structure
+
+- **`.env.example`**: Template with placeholder values (committed to repo)
+- **`.env.local`**: Local development overrides (gitignored, not committed)
+- **`.env.production.local`** (optional): Production-specific overrides (gitignored)
+
+### Local Development Setup
+
+```bash
+# Copy template
+cp .env.example .env.local
+
+# Edit with local values
+DOCUSAURUS_SITE_URL=http://localhost:3000
+DOCUSAURUS_GITHUB_ORG=your-username
+DOCUSAURUS_GITHUB_REPO_DOCS=portfolio-docs
+DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
+```
+
+### Production Configuration (Vercel)
+
+Set environment variables in Vercel Dashboard under **Settings → Environment Variables**:
+
+```
+DOCUSAURUS_SITE_URL=https://bns-portfolio-docs.vercel.app
+DOCUSAURUS_BASE_URL=/
+DOCUSAURUS_GITHUB_ORG=bryce-seefieldt
+DOCUSAURUS_GITHUB_REPO_DOCS=portfolio-docs
+DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
+DOCUSAURUS_PORTFOLIO_APP_URL=https://bns-portfolio-app.vercel.app
+```
+
+### Full Documentation
+
+See [Portfolio Docs Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md) for:
+
+- Complete variable reference
+- Environment-specific examples
+- React component access via `customFields`
+- File precedence rules
+- Security notes
+
 ## CI and Deployment Configuration
 
 ### Hard build gate (broken links == failure)

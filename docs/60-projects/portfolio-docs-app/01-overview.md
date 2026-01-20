@@ -58,6 +58,22 @@ Docusaurus is well-suited because it supports:
 - hierarchical, filesystem-driven navigation
 - versioned documentation patterns (optional, if adopted later)
 - strong developer experience for building a polished public site
+- environment-driven configuration for portability across deployment environments
+
+### Environment Variable Support
+
+The Portfolio Docs App is configured to support local, preview, and production environments through environment variables:
+
+- **`DOCUSAURUS_SITE_URL`**: Base URL (production: Vercel domain; local: `http://localhost:3000`)
+- **`DOCUSAURUS_BASE_URL`**: Subpath (default: `/`)
+- **`DOCUSAURUS_GITHUB_ORG`**, **`DOCUSAURUS_GITHUB_REPO_DOCS`**, **`DOCUSAURUS_GITHUB_REPO_APP`**: GitHub links
+- **`DOCUSAURUS_PORTFOLIO_APP_URL`**: Cross-repository linking to portfolio-app
+
+**Setup:**
+
+- Local development: Copy `.env.example` to `.env.local` and configure for local testing
+- Production: Set variables in Vercel dashboard
+- See [Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md) for complete reference
 
 ## Success criteria
 

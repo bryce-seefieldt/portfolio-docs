@@ -63,7 +63,7 @@ Before assuming link issues, check if the failure is from quality gates:
 
 ### 1) Check for toolchain-related failures
 
-Before assuming link issues, verify package manager consistency:
+Before assuming link issues, verify package manager consistency and environment variables:
 
 **If you recently changed dependencies or pnpm version:**
 
@@ -88,16 +88,28 @@ Before assuming link issues, verify package manager consistency:
    pnpm --version  # Should now match
    ```
 
-3. Clean install and rebuild:
+3. Verify environment variables are configured:
+
+   ```bash
+   # Check .env.local exists
+   [ -f .env.local ] && echo ".env.local exists" || echo "ERROR: .env.local missing"
+
+   # Check required variables
+   grep DOCUSAURUS_SITE_URL .env.local || echo "Missing DOCUSAURUS_SITE_URL"
+   ```
+
+See [Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md) for complete reference.
+
+4. Clean install and rebuild:
    ```bash
    rm -rf node_modules pnpm-lock.yaml
    pnpm install
    pnpm build
    ```
 
-If the build now passes, the issue was toolchain-related, not link-related. Proceed to documenting the fix in a PR.
+If the build now passes, the issue was toolchain or environment-related, not link-related. Proceed to documenting the fix in a PR.
 
-### 1) Reproduce the failure locally
+### 2) Reproduce the failure locally
 
 ```bash
 pnpm build

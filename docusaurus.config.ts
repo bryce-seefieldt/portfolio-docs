@@ -15,18 +15,30 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://bns-portfolio-docs.vercel.app',
+  url:
+    process.env.DOCUSAURUS_SITE_URL || 'https://bns-portfolio-docs.vercel.app',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: process.env.DOCUSAURUS_BASE_URL || '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'bryce-seefieldt', // Usually your GitHub org/user name.
-  projectName: 'portfolio-docs', // Usually your repo name.
+  organizationName: process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt', // Usually your GitHub org/user name.
+  projectName: process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'warn',
+
+  // Custom fields for cross-repository linking
+  customFields: {
+    portfolioAppUrl:
+      process.env.DOCUSAURUS_PORTFOLIO_APP_URL ||
+      'https://bns-portfolio-app.vercel.app',
+    githubOrgUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}`,
+    githubRepoDocsUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}`,
+    githubRepoAppUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_APP || 'portfolio-app'}`,
+  },
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang.
   i18n: {
@@ -59,8 +71,7 @@ const config: Config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/bryce-seefieldt/portfolio-docs/tree/main/',
+          editUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}/tree/main/`,
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -97,7 +108,7 @@ const config: Config = {
         },
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/bryce-seefieldt/portfolio-docs',
+          href: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}`,
           label: 'GitHub',
           position: 'right',
         },
@@ -137,7 +148,7 @@ const config: Config = {
             // },
             {
               label: 'GitHub',
-              href: 'https://github.com/bryce-seefieldt/',
+              href: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/`,
             },
           ],
         },

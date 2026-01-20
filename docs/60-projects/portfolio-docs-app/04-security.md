@@ -105,7 +105,15 @@ This page documents the security posture of the Portfolio Docs App as a public-f
   - dependency audit checks in CI
   - PR-based updates only
 
-### Control 5: MDX minimization
+### Control 5: Environment variable security
+
+- **Public-safe only**: All `DOCUSAURUS_*` variables must be safe for production exposure
+- **No hardcoded secrets**: Use environment files (`.env.local`, `.env.production.local`) for local-only overrides
+- **Verify at merge**: PR reviewers check that no sensitive URLs or endpoints are being added
+- **Protected in Vercel**: Production variables are restricted to authorized users only
+- See [Portfolio Docs Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md) for public-safe variable reference
+
+### Control 6: MDX minimization
 
 - Default to Markdown.
 - Use MDX only when needed and treat MDX as “code” requiring higher scrutiny.
@@ -122,7 +130,7 @@ Examples of acceptable evidence:
 
 - “CI runs dependency audit and fails on critical vulnerabilities.”
 - “Build fails on broken links.”
-- “No secrets policy enforced; secrets scanning enabled.”
+- “No secrets policy enforced; secrets scanning enabled.”- "Environment variables are public-safe; production URLs are Vercel-hosted only."
 
 ## Validation / Expected outcomes
 

@@ -1,6 +1,6 @@
 ---
-last-updated: 2026-01-16
-active-phase: Phase 1 (documentation complete; deployment pending)
+last-updated: 2026-01-20
+active-phase: Phase 1 (documentation complete; deployment pending) → Phase 2 (environment variables implemented)
 workspace-repos:
   - portfolio-app (Next.js + TypeScript)
   - portfolio-docs (Docusaurus)
@@ -8,14 +8,14 @@ workspace-repos:
 
 # Copilot Session Context
 
-## Current State
+## Current State (Phase 2 — Environment Variables Implementation)
 
 ### Active Branches
 
-- **portfolio-app:** `main` (PR merged: chore/phase1-governance-quality-script)
-- **portfolio-docs:** `main` (working branch: feat/portfolio-app-phase-1-update)
+- **portfolio-app:** `main`
+- **portfolio-docs:** `main`
 
-### Phase Progress: Phase 1 (Near Completion)
+### Phase Progress: Phase 2 (Environment Variables — COMPLETED)
 
 #### ✅ Completed (Portfolio App)
 
@@ -61,9 +61,74 @@ workspace-repos:
 
 ## Integration Contract
 
+### Environment Variables Configuration (NEW — Phase 2)
+
+The Portfolio Docs App now supports environment variable configuration for portability across environments.
+
+**Standard Prefix Convention:**
+
+- `DOCUSAURUS_*` prefix for client-exposed variables (browser)
+- Non-prefixed variables are build-time only
+
+**Core Variables (6 required):**
+
+- `DOCUSAURUS_SITE_URL`: Base URL (local: `http://localhost:3000`, production: Vercel domain)
+- `DOCUSAURUS_BASE_URL`: Subpath (default: `/`)
+- `DOCUSAURUS_GITHUB_ORG`, `DOCUSAURUS_GITHUB_REPO_DOCS`, `DOCUSAURUS_GITHUB_REPO_APP`: GitHub linking
+- `DOCUSAURUS_PORTFOLIO_APP_URL`: Cross-linking to portfolio-app
+
+**File Structure:**
+
+- `.env.example`: Template (committed, public-safe placeholders)
+- `.env.local`: Local overrides (gitignored, never committed)
+- `.env.production.local`: Production overrides (optional, gitignored)
+
+**Setup:**
+
+1. **Local**: `cp .env.example .env.local && edit .env.local` with local values
+2. **Production**: Set in Vercel Dashboard → Settings → Environment Variables
+3. **CI**: Uses production env vars automatically
+
+**Security:** All variables are public-safe. No secrets in `.env` files.
+
+**Reference:** [Portfolio Docs Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md)
+
+### URL Linking Standards (Canonical Rules)
+
+**Portfolio-docs authoring (this repository):**
+
+- Hosted docs pages: use relative links starting with `/docs/`, include section prefix numbers (e.g., `00-portfolio`), and include `.md` extensions. Example: `/docs/10-architecture/adr/adr-0001-adopt-docusaurus-for-portfolio-docs.md`.
+- Docs hub pages (`index.md`): when constructing published URLs, omit `index.md` (e.g., `docs/00-portfolio/index.md` → `https://bns-portfolio-docs.vercel.app/docs/portfolio/`, built with `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/"`).
+- Non-hosted files (including anything under `docs/_meta`): link via GitHub blob URLs using repo/env variables (`https://github.com/${DOCUSAURUS_GITHUB_ORG}/${DOCUSAURUS_GITHUB_REPO_DOCS}/blob/main/<path>`). This rule also applies when portfolio-app links to `docs/_meta` content.
+- Env-first rule: For any deployed URLs (docs or app), build URLs from environment variables (`DOCUSAURUS_SITE_URL` + `DOCUSAURUS_BASE_URL`, `NEXT_PUBLIC_DOCS_BASE_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`). Do **not** hardcode production hosts. The only exception is internal `/docs/...` links inside authored content, which stay relative as above.
+
+**These rules are enforced in both repository's copilot-instructions files.**
+
+#### Within portfolio-docs (internal):
+
+- Use relative paths: `/docs/00-portfolio/roadmap.md` (include prefix numbers + .md extension)
+
+#### portfolio-docs non-rendered files:
+
+- Use GitHub URLs: `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/package.json`
+
+#### portfolio-app files:
+
+- Use GitHub URLs: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml`
+
+#### From portfolio-app to portfolio-docs (docs site):
+
+- Use `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/roadmap"` (no prefix numbers, no .md extension)
+
+#### From portfolio-app to portfolio-docs (non-docs):
+
+- Use `NEXT_PUBLIC_DOCS_GITHUB_URL + "blob/main/package.json"` (with extensions)
+
+**See `.github/copilot-instructions.md` in both repos for complete URL linking guidance.**
+
 ### Evidence Link Strategy
 
-- Portfolio App links to docs via: `NEXT_PUBLIC_DOCS_BASE_URL` (env var)
+- Portfolio App links to docs via: `NEXT_PUBLIC_DOCS_BASE_URL` (env var) + GitHub URLs for non-rendered files
 - Helper function: `docsUrl(pathname)` in `src/lib/config.ts`
 - Evidence paths in `src/data/projects.ts` align with docs structure:
   - Dossier: `projects/portfolio-app/`
@@ -213,7 +278,53 @@ Once Phase 1 is complete (deployed + validated):
 
 ## Session History (Brief)
 
-### 2026-01-16 Session (Current — COMPLETED)
+### 2026-01-20 Session (CURRENT — Phase 2 Environment Variables Documentation Review & Update)
+
+**Objective:** Review and update all portfolio-docs development and deployment documentation to comprehensively reflect environment variable support.
+
+**Scope:** 13 files reviewed and updated:
+
+1. **README.md** — Updated Local Development section with `.env.local` setup and configuration
+2. **CONTRIBUTING.md** — Added PR Discipline local setup section with `.env.local` workflow
+3. **CONFIGURATION.md** — Added comprehensive Environment Variables Configuration section
+4. **01-overview.md** (dossier) — Added Environment Variable Support subsection with portability rationale
+5. **02-architecture.md** (dossier) — Added environment configuration details to components section
+6. **03-deployment.md** (dossier) — Added environment variable configuration section with Vercel dashboard setup
+7. **04-security.md** (dossier) — Added Control 5: Environment Variable Security with public-safe enforcement
+8. **rbk-docs-deploy.md** (runbook) — Added env var prereqs and Vercel configuration verification
+9. **rbk-docs-rollback.md** (runbook) — Added environment variable considerations to prereqs
+10. **rbk-docs-broken-links-triage.md** (runbook) — Added .env.local verification to toolchain checks
+11. **portfolio-docs-app-threat-model.md** — Enhanced Threat 3 with environment variable scenarios
+12. **.github/copilot-instructions.md** — Added Environment Variables and Configuration section with table
+13. **.copilot/session-context.md** — Updated with Phase 2 environment variables context
+
+**Documentation Updates Summary:**
+
+- ✅ All PRs and pull request workflows documented with `.env.local` requirements
+- ✅ Vercel environment variable configuration documented with step-by-step instructions
+- ✅ Security controls for environment variables formalized and linked to contract
+- ✅ Runbooks updated with environment variable verification procedures
+- ✅ Threat model includes environment variable security scenarios
+- ✅ Copilot instructions include environment variable prefix convention and table
+- ✅ Session context updated with Phase 2 environment variable implementation
+
+**Files Modified:** 13 total
+**Lines Added:** ~400+ lines across all files
+**Key Documentation Links Added:**
+
+- Cross-references to [Portfolio Docs Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md)
+- Vercel dashboard configuration instructions
+- Local development `.env.local` setup procedures
+- Environment variable security controls
+
+**Validation:**
+
+- All links verified to existing contracts and documentation
+- Build determinism implications documented
+- Security implications formalized in threat model
+- Setup procedures match actual implementation (.env.example + .env.local)
+
+### 2026-01-16 Session (COMPLETED)
 
 **Priorities 1–3 Completed in Earlier Part of Session:**
 
