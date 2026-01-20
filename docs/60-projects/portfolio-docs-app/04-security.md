@@ -131,6 +131,7 @@ Examples of acceptable evidence:
 - “CI runs dependency audit and fails on critical vulnerabilities.”
 - “Build fails on broken links.”
 - “No secrets policy enforced; secrets scanning enabled.”- "Environment variables are public-safe; production URLs are Vercel-hosted only."
+
 ## Validation / Expected outcomes
 
 Security posture is acceptable when:

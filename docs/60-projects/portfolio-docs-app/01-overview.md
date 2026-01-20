@@ -70,6 +70,7 @@ The Portfolio Docs App is configured to support local, preview, and production e
 - **`DOCUSAURUS_PORTFOLIO_APP_URL`**: Cross-repository linking to portfolio-app
 
 **Setup:**
+
 - Local development: Copy `.env.example` to `.env.local` and configure for local testing
 - Production: Set variables in Vercel dashboard
 - See [Environment Variables Contract](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/_meta/env/portfolio-docs-env-contract.md) for complete reference

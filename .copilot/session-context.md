@@ -66,21 +66,25 @@ workspace-repos:
 The Portfolio Docs App now supports environment variable configuration for portability across environments.
 
 **Standard Prefix Convention:**
+
 - `DOCUSAURUS_*` prefix for client-exposed variables (browser)
 - Non-prefixed variables are build-time only
 
 **Core Variables (6 required):**
+
 - `DOCUSAURUS_SITE_URL`: Base URL (local: `http://localhost:3000`, production: Vercel domain)
 - `DOCUSAURUS_BASE_URL`: Subpath (default: `/`)
 - `DOCUSAURUS_GITHUB_ORG`, `DOCUSAURUS_GITHUB_REPO_DOCS`, `DOCUSAURUS_GITHUB_REPO_APP`: GitHub linking
 - `DOCUSAURUS_PORTFOLIO_APP_URL`: Cross-linking to portfolio-app
 
 **File Structure:**
+
 - `.env.example`: Template (committed, public-safe placeholders)
 - `.env.local`: Local overrides (gitignored, never committed)
 - `.env.production.local`: Production overrides (optional, gitignored)
 
 **Setup:**
+
 1. **Local**: `cp .env.example .env.local && edit .env.local` with local values
 2. **Production**: Set in Vercel Dashboard → Settings → Environment Variables
 3. **CI**: Uses production env vars automatically
@@ -307,12 +311,14 @@ Once Phase 1 is complete (deployed + validated):
 **Files Modified:** 13 total
 **Lines Added:** ~400+ lines across all files
 **Key Documentation Links Added:**
+
 - Cross-references to [Portfolio Docs Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md)
 - Vercel dashboard configuration instructions
 - Local development `.env.local` setup procedures
 - Environment variable security controls
 
 **Validation:**
+
 - All links verified to existing contracts and documentation
 - Build determinism implications documented
 - Security implications formalized in threat model

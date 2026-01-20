@@ -13,16 +13,19 @@ pnpm install
 ### Setup (First Time)
 
 1. **Install dependencies:**
+
    ```bash
    pnpm install
    ```
 
 2. **Configure environment variables:**
+
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Edit `.env.local` with your local development values:
+
    ```env
    DOCUSAURUS_SITE_URL=http://localhost:3000
    DOCUSAURUS_GITHUB_ORG=your-github-username
@@ -30,7 +33,7 @@ pnpm install
    DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
    DOCUSAURUS_PORTFOLIO_APP_URL=http://localhost:3000
    ```
-   
+
    **Note:** `.env.local` is gitignored. See [Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md) for full documentation.
 
 3. **Start the development server:**

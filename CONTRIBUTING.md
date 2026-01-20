@@ -64,12 +64,14 @@ Hard rules:
 ### Local setup (before starting work)
 
 1. **Install and configure:**
+
    ```bash
    pnpm install
    cp .env.example .env.local
    ```
 
 2. **Edit `.env.local`** with your local development values:
+
    ```env
    DOCUSAURUS_SITE_URL=http://localhost:3000
    DOCUSAURUS_GITHUB_ORG=your-github-username
@@ -77,10 +79,11 @@ Hard rules:
    DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
    DOCUSAURUS_PORTFOLIO_APP_URL=http://localhost:3000
    ```
-   
+
    See [Environment Variables Contract](./docs/_meta/env/portfolio-docs-env-contract.md) for complete documentation and all available variables.
 
 3. **Test locally:**
+
    ```bash
    pnpm start     # preview
    pnpm build     # required before PR

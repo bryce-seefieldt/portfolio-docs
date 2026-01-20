@@ -414,14 +414,14 @@ The Portfolio Docs App uses environment variables to support portability across 
 
 ### Core Variables
 
-| Variable | Purpose | Local | Production |
-| --- | --- | --- | --- |
-| `DOCUSAURUS_SITE_URL` | Base URL for SEO, sitemap | `http://localhost:3000` | `https://bns-portfolio-docs.vercel.app` |
-| `DOCUSAURUS_BASE_URL` | Subpath (if any) | `/` | `/` |
-| `DOCUSAURUS_GITHUB_ORG` | GitHub org/user | your-username | bryce-seefieldt |
-| `DOCUSAURUS_GITHUB_REPO_DOCS` | Docs repo name | portfolio-docs | portfolio-docs |
-| `DOCUSAURUS_GITHUB_REPO_APP` | App repo name (cross-linking) | portfolio-app | portfolio-app |
-| `DOCUSAURUS_PORTFOLIO_APP_URL` | Portfolio App URL | `http://localhost:3000` | `https://bns-portfolio-app.vercel.app` |
+| Variable                       | Purpose                       | Local                   | Production                              |
+| ------------------------------ | ----------------------------- | ----------------------- | --------------------------------------- |
+| `DOCUSAURUS_SITE_URL`          | Base URL for SEO, sitemap     | `http://localhost:3000` | `https://bns-portfolio-docs.vercel.app` |
+| `DOCUSAURUS_BASE_URL`          | Subpath (if any)              | `/`                     | `/`                                     |
+| `DOCUSAURUS_GITHUB_ORG`        | GitHub org/user               | your-username           | bryce-seefieldt                         |
+| `DOCUSAURUS_GITHUB_REPO_DOCS`  | Docs repo name                | portfolio-docs          | portfolio-docs                          |
+| `DOCUSAURUS_GITHUB_REPO_APP`   | App repo name (cross-linking) | portfolio-app           | portfolio-app                           |
+| `DOCUSAURUS_PORTFOLIO_APP_URL` | Portfolio App URL             | `http://localhost:3000` | `https://bns-portfolio-app.vercel.app`  |
 
 ### File Structure
 
@@ -467,7 +467,7 @@ When creating URLs inside portfolio-docs source (Markdown/MDX under `docs/`):
   - When constructing **published site URLs**, do **not** include `index.md` in the path.
   - Example: `docs/00-portfolio/index.md` → published at `https://bns-portfolio-docs.vercel.app/docs/portfolio/` (built as `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/"`).
 
-- **Non-hosted files (e.g., `docs/_meta/**` or any file not rendered by the site):**
+- **Non-hosted files (e.g., `docs/\_meta/**` or any file not rendered by the site):\*\*
   - Link to the GitHub blob URL: `https://github.com/<org>/<repo>/blob/main/<path>`
   - Use environment-driven pattern when available: `https://github.com/${DOCUSAURUS_GITHUB_ORG}/${DOCUSAURUS_GITHUB_REPO_DOCS}/blob/main/<path>`
   - Apply the same rule from portfolio-app when linking to `docs/_meta` (these files are not hosted on the site).
