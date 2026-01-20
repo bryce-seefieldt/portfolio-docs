@@ -164,31 +164,62 @@ For each threat, the model documents:
 
 ### Environment Variables
 
-- All `NEXT_PUBLIC_*` variables are client-visible by design.
-- No secrets in any `NEXT_PUBLIC_*` variable.
-- `.env.example` documents all required variables.
-- Local `.env.local` is gitignored.
+- ✅ All `NEXT_PUBLIC_*` variables are client-visible by design
+- ✅ No secrets in any `NEXT_PUBLIC_*` variable
+- ✅ `.env.example` documents all required variables
+- ✅ Local `.env.local` gitignored
 
-Validation procedure:
+**Validation procedure:**
 
 ```bash
 # Check for secrets in env vars
 grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 # Should return: no results
+
+# Verify secrets scanning gate
+pnpm secrets:scan
+# Should pass with no detections
 ```
+
+### Dependencies
+
+- ✅ CodeQL scanning (JS/TS) on PR + weekly schedule
+- ✅ Dependabot weekly updates (grouped, majors excluded)
+- ✅ Frozen lockfile in CI (`pnpm install --frozen-lockfile`)
+
+### CI/CD Pipeline
+
+- ✅ Least-privilege permissions (scoped per job)
+- ✅ Secrets scanning gate (TruffleHog, PR-only)
+- ✅ Required checks before merge (quality, secrets-scan, build, CodeQL)
+
+## Security Controls (Phase 2)
+
+| Control                  | Status       | Evidence                                                                                                                |
+| ------------------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| Secrets scanning (CI)    | ✅ Enforced  | [ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)                           |
+| Pre-commit secrets scan  | ✅ Available | [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml)           |
+| Least-privilege CI perms | ✅ Enforced  | [ci.yml job permissions](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L19-L22)   |
+| CodeQL scanning          | ✅ Enforced  | [codeql.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/codeql.yml)                   |
+| Dependabot updates       | ✅ Enabled   | [dependabot.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/dependabot.yml)                     |
+| Threat model             | ✅ Complete  | [portfolio-app-threat-model.md](/docs/40-security/threat-models/portfolio-app-threat-model.md)                          |
+| Incident response        | ✅ Ready     | [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                     |
+| Smoke tests              | ✅ Enforced  | [smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts)                     |
+| Frozen lockfiles         | ✅ Enforced  | [ci.yml build step](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)                |
+| PR template              | ✅ Active    | [PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md) |
 
 ### Code Scanning
 
-- CodeQL enabled (JavaScript/TypeScript).
-- Runs on every push to main and PR.
-- Scans for: SQL injection, XSS, path traversal, hardcoded secrets.
+- ✅ CodeQL enabled (JavaScript/TypeScript)
+- ✅ Runs on every push to main and PR
+- ✅ Scans for: SQL injection, XSS, path traversal, hardcoded secrets
 
 ### Supply Chain Security
 
-- Dependabot enabled (weekly updates, grouped by type).
-- Major version updates excluded (manual review required).
-- Lockfile formatting automated (prevents CI failures).
-- Frozen lockfile installs in CI (`--frozen-lockfile`).
+- ✅ Dependabot enabled (weekly updates, grouped by type)
+- ✅ Major version updates excluded (manual review required)
+- ✅ Lockfile formatting automated (prevents CI failures)
+- ✅ Frozen lockfile installs in CI (`pnpm install --frozen-lockfile`)
 
 ### PR Security Checklist
 
@@ -198,6 +229,7 @@ Every PR must confirm:
 - [ ] No sensitive endpoints added
 - [ ] Environment variables documented in `.env.example`
 - [ ] CodeQL scan passes
+- [ ] Secrets scan passes
 
 ## Known Limitations & Accepted Risks
 

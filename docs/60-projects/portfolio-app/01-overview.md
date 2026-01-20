@@ -126,14 +126,14 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 
 ## Key Metrics (Phase 2 Baseline)
 
-- Lines of code: ~500 (application), ~200 (tests)
-- Routes: 5 core routes (/, /cv, /projects, /contact, /projects/[slug])
-- CI checks: 2 required (quality, build)
-- Test coverage: 100% route coverage (Playwright smoke tests - 12 tests)
-- Deployment frequency: On every merge to main (automatic)
-- Mean time to rollback: ~1 minute (Git revert + CI)
-- Quality gates: lint, format, typecheck, build, smoke tests (all enforced)
-- Dependencies: 17 production, 11 dev (Dependabot weekly updates)
+- **Lines of code:** ~500 (application), ~200 (tests)
+- **Routes:** 5 core routes (/, /cv, /projects, /contact, /projects/[slug])
+- **CI checks:** 4 required (quality, secrets-scan, build w/smoke tests, CodeQL)
+- **Test coverage:** 100% route coverage (Playwright smoke tests - 12 tests)
+- **Deployment frequency:** On every merge to main (automatic)
+- **Mean time to rollback:** ~1 minute (Git revert + CI)
+- **Quality gates:** Lint, format, typecheck, secrets scan, build, smoke tests (all enforced)
+- **Dependencies:** ~17 production, ~15 dev (Dependabot weekly updates)
 
 ## What This Project Proves
 
@@ -148,6 +148,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 
 - CI quality gates (ESLint max-warnings=0, Prettier, TypeScript strict)
 - Automated smoke testing (Playwright multi-browser)
+- Secrets scanning (TruffleHog CI + pre-commit)
 - Frozen lockfile installs (deterministic builds)
 - PR-only merge discipline (GitHub Ruleset enforcement)
 
@@ -155,19 +156,21 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 
 - Public-safe by design (no secrets, internal endpoints, or auth)
 - CodeQL + Dependabot enabled (supply chain hardening)
+- Least-privilege CI permissions (scoped per job)
 - Environment variable hygiene (documented, validated)
-- PR template security checklist
+- Secrets incident response runbook
 
 ### Operational Maturity
 
 - Deploy/rollback runbooks (tested and documented)
 - CI triage procedures (deterministic troubleshooting)
+- Secrets incident response (5-phase procedure)
 - Vercel production promotion gating (required checks)
 - Evidence-based release notes
 
 ### Documentation Excellence
 
 - Complete dossier (7 comprehensive pages)
-- ADRs for durable decisions (hosting, CI gates, gold standard choice)
-- Threat model (STRIDE analysis - Step 4)
-- Operational runbooks (deploy, CI triage, rollback)
+- ADRs for durable decisions (hosting, CI gates, testing strategy, gold standard choice)
+- Threat model (STRIDE analysis with 12 threat scenarios)
+- Operational runbooks (deploy, secrets incident, CI triage, rollback)
