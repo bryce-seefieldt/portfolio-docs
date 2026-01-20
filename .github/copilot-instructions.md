@@ -398,6 +398,70 @@ When asked to implement deployment changes:
 
 ---
 
+---
+
+# URL Linking Standards (Required for All Documentation)
+
+## Linking within portfolio-docs (internal cross-references)
+
+When linking from one page to another **within** the portfolio-docs repository:
+
+**Rules:**
+- Use relative paths starting with `/docs/`
+- **DO include** section prefix numbers (e.g., `00-portfolio`, `10-architecture`)
+- **DO include** `.md` file extension
+- Use markdown link syntax: `[display text](path)`
+
+**Examples:**
+- ✅ `[roadmap.md](/docs/00-portfolio/roadmap.md)`
+- ✅ `[Architecture ADRs](/docs/10-architecture/adr/)`
+- ✅ `[Threat model](/docs/40-security/threat-models/portfolio-app-threat-model.md)`
+- ❌ `[roadmap](/docs/portfolio/roadmap)` (missing prefix + extension)
+- ❌ `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/00-portfolio/roadmap.md` (use relative links for internal nav)
+
+## Linking to non-rendered portfolio-docs files (configuration, repo metadata)
+
+When linking to files in portfolio-docs **outside** of `/docs/` (e.g., root config, CI workflows, package.json):
+
+**Rules:**
+- Use full GitHub repository URLs
+- Format: `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/<path>`
+- **DO include** file extensions
+- Use for: CI workflows, config files, metadata, root-level documentation
+
+**Examples:**
+- ✅ `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/package.json`
+- ✅ `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/.github/workflows/ci.yml`
+- ✅ `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docusaurus.config.ts`
+- ❌ `[package.json](/package.json)` (not a doc, use full GitHub URL)
+
+## Linking to portfolio-app files
+
+When linking to the portfolio-app repository:
+
+**Rules:**
+- Use full GitHub repository URLs
+- Format: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/<path>`
+- **DO include** file extensions
+- Use for: CI workflows, source code, config files, non-rendered artifacts
+
+**Examples:**
+- ✅ `https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml`
+- ✅ `https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/config.ts`
+- ✅ `https://github.com/bryce-seefieldt/portfolio-app/blob/main/package.json`
+- ✅ Link references in dossiers to portfolio-app deployment checks, CI code, etc.
+
+## Linking from portfolio-app to portfolio-docs (see portfolio-app instructions)
+
+The portfolio-app uses environment variables to link to rendered docs:
+
+- `NEXT_PUBLIC_DOCS_BASE_URL` for rendered Docusaurus pages
+- `NEXT_PUBLIC_DOCS_GITHUB_URL` for non-rendered portfolio-docs files
+
+See `.github/copilot-instructions.md` in portfolio-app for detailed URL rules from that repository's perspective.
+
+---
+
 # File/Folder Creation Rules (Strict)
 
 ## Adding a new section (folder) in public docs

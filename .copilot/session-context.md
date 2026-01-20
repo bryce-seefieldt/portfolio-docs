@@ -61,9 +61,30 @@ workspace-repos:
 
 ## Integration Contract
 
+### URL Linking Standards (Canonical Rules)
+
+**These rules are enforced in both repository's copilot-instructions files.**
+
+#### Within portfolio-docs (internal):
+- Use relative paths: `/docs/00-portfolio/roadmap.md` (include prefix numbers + .md extension)
+
+#### portfolio-docs non-rendered files:
+- Use GitHub URLs: `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/package.json`
+
+#### portfolio-app files:
+- Use GitHub URLs: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml`
+
+#### From portfolio-app to portfolio-docs (docs site):
+- Use `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/roadmap"` (no prefix numbers, no .md extension)
+
+#### From portfolio-app to portfolio-docs (non-docs):
+- Use `NEXT_PUBLIC_DOCS_GITHUB_URL + "blob/main/package.json"` (with extensions)
+
+**See `.github/copilot-instructions.md` in both repos for complete URL linking guidance.**
+
 ### Evidence Link Strategy
 
-- Portfolio App links to docs via: `NEXT_PUBLIC_DOCS_BASE_URL` (env var)
+- Portfolio App links to docs via: `NEXT_PUBLIC_DOCS_BASE_URL` (env var) + GitHub URLs for non-rendered files
 - Helper function: `docsUrl(pathname)` in `src/lib/config.ts`
 - Evidence paths in `src/data/projects.ts` align with docs structure:
   - Dossier: `projects/portfolio-app/`
