@@ -330,6 +330,181 @@ src/
     └── config.ts       # Environment config helpers
 ```
 
+## Component Library (Phase 2 Patterns)
+
+### GoldStandardBadge Component
+
+**Purpose**: Visual indicator for exemplary projects with comprehensive evidence.
+
+**Location**: `src/components/GoldStandardBadge.tsx`
+
+**Design**:
+
+- Amber/orange theme (`bg-amber-50`, `text-amber-900`, `border-amber-200`)
+- Checkmark SVG icon (✓) for verification
+- Bold "Gold Standard" text with descriptive subtitle
+- Responsive padding and spacing
+- Dark mode support via Tailwind `dark:` variants
+
+**Usage Pattern**:
+
+```tsx
+import { GoldStandardBadge } from '@/components/GoldStandardBadge';
+
+<GoldStandardBadge />;
+```
+
+**Evidence**: Used in [src/app/projects/[slug]/page.tsx](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/projects/%5Bslug%5D/page.tsx) for portfolio-app gold standard page.
+
+### Enhanced Callout Component
+
+**Purpose**: Highlighted content blocks for announcements, warnings, key takeaways, and informational sections.
+
+**Location**: `src/components/Callout.tsx`
+
+**Design Evolution (Phase 2)**:
+
+- Added `type` prop with three variants: `"default"`, `"warning"`, `"info"`
+- **Default**: Blue theme (`bg-blue-50`, `text-blue-900`, `border-blue-200`)
+- **Warning**: Amber theme (`bg-amber-50`, `text-amber-900`, `border-amber-200`)
+- **Info**: Purple/indigo theme (`bg-purple-50`, `text-purple-900`, `border-purple-200`)
+- Consistent border-left accent (`border-l-4`)
+- Dark mode variants for all types
+
+**Usage Pattern**:
+
+```tsx
+import { Callout } from '@/components/Callout';
+
+<Callout type="info">
+  <strong>For busy reviewers:</strong>
+  Follow this 5-minute verification path...
+</Callout>;
+```
+
+**Evidence**: Used throughout project pages and CV for reviewer guidance and key takeaways.
+
+### Conditional Rendering Pattern (Gold Standard Projects)
+
+**Purpose**: Differentiate gold standard projects with comprehensive sections vs generic project pages.
+
+**Location**: `src/app/projects/[slug]/page.tsx`
+
+**Pattern**:
+
+```tsx
+// Conditional rendering based on slug
+{
+  slug === 'portfolio-app' ? (
+    <>
+      {/* Gold standard sections */}
+      <GoldStandardBadge />
+      <Section title="What This Proves">...</Section>
+      <Section title="Verification Checklist">...</Section>
+      <Section title="Deep Evidence">...</Section>
+      <Section title="Tech Stack">...</Section>
+    </>
+  ) : (
+    <>
+      {/* Generic project template */}
+      <Section title="Overview">...</Section>
+    </>
+  );
+}
+```
+
+**Rationale**:
+
+- Maintains single route for all projects
+- Allows special treatment for showcase projects
+- Scalable: future gold standard projects can extend condition
+- Alternative considered: separate route (`/projects/gold/[slug]`) rejected for URL simplicity
+
+**Evidence**: See [PR #20](https://github.com/bryce-seefieldt/portfolio-app/pull/20) for implementation.
+
+### Data-Driven Content Pattern (CV Timeline)
+
+**Purpose**: Separate data structure from presentation for maintainability and scalability.
+
+**Location**: `src/data/cv.ts` (data), `src/app/cv/page.tsx` (presentation)
+
+**Data Structure**:
+
+```typescript
+interface TimelineEntry {
+  title: string;
+  organization: string;
+  period: string;
+  description: string;
+  keyCapabilities: string[];
+  proofs: Array<{ text: string; href: string }>;
+}
+
+export const TIMELINE: TimelineEntry[] = [
+  {
+    title: 'Portfolio Program & Engineering Excellence',
+    organization: 'Portfolio Development Initiative',
+    period: '2026',
+    description: '...',
+    keyCapabilities: [
+      'Next.js & React (v19+)',
+      'TypeScript (strict mode)',
+      // ... more capabilities
+    ],
+    proofs: [
+      {
+        text: 'Portfolio App Dossier',
+        href: docsUrl('/docs/60-projects/portfolio-app/'),
+      },
+      // ... more proofs
+    ],
+  },
+  // ... more entries
+];
+```
+
+**Presentation Pattern**:
+
+- Map `TIMELINE` array to `Section` components
+- Render capabilities as rounded badge chips
+- Render proofs as underlined links with evidence prefix
+- Evidence Hubs section provides comprehensive navigation
+
+**Benefits**:
+
+- Easy to add new timeline entries without touching UI code
+- Type safety for all entries via TypeScript interface
+- Centralized data source enables future features (filtering, search, analytics)
+- Verifiable capability claims via structured proof links
+
+**Evidence**: See [PR #21](https://github.com/bryce-seefieldt/portfolio-app/pull/21) for implementation.
+
+### Evidence-First UX Pattern
+
+**Principle**: Every capability claim must link to verifiable documentation or code.
+
+**Implementation**:
+
+1. **Project pages**: Each feature links to dossier, threat model, runbook, or ADR
+2. **CV page**: Each capability links to project evidence, architecture docs, or operational artifacts
+3. **Evidence Hubs**: Dedicated sections for comprehensive evidence navigation
+
+**Link Types**:
+
+- **Dossier**: Project overview and architecture (`/docs/60-projects/<project>/`)
+- **Threat Model**: Security analysis (`/docs/40-security/threat-models/<project>-threat-model`)
+- **Runbooks**: Operational procedures (`/docs/50-operations/runbooks/`)
+- **ADRs**: Architecture decisions (`/docs/10-architecture/adr/adr-xxxx-...`)
+- **CI Workflows**: Build and test pipelines (GitHub Actions `.github/workflows/`)
+- **Test Suites**: Smoke tests, E2E coverage (`tests/smoke.spec.ts`)
+
+**Benefits**:
+
+- Reviewers can verify every claim independently
+- No trust required - evidence is public and auditable
+- Demonstrates governance maturity and operational rigor
+- Scalable: more evidence = stronger narrative
+
 ## Scalability Patterns
 
 Current (Phase 2):
@@ -337,9 +512,12 @@ Current (Phase 2):
 - Static project data in TypeScript (typed, version-controlled)
 - Manual content updates via code changes + PRs
 - Evidence links hardcoded per project
+- Data-driven CV timeline (src/data/cv.ts)
+- Gold standard conditional rendering (slug-based)
 
 Planned (Phase 3+):
 
 - CMS or API-driven project data (Contentful, headless CMS)
 - Automated evidence link validation
 - Tag-based filtering and search
+- Dynamic gold standard detection (metadata-driven vs slug hardcoding)

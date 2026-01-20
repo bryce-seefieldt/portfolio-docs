@@ -198,14 +198,16 @@ Create one exemplary project case study that sets the standard for all future po
 
 ### Deliverables (Portfolio App)
 
-- 1 fully polished “gold standard” project page:
+- ✅ 1 fully polished "gold standard" project page:
   - crisp summary (what it is, what it proves)
   - repo/demo links
   - evidence links to dossier, threat model, runbooks as applicable
-  - screenshots/diagrams (public-safe)
-- CV page becomes meaningful:
-  - employment/impact timeline entries
-  - capability-to-proof mapping (links to projects and evidence)
+  - 4 comprehensive sections with verification checklist
+  - Conditional rendering for gold standard vs generic projects
+- ✅ CV page becomes meaningful:
+  - employment/impact timeline entries (2 comprehensive entries)
+  - capability-to-proof mapping (17 capabilities → 9 proof links)
+  - Evidence Hubs section for navigation
 
 ### Required evidence artifacts (Docs App)
 

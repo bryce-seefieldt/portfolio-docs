@@ -93,8 +93,16 @@ Portfolio App must link to evidence pages for each project:
   - Security controls table with 10+ enforced controls
 - ✅ **Threat model**: Complete STRIDE analysis with 12 threat scenarios
 - ✅ **Incident response**: Secrets incident runbook (5-phase procedure)
-- 🟡 **Enhanced project page**: Planned (Priority 3 - gold standard badge)
-- 🟡 **Meaningful CV page**: Planned (Priority 4 - capability-to-proof mapping)
+- ✅ **Enhanced project page**: Complete (Priority 3 - gold standard badge with verification checklist)
+  - GoldStandardBadge component with amber theme
+  - Conditional rendering for portfolio-app slug
+  - 4 comprehensive sections: What This Proves, Verification Checklist, Deep Evidence, Tech Stack
+  - Enhanced Callout component with type="info" support
+- ✅ **Meaningful CV page**: Complete (Priority 4 - capability-to-proof timeline mapping)
+  - Evidence-first timeline structure with 2 entries
+  - 17 total key capabilities mapped to 9 proof links
+  - Each role links to dossiers, threat models, runbooks, ADRs, CI workflows, test suites
+  - Evidence Hubs section for comprehensive navigation
 
 ## Reviewer path
 

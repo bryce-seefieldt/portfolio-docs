@@ -15,15 +15,15 @@ date: 2026-01-20
 
 - ✅ STEP 1: Gold standard project decided (portfolio-app via ADR-0010)
 - ✅ STEP 2: Smoke test infrastructure (Playwright + CI integration)
+- ✅ STEP 3: Enhance portfolio-app dossier to gold standard (PR #39 merged)
 - ✅ STEP 4a: Phase 2 security enhancements (secrets scanning, CI hardening)
 - ✅ STEP 4b: Secrets incident response runbook
+- ✅ STEP 4: Complete/merge threat model PR #32 (merged 2026-01-19)
+- ✅ STEP 6: Create gold standard project page in portfolio-app (PR #20 merged)
+- ✅ STEP 7: Enhance CV page with capability-to-proof mapping (PR #21 pending)
 
 **Remaining Steps:**
 
-- 🟡 STEP 3: Enhance portfolio-app dossier to gold standard
-- 🟡 STEP 4: Complete/merge threat model PR #32
-- 🟡 STEP 6: Create gold standard project page in portfolio-app
-- 🟡 STEP 7: Enhance CV page with capability-to-proof mapping
 - 🟡 STEP 8: Create Phase 2 release note
 
 ---
