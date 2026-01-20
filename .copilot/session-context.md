@@ -34,13 +34,12 @@ workspace-repos:
 - Phase 2 planning and hardening artifacts:
   - [docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/phase-2-implementation-guide.md) (step-by-step execution)
   - [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md) (CI/security hardening summary)
-  - Threat model expanded with STRIDE analysis (PR #32 pending merge)
+  - Threat model expanded with STRIDE analysis (PR #32 merged 2026-01-19)
   - [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) added + runbook index updated
 
 #### ⏳ In Progress / Pending
 
 - Gold-standard project content: finalize portfolio-app exemplar page, dossier enhancements, capability-to-proof CV mapping, release note
-- Merge threat model PR #32 and align references
 - Confirm branch protections require `ci / quality`, `ci / build`, `secrets-scan`, and CodeQL; align Vercel promotion checks accordingly
 - Publish public repo/demo URLs in `src/data/projects.ts` once deployments are live
 - Connect Vercel deployments for portfolio-app and docs (if not already in place)
@@ -229,10 +228,9 @@ pnpm build      # Docusaurus build
 ### Immediate Next Steps (Priority Order)
 
 1. **Finalize gold-standard project content**: portfolio-app exemplar page, dossier enhancements, release note, CV capability-to-proof mapping
-2. **Merge threat model PR #32** and ensure docs/ADR references match (STRIDE + Phase 2 controls)
-3. **Enforce branch protections** for `ci / quality`, `secrets-scan`, `ci / build`, and CodeQL; align Vercel promotion checks
-4. **Validate pipelines locally**: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` (includes Playwright smoke tests)
-5. **Update public repo/demo URLs** in `src/data/projects.ts` after deployments are live (app + docs)
+2. **Enforce branch protections** for `ci / quality`, `secrets-scan`, `ci / build`, and CodeQL; align Vercel promotion checks
+3. **Validate pipelines locally**: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` (includes Playwright smoke tests)
+4. **Update public repo/demo URLs** in `src/data/projects.ts` after deployments are live (app + docs)
 
 ### Phase 1 Acceptance Criteria (Roadmap Reference)
 
@@ -278,7 +276,7 @@ Once Phase 1 is complete (deployed + validated):
 - Added TruffleHog `secrets-scan` CI job with per-job least-privilege permissions; build continues to run Playwright smoke tests
 - Added local hygiene: `.pre-commit-config.yaml` (TruffleHog hook) and `pnpm secrets:scan`
 - Authored [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md) and updated [docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/phase-2-implementation-guide.md) Step 4a/4b for hardening
-- Created [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md); threat model expanded (PR #32 pending)
+- Created [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md); threat model expanded (PR #32 merged 2026-01-19)
 
 **Validation:** `pnpm build` (includes Playwright smoke tests) succeeded; secrets-scan gate runs on PRs.
 
@@ -404,7 +402,7 @@ Created comprehensive **Phase 1 Completion Documentation** to support admin task
 ### What Changed Since Last Commit
 
 - Portfolio-app: CI hardened with TruffleHog `secrets-scan` (PR-only), per-job least-privilege permissions, Playwright smoke tests in build, `.pre-commit-config.yaml`, and `pnpm secrets:scan`
-- Portfolio-docs: Added Phase 2 artifacts ([docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/phase-2-implementation-guide.md), [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md), [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)); threat model expansion PR #32 pending
+- Portfolio-docs: Added Phase 2 artifacts ([docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/phase-2-implementation-guide.md), [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md), [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)); threat model expansion merged (PR #32, 2026-01-19)
 - Session context: Updated for Phase 2 hardening status, required checks, and remaining gold-standard deliverables
 
 ### Lessons Learned
