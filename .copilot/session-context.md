@@ -47,6 +47,7 @@ workspace-repos:
 ### Phase 3 Planning (Ready)
 
 Planned enhancements (initial draft):
+
 1. Automated docs sync: portfolio-app → portfolio-docs integration
 2. Data-driven project registry: YAML config + validation
 3. Enhanced testing: unit, visual regression, accessibility audits
