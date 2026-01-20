@@ -256,9 +256,42 @@ Exceptions:
 
 ## Linking policy (critical)
 
-- Do NOT link to pages that do not exist yet.
-- Use plain-text path references until the target exists.
-- Broken links must be fixed immediately; builds should fail when they occur.
+### Internal Links (within portfolio-docs)
+
+- Use **relative paths starting with `/docs/`**
+- **MUST include section prefix numbers:** `./00-portfolio/.` not `./portfolio/.`
+- **MUST include `.md` file extension**
+- Example: `[roadmap.md](/docs/00-portfolio/roadmap.md)`
+- Do NOT link to pages that do not exist yet
+- Broken links must be fixed immediately; builds should fail when they occur
+
+### External Links (linking FROM portfolio-app TO portfolio-docs)
+
+- Use **production deployment URL prefix:** `https://bns-portfolio-docs.vercel.app/docs/`
+- Do **NOT include section prefix numbers:** use `/portfolio/` not `/00-portfolio/`
+- Do **NOT include `.md` file extension**
+- Example: `https://bns-portfolio-docs.vercel.app/docs/portfolio/roadmap`
+
+### Repository Links (non-rendered content)
+
+- Use **full GitHub repo URL** when linking to files not rendered in the served docs
+- Example: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml`
+- Use this format for: workflow files, non-Docusaurus configs, build artifacts, source code
+
+## Diagram standards (mandatory)
+
+When creating architectural, flow, or decision diagrams in portfolio-docs:
+
+- **Use Mermaid diagram format** exclusively
+- Place Mermaid blocks in markdown using triple-backtick syntax with \`\`\`mermaid language identifier
+- Supported Mermaid diagram types:
+  - `graph LR/TD` — trust boundaries, system context, data flow
+  - `flowchart` — process flows, runbook steps, incident response procedures
+  - `sequenceDiagram` — interaction sequences, deployment flows
+  - `classDiagram` — architecture and component relationships
+- All diagrams must be readable in the rendered HTML (Docusaurus natively supports Mermaid)
+- Prefer simple, clear diagrams over complex ASCII art
+- Every diagram must have a caption explaining its purpose
 
 ---
 
