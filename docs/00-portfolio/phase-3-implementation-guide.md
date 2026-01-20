@@ -43,23 +43,27 @@ Before starting Phase 3, ensure:
 **What:** Create YAML-backed project registry with TypeScript validation.
 
 **Key Files:**
+
 - Create `src/data/projects.yml` (YAML format)
 - Create `src/lib/registry.ts` (Zod schema + loader)
 - Update `src/data/projects.ts` (typed export)
 
 **Schema Design:**
+
 - Project metadata: title, slug, category, tags, dates
 - Tech stack with categories and rationale
 - Key proofs demonstrating capabilities
 - Evidence links: dossier, threat model, ADRs, runbooks, GitHub
 
 **Validation Rules:**
+
 - Slug format: `^[a-z0-9]+(?:-[a-z0-9]+)*$` (lowercase, hyphens, no spaces)
 - Slug uniqueness: No duplicate slugs in registry
 - Required fields: title, description, tech stack (≥1), proofs (≥1)
 - URL validation: Evidence links must be valid URLs
 
 **Deliverables:**
+
 - Registry loader with build-time validation
 - Type-safe exports for components
 - Link construction helpers
@@ -70,16 +74,19 @@ Before starting Phase 3, ensure:
 **What:** Create reusable React components for standardized evidence linking.
 
 **Key Components:**
+
 - `EvidenceBlock.tsx`: Renders dossier, threat model, ADRs, runbooks, GitHub links
 - `VerificationBadge.tsx`: Badge types for docs availability, threat models, gold standard status
 - BadgeGroup utility for multi-badge rendering
 
 **Integration:**
+
 - Update project pages to use `EvidenceBlock` and `BadgeGroup`
 - Conditional badge rendering based on project evidence
 - Responsive styling with Tailwind CSS
 
 **Deliverables:**
+
 - Reusable component library
 - Integration into project detail pages
 - Responsive design tested across devices
@@ -89,23 +96,27 @@ Before starting Phase 3, ensure:
 **What:** Add comprehensive test coverage for registry and link validation.
 
 **Unit Tests (Vitest):**
+
 - Registry schema validation (valid and invalid entries)
 - Slug rule enforcement and deduplication
 - Link construction helpers
 - Tech stack parsing
 
 **E2E Tests (Playwright):**
+
 - Project page rendering
 - Evidence link resolution
 - Registry loading
 - Smoke tests for all routes
 
 **CI Integration:**
+
 - Run tests before build in CI pipeline
 - Fail build if tests fail
 - Link validation as part of smoke tests
 
 **Deliverables:**
+
 - Unit test suite for registry
 - E2E test suite for link validation
 - Test coverage reporting
@@ -116,6 +127,7 @@ Before starting Phase 3, ensure:
 **What:** Document Phase 3 decisions and update dossiers.
 
 **ADRs to Create:**
+
 - ADR-0011: Data-Driven Registry Decision
   - Why YAML (readable, structured, standard)
   - Why type safety (catch errors at build time)
@@ -129,12 +141,14 @@ Before starting Phase 3, ensure:
   - Deployment synchronization strategy
 
 **Documentation Updates:**
+
 - Portfolio App dossier: Add "Data-Driven Registry" section to architecture page
 - Registry Schema Guide: Reference page with examples
 - Publishing Checklist: Step-by-step guide for adding projects
 - Copilot Instructions: Update with registry patterns
 
 **Deliverables:**
+
 - Two comprehensive ADRs
 - Updated dossier pages
 - Reference guides
@@ -145,12 +159,14 @@ Before starting Phase 3, ensure:
 **What:** Add CI link checks and operational procedures.
 
 **CI Enhancements:**
+
 - Registry validation step in CI
 - Link format checking
 - Evidence URL verification
 - Broken link detection in docs
 
 **Runbooks to Create:**
+
 - rbk-portfolio-project-publish.md: Complete publish procedure
   - Planning phase (30 min)
   - Registry entry creation (30 min)
@@ -166,6 +182,7 @@ Before starting Phase 3, ensure:
   - Registry validation failures
 
 **Deliverables:**
+
 - Enhanced CI configuration
 - Operational runbooks
 - Troubleshooting guide
@@ -176,17 +193,20 @@ Before starting Phase 3, ensure:
 **What:** Add tracking and social sharing enhancements.
 
 **Metadata Enhancements:**
+
 - Open Graph metadata for projects
 - Twitter Card configuration
 - Dynamic metadata generation per project
 - Social preview images
 
 **Analytics (Privacy-Safe):**
+
 - Optional: Vercel Web Analytics or Plausible
 - Track aggregate page views (no PII)
 - Document privacy implications
 
 **Deliverables:**
+
 - Enhanced metadata in layout and pages
 - Social sharing optimization
 - Privacy-safe analytics setup
@@ -195,6 +215,7 @@ Before starting Phase 3, ensure:
 ## Implementation Checklist
 
 ### Before Starting
+
 - [ ] Phase 2 complete and verified
 - [ ] Vercel deployments active
 - [ ] GitHub protections configured
@@ -203,6 +224,7 @@ Before starting Phase 3, ensure:
 - [ ] Create tracking issues per stage
 
 ### Stage 3.1 Checklist
+
 - [ ] Design registry schema
 - [ ] Create projects.yml with 2–3 examples
 - [ ] Implement registry.ts loader
@@ -212,6 +234,7 @@ Before starting Phase 3, ensure:
 - [ ] Create PR with registry implementation
 
 ### Stage 3.2 Checklist
+
 - [ ] Create EvidenceBlock component
 - [ ] Create VerificationBadge component
 - [ ] Update project pages to use components
@@ -220,6 +243,7 @@ Before starting Phase 3, ensure:
 - [ ] Create PR with component integration
 
 ### Stage 3.3 Checklist
+
 - [ ] Setup Vitest config
 - [ ] Write registry validation tests
 - [ ] Write slug rule tests
@@ -230,6 +254,7 @@ Before starting Phase 3, ensure:
 - [ ] Create PR with test suite
 
 ### Stage 3.4 Checklist
+
 - [ ] Draft ADR-0011: Registry Decision
 - [ ] Draft ADR-0012: Cross-Repo Linking
 - [ ] Update Portfolio App dossier architecture
@@ -239,6 +264,7 @@ Before starting Phase 3, ensure:
 - [ ] Create PR with documentation
 
 ### Stage 3.5 Checklist
+
 - [ ] Add registry validation to CI
 - [ ] Add link format checking to CI
 - [ ] Create publish runbook
@@ -248,6 +274,7 @@ Before starting Phase 3, ensure:
 - [ ] Create PR with runbooks
 
 ### Stage 3.6 Checklist
+
 - [ ] Enhance Next.js metadata
 - [ ] Add Open Graph tags
 - [ ] Add Twitter Card configuration
@@ -258,15 +285,15 @@ Before starting Phase 3, ensure:
 
 ## Timeline & Resource Estimate
 
-| Stage | Task | Duration | Status |
-|-------|------|----------|--------|
-| 3.1   | Registry & Validation | 6–8h | Ready |
-| 3.2   | EvidenceBlock & Badges | 3–4h | Ready |
-| 3.3   | Unit & E2E Tests | 4–6h | Ready |
-| 3.4   | ADRs & Documentation | 3–4h | Ready |
-| 3.5   | CI & Runbooks | 2–3h | Ready |
-| 3.6   | Analytics & Metadata | 2h | Ready |
-| **Total** | **Phase 3** | **21–29h** | **Ready to Execute** |
+| Stage     | Task                   | Duration   | Status               |
+| --------- | ---------------------- | ---------- | -------------------- |
+| 3.1       | Registry & Validation  | 6–8h       | Ready                |
+| 3.2       | EvidenceBlock & Badges | 3–4h       | Ready                |
+| 3.3       | Unit & E2E Tests       | 4–6h       | Ready                |
+| 3.4       | ADRs & Documentation   | 3–4h       | Ready                |
+| 3.5       | CI & Runbooks          | 2–3h       | Ready                |
+| 3.6       | Analytics & Metadata   | 2h         | Ready                |
+| **Total** | **Phase 3**            | **21–29h** | **Ready to Execute** |
 
 ## Success Criteria
 
