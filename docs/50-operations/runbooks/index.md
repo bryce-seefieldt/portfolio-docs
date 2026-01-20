@@ -127,5 +127,6 @@ Operations documentation is effective when:
   - `docs/50-operations/runbooks/rbk-portfolio-deploy.md`
   - `docs/50-operations/runbooks/rbk-portfolio-rollback.md`
   - `docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`
+  - `docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md` (Phase 2 enhancement: secrets incident response)
 - ADRs: `docs/10-architecture/adr/`
 - Threat models: `docs/40-security/threat-models/`
