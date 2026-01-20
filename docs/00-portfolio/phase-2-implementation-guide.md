@@ -683,6 +683,198 @@ tags: [security, threat-model, portfolio-app]
 
 ---
 
+### STEP 4a: Phase 2 Security Enhancements (Hardening Controls) (2–3 hours)
+
+**Goal:** Implement optional Phase 2 hardening controls that enhance Information Disclosure and Tampering threat mitigations.
+
+**Scope:** These enhancements are **beyond Phase 1 baseline** but strengthen enterprise-grade posture.
+
+**Enhancement 1: Secrets Scanning Gate**
+
+**Location:** `.github/workflows/ci.yml`
+
+**Approach:** Add TruffleHog job to CI pipeline to detect hardcoded secrets before merge.
+
+**Implementation:**
+
+1. Update CI workflow to add `secrets-scan` job:
+
+```yaml
+secrets-scan:
+  name: secrets-scan
+  runs-on: ubuntu-latest
+  timeout-minutes: 5
+  permissions:
+    contents: read
+
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+
+    - name: TruffleHog Secret Scanning
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD
+        extra_args: --debug --only-verified
+```
+
+2. Update build job to depend on `secrets-scan`:
+
+```yaml
+needs: [quality, secrets-scan]
+```
+
+3. Update `package.json` to add local secret scanning script:
+
+```json
+{
+  "scripts": {
+    "secrets:scan": "trufflehog filesystem . --debug --only-verified"
+  }
+}
+```
+
+**Enhancement 2: CI Permission Hardening (Least-Privilege)**
+
+**Location:** `.github/workflows/ci.yml`
+
+**Approach:** Replace global `permissions: contents: write` with job-specific least-privilege permissions.
+
+**Implementation:**
+
+1. Remove global permissions:
+
+```yaml
+# OLD (too broad):
+permissions:
+  contents: write
+
+# NEW (no global permissions):
+permissions: {}
+```
+
+2. Add job-specific permissions:
+
+```yaml
+quality:
+  permissions:
+    contents: write # Needed for Dependabot auto-format
+    pull-requests: read
+
+build:
+  permissions:
+    contents: read # Read-only for build artifacts
+```
+
+**Enhancement 3: Pre-commit Hooks for Local Scanning**
+
+**Location:** `.pre-commit-config.yaml` (new file)
+
+**Approach:** Enable local TruffleHog scanning before commits.
+
+**Implementation:**
+
+1. Create `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: https://github.com/trufflesecurity/trufflehog
+    rev: v3.63.0
+    hooks:
+      - id: trufflehog
+        name: TruffleHog secrets scan
+        description: Detect secrets in code
+        entry: trufflehog filesystem .
+        language: python
+        stages: [commit]
+        types: [python, typescript, javascript, json, yaml, toml, markdown]
+```
+
+2. Users enable locally:
+
+```bash
+pre-commit install
+git config core.hooksPath .git/hooks  # One-time setup
+```
+
+**Benefits:**
+
+- **Information Disclosure (T1):** Secrets scanning gate catches leaks before CI
+- **Tampering (T2):** CI permission hardening reduces attack surface
+- **Elevation of Privilege (E1):** Least-privilege permissions prevent unauthorized deployments
+
+**Threat Model Alignment:**
+
+- Ref: [Threat Model — Information Disclosure](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-1-attacker-exfiltrates-secrets-from-environment-or-repository)
+- Ref: [Threat Model — Tampering](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-modifies-ci-workflows-or-build-scripts-to-inject-malicious-code)
+
+**Success check:**
+
+- [x] Secrets scanning gate added to CI workflow
+- [x] CI permissions set to least-privilege (per-job)
+- [x] Pre-commit hooks configured for local scanning
+- [x] `pnpm secrets:scan` script added
+- [x] All CI checks pass with new gates
+- [x] Team documentation updated with secret scanning procedures
+- [x] STRIDE compliance report generated (see
+
+**Files to create/modify:**
+
+- [x] `.github/workflows/ci.yml` (add secrets-scan job; scoped permissions)
+- [x] `.pre-commit-config.yaml` (new; TruffleHog hook)
+- [x] `package.json` (add secrets:scan script)
+
+**PR Reference:** Phase 2 enhancements merged as part of threat model PR ([PR #33](https://github.com/bryce-seefieldt/portfolio-docs/pull/33))
+
+---
+
+### STEP 4b: Phase 2 Operational Readiness (Incident Response) (1–2 hours)
+
+**Goal:** Create incident response runbooks aligned to threat model procedures.
+
+**Scope:** Formalize secret publication and incident response procedures.
+
+**Enhancement: Secrets Incident Response Runbook**
+
+**Location:** `/portfolio-docs/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md`
+
+**Approach:** Create comprehensive runbook covering detection, containment, investigation, and recovery.
+
+**Key Sections:**
+
+1. **Triage (≤5 min):** Assess severity; determine containment strategy
+2. **Emergency Contain (≤5 min for Critical):** Stop the leak; rotate credentials
+3. **Investigation (5–30 min):** Determine scope, timeline, exposure duration
+4. **Remediation (15–60 min):** Remove secret from history; rotate credentials; update systems
+5. **Validation (5–10 min):** Confirm leak is contained; CI/CD healthy
+6. **Postmortem (30 min–1 hr):** Document; prevent recurrence
+
+**Threat Model Alignment:**
+
+- Ref: [Threat Model — Incident Response](/docs/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
+- Covers: Information Disclosure (T1) response
+- Covers: Suspected malicious deployment response (T2)
+
+**Success check:**
+
+- [x] Secrets incident response runbook created
+- [x] 5-phase procedure documented with timelines
+- [x] Severity levels defined (Critical, High, Medium)
+- [x] Checklists provided for each phase
+- [x] Escalation criteria documented
+- [x] Runbook index updated with reference
+
+**Files to create/modify:**
+
+- [x] `docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md` (new)
+- [x] `docs/50-operations/runbooks/index.md` (add reference)
+
+**PR Reference:** Phase 2 incident response runbook merged as part of runbooks enhancement
+
+---
+
 ### STEP 5: Create/Update Operational Runbooks (2–4 hours)
 
 **Goal:** Document repeatable procedures for deployment, CI triage, and rollback.

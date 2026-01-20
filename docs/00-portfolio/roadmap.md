@@ -225,7 +225,62 @@ Create one exemplary project case study that sets the standard for all future po
   - operational readiness
   - reproducibility
 
----
+### Phase 2 Recommended Controls (Hardening Enhancements)
+
+Beyond baseline Phase 1, Phase 2 includes optional hardening controls that strengthen enterprise security posture:
+
+#### Security Enhancements
+
+1. **Secrets Scanning Gate (TruffleHog CI)**
+   - Detect hardcoded secrets before merge
+   - CI job: `secrets-scan` (required check)
+   - Local hook: `pnpm secrets:scan`
+   - Threat model alignment: Information Disclosure (T1) mitigation
+
+2. **CI Permission Hardening (Least-Privilege)**
+   - Replace global `permissions: contents: write` with job-specific permissions
+   - Quality job: `contents: write`, `pull-requests: read` (Dependabot auto-format)
+   - Build job: `contents: read` (read-only)
+   - Threat model alignment: Tampering (T2), Elevation of Privilege (E1) mitigations
+
+3. **Pre-commit Hooks (Local Secret Scanning)**
+   - `.pre-commit-config.yaml`: TruffleHog hook for local commits
+   - Setup: `pre-commit install` (one-time)
+   - Threat model alignment: Information Disclosure (T1) prevention
+
+#### Operational Enhancements
+
+4. **Secrets Incident Response Runbook**
+   - New: `rbk-portfolio-secrets-incident.md`
+   - 5-phase procedure: Triage → Contain → Investigate → Remediate → Validate
+   - Severity levels: Critical (≤5 min), High (≤30 min), Medium (≤2 hrs)
+   - Threat model alignment: Incident Response procedures
+
+5. **STRIDE Compliance Report**
+   - New: `portfolio-app-stride-compliance-report.md`
+   - Executive summary of all 12 threat mitigations
+   - Control evidence mapping to source code and runbooks
+   - Phase 2 enhancements documented and verified
+
+#### Evidence Artifacts
+
+- **CI Workflow:** `.github/workflows/ci.yml` (secrets-scan job + scoped permissions)
+- **Local Scanning:** `.pre-commit-config.yaml` (TruffleHog hook)
+- **Package Script:** `package.json` (`secrets:scan` script)
+- **Incident Response:** `rbk-portfolio-secrets-incident.md` (complete runbook)
+- **Compliance Report:** `portfolio-app-stride-compliance-report.md` (audit)
+
+#### Implementation Status
+
+- ✅ All Phase 2 recommended controls implemented (as of 2026-01-19)
+- ✅ CI workflow updated with secrets scanning gate
+- ✅ Permissions hardened to least-privilege per job
+- ✅ Pre-commit hooks configured for local scanning
+- ✅ Incident response runbook created
+- ✅ STRIDE compliance report generated
+- ✅ All controls integrated into PR workflow
+
+## See [Phase 2 Implementation Guide — STEP 4a/4b](/docs/00-portfolio/phase-2-implementation-guide.md#step-4a-phase-2-security-enhancements-hardening-controls-23-hours) for detailed procedures.
 
 ## Phase 3 — Repeatable project publishing pipeline (scale without chaos)
 
