@@ -815,7 +815,7 @@ git config core.hooksPath .git/hooks  # One-time setup
 - [x] Secrets scanning gate added to CI workflow
 - [x] CI permissions set to least-privilege (per-job)
 - [x] Pre-commit hooks configured for local scanning
-- [x] `pnpm secrets:scan` script added
+- [x] `secrets:scan` CI stage added; local verify uses a lightweight pattern-based scan
 - [x] All CI checks pass with new gates
 - [x] Team documentation updated with secret scanning procedures
 - [x] STRIDE compliance report generated (see
@@ -824,7 +824,7 @@ git config core.hooksPath .git/hooks  # One-time setup
 
 - [x] `.github/workflows/ci.yml` (add secrets-scan job; scoped permissions)
 - [x] `.pre-commit-config.yaml` (new; TruffleHog hook)
-- [x] `package.json` (add secrets:scan script)
+- [x] `package.json` (secrets:scan script used by CI; optional local run)
 
 **PR Reference:** Phase 2 enhancements merged as part of threat model PR ([PR #33](https://github.com/bryce-seefieldt/portfolio-docs/pull/33))
 

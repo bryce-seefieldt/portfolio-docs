@@ -131,7 +131,7 @@ Purpose: Type checking for config files and React components (not used for build
 
 For any PR, the author should provide:
 
-- confirmation that all quality gates passed (`pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`)
+- confirmation that all quality gates passed (`pnpm verify`; `pnpm verify:quick` is acceptable for iteration but rerun full verify before PR)
 - a description of what navigation path reviewers should take
 - any expected visual changes (if relevant)
 - evidence that CI checks passed (GitHub Actions status)

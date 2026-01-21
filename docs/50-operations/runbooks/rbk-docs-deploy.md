@@ -77,7 +77,12 @@ pnpm start
 
 Then run **all quality gates** (required):
 
+- Recommended: `pnpm verify`
+- Faster iteration: `pnpm verify:quick` (skips the build gate; rerun full `pnpm verify` before merge)
+- Manual equivalent:
+
 ```bash
+pnpm format:write  # Auto-fix formatting
 pnpm lint          # ESLint
 pnpm typecheck     # TypeScript
 pnpm format:check  # Prettier
@@ -89,14 +94,12 @@ Expected outcome:
 - All quality gates pass without errors or warnings.
 - Build succeeds without broken links or structural errors.
 
-**Note:** Use `pnpm format:write` to auto-fix formatting issues and `pnpm lint:fix` to auto-fix linting issues where possible.
-
 ### 2) Open PR (required)
 
 - Ensure PR includes:
   - what changed
   - why
-  - evidence: All quality gates passed (`pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`)
+  - evidence: All quality gates passed (`pnpm verify`)
   - security statement: “No secrets added”
 - If preview deployments are available:
   - validate the preview environment renders as expected.

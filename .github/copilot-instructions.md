@@ -245,13 +245,111 @@ Even when working solo:
 
 ---
 
+# Template Enforcement and Phase Delivery
+
+## When to Use Templates
+
+This project uses **mandatory templates** to ensure governance discipline and traceability. Templates are not optional.
+
+## Phase Planning & Stage Delivery
+
+When working on **Phase N implementation**, use **linked templates**:
+
+### 1. **Phase Implementation Guide** (`template-phase-implementation-guide.md`)
+
+- **When:** Creating a phase plan from scratch
+- **Output:** Published in `docs/00-portfolio/phase-[N]-implementation-guide.md`
+- **Purpose:** Master plan for the entire phase across both repositories
+- **Usage:**
+  - Define all stages within the phase
+  - Specify prerequisites and readiness criteria
+  - Provide sequencing and interdependencies
+  - Include total effort estimate and timeline
+  - Document success criteria and verification steps
+- **Frequency:** Once per phase (updated after phase completion with actual metrics)
+- **Reference:** [Full Template Guide](./docs/_meta/templates/README.md#how-templates-work-together-the-phase-delivery-workflow)
+
+### 2. **Phase Stage App Issue** (`template-phase-stage-app-issue.md`)
+
+- **When:** Creating a GitHub issue for portfolio-app implementation work within a phase
+- **Repository:** `portfolio-app`
+- **Issue Title Format:** `Stage X.Y: [Stage Title] — App Implementation`
+- **Purpose:** Traceable GitHub issue for code/implementation work
+- **Required Sections:**
+  - Overview and objectives
+  - Files to create/update
+  - Design and architecture (data model, API signatures)
+  - Implementation tasks with checkboxes
+  - Testing strategy (unit, integration, E2E)
+  - Acceptance criteria
+  - Success checks per task
+- **Linking:** Link to companion docs stage issue in "Related Issues"
+- **Reference:** [Full Template Guide](./docs/_meta/templates/README.md)
+
+### 3. **Phase Stage Docs Issue** (`template-phase-stage-docs-issue.md`)
+
+- **When:** Creating a GitHub issue for portfolio-docs documentation/analysis work within a phase
+- **Repository:** `portfolio-docs`
+- **Issue Title Format:** `Stage X.Y: [Stage Title] — Documentation`
+- **Purpose:** Traceable GitHub issue for documentation and analysis work
+- **Required Sections:**
+  - Overview and objectives
+  - Files to create/update
+  - Document type (ADR, runbook, guide, threat model, etc.)
+  - Content structure and outline
+  - If ADR: problem statement, decision, rationale, consequences, alternatives
+  - If guide: audience, prerequisites, key concepts, examples
+  - Success criteria and verification steps
+- **Linking:** Link to companion app stage issue in "Related Issues"
+- **Reference:** [Full Template Guide](./docs/_meta/templates/README.md)
+
+## Standalone Work (Non-Phase Issues)
+
+For work **NOT tied to a phase stage**, use **Generic GitHub Issue** (`template-github-issue-generic.md`):
+
+- **When:**
+  - Urgent fixes (security patches, production bugs)
+  - One-off improvements (performance tweaks, refactoring)
+  - Ad-hoc documentation (single-page updates)
+  - Maintenance (dependency upgrades, tooling)
+- **Repository:** Either `portfolio-app` or `portfolio-docs`
+- **Supported Types:** Bug, Feature, Enhancement, Documentation, Refactoring, Maintenance, Other
+- **Purpose:** General-purpose tracking for non-phase work
+- **Usage:**
+  - Fill relevant sections only (adapt to issue type)
+  - Provide clear acceptance criteria
+  - Include testing strategy and effort estimate
+  - Keep scope focused (one issue = one topic)
+- **Reference:** [Full Template Guide](./docs/_meta/templates/README.md)
+
+## Documentation Artifacts
+
+For **evidence documents** created within or outside phases, use:
+
+- `template-adr.md` — Architecture decisions (new frameworks, hosting, platform capabilities)
+- `template-runbook.md` — Operational procedures (deploy, rollback, incident response)
+- `template-threat-model.md` — Security analysis (system boundaries, attack surface)
+- `template-postmortem.md` — Incident retrospectives (root cause, lessons learned)
+- `template-project-dossier/` — Complete project documentation (8-page structure)
+
+**Location in docs:**
+
+- ADRs: `docs/10-architecture/adr/`
+- Runbooks: `docs/50-operations/runbooks/`
+- Threat models: `docs/40-security/threat-models/`
+- Postmortems: `docs/50-operations/runbooks/` (in postmortem subsection)
+- Project dossiers: `docs/60-projects/[project-name]/`
+
+---
+
 # Documentation Authoring Standards (Mandatory)
 
 ## Front matter
 
 Every doc MUST include:
 
-- `title`
+7.  PR discipline: use closing keyword (e.g., Closes #123) when linking issues.
+
 - `description`
 - `tags`
   When appropriate, include:

@@ -56,8 +56,9 @@ If suspected, stop and treat as an incident.
 
 ### Pre-merge checklist (quick)
 
-- Local validation passed:
-  - `pnpm lint && pnpm format:check && pnpm typecheck && pnpm build`
+- Local validation passed (choose one approach):
+  - **Comprehensive:** `pnpm verify` (auto-formats, runs all checks with detailed reporting)
+  - **Individual:** `pnpm lint && pnpm format:check && pnpm typecheck && pnpm build`
 - PR readiness:
   - PR template completed with security note (“No secrets added”)
   - Vercel preview exists and routes render (`/`, `/cv`, `/projects`, one project detail)
@@ -68,16 +69,43 @@ If suspected, stop and treat as an incident.
 
 ### 1) Local preflight validation (required)
 
+### 1) Local preflight validation (required)
+
+**Recommended approach (comprehensive validation):**
+
+```bash
+pnpm install
+pnpm verify  # Runs all 8 checks with detailed error reporting
+```
+
+This runs: environment check, auto-format, format validation, lint, typecheck, secret scanning, registry validation, build, and smoke tests.
+
+**Alternative: Quick validation (skip tests):**
+
+```bash
+pnpm verify:quick  # Runs checks 1-7, skips smoke tests
+```
+
+**Alternative: Manual step-by-step:**
+
 From repository root:
 
 ```bash
 pnpm install
-pnpm lint
-pnpm format:check
-pnpm typecheck
-pnpm build
-pnpm test  # Smoke tests (Playwright - 12 tests)
+pnpm format:write      # Auto-fix formatting
+pnpm lint              # ESLint (zero warnings)
+pnpm typecheck         # TypeScript validation
+pnpm registry:validate # Projects YAML schema check
+pnpm build             # Production build
+pnpm test              # Smoke tests (Playwright - 12 tests)
+ # Secrets scanning runs in CI on PRs (TruffleHog). Local verify uses a lightweight pattern scan.
 ```
+
+**Secrets scanning scope:**
+
+- TruffleHog-based `secrets:scan` runs in CI on PRs and must pass.
+- Local verification does not run TruffleHog; a lightweight pattern-based scan is included.
+- Optional local opt-in: enable pre-commit (`pip install pre-commit && pre-commit install`) or install TruffleHog if you want to run `pnpm secrets:scan` manually.
 
 Optional local preview:
 
@@ -95,7 +123,8 @@ Expected outcome:
 - PR must include:
   - what changed
   - why
-  - evidence: local commands ran successfully (at minimum pnpm build)
+  - evidence: local validation passed (verify script or manual commands)
+  - security note: "No secrets added"
   - security note: “No secrets added”
 
 ### 3) Validate preview deployment

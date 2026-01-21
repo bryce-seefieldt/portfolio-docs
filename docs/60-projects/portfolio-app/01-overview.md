@@ -148,7 +148,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 
 - CI quality gates (ESLint max-warnings=0, Prettier, TypeScript strict)
 - Automated smoke testing (Playwright multi-browser)
-- Secrets scanning (TruffleHog CI + pre-commit)
+- Secrets scanning (CI gate via TruffleHog; optional pre-commit; local verify uses a lightweight pattern scan)
 - Frozen lockfile installs (deterministic builds)
 - PR-only merge discipline (GitHub Ruleset enforcement)
 

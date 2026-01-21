@@ -34,7 +34,7 @@ This page documents how the Portfolio Docs App is built and deployed as a produc
 
 - Docusaurus site builds locally:
   - `pnpm start`
-  - `pnpm build`
+  - `pnpm verify` (full local quality gates; `pnpm verify:quick` skips build for iteration)
 - PR-only merge workflow to `main`
 - A hosting target selected (e.g., Vercel) and connected via Git integration (public-safe assumption)
 - Repository includes a CI workflow that runs at least the required gates

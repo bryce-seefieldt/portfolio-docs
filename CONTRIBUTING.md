@@ -1,10 +1,74 @@
 # Contributing to Development Documentation
 
+## Phase-Based Work (Planning & Tracking)
+
+### Understanding Phases
+
+This project uses **Phases** to coordinate delivery across both `portfolio-app` and `portfolio-docs` repositories.
+
+A Phase typically includes:
+
+1. **Phase Implementation Guide** — Master plan (published in `docs/00-portfolio/`)
+2. **Multiple Stages** — Each with both app and docs work
+3. **Release Notes** — Summary of what was delivered
+
+### Creating a Phase
+
+**Step 1: Create Phase Implementation Guide**
+
+Use template: `docs/_meta/templates/template-phase-implementation-guide.md`
+
+- File location: `docs/00-portfolio/phase-[X]-implementation-guide.md`
+- Content: Master plan for the entire phase
+- Sections: Prerequisites, stages, effort estimates, success criteria
+- Usage: Team alignment and sequencing reference throughout phase
+
+**Step 2: Create Stage Issues (Paired)**
+
+For each stage, create TWO linked issues:
+
+1. **App Stage Issue** (in `portfolio-app`)
+   - Template: `portfolio-docs/docs/_meta/templates/template-phase-stage-app-issue.md`
+   - Title: `Stage X.Y: [Title] — App Implementation`
+   - Content: Design specs, implementation tasks, testing strategy
+   - Link: Reference companion docs issue
+
+2. **Docs Stage Issue** (in `portfolio-docs`)
+   - Template: `portfolio-docs/docs/_meta/templates/template-phase-stage-docs-issue.md`
+   - Title: `Stage X.Y: [Title] — Documentation`
+   - Content: Documentation outline, artifact types, content specs
+   - Link: Reference companion app issue
+
+### Standalone Work (Non-Phase Issues)
+
+For work **NOT tied to a phase**, use **Generic GitHub Issue** template:
+
+Template: `docs/_meta/templates/template-github-issue-generic.md`
+
+Supported types:
+
+- Bug reports
+- Feature requests
+- Enhancements
+- One-off documentation updates
+- Maintenance/refactoring
+
+**When to use:**
+
+- Urgent fixes (security, production bugs)
+- One-off improvements
+- Ad-hoc documentation updates
+- Dependency upgrades or tooling changes
+
+**Reference:** See [Template Usage Guide](./docs/_meta/templates/README.md) for complete details.
+
+---
+
 ## Authoring Guidance (Reduce Noise)
 
-- Every major folder has an `index.md` that acts as a “section hub.”
+- Every major folder has an `index.md` that acts as a "section hub."
 
-- Enforce templates (ADR/runbook/postmortem/threat model) via `docs/_meta/templates/`.
+- **Use templates** (ADR/runbook/postmortem/threat model/phase-implementation) for all evidence artifacts via `docs/_meta/templates/`.
 
 - Treat `60-projects/portfolio-web-app/` as the canonical service doc set; each demo project mirrors the same headings (architecture, deployment, ops, security).
 
@@ -37,6 +101,7 @@ Use one of the following prefixes:
 - `arch/`: architecture pages, diagrams, ADRs
 - `ci/`: workflows, quality gates, build/deploy tooling
 - `ref/`: reference material (CLI cheatsheets, config references)
+- `phase/`: phase planning and coordination (e.g., `phase/phase-3-implementation-guide`)
 
 Format:
 
@@ -49,6 +114,7 @@ Examples:
 - `docs/architecture-c4-l1`
 - `sec/threat-model-portfolio-app`
 - `ops/runbook-deploy-rollback`
+- `phase/phase-3-implementation-guide`
 - `ci/link-check-workflow`
 - `ref/wsl2-workstation-cheatsheet`
 
@@ -85,8 +151,9 @@ Hard rules:
 3. **Test locally:**
 
    ```bash
-   pnpm start     # preview
-   pnpm build     # required before PR
+   pnpm start       # preview
+   pnpm verify      # required before PR
+   # Optional for faster iteration: pnpm verify:quick (skip build, rerun full verify before PR)
    ```
 
 4. **Commit and push** (`.env.local` is gitignored; do not commit)
@@ -101,6 +168,13 @@ PR must include:
 - Why
 - Evidence (build output and links must pass, screenshots optional)
 
+#### Issue closure via PRs
+
+- Use a closing keyword in the PR description to auto-close the issue on merge into `main` (e.g., `Closes #123`, `Fixes #123`, `Resolves #123`).
+- If multiple issues: list each on its own line with a closing keyword.
+- If multiple PRs touch the same issue: only the PR targeting `main` should auto-close; other PRs should use non-closing phrasing (e.g., `Refs #123`).
+- Verify the issue closed after merge; otherwise close manually with a comment.
+
 ### PR Title rules
 
 Use Conventional Commit-like phrasing:
@@ -109,6 +183,7 @@ Use Conventional Commit-like phrasing:
 - sec: add portfolio threat model
 - ops: add deploy and rollback runbooks
 - arch: add ADR for hosting choice
+- phase: create phase 3 implementation guide
 - ci: add docs build/link-check workflow
 
 ### PR Scope rules
@@ -117,7 +192,8 @@ A PR should typically be one of:
 
 - add/update a single page (and references)
 - add a new folder with `_category_` + `index.md` hub
-- add one template
+- create one phase implementation guide
+- create ADR/runbook/threat model/postmortem
 - add/update one CI workflow
 
 If a PR touches multiple domains (`40-security` + `50-operations` + `30-devops-platform`) it should justify why, or split.
@@ -151,13 +227,42 @@ A PR is merge-ready only if:
    - confirm: "No secrets added"
    - if security-related doc: link to updated threat model / control / test page (or state TBD + created issue)
 
-**Quick check command:**
+**Quick check commands:**
+
+For **portfolio-app** (two options):
+
+**Option 1 - Comprehensive verification script (recommended):**
 
 ```bash
-pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
+pnpm verify
 ```
 
-All four must pass before opening a PR.
+Runs all quality checks with auto-formatting and detailed error reporting (environment check, format:write, format:check, lint, typecheck, registry:validate, build).
+
+**Option 2 - Individual commands:**
+
+```bash
+pnpm format:write && pnpm lint && pnpm typecheck && pnpm build
+```
+
+Secrets scanning:
+
+- CI gate runs `secrets:scan` via TruffleHog on PRs.
+- Local verification does not run TruffleHog; a lightweight pattern-based scan is included.
+- Optional local opt-in: enable pre-commit to run TruffleHog automatically:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+For **portfolio-docs**:
+
+- Recommended: `pnpm verify`
+- Faster iteration: `pnpm verify:quick` (skips the build gate; run `pnpm verify` before opening a PR)
+- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`
+
+All checks must pass before opening a PR.
 
 ### Review rules (solo-friendly)
 
@@ -170,7 +275,7 @@ Even as a solo maintainer, act like a team:
 
 A doc PR is done only if:
 
-- All quality gates pass (`pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`)
+- All quality gates pass (`pnpm verify`)
 - CI checks pass (`ci / quality` and `ci / build`)
 - New pages have front matter (title + sidebar rules)
 - The page is placed in the correct domain folder
@@ -222,12 +327,8 @@ The project enforces code quality through automated gates:
 **Before committing:**
 
 ```bash
-# Auto-fix formatting and linting where possible
-pnpm format:write
-pnpm lint:fix
-
-# Verify all gates pass
-pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
+pnpm verify          # Full local verification (format, lint, typecheck, format:check, build)
+pnpm verify:quick    # Optional: skips build for faster iteration (run full verify before PR)
 ```
 
 See [ADR-0004](/docs/architecture/adr/adr-0004-expand-ci-deploy-quality-gates) for quality gate rationale and [Testing](./docs/60-projects/portfolio-docs-app/05-testing.md) for details.

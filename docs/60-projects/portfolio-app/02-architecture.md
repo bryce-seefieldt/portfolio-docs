@@ -265,24 +265,24 @@ Metadata configured in `src/app/layout.tsx`:
 
 ## Technology Stack (Complete Inventory)
 
-| Category               | Technology           | Version  | Rationale                                                                   |
-| ---------------------- | -------------------- | -------- | --------------------------------------------------------------------------- |
-| **Framework**          | Next.js              | v16.1.3  | App Router, React Server Components, static optimization, industry standard |
-| **UI Library**         | React                | v19.2.3  | Concurrent features, automatic batching, modern rendering                   |
-| **Language**           | TypeScript           | v5+      | Strict mode, type safety, developer experience                              |
-| **Styling**            | Tailwind CSS         | v4       | Utility-first, JIT compilation, minimal CSS bundle                          |
-| **CSS Processing**     | @tailwindcss/postcss | v4       | CSS transformation and optimization                                         |
-| **Package Manager**    | pnpm                 | v10.0.0  | Fast, efficient, frozen lockfiles in CI                                     |
-| **Compiler**           | Next.js SWC          | Built-in | Rust-based, 17x faster than Babel                                           |
-| **React Optimizer**    | React Compiler       | v1.0.0   | Automatic memoization, ADR-0009                                             |
-| **E2E Testing**        | Playwright           | v1.57.0  | Multi-browser smoke tests, 100% route coverage                              |
-| **Linting**            | ESLint               | v9       | Flat config, Next.js presets, TypeScript integration                        |
-| **Formatting**         | Prettier             | v3.8.0   | Code formatting, Tailwind class sorting                                     |
-| **CI/CD**              | GitHub Actions       | -        | Quality + build jobs, frozen lockfiles                                      |
-| **Hosting**            | Vercel               | -        | Preview + production, edge CDN, promotion checks                            |
-| **Security Scanning**  | CodeQL               | -        | JavaScript/TypeScript static analysis                                       |
-| **Dependency Updates** | Dependabot           | -        | Weekly updates, grouped, majors excluded                                    |
-| **Secrets Scanning**   | TruffleHog           | v3.85.0  | CI gate + pre-commit hook                                                   |
+| Category               | Technology           | Version  | Rationale                                                                      |
+| ---------------------- | -------------------- | -------- | ------------------------------------------------------------------------------ |
+| **Framework**          | Next.js              | v16.1.3  | App Router, React Server Components, static optimization, industry standard    |
+| **UI Library**         | React                | v19.2.3  | Concurrent features, automatic batching, modern rendering                      |
+| **Language**           | TypeScript           | v5+      | Strict mode, type safety, developer experience                                 |
+| **Styling**            | Tailwind CSS         | v4       | Utility-first, JIT compilation, minimal CSS bundle                             |
+| **CSS Processing**     | @tailwindcss/postcss | v4       | CSS transformation and optimization                                            |
+| **Package Manager**    | pnpm                 | v10.0.0  | Fast, efficient, frozen lockfiles in CI                                        |
+| **Compiler**           | Next.js SWC          | Built-in | Rust-based, 17x faster than Babel                                              |
+| **React Optimizer**    | React Compiler       | v1.0.0   | Automatic memoization, ADR-0009                                                |
+| **E2E Testing**        | Playwright           | v1.57.0  | Multi-browser smoke tests, 100% route coverage                                 |
+| **Linting**            | ESLint               | v9       | Flat config, Next.js presets, TypeScript integration                           |
+| **Formatting**         | Prettier             | v3.8.0   | Code formatting, Tailwind class sorting                                        |
+| **CI/CD**              | GitHub Actions       | -        | Quality + build jobs, frozen lockfiles                                         |
+| **Hosting**            | Vercel               | -        | Preview + production, edge CDN, promotion checks                               |
+| **Security Scanning**  | CodeQL               | -        | JavaScript/TypeScript static analysis                                          |
+| **Dependency Updates** | Dependabot           | -        | Weekly updates, grouped, majors excluded                                       |
+| **Secrets Scanning**   | TruffleHog           | v3.85.0  | CI gate (PRs); optional pre-commit; local verify uses lightweight pattern scan |
 
 ### Notable Architectural Decisions
 

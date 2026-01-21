@@ -45,6 +45,12 @@ This command starts a local development server and opens up a browser window. Mo
 
 The dev server uses the environment variables from `.env.local` to configure site URLs, GitHub links, and cross-repository linking.
 
+### Pre-PR verification (required)
+
+- Recommended: `pnpm verify` (runs format, lint, typecheck, format:check, build)
+- Faster iteration: `pnpm verify:quick` (skips the build gate; rerun full `pnpm verify` before opening a PR)
+- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`
+
 ## Build
 
 ```bash
@@ -79,6 +85,17 @@ pnpm build
 
 This command generates static content into the `build` directory. The same command runs in CI and blocks merge if it fails (intentional safety gate for broken links).
 
+### Scripts
+
+- `pnpm start` — run the local dev server
+- `pnpm build` — produce the static site output (`build/`)
+- `pnpm serve` / `pnpm serve:wsl` — serve a built site locally
+- `pnpm lint` / `pnpm lint:fix` — ESLint check / auto-fix
+- `pnpm typecheck` — TypeScript type validation
+- `pnpm format:check` / `pnpm format:write` — Prettier check / write
+- `pnpm verify` — full local quality gates (format, lint, typecheck, format:check, build)
+- `pnpm verify:quick` — skip build for faster iteration (run full `pnpm verify` before PR)
+
 ### Reference
 
 [Docusaurus Deployment Guide](https://docusaurus.io/docs/deployment)
@@ -101,7 +118,7 @@ Please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for detailed workflow and rule
 3. Run locally:
    - `pnpm install`
    - `pnpm start` (preview)
-   - `pnpm build` (required before PR)
+   - `pnpm verify` (required before PR; use `pnpm verify:quick` only for iteration)
 4. Open a PR and complete the checklist in the PR template.
 5. Merge only when required checks pass (build, nav integrity, security statement).
 

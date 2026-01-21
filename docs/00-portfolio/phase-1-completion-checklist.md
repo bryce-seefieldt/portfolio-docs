@@ -187,6 +187,23 @@ Upon completion, Phase 1 will be fully validated and ready for Phase 2.
 - [ ] Commit pushed to GitHub
 - [ ] PR opened targeting `main`
 
+**Optional: Validate locally before pushing (recommended)**
+
+Run comprehensive validation:
+
+```bash
+pnpm verify
+```
+
+Or run checks individually:
+
+```bash
+pnpm format:write  # Auto-fix formatting
+pnpm lint          # Check linting
+pnpm typecheck     # Check TypeScript
+pnpm build         # Validate build
+```
+
 **Step 5.2: Verify GitHub Checks**
 
 - [ ] CI workflow triggered (wait 1–2 min)

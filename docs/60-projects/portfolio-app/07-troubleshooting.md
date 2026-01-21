@@ -28,8 +28,9 @@ This page is a project-specific summary; authoritative procedures live in runboo
 
 ## Prereqs / Inputs
 
-- ability to run local commands:
-  - `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build`
+- ability to run local tooling:
+  - `pnpm verify` or `pnpm verify:quick` (recommended)
+  - individual commands: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build`
 - access to CI logs (GitHub Actions)
 - access to hosting deployment logs (Vercel)
 
@@ -43,21 +44,31 @@ This page is a project-specific summary; authoritative procedures live in runboo
 - lint rule violations
 - TypeScript config mismatch or unsafe typing changes
 
-### Fix
+### 1) Reproduce locally (required)
 
-- run locally:
+**Recommended approach:**
 
 ```bash
-  pnpm lint
-  pnpm format:check
-  pnpm typecheck
+pnpm install
+pnpm verify:quick  # Fast validation with detailed error reporting
 ```
 
-- apply targeted fixes:
-  - use `pnpm format:write` (if available) for formatting issues
-  - fix lint violations explicitly (avoid disabling rules without governance)
+**Alternative: Individual commands:**
 
-Follow: runbook(s) under docs/50-operations/runbooks/
+On the same branch:
+
+```bash
+pnpm install
+pnpm lint
+pnpm format:check
+pnpm typecheck
+```
+
+- if any command fails locally: fix directly
+  - use `pnpm format:write` for formatting issues (or let `pnpm verify` auto-fix)
+  - for lint errors: inspect output and fix violations
+  - for type errors: fix or adjust `tsconfig.json` if legitimately needed
+    Follow: runbook(s) under docs/50-operations/runbooks/
 
 ## Symptom: `pnpm build` fails
 
@@ -90,6 +101,52 @@ pnpm build
 - confirm toolchain pinning (Node and pnpm)
 - confirm Vercel build settings align with repo scripts
 - compare preview/prod logs and ensure checks are required for promotion
+
+## Symptom: `secrets:scan` CI stage fails (or appears skipped)
+
+### Likely causes
+
+- Actual secrets detected in codebase (critical)
+- CI environment/tooling issues (runner PATH or binary availability)
+- Misunderstanding of scope (TruffleHog runs in CI; local verify uses a lightweight scan)
+
+### Fix
+
+**Scope clarification:**
+
+- Local verification does not run TruffleHog. It includes a lightweight pattern-based scan.
+- The TruffleHog-based `secrets:scan` runs automatically in CI on PRs and must pass.
+
+**If CI `secrets:scan` fails:**
+
+1. Inspect CI logs for detected strings and file paths.
+2. Remove any real secrets; rotate tokens if exposure occurred.
+3. Ensure `.env*` files (except `.env.example`) are gitignored.
+4. Re-run CI via a new commit; verify the gate passes.
+
+**Optional local opt-in:**
+
+- Use pre-commit to run TruffleHog automatically:
+  ```bash
+  pip install pre-commit
+  pre-commit install
+  ```
+- Or install TruffleHog locally if you want to run `pnpm secrets:scan` by hand (not required):
+
+  ```bash
+  # macOS
+  brew install trufflesecurity/trufflehog/trufflehog
+
+  # Linux (download from releases and add to PATH)
+  # https://github.com/trufflesecurity/trufflehog/releases/
+  ```
+
+**Real secrets detected (in CI):**
+
+1. Stop and prevent merge; do not bypass checks.
+2. Remove the secret from code and `.env` files.
+3. Rotate affected credentials.
+4. Clean history if necessary (git-filter-repo/BFG) following GitHub guidance.
 
 ## Symptom: Root domain works but `/docs` links break
 

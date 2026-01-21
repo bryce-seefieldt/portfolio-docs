@@ -265,26 +265,34 @@ code /home/seven30/src/portfolio/portfolio-docs/docs/60-projects/portfolio-app/0
    # Check for secrets in env vars
    grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
    # Should return: no results
-
-   # Verify secrets scanning gate
-   pnpm secrets:scan
-   # Should pass with no detections
    ```
    ````
 
-   ### Dependencies
-   - ✅ CodeQL scanning (JS/TS) on PR + weekly schedule
-   - ✅ Dependabot weekly updates (grouped, majors excluded)
-   - ✅ Frozen lockfile in CI (`pnpm install --frozen-lockfile`)
+# Local secret hygiene (lightweight)
 
-   ### CI/CD Pipeline
-   - ✅ Least-privilege permissions (scoped per job)
-   - ✅ Secrets scanning gate (TruffleHog, PR-only)
-   - ✅ Required checks before merge (quality, secrets-scan, build, CodeQL)
+# Local verification runs a pattern-based scan (no TruffleHog).
 
-   ```
+# CI runs the full `secrets:scan` stage using TruffleHog on PRs.
 
-   ```
+```
+
+```
+
+### Dependencies
+
+- ✅ CodeQL scanning (JS/TS) on PR + weekly schedule
+- ✅ Dependabot weekly updates (grouped, majors excluded)
+- ✅ Frozen lockfile in CI (`pnpm install --frozen-lockfile`)
+
+### CI/CD Pipeline
+
+- ✅ Least-privilege permissions (scoped per job)
+- ✅ Secrets scanning gate (TruffleHog, PR-only)
+- ✅ Required checks before merge (quality, secrets-scan, build, CodeQL)
+
+```
+
+```
 
 2. **Security Controls (Phase 2)** (update existing or new)
 

@@ -72,6 +72,19 @@ In the PR or `main` workflow run, identify:
 
 ### 2) Reproduce locally (required)
 
+**Option 1: Comprehensive verification (recommended)**
+
+Run the complete validation suite to identify all issues at once:
+
+```bash
+pnpm install
+pnpm verify
+```
+
+The verify script runs all CI checks (environment validation, auto-format, format check, lint, typecheck, registry validation, build) with detailed error reporting and troubleshooting guidance.
+
+**Option 2: Individual commands (targeted debugging)**
+
 On the same branch/commit:
 
 ```bash
@@ -82,6 +95,12 @@ pnpm typecheck
 pnpm build
 pnpm test  # Smoke tests (Playwright)
 ```
+
+Use individual commands when you need to:
+
+- Debug a specific failure type
+- Run checks in isolation
+- Understand what each check validates
 
 If local results differ from CI:
 

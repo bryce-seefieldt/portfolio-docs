@@ -145,16 +145,16 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | CI doesn't log env vars             | ✅       | ✅          | CI workflow `set -x` not used; GitHub Actions masks secrets by default                                                                               |
 | GitHub Actions OIDC tokens          | ✅       | ✅          | Vercel OIDC integration used (short-lived tokens); no long-lived PATs in `GITHUB_TOKEN`                                                              |
 | PR template "No secrets" checklist  | ✅       | ✅          | [PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md) includes: "No secrets added" |
-| **Secrets scanning gate (Phase 2)** | ⬆️       | ✅ **NEW**  | TruffleHog CI job added; scans all commits for verified secrets                                                                                      |
+| **Secrets scanning gate (Phase 2)** | ⬆️       | ✅ **NEW**  | TruffleHog CI job added; scans all PRs for verified secrets (CI-only; local verify uses a lightweight pattern scan)                                  |
 
 **Compliance Status:** ✅ **100% — Phase 1 complete + Phase 2 enhancement**
 
 **Evidence Artifacts:**
 
 - Environment Config: [src/lib/config.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/config.ts) — no hardcoded secrets; only `NEXT_PUBLIC_*` vars loaded
-- CI Secrets Scanning: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L63-L75) — TruffleHog job (Phase 2 added)
-- Pre-commit Hook: [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) (Phase 2 added)
-- Package Script: `pnpm secrets:scan` (Phase 2 added)
+- CI Secrets Scanning: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L63-L75) — TruffleHog job (CI-only)
+- Pre-commit Hook: [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) (optional local opt-in)
+- Local Verification: Lightweight pattern-based scan (no TruffleHog) via verification script
 
 ---
 
@@ -284,13 +284,13 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 ### Enhancements Implemented (as of 2026-01-19)
 
-| Enhancement                               | Threat Mitigated                | Status      | Evidence                                                                                                       |
-| ----------------------------------------- | ------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
-| **Secrets Scanning Gate (TruffleHog CI)** | Information Disclosure (T1)     | ✅ Complete | [ci.yml#L63-L75](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L63-L75)  |
-| **Least-Privilege CI Permissions**        | Tampering (T2), Elevation (E1)  | ✅ Complete | [ci.yml#L1-L17](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L1-L17)    |
-| **Pre-commit Hook (TruffleHog)**          | Information Disclosure (T1)     | ✅ Complete | [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml)  |
-| **Local Secrets Scan Script**             | Information Disclosure (T1)     | ✅ Complete | `pnpm secrets:scan` in [package.json](https://github.com/bryce-seefieldt/portfolio-app/blob/main/package.json) |
-| **Secrets Incident Runbook**              | Information Disclosure (T1, T2) | ✅ Complete | [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)            |
+| Enhancement                               | Threat Mitigated                | Status      | Evidence                                                                                                      |
+| ----------------------------------------- | ------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------- |
+| **Secrets Scanning Gate (TruffleHog CI)** | Information Disclosure (T1)     | ✅ Complete | [ci.yml#L63-L75](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L63-L75) |
+| **Least-Privilege CI Permissions**        | Tampering (T2), Elevation (E1)  | ✅ Complete | [ci.yml#L1-L17](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L1-L17)   |
+| **Pre-commit Hook (TruffleHog)**          | Information Disclosure (T1)     | ✅ Complete | [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) |
+| **Local Verification Scan**               | Information Disclosure (T1)     | ✅ Complete | Lightweight pattern-based scan; TruffleHog not run locally                                                    |
+| **Secrets Incident Runbook**              | Information Disclosure (T1, T2) | ✅ Complete | [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)           |
 
 ---
 
@@ -336,7 +336,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | Type check        | `pnpm typecheck`         | TypeScript strict            | ✅ Required in CI               |
 | Build             | `pnpm build`             | Prod build                   | ✅ Required in CI               |
 | Smoke tests       | `pnpm test` (Playwright) | 12 tests; Chromium + Firefox | ✅ Required in CI               |
-| Secrets scan      | `pnpm secrets:scan`      | TruffleHog verified          | ✅ **Phase 2 — Required in CI** |
+| Secrets scan      | `secrets:scan` (CI-only) | TruffleHog verified in CI    | ✅ **Phase 2 — Required in CI** |
 | CodeQL            | CodeQL workflow          | JavaScript/TypeScript        | ✅ Required in CI               |
 
 ### Manual Validation Checklist (per deploy)

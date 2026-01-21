@@ -83,7 +83,7 @@ Portfolio App must link to evidence pages for each project:
 - ✅ **Route skeleton**: 5 core routes implemented and smoke-tested
 - ✅ **CI quality gates**: lint, format, typecheck, secrets-scan, build with smoke tests (all enforced)
 - ✅ **Smoke test coverage**: 100% routes (12 tests, Chromium + Firefox)
-- ✅ **Secrets scanning**: TruffleHog CI gate + pre-commit hook configured
+- ✅ **Secrets scanning**: CI gate via TruffleHog (PR-only); optional pre-commit hook. Local verify uses a lightweight pattern scan (no TruffleHog).
 - ✅ **Security hardening**: Least-privilege CI permissions, CodeQL, Dependabot
 - ✅ **Deployment governance**: Vercel promotion gated by required checks
 - ✅ **Dossier enhancement**: All 7 pages updated to gold standard (Phase 2)

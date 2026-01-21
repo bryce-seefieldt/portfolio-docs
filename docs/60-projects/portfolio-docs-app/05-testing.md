@@ -73,24 +73,16 @@ Use this to validate:
 
 ### 2) Quality checks (before opening PR)
 
-Run all quality gates locally:
-
-```bash
-pnpm lint          # ESLint: code quality
-pnpm typecheck     # TypeScript: type safety
-pnpm format:check  # Prettier: code style
-```
-
-If formatting issues are found:
+- Recommended: `pnpm verify` (runs format:write, lint, typecheck, format:check, build)
+- Faster iteration: `pnpm verify:quick` (skips the build gate; rerun full `pnpm verify` before PR)
+- Manual equivalent:
 
 ```bash
 pnpm format:write  # Auto-fix formatting
-```
-
-If lint issues are found:
-
-```bash
-pnpm lint:fix      # Auto-fix linting (where possible)
+pnpm lint          # ESLint: code quality
+pnpm typecheck     # TypeScript: type safety
+pnpm format:check  # Prettier: code style
+pnpm build         # Docusaurus production build
 ```
 
 ### 3) Production build gate (hard requirement)
@@ -197,7 +189,7 @@ Purpose: Type checking for config files and React components (not used for build
 
 For any PR, the author should provide:
 
-- confirmation that all quality gates passed (`pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`)
+- confirmation that all quality gates passed (`pnpm verify`; use `pnpm verify:quick` only for iteration and rerun full verify before PR)
 - a description of what navigation path reviewers should take
 - any expected visual changes (if relevant)
 - evidence that CI checks passed (GitHub Actions status)
