@@ -28,8 +28,9 @@ This page is a project-specific summary; authoritative procedures live in runboo
 
 ## Prereqs / Inputs
 
-- ability to run local commands:
-  - `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build`
+- ability to run local tooling:
+  - `pnpm verify` or `pnpm verify:quick` (recommended)
+  - individual commands: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build`
 - access to CI logs (GitHub Actions)
 - access to hosting deployment logs (Vercel)
 
@@ -43,20 +44,30 @@ This page is a project-specific summary; authoritative procedures live in runboo
 - lint rule violations
 - TypeScript config mismatch or unsafe typing changes
 
-### Fix
+### 1) Reproduce locally (required)
 
-- run locally:
+**Recommended approach:**
 
 ```bash
-  pnpm lint
-  pnpm format:check
-  pnpm typecheck
+pnpm install
+pnpm verify:quick  # Fast validation with detailed error reporting
 ```
 
-- apply targeted fixes:
-  - use `pnpm format:write` (if available) for formatting issues
-  - fix lint violations explicitly (avoid disabling rules without governance)
+**Alternative: Individual commands:**
 
+On the same branch:
+
+```bash
+pnpm install
+pnpm lint
+pnpm format:check
+pnpm typecheck
+```
+
+- if any command fails locally: fix directly
+  - use `pnpm format:write` for formatting issues (or let `pnpm verify` auto-fix)
+  - for lint errors: inspect output and fix violations
+  - for type errors: fix or adjust `tsconfig.json` if legitimately needed
 Follow: runbook(s) under docs/50-operations/runbooks/
 
 ## Symptom: `pnpm build` fails

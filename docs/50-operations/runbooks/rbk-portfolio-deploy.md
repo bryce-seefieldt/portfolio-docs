@@ -68,16 +68,36 @@ If suspected, stop and treat as an incident.
   - Branch ruleset active (e.g., `main-protection`) and required checks selected
 
 ### 1) Local preflight validation (required)
+### 1) Local preflight validation (required)
+
+**Recommended approach (comprehensive validation):**
+
+```bash
+pnpm install
+pnpm verify  # Runs all 8 checks with detailed error reporting
+```
+
+This runs: environment check, auto-format, format validation, lint, typecheck, secret scanning, registry validation, build, and smoke tests.
+
+**Alternative: Quick validation (skip tests):**
+
+```bash
+pnpm verify:quick  # Runs checks 1-7, skips smoke tests
+```
+
+**Alternative: Manual step-by-step:**
 
 From repository root:
 
 ```bash
 pnpm install
-pnpm lint
-pnpm format:check
-pnpm typecheck
-pnpm build
-pnpm test  # Smoke tests (Playwright - 12 tests)
+pnpm format:write      # Auto-fix formatting
+pnpm lint              # ESLint (zero warnings)
+pnpm typecheck         # TypeScript validation
+pnpm registry:validate # Projects YAML schema check
+pnpm build             # Production build
+pnpm test              # Smoke tests (Playwright - 12 tests)
+pnpm secrets:scan      # Secret detection (if TruffleHog installed)
 ```
 
 Optional local preview:
@@ -96,7 +116,8 @@ Expected outcome:
 - PR must include:
   - what changed
   - why
-  - evidence: local commands ran successfully (at minimum pnpm build)
+  - evidence: local validation passed (verify script or manual commands)
+  - security note: "No secrets added"
   - security note: “No secrets added”
 
 ### 3) Validate preview deployment
