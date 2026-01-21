@@ -871,6 +871,52 @@ git config core.hooksPath .git/hooks  # One-time setup
 
 ---
 
+## Phase 2 Security Enhancements — Quick Reference
+
+This section summarizes all Phase 2 security and operational hardening applied to the Portfolio App (completed in STEP 4a and 4b).
+
+### CI/CD Hardening
+
+- ✅ **Secrets scanning** added to CI using TruffleHog with verified detectors
+  - Runs on **pull requests only** to avoid TruffleHog BASE==HEAD failures on direct pushes to main
+  - Required check before merge via GitHub branch protection rules
+  - Ensures all production code is scanned before merge
+- ✅ **Least-privilege permissions** implemented
+  - Removed global workflow permissions
+  - Added minimal job-level permissions per workflow job
+- ✅ **Deterministic builds** enforced via `pnpm install --frozen-lockfile` in CI
+- ✅ **Required checks** before merge: `ci / quality`, `ci / build`, `secrets-scan`, CodeQL
+
+### Developer Workflow Hardening
+
+- ✅ **Pre-commit hooks** added via `.pre-commit-config.yaml` with TruffleHog
+  - Optional local opt-in for developers
+  - Prevents committing sensitive material before push
+- ✅ **Local verification** uses lightweight pattern-based secret scan
+  - Full TruffleHog scanning runs only in CI (performance optimization)
+- ✅ **Quality gates maintained**: TypeScript strict mode, ESLint zero-warnings, Prettier enforcement
+
+### Operational Hardening
+
+- ✅ **Secrets incident response runbook** created: [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)
+  - 5-phase response procedure: Detection → Containment → Eradication → Recovery → Postmortem
+  - Aligned with STRIDE threat model mitigations
+- ✅ **Existing runbooks verified** for operational readiness:
+  - [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
+  - [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
+  - [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+
+### Evidence Artifacts
+
+- **CI Workflow:** [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)
+- **Pre-commit Config:** [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml)
+- **Package Scripts:** [package.json](https://github.com/bryce-seefieldt/portfolio-app/blob/main/package.json)
+- **Smoke Tests:** [tests/e2e/smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts)
+- **Threat Model:** [Portfolio App STRIDE](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+- **All Runbooks:** [Operations Runbooks Index](/docs/50-operations/runbooks/)
+
+---
+
 ### STEP 5: Create/Update Operational Runbooks ✅ (2–4 hours)
 
 **Goal:** Document repeatable procedures for deployment, CI triage, and rollback.
@@ -1887,6 +1933,36 @@ A reviewer can validate Phase 2 completion through:
 
 ---
 
+## Future Enhancements & Optional Improvements
+
+Optional improvements identified during Phase 2 (not required for Phase 3):
+
+### Security & Compliance
+
+- **Dependabot for GitHub Actions:** Enable SHA pinning for workflow actions (enhanced supply chain security)
+- **Content Security Policy (CSP):** Add CSP headers via `vercel.json` for additional XSS protection
+- **SBOM generation:** Consider automated Software Bill of Materials for dependency tracking
+
+### Performance & Observability
+
+- **Lighthouse CI:** Integrate performance budgets and automated Lighthouse scoring in CI
+- **Web Vitals monitoring:** Add RUM (Real User Monitoring) for production performance tracking
+- **Error tracking:** Consider Sentry or similar for production error aggregation
+
+### Testing & Quality
+
+- **Visual regression testing:** Add Playwright screenshot comparison for UI consistency
+- **Accessibility testing:** Automated a11y checks (axe-core) in smoke tests
+- **Load testing:** Basic performance testing for critical routes
+
+### Documentation & Evidence
+
+- **Architecture diagrams:** Generate C4 or similar architecture diagrams for dossier
+- **API documentation:** If APIs added in Phase 3+, generate OpenAPI/Swagger docs
+- **Runbook automation:** Convert manual runbooks to executable scripts where applicable
+
+---
+
 ## Phase 3 Planning (Next Steps)
 
 With Phase 2 establishing credibility through one exemplary project, Phase 3 will focus on:
@@ -1913,13 +1989,13 @@ With Phase 2 establishing credibility through one exemplary project, Phase 3 wil
 ## Related Documentation
 
 - **Roadmap:** [Portfolio Web Application Roadmap](/docs/00-portfolio/roadmap/index.md)
+- **Phase 1 Implementation Guide:** [Phase 1: Portfolio App Foundation](/docs/00-portfolio/phase-1-implementation-guide.md)
 - **ADR-0010:** [Portfolio App as Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
-- **Phase 1 Completion:** [Phase 1 Quick Reference](/docs/00-portfolio/phase-1-quick-reference.md)
 - **Phase 2 Release Notes:** [20260119 Portfolio App Phase 2 Complete](/docs/00-portfolio/release-notes/20260119-portfolio-app-phase-2-complete.md)
-- **Phase 2 Enhancements Summary:** [PHASE-2-ENHANCEMENTS-SUMMARY.md](/docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md)
 - **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/)
 - **Threat Model:** [Portfolio App Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
 - **Runbooks Index:** [Operations Runbooks](/docs/50-operations/runbooks/)
+- **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/)
 
 ---
 
