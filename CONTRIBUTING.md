@@ -1,10 +1,72 @@
 # Contributing to Development Documentation
 
+## Phase-Based Work (Planning & Tracking)
+
+### Understanding Phases
+
+This project uses **Phases** to coordinate delivery across both `portfolio-app` and `portfolio-docs` repositories.
+
+A Phase typically includes:
+
+1. **Phase Implementation Guide** — Master plan (published in `docs/00-portfolio/`)
+2. **Multiple Stages** — Each with both app and docs work
+3. **Release Notes** — Summary of what was delivered
+
+### Creating a Phase
+
+**Step 1: Create Phase Implementation Guide**
+
+Use template: `docs/_meta/templates/template-phase-implementation-guide.md`
+
+- File location: `docs/00-portfolio/phase-[X]-implementation-guide.md`
+- Content: Master plan for the entire phase
+- Sections: Prerequisites, stages, effort estimates, success criteria
+- Usage: Team alignment and sequencing reference throughout phase
+
+**Step 2: Create Stage Issues (Paired)**
+
+For each stage, create TWO linked issues:
+
+1. **App Stage Issue** (in `portfolio-app`)
+   - Template: `portfolio-docs/docs/_meta/templates/template-phase-stage-app-issue.md`
+   - Title: `Stage X.Y: [Title] — App Implementation`
+   - Content: Design specs, implementation tasks, testing strategy
+   - Link: Reference companion docs issue
+
+2. **Docs Stage Issue** (in `portfolio-docs`)
+   - Template: `portfolio-docs/docs/_meta/templates/template-phase-stage-docs-issue.md`
+   - Title: `Stage X.Y: [Title] — Documentation`
+   - Content: Documentation outline, artifact types, content specs
+   - Link: Reference companion app issue
+
+### Standalone Work (Non-Phase Issues)
+
+For work **NOT tied to a phase**, use **Generic GitHub Issue** template:
+
+Template: `docs/_meta/templates/template-github-issue-generic.md`
+
+Supported types:
+- Bug reports
+- Feature requests
+- Enhancements
+- One-off documentation updates
+- Maintenance/refactoring
+
+**When to use:**
+- Urgent fixes (security, production bugs)
+- One-off improvements
+- Ad-hoc documentation updates
+- Dependency upgrades or tooling changes
+
+**Reference:** See [Template Usage Guide](./docs/_meta/templates/README.md) for complete details.
+
+---
+
 ## Authoring Guidance (Reduce Noise)
 
-- Every major folder has an `index.md` that acts as a “section hub.”
+- Every major folder has an `index.md` that acts as a "section hub."
 
-- Enforce templates (ADR/runbook/postmortem/threat model) via `docs/_meta/templates/`.
+- **Use templates** (ADR/runbook/postmortem/threat model/phase-implementation) for all evidence artifacts via `docs/_meta/templates/`.
 
 - Treat `60-projects/portfolio-web-app/` as the canonical service doc set; each demo project mirrors the same headings (architecture, deployment, ops, security).
 
@@ -37,6 +99,7 @@ Use one of the following prefixes:
 - `arch/`: architecture pages, diagrams, ADRs
 - `ci/`: workflows, quality gates, build/deploy tooling
 - `ref/`: reference material (CLI cheatsheets, config references)
+- `phase/`: phase planning and coordination (e.g., `phase/phase-3-implementation-guide`)
 
 Format:
 
@@ -49,6 +112,7 @@ Examples:
 - `docs/architecture-c4-l1`
 - `sec/threat-model-portfolio-app`
 - `ops/runbook-deploy-rollback`
+- `phase/phase-3-implementation-guide`
 - `ci/link-check-workflow`
 - `ref/wsl2-workstation-cheatsheet`
 
@@ -117,6 +181,7 @@ Use Conventional Commit-like phrasing:
 - sec: add portfolio threat model
 - ops: add deploy and rollback runbooks
 - arch: add ADR for hosting choice
+- phase: create phase 3 implementation guide
 - ci: add docs build/link-check workflow
 
 ### PR Scope rules
@@ -125,7 +190,8 @@ A PR should typically be one of:
 
 - add/update a single page (and references)
 - add a new folder with `_category_` + `index.md` hub
-- add one template
+- create one phase implementation guide
+- create ADR/runbook/threat model/postmortem
 - add/update one CI workflow
 
 If a PR touches multiple domains (`40-security` + `50-operations` + `30-devops-platform`) it should justify why, or split.
