@@ -181,15 +181,31 @@ Common build failure modes:
    - **Reference:** [Stage 3.1 Known Issues](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md#known-issues--solutions)
 
 3. **Environment variable check:**
-   ```bash
-   # Verify required variables are set
-   echo $NEXT_PUBLIC_DOCS_BASE_URL
-   echo $NEXT_PUBLIC_GITHUB_URL
+  ```bash
+  # Verify required variables are set
+  echo $NEXT_PUBLIC_DOCS_BASE_URL
+  echo $NEXT_PUBLIC_GITHUB_URL
    
-   # Test registry interpolation
-   pnpm registry:validate
-   # Should output: Registry OK (projects: N)
-   ```
+  # Test registry interpolation
+  pnpm registry:validate
+  # Should output: Registry OK (projects: N)
+  ```
+
+4. **Quick verification recipe (registry-specific):**
+  ```bash
+  cd portfolio-app
+  pnpm registry:validate   # Expect: Registry OK (projects: N)
+  pnpm lint                # Expect: silent, 0 warnings
+  pnpm build               # Expect: ✓ Compiled successfully
+  ```
+
+5. **If build still fails on registry interpolation:**
+  - Check env vars: `cat .env.local | grep NEXT_PUBLIC`
+  - Run with debug: `DEBUG_REGISTRY=1 pnpm registry:validate 2>&1 | head -20`
+    - Look for `interpolated="https://..."` (absolute URLs)
+  - Clean and rebuild: `rm -rf .next node_modules/.cache && pnpm build`
+  - Ensure `interpolate()` reads from `process.env` (fixed in commit `1a1e272`)
+
 #### E) Smoke test failures (`pnpm test`)
 
 **Status:** Smoke tests implemented in Phase 2 (PR #10).

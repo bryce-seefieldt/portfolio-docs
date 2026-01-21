@@ -270,6 +270,15 @@ NEXT_PUBLIC_SITE_URL=https://your-site-url.com
 - Blocks: Stage 3.3 (Unit tests)
 - Related: Portfolio-Docs ADR-0011 (Registry Decision)
 
+## Implementation Summary (Completed)
+
+- **ADR-0011** finalized: decision to use YAML-backed registry with Zod validation and env placeholder interpolation
+- **Registry schema guide** published with 4 validated examples and troubleshooting
+- **Architecture dossier** updated with Data-Driven Registry subsection and loader flow
+- **Copilot instructions** updated (app + docs) with registry ownership, YAML templates, validation scripts
+- **Validation results:** `pnpm build` (docs) ✅, `pnpm lint` (app) ✅, `node src/lib/registry.ts` validation ✅
+- **Cross-repo coordination:** portfolio-app PR #24 (feat/registry-stage-3.1) pairs with docs commit fb96e99
+
 ## Estimate
 
 **6-8 hours total**
