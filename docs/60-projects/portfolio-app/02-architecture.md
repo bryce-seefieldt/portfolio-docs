@@ -79,6 +79,14 @@ Recommended initial approach (low complexity):
 - generate pages from the data model with stable slugs
 - keep long-form writeups in Docusaurus, linked from project pages
 
+### Data-Driven Registry (Phase 3)
+
+- Registry lives in the Portfolio App at [portfolio-app/src/data/projects.yml](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/data/projects.yml) and is validated by [portfolio-app/src/lib/registry.ts](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/registry.ts).
+- Loader flow: YAML → env placeholder interpolation (`NEXT_PUBLIC_*`) → Zod validation (slug uniqueness, URL shape) → typed export via `src/data/projects.ts` → page components.
+- Validation is enforced in CI via `pnpm registry:validate` and during build; schema is documented in [docs/70-reference/registry-schema-guide.md](docs/70-reference/registry-schema-guide.md); rationale captured in [docs/10-architecture/adr/adr-0011-data-driven-project-registry.md](docs/10-architecture/adr/adr-0011-data-driven-project-registry.md).
+- URLs support env-driven placeholders (`{GITHUB_URL}`, `{DOCS_BASE_URL}`, `{DOCS_GITHUB_URL}`, `{SITE_URL}`) resolved from `NEXT_PUBLIC_*` variables to keep references portable across deploy environments.
+- Evidence fields (dossier, threat model, ADR index, runbooks, GitHub) are part of the contract so every claim on a project page links to verifiable artifacts in the docs app.
+
 ### Evidence-link strategy
 
 Each project entry should include:

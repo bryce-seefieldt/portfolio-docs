@@ -80,6 +80,32 @@ This repository is a **Docusaurus (TypeScript) docs-as-code system** that hosts:
 
 This docs platform is itself a **first-class project** (and the first project dossier entry) and must be treated like a production system.
 
+## Data-driven project registry (Stage 3.1)
+
+- Portfolio App now sources projects from a YAML registry; schema and validation rules must be documented and kept in sync.
+- Registry schema reference: [docs/70-reference/registry-schema-guide.md](docs/70-reference/registry-schema-guide.md); decision record: [docs/10-architecture/adr/adr-0011-data-driven-project-registry.md](docs/10-architecture/adr/adr-0011-data-driven-project-registry.md).
+- When registry shape changes, update the schema guide, ADR (if decision-level), and relevant project dossiers to keep evidence links accurate.
+- YAML template for examples/guides:
+
+```yaml
+- slug: example-project
+  title: 'Example Project'
+  summary: 'Short proof-focused summary.'
+  category: fullstack
+  tags: ['Next.js', 'TypeScript']
+  status: featured
+  evidence:
+    dossierPath: 'projects/example-project/'
+    adrIndexPath: 'architecture/adr/'
+    runbooksPath: 'operations/runbooks/'
+    github: '{DOCS_GITHUB_URL}'
+```
+
+- Cross-repo linking examples to keep docs and app aligned:
+  - Rendered docs: `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/roadmap"`
+  - Docs repo source: `NEXT_PUBLIC_DOCS_GITHUB_URL + "blob/main/docs/10-architecture/adr/adr-0011-data-driven-project-registry.md"`
+  - App repo source: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/registry.ts`
+
 ## Relationship to the future Portfolio project
 
 The Portfolio Docs App is a **platform** that will document the broader Portfolio program:
