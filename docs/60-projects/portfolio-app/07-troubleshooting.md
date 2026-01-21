@@ -102,6 +102,71 @@ pnpm build
 - confirm Vercel build settings align with repo scripts
 - compare preview/prod logs and ensure checks are required for promotion
 
+## Symptom: `pnpm secrets:scan` fails or is skipped
+
+### Likely causes
+
+- TruffleHog CLI binary not installed (most common)
+- TruffleHog not in system PATH
+- Actual secrets detected in codebase (rare, but critical)
+
+### Fix
+
+**TruffleHog not installed:**
+
+The `pnpm secrets:scan` script requires the TruffleHog CLI binary (not available via npm).
+
+```bash
+# macOS
+brew install trufflesecurity/trufflehog/trufflehog
+
+# Linux
+# 1. Download: https://github.com/trufflesecurity/trufflehog/releases/
+# 2. Extract: tar -xzf trufflehog_*_linux_x86_64.tar.gz
+# 3. Install: sudo mv trufflehog /usr/local/bin/
+
+# Verify installation
+which trufflehog
+trufflehog --version
+```
+
+**TruffleHog not in PATH:**
+
+After installation, ensure it's executable and in your PATH:
+
+```bash
+# Check if it's discoverable
+which trufflehog
+
+# If not found, add to PATH or move to /usr/local/bin
+sudo mv trufflehog /usr/local/bin/
+chmod +x /usr/local/bin/trufflehog
+```
+
+**Alternative: Use pre-commit hook:**
+
+If you prefer not to install the binary separately, use the pre-commit hook for automatic scanning on every commit:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+This will run TruffleHog automatically before each commit.
+
+**Real secrets detected:**
+
+If TruffleHog finds verified credentials:
+
+1. **Stop immediately** — do not commit
+2. **Remove the secret** from code and `.env` files
+3. **Rotate the credential** (if already committed to history)
+4. **Clean Git history** (if needed):
+   ```bash
+   # Use git-filter-repo or BFG Repo-Cleaner
+   # See: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+   ```
+
 ## Symptom: Root domain works but `/docs` links break
 
 ### Likely causes

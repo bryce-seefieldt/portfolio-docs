@@ -98,8 +98,18 @@ pnpm typecheck         # TypeScript validation
 pnpm registry:validate # Projects YAML schema check
 pnpm build             # Production build
 pnpm test              # Smoke tests (Playwright - 12 tests)
-pnpm secrets:scan      # Secret detection (if TruffleHog installed)
+pnpm secrets:scan      # Secret detection (requires TruffleHog CLI binary)
 ```
+
+**Note on `pnpm secrets:scan`:**
+
+This command requires the TruffleHog CLI binary (not available via npm):
+
+- **macOS**: `brew install trufflesecurity/trufflehog/trufflehog` before running the scan
+- **Linux**: Download from [GitHub releases](https://github.com/trufflesecurity/trufflehog/releases/), extract, and add to PATH
+- **Alternative**: Use pre-commit hook instead (automatic on commit): `pip install pre-commit && pre-commit install`
+
+If not installed, the `verify` script will skip this step with a warning.
 
 Optional local preview:
 

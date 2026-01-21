@@ -176,10 +176,18 @@ For each threat, the model documents:
 grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 # Should return: no results
 
-# Verify secrets scanning gate
+# Verify secrets scanning gate (requires TruffleHog CLI binary)
 pnpm secrets:scan
 # Should pass with no detections
 ```
+
+**If TruffleHog is not installed:**
+
+The `pnpm secrets:scan` command requires the TruffleHog CLI binary (not available via npm). Install it:
+
+- **macOS**: `brew install trufflesecurity/trufflehog/trufflehog`
+- **Linux**: Download from [GitHub releases](https://github.com/trufflesecurity/trufflehog/releases/), extract, and add to PATH
+- **Alternative**: Use pre-commit hook: `pip install pre-commit && pre-commit install` (automatic scanning on commit)
 
 ### Dependencies
 
