@@ -56,8 +56,9 @@ If suspected, stop and treat as an incident.
 
 ### Pre-merge checklist (quick)
 
-- Local validation passed:
-  - `pnpm lint && pnpm format:check && pnpm typecheck && pnpm build`
+- Local validation passed (choose one approach):
+  - **Comprehensive:** `pnpm verify` (auto-formats, runs all checks with detailed reporting)
+  - **Individual:** `pnpm lint && pnpm format:check && pnpm typecheck && pnpm build`
 - PR readiness:
   - PR template completed with security note (“No secrets added”)
   - Vercel preview exists and routes render (`/`, `/cv`, `/projects`, one project detail)

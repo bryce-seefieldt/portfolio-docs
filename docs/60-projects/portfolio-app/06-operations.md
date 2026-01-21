@@ -63,6 +63,33 @@ Responsibilities:
   - Smoke tests execution (`pnpm test` - 12 tests across 2 browsers)
 - If CI fails: follow the CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
 
+### Pre-deploy local validation (developer workflow)
+
+Before committing changes or opening a PR, validate locally to catch CI failures early.
+
+**Recommended approach (comprehensive):**
+
+```bash
+pnpm verify
+```
+
+This runs the complete validation suite (environment check, auto-format, format validation, lint, typecheck, registry validation, build) with detailed troubleshooting for failures. Mirrors CI checks with the addition of environment validation and auto-formatting.
+
+**Alternative approach (granular):**
+
+```bash
+pnpm format:write  # Fix formatting
+pnpm lint          # Check linting
+pnpm typecheck     # Check types
+pnpm build         # Validate build
+```
+
+Run individual commands when debugging specific issues or during active development.
+
+**Rationale:** Local validation reduces PR iteration cycles by catching failures before CI runs. The verify script provides a single-command workflow that matches CI behavior while offering better error reporting and automatic formatting fixes.
+
+See [Testing: Local validation workflow](/docs/60-projects/portfolio-app/05-testing.md#local-validation-workflow-required) for detailed documentation of both approaches.
+
 ### Dependabot automation
 
 - Dependabot PRs are auto-formatted in CI to prevent lockfile formatting failures

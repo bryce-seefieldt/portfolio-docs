@@ -38,21 +38,66 @@ The emphasis is on **enterprise credibility**:
 
 ## Local validation workflow (required)
 
-Run before opening a PR:
+### Option 1: Comprehensive verification script (recommended)
+
+For a streamlined workflow with detailed reporting:
 
 ```bash
 pnpm install
-pnpm lint
-pnpm format:check
-pnpm typecheck
-pnpm build
+pnpm verify
 ```
 
-Optional local preview:
+The `verify` command runs a comprehensive 7-step validation workflow:
+
+1. **Environment check**: Validates Node version, pnpm availability, `.env.local` existence, and required environment variables
+2. **Auto-format**: Runs `format:write` to fix formatting issues automatically
+3. **Format validation**: Confirms formatting correctness with `format:check`
+4. **Linting**: Executes ESLint with zero-warning enforcement
+5. **Type checking**: Validates TypeScript types across the codebase
+6. **Registry validation**: Ensures project registry schema compliance and data integrity
+7. **Build**: Produces production bundle to catch build-time errors
+
+**Benefits:**
+- Single command runs all pre-commit quality checks
+- Auto-formats code before validation (reduces false failures)
+- Provides color-coded output for quick status assessment
+- Includes detailed troubleshooting guidance for each failure type
+- Mirrors CI workflow for local/remote consistency
+- Generates summary report with next steps
+
+**When to use:**
+- Before every commit (catches issues early)
+- Before opening a PR (ensures CI will pass)
+- After pulling changes from main (validates clean state)
+- When troubleshooting CI failures locally
+
+### Option 2: Individual commands (granular control)
+
+For targeted validation or when you need to run specific checks:
+
+```bash
+pnpm install
+pnpm lint          # ESLint validation
+pnpm format:check  # Prettier validation (or format:write to fix)
+pnpm typecheck     # TypeScript type checking
+pnpm build         # Production build
+```
+
+**When to use individual commands:**
+- Debugging a specific type of failure
+- Running checks during active development (e.g., `typecheck` while coding)
+- Understanding what each check does
+- Integrating with editor/IDE workflows
+
+### Local preview server
+
+To preview the site during development:
 
 ```bash
 pnpm dev
 ```
+
+This starts the Next.js development server at `http://localhost:3000`.
 
 ## CI quality gates (required)
 

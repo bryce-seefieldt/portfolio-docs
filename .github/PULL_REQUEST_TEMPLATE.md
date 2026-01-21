@@ -21,6 +21,7 @@
 
 - [ ] `pnpm build` passed locally
 - [ ] Broken links check passed (build)
+- [ ] Includes closing keyword for linked issue (e.g., Closes #123)
 - ## Links / screenshots / notes:
 
 ## Nav / Structure

@@ -101,6 +101,13 @@ PR must include:
 - Why
 - Evidence (build output and links must pass, screenshots optional)
 
+#### Issue closure via PRs
+
+- Use a closing keyword in the PR description to auto-close the issue on merge into `main` (e.g., `Closes #123`, `Fixes #123`, `Resolves #123`).
+- If multiple issues: list each on its own line with a closing keyword.
+- If multiple PRs touch the same issue: only the PR targeting `main` should auto-close; other PRs should use non-closing phrasing (e.g., `Refs #123`).
+- Verify the issue closed after merge; otherwise close manually with a comment.
+
 ### PR Title rules
 
 Use Conventional Commit-like phrasing:
@@ -151,13 +158,31 @@ A PR is merge-ready only if:
    - confirm: "No secrets added"
    - if security-related doc: link to updated threat model / control / test page (or state TBD + created issue)
 
-**Quick check command:**
+**Quick check commands:**
+
+For **portfolio-app** (two options):
+
+**Option 1 - Comprehensive verification script (recommended):**
+
+```bash
+pnpm verify
+```
+
+Runs all quality checks with auto-formatting and detailed error reporting (environment check, format:write, format:check, lint, typecheck, registry:validate, build).
+
+**Option 2 - Individual commands:**
+
+```bash
+pnpm format:write && pnpm lint && pnpm typecheck && pnpm build
+```
+
+For **portfolio-docs**:
 
 ```bash
 pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
 ```
 
-All four must pass before opening a PR.
+All checks must pass before opening a PR.
 
 ### Review rules (solo-friendly)
 

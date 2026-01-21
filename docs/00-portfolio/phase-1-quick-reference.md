@@ -164,6 +164,10 @@ git checkout -b test/vercel-setup
 echo "# Test" > TEST_VERCEL_SETUP.md
 git add TEST_VERCEL_SETUP.md
 git commit -m "test: validate Vercel setup"
+
+# Before pushing, validate locally (recommended):
+pnpm verify  # Or: pnpm format:write && pnpm lint && pnpm typecheck && pnpm build
+
 git push origin test/vercel-setup
 
 # GitHub: Open PR
