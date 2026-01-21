@@ -248,6 +248,7 @@ Evidence data flow:
 - **Implementation Details:** [stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)
 - **Registry Schema:** [docs/70-reference/registry-schema-guide.md](/docs/70-reference/registry-schema-guide.md)
 - **Gold Standard:** [ADR-0010 — Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+
 ```
 
 #### 3. Verification Pass for `03-deployment.md`, `04-security.md`, `05-testing.md`

@@ -200,6 +200,7 @@ pnpm dev
 ### Issue: Registry Interpolation - Zod URL Validation Failure
 
 **Symptom:**
+
 ```
 Error during page data collection for /projects/[slug]:
 "demoUrl" is missing or invalid according to a Zod schema validation.
@@ -219,17 +220,20 @@ Modified `interpolate()` function in `src/lib/registry.ts` to read environment v
 
 ```typescript
 function interpolate(value: string | null | undefined): string | null {
-  if (!value || typeof value !== "string") return null;
+  if (!value || typeof value !== 'string') return null;
 
   // Read from process.env directly for better reliability with tsx/node
   const DOCS_BASE_URL =
-    process.env.NEXT_PUBLIC_DOCS_BASE_URL?.trim()?.replace(/\/+$/, "") || "/docs";
-  const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL?.trim()?.replace(/\/+$/, "") || "";
+    process.env.NEXT_PUBLIC_DOCS_BASE_URL?.trim()?.replace(/\/+$/, '') ||
+    '/docs';
+  const GITHUB_URL =
+    process.env.NEXT_PUBLIC_GITHUB_URL?.trim()?.replace(/\/+$/, '') || '';
   // ... etc
 }
 ```
 
 **Verification:**
+
 ```bash
 # Validate registry without starting dev server
 pnpm registry:validate
@@ -241,11 +245,13 @@ DEBUG_REGISTRY=1 pnpm registry:validate 2>&1 | grep demoUrl
 ```
 
 **Prevention:**
+
 - Add `pnpm registry:validate` to pre-commit hooks
 - Test registry loading in multiple execution contexts (Next.js, tsx, Node.js)
 - Read environment-dependent values at function call time, not module load time
 
 **Environment Requirements:**
+
 ```bash
 # Required for placeholder interpolation
 NEXT_PUBLIC_DOCS_BASE_URL=https://your-docs-url.com/

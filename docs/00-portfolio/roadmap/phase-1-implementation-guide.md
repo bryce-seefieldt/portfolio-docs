@@ -2,7 +2,8 @@
 title: 'Phase 1 Implementation Guide: Portfolio App Foundation'
 description: 'Completed implementation guide for Phase 1: Next.js app setup, CI/CD governance, Vercel deployment, and production promotion gating with comprehensive evidence artifacts.'
 sidebar_position: 1
-tags: [phase-1, implementation, completed, portfolio-app, foundation, deployment]
+tags:
+  [phase-1, implementation, completed, portfolio-app, foundation, deployment]
 ---
 
 # Phase 1 Implementation Guide — Portfolio App Foundation
@@ -61,11 +62,13 @@ gh auth status  # GitHub CLI authenticated (optional but recommended)
 For quick copy-paste during implementation:
 
 **Repository:**
+
 ```
 bryce-seefieldt/portfolio-app
 ```
 
 **Required CI Checks:**
+
 ```
 ci / quality
 ci / build
@@ -85,6 +88,7 @@ NEXT_PUBLIC_CONTACT_EMAIL=contact@example.com
 ```
 
 **GitHub Ruleset Configuration:**
+
 ```
 Name: main-protection
 Target: main
@@ -98,6 +102,7 @@ Rules:
 ```
 
 **Vercel Build Settings:**
+
 ```
 Framework Preset: Next.js
 Build Command: pnpm build
@@ -137,6 +142,7 @@ cd portfolio-app
 ```
 
 **Files created:**
+
 - Repository with README.md, LICENSE, .gitignore
 
 #### 1b. Initialize Next.js Application
@@ -154,6 +160,7 @@ pnpm create next-app@latest . --typescript --tailwind --app --no-src --import-al
 ```
 
 **Files created:**
+
 - `package.json`, `pnpm-lock.yaml`
 - `tsconfig.json` (strict mode enabled)
 - `tailwind.config.ts`, `postcss.config.mjs`
@@ -182,6 +189,7 @@ touch app/cv/page.tsx app/projects/page.tsx app/contact/page.tsx app/projects/\[
 ```
 
 **Files created:**
+
 - `app/cv/page.tsx` — CV route skeleton
 - `app/projects/page.tsx` — Projects index skeleton
 - `app/contact/page.tsx` — Contact route skeleton
@@ -196,6 +204,7 @@ touch app/cv/page.tsx app/projects/page.tsx app/contact/page.tsx app/projects/\[
 - [x] Initial commit pushed to `main`
 
 **Completion notes:**
+
 - Repository: https://github.com/bryce-seefieldt/portfolio-app
 - Initial commit: Established Next.js foundation with 5 core routes
 
@@ -224,7 +233,10 @@ export default [
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     rules: {
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' },
+      ],
       '@typescript-eslint/no-explicit-any': 'error',
     },
   },
@@ -312,7 +324,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: write  # Needed for Dependabot auto-format
+      contents: write # Needed for Dependabot auto-format
       pull-requests: read
 
     steps:
@@ -385,7 +397,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 0 * * 1'  # Weekly on Monday
+    - cron: '0 0 * * 1' # Weekly on Monday
 
 permissions:
   security-events: write
@@ -441,6 +453,7 @@ updates:
 - [x] CI checks pass on `main` branch
 
 **Completion notes:**
+
 - CI checks visible as `ci / quality` and `ci / build` in GitHub
 - CodeQL runs weekly and on every PR
 - Dependabot generates grouped PRs for dependencies
@@ -587,6 +600,7 @@ After saving, trigger a redeploy to apply changes.
 **Verification:**
 
 Vercel now shows:
+
 ```
 Production Deployment Checks: ci / quality, ci / build
 ```
@@ -599,6 +613,7 @@ Production Deployment Checks: ci / quality, ci / build
 - [x] Preview deployments remain automatic (not gated)
 
 **Completion notes:**
+
 - Production promotion now requires passing CI checks
 - Failed checks prevent automatic production deployment
 - Vercel dashboard shows check status before promotion
@@ -632,6 +647,7 @@ Production Deployment Checks: ci / quality, ci / build
 **Verification:**
 
 GitHub shows:
+
 ```
 Ruleset: main-protection (Active)
 Target: main
@@ -681,6 +697,7 @@ Create 7 standard dossier pages:
 - [x] Dossier accessible at `/docs/60-projects/portfolio-app/`
 
 **Completion notes:**
+
 - Dossier serves as primary evidence artifact for Phase 1
 - ~4,000 words total across 7 pages
 - Referenced in portfolio-app project pages
@@ -698,6 +715,7 @@ Create 7 standard dossier pages:
 Location: `/docs/10-architecture/adr/adr-0005-portfolio-app-stack-choice.md`
 
 Documents:
+
 - Decision to use Next.js 15+, React 19+, TypeScript 5+
 - Rationale: Modern tooling, type safety, server components, performance
 - Alternatives considered: Astro, SvelteKit, vanilla React
@@ -708,6 +726,7 @@ Documents:
 Location: `/docs/10-architecture/adr/adr-0006-evidence-separation-dual-repo.md`
 
 Documents:
+
 - Decision to separate portfolio-app (front) from portfolio-docs (evidence)
 - Rationale: Concerns separation, independent deployment, evidence integrity
 - Alternatives considered: Monorepo, single integrated app
@@ -718,6 +737,7 @@ Documents:
 Location: `/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md`
 
 Documents:
+
 - Decision to use Vercel with GitHub Deployment Checks
 - Rationale: Zero-config deploys, production gating, enterprise governance
 - Alternatives considered: Netlify, AWS Amplify, self-hosted
@@ -728,6 +748,7 @@ Documents:
 **Location:** `/docs/40-security/threat-models/portfolio-app-threat-model.md`
 
 Documents:
+
 - Trust boundaries: public users → portfolio app → docs app → GitHub
 - STRIDE analysis (6 categories, mitigations)
 - Assets at risk: source code, deployment credentials, reputation
@@ -839,6 +860,7 @@ git push origin --delete test/phase-1-validation
 - [x] Cleanup completed
 
 **Completion notes:**
+
 - Full end-to-end pipeline validated
 - All governance controls operational
 - Ready for Phase 2 work
@@ -849,20 +871,20 @@ git push origin --delete test/phase-1-validation
 
 ### Timeline & Effort Actual
 
-| Step | Task                                  | Estimated | Actual | Status |
-|------|---------------------------------------|-----------|--------|--------|
-| 1    | Repository setup & Next.js bootstrap  | 4–6 hrs   | 5 hrs  | ✅     |
-| 2    | Development tooling & quality gates   | 3–4 hrs   | 3 hrs  | ✅     |
-| 3    | GitHub Actions CI/CD workflows        | 4–6 hrs   | 5 hrs  | ✅     |
-| 4    | Environment configuration             | 2–3 hrs   | 2 hrs  | ✅     |
-| 5    | Vercel deployment setup               | 2–3 hrs   | 3 hrs  | ✅     |
-| 6    | GitHub Deployment Checks              | 1–2 hrs   | 2 hrs  | ✅     |
-| 7    | GitHub Ruleset (branch protection)    | 2–3 hrs   | 2 hrs  | ✅     |
-| 8    | Portfolio App dossier                 | 8–12 hrs  | 10 hrs | ✅     |
-| 9    | ADRs and threat model                 | 4–6 hrs   | 5 hrs  | ✅     |
-| 10   | Operational runbooks                  | 3–4 hrs   | 4 hrs  | ✅     |
-| 11   | End-to-end validation                 | 2–3 hrs   | 2 hrs  | ✅     |
-| **Total** | **Phase 1 Complete**             | **40–60 hrs** | **43 hrs** | **✅** |
+| Step      | Task                                 | Estimated     | Actual     | Status |
+| --------- | ------------------------------------ | ------------- | ---------- | ------ |
+| 1         | Repository setup & Next.js bootstrap | 4–6 hrs       | 5 hrs      | ✅     |
+| 2         | Development tooling & quality gates  | 3–4 hrs       | 3 hrs      | ✅     |
+| 3         | GitHub Actions CI/CD workflows       | 4–6 hrs       | 5 hrs      | ✅     |
+| 4         | Environment configuration            | 2–3 hrs       | 2 hrs      | ✅     |
+| 5         | Vercel deployment setup              | 2–3 hrs       | 3 hrs      | ✅     |
+| 6         | GitHub Deployment Checks             | 1–2 hrs       | 2 hrs      | ✅     |
+| 7         | GitHub Ruleset (branch protection)   | 2–3 hrs       | 2 hrs      | ✅     |
+| 8         | Portfolio App dossier                | 8–12 hrs      | 10 hrs     | ✅     |
+| 9         | ADRs and threat model                | 4–6 hrs       | 5 hrs      | ✅     |
+| 10        | Operational runbooks                 | 3–4 hrs       | 4 hrs      | ✅     |
+| 11        | End-to-end validation                | 2–3 hrs       | 2 hrs      | ✅     |
+| **Total** | **Phase 1 Complete**                 | **40–60 hrs** | **43 hrs** | **✅** |
 
 **Completion date:** 2026-01-17  
 **Duration:** ~5 weeks (December 15, 2025 – January 17, 2026)
@@ -924,10 +946,10 @@ A reviewer can validate Phase 1 completion through:
    - Check environment variables are applied (links to docs resolve)
 
 3. **Documentation Evidence:**
-   - Review [Portfolio App Dossier](/docs/60-projects/portfolio-app/)
-   - Review [ADR-0005](/docs/10-architecture/adr/adr-0005-portfolio-app-stack-choice.md), [ADR-0006](/docs/10-architecture/adr/adr-0006-evidence-separation-dual-repo.md), [ADR-0007](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+   - Review [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md)
+   - Review [ADR-0005](/docs/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md), [ADR-0006](/docs/10-architecture/adr/adr-0006-separate-portfolio-app-from-evidence-engine-docs.md), [ADR-0007](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
    - Review [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
-   - Review [Operational Runbooks](/docs/50-operations/runbooks/)
+   - Review [Operational Runbooks](/docs/50-operations/runbooks/index.md)
 
 4. **Governance Validation:**
    - Create test PR in portfolio-app
@@ -1004,7 +1026,7 @@ With Phase 1 establishing production infrastructure and governance, Phase 2 will
 
 ### Planning Documents
 
-- **Phase 2 Implementation Guide:** [/docs/00-portfolio/phase-2-implementation-guide.md](/docs/00-portfolio/phase-2-implementation-guide.md)
+- **Phase 2 Implementation Guide:** [/docs/00-portfolio/roadmap/phase-2-implementation-guide.md](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
 - **Roadmap (Phase 2 section):** [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md#phase-2--gold-standard-project-and-credibility-baseline)
 - **ADR-0010:** [Portfolio App as Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
 
@@ -1014,25 +1036,25 @@ With Phase 1 establishing production infrastructure and governance, Phase 2 will
 
 Quick troubleshooting reference for Phase 1 implementation:
 
-| Problem | Quick Fix | Detailed Guide |
-|---------|-----------|----------------|
-| **Vercel waits for checks indefinitely** | Verify `ci.yml` runs on `push: [main]` and check names match exactly (`ci / quality`, `ci / build`) | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
-| **Preview deployment fails** | Verify Node version (20.x) and pnpm version (9+) match in Vercel settings | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
-| **Evidence links broken in preview** | Verify `NEXT_PUBLIC_DOCS_BASE_URL` is set for Preview scope in Vercel | [Portfolio App Dossier - Deployment](/docs/60-projects/portfolio-app/03-deployment.md) |
-| **Merge button disabled when checks pass** | Verify GitHub Ruleset is **Active** (not Evaluate/Disabled) | [portfolio-app-github-ruleset-config.md](/docs/70-reference/portfolio-app-github-ruleset-config.md) |
-| **CI checks don't appear in PR** | Wait 3–5 minutes; verify `.github/workflows/ci.yml` exists and is valid; check Actions tab | [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md) |
-| **Environment variables not applied** | Trigger manual redeploy in Vercel after saving environment variables | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
-| **Production promotion doesn't trigger** | Verify Deployment Checks are scoped to Production only; check CI passed before merge | [ADR-0007](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) |
+| Problem                                    | Quick Fix                                                                                           | Detailed Guide                                                                                                            |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Vercel waits for checks indefinitely**   | Verify `ci.yml` runs on `push: [main]` and check names match exactly (`ci / quality`, `ci / build`) | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Preview deployment fails**               | Verify Node version (20.x) and pnpm version (9+) match in Vercel settings                           | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Evidence links broken in preview**       | Verify `NEXT_PUBLIC_DOCS_BASE_URL` is set for Preview scope in Vercel                               | [Portfolio App Dossier - Deployment](/docs/60-projects/portfolio-app/03-deployment.md)                                    |
+| **Merge button disabled when checks pass** | Verify GitHub Ruleset is **Active** (not Evaluate/Disabled)                                         | [portfolio-app-github-ruleset-config.md](/docs/70-reference/portfolio-app-github-ruleset-config.md)                       |
+| **CI checks don't appear in PR**           | Wait 3–5 minutes; verify `.github/workflows/ci.yml` exists and is valid; check Actions tab          | [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)                                     |
+| **Environment variables not applied**      | Trigger manual redeploy in Vercel after saving environment variables                                | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Production promotion doesn't trigger**   | Verify Deployment Checks are scoped to Production only; check CI passed before merge                | [ADR-0007](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)                      |
 
 ---
 
 ## Related Documentation
 
 - **Roadmap:** [Portfolio Web Application Roadmap](/docs/00-portfolio/roadmap/index.md)
-- **Phase 2 Implementation Guide:** [Phase 2: Gold Standard Project](/docs/00-portfolio/phase-2-implementation-guide.md)
-- **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/)
-- **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/)
-- **Runbooks Index:** [Operations Runbooks](/docs/50-operations/runbooks/)
+- **Phase 2 Implementation Guide:** [Phase 2: Gold Standard Project](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
+- **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/index.md)
+- **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/index.md)
+- **Runbooks Index:** [Operations Runbooks](/docs/50-operations/runbooks/index.md)
 
 ---
 

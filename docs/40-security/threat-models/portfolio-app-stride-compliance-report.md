@@ -451,7 +451,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 ### Phase 2 Planning
 
-- [Phase 2 Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md)
+- [Phase 2 Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
 - [Roadmap](/docs/00-portfolio/roadmap/index.md)
 
 ---

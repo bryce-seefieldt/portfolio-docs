@@ -913,7 +913,7 @@ This section summarizes all Phase 2 security and operational hardening applied t
 - **Package Scripts:** [package.json](https://github.com/bryce-seefieldt/portfolio-app/blob/main/package.json)
 - **Smoke Tests:** [tests/e2e/smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts)
 - **Threat Model:** [Portfolio App STRIDE](/docs/40-security/threat-models/portfolio-app-threat-model.md)
-- **All Runbooks:** [Operations Runbooks Index](/docs/50-operations/runbooks/)
+- **All Runbooks:** [Operations Runbooks Index](/docs/50-operations/runbooks/index.md)
 
 ---
 
@@ -1516,7 +1516,7 @@ export default function CVPage() {
 
 **Goal:** Document Phase 2 completion with all additions and changes.
 
-**Location:** `/portfolio-docs/docs/00-portfolio/release-notes/20260119-portfolio-app-phase-2-complete.md`
+**Location:** `/portfolio-docs/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md`
 
 **Success check:**
 
@@ -1528,7 +1528,10 @@ export default function CVPage() {
 
 **Completion notes:**
 
-- Release note published: [20260119-portfolio-app-phase-2-complete.md](/docs/00-portfolio/release-notes/20260119-portfolio-app-phase-2-complete.md)
+- Release note published: [20260120-portfolio-app-phase-2-gold-standard.md](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+
+release-notes/20260120-portfolio-app-phase-2-gold-standard.md(/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+
 - All evidence artifacts linked and verified
 
 ---
@@ -1654,9 +1657,8 @@ The Phase 2 release is valid when:
 
 ## Architecture & Governance References
 
-- [Portfolio App Dossier](/docs/60-projects/portfolio-app/) (location TBD during implementation)
+- [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md) (location TBD during implementation)
 - [Threat Model: Portfolio App](/docs/40-security/threat-models/) (location TBD during implementation)
-- [ADR-0009: Portfolio App Testing Strategy](/docs/10-architecture/adr/) (location TBD during implementation)
 - Operational runbooks (created during Phase 2):
   - Deploy runbook
   - CI triage runbook
@@ -1782,21 +1784,21 @@ git push origin feat/phase-2-gold-standard
 
 ### Timeline & Effort Actual
 
-| Step | Task                            | Estimated | Actual | Status |
-| ---- | ------------------------------- | --------- | ------ | ------ |
-| 1    | Choose gold standard project    | 1–2 hrs   | 2 hrs  | ✅     |
-| 2    | Set up smoke tests (Playwright) | 3–5 hrs   | 4 hrs  | ✅     |
-| 3    | Enhance project dossier         | 4–6 hrs   | 6 hrs  | ✅     |
-| 4    | Create threat model             | 2–3 hrs   | 3 hrs  | ✅     |
-| 4a   | Security enhancements           | 2–3 hrs   | 3 hrs  | ✅     |
-| 4b   | Incident response runbooks      | 1–2 hrs   | 2 hrs  | ✅     |
-| 5    | Create operational runbooks     | 2–4 hrs   | 3 hrs  | ✅     |
-| 6    | Create/update ADRs              | 1–2 hrs   | 1 hr   | ✅     |
-| 7    | Enhance project detail page     | 2–3 hrs   | 3 hrs  | ✅     |
-| 8    | Enhance CV page                 | 2–3 hrs   | 3 hrs  | ✅     |
-| 9    | Create Phase 2 release note     | 1–2 hrs   | 1 hr   | ✅     |
-| 10   | Create PRs & verify end-to-end  | 1–2 hrs   | 2 hrs  | ✅     |
-| **Total** | **Phase 2 Complete**       | **19–32 hrs** | **33 hrs** | **✅** |
+| Step      | Task                            | Estimated     | Actual     | Status |
+| --------- | ------------------------------- | ------------- | ---------- | ------ |
+| 1         | Choose gold standard project    | 1–2 hrs       | 2 hrs      | ✅     |
+| 2         | Set up smoke tests (Playwright) | 3–5 hrs       | 4 hrs      | ✅     |
+| 3         | Enhance project dossier         | 4–6 hrs       | 6 hrs      | ✅     |
+| 4         | Create threat model             | 2–3 hrs       | 3 hrs      | ✅     |
+| 4a        | Security enhancements           | 2–3 hrs       | 3 hrs      | ✅     |
+| 4b        | Incident response runbooks      | 1–2 hrs       | 2 hrs      | ✅     |
+| 5         | Create operational runbooks     | 2–4 hrs       | 3 hrs      | ✅     |
+| 6         | Create/update ADRs              | 1–2 hrs       | 1 hr       | ✅     |
+| 7         | Enhance project detail page     | 2–3 hrs       | 3 hrs      | ✅     |
+| 8         | Enhance CV page                 | 2–3 hrs       | 3 hrs      | ✅     |
+| 9         | Create Phase 2 release note     | 1–2 hrs       | 1 hr       | ✅     |
+| 10        | Create PRs & verify end-to-end  | 1–2 hrs       | 2 hrs      | ✅     |
+| **Total** | **Phase 2 Complete**            | **19–32 hrs** | **33 hrs** | **✅** |
 
 **Completion date:** 2026-01-21  
 **Duration:** ~3 weeks (January 2–21, 2026)
@@ -1862,11 +1864,11 @@ A reviewer can validate Phase 2 completion through:
    - Click evidence links to docs; verify they resolve correctly
 
 3. **Documentation Evidence:**
-   - Review [Portfolio App Dossier](/docs/60-projects/portfolio-app/)
+   - Review [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md)
    - Review [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
    - Review [ADR-0010](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
-   - Review [Operational Runbooks](/docs/50-operations/runbooks/)
-   - Review [Release Notes](/docs/00-portfolio/release-notes/20260119-portfolio-app-phase-2-complete.md)
+   - Review [Operational Runbooks](/docs/50-operations/runbooks/index.md)
+   - Review [Release Notes](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
 
 4. **Automated Tests:**
    - Clone portfolio-app repo
@@ -1880,12 +1882,14 @@ A reviewer can validate Phase 2 completion through:
 **Status:** ✅ **Compliant** — All documented STRIDE threats and Phase 2 security enhancements verified.
 
 **Scope reviewed:**
+
 - STRIDE Threat Model (12 threats across 6 categories)
 - STRIDE Compliance Report (evidence mapping for each mitigation)
 - Phase 2 security enhancements (secrets scanning, least-privilege CI, pre-commit hooks, incident response)
 - SDLC controls in CI/CD, repo governance, and operational runbooks
 
 **Verification highlights:**
+
 - CI/CD: Required checks (`ci / quality`, `ci / build`, `secrets-scan`, CodeQL), job-scoped permissions, frozen lockfile installs
 - Secrets hygiene: No secrets in `NEXT_PUBLIC_*`; `.env.example` documents schema; TruffleHog in CI and pre-commit
 - Operations: Secrets incident response runbook; deploy/rollback/CI triage runbooks validated
@@ -1893,11 +1897,12 @@ A reviewer can validate Phase 2 completion through:
 - Dependency governance: Dependabot weekly updates (grouped), minimal dependencies, no postinstall hooks
 
 **Evidence:**
+
 - [STRIDE compliance report](/docs/40-security/threat-models/portfolio-app-stride-compliance-report.md)
 - [Threat model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
 - [CI workflow](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml) (quality, secrets-scan, build, tests)
 - [Pre-commit config](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) (TruffleHog)
-- [Runbooks](/docs/50-operations/runbooks/) (deploy, rollback, CI triage, secrets incident)
+- [Runbooks](/docs/50-operations/runbooks/index.md) (deploy, rollback, CI triage, secrets incident)
 
 ---
 
@@ -1923,7 +1928,7 @@ A reviewer can validate Phase 2 completion through:
   - `rbk-portfolio-ci-triage.md`
   - `rbk-portfolio-rollback.md`
   - `rbk-portfolio-secrets-incident.md`
-- **Release notes:** `/docs/00-portfolio/release-notes/20260119-portfolio-app-phase-2-complete.md`
+- **Release notes:** `/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md`
 - **STRIDE compliance report:** `/docs/40-security/threat-models/portfolio-app-stride-compliance-report.md`
 
 ---
@@ -2000,7 +2005,7 @@ With Phase 2 establishing credibility through one exemplary project, Phase 3 wil
 
 ### Planning Documents
 
-- **Phase 3 Implementation Guide:** [/docs/00-portfolio/phase-3-implementation-guide.md](/docs/00-portfolio/phase-3-implementation-guide.md)
+- **Phase 3 Implementation Guide:** [/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md))
 - **Roadmap (Phase 3 section):** [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md#phase-3--repeatable-project-publishing-pipeline-scale-without-chaos)
 - **Stage 3.1 App Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md)
 - **Stage 3.1 Docs Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-1-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-1-docs-issue.md)
@@ -2014,11 +2019,11 @@ With Phase 2 establishing credibility through one exemplary project, Phase 3 wil
 - **Roadmap:** [Portfolio Web Application Roadmap](/docs/00-portfolio/roadmap/index.md)
 - **Phase 1 Implementation Guide:** [Phase 1: Portfolio App Foundation](/docs/00-portfolio/roadmap/phase-1-implementation-guide.md)
 - **ADR-0010:** [Portfolio App as Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
-- **Phase 2 Release Notes:** [20260119 Portfolio App Phase 2 Complete](/docs/00-portfolio/release-notes/20260119-portfolio-app-phase-2-complete.md)
-- **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/)
+- **Phase 2 Release Notes:** [20260119 Portfolio App Phase 2 Complete](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+- **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/index.md)
 - **Threat Model:** [Portfolio App Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
-- **Runbooks Index:** [Operations Runbooks](/docs/50-operations/runbooks/)
-- **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/)
+- **Runbooks Index:** [Operations Runbooks](/docs/50-operations/runbooks/index.md)
+- **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/index.md)
 
 ---
 

@@ -165,7 +165,7 @@ Fix:
 - reproduce with `pnpm build`
 - correct the root cause
 - do not “paper over” build errors by weakening the build process
-Common build failure modes:
+  Common build failure modes:
 
 1. **Registry validation errors during page data collection:**
    - Error: `"demoUrl" is missing or invalid according to a Zod schema validation`
@@ -181,30 +181,33 @@ Common build failure modes:
    - **Reference:** [Stage 3.1 Known Issues](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md#known-issues--solutions)
 
 3. **Environment variable check:**
-  ```bash
-  # Verify required variables are set
-  echo $NEXT_PUBLIC_DOCS_BASE_URL
-  echo $NEXT_PUBLIC_GITHUB_URL
-   
-  # Test registry interpolation
-  pnpm registry:validate
-  # Should output: Registry OK (projects: N)
-  ```
+
+```bash
+# Verify required variables are set
+echo $NEXT_PUBLIC_DOCS_BASE_URL
+echo $NEXT_PUBLIC_GITHUB_URL
+
+# Test registry interpolation
+pnpm registry:validate
+# Should output: Registry OK (projects: N)
+```
 
 4. **Quick verification recipe (registry-specific):**
-  ```bash
-  cd portfolio-app
-  pnpm registry:validate   # Expect: Registry OK (projects: N)
-  pnpm lint                # Expect: silent, 0 warnings
-  pnpm build               # Expect: ✓ Compiled successfully
-  ```
+
+```bash
+cd portfolio-app
+pnpm registry:validate   # Expect: Registry OK (projects: N)
+pnpm lint                # Expect: silent, 0 warnings
+pnpm build               # Expect: ✓ Compiled successfully
+```
 
 5. **If build still fails on registry interpolation:**
-  - Check env vars: `cat .env.local | grep NEXT_PUBLIC`
-  - Run with debug: `DEBUG_REGISTRY=1 pnpm registry:validate 2>&1 | head -20`
-    - Look for `interpolated="https://..."` (absolute URLs)
-  - Clean and rebuild: `rm -rf .next node_modules/.cache && pnpm build`
-  - Ensure `interpolate()` reads from `process.env` (fixed in commit `1a1e272`)
+
+- Check env vars: `cat .env.local | grep NEXT_PUBLIC`
+- Run with debug: `DEBUG_REGISTRY=1 pnpm registry:validate 2>&1 | head -20`
+  - Look for `interpolated="https://..."` (absolute URLs)
+- Clean and rebuild: `rm -rf .next node_modules/.cache && pnpm build`
+- Ensure `interpolate()` reads from `process.env` (fixed in commit `1a1e272`)
 
 #### E) Smoke test failures (`pnpm test`)
 
