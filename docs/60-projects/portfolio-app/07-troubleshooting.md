@@ -102,70 +102,51 @@ pnpm build
 - confirm Vercel build settings align with repo scripts
 - compare preview/prod logs and ensure checks are required for promotion
 
-## Symptom: `pnpm secrets:scan` fails or is skipped
+## Symptom: `secrets:scan` CI stage fails (or appears skipped)
 
 ### Likely causes
 
-- TruffleHog CLI binary not installed (most common)
-- TruffleHog not in system PATH
-- Actual secrets detected in codebase (rare, but critical)
+- Actual secrets detected in codebase (critical)
+- CI environment/tooling issues (runner PATH or binary availability)
+- Misunderstanding of scope (TruffleHog runs in CI; local verify uses a lightweight scan)
 
 ### Fix
 
-**TruffleHog not installed:**
+**Scope clarification:**
 
-The `pnpm secrets:scan` script requires the TruffleHog CLI binary (not available via npm).
+- Local verification does not run TruffleHog. It includes a lightweight pattern-based scan.
+- The TruffleHog-based `secrets:scan` runs automatically in CI on PRs and must pass.
 
-```bash
-# macOS
-brew install trufflesecurity/trufflehog/trufflehog
+**If CI `secrets:scan` fails:**
 
-# Linux
-# 1. Download: https://github.com/trufflesecurity/trufflehog/releases/
-# 2. Extract: tar -xzf trufflehog_*_linux_x86_64.tar.gz
-# 3. Install: sudo mv trufflehog /usr/local/bin/
+1. Inspect CI logs for detected strings and file paths.
+2. Remove any real secrets; rotate tokens if exposure occurred.
+3. Ensure `.env*` files (except `.env.example`) are gitignored.
+4. Re-run CI via a new commit; verify the gate passes.
 
-# Verify installation
-which trufflehog
-trufflehog --version
-```
+**Optional local opt-in:**
 
-**TruffleHog not in PATH:**
+- Use pre-commit to run TruffleHog automatically:
+  ```bash
+  pip install pre-commit
+  pre-commit install
+  ```
+- Or install TruffleHog locally if you want to run `pnpm secrets:scan` by hand (not required):
 
-After installation, ensure it's executable and in your PATH:
+  ```bash
+  # macOS
+  brew install trufflesecurity/trufflehog/trufflehog
 
-```bash
-# Check if it's discoverable
-which trufflehog
+  # Linux (download from releases and add to PATH)
+  # https://github.com/trufflesecurity/trufflehog/releases/
+  ```
 
-# If not found, add to PATH or move to /usr/local/bin
-sudo mv trufflehog /usr/local/bin/
-chmod +x /usr/local/bin/trufflehog
-```
+**Real secrets detected (in CI):**
 
-**Alternative: Use pre-commit hook:**
-
-If you prefer not to install the binary separately, use the pre-commit hook for automatic scanning on every commit:
-
-```bash
-pip install pre-commit
-pre-commit install
-```
-
-This will run TruffleHog automatically before each commit.
-
-**Real secrets detected:**
-
-If TruffleHog finds verified credentials:
-
-1. **Stop immediately** — do not commit
-2. **Remove the secret** from code and `.env` files
-3. **Rotate the credential** (if already committed to history)
-4. **Clean Git history** (if needed):
-   ```bash
-   # Use git-filter-repo or BFG Repo-Cleaner
-   # See: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
-   ```
+1. Stop and prevent merge; do not bypass checks.
+2. Remove the secret from code and `.env` files.
+3. Rotate affected credentials.
+4. Clean history if necessary (git-filter-repo/BFG) following GitHub guidance.
 
 ## Symptom: Root domain works but `/docs` links break
 

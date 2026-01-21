@@ -31,7 +31,7 @@ This page summarizes the Phase 2 hardening efforts applied to the Portfolio App 
 ### Developer Workflow
 
 - Added `.pre-commit-config.yaml` with TruffleHog hook.
-- Added `pnpm secrets:scan` script for local scanning.
+- Local verification uses a lightweight pattern-based secret scan; TruffleHog runs only in CI. Optional local opt-in via pre-commit.
 - Maintained TypeScript strict mode and ESLint/Prettier gates.
 
 ### Operations

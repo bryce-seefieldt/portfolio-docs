@@ -176,18 +176,21 @@ For each threat, the model documents:
 grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 # Should return: no results
 
-# Verify secrets scanning gate (requires TruffleHog CLI binary)
-pnpm secrets:scan
-# Should pass with no detections
+# Local secret hygiene (lightweight):
+# The local verification script runs a pattern-based scan (no TruffleHog).
+# CI runs the full `secrets:scan` stage using TruffleHog on PRs.
+# To opt-in locally, use pre-commit or install TruffleHog, but it's not required.
 ```
 
-**If TruffleHog is not installed:**
+**Secrets scanning scope:**
 
-The `pnpm secrets:scan` command requires the TruffleHog CLI binary (not available via npm). Install it:
-
-- **macOS**: `brew install trufflesecurity/trufflehog/trufflehog`
-- **Linux**: Download from [GitHub releases](https://github.com/trufflesecurity/trufflehog/releases/), extract, and add to PATH
-- **Alternative**: Use pre-commit hook: `pip install pre-commit && pre-commit install` (automatic scanning on commit)
+- Local verification does NOT run TruffleHog. A lightweight pattern scan is included.
+- The TruffleHog-based `secrets:scan` runs in CI on PRs and must pass.
+- Optional local opt-in:
+  - **Pre-commit**: `pip install pre-commit && pre-commit install` (runs TruffleHog on commits)
+  - **Manual**: Install TruffleHog CLI if you want to run `pnpm secrets:scan` locally
+    - **macOS**: `brew install trufflesecurity/trufflehog/trufflehog`
+    - **Linux**: Download from [GitHub releases](https://github.com/trufflesecurity/trufflehog/releases/), extract, and add to PATH
 
 ### Dependencies
 
@@ -198,7 +201,7 @@ The `pnpm secrets:scan` command requires the TruffleHog CLI binary (not availabl
 ### CI/CD Pipeline
 
 - ✅ Least-privilege permissions (scoped per job)
-- ✅ Secrets scanning gate (TruffleHog, PR-only)
+- ✅ Secrets scanning gate (TruffleHog, PR-only in CI)
 - ✅ Required checks before merge (quality, secrets-scan, build, CodeQL)
 
 ## Security Controls (Phase 2)

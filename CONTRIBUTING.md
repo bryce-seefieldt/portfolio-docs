@@ -177,6 +177,17 @@ Runs all quality checks with auto-formatting and detailed error reporting (envir
 pnpm format:write && pnpm lint && pnpm typecheck && pnpm build
 ```
 
+Secrets scanning:
+
+- CI gate runs `secrets:scan` via TruffleHog on PRs.
+- Local verification does not run TruffleHog; a lightweight pattern-based scan is included.
+- Optional local opt-in: enable pre-commit to run TruffleHog automatically:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
 For **portfolio-docs**:
 
 - Recommended: `pnpm verify`

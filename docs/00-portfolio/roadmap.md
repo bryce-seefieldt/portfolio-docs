@@ -236,8 +236,9 @@ Beyond baseline Phase 1, Phase 2 includes optional hardening controls that stren
 1. **Secrets Scanning Gate (TruffleHog CI)**
    - Detect hardcoded secrets before merge
    - CI job: `secrets-scan` (required check)
-   - Local hook: `pnpm secrets:scan`
-   - Threat model alignment: Information Disclosure (T1) mitigation
+
+- Local verification: lightweight pattern-based scan; optional pre-commit for TruffleHog
+- Threat model alignment: Information Disclosure (T1) mitigation
 
 2. **CI Permission Hardening (Least-Privilege)**
    - Replace global `permissions: contents: write` with job-specific permissions
