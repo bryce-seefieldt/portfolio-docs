@@ -195,12 +195,74 @@ pnpm dev
 - [x] Duplicate slug detection works
 - [x] Link helpers construct correct URLs
 
+## Known Issues & Solutions
+
+### Issue: Registry Interpolation - Zod URL Validation Failure
+
+**Symptom:**
+```
+Error during page data collection for /projects/[slug]:
+"demoUrl" is missing or invalid according to a Zod schema validation.
+{
+  "validation": "url",
+  "code": "invalid_string",
+  "message": "Invalid url",
+  "path": ["demoUrl"]
+}
+```
+
+**Root Cause:**
+Module load order issue when using `tsx` or other Node.js execution contexts. The `interpolate()` function was importing configuration values that were evaluated at module load time, before environment variables were loaded by dotenv. This caused fallback to relative paths (e.g., `/docs`) which failed Zod's `.url()` validation.
+
+**Solution (Implemented in commit 1a1e272):**
+Modified `interpolate()` function in `src/lib/registry.ts` to read environment variables directly from `process.env` at runtime instead of using module-level imports:
+
+```typescript
+function interpolate(value: string | null | undefined): string | null {
+  if (!value || typeof value !== "string") return null;
+
+  // Read from process.env directly for better reliability with tsx/node
+  const DOCS_BASE_URL =
+    process.env.NEXT_PUBLIC_DOCS_BASE_URL?.trim()?.replace(/\/+$/, "") || "/docs";
+  const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL?.trim()?.replace(/\/+$/, "") || "";
+  // ... etc
+}
+```
+
+**Verification:**
+```bash
+# Validate registry without starting dev server
+pnpm registry:validate
+# Should output: Registry OK (projects: N)
+
+# Check interpolation results
+DEBUG_REGISTRY=1 pnpm registry:validate 2>&1 | grep demoUrl
+# Should show absolute URLs for interpolated fields
+```
+
+**Prevention:**
+- Add `pnpm registry:validate` to pre-commit hooks
+- Test registry loading in multiple execution contexts (Next.js, tsx, Node.js)
+- Read environment-dependent values at function call time, not module load time
+
+**Environment Requirements:**
+```bash
+# Required for placeholder interpolation
+NEXT_PUBLIC_DOCS_BASE_URL=https://your-docs-url.com/
+NEXT_PUBLIC_GITHUB_URL=https://github.com/username/repo/
+NEXT_PUBLIC_DOCS_GITHUB_URL=https://github.com/username/docs-repo/
+NEXT_PUBLIC_SITE_URL=https://your-site-url.com
+```
+
+---
+
 ## Notes
 
 - This is a prerequisite for Stage 3.2 (EvidenceBlock component)
 - Registry will be consumed by project detail pages
 - Future stages will add unit tests for validation logic
 - Keep registry entries public-safe (no secrets, internal endpoints)
+- Registry validation should be run before every build to catch schema violations early
 
 ## Related Issues
 

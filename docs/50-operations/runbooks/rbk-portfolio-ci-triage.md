@@ -165,7 +165,31 @@ Fix:
 - reproduce with `pnpm build`
 - correct the root cause
 - do not “paper over” build errors by weakening the build process
+Common build failure modes:
 
+1. **Registry validation errors during page data collection:**
+   - Error: `"demoUrl" is missing or invalid according to a Zod schema validation`
+   - Symptom: Build fails during static page generation for `/projects/[slug]`
+   - Root Cause: Environment variable interpolation failing (see Known Issue below)
+   - Fix: Verify environment variables are set correctly
+   - Verification: `pnpm registry:validate` should pass
+
+2. **Known Issue: Registry interpolation with tsx/Node.js:**
+   - **Problem:** Module load order causes environment variables to not be visible during registry loading
+   - **Solution (Fixed in commit 1a1e272):** Use `process.env` directly in `interpolate()` function instead of module-level imports
+   - **Prevention:** Ensure `NEXT_PUBLIC_*` environment variables are set before build
+   - **Reference:** [Stage 3.1 Known Issues](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md#known-issues--solutions)
+
+3. **Environment variable check:**
+   ```bash
+   # Verify required variables are set
+   echo $NEXT_PUBLIC_DOCS_BASE_URL
+   echo $NEXT_PUBLIC_GITHUB_URL
+   
+   # Test registry interpolation
+   pnpm registry:validate
+   # Should output: Registry OK (projects: N)
+   ```
 #### E) Smoke test failures (`pnpm test`)
 
 **Status:** Smoke tests implemented in Phase 2 (PR #10).
