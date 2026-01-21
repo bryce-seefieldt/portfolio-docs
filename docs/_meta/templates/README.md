@@ -39,6 +39,8 @@ Current templates:
 - `template-runbook.md`
 - `template-threat-model.md`
 - `template-postmortem.md`
+- `template-phase-implementation-guide.md` (for planning major development phases)
+- `template-project-dossier/` (folder with 8-file dossier structure)
 
 Recommended conventions:
 
@@ -307,6 +309,90 @@ Use the lightest artifact that still preserves traceability:
 - one operational action you might repeat → Runbook
 - new entry point / integration → Threat model update
 - any user impact incident → Postmortem
+- planning a major multi-week development initiative → Phase Implementation Guide
+
+---
+
+## Phase Implementation Guide
+
+### When to use
+
+- You are planning a major development phase (e.g., Phase 2, Phase 3)
+- The phase spans 2–4 weeks and includes multiple deliverables
+- You need to coordinate work across multiple files/components
+- You want to document the roadmap, timeline, and success criteria clearly
+
+### What it contains
+
+The template provides a standardized structure for planning phases that includes:
+
+1. **Executive Overview:** Phase purpose, duration, deliverables
+2. **Prerequisites:** Conditions that must be met before starting
+3. **Implementation Structure:** Choice of two approaches:
+   - **Sequential Steps:** For linear, cumulative work (e.g., Phase 2)
+   - **Modular Stages:** For independent, parallel-capable work (e.g., Phase 3)
+4. **Implementation Checklists:** Organized by step/stage with verification items
+5. **Timeline & Resources:** Breakdown of hours and dependencies
+6. **Success Criteria:** Clear, measurable indicators of completion
+7. **Risk Mitigation:** Known risks and mitigation strategies
+8. **Deployment & Communication:** Sequencing and review gates
+9. **Troubleshooting & References:** Common issues and related docs
+
+### Definition of Done (Phase Implementation Guide)
+
+A Phase Implementation Guide is complete when:
+
+- ✅ **Title & metadata:** Clear phase title, estimated duration, status, last updated date
+- ✅ **Purpose & scope:** Executive summary explaining what problem the phase solves
+- ✅ **Deliverables:** Bulleted list of tangible outputs (code, docs, tests, runbooks)
+- ✅ **Prerequisites:** Checklist of conditions that must be met before starting
+- ✅ **Implementation details:** Each step/stage includes goal, scope, action items, and success checks
+- ✅ **Checklists:** Organized by step/stage with verifiable tasks
+- ✅ **Timeline table:** Estimated hours per step/stage, total duration
+- ✅ **Success criteria:** Measurable indicators that phase is complete
+- ✅ **Risk mitigation:** Known risks and planned responses
+- ✅ **References & next steps:** Links to related docs, ADRs, runbooks, and upcoming phases
+- ✅ **No broken links:** All cross-references validate in local build
+- ✅ **No secrets:** No tokens, private keys, or sensitive details
+- ✅ **Deployment section:** Clear sequencing for rolling out phase changes
+- ✅ **Revision history:** Starting version, dates, authors recorded
+
+### How to use the template
+
+1. Copy `template-phase-implementation-guide.md` to the appropriate location:
+   ```
+   docs/00-portfolio/phase-[x]-implementation-guide.md
+   ```
+
+2. Replace all `[X]` placeholders with actual phase number and details
+
+3. Choose **one approach:**
+   - **Sequential Steps:** For phases where each step builds on prior work
+   - **Modular Stages:** For phases with independent deliverables
+
+4. For each step/stage:
+   - Document the goal and scope
+   - List all action items and substeps
+   - Include code examples or configurations
+   - Specify files to create/modify
+   - Add success verification items
+
+5. Fill in the checklists, timeline, and success criteria
+
+6. Document risks and mitigation strategies
+
+7. Link to any new ADRs, runbooks, or threat models created during the phase
+
+8. Run `pnpm build` to verify no broken links before PR
+
+### Example usage
+
+See existing examples:
+
+- [Phase 2 Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md) — Sequential steps approach
+- [Phase 3 Implementation Guide](/docs/00-portfolio/phase-3-implementation-guide.md) — Modular stages approach
+
+Both follow this template structure and serve as reference implementations.
 
 ## References
 
