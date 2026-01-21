@@ -439,4 +439,4 @@ If the incident reveals a new threat or mitigation gap, update [portfolio-app-th
 - Threat Model: [Incident Response](/docs/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
 - Rollback Runbook: [rbk-portfolio-rollback.md](./rbk-portfolio-rollback.md)
 - CI Triage Runbook: [rbk-portfolio-ci-triage.md](./rbk-portfolio-ci-triage.md)
-- Phase 2 Implementation: [phase-2-implementation-guide.md](/docs/00-portfolio/phase-2-implementation-guide.md)
+- Phase 2 Implementation: [phase-2-implementation-guide.md](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)

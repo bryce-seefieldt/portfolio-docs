@@ -1,6 +1,6 @@
 ---
-last-updated: 2026-01-20
-active-phase: Phase 2 (COMPLETE) — Ready for Phase 3 planning
+last-updated: 2026-01-21
+active-phase: Phase 3 (Scaling & Governance) — Stage 3.1 COMPLETE; Stage 3.2 IN PROGRESS
 workspace-repos:
   - portfolio-app (Next.js + TypeScript)
   - portfolio-docs (Docusaurus)
@@ -8,14 +8,14 @@ workspace-repos:
 
 # Copilot Session Context
 
-## Current State (Phase 2 — COMPLETE; Ready for Phase 3 Planning)
+## Current State (Phase 3 — Stage 3.1 COMPLETE; Stage 3.2 READY TO EXECUTE)
 
 ### Active Branches
 
-- **portfolio-app:** `main`
-- **portfolio-docs:** `main`
+- **portfolio-app:** `main` (Stage 3.1 complete: YAML registry + validation deployed)
+- **portfolio-docs:** `main` (PRs #43-44 merged with template enforcement)
 
-### Phase Progress: Phase 2 COMPLETE; preparing detailed Phase 3 plan
+### Phase Progress: Phase 3 Stages 3.1 complete; Stage 3.2 in active planning
 
 #### Template Enforcement (Critical)
 
@@ -61,6 +61,7 @@ All work in both repositories **MUST** use templates for proper governance and t
   - CodeQL scanning (PR + weekly); Dependabot weekly (majors excluded, grouped)
   - Local hygiene: `.pre-commit-config.yaml` (TruffleHog hook) + `pnpm secrets:scan`
 - Testing: Playwright smoke tests cover core routes and evidence links (run in build job)
+- **Stage 3.1 COMPLETE:** YAML registry (`src/data/projects.yml`), TypeScript validation (`src/lib/registry.ts`), environment-based link interpolation, slug uniqueness + format validation
 
 #### ✅ Completed (Portfolio Docs)
 
@@ -70,26 +71,19 @@ All work in both repositories **MUST** use templates for proper governance and t
   - [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md) (CI/security hardening summary)
   - Threat model expanded with STRIDE analysis (PR #32 merged 2026-01-19)
   - [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) added + runbook index updated
+- Template system fully enforced with mandatory guidance in both repos (PRs #43-44 merged)
 
-#### ⏳ In Progress / Pending (Phase 3 planning)
+#### 🔄 In Progress: Phase 3 Stage 3.2 — EvidenceBlock Component & Badges
 
-- Strategize and draft detailed Phase 3 plan per roadmap and agent suggestions
-- Create tracking issues for Phase 3 in both repos (planning, implementation, verification)
-- Confirm branch protections and Vercel promotion checks are enforced; adjust if needed
-- Publish public repo/demo URLs in `src/data/projects.ts` after deployments are live
+**What:** Create reusable React components for standardized evidence linking
 
-### Phase 3 Planning (Ready)
+- `EvidenceBlock.tsx`: Renders dossier, threat model, ADRs, runbooks, GitHub links with responsive cards
+- `VerificationBadge.tsx`: Multiple badge types (docs-available, threat-model-complete, gold-standard-status)
+- `BadgeGroup.tsx` utility for multi-badge rendering with responsive wrapping
+- Update `/projects/[slug]` page to integrate components
+- Full Tailwind CSS responsive styling (mobile-first)
 
-Planned enhancements (initial draft):
-
-1. Automated docs sync: portfolio-app → portfolio-docs integration
-2. Data-driven project registry: YAML config + validation
-3. Enhanced testing: unit, visual regression, accessibility audits
-4. Component library: reusable UI components with Storybook
-5. Optional CMS integration: headless CMS for project metadata
-6. Analytics integration: view tracking and usage metrics
-7. Automated link validation: CI broken link detection
-8. Social sharing: enhanced metadata for social cards
+**Timeline:** 3–4 hours | **Status:** Creating tracking issues (this stage)
 
 ---
 
@@ -198,6 +192,68 @@ Planned enhancements (initial draft):
   - Frozen lockfile installs for determinism
   - CodeQL + Dependabot baseline
   - GitHub Rulesets (not classic branch protection)
+
+- **ADR-0011** (exisits, updates in Stage 3.4 planned): Data-Driven Registry Decision
+  - Why YAML (readable, structured, standard format)
+  - Why type safety via Zod (catch errors at build time)
+  - Why build-time validation (prevent broken links in production)
+  - Migration path from hardcoded projects
+
+- **ADR-0012** (Stage 3.4 planned): Cross-Repo Documentation Linking
+  - Environment-first URL construction pattern
+  - Schema-based link validation approach
+  - Bidirectional link assertions (app ↔ docs consistency)
+  - Deployment synchronization strategy
+
+- **ADR-0010** (existing): Gold Standard Exemplar — Portfolio App proves enterprise SDLC posture
+
+- **ADR-0009** (existing): Documentation platform (Docusaurus)
+
+- **ADR-0008:** Portfolio App CI Quality Gates
+  - Stable check names for governance
+  - Frozen lockfile installs for determinism
+  - CodeQL + Dependabot baseline
+  - GitHub Rulesets (not classic branch protection)
+
+---
+
+### Phase 3 Stage 3.2 Implementation Context
+
+**What Components Will Do:**
+
+1. **`EvidenceBlock.tsx`** — Card-based evidence display
+   - Props: `project: Project`, `className?: string`
+   - Renders sections for: dossier, threat model, ADRs, runbooks, GitHub repo
+   - Each section: title + clickable link if available, placeholder if not
+   - Responsive grid layout (1 col mobile, 2 col tablet, 3 col desktop)
+   - Uses Tailwind: `border`, `rounded-lg`, `hover:shadow`, `dark:` variants
+
+2. **`VerificationBadge.tsx`** — Status indicators
+   - Props: `type: 'docs-available' | 'threat-model' | 'gold-standard' | 'adr-complete'`
+   - Icons + color-coded styling (Tailwind)
+   - gold-standard uses amber (existing GoldStandardBadge as reference)
+   - Each type has tooltip/aria-label for accessibility
+
+3. **`BadgeGroup.tsx`** — Multi-badge renderer
+   - Props: `badges: BadgeType[]`, `project: Project`
+   - Conditionally renders badges based on evidence presence
+   - Responsive flex wrapping with gap spacing
+   - Example: portfolio-app shows [gold-standard, docs-complete, threat-model]
+
+**Integration Points:**
+
+- Import all three in `/projects/[slug]/page.tsx`
+- Place `EvidenceBlock` after "What This Project Proves" section
+- Place `BadgeGroup` in header area near title
+- Test on mobile: DevTools → iPhone 12 / iPad
+
+**Design Reference:**
+
+- Use existing `GoldStandardBadge.tsx` as style pattern (amber border/bg/text)
+- Check current project pages for layout patterns
+- Follow Tailwind 4 naming (no spaces in class names, use `dark:` modifier)
+
+---
 
 - **ADR-0007** (planned): Vercel hosting with promotion checks
 

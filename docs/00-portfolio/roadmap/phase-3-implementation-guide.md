@@ -1,7 +1,7 @@
 ---
 title: 'Phase 3 Implementation Guide'
 description: 'Step-by-step procedures for scaling the portfolio with a data-driven project registry, standardized evidence UI, and automated governance.'
-sidebar_position: 5
+sidebar_position: 3
 tags: ['phase-3', 'implementation', 'registry', 'governance', 'testing']
 ---
 
@@ -310,7 +310,7 @@ Before starting Phase 3, ensure:
 
 ## Reference Documentation
 
-- [Roadmap — Phase 3](/docs/00-portfolio/roadmap.md)
+- [Roadmap — Phase 3](/docs/00-portfolio/roadmap/index.md)
 - [Session Context — Phase 3 Ready](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/.copilot/session-context.md)
 - [ADR Index](/docs/10-architecture/adr/index.md)
 - [Portfolio App Dossier](docs/60-projects/portfolio-app/index.md)

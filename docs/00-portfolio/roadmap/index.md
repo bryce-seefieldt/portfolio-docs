@@ -98,9 +98,9 @@ For each phase or milestone:
 ## Roadmap at-a-glance (phases)
 
 - **Phase 0:** Baseline governance + evidence scaffolding (Docs App hardened)
-- **Phase 1:** Portfolio App foundation (repo, CI, deployment, core routes)
-- **Phase 2:** “Gold standard” content (one exemplary project + deep evidence)
-- **Phase 3:** Scaling content model (repeatable project publishing pipeline)
+- **Phase 1:** Portfolio App foundation (repo, CI, deployment, core routes) — ✅ Complete (2026-01-17)
+- **Phase 2:** “Gold standard” content (one exemplary project + deep evidence) — ✅ Complete (2026-01-21)
+- **Phase 3:** Scaling content model (repeatable project publishing pipeline) — 🟡 Ready to execute
 - **Phase 4:** Reliability + security hardening (enterprise credibility upgrades)
 - **Phase 5:** Advanced demonstrations (multi-language demos, platform proofs, eval-first artifacts)
 
@@ -145,52 +145,45 @@ Ensure the Documentation App is a credible enterprise evidence engine with stron
 
 ## Phase 1 — Portfolio App foundation (production-quality skeleton)
 
+**Status:** ✅ Complete (2026-01-17) — see [Phase 1 Implementation Guide](/docs/00-portfolio/roadmap/phase-1-implementation-guide.md)
+
 ### Objective
 
 Stand up the Portfolio App with enterprise-grade SDLC controls and a minimal, polished surface.
 
 ### Deliverables (Portfolio App repo)
 
-- Next.js (App Router) + TypeScript app bootstrapped using pnpm
-- Core routes (MVP):
-  - `/` (landing)
-  - `/cv` (interactive CV scaffold)
-  - `/projects` (project index scaffold)
-  - `/projects/[slug]` (project detail scaffold)
-- Tooling and governance:
-  - ESLint + Prettier + TypeScript `typecheck`
-  - GitHub Actions workflows:
-    - `ci / quality` (lint, format:check, typecheck)
-    - `ci / build` (Next build)
-    - CodeQL
-  - Dependabot
-- Vercel deployment:
-  - preview deployments for PRs
-  - production deployment from `main`
-  - production promotion gated by checks
+- Next.js 15+ (App Router) + TypeScript strict mode with Tailwind CSS scaffolded via pnpm
+- Core routes live: `/`, `/cv`, `/projects`, `/contact`, `/projects/[slug]`
+- Tooling and governance: ESLint (flat config), Prettier (Tailwind plugin), TypeScript `typecheck`, frozen lockfile installs
+- GitHub Actions workflows in place:
+  - `ci / quality` (format:check, lint, typecheck)
+  - `ci / build` (Next build)
+  - CodeQL security analysis
+  - Dependabot weekly updates
+- Vercel preview + production deployments, promotion gated by required checks
+- Environment contract documented (`NEXT_PUBLIC_*` vars) with helpers in `src/lib/config.ts`
 
 ### Required evidence artifacts (Docs App)
 
-- Portfolio App dossier (8 pages) — complete first-pass
-- ADRs:
-  - ADR-0005 stack choice
-  - ADR-0006 evidence separation
-  - ADR-0007 hosting/promotion checks
-- Threat model:
-  - `portfolio-app-threat-model.md`
-- Runbooks:
-  - deploy, rollback, CI triage for Portfolio App
+- Portfolio App dossier (7-page contract) — initial pass complete
+- ADRs: ADR-0005 (stack choice), ADR-0006 (evidence separation), ADR-0007 (hosting/promotion checks)
+- Threat model: `portfolio-app-threat-model.md`
+- Runbooks: deploy, rollback, CI triage for Portfolio App
+- Release tracking via roadmap + dossier updates
 
 ### Acceptance criteria
 
-- Portfolio App can be deployed and validated end-to-end with preview-to-prod governance
-- CI gates are enforceable and stable (check names consistent)
-- Routes render in preview and production
-- Portfolio App pages include correct evidence-link placeholders to docs
+- Deployed previews and production promote only after checks pass — **Met**
+- CI gates stable with consistent check names — **Met**
+- Core routes render in preview and production — **Met**
+- Evidence links point into docs with placeholders ready — **Met**
 
 ---
 
 ## Phase 2 — “Gold standard” project and credibility baseline
+
+**Status:** ✅ Complete (2026-01-21) — see [Phase 2 Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
 
 ### Objective
 
@@ -198,34 +191,27 @@ Create one exemplary project case study that sets the standard for all future po
 
 ### Deliverables (Portfolio App)
 
-- ✅ 1 fully polished "gold standard" project page:
-  - crisp summary (what it is, what it proves)
-  - repo/demo links
-  - evidence links to dossier, threat model, runbooks as applicable
-  - 4 comprehensive sections with verification checklist
-  - Conditional rendering for gold standard vs generic projects
-- ✅ CV page becomes meaningful:
-  - employment/impact timeline entries (2 comprehensive entries)
-  - capability-to-proof mapping (17 capabilities → 9 proof links)
-  - Evidence Hubs section for navigation
+- ✅ Gold standard project page (Portfolio App) with repo/demo/evidence links, verification checklist, and conditional rendering for gold-standard vs generic projects
+- ✅ CV page upgraded with employment/impact timeline, capability-to-proof mapping, and Evidence Hubs navigation
+- ✅ Playwright smoke tests (multi-browser) with 100% route coverage wired into CI
+- ✅ Enhanced Portfolio App dossier (7 pages) with gold standard depth
+- ✅ Threat model (STRIDE) updated; operational runbooks: deploy, CI triage, rollback, secrets incident response
+- ✅ Security hardening: secrets scanning gate, scoped CI permissions, Pre-commit TruffleHog hook
+- ✅ Governance artifacts: ADR-0010 (gold standard decision), release note entry, STRIDE compliance report
 
 ### Required evidence artifacts (Docs App)
 
-- Project dossier for the chosen “gold standard” project:
-  - overview, architecture, deployment, security, testing, operations, troubleshooting
-  - dossier contract: 7 standard pages; Step 3 enhances these pages rather than creating a single monolithic document
-- At least 1 ADR for a durable decision in that project
-- Threat model (if project introduces meaningful surface)
-- Runbooks (if project is deployed/operated)
-- Release note entry recording the milestone
+- Project dossier (7-page contract) for the gold standard project
+- ADR-0010: Portfolio App as Gold Standard Exemplar
+- Threat model update for gold standard posture
+- Runbooks: deploy, rollback, CI triage, secrets incident response
+- Compliance/reporting: STRIDE compliance report, release note documenting completion
 
 ### Acceptance criteria
 
-- A reviewer can validate senior-level engineering discipline through a single project:
-  - “what, why, how”
-  - security posture
-  - operational readiness
-  - reproducibility
+- Reviewer can validate senior-level engineering discipline through one project (what/why/how, security posture, ops readiness, reproducibility) — **Met**
+- CI shows smoke tests + quality gates enforced; gold standard evidence links live — **Met**
+- Governance controls (secrets scanning, scoped permissions, pre-commit) operational — **Met**
 
 ### Phase 2 Recommended Controls (Hardening Enhancements)
 
@@ -283,9 +269,11 @@ Beyond baseline Phase 1, Phase 2 includes optional hardening controls that stren
 - ✅ STRIDE compliance report generated
 - ✅ All controls integrated into PR workflow
 
-## See [Phase 2 Implementation Guide — STEP 4a/4b](/docs/00-portfolio/phase-2-implementation-guide.md#step-4a-phase-2-security-enhancements-hardening-controls-23-hours) for detailed procedures.
+## See [Phase 2 Implementation Guide — STEP 4a/4b](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md#step-4a-phase-2-security-enhancements-hardening-controls--23-hours) for detailed procedures.
 
 ## Phase 3 — Repeatable project publishing pipeline (scale without chaos)
+
+**Status:** 🟡 Ready to execute — see [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
 
 ### Objective
 
@@ -293,29 +281,27 @@ Make adding projects predictable, low-friction, and consistent with governance.
 
 ### Deliverables (Portfolio App)
 
-- Data-driven project registry:
-  - structured metadata (title, slug, tech, proofs, links)
-  - consistent slug rules enforced by validation
-- Project page template enhancements:
-  - “evidence block” component that standardizes links
-  - optional “verification badges” (e.g., Build Passing, Docs Available)
-- Quality improvements:
-  - add unit tests (Vitest) for content/slug validation
-  - optionally add basic Playwright e2e smoke tests for core routes
+- Stage 3.1: YAML-backed project registry with Zod validation, slug rules, URL validation, build-time script
+- Stage 3.2: EvidenceBlock + VerificationBadge components; project pages render standardized evidence badges/links
+- Stage 3.3: Unit tests (Vitest) for registry/schema/slug helpers; Playwright e2e for route and evidence link resolution; wired into CI
+- Stage 3.4: ADR-0011 (registry decision) and ADR-0012 (cross-repo linking); dossier updates; registry schema guide; Copilot instructions updated
+- Stage 3.5: CI link validation (registry + evidence URLs), publish runbook, troubleshooting guide
+- Stage 3.6: Metadata + analytics (OG/Twitter cards, optional privacy-safe analytics) documented and implemented
 
 ### Required evidence artifacts (Docs App)
 
-- Update Portfolio App dossier architecture and testing pages to reflect new model
-- Runbook updates for publish/maintenance process
-- ADR if content model changes materially (e.g., moving to MDX, CMS, or remote data)
+- Dossier updates (architecture/testing) reflecting the registry model
+- Registry schema reference guide + publishing checklist
+- ADR-0011 (registry decision) and ADR-0012 (cross-repo linking)
+- Runbooks: project publish procedure, troubleshooting guide
+- CI documentation for registry/link validation
 
 ### Acceptance criteria
 
-- Adding a new project is a repeatable checklist:
-  - add metadata + assets + evidence links
-  - create dossier folder and pages
-  - update release notes
-- CI catches broken slugs/routes and basic regressions
+- Adding a new project follows a repeatable checklist (YAML entry + dossier + release note) — **Pending execution**
+- Registry validates on every build; CI fails on invalid slugs/links — **Planned**
+- Evidence components/badges render consistently across projects — **Planned**
+- Unit + e2e suites enforce registry and link integrity — **Planned**
 
 ---
 

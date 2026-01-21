@@ -442,5 +442,5 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
 
 ### Phase 2 Planning
 
-- [Roadmap](/docs/00-portfolio/roadmap.md)
-- [Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md)
+- [Roadmap](/docs/00-portfolio/roadmap/index.md)
+- [Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)

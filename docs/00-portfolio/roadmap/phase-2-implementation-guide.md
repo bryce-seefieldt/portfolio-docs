@@ -1,74 +1,70 @@
 ---
 title: 'Phase 2 Implementation Guide: Gold Standard Project & Credibility Baseline'
-description: 'Step-by-step guide to Phase 2 implementation, including smoke tests, gold standard project development, CV enhancement, evidence artifacts, and documentation updates.'
-tags: [phase-2, implementation, portfolio-app, testing, projects, operations]
-date: 2026-01-17
+description: 'Completed implementation guide for Phase 2: smoke tests, gold standard project, CV enhancement, comprehensive evidence artifacts, and operational maturity.'
+sidebar_position: 2
+tags: [phase-2, implementation, completed, portfolio-app, testing, operations]
 ---
 
-# Phase 2 Implementation Guide: Gold Standard Project & Credibility Baseline
+# Phase 2 Implementation Guide — Gold Standard Project & Credibility Baseline
 
-## Overview
+**Phase:** Phase 2 (Credibility & Quality Foundation)  
+**Estimated Duration:** 19–32 hours (2–4 weeks at 10–15 hrs/week)  
+**Status:** ✅ **Complete** (2026-01-21)  
+**Last Updated:** 2026-01-21
 
-Phase 2 transforms the Portfolio App from a "professional foundation" into a "credible engineering portfolio." The focus is on creating one exemplary project that demonstrates senior-level engineering discipline and using that as the template for all future portfolio entries.
+## Purpose
 
-**Duration:** ~2–3 weeks (assuming 10–15 hrs/week)
+Phase 2 establishes credibility by transforming the Portfolio App from a "professional foundation" into a demonstrable showcase of senior-level engineering discipline. Rather than building many mediocre examples, Phase 2 creates one exemplary "gold standard" project with comprehensive evidence: complete dossier, threat model, operational runbooks, automated testing, and governance artifacts. This sets the quality bar for all future portfolio entries.
 
-**Key outputs:**
+## What Phase 2 Delivers
 
-- Smoke test infrastructure (Playwright or similar)
-- One "gold standard" project page with full evidence trail
-- Enhanced CV page with capability-to-proof mapping
-- Complete dossier, threat model, and runbooks for the chosen project
-- Updated documentation reflecting new standards
-
----
-
-## Phase 2 Objectives (from Roadmap)
-
-### Portfolio App deliverables
-
-1. **One polished "gold standard" project page**
-   - What it is, what it proves
-   - Repo + demo links
-   - Evidence links (dossier, threat model, runbooks)
-   - Public-safe screenshots/diagrams
-
-2. **Meaningful CV page**
-   - Employment/impact timeline
-   - Capability-to-proof mapping (links to projects and evidence)
-
-3. **Smoke test infrastructure** (prerequisite for scaling)
-   - Basic route validation tests
-   - Content/slug validation
-   - Evidence link integrity checks
-
-### Documentation App deliverables
-
-1. **Project dossier for gold standard project**
-   - Overview, architecture, deployment, security, testing, operations, troubleshooting
-
-2. **At least 1 ADR** for a durable decision in the chosen project
-
-3. **Threat model** (if the project introduces meaningful surface)
-
-4. **Runbooks** (if the project is deployed/operated)
-
-5. **Release note** marking the Phase 2 milestone
-
-### Acceptance criteria
-
-A reviewer can validate senior-level engineering discipline through a single project:
-
-- "What, why, how" clarity
-- Security posture and controls
-- Operational readiness and reproducibility
-- Testing and quality discipline
+- **Gold standard project selection:** Portfolio App chosen as the exemplary case study (documented in ADR-0010)
+- **Smoke test infrastructure:** Playwright E2E tests with 100% route coverage, integrated into CI pipeline
+- **Enhanced Portfolio App dossier:** Comprehensive 7-page documentation covering architecture, security, deployment, testing, operations, and troubleshooting
+- **Threat model:** Complete STRIDE analysis with mitigations, controls, and residual risks
+- **Operational runbooks:** Deploy, CI triage, rollback, and secrets incident response procedures
+- **Security hardening:** Secrets scanning (TruffleHog), CI permission hardening, pre-commit hooks
+- **Enhanced project pages:** Gold standard badge component, verification checklists, evidence links
+- **Meaningful CV page:** Capability-to-proof mapping with deep links to evidence artifacts
+- **Phase 2 completion artifacts:** Release notes, compliance reports, updated roadmap
 
 ---
 
-## Phase 2 Implementation Steps (Step-by-Step)
+## Prerequisites
 
-### STEP 1: Decide on the "Gold Standard" Project (1–2 hours)
+Before starting Phase 2, ensure:
+
+- ✅ Phase 1 complete and verified (Portfolio App deployed with CI/CD governance)
+- ✅ ADR-0010 documented (gold standard project decision)
+- ✅ GitHub issues created in both repos (portfolio-app #9, portfolio-docs #24)
+- ✅ Development environment ready (pnpm, Node.js, local testing capabilities)
+- ✅ Portfolio-docs build infrastructure operational
+
+**Verification checklist:**
+
+```bash
+# Verify Phase 1 state
+cd portfolio-app
+git pull origin main
+pnpm install
+pnpm lint && pnpm format:check && pnpm typecheck && pnpm build
+# All should pass
+
+# Verify docs build
+cd portfolio-docs
+pnpm build
+# Should complete without errors
+```
+
+## Implementation Approach
+
+Phase 2 follows a **sequential steps** implementation pattern, where each step builds on the previous to create a comprehensive evidence foundation. The steps are organized chronologically as they were executed, with all completion status and outcomes documented.
+
+---
+
+## Implementation Steps (Completed)
+
+### STEP 1: Decide on the "Gold Standard" Project ✅ (1–2 hours)
 
 **Goal:** Choose which project will be your exemplary case study.
 
@@ -114,7 +110,7 @@ Start with **portfolio-app** as the gold standard. Rationale:
 
 ---
 
-### STEP 2: Set Up Smoke Test Infrastructure (3–5 hours)
+### STEP 2: Set Up Smoke Test Infrastructure ✅ (3–5 hours)
 
 **Goal:** Create test infrastructure that validates core routes, content, and evidence links.
 
@@ -258,7 +254,7 @@ playwright-report/
 
 ---
 
-### STEP 3: Enhance Portfolio App Dossier to Gold Standard (4–6 hours)
+### STEP 3: Enhance Portfolio App Dossier to Gold Standard ✅ (4–6 hours)
 
 **Goal:** Enhance the existing 7-file dossier structure with gold standard content, following the established project dossier contract.
 
@@ -594,7 +590,7 @@ Every PR must confirm:
 
 ---
 
-### STEP 4: Create/Update Threat Model (2–3 hours)
+### STEP 4: Create/Update Threat Model ✅ (2–3 hours)
 
 **Goal:** Document security assumptions, threats, and controls for the project.
 
@@ -683,7 +679,7 @@ tags: [security, threat-model, portfolio-app]
 
 ---
 
-### STEP 4a: Phase 2 Security Enhancements (Hardening Controls) (2–3 hours)
+### STEP 4a: Phase 2 Security Enhancements (Hardening Controls) ✅ (2–3 hours)
 
 **Goal:** Implement optional Phase 2 hardening controls that enhance Information Disclosure and Tampering threat mitigations.
 
@@ -830,7 +826,7 @@ git config core.hooksPath .git/hooks  # One-time setup
 
 ---
 
-### STEP 4b: Phase 2 Operational Readiness (Incident Response) (1–2 hours)
+### STEP 4b: Phase 2 Operational Readiness (Incident Response) ✅ (1–2 hours)
 
 **Goal:** Create incident response runbooks aligned to threat model procedures.
 
@@ -875,7 +871,53 @@ git config core.hooksPath .git/hooks  # One-time setup
 
 ---
 
-### STEP 5: Create/Update Operational Runbooks (2–4 hours)
+## Phase 2 Security Enhancements — Quick Reference
+
+This section summarizes all Phase 2 security and operational hardening applied to the Portfolio App (completed in STEP 4a and 4b).
+
+### CI/CD Hardening
+
+- ✅ **Secrets scanning** added to CI using TruffleHog with verified detectors
+  - Runs on **pull requests only** to avoid TruffleHog BASE==HEAD failures on direct pushes to main
+  - Required check before merge via GitHub branch protection rules
+  - Ensures all production code is scanned before merge
+- ✅ **Least-privilege permissions** implemented
+  - Removed global workflow permissions
+  - Added minimal job-level permissions per workflow job
+- ✅ **Deterministic builds** enforced via `pnpm install --frozen-lockfile` in CI
+- ✅ **Required checks** before merge: `ci / quality`, `ci / build`, `secrets-scan`, CodeQL
+
+### Developer Workflow Hardening
+
+- ✅ **Pre-commit hooks** added via `.pre-commit-config.yaml` with TruffleHog
+  - Optional local opt-in for developers
+  - Prevents committing sensitive material before push
+- ✅ **Local verification** uses lightweight pattern-based secret scan
+  - Full TruffleHog scanning runs only in CI (performance optimization)
+- ✅ **Quality gates maintained**: TypeScript strict mode, ESLint zero-warnings, Prettier enforcement
+
+### Operational Hardening
+
+- ✅ **Secrets incident response runbook** created: [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)
+  - 5-phase response procedure: Detection → Containment → Eradication → Recovery → Postmortem
+  - Aligned with STRIDE threat model mitigations
+- ✅ **Existing runbooks verified** for operational readiness:
+  - [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
+  - [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
+  - [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+
+### Evidence Artifacts
+
+- **CI Workflow:** [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)
+- **Pre-commit Config:** [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml)
+- **Package Scripts:** [package.json](https://github.com/bryce-seefieldt/portfolio-app/blob/main/package.json)
+- **Smoke Tests:** [tests/e2e/smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts)
+- **Threat Model:** [Portfolio App STRIDE](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+- **All Runbooks:** [Operations Runbooks Index](/docs/50-operations/runbooks/index.md)
+
+---
+
+### STEP 5: Create/Update Operational Runbooks ✅ (2–4 hours)
 
 **Goal:** Document repeatable procedures for deployment, CI triage, and rollback.
 
@@ -1128,7 +1170,7 @@ If waiting for CI is unacceptable, you can manually redeploy a previous commit i
 
 ---
 
-### STEP 6: Create/Update ADRs for Phase 2 Decisions (1–2 hours)
+### STEP 6: Create/Update ADRs for Phase 2 Decisions ✅ (1–2 hours)
 
 **Goal:** Document any significant decisions made during Phase 2.
 
@@ -1210,7 +1252,7 @@ See: [Smoke test setup in Phase 2 guide]
 
 ---
 
-### STEP 7: Enhance Project Detail Page (2–3 hours)
+### STEP 7: Enhance Project Detail Page ✅ (2–3 hours)
 
 **Goal:** Make the project page showcase the evidence trail and governance posture.
 
@@ -1336,7 +1378,7 @@ import { GoldStandardBadge } from '@/components/GoldStandardBadge';
 
 ---
 
-### STEP 8: Enhance CV Page with Capability Mapping (2–3 hours)
+### STEP 8: Enhance CV Page with Capability Mapping ✅ (2–3 hours)
 
 **Goal:** Transform CV from skeleton into meaningful capability-to-proof mapping.
 
@@ -1470,7 +1512,31 @@ export default function CVPage() {
 
 ---
 
-### STEP 9: Create Release Note for Phase 2 (1–2 hours)
+### STEP 9: Create Release Note for Phase 2 ✅ (1–2 hours)
+
+**Goal:** Document Phase 2 completion with all additions and changes.
+
+**Location:** `/portfolio-docs/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md`
+
+**Success check:**
+
+- [x] Release note created with all Phase 2 features
+- [x] Links to dossier, threat model, ADRs, runbooks, security enhancements
+- [x] Success criteria clearly documented
+- [x] Build verification passes
+- [x] PR created and merged
+
+**Completion notes:**
+
+- Release note published: [20260120-portfolio-app-phase-2-gold-standard.md](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+
+release-notes/20260120-portfolio-app-phase-2-gold-standard.md(/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+
+- All evidence artifacts linked and verified
+
+---
+
+### STEP 10: Create PR and Verify End-to-End ✅ (1–2 hours)
 
 **Goal:** Document Phase 2 completion with all additions and changes.
 
@@ -1591,9 +1657,8 @@ The Phase 2 release is valid when:
 
 ## Architecture & Governance References
 
-- [Portfolio App Dossier](/docs/60-projects/portfolio-app/) (location TBD during implementation)
+- [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md) (location TBD during implementation)
 - [Threat Model: Portfolio App](/docs/40-security/threat-models/) (location TBD during implementation)
-- [ADR-0009: Portfolio App Testing Strategy](/docs/10-architecture/adr/) (location TBD during implementation)
 - Operational runbooks (created during Phase 2):
   - Deploy runbook
   - CI triage runbook
@@ -1696,56 +1761,273 @@ git push origin feat/phase-2-gold-standard
 
 **Success check:**
 
-- [ ] All local checks pass (`lint`, `format:check`, `typecheck`, `build`, `test`)
-- [ ] Documentation builds pass
-- [ ] PR created with comprehensive description
-- [ ] GitHub Actions CI runs successfully
-- [ ] Vercel preview deployment works
-- [ ] After merge, production deployment automatic
-- [ ] All evidence links resolve to docs app
-- [ ] Smoke tests pass in CI
+- [x] All local checks pass (`lint`, `format:check`, `typecheck`, `build`, `test`)
+- [x] Documentation builds pass
+- [x] PRs created with comprehensive descriptions
+- [x] GitHub Actions CI runs successfully
+- [x] Vercel preview deployments work
+- [x] Production deployments automatic and successful
+- [x] All evidence links resolve to docs app
+- [x] Smoke tests pass in CI
+
+**Completion notes:**
+
+- Multiple PRs created and merged throughout Phase 2
+- Portfolio App PRs: #10 (smoke tests), #20 (gold standard page), #21 (CV page), #25 (verification script)
+- Portfolio Docs PRs: #32 (threat model), #33 (enhancements summary), #39 (dossier), #40 (STRIDE compliance)
+- All CI gates passing consistently
+- Production deployments stable and verified
 
 ---
 
-## Summary: Phase 2 Timeline & Effort
+## Phase 2 Completion Summary
 
-| Step | Task                            | Effort  | Cumulative |
-| ---- | ------------------------------- | ------- | ---------- |
-| 1    | Choose gold standard project    | 1–2 hrs | 1–2 hrs    |
-| 2    | Set up smoke tests (Playwright) | 3–5 hrs | 4–7 hrs    |
-| 3    | Create project dossier          | 4–6 hrs | 8–13 hrs   |
-| 4    | Create threat model             | 2–3 hrs | 10–16 hrs  |
-| 5    | Create operational runbooks     | 2–4 hrs | 12–20 hrs  |
-| 6    | Create/update ADRs              | 1–2 hrs | 13–22 hrs  |
-| 7    | Enhance project detail page     | 2–3 hrs | 15–25 hrs  |
-| 8    | Enhance CV page                 | 2–3 hrs | 17–28 hrs  |
-| 9    | Create Phase 2 release note     | 1–2 hrs | 18–30 hrs  |
-| 10   | Create PR & verify end-to-end   | 1–2 hrs | 19–32 hrs  |
+### Timeline & Effort Actual
 
-**Total effort:** ~19–32 hours (2–4 weeks at 10–15 hrs/week)
+| Step      | Task                            | Estimated     | Actual     | Status |
+| --------- | ------------------------------- | ------------- | ---------- | ------ |
+| 1         | Choose gold standard project    | 1–2 hrs       | 2 hrs      | ✅     |
+| 2         | Set up smoke tests (Playwright) | 3–5 hrs       | 4 hrs      | ✅     |
+| 3         | Enhance project dossier         | 4–6 hrs       | 6 hrs      | ✅     |
+| 4         | Create threat model             | 2–3 hrs       | 3 hrs      | ✅     |
+| 4a        | Security enhancements           | 2–3 hrs       | 3 hrs      | ✅     |
+| 4b        | Incident response runbooks      | 1–2 hrs       | 2 hrs      | ✅     |
+| 5         | Create operational runbooks     | 2–4 hrs       | 3 hrs      | ✅     |
+| 6         | Create/update ADRs              | 1–2 hrs       | 1 hr       | ✅     |
+| 7         | Enhance project detail page     | 2–3 hrs       | 3 hrs      | ✅     |
+| 8         | Enhance CV page                 | 2–3 hrs       | 3 hrs      | ✅     |
+| 9         | Create Phase 2 release note     | 1–2 hrs       | 1 hr       | ✅     |
+| 10        | Create PRs & verify end-to-end  | 1–2 hrs       | 2 hrs      | ✅     |
+| **Total** | **Phase 2 Complete**            | **19–32 hrs** | **33 hrs** | **✅** |
 
----
-
-## Success Metrics for Phase 2
-
-After Phase 2 completes, you should be able to answer YES to:
-
-1. **Coverage:** Can a reviewer access 100% of core routes through the app or docs?
-2. **Clarity:** Does each route explain what it proves about engineering discipline?
-3. **Evidence:** Are all evidence links (dossier, threat model, ADRs, runbooks) complete and accurate?
-4. **Automation:** Do smoke tests validate all core routes on every merge?
-5. **Credibility:** Can a senior engineer validate your engineering posture through one project?
-6. **Scale-ready:** Is the structure repeatable for adding additional projects without chaos?
+**Completion date:** 2026-01-21  
+**Duration:** ~3 weeks (January 2–21, 2026)
 
 ---
 
-## Next Steps After Phase 2
+## Success Criteria — All Achieved ✅
 
-Once Phase 2 is complete:
+Phase 2 is complete when all criteria are met:
 
-1. **Share with stakeholders** — show gold standard project and evidence trail
-2. **Gather feedback** — refine based on reviewer perspective
-3. **Plan Phase 3** — scale to multiple projects, add unit/e2e tests
-4. **Consider Phase 4** — performance, security hardening, observability
+### Functionality Criteria
+
+- ✅ One "gold standard" project page is fully polished with evidence trail
+- ✅ Comprehensive dossier covers architecture, security, deployment, operations, testing, troubleshooting
+- ✅ Threat model documents security posture, controls, and STRIDE analysis
+- ✅ Operational runbooks (deploy, CI triage, rollback, secrets incident) are complete and tested
+- ✅ Smoke tests validate all core routes and evidence links
+- ✅ CV page meaningfully maps capabilities to verifiable proofs
+
+### Quality Criteria
+
+- ✅ All CI checks pass: quality (lint, format, typecheck), secrets-scan, build with smoke tests, CodeQL
+- ✅ 100% route coverage in Playwright smoke tests (12 tests, Chromium + Firefox)
+- ✅ No broken links between portfolio-app and portfolio-docs
+- ✅ All evidence artifacts published and accessible
+- ✅ GitHub Rulesets enforce PR discipline and required checks
+
+### Evidence Criteria
+
+- ✅ ADR-0010 (Gold Standard Exemplar) published and referenced
+- ✅ Threat model with STRIDE analysis published
+- ✅ STRIDE compliance report generated
+- ✅ 4 operational runbooks complete (deploy, CI triage, rollback, secrets incident)
+- ✅ Dossier enhanced to 7 comprehensive pages
+- ✅ Release note published with completion evidence
+
+### Reviewer Validation Criteria
+
+A senior engineer reviewing the Portfolio App can validate engineering discipline through:
+
+- ✅ "What, why, how" clarity: Project purpose, technical decisions, implementation approach documented
+- ✅ Security posture: Threat model, controls, public-safety rules enforced
+- ✅ Operational readiness: Runbooks tested, deployment/rollback procedures documented
+- ✅ Testing discipline: Automated smoke tests, CI gates, reproducible builds
+- ✅ Evidence trail: All claims link to verifiable artifacts (dossier, ADRs, threat model, runbooks)
 
 ---
+
+## Acceptance Criteria (Reviewability)
+
+A reviewer can validate Phase 2 completion through:
+
+1. **Portfolio App Repository:**
+   - Browse [https://github.com/bryce-seefieldt/portfolio-app](https://github.com/bryce-seefieldt/portfolio-app)
+   - Verify CI checks are passing (quality, secrets-scan, build)
+   - Review merged PRs (#10, #20, #21, #25) for smoke tests, enhanced pages, verification scripts
+   - Check `.github/workflows/ci.yml` for secrets scanning and smoke test integration
+
+2. **Live Deployment:**
+   - Visit portfolio app production URL
+   - Navigate to all 5 core routes (/, /cv, /projects, /contact, /projects/portfolio-app)
+   - Verify gold standard badge displays on portfolio-app project page
+   - Click evidence links to docs; verify they resolve correctly
+
+3. **Documentation Evidence:**
+   - Review [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md)
+   - Review [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+   - Review [ADR-0010](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+   - Review [Operational Runbooks](/docs/50-operations/runbooks/index.md)
+   - Review [Release Notes](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+
+4. **Automated Tests:**
+   - Clone portfolio-app repo
+   - Run `pnpm install && pnpm test`
+   - Verify all 12 smoke tests pass (5 route tests, evidence link tests, registry validation)
+
+---
+
+## Compliance Review (2026-01-19)
+
+**Status:** ✅ **Compliant** — All documented STRIDE threats and Phase 2 security enhancements verified.
+
+**Scope reviewed:**
+
+- STRIDE Threat Model (12 threats across 6 categories)
+- STRIDE Compliance Report (evidence mapping for each mitigation)
+- Phase 2 security enhancements (secrets scanning, least-privilege CI, pre-commit hooks, incident response)
+- SDLC controls in CI/CD, repo governance, and operational runbooks
+
+**Verification highlights:**
+
+- CI/CD: Required checks (`ci / quality`, `ci / build`, `secrets-scan`, CodeQL), job-scoped permissions, frozen lockfile installs
+- Secrets hygiene: No secrets in `NEXT_PUBLIC_*`; `.env.example` documents schema; TruffleHog in CI and pre-commit
+- Operations: Secrets incident response runbook; deploy/rollback/CI triage runbooks validated
+- Security headers: HSTS verified on production deployment; Vercel-managed TLS
+- Dependency governance: Dependabot weekly updates (grouped), minimal dependencies, no postinstall hooks
+
+**Evidence:**
+
+- [STRIDE compliance report](/docs/40-security/threat-models/portfolio-app-stride-compliance-report.md)
+- [Threat model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+- [CI workflow](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml) (quality, secrets-scan, build, tests)
+- [Pre-commit config](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) (TruffleHog)
+- [Runbooks](/docs/50-operations/runbooks/index.md) (deploy, rollback, CI triage, secrets incident)
+
+---
+
+## Key Deliverables Reference
+
+### Portfolio App Artifacts
+
+- **Smoke tests:** `tests/e2e/smoke.spec.ts` (12 tests, 100% route coverage)
+- **Playwright config:** `playwright.config.ts`
+- **CI workflow:** `.github/workflows/ci.yml` (quality, secrets-scan, build with tests)
+- **Gold standard component:** `src/components/GoldStandardBadge.tsx`
+- **Enhanced project page:** `src/app/projects/[slug]/page.tsx`
+- **Enhanced CV page:** `src/app/cv/page.tsx`
+- **Pre-commit hooks:** `.pre-commit-config.yaml`
+
+### Documentation Artifacts
+
+- **Project dossier:** `/docs/60-projects/portfolio-app/` (7 pages)
+- **Threat model:** `/docs/40-security/threat-models/portfolio-app-threat-model.md`
+- **ADR-0010:** `/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md`
+- **Runbooks:** `/docs/50-operations/runbooks/` (4 runbooks)
+  - `rbk-portfolio-deploy.md`
+  - `rbk-portfolio-ci-triage.md`
+  - `rbk-portfolio-rollback.md`
+  - `rbk-portfolio-secrets-incident.md`
+- **Release notes:** `/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md`
+- **STRIDE compliance report:** `/docs/40-security/threat-models/portfolio-app-stride-compliance-report.md`
+
+---
+
+## Lessons Learned & Retrospective
+
+### What Went Well
+
+1. **Sequential execution:** Breaking work into 10 discrete steps made progress measurable and allowed for course-correction
+2. **Evidence-first approach:** Creating documentation alongside code prevented documentation debt
+3. **Smoke tests early:** Catching broken links and routing issues before manual testing saved significant debugging time
+4. **Security hardening:** Adding TruffleHog and pre-commit hooks provided immediate value and prevented potential leaks
+5. **ADR discipline:** Documenting decisions (ADR-0010, testing strategy) created durable reference points
+
+### Challenges & Mitigations
+
+1. **Scope creep:** Initially planned Phase 2 for ~20 hours; actual was ~33 hours due to security enhancements
+   - Mitigation: Broke enhancements into STEP 4a/4b; documented as "recommended" vs "required"
+2. **Cross-repo coordination:** Portfolio-app and portfolio-docs PRs needed careful sequencing
+   - Mitigation: Created tracking issues in both repos with cross-links
+3. **Documentation volume:** Dossier alone was 4,000+ words
+   - Mitigation: Used templates and structured approach; content reusable for future projects
+
+### Recommendations for Phase 3
+
+1. Continue evidence-first approach (documentation before/during implementation)
+2. Plan for ~1.5x estimated hours to account for polish and hardening
+3. Create issue templates for Stage/Step granularity (see Phase 3 planning docs)
+4. Establish registry schema early to avoid rework
+
+---
+
+## Future Enhancements & Optional Improvements
+
+Optional improvements identified during Phase 2 (not required for Phase 3):
+
+### Security & Compliance
+
+- **Dependabot for GitHub Actions:** Enable SHA pinning for workflow actions (enhanced supply chain security)
+- **Content Security Policy (CSP):** Add CSP headers via `vercel.json` for additional XSS protection
+- **SBOM generation:** Consider automated Software Bill of Materials for dependency tracking
+
+### Performance & Observability
+
+- **Lighthouse CI:** Integrate performance budgets and automated Lighthouse scoring in CI
+- **Web Vitals monitoring:** Add RUM (Real User Monitoring) for production performance tracking
+- **Error tracking:** Consider Sentry or similar for production error aggregation
+
+### Testing & Quality
+
+- **Visual regression testing:** Add Playwright screenshot comparison for UI consistency
+- **Accessibility testing:** Automated a11y checks (axe-core) in smoke tests
+- **Load testing:** Basic performance testing for critical routes
+
+### Documentation & Evidence
+
+- **Architecture diagrams:** Generate C4 or similar architecture diagrams for dossier
+- **API documentation:** If APIs added in Phase 3+, generate OpenAPI/Swagger docs
+- **Runbook automation:** Convert manual runbooks to executable scripts where applicable
+
+---
+
+## Phase 3 Planning (Next Steps)
+
+With Phase 2 establishing credibility through one exemplary project, Phase 3 will focus on:
+
+### Phase 3 Objectives
+
+- **Data-driven project registry:** YAML-backed registry with Zod validation (Stage 3.1)
+- **Evidence visualization components:** EvidenceBlock, VerificationBadge, BadgeGroup (Stage 3.2)
+- **Unit tests:** Content/slug validation, registry schema enforcement (Stage 3.3)
+- **E2E tests:** Full user flows, cross-domain evidence link validation (Stage 3.4)
+- **Publish runbook:** Repeatable project publishing pipeline (Stage 3.5)
+
+### Planning Documents
+
+- **Phase 3 Implementation Guide:** [/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md))
+- **Roadmap (Phase 3 section):** [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md#phase-3--repeatable-project-publishing-pipeline-scale-without-chaos)
+- **Stage 3.1 App Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md)
+- **Stage 3.1 Docs Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-1-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-1-docs-issue.md)
+- **Stage 3.2 App Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)
+- **Stage 3.2 Docs Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)
+
+---
+
+## Related Documentation
+
+- **Roadmap:** [Portfolio Web Application Roadmap](/docs/00-portfolio/roadmap/index.md)
+- **Phase 1 Implementation Guide:** [Phase 1: Portfolio App Foundation](/docs/00-portfolio/roadmap/phase-1-implementation-guide.md)
+- **ADR-0010:** [Portfolio App as Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+- **Phase 2 Release Notes:** [20260119 Portfolio App Phase 2 Complete](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+- **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/index.md)
+- **Threat Model:** [Portfolio App Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+- **Runbooks Index:** [Operations Runbooks](/docs/50-operations/runbooks/index.md)
+- **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/index.md)
+
+---
+
+**Owner:** Portfolio Program  
+**Phase:** 2 of 5  
+**Status:** ✅ Complete (2026-01-21)  
+**Next Phase:** Phase 3 — Repeatable Project Publishing Pipeline

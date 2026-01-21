@@ -165,6 +165,49 @@ Fix:
 - reproduce with `pnpm build`
 - correct the root cause
 - do not “paper over” build errors by weakening the build process
+  Common build failure modes:
+
+1. **Registry validation errors during page data collection:**
+   - Error: `"demoUrl" is missing or invalid according to a Zod schema validation`
+   - Symptom: Build fails during static page generation for `/projects/[slug]`
+   - Root Cause: Environment variable interpolation failing (see Known Issue below)
+   - Fix: Verify environment variables are set correctly
+   - Verification: `pnpm registry:validate` should pass
+
+2. **Known Issue: Registry interpolation with tsx/Node.js:**
+   - **Problem:** Module load order causes environment variables to not be visible during registry loading
+   - **Solution (Fixed in commit 1a1e272):** Use `process.env` directly in `interpolate()` function instead of module-level imports
+   - **Prevention:** Ensure `NEXT_PUBLIC_*` environment variables are set before build
+   - **Reference:** [Stage 3.1 Known Issues](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md#known-issues--solutions)
+
+3. **Environment variable check:**
+
+```bash
+# Verify required variables are set
+echo $NEXT_PUBLIC_DOCS_BASE_URL
+echo $NEXT_PUBLIC_GITHUB_URL
+
+# Test registry interpolation
+pnpm registry:validate
+# Should output: Registry OK (projects: N)
+```
+
+4. **Quick verification recipe (registry-specific):**
+
+```bash
+cd portfolio-app
+pnpm registry:validate   # Expect: Registry OK (projects: N)
+pnpm lint                # Expect: silent, 0 warnings
+pnpm build               # Expect: ✓ Compiled successfully
+```
+
+5. **If build still fails on registry interpolation:**
+
+- Check env vars: `cat .env.local | grep NEXT_PUBLIC`
+- Run with debug: `DEBUG_REGISTRY=1 pnpm registry:validate 2>&1 | head -20`
+  - Look for `interpolated="https://..."` (absolute URLs)
+- Clean and rebuild: `rm -rf .next node_modules/.cache && pnpm build`
+- Ensure `interpolate()` reads from `process.env` (fixed in commit `1a1e272`)
 
 #### E) Smoke test failures (`pnpm test`)
 

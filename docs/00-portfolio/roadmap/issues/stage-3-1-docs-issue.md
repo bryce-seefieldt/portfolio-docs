@@ -1,4 +1,10 @@
-#Stage 3.1: ADR-0011 & Registry Schema Documentation
+---
+title: 'Stage 3.1 — ADR-0011 & Registry Schema Documentation (Docs)'
+description: 'Documents the registry decision (ADR-0011) and publishes a comprehensive Registry Schema Guide with rationale, validation rules, and examples.'
+tags: [portfolio, roadmap, planning, phase-3, stage-3.1, docs, adr, reference]
+---
+
+# Stage 3.1: ADR-0011 & Registry Schema Documentation
 
 https://github.com/bryce-seefieldt/portfolio-docs/issues/42
 
@@ -43,6 +49,15 @@ Document the decision to adopt a data-driven project registry and create referen
    - Add registry patterns and examples
    - Update URL construction rules
    - Document evidence link structure
+
+## Implementation Summary (Completed)
+
+- **ADR-0011** published with full 11-section structure (decision: YAML + Zod + env placeholders)
+- **Registry Schema Guide** published with field reference, validation rules, 4 validated YAML examples, troubleshooting
+- **Architecture dossier** updated (Data-Driven Registry subsection, loader flow, benefits, references to ADR-0011 and schema guide)
+- **Copilot instructions** updated in both repos with registry templates, ownership, and validation scripts
+- **Validation:** `pnpm build` (docs) ✅ with 0 errors/warnings/broken links; all cross-links resolve
+- **Coordination:** Aligned with portfolio-app PR #24 (registry implementation) and commit fb96e99 in portfolio-docs
 
 ## ADR-0011 Structure
 
