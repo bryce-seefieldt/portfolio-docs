@@ -1,9 +1,15 @@
-# Stage 3.2: EvidenceBlock Component & Badges — Documentation
+---
+title: 'Stage 3.2 — EvidenceBlock Components & Badges (Docs)'
+description: 'Updates the Portfolio App dossier and architecture docs to explain the EvidenceBlock, VerificationBadge, and BadgeGroup components and ensure evidence consistency.'
+tags: [portfolio, roadmap, planning, phase-3, stage-3.2, docs, documentation]
+---
+
+# Stage 3.2: EvidenceBlock Components & Badges — Documentation
 
 **Type:** Documentation / Reference  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.2  
-**Linked Issue:** [stage-3.2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-app-issue.md)  
+**Linked Issue:** [stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)  
 **Duration Estimate:** 2–3 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-21  
@@ -13,9 +19,10 @@
 
 ## Overview
 
-This stage complements the app implementation ([stage-3.2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-app-issue.md)) by updating portfolio-docs with architecture explanations, ensuring evidence consistency, and documenting the component-driven evidence visualization approach.
+This stage complements the app implementation ([stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)) by updating portfolio-docs with architecture explanations, ensuring evidence consistency, and documenting the component-driven evidence visualization approach.
 
 While the app work creates three reusable React components (`EvidenceBlock`, `VerificationBadge`, `BadgeGroup`), this docs work ensures reviewers understand:
+
 - **Why** components were introduced (evidence visibility as first-class concern)
 - **How** components work (architecture, design decisions)
 - **What** evidence is expected (updated dossiers)
@@ -125,16 +132,17 @@ After Stage 3.1 established a data-driven registry, Stage 3.2 makes evidence vis
 #### Component Architecture
 
 **Three-Tier Component System:**
+```
 
-```
 EvidenceBlock (render evidence grid)
-    ↑
+↑
 BadgeGroup (conditional badge aggregation)
-    ↑
+↑
 VerificationBadge (single badge + icon)
-    ↑
+↑
 Registry Data (Project.evidence)
-```
+
+````
 
 **EvidenceBlock Component**
 
@@ -163,7 +171,7 @@ Registry Data (Project.evidence)
 
 - **Purpose:** Aggregate status visualization
 - **Logic:** Analyzes project evidence; conditionally renders appropriate badges
-- **Example Output (portfolio-app):** 
+- **Example Output (portfolio-app):**
   - Renders: `[Gold Standard]` `[Docs Available]` `[Threat Model]` `[ADR Complete]`
 - **Data Source:** `project` object from registry
 - **Styling:** Flex layout with responsive wrapping, gap spacing
@@ -206,7 +214,7 @@ import { BadgeGroup } from '@/components/BadgeGroup';
 // In JSX:
 <BadgeGroup project={project} />           // Header
 <EvidenceBlock project={project} />        // After "What This Proves"
-```
+````
 
 Evidence data flow:
 
@@ -220,10 +228,12 @@ Evidence data flow:
 #### Maintainability & Future Enhancements
 
 **Current Implementation (Stage 3.2):**
+
 - Static badge rendering based on evidence presence
 - Fixed evidence categories (dossier, threat model, ADRs, runbooks, GitHub)
 
 **Future Enhancement Candidates (Post-Stage 3.2):**
+
 - Tooltip explanations for each evidence type
 - Visual indicators for "incomplete" or "outdated" evidence
 - Badge counts (e.g., "4 ADRs") to signal depth
@@ -235,9 +245,9 @@ Evidence data flow:
 #### See Also
 
 - **Component Specifications:** Portfolio App Copilot Instructions, Section 8 — [Phase 3 Stage 3.2](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/copilot-instructions.md#8-phase-3-stage-32--evidenceblock-components)
-- **Implementation Details:** [stage-3.2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-app-issue.md)
+- **Implementation Details:** [stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)
 - **Registry Schema:** [docs/70-reference/registry-schema-guide.md](/docs/70-reference/registry-schema-guide.md)
-- **Gold Standard:** [ADR-0010 — Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-gold-standard-exemplar.md)
+- **Gold Standard:** [ADR-0010 — Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
 ```
 
 #### 3. Verification Pass for `03-deployment.md`, `04-security.md`, `05-testing.md`
@@ -327,9 +337,9 @@ However, if reviewers ask:
 
 ## Related Issues
 
-- **Linked:** [stage-3.2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-app-issue.md) (companion implementation)
-- **Dependency:** STAGE-3.1-DOCS-ISSUE.md (completed) — registry documentation published
-- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/phase-3-implementation-guide.md](/docs/00-portfolio/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
+- **Linked:** [stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md) (companion implementation)
+- **Dependency:** stage-3-1-docs-issue.md (completed) — registry documentation published
+- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
 - **Related ADR:** ADR-0010 — Gold Standard Exemplar
 
 ---
@@ -383,7 +393,7 @@ This docs work is **intentionally limited** to dossier updates and verification.
 The components themselves are NOT documented in portfolio-docs (that would be redundant). Instead:
 - Architecture page explains **why** components exist and **how** they're designed
 - Copilot instructions in portfolio-app contain **full specs** (props, styling, behavior)
-- GitHub issue ([stage-3.2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-app-issue.md)) contains **implementation tasks**
+- GitHub issue ([stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)) contains **implementation tasks**
 
 This keeps implementation details close to code and architecture explanations close to decision rationale.
 
@@ -395,9 +405,10 @@ Key invariant: All evidence paths mentioned in dossier must match registry struc
 
 ## Reference Documentation
 
-- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/docs/00-portfolio/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
+- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
 - **Portfolio App Dossier — Architecture:** [docs/60-projects/portfolio-app/02-architecture.md](/docs/60-projects/portfolio-app/02-architecture.md)
 - **Registry Schema Guide:** [docs/70-reference/registry-schema-guide.md](/docs/70-reference/registry-schema-guide.md)
-- **ADR-0010 — Gold Standard Exemplar:** [docs/10-architecture/adr/adr-0010-gold-standard-exemplar.md](/docs/10-architecture/adr/adr-0010-gold-standard-exemplar.md)
+- **ADR-0010 — Gold Standard Exemplar:** [docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
 - **Copilot Instructions (Portfolio App):** Section 8 — Phase 3 Stage 3.2
 
+```

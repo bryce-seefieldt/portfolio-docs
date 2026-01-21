@@ -76,6 +76,7 @@ All work in both repositories **MUST** use templates for proper governance and t
 #### 🔄 In Progress: Phase 3 Stage 3.2 — EvidenceBlock Component & Badges
 
 **What:** Create reusable React components for standardized evidence linking
+
 - `EvidenceBlock.tsx`: Renders dossier, threat model, ADRs, runbooks, GitHub links with responsive cards
 - `VerificationBadge.tsx`: Multiple badge types (docs-available, threat-model-complete, gold-standard-status)
 - `BadgeGroup.tsx` utility for multi-badge rendering with responsive wrapping

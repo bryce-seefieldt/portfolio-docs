@@ -1,9 +1,15 @@
-# Stage 3.2: EvidenceBlock Component & Badges — App Implementation
+---
+title: 'Stage 3.2 — EvidenceBlock Components & Badges (App)'
+description: 'Implements EvidenceBlock, VerificationBadge, and BadgeGroup components and integrates them into project pages with strict TypeScript and Tailwind styling.'
+tags: [portfolio, roadmap, planning, phase-3, stage-3.2, app, implementation]
+---
+
+# Stage 3.2: EvidenceBlock Components & Badges — App Implementation
 
 **Type:** Feature / Implementation  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.2  
-**Linked Issue:** [stage-3.2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-docs-issue.md)  
+**Linked Issue:** [stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)  
 **Duration Estimate:** 3–4 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-21  
@@ -93,10 +99,11 @@ Project Registry (src/data/projects.yml)
 ### Component Data Model
 
 **EvidenceBlock Props:**
+
 ```typescript
 interface EvidenceBlockProps {
-  project: Project;           // From registry
-  className?: string;          // Additional Tailwind classes
+  project: Project; // From registry
+  className?: string; // Additional Tailwind classes
 }
 
 // Uses project.evidence to extract paths, then calls docsUrl()
@@ -104,22 +111,28 @@ interface EvidenceBlockProps {
 ```
 
 **VerificationBadge Props:**
+
 ```typescript
-type BadgeType = 'docs-available' | 'threat-model' | 'gold-standard' | 'adr-complete';
+type BadgeType =
+  | 'docs-available'
+  | 'threat-model'
+  | 'gold-standard'
+  | 'adr-complete';
 
 interface VerificationBadgeProps {
   type: BadgeType;
-  title?: string;              // Tooltip text
+  title?: string; // Tooltip text
 }
 
 // Renders single badge with icon, label, and color scheme
 ```
 
 **BadgeGroup Props:**
+
 ```typescript
 interface BadgeGroupProps {
-  project: Project;           // From registry
-  className?: string;          // Additional Tailwind classes
+  project: Project; // From registry
+  className?: string; // Additional Tailwind classes
 }
 
 // Analyzes project.evidence and renders appropriate badges
@@ -403,15 +416,15 @@ Break the work into concrete, sequential phases with clear deliverables.
 - ✅ ESLint and Prettier: zero errors/warnings for new files
 - ✅ `pnpm build` succeeds deterministically
 - ✅ Playwright smoke tests pass
-- ✅ PR merged to `main` with companion docs issue ([stage-3.2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-docs-issue.md)) closed in parallel
+- ✅ PR merged to `main` with companion docs issue ([stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)) closed in parallel
 
 ---
 
 ## Related Issues
 
-- **Linked:** [stage-3.2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-docs-issue.md) (companion documentation work)
-- **Dependency:** STAGE-3.1-APP-ISSUE.md (completed) — registry must exist for this to consume
-- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/phase-3-implementation-guide.md](/docs/00-portfolio/phase-3-implementation-guide.md)
+- **Linked:** [stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md) (companion documentation work)
+- **Dependency:** stage-3-1-APP-ISSUE.md (completed) — registry must exist for this to consume
+- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
 
 ---
 
@@ -420,6 +433,7 @@ Break the work into concrete, sequential phases with clear deliverables.
 **Component Reusability:**
 
 These components are designed to be used beyond project pages. Future expansions might place badges on:
+
 - Project index pages (list view)
 - Evidence index pages (dossier hub)
 - Portfolio homepage (featured projects preview)
@@ -427,6 +441,7 @@ These components are designed to be used beyond project pages. Future expansions
 **Styling Philosophy:**
 
 Consistent with existing portfolio-app design:
+
 - Tailwind 4 utility-first approach
 - Dark mode via `dark:` modifier (no separate color schemes)
 - Responsive grid system (mobile-first)
@@ -435,6 +450,7 @@ Consistent with existing portfolio-app design:
 **Evidence Link Strategy:**
 
 Components use existing helpers (`docsUrl()`, `githubUrl()`) to ensure:
+
 - Links remain portable (environment-based)
 - Changes to URL strategy require only config updates, not component changes
 - Evidence paths maintained in single source of truth (`src/data/projects.yml`)
@@ -463,14 +479,14 @@ After Stage 3.2 is complete:
 
 ## Deployment & Release
 
-- **Branch:** feature branch off `main` (e.g., `feat/stage-3.2-evidence-components`)
+- **Branch:** feature branch off `main` (e.g., `feat/stage-3-2-evidence-components`)
 - **PR checklist:**
   - Summary of what changed (3 new components, integration into project pages)
   - Rationale: evidence visibility improves credibility signal
   - Evidence: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` all pass
   - Security: "No secrets added"
   - Closes: #[issue-number] (this issue)
-  - Reference companion: [stage-3.2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3.2-docs-issue.md)
+  - Reference companion: [stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)
 
 - **Merge:** Requires both CI checks to pass (`ci / quality`, `ci / build`)
 - **Post-merge:** Vercel auto-deploys preview and production
@@ -479,9 +495,8 @@ After Stage 3.2 is complete:
 
 ## Reference Documentation
 
-- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/docs/00-portfolio/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
+- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
 - **Portfolio App Copilot Instructions:** Section 8 — Phase 3 Stage 3.2
 - **Component Styling Reference:** Existing components (GoldStandardBadge.tsx, Section.tsx, Callout.tsx)
 - **Registry Reference:** src/lib/registry.ts (Project type, evidenceLinks helper)
 - **Config Reference:** src/lib/config.ts (docsUrl, githubUrl helpers)
-

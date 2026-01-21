@@ -1,3 +1,10 @@
+---
+title: 'Stage 3.1 — Data-Driven Project Registry & Validation (App)'
+description: 'Implements a YAML-backed project registry with Zod validation and helper utilities to standardize project metadata and evidence links.'
+tags:
+  [portfolio, roadmap, planning, phase-3, stage-3.1, app, registry, validation]
+---
+
 # Stage 3.1: Data-Driven Project Registry & Validation
 
 https://github.com/bryce-seefieldt/portfolio-app/issues/23#issue-3835851437

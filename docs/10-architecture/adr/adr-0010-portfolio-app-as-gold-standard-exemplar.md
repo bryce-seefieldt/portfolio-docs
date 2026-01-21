@@ -10,7 +10,7 @@ tags:
 
 ## Context
 
-Phase 2 of the Portfolio Program (see [roadmap.md](/docs/00-portfolio/roadmap.md#phase-2--gold-standard-project-and-credibility-baseline) requires selecting one exemplary project to demonstrate senior-level engineering discipline. This project will serve as the template and quality bar for all future portfolio entries.
+Phase 2 of the Portfolio Program (see [roadmap.md](/docs/00-portfolio/roadmap/index.md#phase-2--gold-standard-project-and-credibility-baseline) requires selecting one exemplary project to demonstrate senior-level engineering discipline. This project will serve as the template and quality bar for all future portfolio entries.
 
 Candidate projects were evaluated:
 

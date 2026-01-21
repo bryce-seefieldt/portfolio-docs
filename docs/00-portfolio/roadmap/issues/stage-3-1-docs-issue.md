@@ -1,4 +1,10 @@
-#Stage 3.1: ADR-0011 & Registry Schema Documentation
+---
+title: 'Stage 3.1 — ADR-0011 & Registry Schema Documentation (Docs)'
+description: 'Documents the registry decision (ADR-0011) and publishes a comprehensive Registry Schema Guide with rationale, validation rules, and examples.'
+tags: [portfolio, roadmap, planning, phase-3, stage-3.1, docs, adr, reference]
+---
+
+# Stage 3.1: ADR-0011 & Registry Schema Documentation
 
 https://github.com/bryce-seefieldt/portfolio-docs/issues/42
 

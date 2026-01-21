@@ -797,6 +797,7 @@ Never place internal authoring mechanics into public-facing domains unless expli
 Stage 3.2 is the EvidenceBlock component implementation stage (portfolio-app) paired with documentation updates (portfolio-docs).
 
 The app work creates three reusable React components for evidence visualization. The docs work involves:
+
 1. Updating Portfolio App dossier with component architecture details
 2. Ensuring ADRs and runbooks remain aligned
 3. Updating copilot-instructions in portfolio-app with component specs (already done)
@@ -806,6 +807,7 @@ The app work creates three reusable React components for evidence visualization.
 ### 1. Update Portfolio App Dossier (`docs/60-projects/portfolio-app/`)
 
 **Files to update:**
+
 - `01-overview.md` — Add brief mention of component library introduction
 - `02-architecture.md` — Add new section: "Evidence Visualization Layer (Stage 3.2)"
 
@@ -843,6 +845,7 @@ Three new React components standardize evidence artifact linking:
 - No hardcoded links; all evidence paths from `src/data/projects.yml`
 
 **See Also:**
+
 - Component specifications: [`@/app/.github/copilot-instructions.md`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/copilot-instructions.md) (Section 8 — Phase 3 Stage 3.2)
 - Stage 3.2 app issue: [stage-3.2-app-issue](/docs/00-portfolio/roadmap/issues/stage-3.2-app-issue.md) (linked in PR)
 ```
@@ -870,22 +873,26 @@ After Stage 3.2 completes, add entry:
 ## Stage 3.2: Evidence Components (2026-01-XX)
 
 **What changed:**
+
 - Introduced EvidenceBlock component for standardized evidence linking
 - Introduced VerificationBadge component for status indicators
 - Introduced BadgeGroup utility for multi-badge rendering
 - Updated project detail pages (`/projects/[slug]`) to integrate components
 
 **Why:**
+
 - Standardizes how projects display evidence artifacts (dossier, threat model, ADRs, runbooks)
 - Enables reviewers to quickly verify evidence availability
 - Supports gold-standard designation and quality signals
 
 **Impact:**
+
 - All featured project pages now display evidence badges and linked artifacts
 - Responsive design improves mobile UX for evidence discovery
 - Dark mode support for consistent portfolio experience
 
 **Evidence:**
+
 - PR: portfolio-app#XY
 - Components: `src/components/{EvidenceBlock,VerificationBadge,BadgeGroup}.tsx`
 - Dossier update: [Portfolio App Architecture — Evidence Visualization](/docs/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer-stage-32)
