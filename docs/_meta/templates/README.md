@@ -35,12 +35,19 @@ These templates are not optional. They enforce enterprise-level structure, trace
 
 Current templates:
 
-- `template-adr.md`
-- `template-runbook.md`
-- `template-threat-model.md`
-- `template-postmortem.md`
-- `template-phase-implementation-guide.md` (for planning major development phases)
-- `template-project-dossier/` (folder with 8-file dossier structure)
+### Documentation & Architecture Templates
+
+- `template-adr.md` — Architecture Decision Records
+- `template-runbook.md` — Operational procedures
+- `template-threat-model.md` — Security analysis
+- `template-postmortem.md` — Incident retrospectives
+- `template-phase-implementation-guide.md` — Phase planning and coordination
+- `template-project-dossier/` — Complete project documentation (8-file structure)
+
+### GitHub Issue Templates (for Phase Stages)
+
+- `template-phase-stage-app-issue.md` — For portfolio-app implementation stages
+- `template-phase-stage-docs-issue.md` — For portfolio-docs documentation stages
 
 Recommended conventions:
 
@@ -392,7 +399,216 @@ See existing examples:
 - [Phase 2 Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md) — Sequential steps approach
 - [Phase 3 Implementation Guide](/docs/00-portfolio/phase-3-implementation-guide.md) — Modular stages approach
 
+See existing examples:
+
+- [Phase 2 Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md) — Sequential steps approach
+- [Phase 3 Implementation Guide](/docs/00-portfolio/phase-3-implementation-guide.md) — Modular stages approach
+
 Both follow this template structure and serve as reference implementations.
+
+---
+
+## GitHub Issue Templates (for Phase Stages)
+
+### Overview
+
+GitHub issues are the primary tracking mechanism for individual stages within a phase. Each stage should be documented as an issue using the appropriate template:
+
+- **App Implementation Issues** → Use `template-phase-stage-app-issue.md`
+- **Documentation Issues** → Use `template-phase-stage-docs-issue.md`
+
+These templates ensure:
+
+- Clear objectives and deliverables
+- Comprehensive task breakdowns with checklists
+- Acceptance criteria that define "done"
+- Test strategy and verification steps
+- Cross-linking between related work
+- Effort estimation and progress tracking
+
+### When to Use App Issue Template
+
+**Use `template-phase-stage-app-issue.md` when:**
+
+- You are implementing a feature or stage in `portfolio-app`
+- The work involves code changes (components, utilities, configuration)
+- You need to track implementation, testing, and deployment
+- The stage involves creating/updating TypeScript/React files
+
+**Typical Stage Names:**
+
+- "Stage 3.1: Data-Driven Project Registry & Validation"
+- "Stage 3.2: EvidenceBlock Component & Badges"
+- "Stage 3.3: Unit & E2E Tests"
+
+**What the App Issue Template includes:**
+
+- Overview and objectives
+- Scope (files to create/update, dependencies)
+- Design & architecture (data models, function signatures)
+- Implementation tasks broken into sequential phases
+- Testing strategy (unit, integration, E2E)
+- Acceptance criteria (code quality gates)
+- Performance and security considerations
+- Effort breakdown and troubleshooting
+
+### When to Use Docs Issue Template
+
+**Use `template-phase-stage-docs-issue.md` when:**
+
+- You are creating documentation (ADRs, guides, runbooks)
+- The work involves content creation in `portfolio-docs`
+- You need to track writing, review, and publication
+- The stage involves creating markdown files
+
+**Typical Stage Names:**
+
+- "Stage 3.1: ADR-0011 & Registry Schema Documentation"
+- "Stage 3.4: ADRs & Documentation Updates"
+- "Stage 3.5: CI Link Validation & Runbooks"
+
+**What the Docs Issue Template includes:**
+
+- Overview and objectives
+- Scope (files to create/update)
+- Content structure and design (outlines, examples)
+- Decision documentation (if ADR)
+- Reference material documentation (if guide)
+- Operational documentation (if runbook)
+- Implementation tasks broken into sequential phases
+- Acceptance criteria (content quality gates)
+- Definition of Done checklist
+- Coordination with implementation work
+
+### How to Use These Templates
+
+#### 1. Choose the Correct Template
+
+Determine if the stage is primarily **app implementation** or **documentation**:
+
+- Mostly code? → Use **App Issue** template
+- Mostly documentation? → Use **Docs Issue** template
+- Both equally? → Create TWO linked issues (one for each template)
+
+#### 2. Create a GitHub Issue
+
+In the appropriate repo (`portfolio-app` or `portfolio-docs`):
+
+1. Click **"New Issue"**
+2. Click **"Use a template"** (if configured) or paste the template content
+3. Fill in all placeholder sections (`[X]`, `[description]`, etc.)
+
+#### 3. Link Related Issues
+
+If there are parallel app and docs issues for the same stage:
+
+- **In the App issue:** Add link to Docs issue under "Related Issues"
+- **In the Docs issue:** Add link to App issue under "Related Issues"
+
+Example:
+```markdown
+## Related Issues
+
+- Parent issue: [Link to Phase X Implementation Guide]
+- Related docs issue: [Link to STAGE-X.Y-DOCS-ISSUE]
+- Blocks: [What issues does this unblock]
+```
+
+#### 4. Fill Out All Required Sections
+
+Key sections to prioritize:
+
+- **Overview:** What is being delivered
+- **Objectives:** Specific, measurable goals
+- **Scope:** What's in/out; files to create/update
+- **Implementation Tasks:** Broken into phases with checkboxes
+- **Acceptance Criteria:** Definition of done
+- **Effort Breakdown:** Hours estimate
+
+#### 5. Keep the Issue Updated
+
+As you work:
+
+- [ ] Check off tasks as you complete them
+- [ ] Update status in the issue description or comments
+- [ ] Link PRs that implement the issue work
+- [ ] Document blockers or delays
+
+#### 6. Verify Completion
+
+Before marking the issue done:
+
+- [ ] All tasks checked off
+- [ ] All acceptance criteria met
+- [ ] All related PRs merged
+- [ ] Tests/builds passing
+- [ ] Links/cross-references verified
+- [ ] Documentation complete
+- [ ] Reviewer approved
+
+### Example Issues Using These Templates
+
+**App Implementation Example:**
+
+See [STAGE-3.1-APP-ISSUE.MD](/docs/00-portfolio/STAGE-3.1-APP-ISSUE.MD) for a complete example of the App Issue template in use for portfolio-app Stage 3.1.
+
+**Documentation Example:**
+
+See [STAGE-3.1-DOCS-ISSUE.md](/docs/00-portfolio/STAGE-3.1-DOCS-ISSUE.md) for a complete example of the Docs Issue template in use for portfolio-docs Stage 3.1.
+
+### Definition of Done (GitHub Issues)
+
+An issue using these templates is complete when:
+
+✅ **For App Issues:**
+- All implementation phases complete
+- All tasks checked off
+- All tests passing (`pnpm verify`)
+- All acceptance criteria met
+- Code reviewed and approved
+- PRs merged to `main`
+- Related docs issue updated (if applicable)
+
+✅ **For Docs Issues:**
+- All documentation phases complete
+- All content written (no TODOs)
+- Build verified (`pnpm build` passes)
+- All links working
+- Technical accuracy verified
+- Related docs updated
+- Docs reviewed and approved
+- PRs merged to `main`
+- Related implementation issue linked
+
+### Issue Linking & Coordination
+
+**Linking Pattern for Phase Stages:**
+
+```
+Phase X Implementation Guide (parent)
+  ├── STAGE-X.1-APP-ISSUE (linked to STAGE-X.1-DOCS-ISSUE)
+  │   └── Blocks: STAGE-X.2-APP-ISSUE, STAGE-X.2-DOCS-ISSUE (if sequential)
+  ├── STAGE-X.1-DOCS-ISSUE (linked to STAGE-X.1-APP-ISSUE)
+  │   └── Depends on: STAGE-X.1-APP-ISSUE (if docs document implementation)
+  ├── STAGE-X.2-APP-ISSUE
+  │   └── Depends on: STAGE-X.1-APP-ISSUE (if sequential)
+  └── [Additional stages...]
+```
+
+### Best Practices
+
+1. **Create issues early:** Create all stage issues when the Phase is kicked off
+2. **Link bidirectionally:** If there's an app and docs issue, link both ways
+3. **Update regularly:** Add comments for progress, blockers, learnings
+4. **Link PRs:** Reference the issue in PR descriptions (`Closes #123`)
+5. **Close on completion:** Close issue when all PRs merged and verified
+6. **Leave comments:** Document any learnings or gotchas in issue comments
+
+---
+
+## References
+
+This document is authoritative for artifact usage and DoD enforcement across the repository.
 
 ## References
 
