@@ -219,6 +219,6 @@ After Phase 2 completes, verify:
 
 - [Phase 2 Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md) — step-by-step procedures
 - [Phase 1 Release Notes](/docs/00-portfolio/release-notes/20260117-portfolio-app-phase-1-complete.md) — Phase 1 completion status
-- [Portfolio Roadmap](/docs/00-portfolio/roadmap.md) — program-level planning
+- [Portfolio Roadmap](/docs/00-portfolio/roadmap/index.md) — program-level planning
 - [ADR-0007: Vercel + Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) — deployment decisions
 - [ADR-0008: CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md) — CI governance decisions

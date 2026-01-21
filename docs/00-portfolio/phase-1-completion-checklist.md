@@ -334,4 +334,4 @@ pnpm build         # Validate build
 - [Portfolio App Deployment Dossier](/docs/60-projects/portfolio-app/03-deployment.md) — Governance policy
 - [ADR-0007: Vercel + Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
 - [ADR-0008: CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)
-- [Portfolio App Roadmap](/docs/00-portfolio/roadmap.md)
+- [Portfolio App Roadmap](/docs/00-portfolio/roadmap/index.md)

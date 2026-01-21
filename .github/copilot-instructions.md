@@ -385,7 +385,7 @@ Exceptions:
 - Use **relative paths starting with `/docs/`**
 - **MUST include section prefix numbers:** `./00-portfolio/.` not `./portfolio/.`
 - **MUST include `.md` file extension**
-- Example: `[roadmap.md](/docs/00-portfolio/roadmap.md)`
+- Example: `[roadmap.md](/docs/00-portfolio/roadmap/index.md)`
 - Do NOT link to pages that do not exist yet
 - Broken links must be fixed immediately; builds should fail when they occur
 
@@ -713,7 +713,7 @@ When linking from one page to another **within** the portfolio-docs repository:
 
 **Examples:**
 
-- ✅ `[roadmap.md](/docs/00-portfolio/roadmap.md)`
+- ✅ `[roadmap.md](/docs/00-portfolio/roadmap/index.md)`
 - ✅ `[Architecture ADRs](/docs/10-architecture/adr/)`
 - ✅ `[Threat model](/docs/40-security/threat-models/portfolio-app-threat-model.md)`
 - ❌ `[roadmap](/docs/portfolio/roadmap)` (missing prefix + extension)
@@ -787,6 +787,116 @@ Place in:
 - `docs/_meta/`
 
 Never place internal authoring mechanics into public-facing domains unless explicitly approved and curated.
+
+---
+
+# Phase 3 Stage 3.2 — Documentation Work
+
+## Overview
+
+Stage 3.2 is the EvidenceBlock component implementation stage (portfolio-app) paired with documentation updates (portfolio-docs).
+
+The app work creates three reusable React components for evidence visualization. The docs work involves:
+1. Updating Portfolio App dossier with component architecture details
+2. Ensuring ADRs and runbooks remain aligned
+3. Updating copilot-instructions in portfolio-app with component specs (already done)
+
+## Documentation Tasks for Stage 3.2
+
+### 1. Update Portfolio App Dossier (`docs/60-projects/portfolio-app/`)
+
+**Files to update:**
+- `01-overview.md` — Add brief mention of component library introduction
+- `02-architecture.md` — Add new section: "Evidence Visualization Layer (Stage 3.2)"
+
+**Section Content (02-architecture.md):**
+
+Create a new subsection after the registry section:
+
+```markdown
+### Evidence Visualization Layer (Stage 3.2)
+
+**Components:**
+
+Three new React components standardize evidence artifact linking:
+
+- `EvidenceBlock.tsx` — Renders evidence cards (dossier, threat model, ADRs, runbooks, GitHub)
+- `VerificationBadge.tsx` — Status badges indicating evidence completeness (docs-available, threat-model, gold-standard, adr-complete)
+- `BadgeGroup.tsx` — Multi-badge container with conditional rendering based on project evidence
+
+**Integration:**
+
+- Used on `/projects/[slug]` pages to display project evidence trail
+- Allows reviewers to verify evidence availability at a glance
+- Responsive design: mobile (1 col) → tablet (2 cols) → desktop (3 cols)
+
+**Styling:**
+
+- Tailwind CSS 4 with `dark:` mode support
+- Gold Standard badge: amber colors (reference: GoldStandardBadge.tsx)
+- Other evidence badges: blue, violet, indigo (matching evidence type)
+
+**Maintainability:**
+
+- Components accept `project: Project` prop from registry
+- Uses environment-aware URL helpers (`docsUrl()`, `githubUrl()`)
+- No hardcoded links; all evidence paths from `src/data/projects.yml`
+
+**See Also:**
+- Component specifications: [`@/app/.github/copilot-instructions.md`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/copilot-instructions.md) (Section 8 — Phase 3 Stage 3.2)
+- Stage 3.2 app issue: [stage-3.2-app-issue](/docs/00-portfolio/roadmap/issues/stage-3.2-app-issue.md) (linked in PR)
+```
+
+### 2. Update Copilot Instructions (Already Done)
+
+The portfolio-app copilot-instructions already received Section 8 updates with full component specifications. No additional docs work needed here.
+
+### 3. Verify Evidence Link Consistency
+
+**Checklist for docs review:**
+
+- [ ] All evidence paths in dossier match `src/data/projects.yml` schema
+- [ ] ADRs and threat models referenced in dossier still exist and are not broken links
+- [ ] Runbook paths are accurate (check against `docs/50-operations/runbooks/` structure)
+- [ ] No new gaps introduced in evidence availability for portfolio-app
+
+### 4. Update Release Notes (Post-Implementation)
+
+**File:** `docs/00-portfolio/release-notes/` (create new entry if needed or update existing draft)
+
+After Stage 3.2 completes, add entry:
+
+```markdown
+## Stage 3.2: Evidence Components (2026-01-XX)
+
+**What changed:**
+- Introduced EvidenceBlock component for standardized evidence linking
+- Introduced VerificationBadge component for status indicators
+- Introduced BadgeGroup utility for multi-badge rendering
+- Updated project detail pages (`/projects/[slug]`) to integrate components
+
+**Why:**
+- Standardizes how projects display evidence artifacts (dossier, threat model, ADRs, runbooks)
+- Enables reviewers to quickly verify evidence availability
+- Supports gold-standard designation and quality signals
+
+**Impact:**
+- All featured project pages now display evidence badges and linked artifacts
+- Responsive design improves mobile UX for evidence discovery
+- Dark mode support for consistent portfolio experience
+
+**Evidence:**
+- PR: portfolio-app#XY
+- Components: `src/components/{EvidenceBlock,VerificationBadge,BadgeGroup}.tsx`
+- Dossier update: [Portfolio App Architecture — Evidence Visualization](/docs/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer-stage-32)
+```
+
+## Documentation Quality Standards for Stage 3.2
+
+- Component descriptions must be specific about props, styling, and responsive behavior
+- Evidence link validation is critical: verify all paths resolve when stage is complete
+- Maintain consistency between app and docs: if component props change, dossier documentation must reflect that
+- Use Mermaid diagrams if helpful (e.g., component hierarchy or evidence flow diagram)
 
 ---
 
