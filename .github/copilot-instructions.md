@@ -244,6 +244,7 @@ Even when working solo:
   - Security note (“No secrets added”)
 
 ---
+
 # Template Enforcement and Phase Delivery
 
 ## When to Use Templates
@@ -332,6 +333,7 @@ For **evidence documents** created within or outside phases, use:
 - `template-project-dossier/` — Complete project documentation (8-page structure)
 
 **Location in docs:**
+
 - ADRs: `docs/10-architecture/adr/`
 - Runbooks: `docs/50-operations/runbooks/`
 - Threat models: `docs/40-security/threat-models/`
@@ -339,6 +341,7 @@ For **evidence documents** created within or outside phases, use:
 - Project dossiers: `docs/60-projects/[project-name]/`
 
 ---
+
 # Documentation Authoring Standards (Mandatory)
 
 ## Front matter

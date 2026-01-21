@@ -22,12 +22,14 @@ workspace-repos:
 All work in both repositories **MUST** use templates for proper governance and traceability:
 
 **Phase Planning & Delivery Templates (Mandatory):**
+
 - `template-phase-implementation-guide.md` — Master plan for entire phase (published in `docs/00-portfolio/`)
 - `template-phase-stage-app-issue.md` — GitHub issue for `portfolio-app` stage work
 - `template-phase-stage-docs-issue.md` — GitHub issue for `portfolio-docs` stage work
 - `template-github-issue-generic.md` — GitHub issue for non-phase work (bugs, features, maintenance)
 
 **Evidence Templates:**
+
 - `template-adr.md` — Architecture decisions (docs/10-architecture/adr/)
 - `template-runbook.md` — Operational procedures (docs/50-operations/runbooks/)
 - `template-threat-model.md` — Security analysis (docs/40-security/threat-models/)
@@ -35,12 +37,14 @@ All work in both repositories **MUST** use templates for proper governance and t
 - `template-project-dossier/` — Complete project documentation
 
 **Template Location & Usage:**
+
 - All templates: `portfolio-docs/docs/_meta/templates/`
 - Reference guide: [Templates Guide and Definitions of Done](./docs/_meta/templates/README.md)
 - Required in both copilot-instructions.md and CONTRIBUTING.md
 - Enforced in GitHub issue workflows
 
 **Phase Stage Workflow:**
+
 1. Create Phase Implementation Guide (published in docs/00-portfolio/)
 2. For each stage: create paired issues (app + docs) using stage templates
 3. Reference companion issue in linked issues

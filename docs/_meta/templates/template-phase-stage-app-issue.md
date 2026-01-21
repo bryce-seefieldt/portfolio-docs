@@ -354,11 +354,11 @@ Documentation: See `.env.example` for complete list.
 
 ## Effort Breakdown
 
-| Phase | Task | Hours | Notes |
-|-------|------|-------|-------|
-| 1 | [Task name] | 2–3h | [Any constraints] |
-| 1 | [Task name] | 1–2h | [Any constraints] |
-| 2 | [Task name] | 2–3h | [Any constraints] |
+| Phase     | Task                 | Hours    | Notes              |
+| --------- | -------------------- | -------- | ------------------ |
+| 1         | [Task name]          | 2–3h     | [Any constraints]  |
+| 1         | [Task name]          | 1–2h     | [Any constraints]  |
+| 2         | [Task name]          | 2–3h     | [Any constraints]  |
 | **Total** | **[Stage complete]** | **6–8h** | **[Dependencies]** |
 
 ---
@@ -383,11 +383,13 @@ Before marking this stage complete:
 ### Common Issues & Fixes
 
 **Issue: [Error message or symptom]**
+
 - **Cause:** [Root cause]
 - **Fix:** [Step-by-step resolution]
 - **Prevention:** [How to avoid in future]
 
 **Issue: [Error message or symptom]**
+
 - **Cause:** [Root cause]
 - **Fix:** [Step-by-step resolution]
 

@@ -46,6 +46,7 @@ For work **NOT tied to a phase**, use **Generic GitHub Issue** template:
 Template: `docs/_meta/templates/template-github-issue-generic.md`
 
 Supported types:
+
 - Bug reports
 - Feature requests
 - Enhancements
@@ -53,6 +54,7 @@ Supported types:
 - Maintenance/refactoring
 
 **When to use:**
+
 - Urgent fixes (security, production bugs)
 - One-off improvements
 - Ad-hoc documentation updates

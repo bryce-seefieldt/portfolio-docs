@@ -42,11 +42,13 @@ These templates enforce planning discipline and create traceable, measurable wor
 **Purpose:** Master plan for a phase that coordinates both app and docs delivery.
 
 **When to use:**
+
 - Creating the detailed execution plan for a new phase (e.g., "Phase 3 Implementation Guide")
 - Scope: entire phase, both repositories, all stages
 - Creates single source of truth for phase sequencing, dependencies, and success criteria
 
 **Key sections:**
+
 - Prerequisites and phase readiness verification
 - Sequential steps OR parallel stages (choose one approach)
 - Implementation tasks with phase-specific sequencing
@@ -57,6 +59,7 @@ These templates enforce planning discipline and create traceable, measurable wor
 **Output:** Published in `docs/00-portfolio/` as `phase-[X]-implementation-guide.md`
 
 **How it works:**
+
 1. Read at kickoff to align team on scope and sequencing
 2. Reference throughout phase to ensure tasks are tracked
 3. Update after phase completion with actual effort and lessons learned
@@ -68,11 +71,13 @@ These templates enforce planning discipline and create traceable, measurable wor
 **Purpose:** GitHub issue template for app/code implementation work within a phase stage.
 
 **When to use:**
+
 - Creating an issue for app code work (e.g., "Stage 3.1: Data-Driven Registry — App Implementation")
 - Scope: app repository (`portfolio-app`), specific stage
 - Linked to a companion docs stage issue
 
 **Key sections:**
+
 - Overview and objectives for the stage
 - Files to create, update, remove
 - Design specifications (data model, API signatures, validation rules)
@@ -83,6 +88,7 @@ These templates enforce planning discipline and create traceable, measurable wor
 **Output:** Created as GitHub issue in `portfolio-app` repository
 
 **How it works:**
+
 1. Copy template as issue body when creating the GitHub issue
 2. Fill required sections before marking "Ready for Development"
 3. Link to companion docs stage issue in "Linked Issues"
@@ -96,11 +102,13 @@ These templates enforce planning discipline and create traceable, measurable wor
 **Purpose:** GitHub issue template for documentation/analysis work within a phase stage.
 
 **When to use:**
+
 - Creating an issue for docs work (e.g., "Stage 3.1: Data-Driven Registry — Documentation")
 - Scope: docs repository (`portfolio-docs`), specific stage
 - Linked to a companion app stage issue
 
 **Key sections:**
+
 - Overview and objectives for the documentation deliverable
 - Files to create and update
 - Document type and template (ADR, runbook, reference guide, etc.)
@@ -112,6 +120,7 @@ These templates enforce planning discipline and create traceable, measurable wor
 **Output:** Created as GitHub issue in `portfolio-docs` repository
 
 **How it works:**
+
 1. Copy template as issue body when creating the GitHub issue
 2. Fill required sections before marking "Ready for Development"
 3. Link to companion app stage issue in "Linked Issues"
@@ -125,11 +134,13 @@ These templates enforce planning discipline and create traceable, measurable wor
 **Purpose:** General-purpose GitHub issue template for standalone work NOT related to phase stages.
 
 **When to use:**
+
 - Creating issues for ad-hoc work, urgent fixes, improvements, or one-off tasks
 - Scope: repository-agnostic; can be used in `portfolio-app` or `portfolio-docs`
 - NOT tied to a phase stage
 
 **Supported types:**
+
 - Bug reports (with reproduction steps)
 - Feature requests (with problem statement)
 - Enhancements/improvements
@@ -139,6 +150,7 @@ These templates enforce planning discipline and create traceable, measurable wor
 - Other
 
 **Key sections:**
+
 - Description (with type-specific subsections)
 - Scope (in/out of scope clarity)
 - Acceptance criteria (checkboxes)
@@ -153,6 +165,7 @@ These templates enforce planning discipline and create traceable, measurable wor
 **Output:** Created as GitHub issue in either repository
 
 **How it works:**
+
 1. Copy template as issue body when creating the GitHub issue
 2. Keep only sections relevant to the issue type
 3. Provide clear acceptance criteria
@@ -174,6 +187,7 @@ Recommended conventions:
 - Copy the template into the correct target directory.
 - Fill all required sections.
 - Remove placeholder text and “TBD” items unless explicitly tracked as planned work.
+
 ---
 
 ## How Templates Work Together: The Phase Delivery Workflow
@@ -236,6 +250,7 @@ For each stage, create two linked issues:
 #### Step 3: Execution (During Work)
 
 **For App Implementation:**
+
 - Check out feature branch from app stage issue
 - Implement code per design/architecture in issue body
 - Add tests per testing strategy section
@@ -243,6 +258,7 @@ For each stage, create two linked issues:
 - Create PR referencing the app stage issue
 
 **For Documentation:**
+
 - Check out feature branch from docs stage issue
 - Create/update documentation per content outline
 - Link to relevant ADRs, runbooks, threat models as specified
@@ -252,6 +268,7 @@ For each stage, create two linked issues:
 #### Step 4: Verification (Before Merge)
 
 **For both repositories:**
+
 - [ ] All acceptance criteria complete and verified
 - [ ] Companion repository work is also complete (or on track)
 - [ ] Required CI checks passing
@@ -286,6 +303,7 @@ These scenarios use **Generic GitHub Issue** template instead:
 **Key difference:** Generic issues are tracked independently; phase stage issues are tracked as part of a coordinated phase delivery.
 
 ---
+
 ## Global rules (apply to all artifact types)
 
 ### Required front matter
@@ -598,6 +616,7 @@ A Phase Implementation Guide is complete when:
 ### How to use the template
 
 1. Copy `template-phase-implementation-guide.md` to the appropriate location:
+
    ```
    docs/00-portfolio/phase-[x]-implementation-guide.md
    ```
@@ -737,6 +756,7 @@ If there are parallel app and docs issues for the same stage:
 - **In the Docs issue:** Add link to App issue under "Related Issues"
 
 Example:
+
 ```markdown
 ## Related Issues
 
@@ -792,6 +812,7 @@ See [STAGE-3.1-DOCS-ISSUE.md](/docs/00-portfolio/STAGE-3.1-DOCS-ISSUE.md) for a 
 An issue using these templates is complete when:
 
 ✅ **For App Issues:**
+
 - All implementation phases complete
 - All tasks checked off
 - All tests passing (`pnpm verify`)
@@ -801,6 +822,7 @@ An issue using these templates is complete when:
 - Related docs issue updated (if applicable)
 
 ✅ **For Docs Issues:**
+
 - All documentation phases complete
 - All content written (no TODOs)
 - Build verified (`pnpm build` passes)

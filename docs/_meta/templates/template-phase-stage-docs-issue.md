@@ -81,11 +81,13 @@ tags: [tag1, tag2, tag3]
 **Purpose:** [What does this section accomplish]
 
 **Key topics to cover:**
+
 - [Topic 1]
 - [Topic 2]
 - [Topic 3]
 
 **Examples to include:**
+
 - [Example 1 with description]
 - [Example 2 with description]
 
@@ -98,11 +100,13 @@ tags: [tag1, tag2, tag3]
 [List any code examples, diagrams, or visual content to include]
 
 - Example 1: [Brief description and location where it appears]
+
   ```[language]
   [code snippet]
   ```
 
 - Example 2: [Brief description]
+
   ```[language]
   [code snippet]
   ```
@@ -150,11 +154,13 @@ tags: [tag1, tag2, tag3]
 ### Consequences
 
 **Positive consequences (enablers):**
+
 - [What becomes possible]
 - [What improves]
 - [What is simplified]
 
 **Negative consequences (tradeoffs):**
+
 - [What is constrained]
 - [What is made more complex]
 - [What effort is required]
@@ -217,16 +223,19 @@ tags: [tag1, tag2, tag3]
 [Practical examples showing how to use the concept/guide]
 
 **Example 1: [Simple case]**
+
 ```
 [Code or configuration example]
 ```
 
 **Example 2: [Common case]**
+
 ```
 [Code or configuration example]
 ```
 
 **Example 3: [Advanced case]**
+
 ```
 [Code or configuration example]
 ```
@@ -240,6 +249,7 @@ tags: [tag1, tag2, tag3]
 ### Troubleshooting
 
 **Issue: [Common problem]**
+
 - **Cause:** [Root cause]
 - **Solution:** [Step-by-step fix]
 
@@ -488,12 +498,12 @@ Before marking complete:
 
 ## Effort Breakdown
 
-| Phase | Task | Hours | Notes |
-|-------|------|-------|-------|
-| 1 | [Task name] | 1–2h | [Any constraints] |
-| 1 | [Task name] | 1–2h | [Any constraints] |
-| 2 | [Task name] | 1–2h | [Any constraints] |
-| 2 | [Task name] | 1h | [Any constraints] |
+| Phase     | Task                 | Hours    | Notes              |
+| --------- | -------------------- | -------- | ------------------ |
+| 1         | [Task name]          | 1–2h     | [Any constraints]  |
+| 1         | [Task name]          | 1–2h     | [Any constraints]  |
+| 2         | [Task name]          | 1–2h     | [Any constraints]  |
+| 2         | [Task name]          | 1h       | [Any constraints]  |
 | **Total** | **[Stage complete]** | **4–7h** | **[Dependencies]** |
 
 ---

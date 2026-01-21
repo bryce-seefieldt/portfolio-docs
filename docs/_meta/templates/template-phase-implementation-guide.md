@@ -51,10 +51,12 @@ Before starting Phase [X], ensure:
 ### Two approaches to Phase [X] structure:
 
 **Option A: Sequential Steps (for linear, cumulative work)**
+
 - Use this for phases where each step builds directly on the previous
 - Example: Phase 2 (each step adds capabilities to the app)
 
 **Option B: Parallel Stages (for modular, independent work)**
+
 - Use this for phases with distinct deliverables that can proceed in parallel
 - Example: Phase 3 (registry, components, tests can be worked on independently)
 
@@ -222,12 +224,12 @@ Before starting Phase [X], ensure:
 
 ## Timeline & Resource Estimate
 
-| Step/Stage | Task                    | Duration | Status        | Notes |
-| ---------- | ----------------------- | -------- | ------------- | ----- |
-| [1]        | [Task name]             | 6–8h     | Ready         | —     |
-| [2]        | [Task name]             | 3–4h     | Ready         | —     |
-| [3]        | [Task name]             | 4–6h     | Ready         | —     |
-| **Total**  | **Phase [X] Complete**  | **21h**  | **Ready** | —     |
+| Step/Stage | Task                   | Duration | Status    | Notes |
+| ---------- | ---------------------- | -------- | --------- | ----- |
+| [1]        | [Task name]            | 6–8h     | Ready     | —     |
+| [2]        | [Task name]            | 3–4h     | Ready     | —     |
+| [3]        | [Task name]            | 4–6h     | Ready     | —     |
+| **Total**  | **Phase [X] Complete** | **21h**  | **Ready** | —     |
 
 **Resource allocation:**
 
@@ -323,11 +325,11 @@ All stages can proceed in parallel; Stage 1.4 (CI Integration) depends on all.
 
 ## Risk Mitigation
 
-| Risk                              | Likelihood | Impact | Mitigation                                       |
-| --------------------------------- | ---------- | ------ | ------------------------------------------------ |
-| [Risk description]                | High/Med   | High   | [Mitigation strategy]                            |
-| [Risk description]                | Low        | High   | [Mitigation strategy]                            |
-| [Coordination delay]              | Med        | Med    | Schedule reviews; use async-friendly practices   |
+| Risk                 | Likelihood | Impact | Mitigation                                     |
+| -------------------- | ---------- | ------ | ---------------------------------------------- |
+| [Risk description]   | High/Med   | High   | [Mitigation strategy]                          |
+| [Risk description]   | Low        | High   | [Mitigation strategy]                          |
+| [Coordination delay] | Med        | Med    | Schedule reviews; use async-friendly practices |
 
 ---
 
@@ -392,10 +394,12 @@ pnpm start                      # Local dev server
 ### Common Issues
 
 **Issue: [Error message or symptom]**
+
 - **Cause:** [Root cause]
 - **Fix:** [Step-by-step resolution]
 
 **Issue: [Error message or symptom]**
+
 - **Cause:** [Root cause]
 - **Fix:** [Step-by-step resolution]
 
@@ -441,10 +445,10 @@ Once Phase [X] is complete, consider:
 
 ## Revision History
 
-| Date       | Author | Version | Changes                              |
-| ---------- | ------ | ------- | ------------------------------------ |
-| 2026-01-20 | Team   | 1.0     | Initial template and planning        |
-| [Date]     | [Name] | [Ver]   | [Description of changes]             |
+| Date       | Author | Version | Changes                       |
+| ---------- | ------ | ------- | ----------------------------- |
+| 2026-01-20 | Team   | 1.0     | Initial template and planning |
+| [Date]     | [Name] | [Ver]   | [Description of changes]      |
 
 ---
 

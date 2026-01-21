@@ -4,7 +4,7 @@
 **Priority:** [Critical | High | Medium | Low]  
 **Assignee:** [Who is working on this]  
 **Labels:** [Relevant labels]  
-**Duration Estimate:** [X–Y hours or "TBD"]  
+**Duration Estimate:** [X–Y hours or "TBD"]
 
 ---
 
@@ -84,10 +84,12 @@ This issue is complete when:
 ```
 
 **Why this approach:**
+
 - [Reason 1]
 - [Reason 2]
 
 **Alternative approaches considered:**
+
 - [Alternative 1 and why it was rejected]
 - [Alternative 2 and why it was rejected]
 
@@ -184,13 +186,13 @@ pnpm build
 
 [Provide honest time estimate]
 
-| Task | Hours | Notes |
-|------|-------|-------|
-| [Task 1] | 1–2h | [Any constraints] |
-| [Task 2] | 2–3h | [Any constraints] |
-| [Testing] | 1h | [Any constraints] |
-| [Documentation] | 30m | [Any constraints] |
-| **Total** | **4–6h** | [Any dependencies] |
+| Task            | Hours    | Notes              |
+| --------------- | -------- | ------------------ |
+| [Task 1]        | 1–2h     | [Any constraints]  |
+| [Task 2]        | 2–3h     | [Any constraints]  |
+| [Testing]       | 1h       | [Any constraints]  |
+| [Documentation] | 30m      | [Any constraints]  |
+| **Total**       | **4–6h** | [Any dependencies] |
 
 ---
 
@@ -199,6 +201,7 @@ pnpm build
 **Priority: [Critical | High | Medium | Low]**
 
 Justification:
+
 - [Why this priority level]
 - [Impact if not addressed]
 - [Urgency factors]
