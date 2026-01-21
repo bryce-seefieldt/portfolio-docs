@@ -56,6 +56,58 @@ gh auth status  # GitHub CLI authenticated (optional but recommended)
 
 ---
 
+## Critical Constants (Quick Reference)
+
+For quick copy-paste during implementation:
+
+**Repository:**
+```
+bryce-seefieldt/portfolio-app
+```
+
+**Required CI Checks:**
+```
+ci / quality
+ci / build
+```
+
+**Environment Variables** (all `NEXT_PUBLIC_*` variables are client-visible by design):
+
+```bash
+# Required
+NEXT_PUBLIC_DOCS_BASE_URL=https://docs.example.com
+
+# Recommended
+NEXT_PUBLIC_SITE_URL=https://portfolio.example.com
+NEXT_PUBLIC_GITHUB_URL=https://github.com/your-handle
+NEXT_PUBLIC_LINKEDIN_URL=https://linkedin.com/in/your-handle
+NEXT_PUBLIC_CONTACT_EMAIL=contact@example.com
+```
+
+**GitHub Ruleset Configuration:**
+```
+Name: main-protection
+Target: main
+Enforcement: Active
+Rules:
+  ✓ Required checks: ci / quality, ci / build
+  ✓ PR review required: 1 approval
+  ✓ Dismiss stale reviews: ON
+  ✓ Block force-push: ON
+  ✓ Block deletions: ON
+```
+
+**Vercel Build Settings:**
+```
+Framework Preset: Next.js
+Build Command: pnpm build
+Install Command: pnpm install --frozen-lockfile
+Output Directory: .next (default)
+Node Version: 20.x
+```
+
+---
+
 ## Implementation Approach
 
 Phase 1 follows a **sequential steps** implementation pattern, where foundational infrastructure is established first, followed by governance layers, and completed with deployment and validation. All steps are documented below with completion status and outcomes.
@@ -958,11 +1010,25 @@ With Phase 1 establishing production infrastructure and governance, Phase 2 will
 
 ---
 
+## Common Issues & Solutions
+
+Quick troubleshooting reference for Phase 1 implementation:
+
+| Problem | Quick Fix | Detailed Guide |
+|---------|-----------|----------------|
+| **Vercel waits for checks indefinitely** | Verify `ci.yml` runs on `push: [main]` and check names match exactly (`ci / quality`, `ci / build`) | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Preview deployment fails** | Verify Node version (20.x) and pnpm version (9+) match in Vercel settings | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Evidence links broken in preview** | Verify `NEXT_PUBLIC_DOCS_BASE_URL` is set for Preview scope in Vercel | [Portfolio App Dossier - Deployment](/docs/60-projects/portfolio-app/03-deployment.md) |
+| **Merge button disabled when checks pass** | Verify GitHub Ruleset is **Active** (not Evaluate/Disabled) | [portfolio-app-github-ruleset-config.md](/docs/70-reference/portfolio-app-github-ruleset-config.md) |
+| **CI checks don't appear in PR** | Wait 3–5 minutes; verify `.github/workflows/ci.yml` exists and is valid; check Actions tab | [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md) |
+| **Environment variables not applied** | Trigger manual redeploy in Vercel after saving environment variables | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Production promotion doesn't trigger** | Verify Deployment Checks are scoped to Production only; check CI passed before merge | [ADR-0007](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) |
+
+---
+
 ## Related Documentation
 
 - **Roadmap:** [Portfolio Web Application Roadmap](/docs/00-portfolio/roadmap/index.md)
-- **Phase 1 Quick Reference:** [Phase 1 Completion Quick Reference](/docs/00-portfolio/phase-1-quick-reference.md)
-- **Phase 1 Checklist:** [Phase 1 Completion Checklist](/docs/00-portfolio/phase-1-completion-checklist.md)
 - **Phase 2 Implementation Guide:** [Phase 2: Gold Standard Project](/docs/00-portfolio/phase-2-implementation-guide.md)
 - **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/)
 - **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/)
