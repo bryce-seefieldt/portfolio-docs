@@ -58,6 +58,7 @@ The `verify` command runs a comprehensive 7-step validation workflow:
 7. **Build**: Produces production bundle to catch build-time errors
 
 **Benefits:**
+
 - Single command runs all pre-commit quality checks
 - Auto-formats code before validation (reduces false failures)
 - Provides color-coded output for quick status assessment
@@ -66,6 +67,7 @@ The `verify` command runs a comprehensive 7-step validation workflow:
 - Generates summary report with next steps
 
 **When to use:**
+
 - Before every commit (catches issues early)
 - Before opening a PR (ensures CI will pass)
 - After pulling changes from main (validates clean state)
@@ -84,6 +86,7 @@ pnpm build         # Production build
 ```
 
 **When to use individual commands:**
+
 - Debugging a specific type of failure
 - Running checks during active development (e.g., `typecheck` while coding)
 - Understanding what each check does

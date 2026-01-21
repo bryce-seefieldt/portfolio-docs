@@ -68,7 +68,7 @@ pnpm typecheck
   - use `pnpm format:write` for formatting issues (or let `pnpm verify` auto-fix)
   - for lint errors: inspect output and fix violations
   - for type errors: fix or adjust `tsconfig.json` if legitimately needed
-Follow: runbook(s) under docs/50-operations/runbooks/
+    Follow: runbook(s) under docs/50-operations/runbooks/
 
 ## Symptom: `pnpm build` fails
 

@@ -251,7 +251,8 @@ Even when working solo:
 
 Every doc MUST include:
 
- 7) PR discipline: use closing keyword (e.g., Closes #123) when linking issues.
+7.  PR discipline: use closing keyword (e.g., Closes #123) when linking issues.
+
 - `description`
 - `tags`
   When appropriate, include:

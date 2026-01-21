@@ -85,8 +85,9 @@ Hard rules:
 3. **Test locally:**
 
    ```bash
-   pnpm start     # preview
-   pnpm build     # required before PR
+   pnpm start       # preview
+   pnpm verify      # required before PR
+   # Optional for faster iteration: pnpm verify:quick (skip build, rerun full verify before PR)
    ```
 
 4. **Commit and push** (`.env.local` is gitignored; do not commit)
@@ -178,9 +179,9 @@ pnpm format:write && pnpm lint && pnpm typecheck && pnpm build
 
 For **portfolio-docs**:
 
-```bash
-pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
-```
+- Recommended: `pnpm verify`
+- Faster iteration: `pnpm verify:quick` (skips the build gate; run `pnpm verify` before opening a PR)
+- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`
 
 All checks must pass before opening a PR.
 
@@ -195,7 +196,7 @@ Even as a solo maintainer, act like a team:
 
 A doc PR is done only if:
 
-- All quality gates pass (`pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`)
+- All quality gates pass (`pnpm verify`)
 - CI checks pass (`ci / quality` and `ci / build`)
 - New pages have front matter (title + sidebar rules)
 - The page is placed in the correct domain folder
@@ -247,12 +248,8 @@ The project enforces code quality through automated gates:
 **Before committing:**
 
 ```bash
-# Auto-fix formatting and linting where possible
-pnpm format:write
-pnpm lint:fix
-
-# Verify all gates pass
-pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
+pnpm verify          # Full local verification (format, lint, typecheck, format:check, build)
+pnpm verify:quick    # Optional: skips build for faster iteration (run full verify before PR)
 ```
 
 See [ADR-0004](/docs/architecture/adr/adr-0004-expand-ci-deploy-quality-gates) for quality gate rationale and [Testing](./docs/60-projects/portfolio-docs-app/05-testing.md) for details.

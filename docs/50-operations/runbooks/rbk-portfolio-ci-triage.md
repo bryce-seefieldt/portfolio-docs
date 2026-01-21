@@ -97,6 +97,7 @@ pnpm test  # Smoke tests (Playwright)
 ```
 
 Use individual commands when you need to:
+
 - Debug a specific failure type
 - Run checks in isolation
 - Understand what each check validates

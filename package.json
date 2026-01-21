@@ -17,7 +17,9 @@
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "format:check": "prettier --check .",
-    "format:write": "prettier --write ."
+    "format:write": "prettier --write .",
+    "verify": "./scripts/verify-docs-local.sh",
+    "verify:quick": "./scripts/verify-docs-local.sh --skip-build"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",

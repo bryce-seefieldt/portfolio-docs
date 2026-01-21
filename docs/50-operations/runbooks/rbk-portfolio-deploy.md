@@ -68,6 +68,7 @@ If suspected, stop and treat as an incident.
   - Branch ruleset active (e.g., `main-protection`) and required checks selected
 
 ### 1) Local preflight validation (required)
+
 ### 1) Local preflight validation (required)
 
 **Recommended approach (comprehensive validation):**
