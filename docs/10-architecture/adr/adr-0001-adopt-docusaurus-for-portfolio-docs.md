@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0001: Adopt Docusaurus for Portfolio Documentation'
 description: 'Decision to use Docusaurus as the docs-as-code platform for the portfolio documentation system.'
-sidebar_position: 1
+sidebar_position: 0.1
 tags: [architecture, adr, documentation, docusaurus, governance]
 ---
 

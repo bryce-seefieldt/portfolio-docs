@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0007: Host Portfolio App on Vercel with Promotion Gated by GitHub Checks'
 description: 'Decision to deploy the Portfolio App to Vercel using preview deployments for PRs and production promotion gated by imported GitHub checks.'
-sidebar_position: 7
+sidebar_position: 0.7
 tags:
   [architecture, adr, portfolio-app, hosting, vercel, cicd, release-governance]
 ---

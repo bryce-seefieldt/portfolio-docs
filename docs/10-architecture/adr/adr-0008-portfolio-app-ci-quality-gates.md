@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0008: Portfolio App CI Quality Gates, Supply Chain Baselines, and Branch Protection (Rulesets)'
 description: 'Establishes mandatory CI gates with stable check naming, deterministic installs, baseline CodeQL + Dependabot posture, and main-branch enforcement via GitHub Rulesets.'
-sidebar_position: 8
+sidebar_position: 0.8
 tags:
   [
     architecture,

@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0003: Host Portfolio Docs App on Vercel with Preview Deployments'
 description: 'Decision to host the Docusaurus documentation site on Vercel, enabling PR preview deployments and main-branch production publishing.'
-sidebar_position: 3
+sidebar_position: 0.3
 tags: [architecture, adr, hosting, deployment, vercel, cicd]
 ---
 
