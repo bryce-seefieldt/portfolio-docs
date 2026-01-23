@@ -122,7 +122,6 @@ graph TB
 ```
 ````
 
-````
 
 ```mermaid
 graph TB
@@ -136,7 +135,7 @@ graph TB
     style End fill:#51cf66,stroke:#2f9e44,color:#fff
     style Error fill:#ff6b6b,stroke:#c92a2a,color:#fff
     style Process fill:#339af0,stroke:#1971c2,color:#fff
-````
+```
 
 ### Sequence Diagrams
 
