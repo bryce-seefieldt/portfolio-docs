@@ -1,6 +1,6 @@
 ---
-last-updated: 2026-01-21
-active-phase: Phase 3 (Scaling & Governance) — Stage 3.1 COMPLETE; Stage 3.2 IN PROGRESS
+last-updated: 2026-01-22
+active-phase: Phase 3 (Scaling & Governance) — Stage 3.3 COMPLETE; Stage 3.4 READY
 workspace-repos:
   - portfolio-app (Next.js + TypeScript)
   - portfolio-docs (Docusaurus)
@@ -8,14 +8,14 @@ workspace-repos:
 
 # Copilot Session Context
 
-## Current State (Phase 3 — Stage 3.1 COMPLETE; Stage 3.2 READY TO EXECUTE)
+## Current State (Phase 3 — Stage 3.3 COMPLETE; Stage 3.4 READY TO EXECUTE)
 
 ### Active Branches
 
-- **portfolio-app:** `main` (Stage 3.1 complete: YAML registry + validation deployed)
-- **portfolio-docs:** `main` (PRs #43-44 merged with template enforcement)
+- **portfolio-app:** `main` (Stage 3.3 complete: registry, evidence UI, and tests wired into CI)
+- **portfolio-docs:** `main` (PRs #43-44 merged; Stage 3.3 evidence/test docs next)
 
-### Phase Progress: Phase 3 Stages 3.1 complete; Stage 3.2 in active planning
+### Phase Progress: Phase 3 Stages 3.1–3.3 complete; Stage 3.4 in active planning
 
 #### Template Enforcement (Critical)
 
@@ -73,17 +73,20 @@ All work in both repositories **MUST** use templates for proper governance and t
   - [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) added + runbook index updated
 - Template system fully enforced with mandatory guidance in both repos (PRs #43-44 merged)
 
-#### 🔄 In Progress: Phase 3 Stage 3.2 — EvidenceBlock Component & Badges
+#### ✅ Complete: Phase 3 Stage 3.3 — Unit & E2E Tests
 
-**What:** Create reusable React components for standardized evidence linking
+**What shipped:**
 
-- `EvidenceBlock.tsx`: Renders dossier, threat model, ADRs, runbooks, GitHub links with responsive cards
-- `VerificationBadge.tsx`: Multiple badge types (docs-available, threat-model-complete, gold-standard-status)
-- `BadgeGroup.tsx` utility for multi-badge rendering with responsive wrapping
-- Update `/projects/[slug]` page to integrate components
-- Full Tailwind CSS responsive styling (mobile-first)
+- Vitest suite for registry schema, slug rules, link construction, and coverage thresholds
+- Playwright E2E smoke tests tightened (page error handling corrected); evidence links validated
+- CI pipeline wiring confirmed via `pnpm verify` (lint, typecheck, build, unit, E2E)
 
-**Timeline:** 3–4 hours | **Status:** Creating tracking issues (this stage)
+**Status:** Complete (2026-01-22)
+
+#### 🔄 Next: Phase 3 Stage 3.4 — ADRs & Documentation Updates
+
+- Document Stage 3 decisions (ADR-0011/0012 updates), dossier refresh, and registry schema guide alignment
+- Keep template enforcement unchanged; use Phase Stage templates for paired app/docs issues
 
 ---
 
@@ -330,10 +333,10 @@ pnpm build      # Docusaurus build
 
 ### Immediate Next Steps (Priority Order)
 
-1. **Finalize gold-standard project content**: portfolio-app exemplar page, dossier enhancements, release note, CV capability-to-proof mapping
-2. **Enforce branch protections** for `ci / quality`, `secrets-scan`, `ci / build`, and CodeQL; align Vercel promotion checks
-3. **Validate pipelines locally**: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` (includes Playwright smoke tests)
-4. **Update public repo/demo URLs** in `src/data/projects.ts` after deployments are live (app + docs)
+1. **Stage 3.4 documentation set**: finalize ADR-0011/0012 text, dossier updates, registry schema guide alignment, and release-note entry if needed
+2. **Issue discipline**: open paired Stage 3.4 app/docs issues using phase templates and link them; PRs must close those issues
+3. **CI sanity**: keep `pnpm verify` green (lint, typecheck, build, unit, E2E) before drafting docs PRs
+4. **Evidence links**: validate docs/app cross-links via `docsUrl` patterns and registry placeholders while editing docs
 
 ### Phase 1 Acceptance Criteria (Roadmap Reference)
 
