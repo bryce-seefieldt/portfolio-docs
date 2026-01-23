@@ -67,6 +67,15 @@ Responsibilities:
 - Build runs `pnpm build` with frozen lockfile installs, then triggers Vercel deployment
 - If CI fails: follow the CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
 
+### Monitoring and analytics
+
+- Vercel Web Analytics is enabled for the Portfolio App; no cookies and no PII are collected.
+- Access: Vercel project → Analytics tab (requires Vercel access, no extra env vars).
+- Recommended checks after deploy:
+  - Confirm page views register for `/`, `/projects`, and at least one project slug.
+  - Verify no personally identifiable information is shown (aggregate metrics only).
+- If analytics must be disabled temporarily, remove `<Analytics />` from `src/app/layout.tsx` and redeploy.
+
 ### Pre-deploy local validation (developer workflow)
 
 Before committing changes or opening a PR, validate locally to catch CI failures early.

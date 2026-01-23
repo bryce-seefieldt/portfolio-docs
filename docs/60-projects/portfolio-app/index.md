@@ -78,7 +78,7 @@ Portfolio App must link to evidence pages for each project:
 - CI gates enforced: `ci / quality` (lint, format check, typecheck) → `ci / build` (Next build), frozen lockfile installs.
 - CodeQL and Dependabot baselines present; branch protection/ruleset requires required checks before merge.
 
-### Current State (Phase 3, Stage 5)
+### Current State (Phase 3, Stage 6)
 
 - ✅ **Route skeleton**: 5 core routes implemented and fully tested
 - ✅ **CI quality gates**: lint, format, typecheck, secrets-scan, registry validation, unit tests, E2E tests, build (all enforced)
@@ -122,6 +122,11 @@ Portfolio App must link to evidence pages for each project:
     - Invalid slugs, broken dossier links, missing evidence URLs, schema validation, CI flakiness
     - Maps each to specific pnpm commands and expected outputs
     - References playwright-report artifacts for debugging
+- ✅ **Social metadata & analytics**: Complete (Stage 3.6)
+  - Open Graph + Twitter Cards configured globally and per project (site-wide defaults + generateMetadata per slug)
+  - Vercel Web Analytics integrated (privacy-safe, no cookies/PII); access via Vercel Analytics tab
+  - Metadata unit tests added (19 tests) covering OG/Twitter defaults, URL construction, fallbacks, special characters
+  - Social metadata reference guide published; dossier updated with analytics and metadata context
 
 ## Reviewer path
 

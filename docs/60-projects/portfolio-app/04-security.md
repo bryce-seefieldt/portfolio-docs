@@ -162,6 +162,13 @@ For each threat, the model documents:
 
 ## Public-Safety Rules (Enforced)
 
+### Analytics privacy stance
+
+- Vercel Web Analytics is used for aggregate page views only; no cookies and no PII are collected.
+- No additional environment variables are required; instrumentation is via `<Analytics />` in `src/app/layout.tsx`.
+- Data collected: page URL and count metrics only; no IPs, names, or user identifiers.
+- If analytics are not desired, remove the component and redeploy; no data will be collected.
+
 ### Environment Variables
 
 - ✅ All `NEXT_PUBLIC_*` variables are client-visible by design

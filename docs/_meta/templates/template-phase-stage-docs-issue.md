@@ -1,3 +1,10 @@
+---
+title: 'Stage x.y — ... (Docs)'
+description: ''
+tags:
+  [portfolio, roadmap, planning, phase-x, stage-x.y, app, registry, validation]
+---
+
 # Stage [X].[Y]: [Stage Title] — Documentation
 
 **Type:** Documentation / ADR / Reference  
