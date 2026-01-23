@@ -831,7 +831,7 @@ sequenceDiagram
     API->>-Client: Close connection
 ````
 
-````markdown
+`````markdown
 ```mermaid
 sequenceDiagram
     participant Client
@@ -849,6 +849,7 @@ sequenceDiagram
     end
     API->>-Client: Close connection
 ```
+
 ## Accessibility Guidelines
 
 ### Alt Text
@@ -868,6 +869,7 @@ graph LR
 
 </details>
 ````
+`````
 
 ### High Contrast
 
@@ -906,6 +908,7 @@ graph TB
 ### ❌ Avoid: Overly Complex Diagrams
 
 **Problem:**
+
 ```mermaid
 graph TB
     A --> B
@@ -921,7 +924,7 @@ graph TB
     G --> J
     H --> J
     I --> J
-````
+```
 
 **Solution**: Break into multiple focused diagrams or use subgraphs.
 
