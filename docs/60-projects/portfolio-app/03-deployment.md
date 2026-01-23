@@ -113,14 +113,15 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://portfolio-docs-git-preview-branch.vercel.app
 NEXT_PUBLIC_DOCS_BASE_URL=https://docs.yourdomain.com
 # OR path-based:
 NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
-```
-
-### Optional variables (recommended for production)
 
 **`NEXT_PUBLIC_SITE_URL`**
 
-- Canonical site URL for metadata and absolute links
+- Canonical site URL used for social metadata (Open Graph/Twitter) and absolute links
+- Required for correct social previews; set to the production domain
 - Example: `https://portfolio.yourdomain.com`
+```
+
+### Optional variables (recommended for production)
 
 **`NEXT_PUBLIC_GITHUB_URL`**
 
@@ -136,6 +137,10 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 
 - Public contact email (appears as mailto link; no form)
 - Example: `contact@yourdomain.com`
+
+**Analytics**
+
+- Vercel Web Analytics requires no additional environment variables (enabled via `<Analytics />` in `layout.tsx`).
 
 ### Variable validation
 

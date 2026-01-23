@@ -1,3 +1,10 @@
+---
+title: 'Stage x.y — ... (App)'
+description: ''
+tags:
+  [portfolio, roadmap, planning, phase-x, stage-x.y, app, registry, validation]
+---
+
 # Stage [X].[Y]: [Stage Title] — App Implementation
 
 **Type:** Feature / Enhancement / Implementation  
