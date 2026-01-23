@@ -283,66 +283,65 @@ tags: [reference, registry, schema, portfolio-app]
 
 #### Tasks
 
-- [ ] **Draft ADR-0011: Data-Driven Registry Decision**
+- [x] **Draft ADR-0011: Data-Driven Registry Decision**
   - File: `docs/10-architecture/adr/adr-0011-data-driven-project-registry.md`
   - Include all sections listed above
   - Link to Stage 3.1 implementation guide
   - Reference registry schema guide
   - Explain Zod schema benefits
 
-- [ ] **Draft ADR-0012: Cross-Repo Documentation Linking**
+- [x] **Draft ADR-0012: Cross-Repo Documentation Linking**
   - File: `docs/10-architecture/adr/adr-0012-cross-repo-documentation-linking.md`
   - Include all sections listed above
   - Show docsUrl, githubUrl examples
   - Explain environment variable contract
   - Reference config.ts helpers
 
-- [ ] **Add both ADRs to ADR index**
+- [x] **Add both ADRs to ADR index**
   - File: `docs/10-architecture/adr/index.md` (if it exists) or `_category_.json`
   - Add links to ADR-0011 and ADR-0012
 
 #### Success Criteria for Phase 1
 
-- [ ] Both ADRs complete with all sections
-- [ ] Examples are accurate and tested
-- [ ] Links to implementation and guides are valid
-- [ ] Front matter complete (title, description, tags, sidebar_position)
-
----
+- [x] Both ADRs complete with all sections
+- [x] Examples are accurate and tested
+- [x] Links to implementation and guides are valid
+- [x] Front matter complete (title, description, tags, sidebar_position)
+ [x]
 
 ### Phase 2: Dossier & Reference Updates (1–1.5 hours)
 
 #### Tasks
 
-- [ ] **Create registry schema guide**
+- [x] **Create registry schema guide**
   - File: `docs/70-reference/registry-schema-guide.md`
   - Include complete schema with all fields
   - Add validation rules and examples
   - Link to testing procedures
   - Reference ADR-0011
 
-- [ ] **Update Portfolio App dossier**
+- [x] **Update Portfolio App dossier**
   - File: `docs/60-projects/portfolio-app/02-architecture.md`
   - Add "Data-Driven Registry (Stage 3.1)" subsection
   - Explain YAML + Zod approach
   - Link to ADR-0011 and registry schema guide
 
-- [ ] **Update Portfolio App testing page**
+- [x] **Update Portfolio App testing page**
   - File: `docs/60-projects/portfolio-app/05-testing.md`
   - Add registry validation test description
   - Link to testing guide in reference
 
-- [ ] **Update Portfolio App dossier overview**
+- [x] **Update Portfolio App dossier overview**
   - File: `docs/60-projects/portfolio-app/index.md`
   - Add Phase 3 to key deliverables
   - Link to ADRs in Architecture section
 
 #### Success Criteria for Phase 2
 
-- [ ] Registry schema guide is comprehensive and examples are correct
-- [ ] Dossier pages updated with Phase 3 context
-- [ ] All links to ADRs are valid
-- [ ] Examples are copy/paste safe
+- [x] Registry schema guide is comprehensive and examples are correct
+- [x] Dossier pages updated with Phase 3 context
+- [x] All links to ADRs are valid
+- [x] Examples are copy/paste safe
 
 ---
 
@@ -350,27 +349,27 @@ tags: [reference, registry, schema, portfolio-app]
 
 #### Tasks
 
-- [ ] **Update copilot instructions**
+- [x] **Update copilot instructions**
   - File: `.github/copilot-instructions.md` (portfolio-docs)
   - Add "Phase 3 Decision References" section
   - Link to ADR-0011 and ADR-0012
   - Explain when to reference them
 
-- [ ] **Build and verify**
+- [x] **Build and verify**
   - Command: `pnpm build`
   - Expected: No broken links, no build errors
   - Link check: Verify all internal links resolve
 
-- [ ] **Validate cross-references**
+- [x] **Validate cross-references**
   - Check: ADRs link to each other bidirectionally
   - Check: Dossier links to ADRs
   - Check: Schema guide is referenced by ADRs and dossier
 
 #### Success Criteria for Phase 3
 
-- [ ] `pnpm build` passes with no errors
-- [ ] All links are valid and bidirectional
-- [ ] No broken internal references
+- [x] `pnpm build` passes with no errors
+- [x] All links are valid and bidirectional
+- [x] No broken internal references
 
 ---
 
@@ -378,23 +377,23 @@ tags: [reference, registry, schema, portfolio-app]
 
 ### Content Validation
 
-- [ ] ADR-0011: All sections complete; examples accurate
-- [ ] ADR-0012: All sections complete; URL construction examples valid
-- [ ] Registry schema guide: Schema matches actual Zod schema in `src/lib/registry.ts`
-- [ ] Dossier updates: Reflect actual Phase 3 implementation
+- [x] ADR-0011: All sections complete; examples accurate
+- [x] ADR-0012: All sections complete; URL construction examples valid
+- [x] Registry schema guide: Schema matches actual Zod schema in `src/lib/registry.ts`
+- [x] Dossier updates: Reflect actual Phase 3 implementation
 
 ### Build Validation
 
-- [ ] `pnpm build` passes locally
-- [ ] No broken links in output
-- [ ] All internal links resolve to actual files
+- [x] `pnpm build` passes locally
+- [x] No broken links in output
+- [x] All internal links resolve to actual files
 
 ### Accuracy Checks
 
-- [ ] All helper function names match code (`docsUrl`, `githubUrl`, `docsGithubUrl`)
-- [ ] All file paths in examples are correct
-- [ ] Environment variable names match CI workflow and `.env.example`
-- [ ] ADR numbering is sequential and follows convention
+- [x] All helper function names match code (`docsUrl`, `githubUrl`, `docsGithubUrl`)
+- [x] All file paths in examples are correct
+- [x] Environment variable names match CI workflow and `.env.example`
+- [x] ADR numbering is sequential and follows convention
 
 ---
 
@@ -402,18 +401,18 @@ tags: [reference, registry, schema, portfolio-app]
 
 This stage is complete when:
 
-- [ ] ADR-0011 created and published with all sections
-- [ ] ADR-0012 created and published with all sections
-- [ ] Registry schema guide created with examples and validation rules
-- [ ] Portfolio App dossier updated with Phase 3 content
-- [ ] All internal links are bidirectional and valid
-- [ ] `pnpm build` passes with no broken links
-- [ ] No placeholder text or "TODO" items
-- [ ] Front matter complete on all pages (title, description, tags, sidebar_position)
-- [ ] All code examples are accurate and tested
-- [ ] Cross-references to portfolio-app code are correct
-- [ ] PR approved by engineering lead
-- [ ] PR merged with "Closes #X" keyword
+- [x] ADR-0011 created and published with all sections
+- [x] ADR-0012 created and published with all sections
+- [x] Registry schema guide created with examples and validation rules
+- [x] Portfolio App dossier updated with Phase 3 content
+- [x] All internal links are bidirectional and valid
+- [x] `pnpm build` passes with no broken links
+- [x] No placeholder text or "TODO" items
+- [x] Front matter complete on all pages (title, description, tags, sidebar_position)
+- [x] All code examples are accurate and tested
+- [x] Cross-references to portfolio-app code are correct
+- [x] PR approved by engineering lead
+- [x] PR merged with "Closes #X" keyword
 
 ---
 
@@ -477,12 +476,12 @@ This stage is complete and ready to deploy when:
 
 ## Review Checklist (for Reviewer)
 
-- [ ] ADRs follow ADR template and portfolio style
-- [ ] Decisions are well-justified and consequences clearly explained
-- [ ] Alternatives section is thorough
-- [ ] Examples are accurate and match actual code
-- [ ] Registry schema guide is comprehensive and correct
-- [ ] Dossier updates reflect Phase 3 accurately
-- [ ] All internal links are valid
-- [ ] No secrets or sensitive data
-- [ ] ADRs are numbered correctly and sequentially
+- [x] ADRs follow ADR template and portfolio style
+- [x] Decisions are well-justified and consequences clearly explained
+- [x] Alternatives section is thorough
+- [x] Examples are accurate and match actual code
+- [x] Registry schema guide is comprehensive and correct
+- [x] Dossier updates reflect Phase 3 accurately
+- [x] All internal links are valid
+- [x] No secrets or sensitive data
+- [x] ADRs are numbered correctly and sequentially

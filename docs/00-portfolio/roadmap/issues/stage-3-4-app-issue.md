@@ -76,11 +76,11 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
 
 #### Tasks
 
-- [ ] **Review ADRs from docs stage (3.4-docs)**
+- [x] **Review ADRs from docs stage (3.4-docs)**
   - Details: Wait for companion docs issue PRs to merge; review ADR-0011 and ADR-0012
   - Files: Reference [portfolio-docs/docs/10-architecture/adr/adr-0011-data-driven-project-registry.md](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/10-architecture/adr/adr-0011-data-driven-project-registry.md)
 
-- [ ] **Add "Phase 3 Implementation Patterns" section to copilot instructions**
+- [x] **Add "Phase 3 Implementation Patterns" section to copilot instructions**
   - Location: `.github/copilot-instructions.md` after "Architecture Overview" section
   - Content:
     - Brief intro to Phase 3 data-driven registry
@@ -98,7 +98,7 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
     - ADR-0012: [Cross-Repo Documentation Linking](https://bns-portfolio-docs.vercel.app/docs/architecture/adr/adr-0012-cross-repo-documentation-linking)
     ```
 
-- [ ] **Document registry YAML patterns**
+- [x] **Document registry YAML patterns**
   - Location: New subsection "Registry Patterns & Project Structure"
   - Content:
     - YAML schema overview
@@ -107,7 +107,7 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
     - Example valid project entry
     - Common mistakes and how to avoid them
 
-- [ ] **Document evidence link construction**
+- [x] **Document evidence link construction**
   - Location: New subsection "Evidence Link Construction"
   - Content:
     - Explanation of `docsUrl()`, `githubUrl()`, `docsGithubUrl()` helpers
@@ -118,7 +118,7 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
       - ✅ `githubUrl("portfolio-app")` → resolves to `https://github.com/bryce-seefieldt/portfolio-app/portfolio-app` (if env set)
       - ✅ `docsGithubUrl("blob/main/src/lib/registry.ts")` → resolves to docs repo blob URL
 
-- [ ] **Add registry validation reference**
+- [x] **Add registry validation reference**
   - Location: Under "Registry Patterns & Project Structure"
   - Content:
     - Reference `src/lib/__tests__/registry.test.ts` for validation rules
@@ -127,11 +127,11 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
 
 #### Success Criteria for Phase 1
 
-- [ ] Copilot instructions updated with Phase 3 context
-- [ ] All sections include working links to portfolio-docs ADRs
-- [ ] Examples are copy/paste safe and accurate
-- [ ] Registry schema patterns clearly documented
-- [ ] Evidence link construction helpers explained with examples
+- [x] Copilot instructions updated with Phase 3 context
+- [x] All sections include working links to portfolio-docs ADRs
+- [x] Examples are copy/paste safe and accurate
+- [x] Registry schema patterns clearly documented
+- [x] Evidence link construction helpers explained with examples
 
 ---
 
@@ -139,26 +139,26 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
 
 #### Tasks
 
-- [ ] **Add Phase 3 reference to README (optional)**
+- [x] **Add Phase 3 reference to README (optional)**
   - Content: Add bullet under "What This App Does" or "Architecture" section
   - Example: `- Data-driven project registry (YAML + TypeScript validation); see [Registry Guide](https://bns-portfolio-docs.vercel.app/docs/reference/registry-schema-guide)`
 
-- [ ] **Build and verify no broken links**
+- [x] **Build and verify no broken links**
   - Command: `pnpm build` (local)
   - Expected: Next.js build succeeds; no TypeScript errors
   - Linting: `pnpm lint` (should pass; no new issues)
 
-- [ ] **Verify file consistency**
+- [x] **Verify file consistency**
   - Check: All helper functions referenced in copilot instructions actually exist in `src/lib/config.ts`
   - Check: All test patterns reference actual test files in `src/lib/__tests__/`
   - Check: All links to portfolio-docs follow canonical URL patterns
 
 #### Success Criteria for Phase 2
 
-- [ ] README updated with Phase 3 reference (if applicable)
-- [ ] `pnpm lint` and `pnpm typecheck` pass
-- [ ] Links to portfolio-docs follow correct format
-- [ ] No broken references to internal files
+- [x] README updated with Phase 3 reference (if applicable)
+- [x] `pnpm lint` and `pnpm typecheck` pass
+- [x] Links to portfolio-docs follow correct format
+- [x] No broken references to internal files
 
 ---
 
@@ -166,15 +166,15 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
 
 This stage is complete when:
 
-- [ ] `.github/copilot-instructions.md` includes Phase 3 section with ADR links
-- [ ] Registry patterns documented with examples
-- [ ] Evidence link construction helpers explained with examples
-- [ ] All internal code references are accurate
-- [ ] All links to portfolio-docs ADRs are valid
-- [ ] README updated (if applicable)
-- [ ] `pnpm lint`, `pnpm typecheck`, `pnpm build` all pass locally
-- [ ] PR approved by engineering lead
-- [ ] Companion docs issue (Stage 3.4 docs) is merged before merging this app issue
+- [x] `.github/copilot-instructions.md` includes Phase 3 section with ADR links
+- [x] Registry patterns documented with examples
+- [x] Evidence link construction helpers explained with examples
+- [x] All internal code references are accurate
+- [x] All links to portfolio-docs ADRs are valid
+- [x] README updated (if applicable)
+- [x] `pnpm lint`, `pnpm typecheck`, `pnpm build` all pass locally
+- [x] PR approved by engineering lead
+- [x] Companion docs issue (Stage 3.4 docs) is merged before merging this app issue
 
 ---
 
