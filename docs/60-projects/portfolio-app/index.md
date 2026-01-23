@@ -78,7 +78,7 @@ Portfolio App must link to evidence pages for each project:
 - CI gates enforced: `ci / quality` (lint, format check, typecheck) → `ci / build` (Next build), frozen lockfile installs.
 - CodeQL and Dependabot baselines present; branch protection/ruleset requires required checks before merge.
 
-### Current State (Phase 2–3.3)
+### Current State (Phase 3, Stage 5)
 
 - ✅ **Route skeleton**: 5 core routes implemented and fully tested
 - ✅ **CI quality gates**: lint, format, typecheck, secrets-scan, registry validation, unit tests, E2E tests, build (all enforced)
@@ -106,6 +106,22 @@ Portfolio App must link to evidence pages for each project:
   - 17 total key capabilities mapped to 9 proof links
   - Each role links to dossiers, threat models, runbooks, ADRs, CI workflows, test suites
   - Evidence Hubs section for comprehensive navigation
+- ✅ **Link validation in CI**: Complete (Stage 3.5 - evidence URL integrity assurance)
+  - New `link-validation` CI job running after quality checks, before build
+  - Validates registry schema via `pnpm registry:validate` 
+  - Validates all evidence links via `pnpm links:check` (Playwright-based, 12 checks)
+  - Build gate: promotion depends on link-validation success
+  - Playwright artifacts retained 7 days for troubleshooting
+  - Local validation: `pnpm verify` includes link validation as Step 9
+- ✅ **Project publication runbooks**: Complete (Stage 3.5 - operational governance)
+  - Project Publish Runbook (`rbk-portfolio-project-publish.md`): 6-phase, time-boxed procedure (3 hours)
+    - Planning → Registry Entry → Dossier Update → Link Validation → PR/Review → Post-Publish
+    - Validation signals: registry:validate, links:check, pnpm build
+    - Includes rollback and abort procedures
+  - Troubleshooting Guide (`troubleshooting-portfolio-publish.md`): 5 common failure modes with actionable fixes
+    - Invalid slugs, broken dossier links, missing evidence URLs, schema validation, CI flakiness
+    - Maps each to specific pnpm commands and expected outputs
+    - References playwright-report artifacts for debugging
 
 ## Reviewer path
 

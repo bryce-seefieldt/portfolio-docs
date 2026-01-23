@@ -19,10 +19,11 @@
 
 ## Evidence
 
-- [ ] `pnpm build` passed locally
-- [ ] Broken links check passed (build)
+- [ ] `ci / quality` passed (lint, typecheck, format)
+- [ ] `ci / build` passed (Docusaurus build + broken links check)
+- [ ] `codeql` checks passed
 - [ ] Includes closing keyword for linked issue (e.g., Closes #123)
-- ## Links / screenshots / notes:
+- Links / screenshots / notes:
 
 ## Nav / Structure
 

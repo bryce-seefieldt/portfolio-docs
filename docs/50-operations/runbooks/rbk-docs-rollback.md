@@ -1,7 +1,7 @@
 ---
 title: 'Runbook: Rollback Portfolio Docs App'
 description: 'Procedure to rollback a Portfolio Docs App deployment by reverting changes on main and validating recovery.'
-sidebar_position: 2
+sidebar_position: 102
 tags: [operations, runbook, rollback, incident-response, documentation]
 ---
 

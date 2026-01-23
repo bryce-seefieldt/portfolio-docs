@@ -827,20 +827,6 @@ sequenceDiagram
 
 Always wrap diagrams in details/summary when possible:
 
-````mdx
-<details>
-<summary>View CI/CD pipeline diagram</summary>
-
-```mermaid
-graph LR
-    ...
-```
-
-**Text description**: The CI/CD pipeline consists of 5 stages: lint, test, build, deploy, and success. Failed stages redirect to a failed end state.
-
-</details>
-````
-
 ````markdown
 <details>
 <summary>View CI/CD pipeline diagram</summary>
