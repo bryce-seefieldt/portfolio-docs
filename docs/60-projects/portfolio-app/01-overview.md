@@ -96,6 +96,18 @@ Every significant claim should map to one of:
 - Delivery maturity (CI + promotion checks)
 - Security awareness (safe content, hardening, dependency hygiene)
 
+### Evidence-First Component Library (Stage 3.2)
+
+The Portfolio App introduces a reusable component library for standardized evidence linking:
+
+- **EvidenceBlock.tsx** renders project evidence artifacts (dossiers, threat models, ADRs, runbooks) in a responsive grid, enabling reviewers to verify completeness at a glance.
+- **VerificationBadge.tsx** displays status indicators (docs-available, threat-model-complete, gold-standard-status, adr-complete) to signal evidence quality.
+- **BadgeGroup.tsx** conditionally aggregates multiple evidence badges for quick scanning.
+
+Together, these components embed evidence verification into the user experience, making "show your work" a visual, interactive expectation rather than a hidden link hunt.
+
+See [Architecture — Evidence Visualization Layer](/docs/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer-stage-32) for full details.
+
 ## Validation / Expected outcomes
 
 - A third-party reviewer can quickly verify:
