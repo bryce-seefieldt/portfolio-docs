@@ -108,7 +108,7 @@ Portfolio App must link to evidence pages for each project:
   - Evidence Hubs section for comprehensive navigation
 - ✅ **Link validation in CI**: Complete (Stage 3.5 - evidence URL integrity assurance)
   - New `link-validation` CI job running after quality checks, before build
-  - Validates registry schema via `pnpm registry:validate` 
+  - Validates registry schema via `pnpm registry:validate`
   - Validates all evidence links via `pnpm links:check` (Playwright-based, 12 checks)
   - Build gate: promotion depends on link-validation success
   - Playwright artifacts retained 7 days for troubleshooting

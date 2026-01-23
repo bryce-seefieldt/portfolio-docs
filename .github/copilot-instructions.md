@@ -294,6 +294,7 @@ Any material change must update:
    - Update step numbers for subsequent steps if needed
 
 ---- runbook(s) (if it changes deploy/rollback/triage steps)
+
 - release notes (if it changes externally visible behavior or governance)
 
 ## Step 3 — Implement changes in small, auditable increments
