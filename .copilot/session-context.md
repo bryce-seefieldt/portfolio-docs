@@ -508,7 +508,7 @@ Created comprehensive **Phase 1 Completion Documentation** to support admin task
 ### What Changed Since Last Commit
 
 - Portfolio-app: CI hardened with TruffleHog `secrets-scan` (PR-only), per-job least-privilege permissions, Playwright smoke tests in build, `.pre-commit-config.yaml`, and `pnpm secrets:scan`
-- Portfolio-docs: Added Phase 2 artifacts ([docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/phase-2-implementation-guide.md), [docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md](docs/00-portfolio/PHASE-2-ENHANCEMENTS-SUMMARY.md), [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)); threat model expansion merged (PR #32, 2026-01-19)
+- Portfolio-docs: Added Phase 2 artifacts ([docs/00-portfolio/phase-2-implementation-guide.md](docs/00-portfolio/roadmap/phase-2-implementation-guide.md), , [docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md](docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)); threat model expansion merged (PR #32, 2026-01-19)
 - Session context: Updated for Phase 2 hardening status, required checks, and remaining gold-standard deliverables
 
 ### Lessons Learned
