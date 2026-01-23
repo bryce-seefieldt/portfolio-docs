@@ -24,10 +24,14 @@ Use this index to find the canonical task descriptions, acceptance criteria, and
 
 ## Current Issues
 
+- Stage 3.4 — App: Copilot instructions update with Phase 3 patterns — see [stage-3-4-app-issue.md](./stage-3-4-app-issue.md)
+- Stage 3.4 — Docs: ADRs 0011/0012 and registry schema guide — see [stage-3-4-docs-issue.md](./stage-3-4-docs-issue.md)
+- Stage 3.3 — App: Unit & E2E tests, coverage integration — see [stage-3-3-app-issue.md](./stage-3-3-app-issue.md)
+- Stage 3.3 — Docs: Testing documentation and reference guide — see [stage-3-3-docs-issue.md](./stage-3-3-docs-issue.md)
 - Stage 3.2 — App: EvidenceBlock components and badges — see [stage-3-2-app-issue.md](./stage-3-2-app-issue.md)
 - Stage 3.2 — Docs: EvidenceBlock documentation and dossier updates — see [stage-3-2-docs-issue.md](./stage-3-2-docs-issue.md)
 - Stage 3.1 — App: Data-driven registry and validation — see [stage-3-1-app-issue.md](./stage-3-1-app-issue.md)
-- Stage 3.1 — Docs: ADR-0011 and registry schema guide — see [stage-3-1-docs-issue.md](./stage-3-1-docs-issue.md)
+- Stage 3.1 — Docs: Registry schema reference (placeholder) — see [stage-3-1-docs-issue.md](./stage-3-1-docs-issue.md)
 
 ## Authoring Conventions
 
