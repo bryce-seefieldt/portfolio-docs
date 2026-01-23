@@ -2,16 +2,7 @@
 title: 'Stage 3.4 — ADRs & Documentation Updates (App)'
 description: 'Updates Portfolio App copilot instructions and configuration to reflect Phase 3 Stage 3.4 architectural decisions and patterns.'
 tags:
-  [
-    portfolio,
-    roadmap,
-    planning,
-    phase-3,
-    stage-3.4,
-    app,
-    documentation,
-    adr,
-  ]
+  [portfolio, roadmap, planning, phase-3, stage-3.4, app, documentation, adr]
 ---
 
 # Stage 3.4: ADRs & Documentation Updates — App Implementation
@@ -94,6 +85,7 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
     **Overview:** Stage 3.1 introduced a YAML-backed project registry (see `src/data/projects.yml`) validated by Zod in `src/lib/registry.ts`. Stage 3.2 added reusable components (`EvidenceBlock`, `VerificationBadge`, `BadgeGroup`) for evidence display. Stage 3.3 added comprehensive unit and E2E tests. This pattern enables adding projects at scale without code changes.
 
     **Decision references:**
+
     - ADR-0011: [Data-Driven Registry Decision](https://bns-portfolio-docs.vercel.app/docs/architecture/adr/adr-0011-data-driven-project-registry)
     - ADR-0012: [Cross-Repo Documentation Linking](https://bns-portfolio-docs.vercel.app/docs/architecture/adr/adr-0012-cross-repo-documentation-linking)
     ```

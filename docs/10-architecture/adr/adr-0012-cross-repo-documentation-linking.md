@@ -2,7 +2,16 @@
 title: 'ADR-0012: Cross-Repo Documentation Linking Strategy'
 description: 'Environment-first URL construction for portable, consistent linking across portfolio-app and portfolio-docs repositories.'
 sidebar_position: 12
-tags: [adr, architecture, phase-3, linking, cross-repo, environment-variables, portability]
+tags:
+  [
+    adr,
+    architecture,
+    phase-3,
+    linking,
+    cross-repo,
+    environment-variables,
+    portability,
+  ]
 ---
 
 ## Problem Statement
@@ -57,6 +66,7 @@ docsGithubUrl(path: string): string => `${DOCS_GITHUB_URL}/${path}`
 ```
 
 **Behavior:**
+
 - If environment variable is set: returns fully qualified URL
 - If environment variable is unset: returns placeholder (`"#"`) for testing
 
@@ -69,8 +79,8 @@ projects:
   - slug: portfolio-app
     evidence:
       dossierPath: projects/portfolio-app/
-      github: "{GITHUB_URL}"
-    repoUrl: "{GITHUB_URL}/portfolio-app"
+      github: '{GITHUB_URL}'
+    repoUrl: '{GITHUB_URL}/portfolio-app'
 ```
 
 Loader interpolates placeholders at build time:
@@ -128,13 +138,13 @@ Environment variables are read once at build time; links are embedded in static 
 ✅ **Scalable:** New cross-repo links use same pattern; consistent URL construction  
 ✅ **Explicit:** Environment variables documented in `.env.example`; no guessing required  
 ✅ **Non-invasive:** Links work immediately on clone without secret setup (public-safe)  
-✅ **Forked-friendly:** If portfolio is forked, users only need to update `.env` file  
+✅ **Forked-friendly:** If portfolio is forked, users only need to update `.env` file
 
 ### Negative / Managed
 
 ❌ **Environment dependency:** CI/CD pipelines must set environment variables correctly  
 ❌ **Configuration brittleness:** Typos in env var names silently produce broken links  
-❌ **Documentation burden:** Contributors must understand env variable contract  
+❌ **Documentation burden:** Contributors must understand env variable contract
 
 ### Mitigation
 
@@ -150,10 +160,11 @@ Environment variables are read once at build time; links are embedded in static 
 ### 1. Hardcoded URLs (Current Approach)
 
 ```typescript
-const docsBase = "https://docs.yourdomain.com";
+const docsBase = 'https://docs.yourdomain.com';
 ```
 
 **Why rejected:**
+
 - Not portable; different URLs required for local dev vs. production
 - Requires file edits to test different environments
 - Breaks if domains change; single point of failure
@@ -166,6 +177,7 @@ const docsBase = "https://docs.yourdomain.com";
 ```
 
 **Why rejected:**
+
 - Only works if docs served from same domain (e.g., `/docs` path)
 - Does not work for subdomain setup (e.g., `docs.yourdomain.com`)
 - Breaks cross-domain linking; not flexible enough
@@ -174,12 +186,13 @@ const docsBase = "https://docs.yourdomain.com";
 
 ```typescript
 const getConfig = async () => {
-  const res = await fetch("/.config.json");
+  const res = await fetch('/.config.json');
   return res.json();
 };
 ```
 
 **Why rejected:**
+
 - Additional HTTP request for every page load
 - Configuration not available at build time
 - Incompatible with static site generation
@@ -188,11 +201,14 @@ const getConfig = async () => {
 ### 4. Link Inference from DNS/Hostname
 
 ```typescript
-const docsBase = new URL(process.env.SITE_URL).hostname
-  .replace(/^(www\.)?/, "docs.");
+const docsBase = new URL(process.env.SITE_URL).hostname.replace(
+  /^(www\.)?/,
+  'docs.'
+);
 ```
 
 **Why rejected:**
+
 - Assumes naming convention; fragile
 - Does not work if docs served on different domain structure
 - Hidden logic; contributors confused about where URLs come from
@@ -207,6 +223,7 @@ portfolio/
 ```
 
 **Why rejected:**
+
 - Combines two projects that should be separate
 - Adds deployment complexity (both must deploy together)
 - Less flexible for independent scaling
@@ -229,16 +246,16 @@ portfolio/
 ```typescript
 // src/lib/config.ts
 export const DOCS_BASE_URL = normalizeBaseUrl(
-  env.NEXT_PUBLIC_DOCS_BASE_URL?.trim() || "/docs"
+  env.NEXT_PUBLIC_DOCS_BASE_URL?.trim() || '/docs'
 );
 export const GITHUB_URL = asAbsoluteUrl(env.NEXT_PUBLIC_GITHUB_URL);
 
 export function docsUrl(path: string): string {
-  return `${DOCS_BASE_URL}/${path.replace(/^\/+/, "")}`;
+  return `${DOCS_BASE_URL}/${path.replace(/^\/+/, '')}`;
 }
 
 export function githubUrl(path: string): string {
-  return GITHUB_URL ? `${GITHUB_URL}/${path}` : "#";
+  return GITHUB_URL ? `${GITHUB_URL}/${path}` : '#';
 }
 ```
 
@@ -272,17 +289,17 @@ When `pnpm build` runs:
 ### Unit Tests
 
 ```typescript
-describe("docsUrl", () => {
-  it("returns docs URL when env is set", () => {
-    process.env.NEXT_PUBLIC_DOCS_BASE_URL = "https://docs.example.com";
-    expect(docsUrl("projects/portfolio")).toBe(
-      "https://docs.example.com/projects/portfolio"
+describe('docsUrl', () => {
+  it('returns docs URL when env is set', () => {
+    process.env.NEXT_PUBLIC_DOCS_BASE_URL = 'https://docs.example.com';
+    expect(docsUrl('projects/portfolio')).toBe(
+      'https://docs.example.com/projects/portfolio'
     );
   });
 
-  it("defaults to /docs when env is unset", () => {
+  it('defaults to /docs when env is unset', () => {
     delete process.env.NEXT_PUBLIC_DOCS_BASE_URL;
-    expect(docsUrl("projects/portfolio")).toBe("/docs/projects/portfolio");
+    expect(docsUrl('projects/portfolio')).toBe('/docs/projects/portfolio');
   });
 });
 ```
@@ -290,11 +307,11 @@ describe("docsUrl", () => {
 ### E2E Tests
 
 ```typescript
-test("evidence links resolve correctly", async ({ page }) => {
-  await page.goto("/projects/portfolio-app");
+test('evidence links resolve correctly', async ({ page }) => {
+  await page.goto('/projects/portfolio-app');
   const docsLink = page.locator('a[href*="/docs/"]');
   await expect(docsLink).toHaveAttribute(
-    "href",
+    'href',
     /https:\/\/(docs\.)?example\.com\/docs\//
   );
 });

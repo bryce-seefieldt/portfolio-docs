@@ -2,16 +2,7 @@
 title: 'Stage 3.4 — ADRs & Documentation Updates (Docs)'
 description: 'Create ADRs for Phase 3 decisions, update dossiers, and publish reference guides for data-driven registry and cross-repo linking.'
 tags:
-  [
-    portfolio,
-    roadmap,
-    planning,
-    phase-3,
-    stage-3.4,
-    docs,
-    documentation,
-    adr,
-  ]
+  [portfolio, roadmap, planning, phase-3, stage-3.4, docs, documentation, adr]
 ---
 
 # Stage 3.4: ADRs & Documentation Updates — Documentation
@@ -127,6 +118,7 @@ While Stages 3.1–3.3 implemented the data-driven registry, evidence components
 ### ADR-0011: Data-Driven Registry Decision
 
 **Front Matter:**
+
 ```yaml
 ---
 title: 'ADR-0011: Data-Driven Project Registry'
@@ -139,31 +131,37 @@ tags: [adr, architecture, phase-3, registry, data-driven]
 **Outline:**
 
 #### Section 1: Problem Statement
+
 - Current state: Projects defined in hardcoded TypeScript
 - Pain points: Adding projects requires code changes, testing, PR review; not scalable
 - Trigger: Phase 3 objective to enable publishing at scale
 
 #### Section 2: Decision
+
 - Use YAML for project metadata (`src/data/projects.yml`)
 - Validate with Zod schema (`src/lib/registry.ts`)
 - Build-time validation prevents invalid registries in production
 
 #### Section 3: Rationale
+
 - YAML is human-readable, minimal syntax
 - Zod provides type safety and runtime validation
 - Build-time validation catches errors early
 - Patterns established in Phase 3 Stages 3.1–3.3 (tested, working)
 
 #### Section 4: Consequences
+
 - **Positive:** Easy project addition (YAML only), no code changes, validated at build time
 - **Negative:** New contributors must learn schema, requires validation script, schema migrations needed if fields change
 
 #### Section 5: Alternatives
+
 - Hardcoded array: Rejected—requires code changes
 - JSON: Rejected—less readable than YAML
 - Database: Rejected—too complex for this stage, not needed for static site
 
 #### Section 6: Implementation
+
 - Implementation guide: [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
 - Schema reference: [Registry Schema Guide](/docs/70-reference/registry-schema-guide.md)
 - Related components: EvidenceBlock, VerificationBadge (Stage 3.2)
@@ -173,6 +171,7 @@ tags: [adr, architecture, phase-3, registry, data-driven]
 ### ADR-0012: Cross-Repo Documentation Linking
 
 **Front Matter:**
+
 ```yaml
 ---
 title: 'ADR-0012: Cross-Repo Documentation Linking Strategy'
@@ -185,31 +184,37 @@ tags: [adr, architecture, phase-3, linking, cross-repo, environment-variables]
 **Outline:**
 
 #### Section 1: Problem Statement
+
 - Current state: Links between portfolio-app and portfolio-docs are partially hardcoded
 - Pain points: URLs brittle if domain changes, inconsistent patterns, difficult to test locally vs. production
 - Trigger: Phase 3 requires scalable evidence linking across repos
 
 #### Section 2: Decision
+
 - Environment-first URL construction via helpers (docsUrl, githubUrl, docsGithubUrl)
-- Helpers resolve NEXT_PUBLIC_* env vars at build time
+- Helpers resolve NEXT*PUBLIC*\* env vars at build time
 - Enables local dev, CI, and production to use different URLs
 
 #### Section 3: Rationale
+
 - Portability: Same code works locally, in CI, and in production
 - Consistency: All links follow same pattern
 - Decoupling: Repos don't need to know each other's production domains
 - Tested: Unit tests verify fallbacks when env vars missing
 
 #### Section 4: Consequences
+
 - **Positive:** Links portable, consistent, testable
 - **Negative:** Requires env setup, slightly more complex than hardcoded URLs, .env.local required locally
 
 #### Section 5: Alternatives
+
 - Hardcoded URLs: Rejected—brittle, not portable
 - Relative paths: Rejected—only works within same domain, doesn't help cross-repo
 - Runtime config: Rejected—too dynamic for static site generation
 
 #### Section 6: Implementation
+
 - Config module: `src/lib/config.ts`
 - Tests: `src/lib/__tests__/config.test.ts`, `src/lib/__tests__/linkConstruction.test.ts`
 - Environment contract: `.env.example`
@@ -220,6 +225,7 @@ tags: [adr, architecture, phase-3, linking, cross-repo, environment-variables]
 ### Registry Schema Guide
 
 **Front Matter:**
+
 ```yaml
 ---
 title: 'Registry Schema Guide'
@@ -232,16 +238,19 @@ tags: [reference, registry, schema, portfolio-app]
 **Outline:**
 
 #### Section 1: Purpose & Overview
+
 - Registry location and format
 - Who uses it (contributors, CI, build system)
 - Why it matters (enables scalable project publishing)
 
 #### Section 2: Complete Schema
+
 ```typescript
 // Show Zod schema structure with all fields, types, constraints
 ```
 
 #### Section 3: Field Reference
+
 - slug (required): Unique identifier; format `^[a-z0-9]+(?:-[a-z0-9]+)*$`
 - title (required): Project name
 - summary (required): Short proof-focused summary
@@ -256,21 +265,25 @@ tags: [reference, registry, schema, portfolio-app]
 - proofs: Key capabilities demonstrated
 
 #### Section 4: Validation Rules
+
 - Slug format and uniqueness enforcement
 - Required fields
 - URL validation
 - Error messages and recovery
 
 #### Section 5: Examples
+
 - ✅ Valid project entry (well-formed)
 - ❌ Invalid entries (with explanations of what's wrong and how to fix)
 
 #### Section 6: Link Examples
+
 - How to structure evidence links
 - docsUrl patterns for dossier paths
 - githubUrl patterns for repo links
 
 #### Section 7: Testing & Validation
+
 - Running `pnpm registry:validate` locally
 - CI validation in build pipeline
 - Common validation errors and fixes
@@ -307,7 +320,7 @@ tags: [reference, registry, schema, portfolio-app]
 - [x] Examples are accurate and tested
 - [x] Links to implementation and guides are valid
 - [x] Front matter complete (title, description, tags, sidebar_position)
- [x]
+      [x]
 
 ### Phase 2: Dossier & Reference Updates (1–1.5 hours)
 
