@@ -1,7 +1,7 @@
 ---
 title: 'CLI Commands'
 description: 'Reference for general CLI commands.'
-sidebar_position: 1
+sidebar_position: 10
 tags: [cli, wsl2, powershell, linux]
 ---
 

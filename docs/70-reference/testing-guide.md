@@ -1,7 +1,7 @@
 ---
 title: 'Testing Guide'
 description: 'Comprehensive guide to writing unit tests (Vitest) and E2E tests (Playwright) for the Portfolio App.'
-sidebar_position: 10
+sidebar_position: 3
 tags: [testing, vitest, playwright, quality, ci-cd, portfolio-app]
 ---
 
@@ -23,25 +23,32 @@ This guide provides patterns and examples for writing tests in the Portfolio App
 
 The Portfolio App follows a testing pyramid: broad unit tests at the base, fewer integration tests in the middle, and a focused set of E2E tests at the top.
 
-```
-┌─────────────────────────────────────────┐
-│  E2E Tests (Playwright)                  │
-│  - Evidence link resolution              │
-│  - Component rendering                   │
-│  - Route coverage (user journeys)        │
-│  - Responsive design                     │
-│  Tests: ~12                              │
-├─────────────────────────────────────────┤
-│  Integration Tests (Future)              │
-│  - API routes                            │
-│  - Data fetching                         │
-├─────────────────────────────────────────┤
-│  Unit Tests (Vitest)                     │
-│  - Registry validation (Zod schemas)     │
-│  - Slug helpers (format, uniqueness)     │
-│  - Link construction (URL building)      │
-│  Tests: ~70                              │
-└─────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph E2E["E2E Tests (Playwright) - ~12 tests"]
+        E1["Evidence link resolution"]
+        E2["Component rendering"]
+        E3["Route coverage (user journeys)"]
+        E4["Responsive design"]
+    end
+
+    subgraph INT["Integration Tests (Future)"]
+        I1["API routes"]
+        I2["Data fetching"]
+    end
+
+    subgraph UNIT["Unit Tests (Vitest) - ~70 tests"]
+        U1["Registry validation (Zod schemas)"]
+        U2["Slug helpers (format, uniqueness)"]
+        U3["Link construction (URL building)"]
+    end
+
+    E2E --> INT
+    INT --> UNIT
+
+    style E2E fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
+    style INT fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
+    style UNIT fill:#51cf66,stroke:#2f9e44,stroke-width:2px,color:#000
 ```
 
 ### Coverage Targets

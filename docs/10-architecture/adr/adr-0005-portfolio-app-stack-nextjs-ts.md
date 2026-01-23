@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0005: Portfolio App Stack — Next.js + TypeScript'
 description: 'Decision to implement the Portfolio App as a Next.js App Router application using TypeScript, pnpm, and modern UI/tooling aligned to enterprise delivery expectations.'
-sidebar_position: 0005
+sidebar_position: 5
 tags:
   [architecture, adr, portfolio-app, nextjs, typescript, tooling, governance]
 ---

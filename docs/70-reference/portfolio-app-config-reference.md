@@ -1,7 +1,7 @@
 ---
 title: 'Portfolio App Configuration Reference'
 description: 'Comprehensive reference for Portfolio App configuration files: Next.js, ESLint, Prettier, PostCSS, and TypeScript compiler options.'
-sidebar_position: 2
+sidebar_position: 1
 tags:
   [
     reference,
