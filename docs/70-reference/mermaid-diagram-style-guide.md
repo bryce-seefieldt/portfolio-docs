@@ -106,6 +106,20 @@ light: '#f1f3f5' # Light gray - backgrounds, containers
 
 **Example:**
 
+```mermaid
+graph TB
+    Start([Start]) --> Decision{Is valid?}
+    Decision -->|Yes| Process[Process data]
+    Decision -->|No| Error[Return error]
+    Process --> End([End])
+    Error --> End
+
+    style Start fill:#51cf66,stroke:#2f9e44,color:#fff
+    style End fill:#51cf66,stroke:#2f9e44,color:#fff
+    style Error fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style Process fill:#339af0,stroke:#1971c2,color:#fff
+```
+
 ````markdown
 ```mermaid
 graph TB
@@ -121,21 +135,6 @@ graph TB
     style Process fill:#339af0,stroke:#1971c2,color:#fff
 ```
 ````
-
-
-```mermaid
-graph TB
-    Start([Start]) --> Decision{Is valid?}
-    Decision -->|Yes| Process[Process data]
-    Decision -->|No| Error[Return error]
-    Process --> End([End])
-    Error --> End
-
-    style Start fill:#51cf66,stroke:#2f9e44,color:#fff
-    style End fill:#51cf66,stroke:#2f9e44,color:#fff
-    style Error fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style Process fill:#339af0,stroke:#1971c2,color:#fff
-```
 
 ### Sequence Diagrams
 
@@ -149,6 +148,20 @@ graph TB
 
 **Example:**
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API
+    participant DB
+
+    Client->>+API: POST /projects
+    API->>+DB: INSERT project
+    DB-->>-API: project_id
+    API-->>-Client: 201 Created
+
+    Note over Client,DB: Project creation flow
+```
+
 ````markdown
 ```mermaid
 sequenceDiagram
@@ -163,22 +176,6 @@ sequenceDiagram
 
     Note over Client,DB: Project creation flow
 ```
-````
-
-````
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant API
-    participant DB
-
-    Client->>+API: POST /projects
-    API->>+DB: INSERT project
-    DB-->>-API: project_id
-    API-->>-Client: 201 Created
-
-    Note over Client,DB: Project creation flow
 ````
 
 ### State Diagrams
@@ -192,6 +189,23 @@ sequenceDiagram
 
 **Example:**
 
+```mermaid
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Review: Submit
+    Review --> Approved: Approve
+    Review --> Draft: Request changes
+    Approved --> Published: Publish
+    Published --> Archived: Archive
+    Archived --> [*]
+
+    state Review {
+        [*] --> Pending
+        Pending --> InProgress
+        InProgress --> Completed
+    }
+```
+
 ````markdown
 ```mermaid
 stateDiagram-v2
@@ -209,25 +223,6 @@ stateDiagram-v2
         InProgress --> Completed
     }
 ```
-````
-
-````
-
-```mermaid
-stateDiagram-v2
-    [*] --> Draft
-    Draft --> Review: Submit
-    Review --> Approved: Approve
-    Review --> Draft: Request changes
-    Approved --> Published: Publish
-    Published --> Archived: Archive
-    Archived --> [*]
-
-    state Review {
-        [*] --> Pending
-        Pending --> InProgress
-        InProgress --> Completed
-    }
 ````
 
 ### Class Diagrams
@@ -241,6 +236,25 @@ stateDiagram-v2
 
 **Example:**
 
+```mermaid
+classDiagram
+    class Project {
+        +string slug
+        +string title
+        +string summary
+        +validate()
+        +toJSON()
+    }
+
+    class Evidence {
+        +string dossier
+        +string threatModel
+        +string[] adrs
+    }
+
+    Project "1" --> "1" Evidence: has
+```
+
 ````markdown
 ```mermaid
 classDiagram
@@ -260,27 +274,6 @@ classDiagram
 
     Project "1" --> "1" Evidence: has
 ```
-````
-
-````
-
-```mermaid
-classDiagram
-    class Project {
-        +string slug
-        +string title
-        +string summary
-        +validate()
-        +toJSON()
-    }
-
-    class Evidence {
-        +string dossier
-        +string threatModel
-        +string[] adrs
-    }
-
-    Project "1" --> "1" Evidence: has
 ````
 
 ### Entity Relationship Diagrams
@@ -293,6 +286,25 @@ classDiagram
 
 **Example:**
 
+```mermaid
+erDiagram
+    PROJECT ||--o{ TAG : has
+    PROJECT ||--o| EVIDENCE : contains
+    PROJECT {
+        string slug PK
+        string title
+        string summary
+    }
+    TAG {
+        string name PK
+        string category
+    }
+    EVIDENCE {
+        string project_slug FK
+        string dossier_url
+    }
+```
+
 ````markdown
 ```mermaid
 erDiagram
@@ -312,27 +324,6 @@ erDiagram
         string dossier_url
     }
 ```
-````
-
-````
-
-```mermaid
-erDiagram
-    PROJECT ||--o{ TAG : has
-    PROJECT ||--o| EVIDENCE : contains
-    PROJECT {
-        string slug PK
-        string title
-        string summary
-    }
-    TAG {
-        string name PK
-        string category
-    }
-    EVIDENCE {
-        string project_slug FK
-        string dossier_url
-    }
 ````
 
 ### Gantt Charts
@@ -346,6 +337,20 @@ erDiagram
 
 **Example:**
 
+```mermaid
+gantt
+    title Phase 3 Implementation Timeline
+    dateFormat YYYY-MM-DD
+    section Stage 3.1
+    Registry Implementation    :done, s31, 2026-01-15, 3d
+    section Stage 3.2
+    Evidence Components       :done, s32, 2026-01-18, 2d
+    section Stage 3.3
+    Testing                   :active, s33, 2026-01-20, 2d
+    section Stage 3.4
+    Documentation             :s34, 2026-01-22, 2d
+```
+
 ````markdown
 ```mermaid
 gantt
@@ -360,22 +365,6 @@ gantt
     section Stage 3.4
     Documentation             :s34, 2026-01-22, 2d
 ```
-````
-
-````
-
-```mermaid
-gantt
-    title Phase 3 Implementation Timeline
-    dateFormat YYYY-MM-DD
-    section Stage 3.1
-    Registry Implementation    :done, s31, 2026-01-15, 3d
-    section Stage 3.2
-    Evidence Components       :done, s32, 2026-01-18, 2d
-    section Stage 3.3
-    Testing                   :active, s33, 2026-01-20, 2d
-    section Stage 3.4
-    Documentation             :s34, 2026-01-22, 2d
 ````
 
 ## Naming Conventions
@@ -391,6 +380,13 @@ gantt
 
 **Examples:**
 
+```mermaid
+graph LR
+    UserInput[User Input] --> ValidateForm[Validate Form]
+    ValidateForm --> ProcessSubmission[Process Submission]
+    ValidateForm --> ShowError[Show Error]
+```
+
 ````markdown
 ```mermaid
 graph LR
@@ -398,15 +394,6 @@ graph LR
     ValidateForm --> ProcessSubmission[Process Submission]
     ValidateForm --> ShowError[Show Error]
 ```
-````
-
-````
-
-```mermaid
-graph LR
-    UserInput[User Input] --> ValidateForm[Validate Form]
-    ValidateForm --> ProcessSubmission[Process Submission]
-    ValidateForm --> ShowError[Show Error]
 ````
 
 **❌ Bad:**
@@ -435,6 +422,13 @@ ValidateForm --> ProcessSubmission
 
 **Examples:**
 
+```mermaid
+graph TB
+    Start([Start authentication]) --> CheckToken{Token valid?}
+    CheckToken -->|Yes| GrantAccess[Grant access]
+    CheckToken -->|No| DenyAccess[Deny access]
+```
+
 ````markdown
 ```mermaid
 graph TB
@@ -442,15 +436,6 @@ graph TB
     CheckToken -->|Yes| GrantAccess[Grant access]
     CheckToken -->|No| DenyAccess[Deny access]
 ```
-````
-
-````
-
-```mermaid
-graph TB
-    Start([Start authentication]) --> CheckToken{Token valid?}
-    CheckToken -->|Yes| GrantAccess[Grant access]
-    CheckToken -->|No| DenyAccess[Deny access]
 ````
 
 ## Layout Guidelines
@@ -465,6 +450,14 @@ graph TB
     B --> C
 ```
 
+````markdown
+```mermaid
+graph TB
+    A --> B
+    B --> C
+```
+````
+
 **Left to Right (LR)**: For horizontal timelines, pipelines
 
 ```mermaid
@@ -474,20 +467,9 @@ graph LR
 
 ````markdown
 ```mermaid
-graph TB
-    A --> B
-    B --> C
-```
-````
-
-````
-
-```markdown
-```mermaid
 graph LR
     Stage1 --> Stage2 --> Stage3
-````
-
+```
 ````
 
 **Recommendation**: Use TB for most diagrams unless horizontal flow is more intuitive (e.g., CI/CD pipelines, timelines).
@@ -504,7 +486,7 @@ graph TB
     Data[(Database - Cylinder)]
     Document{{Document - Folded document}}
     Subprocess[[Subprocess - Double rectangle]]
-````
+```
 
 ````markdown
 ```mermaid
@@ -518,9 +500,8 @@ graph TB
 ```
 ````
 
-````
-
 **Shape semantics:**
+
 - `([text])` Stadium/Pill: Start/End points
 - `[text]` Rectangle: Standard process steps
 - `{text}` Diamond: Decision points
@@ -547,7 +528,7 @@ graph TB
     UI --> Router
     Router --> API
     API --> DB
-````
+```
 
 ````markdown
 ```mermaid
@@ -568,9 +549,8 @@ graph TB
 ```
 ````
 
-```
-
 **Benefits:**
+
 - Visual hierarchy
 - Logical separation
 - Easier maintenance
@@ -581,11 +561,12 @@ graph TB
 ### Standard Node Styling
 
 **Template:**
+
 ```
 
 style NodeID fill:#hexcolor,stroke:#hexcolor,stroke-width:2px,color:#textcolor
 
-````
+```
 
 **Examples:**
 
@@ -600,7 +581,7 @@ graph TB
     style InProgress fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
     style Error fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
     style Info fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
-````
+```
 
 ````markdown
 ```mermaid
@@ -615,8 +596,6 @@ graph TB
     style Error fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
     style Info fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
 ```
-````
-
 ````
 
 ### Text Color Rules
@@ -645,7 +624,7 @@ graph TB
 
     classDef successNode fill:#51cf66,stroke:#2f9e44,stroke-width:2px,color:#fff
     classDef errorNode fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
-````
+```
 
 ````markdown
 ```mermaid
@@ -660,8 +639,6 @@ graph TB
     classDef successNode fill:#51cf66,stroke:#2f9e44,stroke-width:2px,color:#fff
     classDef errorNode fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
 ```
-````
-
 ````
 
 ## Common Patterns
@@ -693,7 +670,7 @@ graph TB
     style E2E fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
     style INT fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
     style UNIT fill:#51cf66,stroke:#2f9e44,stroke-width:2px,color:#000
-````
+```
 
 ````markdown
 ```mermaid
@@ -724,8 +701,6 @@ graph TB
 ```
 ````
 
-````
-
 ### CI/CD Pipeline
 
 ```mermaid
@@ -747,7 +722,7 @@ graph LR
     style Test fill:#e9ecef,stroke:#868e96,stroke-width:2px,color:#000
     style Build fill:#e9ecef,stroke:#868e96,stroke-width:2px,color:#000
     style Deploy fill:#e9ecef,stroke:#868e96,stroke-width:2px,color:#000
-````
+```
 
 ````markdown
 ```mermaid
@@ -772,8 +747,6 @@ graph LR
 ```
 ````
 
-````
-
 ### State Machine
 
 ```mermaid
@@ -789,7 +762,7 @@ stateDiagram-v2
     note right of Review
         Requires 2 approvals
     end note
-````
+```
 
 ````markdown
 ```mermaid
@@ -806,8 +779,6 @@ stateDiagram-v2
         Requires 2 approvals
     end note
 ```
-````
-
 ````
 
 ### API Request Flow
@@ -828,9 +799,9 @@ sequenceDiagram
         API-->>Client: 400 Bad Request
     end
     API->>-Client: Close connection
-````
+```
 
-`````markdown
+````markdown
 ```mermaid
 sequenceDiagram
     participant Client
@@ -848,12 +819,27 @@ sequenceDiagram
     end
     API->>-Client: Close connection
 ```
+````
 
 ## Accessibility Guidelines
 
 ### Alt Text
 
 Always wrap diagrams in details/summary when possible:
+
+````mdx
+<details>
+<summary>View CI/CD pipeline diagram</summary>
+
+```mermaid
+graph LR
+    ...
+```
+
+**Text description**: The CI/CD pipeline consists of 5 stages: lint, test, build, deploy, and success. Failed stages redirect to a failed end state.
+
+</details>
+````
 
 ````markdown
 <details>
@@ -868,7 +854,6 @@ graph LR
 
 </details>
 ````
-`````
 
 ### High Contrast
 
@@ -885,6 +870,14 @@ graph TB
     A --> B
     B --> C
 ```
+
+````markdown
+```mermaid
+graph TB
+    A --> B
+    B --> C
+```
+````
 
 **✅ Good:**
 
@@ -959,8 +952,6 @@ graph LR
 ```
 ````
 
-````
-
 ### ❌ Avoid: Generic Node Names
 
 **Problem**: `node1`, `step2`, `A`, `B`
@@ -982,7 +973,7 @@ Run local build to catch syntax errors:
 ```bash
 cd portfolio-docs
 pnpm build
-````
+```
 
 **Common errors:**
 
@@ -1079,8 +1070,6 @@ graph TB
 ```
 ````
 
-````
-
 ### Complete Sequence Diagram Example
 
 ```mermaid
@@ -1105,7 +1094,7 @@ sequenceDiagram
     end
 
     App->>-User: Update UI
-````
+```
 
 ````markdown
 ```mermaid
@@ -1133,12 +1122,9 @@ sequenceDiagram
 ```
 ````
 
-```
-
 ## See Also
 
 - [Mermaid Official Documentation](https://mermaid.js.org/) — Complete syntax reference
 - [Testing Guide](/docs/70-reference/testing-guide.md) — Example testing pyramid diagram
-- [Doc Style Guide](/docs/_meta/doc-style-guide.md) — General documentation standards
+- [Doc Style Guide](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/doc-style-guide.md) — General documentation standards
 - [Mermaid Live Editor](https://mermaid.live) — Online diagram editor and validator
-```
