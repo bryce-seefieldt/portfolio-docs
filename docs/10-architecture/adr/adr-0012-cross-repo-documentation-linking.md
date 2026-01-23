@@ -336,9 +336,9 @@ This decision is considered successful if:
 
 ## Related Documentation
 
-- **Config Reference:** [src/lib/config.ts](../../../../portfolio-app/src/lib/config.ts)
-- **Environment Variables:** [.env.example](../../../../portfolio-app/.env.example)
-- **Registry Implementation:** [src/lib/registry.ts](../../../../portfolio-app/src/lib/registry.ts)
+- **Config Reference:** [src/lib/config.ts](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/config.ts)
+- **Environment Variables:** [.env.example](https://github.com/bryce-seefieldt/portfolio-app/tree/main/.env.example)
+- **Registry Implementation:** [src/lib/registry.ts](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/registry.ts)
 - **Portfolio App Dossier:** [docs/60-projects/portfolio-app/index.md](docs/60-projects/portfolio-app/index.md)
 
 ### Related ADRs
