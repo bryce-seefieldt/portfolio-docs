@@ -94,6 +94,21 @@ This dossier is considered “complete enough for first publication” when:
   - this hub page is the category landing page
 - claims in these pages map to concrete governance/pipeline/security/ops artifacts (even if some artifacts are initially stubbed)
 
+## Current State (Phase 3–Stage 3.5)
+
+- ✅ **Docs infrastructure**: Docusaurus + TypeScript configured for enterprise authoring patterns
+- ✅ **Architecture and governance**: 7-page dossier with full threat model, security analysis, and operational baseline (Phase 2)
+- ✅ **CI/CD pipeline**: Quality gates (lint, format check, link validation); build determinism enforced with frozen lockfiles; branch protection via required checks (Phase 3.3)
+- ✅ **Testing and validation**: Complete build/link/lint/format quality gates; local `pnpm verify` script with 8-step workflow (Phase 3.3)
+- ✅ **Operational procedures**: Comprehensive runbooks and governance documentation in `docs/50-operations/runbooks/` (Phase 3–Stage 3.5)
+  - **Project Publish Runbook**: 6-phase, time-boxed procedure (3 hours) for portfolio app project publication
+    - Covers Planning → Registry Entry → Dossier Update → Link Validation → PR/Review → Post-Publish
+    - Validation signals: `pnpm registry:validate`, `pnpm links:check`, `pnpm build`
+    - Includes rollback and abort procedures
+  - **Troubleshooting Guide**: 5 common project-publication failure modes with diagnostic steps
+    - Covers invalid slugs, broken dossier links, missing evidence URLs, schema validation failures, CI link-validation flakiness
+    - References playwright-report artifacts from CI for debugging
+
 ## Failure modes / Troubleshooting
 
 - Dossier pages drift into general policy (belongs in domain sections) → refactor content into the appropriate domain and keep dossier as project-specific summary.

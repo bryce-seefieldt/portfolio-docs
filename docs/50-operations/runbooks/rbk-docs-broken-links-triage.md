@@ -1,7 +1,7 @@
 ---
 title: 'Runbook: Broken Links Triage for Portfolio Docs App'
 description: 'Procedure to diagnose and fix pnpm build failures caused by broken internal links, missing doc IDs, or category link mismatches.'
-sidebar_position: 3
+sidebar_position: 101
 tags: [operations, runbook, troubleshooting, documentation, quality-gates]
 ---
 

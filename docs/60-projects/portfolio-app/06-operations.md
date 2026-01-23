@@ -55,11 +55,15 @@ Responsibilities:
 ### Release gates (CI)
 
 - CI is a hard release gate. Merges and promotions must not proceed if required checks fail.
-- Required checks (by contract): `ci / quality`, `ci / test`, `ci / build`.
+- Required checks (by contract): `ci / quality`, `ci / test`, `ci / build`, `ci / link-validation`.
 - Quality runs `pnpm lint`, `pnpm format:check`, `pnpm typecheck`
 - Test runs:
   - Unit tests: `pnpm test:unit` (70+ Vitest tests with ≥80% coverage validation)
   - E2E tests: `pnpm playwright test` (12 Playwright tests across Chromium, Firefox)
+- Link validation runs (Stage 3.5):
+  - Registry validation: `pnpm registry:validate` (checks project metadata schema)
+  - Evidence link checks: `pnpm links:check` (Playwright-based validation of all `href="/docs/*"` links)
+  - Produces playwright-report artifact on failure for diagnostic use
 - Build runs `pnpm build` with frozen lockfile installs, then triggers Vercel deployment
 - If CI fails: follow the CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
 

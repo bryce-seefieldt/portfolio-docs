@@ -75,6 +75,21 @@ Runbooks must include:
 - validation
 - rollback and failure modes
 
+### Existing runbooks (Stage 3.5 — Portfolio App publication governance)
+
+The Portfolio Docs App hosts operational runbooks for the Portfolio App project publication workflow:
+
+- **[Project Publish Runbook](../../50-operations/runbooks/rbk-portfolio-project-publish.md)**: 6-phase procedure for safely publishing new portfolio projects
+  - Covers Planning → Registry Entry → Dossier Update → Link Validation → PR/Review → Post-Publish
+  - Validation signals: `pnpm registry:validate`, `pnpm links:check`, `pnpm build`
+  - Time-boxed: 3 hours total (~30m per phase)
+  - Includes rollback and abort procedures
+
+- **[Troubleshooting Guide](../../50-operations/runbooks/rbk-troubleshooting-portfolio-publish.md)**: Diagnostic guide for project-publication failures
+  - 5 common failure modes: invalid slugs, broken dossier links, missing evidence URLs, schema validation, CI flakiness
+  - Each includes root cause analysis, specific diagnostic commands, and fixes
+  - References playwright-report artifacts from CI link-validation job for debugging
+
 ## Maintenance cadence (recommended)
 
 ### Weekly / bi-weekly

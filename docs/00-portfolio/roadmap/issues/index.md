@@ -24,6 +24,8 @@ Use this index to find the canonical task descriptions, acceptance criteria, and
 
 ## Current Issues
 
+- Stage 3.5 — App: CI link validation and link-check job — see [stage-3-5-app-issue.md](./stage-3-5-app-issue.md)
+- Stage 3.5 — Docs: Publish runbook and troubleshooting guide — see [stage-3-5-docs-issue.md](./stage-3-5-docs-issue.md)
 - Stage 3.4 — App: Copilot instructions update with Phase 3 patterns — see [stage-3-4-app-issue.md](./stage-3-4-app-issue.md)
 - Stage 3.4 — Docs: ADRs 0011/0012 and registry schema guide — see [stage-3-4-docs-issue.md](./stage-3-4-docs-issue.md)
 - Stage 3.3 — App: Unit & E2E tests, coverage integration — see [stage-3-3-app-issue.md](./stage-3-3-app-issue.md)

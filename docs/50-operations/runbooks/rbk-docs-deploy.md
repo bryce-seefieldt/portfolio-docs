@@ -1,7 +1,7 @@
 ---
 title: 'Runbook: Deploy Portfolio Docs App'
 description: 'Procedure to deploy the Portfolio Docs App via PR workflow, including validation steps and rollback triggers.'
-sidebar_position: 1
+sidebar_position: 100
 tags: [operations, runbook, deployment, documentation, devops]
 ---
 

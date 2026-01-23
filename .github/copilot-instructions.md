@@ -218,8 +218,83 @@ Any material change must update:
 
 - a dossier page (if it affects a project’s behavior)
 - ADR(s) (if it is a durable architectural decision)
-- threat model(s) (if it changes trust boundaries or supply chain posture)
-- runbook(s) (if it changes deploy/rollback/triage steps)
+- threat model(s) (if it changes trust boundaries or supply chain posture)- runbook(s) (if it changes deploy/rollback/triage steps)
+- release notes (if it changes externally visible behavior or governance)
+
+### Special case: CI/CD and verification process changes
+
+**Mandatory:** When making changes to CI workflows or local verification processes, you MUST update the following files in the same PR:
+
+**CONTRIBUTING.md updates required when:**
+
+- Adding/removing/renaming CI jobs (`.github/workflows/ci.yml` or `.github/workflows/*.yml`)
+  - Update: "Required checks (definition of merge-ready)" section → numbered list of checks
+  - Update: Job names and descriptions in quality gates subsection
+- Adding/removing/changing local verification steps or commands
+  - Update: "Quick check commands" section for both portfolio-app and portfolio-docs
+  - Update: Command examples in "Required checks" section
+- Changing pnpm script names or adding new verification scripts
+  - Update: All command references throughout CONTRIBUTING.md
+  - Update: "For portfolio-app" and "For portfolio-docs" verification sections
+- Adding new verification tools (like TruffleHog, Playwright)
+  - Update: "Secrets scanning" or relevant subsections
+  - Add installation/setup instructions if needed
+
+**scripts/verify-docs-local.sh updates required when:**
+
+- Adding/removing/changing verification steps in the local development workflow
+  - Add: New step section with appropriate print_section, command execution, success/failure handling
+  - Remove: Obsolete step sections
+  - Update: Step numbers and descriptions to maintain sequential flow (Step 1, Step 2, etc.)
+- Adding/removing pnpm scripts that should be run during local verification
+  - Add: Execution block with appropriate error handling and troubleshooting guidance
+  - Update: Summary section to reflect new check count
+- Changing verification tools or their invocation (e.g., ESLint config changes, new TypeScript options)
+  - Update: Tool version checks in "Environment check" section if applicable
+  - Update: Troubleshooting guidance for the affected step
+- Adding flags or options to existing commands (e.g., `--skip-build`, `--ci-mode`)
+  - Add: Argument parsing in script header
+  - Update: Help text and usage examples
+
+**PULL_REQUEST_TEMPLATE.md updates required when:**
+
+- Adding/removing/renaming CI jobs or changing job names displayed in GitHub UI
+  - Update: "Evidence" section → CI job checklist (add/remove/rename checkboxes with descriptions)
+- Changing what each CI job validates
+  - Update: Job descriptions in parentheses (e.g., "Docusaurus build + broken links check")
+- Adding new CI-only gates or conditional jobs
+  - Update: Add notes about when job runs if applicable
+
+**Validation before merge:**
+
+- Verify CONTRIBUTING.md "Required checks" section lists all current CI jobs
+- Verify CONTRIBUTING.md verification commands match actual scripts in `package.json`
+- Verify PULL_REQUEST_TEMPLATE.md Evidence checklist matches `.github/workflows/ci.yml` jobs
+- Confirm all command examples in CONTRIBUTING.md are copy/paste safe and current
+- Verify scripts/verify-docs-local.sh steps match CONTRIBUTING.md verification workflow and `pnpm verify` execution
+
+**Failure to update these files will cause:**
+
+- Contributor confusion (CONTRIBUTING.md doesn't match reality)
+- PR template checklist drift (missing/outdated CI jobs in Evidence section)
+- Onboarding friction (new contributors follow outdated verification steps)
+- Evidence gaps in PRs (checklist doesn't cover all required checks)
+- Local verification script drift (developers run outdated checks)
+
+**Example:** If you add a new `ci / link-validation` job:
+
+1. Update CONTRIBUTING.md:
+   - Add to "Required checks" list: "5. **Link validation** - \`ci / link-validation\` passes"
+   - Add command example if there's a local equivalent: `pnpm links:check`
+2. Update PULL_REQUEST_TEMPLATE.md:
+   - Add to Evidence section: `- [ ] \`ci / link-validation\` passed (description)`
+3. Update scripts/verify-docs-local.sh:
+   - Add new step section (e.g., "Step 6: Link validation")
+   - Add `pnpm links:check` execution with error handling
+   - Update step numbers for subsequent steps if needed
+
+---- runbook(s) (if it changes deploy/rollback/triage steps)
+
 - release notes (if it changes externally visible behavior or governance)
 
 ## Step 3 — Implement changes in small, auditable increments
@@ -407,6 +482,8 @@ Exceptions:
 ## Diagram standards (mandatory)
 
 **ALL diagrams created within `docs/` subdirectories MUST use Mermaid format exclusively — never PNG, SVG, ASCII art, or external tools.**
+
+- When adding or updating any diagram, follow the canonical style rules in [docs/70-reference/mermaid-diagram-style-guide.md](docs/70-reference/mermaid-diagram-style-guide.md) to ensure palette, shapes, and layout stay consistent across the site.
 
 ### Why Mermaid
 

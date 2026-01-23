@@ -2,7 +2,7 @@
 title: 'ADR-0010: Portfolio App as Gold Standard Exemplar Project'
 status: 'accepted'
 date: 2026-01-17
-sidebar_position: 0010
+sidebar_position: 1.0
 tags:
   [adr, architecture, portfolio-program, exemplar, quality-baseline, phase-2]
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0004: Expand CI and Deployment Quality Gates (Lint, Format, Typecheck, Docs Integrity)'
 description: 'Decision to implement additional CI quality gates and Vercel deployment checks to enforce build determinism, code quality, and documentation integrity for the Documentation App.'
-sidebar_position: 0004
+sidebar_position: 0.4
 tags:
   [
     architecture,

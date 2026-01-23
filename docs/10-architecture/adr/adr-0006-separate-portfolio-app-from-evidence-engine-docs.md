@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0006: Separate Portfolio App from Docs App'
 description: 'Decision to keep the Portfolio App focused on a polished product experience and use the Docusaurus Documentation App as the enterprise evidence engine.'
-sidebar_position: 0006
+sidebar_position: 0.6
 tags:
   [
     architecture,
