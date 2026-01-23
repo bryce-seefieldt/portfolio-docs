@@ -86,6 +86,7 @@ Recommended initial approach (low complexity):
 - Validation is enforced in CI via `pnpm registry:validate` and during build; schema is documented in [docs/70-reference/registry-schema-guide.md](docs/70-reference/registry-schema-guide.md); rationale captured in [docs/10-architecture/adr/adr-0011-data-driven-project-registry.md](docs/10-architecture/adr/adr-0011-data-driven-project-registry.md).
 - URLs support env-driven placeholders (`{GITHUB_URL}`, `{DOCS_BASE_URL}`, `{DOCS_GITHUB_URL}`, `{SITE_URL}`) resolved from `NEXT_PUBLIC_*` variables to keep references portable across deploy environments.
 - Evidence fields (dossier, threat model, ADR index, runbooks, GitHub) are part of the contract so every claim on a project page links to verifiable artifacts in the docs app.
+
 ### Evidence Visualization Layer (Stage 3.2)
 
 After Stage 3.1 established a data-driven registry, Stage 3.2 makes evidence visualization a first-class architectural concern through three reusable React components. Rather than relegating evidence links to project footers or separate pages, components embed evidence discovery into the main project detail experience.
@@ -163,21 +164,25 @@ Evidence data flows:
 #### Design Decisions
 
 **Why separate components instead of monolithic "Evidence" component?**
+
 - Each component solves a distinct UX problem; enables reuse in different contexts (future index views, dashboards)
 - Changes to one concern don't cascade through entire component tree
 - Simpler testing and maintenance
 
 **Why Tailwind CSS for styling?**
+
 - All portfolio-app styling uses Tailwind; avoids framework fragmentation
 - Utility-first CSS with tree-shaking minimizes bundle overhead
 - Dark mode support via `dark:` modifier is built-in
 
 **Why responsive grid (3-column desktop)?**
+
 - Scales naturally: three evidence categories (dossier, threat model, ADRs) fit 3-column layout
 - Mobile-first design: starts at 1 column, progressively enhances
 - Future-proof: easy to add more evidence types
 
 **Why build links from registry?**
+
 - Registry is single source of truth; link changes update all pages automatically
 - Portability: URLs remain consistent across environments and deploy variations
 - Maintainability: Adding new projects or changing evidence URLs requires registry edit only
@@ -193,6 +198,7 @@ Planned enhancements:
 - Link validation dashboard (showing broken evidence links)
 - Keyboard focus management and enhanced a11y improvements
 - Storybook integration for component library documentation
+
 ### Evidence-link strategy
 
 Each project entry should include:

@@ -13,7 +13,7 @@ tags: [portfolio, roadmap, planning, phase-3, stage-3.2, docs, documentation]
 **Duration Estimate:** 2–3 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-21  
-**Status:** Ready to execute
+**Status:** ✅ COMPLETE (2026-01-22)
 
 ---
 
@@ -254,22 +254,22 @@ Evidence data flow:
 #### 3. Verification Pass for `03-deployment.md`, `04-security.md`, `05-testing.md`
 
 **03-deployment.md:**
-- [ ] Verify deployment steps mention component build step (Next.js build compiles/bundles components)
-- [ ] No new deployment infrastructure needed (components are client-side only)
-- [ ] No required environment variable changes for components
-- [ ] Deployment URL strategy unchanged (components use existing `NEXT_PUBLIC_*` vars)
+- [X] Verify deployment steps mention component build step (Next.js build compiles/bundles components)
+- [X] No new deployment infrastructure needed (components are client-side only)
+- [X] No required environment variable changes for components
+- [X] Deployment URL strategy unchanged (components use existing `NEXT_PUBLIC_*` vars)
 
 **04-security.md:**
-- [ ] Components accept `project` prop only (no external API calls)
-- [ ] Components render links; no form submission or authentication
-- [ ] No secrets embedded in component code or styling
-- [ ] Evidence links are validated by registry loader (trust already established)
-- [ ] Conclusion: Components add no new attack surface or trust boundaries
+- [X] Components accept `project` prop only (no external API calls)
+- [X] Components render links; no form submission or authentication
+- [X] No secrets embedded in component code or styling
+- [X] Evidence links are validated by registry loader (trust already established)
+- [X] Conclusion: Components add no new attack surface or trust boundaries
 
 **05-testing.md:**
-- [ ] Add note: Playwright smoke tests verify project pages render correctly with components
-- [ ] Add note: Components styled with Tailwind; testing focuses on DOM presence and link accessibility, not visual regression
-- [ ] Manual testing: verify responsive design on mobile/tablet/desktop (covered in app issue)
+- [X] Add note: Playwright smoke tests verify project pages render correctly with components
+- [X] Add note: Components styled with Tailwind; testing focuses on DOM presence and link accessibility, not visual regression
+- [X] Manual testing: verify responsive design on mobile/tablet/desktop (covered in app issue)
 
 ---
 
@@ -291,15 +291,15 @@ However, if reviewers ask:
 
 **Pre-merge checklist for this stage:**
 
-- [ ] Portfolio App dossier contains no broken links
-- [ ] All evidence paths in dossier match `src/data/projects.yml` structure
+- [X] Portfolio App dossier contains no broken links
+- [X] All evidence paths in dossier match `src/data/projects.yml` structure
   - Dossier should reference: projects/portfolio-app/ (path in registry)
   - Threat model should reference: security/threat-models/portfolio-app-threat-model (path in registry)
   - ADR index should reference: architecture/adr/ (standard path)
   - Runbooks should reference: operations/runbooks/ (standard path)
-- [ ] Registry validation passes: `pnpm registry:validate` (from portfolio-app repo)
-- [ ] Build succeeds: `pnpm build` (portfolio-docs)
-- [ ] No console warnings about missing evidence in project pages
+- [X] Registry validation passes: `pnpm registry:validate` (from portfolio-app repo)
+- [X] Build succeeds: `pnpm build` (portfolio-docs)
+- [X] No console warnings about missing evidence in project pages
 
 ### Audience Guidance
 
@@ -323,16 +323,19 @@ However, if reviewers ask:
 
 ## Success Criteria
 
-- ✅ Portfolio App dossier updated with Stage 3.2 component architecture section
-- ✅ Overview page mentions component library with link to detailed architecture
-- ✅ Architecture section explains all three components (EvidenceBlock, VerificationBadge, BadgeGroup)
-- ✅ Design decisions documented (why separate components, why Tailwind, why registry-first)
-- ✅ All evidence links in dossier resolve to correct docs URLs
-- ✅ No broken internal links (build succeeds without warnings)
-- ✅ ADRs and threat model remain consistent (no contradictions)
-- ✅ Testing guidance updated if applicable
-- ✅ Deployment documentation verified (no changes needed, no new steps required)
-- ✅ Future enhancement candidates listed in "Maintainability" section
+- [x] ✅ Portfolio App dossier updated with Stage 3.2 component architecture section
+- [x] ✅ Overview page mentions component library with link to detailed architecture
+- [x] ✅ Architecture section explains all three components (VerificationBadge, BadgeGroup, EvidenceBlock)
+- [x] ✅ Design decisions documented (why separate components, why Tailwind, why registry-first, why responsive grid)
+- [x] ✅ All evidence links in dossier resolve to correct docs URLs
+- [x] ✅ No broken internal links (build succeeds without warnings: `pnpm build` PASSED)
+- [x] ✅ ADRs and threat model remain consistent (no contradictions)
+- [x] ✅ Testing guidance verified (no updates needed)
+- [x] ✅ Deployment documentation verified (no changes required)
+- [x] ✅ Future enhancement candidates listed in Maintainability section
+- [x] ✅ Feature branch created: `docs/stage-3-2-evidence-components`
+- [x] ✅ PR #47 created and pushed: https://github.com/bryce-seefieldt/portfolio-docs/pull/47
+- [x] ✅ Companion PR #28 (portfolio-app) in parallel for synchronized merge
 
 ---
 
@@ -349,14 +352,14 @@ However, if reviewers ask:
 
 All updates must follow portfolio-docs authoring standards:
 
-- [ ] Front matter correct: title, description, tags, sidebar_position (if applicable)
-- [ ] Standard page shape: Purpose / Scope / Content / Links (architecture pages may vary)
-- [ ] No broken links: all relative links start with `/docs/`, include prefix numbers, include `.md`
-- [ ] All external links use full GitHub URLs or production deployment URLs
-- [ ] Tone: enterprise engineering organization (explicit, verifiable, no marketing)
-- [ ] Mermaid diagrams (if added): tested locally with `pnpm build && pnpm serve`
-- [ ] Build succeeds: `pnpm build` with no warnings
-- [ ] No secrets or sensitive information
+- [X] Front matter correct: title, description, tags, sidebar_position (if applicable)
+- [X] Standard page shape: Purpose / Scope / Content / Links (architecture pages may vary)
+- [X] No broken links: all relative links start with `/docs/`, include prefix numbers, include `.md`
+- [X] All external links use full GitHub URLs or production deployment URLs
+- [X] Tone: enterprise engineering organization (explicit, verifiable, no marketing)
+- [X] Mermaid diagrams (if added): tested locally with `pnpm build && pnpm serve`
+- [X] Build succeeds: `pnpm build` with no warnings
+- [X] No secrets or sensitive information
 
 ---
 
@@ -373,9 +376,9 @@ All updates must follow portfolio-docs authoring standards:
 
 ## Post-Implementation Tasks (Next Phase)
 
-- [ ] Create release note entry documenting Stage 3.2 completion
-- [ ] Add Stage 3.2 metrics to Phase 3 completion checklist (actual effort vs. estimate)
-- [ ] Plan Stage 3.3 (Unit & E2E Tests)
+- [X] Create release note entry documenting Stage 3.2 completion
+- [X] Add Stage 3.2 metrics to Phase 3 completion checklist (actual effort vs. estimate)
+- [X] Plan Stage 3.3 (Unit & E2E Tests)
 
 ---
 

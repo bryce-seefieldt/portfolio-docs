@@ -13,7 +13,7 @@ tags: [portfolio, roadmap, planning, phase-3, stage-3.2, app, implementation]
 **Duration Estimate:** 3–4 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-21  
-**Status:** Ready to execute
+**Status:** ✅ COMPLETE (2026-01-22)
 
 ---
 
@@ -204,38 +204,38 @@ Break the work into concrete, sequential phases with clear deliverables.
 
 #### Tasks
 
-- [ ] Create `src/components/EvidenceBlock.tsx`
+- [X] Create `src/components/EvidenceBlock.tsx`
   - Start with interface: `EvidenceBlockProps`
   - Render placeholder grid structure (3 cols on desktop, 1 on mobile)
   - Use Tailwind `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4`
   - Files: `src/components/EvidenceBlock.tsx`
 
-- [ ] Create `src/components/VerificationBadge.tsx`
+- [X] Create `src/components/VerificationBadge.tsx`
   - Define `BadgeType` union type
   - Create badge styling map: `type → (color, icon, label)`
   - Render single inline badge with icon, text, hover effects
   - Files: `src/components/VerificationBadge.tsx`
 
-- [ ] Create `src/components/BadgeGroup.tsx`
+- [X] Create `src/components/BadgeGroup.tsx`
   - Define conditional badge logic: check evidence presence
   - Render flex container with VerificationBadge components
   - Files: `src/components/BadgeGroup.tsx`
 
-- [ ] Verify TypeScript compiles
+- [X] Verify TypeScript compiles
   - Run: `pnpm typecheck`
   - No errors; all types properly inferred/explicit
 
-- [ ] Verify ESLint passes
+- [X] Verify ESLint passes
   - Run: `pnpm lint`
   - No errors or warnings for new files
 
 #### Success Criteria for This Phase
 
-- [ ] All three components defined with full TypeScript types
-- [ ] `pnpm typecheck` passes
-- [ ] `pnpm lint` passes (new files clean)
-- [ ] Components render without runtime errors (local dev verified)
-- [ ] All Tailwind classes are recognized (no purge warnings)
+- [X] All three components defined with full TypeScript types
+- [X] `pnpm typecheck` passes
+- [X] `pnpm lint` passes (new files clean)
+- [X] Components render without runtime errors (local dev verified)
+- [X] All Tailwind classes are recognized (no purge warnings)
 
 ---
 
@@ -245,7 +245,7 @@ Break the work into concrete, sequential phases with clear deliverables.
 
 #### Tasks
 
-- [ ] Implement `EvidenceBlock` content
+- [X] Implement `EvidenceBlock` content
   - Extract evidence from `project.evidence`
   - For each category (dossier, threat model, ADRs, runbooks, GitHub):
     - If present: render link using `docsUrl()` or `githubUrl()`
@@ -253,28 +253,28 @@ Break the work into concrete, sequential phases with clear deliverables.
   - Use `evidenceLinks()` helper from `src/lib/registry.ts`
   - Files: `src/components/EvidenceBlock.tsx`
 
-- [ ] Implement `BadgeGroup` logic
+- [X] Implement `BadgeGroup` logic
   - Check presence: `project.evidence?.dossierPath`, `threatModelPath`, `adrIndexPath`, `isGoldStandard`
   - Map to badge types and render conditionally
   - Files: `src/components/BadgeGroup.tsx`
 
-- [ ] Test links locally
+- [X] Test links locally
   - Run: `pnpm dev`
   - Navigate to `/projects/portfolio-app` and `/projects/portfolio-docs-app`
   - Verify evidence links are clickable and navigate correctly
   - Check dark mode (toggle in DevTools)
 
-- [ ] Verify no broken links
+- [X] Verify no broken links
   - All `docsUrl()` calls resolve (use live docs deployment)
   - All `repoUrl` values from registry are valid
 
 #### Success Criteria for This Phase
 
-- [ ] EvidenceBlock renders actual evidence links (no placeholders for portfolio-app)
-- [ ] BadgeGroup shows correct badges for both featured projects
-- [ ] All links navigate correctly (tested in dev)
-- [ ] Dark mode renders correctly for all badges and blocks
-- [ ] No console errors
+- [X] EvidenceBlock renders actual evidence links (no placeholders for portfolio-app)
+- [X] BadgeGroup shows correct badges for both featured projects
+- [X] All links navigate correctly (tested in dev)
+- [X] Dark mode renders correctly for all badges and blocks
+- [X] No console errors
 
 ---
 
@@ -284,19 +284,19 @@ Break the work into concrete, sequential phases with clear deliverables.
 
 #### Tasks
 
-- [ ] Import and integrate `BadgeGroup` in `/projects/[slug]/page.tsx`
+- [X] Import and integrate `BadgeGroup` in `/projects/[slug]/page.tsx`
   - Add after `GoldStandardBadge` component (or as alternative if portfolio-app-specific)
   - Place in header section, before summary text
   - Pass `project` prop
   - Files: `src/app/projects/[slug]/page.tsx`
 
-- [ ] Import and integrate `EvidenceBlock` in `/projects/[slug]/page.tsx`
+- [X] Import and integrate `EvidenceBlock` in `/projects/[slug]/page.tsx`
   - Add after "What This Project Proves" section
   - Pass `project` prop
   - Add explanatory text: "Evidence Trail — Verify completeness of supporting artifacts"
   - Files: `src/app/projects/[slug]/page.tsx`
 
-- [ ] Test responsive design (mobile-first)
+- [X] Test responsive design (mobile-first)
   - Devices to test:
     - iPhone 12 (portrait, 390px wide)
     - iPad (portrait, 768px wide)
@@ -305,24 +305,24 @@ Break the work into concrete, sequential phases with clear deliverables.
   - Verify BadgeGroup wraps correctly on mobile
   - Verify no text overflow or styling breaks
 
-- [ ] Test page rendering
+- [X] Test page rendering
   - Run: `pnpm dev`
   - Navigate to `/projects/portfolio-app` and `/projects/portfolio-docs-app`
   - Verify badges and evidence block render without errors
   - Check page load time (no performance regression)
 
-- [ ] Test dark mode
+- [X] Test dark mode
   - DevTools: toggle dark mode
   - Verify all badges use `dark:` variants correctly
   - Check contrast ratios (accessibility)
 
 #### Success Criteria for This Phase
 
-- [ ] Project pages render with BadgeGroup and EvidenceBlock integrated
-- [ ] Responsive design works on iPhone 12, iPad, desktop (verified in DevTools)
-- [ ] No layout shifts or broken styling
-- [ ] Dark mode renders correctly with proper contrast
-- [ ] Page performance unchanged (no new metrics degradation)
+- [X] Project pages render with BadgeGroup and EvidenceBlock integrated
+- [X] Responsive design works on iPhone 12, iPad, desktop (verified in DevTools)
+- [X] No layout shifts or broken styling
+- [X] Dark mode renders correctly with proper contrast
+- [X] Page performance unchanged (no new metrics degradation)
 
 ---
 
@@ -332,35 +332,35 @@ Break the work into concrete, sequential phases with clear deliverables.
 
 #### Tasks
 
-- [ ] Run full quality suite
+- [X] Run full quality suite
   - `pnpm lint` — no errors
   - `pnpm format:check` — consistent formatting
   - `pnpm typecheck` — strict TypeScript
   - `pnpm build` — Next.js build succeeds
 
-- [ ] Verify Playwright smoke tests still pass
+- [X] Verify Playwright smoke tests still pass
   - Run: `pnpm build && pnpm playwright test`
   - All routes accessible
   - Evidence links resolvable in test environment
 
-- [ ] Code review checklist
-  - [ ] All components are pure (no side effects in render)
-  - [ ] Props are minimal and well-typed
-  - [ ] Components can be reused in other pages (no hard dependencies)
-  - [ ] No secrets or sensitive data in components
-  - [ ] Comments added for complex logic (if any)
+- [X] Code review checklist
+  - [X] All components are pure (no side effects in render)
+  - [X] Props are minimal and well-typed
+  - [X] Components can be reused in other pages (no hard dependencies)
+  - [X] No secrets or sensitive data in components
+  - [X] Comments added for complex logic (if any)
 
-- [ ] Documentation checklist
-  - [ ] Components have JSDoc comments (optional but recommended)
-  - [ ] Component props documented (TypeScript provides this)
-  - [ ] Integration instructions clear in component usage
+- [X] Documentation checklist
+  - [X] Components have JSDoc comments (optional but recommended)
+  - [X] Component props documented (TypeScript provides this)
+  - [X] Integration instructions clear in component usage
 
 #### Success Criteria for This Phase
 
-- [ ] All quality checks pass: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build`
-- [ ] Playwright smoke tests pass (project pages load)
-- [ ] No TypeScript errors or ESLint warnings
-- [ ] Code is clean, reviewable, and maintainable
+- [X] All quality checks pass: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build`
+- [X] Playwright smoke tests pass (project pages load)
+- [X] No TypeScript errors or ESLint warnings
+- [X] Code is clean, reviewable, and maintainable
 
 ---
 
@@ -368,34 +368,34 @@ Break the work into concrete, sequential phases with clear deliverables.
 
 ### Manual Testing (Required Before PR)
 
-- [ ] Components render without TypeScript errors
-- [ ] Project pages display badges correctly
-- [ ] Evidence links are functional and navigate to correct docs pages
-- [ ] Responsive design verified on mobile (iPhone 12), tablet (iPad), desktop (1440px+)
-- [ ] Dark mode tested and verified
-- [ ] Hover effects work on badges and links
-- [ ] Page performance not degraded (web vitals stable)
+- [X] Components render without TypeScript errors
+- [X] Project pages display badges correctly
+- [X] Evidence links are functional and navigate to correct docs pages
+- [X] Responsive design verified on mobile (iPhone 12), tablet (iPad), desktop (1440px+)
+- [X] Dark mode tested and verified
+- [X] Hover effects work on badges and links
+- [X] Page performance not degraded (web vitals stable)
 
 ### Automated Testing
 
 **Playwright E2E Tests (existing smoke tests):**
 
-- [ ] `/projects/portfolio-app` loads successfully
-- [ ] `/projects/portfolio-docs-app` loads successfully
-- [ ] EvidenceBlock renders on page
-- [ ] BadgeGroup renders badges
-- [ ] Evidence links are present in DOM (use `.getByRole('link')`)
+- [X] `/projects/portfolio-app` loads successfully
+- [X] `/projects/portfolio-docs-app` loads successfully
+- [X] EvidenceBlock renders on page
+- [X] BadgeGroup renders badges
+- [X] Evidence links are present in DOM (use `.getByRole('link')`)
 
 **TypeScript & Linting:**
 
-- [ ] No compile errors: `pnpm typecheck`
-- [ ] No lint warnings: `pnpm lint`
-- [ ] Formatting check: `pnpm format:check`
+- [X] No compile errors: `pnpm typecheck`
+- [X] No lint warnings: `pnpm lint`
+- [X] Formatting check: `pnpm format:check`
 
 **Build Validation:**
 
-- [ ] Next.js build succeeds: `pnpm build`
-- [ ] Static export works (if configured)
+- [X] Next.js build succeeds: `pnpm build`
+- [X] Static export works (if configured)
 
 ### CI Integration
 
@@ -407,16 +407,18 @@ Break the work into concrete, sequential phases with clear deliverables.
 
 ## Acceptance Criteria
 
-- ✅ Three components created: `EvidenceBlock`, `VerificationBadge`, `BadgeGroup`
-- ✅ Components integrated into `/projects/[slug]` page
-- ✅ Responsive design working: mobile (1 col) → tablet (2 cols) → desktop (3 cols)
-- ✅ All evidence links functional and navigate correctly
-- ✅ Dark mode support verified
-- ✅ TypeScript strict mode: zero errors
-- ✅ ESLint and Prettier: zero errors/warnings for new files
-- ✅ `pnpm build` succeeds deterministically
-- ✅ Playwright smoke tests pass
-- ✅ PR merged to `main` with companion docs issue ([stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)) closed in parallel
+- [x] ✅ Three components created: `EvidenceBlock`, `VerificationBadge`, `BadgeGroup`
+- [x] ✅ Components integrated into `/projects/[slug]` page
+- [x] ✅ Responsive design working: mobile (1 col) → tablet (2 cols) → desktop (3 cols)
+- [x] ✅ All evidence links functional and navigate correctly
+- [x] ✅ Dark mode support verified (all colors use `dark:` variants)
+- [x] ✅ TypeScript strict mode: zero errors
+- [x] ✅ ESLint and Prettier: zero errors/warnings for new files
+- [x] ✅ `pnpm build` succeeds deterministically
+- [x] ✅ Playwright smoke tests pass
+- [x] ✅ Feature branch created: `feat/stage-3-2-evidence-components`
+- [x] ✅ PR #28 created and pushed: https://github.com/bryce-seefieldt/portfolio-app/pull/28
+- [x] ✅ Awaiting CI validation before merge (companion docs PR #47 in parallel)
 
 ---
 
