@@ -106,6 +106,8 @@ This docs platform is itself a **first-class project** (and the first project do
   - Docs repo source: `NEXT_PUBLIC_DOCS_GITHUB_URL + "blob/main/docs/10-architecture/adr/adr-0011-data-driven-project-registry.md"`
   - App repo source: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/registry.ts`
 
+**Phase 3 status:** Stages 3.1–3.3 are complete (registry, evidence UI, and unit/E2E/coverage wiring); Stage 3.4 documentation updates are next.
+
 ## Relationship to the future Portfolio project
 
 The Portfolio Docs App is a **platform** that will document the broader Portfolio program:

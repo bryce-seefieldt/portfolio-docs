@@ -78,19 +78,22 @@ Portfolio App must link to evidence pages for each project:
 - CI gates enforced: `ci / quality` (lint, format check, typecheck) → `ci / build` (Next build), frozen lockfile installs.
 - CodeQL and Dependabot baselines present; branch protection/ruleset requires required checks before merge.
 
-### Current State (Phase 2)
+### Current State (Phase 2–3.3)
 
-- ✅ **Route skeleton**: 5 core routes implemented and smoke-tested
-- ✅ **CI quality gates**: lint, format, typecheck, secrets-scan, build with smoke tests (all enforced)
-- ✅ **Smoke test coverage**: 100% routes (12 tests, Chromium + Firefox)
-- ✅ **Secrets scanning**: CI gate via TruffleHog (PR-only); optional pre-commit hook. Local verify uses a lightweight pattern scan (no TruffleHog).
+- ✅ **Route skeleton**: 5 core routes implemented and fully tested
+- ✅ **CI quality gates**: lint, format, typecheck, secrets-scan, registry validation, unit tests, E2E tests, build (all enforced)
+- ✅ **Unit test coverage**: 70+ Vitest tests (registry validation, slug helpers, link construction) with ≥80% code coverage
+- ✅ **E2E test coverage**: 12 Playwright tests across Chromium, Firefox (100% route coverage + evidence link validation)
+- ✅ **Comprehensive testing**: verify script with 9-step validation workflow (optional verify:quick for fast iteration)
+- ✅ **Secrets scanning**: CI gate via TruffleHog (PR-only); optional pre-commit hook. Local verify uses lightweight pattern scan.
 - ✅ **Security hardening**: Least-privilege CI permissions, CodeQL, Dependabot
-- ✅ **Deployment governance**: Vercel promotion gated by required checks
+- ✅ **Deployment governance**: Vercel promotion gated by required checks (quality, test, build)
 - ✅ **Dossier enhancement**: All 7 pages updated to gold standard (Phase 2)
   - Executive summary, key metrics, "what this proves" framework
   - Comprehensive tech stack table with 16+ dependencies
   - Mermaid flow diagrams for request routing
   - Security controls table with 10+ enforced controls
+- ✅ **Testing documentation**: Complete testing guide, architecture section, operations guidance (Stage 3.3)
 - ✅ **Threat model**: Complete STRIDE analysis with 12 threat scenarios
 - ✅ **Incident response**: Secrets incident runbook (5-phase procedure)
 - ✅ **Enhanced project page**: Complete (Priority 3 - gold standard badge with verification checklist)

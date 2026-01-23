@@ -138,13 +138,13 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 
 ## Key Metrics (Phase 2 Baseline)
 
-- **Lines of code:** ~500 (application), ~200 (tests)
+- **Lines of code:** ~500 (application), ~600 (tests: 70+ unit tests, 12 E2E tests)
 - **Routes:** 5 core routes (/, /cv, /projects, /contact, /projects/[slug])
-- **CI checks:** 4 required (quality, secrets-scan, build w/smoke tests, CodeQL)
-- **Test coverage:** 100% route coverage (Playwright smoke tests - 12 tests)
+- **CI checks:** 5 required (quality, secrets-scan, test, build, CodeQL)
+- **Test coverage:** 70+ unit tests (≥80% coverage), 12 E2E tests (100% route coverage)
 - **Deployment frequency:** On every merge to main (automatic)
 - **Mean time to rollback:** ~1 minute (Git revert + CI)
-- **Quality gates:** Lint, format, typecheck, secrets scan, build, smoke tests (all enforced)
+- **Quality gates:** Lint, format, typecheck, registry validation, unit tests, E2E tests, secrets scan, build (all enforced)
 - **Dependencies:** ~17 production, ~15 dev (Dependabot weekly updates)
 
 ## What This Project Proves
@@ -159,7 +159,8 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 ### Engineering Discipline
 
 - CI quality gates (ESLint max-warnings=0, Prettier, TypeScript strict)
-- Automated smoke testing (Playwright multi-browser)
+- Automated unit testing (Vitest: 70+ tests for registry, links, slugs)
+- Automated E2E testing (Playwright: 12 multi-browser smoke tests)
 - Secrets scanning (CI gate via TruffleHog; optional pre-commit; local verify uses a lightweight pattern scan)
 - Frozen lockfile installs (deterministic builds)
 - PR-only merge discipline (GitHub Ruleset enforcement)
@@ -186,3 +187,59 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 - ADRs for durable decisions (hosting, CI gates, testing strategy, gold standard choice)
 - Threat model (STRIDE analysis with 12 threat scenarios)
 - Operational runbooks (deploy, secrets incident, CI triage, rollback)
+
+## Quality Standards (Stage 3.3)
+
+### Testing Strategy
+
+The Portfolio App implements a comprehensive testing pyramid:
+
+- **Unit tests (Vitest):** 70+ tests covering registry validation, link construction, and slug validation
+- **E2E tests (Playwright):** 12 multi-browser smoke tests verifying all routes and evidence links
+- **Coverage targets:** ≥80% for `src/lib/` (utility functions), 100% route coverage for E2E
+- **CI integration:** Tests run on every PR and merge; failures block deployment
+
+See [Testing Guide](/docs/reference/testing-guide) for comprehensive patterns, setup, and troubleshooting. Implementation details available in [Testing — Phase 3](/docs/60-projects/portfolio-app/05-testing.md#phase-3-unit-tests-implemented--stage-33).
+
+### Code Quality Gates
+
+All required checks must pass before merge (GitHub Ruleset enforcement):
+
+1. **Lint:** ESLint with `max-warnings=0` (zero-tolerance linting)
+2. **Format:** Prettier with auto-format enforcement
+3. **Type safety:** TypeScript strict mode (no `any`)
+4. **Build:** Next.js compilation succeeds
+5. **Unit tests:** Vitest suite passes + ≥80% coverage thresholds met
+6. **E2E tests:** Playwright tests pass across Chromium, Firefox (12 tests)
+7. **Secrets:** TruffleHog scans with `--only-verified` flag
+8. **Supply chain:** CodeQL + Dependabot for dependency hygiene
+
+### CI/CD Pipeline
+
+The GitHub Actions workflow orchestrates quality gates with job dependencies:
+
+```
+quality (lint, format, typecheck)
+  ↓
+secrets-scan (TruffleHog --only-verified)
+  ↓
+test (unit tests + E2E tests)
+  ├─ pnpm test:unit (70+ Vitest tests)
+  └─ pnpm playwright test (12 E2E tests)
+  ↓
+build (Next.js compile + Vercel deploy)
+```
+
+All jobs must pass; failures block subsequent stages. Tests are separated into distinct steps for clarity:
+
+- **Unit tests** validate data integrity, link construction, and slug validation
+- **E2E tests** validate route rendering, evidence link resolution, and component behavior
+
+See [CI/CD Pipeline Overview](/docs/devops-platform/ci-cd-pipeline-overview) for detailed job configuration and troubleshooting.
+
+### Evidence of Quality
+
+- **Public CI visibility:** All checks displayed on PR and commit
+- **Test artifacts:** Coverage reports and E2E traces available in CI logs
+- **Release notes:** Every deployment includes documented changes and impact
+- **Runbooks:** CI failure triage, secrets incident response, and deploy procedures

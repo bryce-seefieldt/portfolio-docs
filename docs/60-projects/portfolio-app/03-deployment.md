@@ -161,21 +161,35 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
    - lint (ESLint)
    - format check (Prettier)
    - typecheck (TypeScript)
-2. **Build gate** (`ci / build`)
+2. **Test gate** (`ci / test`)
+   - Unit tests (pnpm test:unit - 70+ Vitest tests)
+   - Coverage validation (≥80% for src/lib/)
+   - E2E tests (pnpm playwright test - 12 tests across Chromium, Firefox)
+3. **Build gate** (`ci / build`)
    - Next.js build must succeed
-   - Playwright browser installation
-   - Dev server startup
-   - Smoke tests (12 tests across 2 browsers)
+   - Vercel deployment initiated
 
-**Status:** Smoke tests implemented in Phase 2 (PR #10, merged 2026-01-17).
+**Status:** Unit tests implemented in Stage 3.3 (PR #XX, merged 2026-01-22). E2E tests implemented in Phase 2 (PR #10, merged 2026-01-17).
 
-### Test coverage (smoke tests)
+### Test coverage
 
-- 6 test cases, 12 total executions (Chromium + Firefox)
-- Routes tested: `/`, `/cv`, `/projects`, `/contact`, `/projects/portfolio-app`
+**Unit Tests (Vitest):**
+
+- 70+ test cases covering registry, slug helpers, link construction
+- Files tested: `src/lib/__tests__/registry.test.ts`, `slugHelpers.test.ts`, `config.test.ts`
+- Coverage target: ≥80% for all `src/lib/` modules
+- Runtime: ~5 seconds
+- CI integration: Tests run in `ci / test` job before build
+
+**E2E Tests (Playwright):**
+
+- 12 test cases across 2 browsers (Chromium, Firefox)
+- Routes tested: `/`, `/cv`, `/projects`, `/contact`, `/projects/[slug]`
 - Evidence link resolution validation
+- Component rendering validation (EvidenceBlock, BadgeGroup)
+- Responsive design verification (mobile, tablet, desktop)
 - Runtime: ~10 seconds
-- CI integration: Tests run in `ci / build` job after successful build
+- CI integration: Tests run in `ci / test` job after unit tests
 
 ### Dependabot automation
 
@@ -191,9 +205,10 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 The Portfolio App should never merge changes that:
 
 - break build
-- fail smoke tests
+- fail unit or E2E tests
 - drift formatting standards
 - introduce type errors
+- fail coverage thresholds
 - violate documented governance requirements
 
 ## Pre-deployment governance (required)

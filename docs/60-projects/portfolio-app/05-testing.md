@@ -38,16 +38,16 @@ The emphasis is on **enterprise credibility**:
 
 ## Local validation workflow (required)
 
-### Option 1: Comprehensive verification script (recommended)
+### Option 1: Comprehensive verification (recommended)
 
-For a streamlined workflow with detailed reporting:
+For a streamlined workflow with detailed reporting and full test coverage:
 
 ```bash
 pnpm install
 pnpm verify
 ```
 
-The `verify` command runs a comprehensive 7-step validation workflow:
+The `verify` command runs a comprehensive 9-step validation workflow:
 
 1. **Environment check**: Validates Node version, pnpm availability, `.env.local` existence, and required environment variables
 2. **Auto-format**: Runs `format:write` to fix formatting issues automatically
@@ -56,10 +56,12 @@ The `verify` command runs a comprehensive 7-step validation workflow:
 5. **Type checking**: Validates TypeScript types across the codebase
 6. **Registry validation**: Ensures project registry schema compliance and data integrity
 7. **Build**: Produces production bundle to catch build-time errors
+8. **Unit tests**: Runs Vitest suite (70+ tests: registry validation, slug helpers, link construction)
+9. **E2E tests**: Runs Playwright suite (12 tests: evidence link resolution, route coverage)
 
 **Benefits:**
 
-- Single command runs all pre-commit quality checks
+- Single command runs all pre-commit quality checks and tests
 - Auto-formats code before validation (reduces false failures)
 - Provides color-coded output for quick status assessment
 - Includes detailed troubleshooting guidance for each failure type
@@ -71,9 +73,26 @@ The `verify` command runs a comprehensive 7-step validation workflow:
 - Before every commit (catches issues early)
 - Before opening a PR (ensures CI will pass)
 - After pulling changes from main (validates clean state)
-- When troubleshooting CI failures locally
+- Before final push to production branch
 
-### Option 2: Individual commands (granular control)
+### Option 2: Quick verification (fast iteration)
+
+For rapid feedback during active development without tests:
+
+```bash
+pnpm verify:quick
+```
+
+Runs steps 1-7 above, **skips unit and E2E tests** (steps 8-9).
+
+**When to use:**
+
+- During active development with frequent small changes
+- When debugging specific issues in a feature branch
+- For rapid iteration cycles
+- Always run full `pnpm verify` before final commit/push
+
+### Option 3: Individual commands (granular control)
 
 For targeted validation or when you need to run specific checks:
 
@@ -83,6 +102,8 @@ pnpm lint          # ESLint validation
 pnpm format:check  # Prettier validation (or format:write to fix)
 pnpm typecheck     # TypeScript type checking
 pnpm build         # Production build
+pnpm test:unit     # Unit tests (Vitest)
+pnpm playwright test # E2E tests (Playwright)
 ```
 
 **When to use individual commands:**
@@ -91,6 +112,8 @@ pnpm build         # Production build
 - Running checks during active development (e.g., `typecheck` while coding)
 - Understanding what each check does
 - Integrating with editor/IDE workflows
+- Running only unit tests (without E2E): `pnpm test:unit`
+- Debugging E2E tests: `pnpm playwright test --ui` or `pnpm playwright test --debug`
 
 ### Local preview server
 
@@ -227,48 +250,59 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
   - page rendering
   - key links to `/docs`
 
-### Phase 2: Automated smoke tests with Playwright (implemented)
+### Phase 2: Automated E2E tests with Playwright (implemented)
 
-**Status:** Implemented in PR #10 (merged 2026-01-17).
+**Status:** Implemented in PR #10 (merged 2026-01-17). Enhanced in Stage 3.3 to validate evidence link resolution.
 
 **Framework:** Playwright (multi-browser E2E testing)
 
 **Coverage:**
 
-- 6 smoke test cases (12 total executions across 2 browsers)
+- 12 test cases across 2 browsers (Chromium, Firefox)
 - Core routes: `/`, `/cv`, `/projects`, `/contact`
 - Dynamic routes: `/projects/[slug]` (example: `/projects/portfolio-app`)
-- Evidence link resolution validation
+- Evidence link resolution validation (dossier, threat model, ADRs, runbooks)
+- BadgeGroup component display validation
+- Responsive design verification (mobile, tablet, desktop)
 
 **Configuration:**
 
-- Test directory: `tests/e2e/`
+- Test directory: `e2e/`
 - Config file: `playwright.config.ts`
 - Browsers: Chromium, Firefox (WebKit excluded for stability)
 - Retries: 2 in CI, 0 locally
 - Workers: 1 in CI (sequential for stability), unlimited locally
 - Base URL: `http://localhost:3000` (local/CI dev server)
 
+**Running E2E Tests:**
+
+```bash
+pnpm playwright test          # Run all E2E tests headlessly
+pnpm playwright test --ui     # Open Playwright UI mode (local dev)
+pnpm playwright test --debug  # Run tests in debug mode with inspector
+npx playwright show-report    # View HTML test report
+```
+
 **CI Integration:**
 
-- Tests run in `ci / build` job after successful build
+- Tests run in `ci / test` job after successful build
 - Playwright browsers installed via `npx playwright install --with-deps`
 - Dev server started with `pnpm dev &` and readiness check via `wait-on http://localhost:3000`
-- Tests execute with `pnpm test` (runs `playwright test`)
+- Tests execute with `pnpm playwright test`
 - HTML test reports generated (`.gitignored`)
+- Build fails if any E2E tests fail
 
 **Test Scripts:**
 
-```bash
-pnpm test        # Run all tests headlessly
-pnpm test:ui     # Open Playwright UI mode (local dev)
-pnpm test:debug  # Run tests in debug mode
-```
+- `pnpm playwright test` — Run all E2E tests
+- `pnpm playwright test --ui` — Interactive UI mode for debugging
+- `pnpm playwright test --debug` — Debug mode with step-through inspector
 
 **Evidence:**
 
 - PR #10: https://github.com/bryce-seefieldt/portfolio-app/pull/10
-- Test runtime: ~10 seconds for 12 tests
+- Test runtime: ~10 seconds for 12 tests across 2 browsers
+- Test file: `e2e/evidence-links.spec.ts`
 - All tests passing in CI and local environments
 
 **Next.js 15 Compatibility Fix:**
@@ -277,15 +311,193 @@ pnpm test:debug  # Run tests in debug mode
 - Changed `params: { slug: string }` to `params: Promise<{ slug: string }>`
 - Added `await` for params destructuring in `[slug]/page.tsx`
 
-### Phase 3: Unit tests (planned)
+### Phase 3: Unit tests (implemented — Stage 3.3)
 
-- add Vitest for:
-  - slug generation
-  - project metadata validation
-  - components with business logic
-- CI adds `pnpm test:unit`
+**Status:** Implemented in PR #XX (2026-01-22).
 
-### Phase 4: Extended E2E coverage (planned)
+**Framework:** Vitest (fast, ESM-native unit testing)
+
+**Purpose:** Validate registry schema, slug rules, and link construction helpers at build time to ensure data integrity
+
+**Coverage:**
+
+- 70 unit tests across 3 test suites
+- All tests passing locally and in CI
+- Code coverage: ≥80% for `src/lib/` modules
+
+**Local execution:**
+
+```bash
+pnpm test:unit      # Run all 70+ unit tests (CI-like execution)
+pnpm test           # Run tests in watch mode (for development)
+pnpm test:coverage  # Run tests and generate coverage report
+pnpm test:ui        # Visual UI mode for debugging failing tests
+```
+
+#### Registry Validation Tests
+
+**File:** `src/lib/__tests__/registry.test.ts` (17 tests)
+
+**Purpose:** Ensure project registry entries are valid according to Zod schema
+
+**What's tested:**
+
+- Valid project entries pass schema validation
+- Invalid entries (missing fields, malformed slugs) are rejected
+- Required fields (title, summary, tags, tech stack) are validated
+- Date format enforcement (YYYY-MM for startDate/endDate)
+- Slug uniqueness is enforced (duplicate slugs rejected)
+- Tech stack categories are validated (language, framework, library, tool, platform)
+- Evidence links structure is validated
+
+**Key assertions:**
+
+```typescript
+it('should accept valid project entries', () => {
+  const validProject = {
+    slug: 'portfolio-app',
+    title: 'Portfolio App',
+    summary: 'A comprehensive portfolio application.',
+    tags: ['nextjs', 'typescript'],
+    // ... other required fields
+  };
+  expect(ProjectSchema.safeParse(validProject).success).toBe(true);
+});
+
+it('should reject projects with invalid slug format', () => {
+  const invalid = { slug: 'Invalid Slug!' };
+  expect(ProjectSchema.safeParse(invalid).success).toBe(false);
+});
+```
+
+#### Link Construction Tests
+
+**Files:**
+
+- `src/lib/__tests__/config.test.ts` (18 tests)
+- `src/lib/__tests__/linkConstruction.test.ts` (16 tests)
+
+**Purpose:** Ensure URL helpers (`docsUrl()`, `githubUrl()`, `docsGithubUrl()`, `mailtoUrl()`) work correctly
+
+**What's tested:**
+
+1. **docsUrl()**: Builds documentation URLs with `NEXT_PUBLIC_DOCS_BASE_URL`
+   - With environment variable configured
+   - Fallback to `/docs` when env var missing
+   - Leading slash normalization
+   - Nested path handling
+
+2. **githubUrl()**: Builds GitHub URLs with `NEXT_PUBLIC_GITHUB_URL`
+   - With environment variable configured
+   - Placeholder return when env var missing
+   - Path normalization
+
+3. **docsGithubUrl()**: Builds documentation GitHub URLs with `NEXT_PUBLIC_DOCS_GITHUB_URL`
+   - URL construction from environment variable
+   - Fallback behavior
+
+4. **mailtoUrl()**: Builds mailto links with optional subject parameters
+   - Email address handling
+   - Subject parameter encoding
+   - Special character escaping
+
+**Key assertions:**
+
+```typescript
+it('should build URL with default base path', () => {
+  const result = docsUrl('/portfolio/roadmap');
+  expect(result).toBe('/docs/portfolio/roadmap');
+});
+
+it('should handle email with subject', () => {
+  const result = mailtoUrl('test@example.com', 'Hello World');
+  expect(result).toBe('mailto:test@example.com?subject=Hello%20World');
+});
+```
+
+#### Slug Validation Tests
+
+**File:** `src/lib/__tests__/slugHelpers.test.ts` (19 tests)
+
+**Purpose:** Enforce slug format rules and validate edge cases
+
+**What's tested:**
+
+- Valid slug format: lowercase, hyphens, alphanumeric only
+- Regex pattern: `^[a-z0-9]+(?:-[a-z0-9]+)*$`
+- Rejection of: uppercase, spaces, special characters, unicode, emoji
+- Edge cases: empty strings, single characters, very long slugs
+- Multiple consecutive hyphens rejected
+- Hyphens at start/end rejected
+
+**Key assertions:**
+
+```typescript
+it('should accept valid lowercase slugs', () => {
+  expect(isValidSlug('portfolio-app')).toBe(true);
+  expect(isValidSlug('my-project-2024')).toBe(true);
+});
+
+it('should reject uppercase slugs', () => {
+  expect(isValidSlug('Portfolio-App')).toBe(false);
+});
+```
+
+#### Running Unit Tests
+
+```bash
+# All unit tests in watch mode (development)
+pnpm test
+
+# Unit tests once (for CI verification)
+pnpm test:unit
+
+# With coverage report (outputs to coverage/index.html)
+pnpm test:coverage
+
+# Visual UI dashboard (for debugging)
+pnpm test:ui
+
+# Debug mode with inspector
+pnpm test:debug
+```
+
+**Available test suites:**
+
+- `src/lib/__tests__/registry.test.ts` — Registry validation (17 tests)
+- `src/lib/__tests__/slugHelpers.test.ts` — Slug format and deduplication (19 tests)
+- `src/lib/__tests__/config.test.ts` — Link construction helpers (34 tests)
+
+**CI Integration:**
+
+- Runs in `ci / test` job as prerequisite to build
+- Command: `pnpm test:unit`
+- Coverage reports uploaded as artifacts
+- Build fails if any tests fail
+- Must pass ≥80% coverage thresholds (lines, functions, branches, statements)
+
+**Coverage Report:**
+
+After running `pnpm test:coverage`:
+
+- Open `coverage/index.html` in a browser
+- Review per-file coverage metrics
+- Identify uncovered branches and functions
+
+**Coverage thresholds** (enforced in CI):
+
+- Lines: ≥80%
+- Functions: ≥80%
+- Branches: ≥75%
+- Statements: ≥80%
+
+#### Evidence Links
+
+- **Test Guide:** [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md#unit-testing-with-vitest)
+- **PR #XX:** Stage 3.3 unit tests implementation
+- **Configuration:** `vitest.config.ts`
+
+### Phase 4: Extended E2E coverage (Stage 3.3 enhanced)
 
 - Expand Playwright coverage:
   - form submissions (contact page)

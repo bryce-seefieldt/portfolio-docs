@@ -55,25 +55,33 @@ Responsibilities:
 ### Release gates (CI)
 
 - CI is a hard release gate. Merges and promotions must not proceed if required checks fail.
-- Required checks (by contract): `ci / quality`, `ci / build`.
+- Required checks (by contract): `ci / quality`, `ci / test`, `ci / build`.
 - Quality runs `pnpm lint`, `pnpm format:check`, `pnpm typecheck`
-- Build runs `pnpm build` with frozen lockfile installs, then smoke tests:
-  - Playwright browser installation (`npx playwright install --with-deps`)
-  - Dev server startup (`pnpm dev &` + `wait-on http://localhost:3000`)
-  - Smoke tests execution (`pnpm test` - 12 tests across 2 browsers)
+- Test runs:
+  - Unit tests: `pnpm test:unit` (70+ Vitest tests with ≥80% coverage validation)
+  - E2E tests: `pnpm playwright test` (12 Playwright tests across Chromium, Firefox)
+- Build runs `pnpm build` with frozen lockfile installs, then triggers Vercel deployment
 - If CI fails: follow the CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
 
 ### Pre-deploy local validation (developer workflow)
 
 Before committing changes or opening a PR, validate locally to catch CI failures early.
 
-**Recommended approach (comprehensive):**
+**Recommended approach (comprehensive with tests):**
 
 ```bash
 pnpm verify
 ```
 
-This runs the complete validation suite (environment check, auto-format, format validation, lint, typecheck, registry validation, build) with detailed troubleshooting for failures. Mirrors CI checks with the addition of environment validation and auto-formatting.
+This runs the complete validation suite: environment check, auto-format, format validation, lint, typecheck, registry validation, build, unit tests, and E2E tests with detailed troubleshooting for failures. Mirrors CI workflow exactly.
+
+**Fast approach (skip tests):**
+
+```bash
+pnpm verify:quick
+```
+
+Runs environment check through build steps (excluding unit and E2E tests) for rapid feedback during active development. Always run full `pnpm verify` before final push.
 
 **Alternative approach (granular):**
 

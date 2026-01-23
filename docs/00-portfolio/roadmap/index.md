@@ -100,7 +100,7 @@ For each phase or milestone:
 - **Phase 0:** Baseline governance + evidence scaffolding (Docs App hardened)
 - **Phase 1:** Portfolio App foundation (repo, CI, deployment, core routes) — ✅ Complete (2026-01-17)
 - **Phase 2:** “Gold standard” content (one exemplary project + deep evidence) — ✅ Complete (2026-01-21)
-- **Phase 3:** Scaling content model (repeatable project publishing pipeline) — 🟡 Ready to execute
+- **Phase 3:** Scaling content model (repeatable project publishing pipeline) — 🟡 In Progress (Stage 3.3 complete 2026-01-22)
 - **Phase 4:** Reliability + security hardening (enterprise credibility upgrades)
 - **Phase 5:** Advanced demonstrations (multi-language demos, platform proofs, eval-first artifacts)
 
@@ -273,7 +273,7 @@ Beyond baseline Phase 1, Phase 2 includes optional hardening controls that stren
 
 ## Phase 3 — Repeatable project publishing pipeline (scale without chaos)
 
-**Status:** 🟡 Ready to execute — see [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
+**Status:** 🟡 In Progress — Stage 3.2 complete (2026-01-22) — see [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
 
 ### Objective
 
@@ -282,7 +282,7 @@ Make adding projects predictable, low-friction, and consistent with governance.
 ### Deliverables (Portfolio App)
 
 - Stage 3.1: YAML-backed project registry with Zod validation, slug rules, URL validation, build-time script
-- Stage 3.2: EvidenceBlock + VerificationBadge components; project pages render standardized evidence badges/links
+- Stage 3.2: ✅ **Complete (2026-01-22)** — EvidenceBlock + VerificationBadge + BadgeGroup components; project pages render standardized evidence badges/links ([PR #28](https://github.com/bryce-seefieldt/portfolio-app/pull/28), [Docs PR #47](https://github.com/bryce-seefieldt/portfolio-docs/pull/47))
 - Stage 3.3: Unit tests (Vitest) for registry/schema/slug helpers; Playwright e2e for route and evidence link resolution; wired into CI
 - Stage 3.4: ADR-0011 (registry decision) and ADR-0012 (cross-repo linking); dossier updates; registry schema guide; Copilot instructions updated
 - Stage 3.5: CI link validation (registry + evidence URLs), publish runbook, troubleshooting guide
@@ -300,7 +300,7 @@ Make adding projects predictable, low-friction, and consistent with governance.
 
 - Adding a new project follows a repeatable checklist (YAML entry + dossier + release note) — **Pending execution**
 - Registry validates on every build; CI fails on invalid slugs/links — **Planned**
-- Evidence components/badges render consistently across projects — **Planned**
+- Evidence components/badges render consistently across projects — ✅ **Met (Stage 3.2 complete)**
 - Unit + e2e suites enforce registry and link integrity — **Planned**
 
 ---

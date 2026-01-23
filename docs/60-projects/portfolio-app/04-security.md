@@ -215,7 +215,8 @@ grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 | Dependabot updates       | ✅ Enabled   | [dependabot.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/dependabot.yml)                     |
 | Threat model             | ✅ Complete  | [portfolio-app-threat-model.md](/docs/40-security/threat-models/portfolio-app-threat-model.md)                          |
 | Incident response        | ✅ Ready     | [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                     |
-| Smoke tests              | ✅ Enforced  | [smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts)                     |
+| Unit tests               | ✅ Enforced  | [src/lib/**tests**/](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/__tests__) (70+ tests)          |
+| E2E tests                | ✅ Enforced  | [e2e/evidence-links.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/e2e/evidence-links.spec.ts)     |
 | Frozen lockfiles         | ✅ Enforced  | [ci.yml build step](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)                |
 | PR template              | ✅ Active    | [PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md) |
 

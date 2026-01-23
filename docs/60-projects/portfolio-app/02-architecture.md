@@ -199,6 +199,161 @@ Planned enhancements:
 - Keyboard focus management and enhanced a11y improvements
 - Storybook integration for component library documentation
 
+### Testing Architecture (Stage 3.3)
+
+After Stage 3.2 established evidence visualization components, Stage 3.3 adds comprehensive test coverage to ensure registry integrity and link resolution. The testing architecture follows the testing pyramid: unit tests (Vitest) for business logic, E2E tests (Playwright) for user-facing behavior.
+
+#### Testing Pyramid
+
+```
+┌─────────────────────────────────────────┐
+│  E2E Tests (Playwright)                  │
+│  - Evidence link resolution              │
+│  - Component rendering                   │
+│  - Route coverage                        │
+│  - Responsive design (mobile/tablet)    │
+│  Tests: ~12                              │
+├─────────────────────────────────────────┤
+│  Integration Tests (Future)              │
+│  - API routes                            │
+│  - Data fetching                         │
+├─────────────────────────────────────────┤
+│  Unit Tests (Vitest)                     │
+│  - Registry validation (Zod schemas)     │
+│  - Slug helpers (format, uniqueness)     │
+│  - Link construction (URL building)      │
+│  Tests: ~70                              │
+└─────────────────────────────────────────┘
+```
+
+#### Unit Tests (Vitest)
+
+**Purpose**: Validate registry schema, slug rules, and link construction helpers at build time
+
+**Modules Tested**:
+
+1. `src/lib/registry.ts` (Stage 3.1)
+   - Valid project entries pass Zod schema validation
+   - Invalid entries (missing fields, malformed slugs, duplicate slugs) are rejected
+   - Required field validation (title, description, tags, tech stack, evidence links)
+   - Slug uniqueness enforcement across entire registry
+
+2. `src/lib/config.ts` (Stage 3.1)
+   - `docsUrl()` builds URLs with `NEXT_PUBLIC_DOCS_BASE_URL` environment variable
+   - `githubUrl()` builds GitHub URLs correctly
+   - `docsGithubUrl()` builds documentation GitHub URLs
+   - `mailtoUrl()` builds mailto links with optional subject parameters
+   - Fallback behavior when environment variables are missing
+   - URL normalization (trailing slashes, leading slashes)
+
+3. `src/lib/slugHelpers.ts` (Stage 3.1)
+   - Slug format enforcement: regex `^[a-z0-9]+(?:-[a-z0-9]+)*$`
+   - Rejection of uppercase, spaces, special characters
+   - Edge cases: empty strings, unicode characters, emoji
+
+**Coverage Target**: ≥80% for all `src/lib/` modules
+
+**Test Files**:
+
+- `src/lib/__tests__/registry.test.ts` — 17 tests for schema validation
+- `src/lib/__tests__/config.test.ts` — 18 tests for link construction helpers
+- `src/lib/__tests__/slugHelpers.test.ts` — 19 tests for slug validation
+- `src/lib/__tests__/linkConstruction.test.ts` — 16 tests (dedicated link helper tests)
+
+**Example Test**:
+
+```typescript
+describe('Registry Validation', () => {
+  it('should enforce slug format', () => {
+    const invalidProject = { slug: 'Invalid Slug!' };
+    expect(ProjectSchema.safeParse(invalidProject).success).toBe(false);
+  });
+});
+```
+
+#### E2E Tests (Playwright)
+
+**Purpose**: Verify evidence link resolution, component rendering, and user journeys work correctly end-to-end
+
+**Routes Tested**:
+
+- All project pages: `/projects/[slug]`
+- Evidence link navigation and href correctness
+- Component rendering (EvidenceBlock, BadgeGroup, VerificationBadge)
+- Responsive design across viewports (mobile: 390px, tablet: 768px, desktop: 1440px)
+- Gold standard badge display for portfolio-app
+
+**Coverage Target**: 100% route coverage for all project pages
+
+**Test File**: `e2e/evidence-links.spec.ts` and `tests/e2e/smoke.spec.ts`
+
+**Example Test**:
+
+```typescript
+test('evidence block renders all categories', async ({ page }) => {
+  await page.goto('/projects/portfolio-app');
+
+  // Verify all 5 evidence categories present
+  await expect(page.locator('text=Dossier')).toBeVisible();
+  await expect(page.locator('text=Threat Model')).toBeVisible();
+  await expect(page.locator('text=ADRs')).toBeVisible();
+  await expect(page.locator('text=Runbooks')).toBeVisible();
+  await expect(page.locator('text=GitHub Repository')).toBeVisible();
+});
+```
+
+#### CI Integration
+
+Tests run in GitHub Actions **before build** to enforce quality gates:
+
+1. **Quality Job**: ESLint, Prettier, TypeScript linting (prerequisite)
+2. **Test Job** (depends on quality job):
+   - Run unit tests: `pnpm test:unit`
+   - Install Playwright browsers
+   - Start dev server
+   - Run E2E tests: `pnpm playwright test`
+   - Upload coverage reports as artifacts
+3. **Build Job** (depends on test job):
+   - Build fails if any tests fail
+   - Merge is blocked if CI fails
+
+**Build Blocking**: The `build` job depends on the `test` job:
+
+```yaml
+build:
+  needs: [quality, test]
+  if: always() && needs.quality.result == 'success' && needs.test.result == 'success'
+```
+
+This ensures broken tests prevent production deployments.
+
+#### Design Decisions
+
+**Why Vitest over Jest?**
+
+- Native ESM support (required for Next.js 15 App Router with `reactCompiler: true`)
+- Faster test execution and better TypeScript integration
+- Shared config with Vite tooling (simpler setup)
+
+**Why Playwright over Cypress?**
+
+- Multi-browser support out-of-the-box (Chromium, Firefox, WebKit)
+- Better performance at scale and superior API for responsive design testing
+- Faster test execution and better debugging experience
+
+**Why ≥80% coverage target, not 100%?**
+
+- Balance between quality and development velocity
+- 80% coverage catches most regressions without testing implementation details
+- Avoids test maintenance burden for trivial code (re-exports, empty handlers)
+- Allows engineers to focus on testing behavior, not implementation
+
+#### See Also
+
+- **Testing Guide**: [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md) — Comprehensive patterns and examples
+- **Testing Dossier**: [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md) — CI gates and local validation
+- **Implementation**: [stage-3-3-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-app-issue.md) — GitHub issue with acceptance criteria
+
 ### Evidence-link strategy
 
 Each project entry should include:
@@ -616,7 +771,8 @@ export const TIMELINE: TimelineEntry[] = [
 - **Runbooks**: Operational procedures (`/docs/50-operations/runbooks/`)
 - **ADRs**: Architecture decisions (`/docs/10-architecture/adr/adr-xxxx-...`)
 - **CI Workflows**: Build and test pipelines (GitHub Actions `.github/workflows/`)
-- **Test Suites**: Smoke tests, E2E coverage (`tests/smoke.spec.ts`)
+- **Unit Tests**: Registry, slug, link validation (Vitest, `src/lib/__tests__/`)
+- **E2E Tests**: Route coverage, evidence link resolution (Playwright, `e2e/evidence-links.spec.ts`)
 
 **Benefits**:
 
