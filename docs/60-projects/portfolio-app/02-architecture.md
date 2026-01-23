@@ -86,7 +86,113 @@ Recommended initial approach (low complexity):
 - Validation is enforced in CI via `pnpm registry:validate` and during build; schema is documented in [docs/70-reference/registry-schema-guide.md](docs/70-reference/registry-schema-guide.md); rationale captured in [docs/10-architecture/adr/adr-0011-data-driven-project-registry.md](docs/10-architecture/adr/adr-0011-data-driven-project-registry.md).
 - URLs support env-driven placeholders (`{GITHUB_URL}`, `{DOCS_BASE_URL}`, `{DOCS_GITHUB_URL}`, `{SITE_URL}`) resolved from `NEXT_PUBLIC_*` variables to keep references portable across deploy environments.
 - Evidence fields (dossier, threat model, ADR index, runbooks, GitHub) are part of the contract so every claim on a project page links to verifiable artifacts in the docs app.
+### Evidence Visualization Layer (Stage 3.2)
 
+After Stage 3.1 established a data-driven registry, Stage 3.2 makes evidence visualization a first-class architectural concern through three reusable React components. Rather than relegating evidence links to project footers or separate pages, components embed evidence discovery into the main project detail experience.
+
+#### Component Architecture
+
+**Three-Tier Component System:**
+
+```
+EvidenceBlock (render evidence grid)
+↑
+BadgeGroup (conditional badge aggregation)
+↑
+VerificationBadge (single badge + icon)
+↑
+Registry Data (Project.evidence)
+```
+
+**VerificationBadge Component**
+
+- **Purpose:** Quick status indicator for evidence artifacts
+- **Location:** `src/components/VerificationBadge.tsx`
+- **Badge Types:**
+  - `docs-available` → Blue theme, document icon
+  - `threat-model` → Purple theme, shield icon
+  - `gold-standard` → Amber theme, check-circle icon
+  - `adr-complete` → Green theme, archive icon
+- **Design:** Inline badges with icons, text labels, full dark mode support
+- **Props:** `type` (BadgeType), `title?` (optional tooltip)
+
+**BadgeGroup Component**
+
+- **Purpose:** Conditional multi-badge rendering based on project evidence
+- **Location:** `src/components/BadgeGroup.tsx`
+- **Logic:**
+  - Shows `gold-standard` if `project.isGoldStandard === true`
+  - Shows `docs-available` if `project.evidence.dossierPath` exists
+  - Shows `threat-model` if `project.evidence.threatModelPath` exists
+  - Shows `adr-complete` if `project.evidence.adr` array has items
+- **Design:** Flex wrap layout for responsive badge arrangement
+- **Props:** `project` (Project object), `className?` (additional Tailwind classes)
+- **Integration:** Placed in project header for at-a-glance evidence scanning
+
+**EvidenceBlock Component**
+
+- **Purpose:** Comprehensive evidence artifact display in responsive grid
+- **Location:** `src/components/EvidenceBlock.tsx`
+- **Renders:** 5 evidence categories:
+  1. **Dossier** — Link to comprehensive project documentation
+  2. **Threat Model** — STRIDE security analysis
+  3. **Architecture Decisions** — ADR records (list or index)
+  4. **Runbooks** — Operational procedures (list or index)
+  5. **GitHub** — Source code repository
+- **Design:** Responsive grid (1 col mobile → 2 col tablet → 3 col desktop), card styling with dark mode
+- **Empty States:** Placeholder cards with muted styling for unavailable evidence
+- **Props:** `project` (Project object), `className?` (additional Tailwind classes)
+- **Link Construction:** Uses `docsUrl()` helper for docs URLs; environment-safe URL building
+
+#### Integration Pattern
+
+Components integrate into `/projects/[slug]` page (`src/app/projects/[slug]/page.tsx`):
+
+1. **BadgeGroup** in header section (below title, above summary)
+2. **EvidenceBlock** in dedicated "Evidence Artifacts" section
+
+Evidence data flows:
+
+1. Registry loads from `src/data/projects.yml` (Stage 3.1)
+2. Registry validates slug uniqueness, URL validity, evidence link patterns
+3. Components receive `Project` type (TypeScript)
+4. Components extract `evidence` and `isGoldStandard` fields
+5. Components call `docsUrl()` to interpolate environment-based links
+6. Components render responsive, accessible UI
+
+#### Design Decisions
+
+**Why separate components instead of monolithic "Evidence" component?**
+- Each component solves a distinct UX problem; enables reuse in different contexts (future index views, dashboards)
+- Changes to one concern don't cascade through entire component tree
+- Simpler testing and maintenance
+
+**Why Tailwind CSS for styling?**
+- All portfolio-app styling uses Tailwind; avoids framework fragmentation
+- Utility-first CSS with tree-shaking minimizes bundle overhead
+- Dark mode support via `dark:` modifier is built-in
+
+**Why responsive grid (3-column desktop)?**
+- Scales naturally: three evidence categories (dossier, threat model, ADRs) fit 3-column layout
+- Mobile-first design: starts at 1 column, progressively enhances
+- Future-proof: easy to add more evidence types
+
+**Why build links from registry?**
+- Registry is single source of truth; link changes update all pages automatically
+- Portability: URLs remain consistent across environments and deploy variations
+- Maintainability: Adding new projects or changing evidence URLs requires registry edit only
+
+#### Future Extensions (Post-Stage 3.2)
+
+Planned enhancements:
+
+- Tooltip explanations for each evidence type
+- Visual indicators for "incomplete" or "outdated" evidence
+- Badge counts (e.g., "4 ADRs") to signal depth
+- Click-through analytics (optional, privacy-safe)
+- Link validation dashboard (showing broken evidence links)
+- Keyboard focus management and enhanced a11y improvements
+- Storybook integration for component library documentation
 ### Evidence-link strategy
 
 Each project entry should include:
