@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0009: Enable React Compiler for Portfolio App'
 description: 'Decision to enable the experimental React Compiler (React 19) for the Portfolio App to optimize performance and adopt modern React patterns.'
-sidebar_position: 0009
+sidebar_position: 9
 tags: [architecture, adr, portfolio-app, react, performance, optimization]
 ---
 

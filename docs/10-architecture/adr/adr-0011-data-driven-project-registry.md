@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0011: Data-Driven Project Registry'
 description: 'Adopt a YAML-backed, Zod-validated project registry with environment-aware URL construction as the single source of truth for portfolio projects.'
-sidebar_position: 0011
+sidebar_position: 11
 tags:
   [
     architecture,
