@@ -1,7 +1,7 @@
 ---
 title: 'ADR-0012: Cross-Repo Documentation Linking Strategy'
 description: 'Environment-first URL construction for portable, consistent linking across portfolio-app and portfolio-docs repositories.'
-sidebar_position: 12
+sidebar_position: 0012
 tags:
   [
     adr,
