@@ -110,21 +110,21 @@ tags: [troubleshooting, operations, publishing, links, registry, phase-3]
 
 ### Phase 1: Draft Runbook (0.75–1 hour)
 
-- [ ] Add runbook file with front matter, purpose, prerequisites, and timed steps from Stage 3.5 outline
-- [ ] Include validation checkpoints for `pnpm registry:validate`, `pnpm links:check`, and `pnpm build`
-- [ ] Add post-publish verification checklist and rollback steps
+- [x] Add runbook file with front matter, purpose, prerequisites, and timed steps from Stage 3.5 outline
+- [x] Include validation checkpoints for `pnpm registry:validate`, `pnpm links:check`, and `pnpm build`
+- [x] Add post-publish verification checklist and rollback steps
 
 ### Phase 2: Troubleshooting Guide (0.75–1 hour)
 
-- [ ] Add troubleshooting file with front matter and sections for slug, dossier link, evidence URL, and registry validation issues
-- [ ] Map each issue to commands, expected outputs, and links to CI artifacts
-- [ ] Provide sample error messages to search in CI logs
+- [x] Add troubleshooting file with front matter and sections for slug, dossier link, evidence URL, and registry validation issues
+- [x] Map each issue to commands, expected outputs, and links to CI artifacts
+- [x] Provide sample error messages to search in CI logs
 
 ### Phase 3: Cross-References & Validation (0.5–1 hour)
 
-- [ ] Update phase-3 guide Stage 3.5 section with links to the runbook and troubleshooting guide
-- [ ] (Optional) Update issues index and copilot instructions with Stage 3.5 resources
-- [ ] Run `pnpm build` to verify docs and links
+- [x] Update phase-3 guide Stage 3.5 section with links to the runbook and troubleshooting guide
+- [x] (Optional) Update issues index and copilot instructions with Stage 3.5 resources
+- [x] Run `pnpm build` to verify docs and links
 
 ---
 
