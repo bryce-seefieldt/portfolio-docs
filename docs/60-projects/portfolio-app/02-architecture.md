@@ -92,6 +92,7 @@ Recommended initial approach (low complexity):
 **Static Generation with ISR:** All project detail pages (`/projects/[slug]`) are pre-rendered at build time using `generateStaticParams()`, extracting all known slugs from the project registry. Pages revalidate every hour (ISR) to allow content updates without full rebuilds, balancing performance with freshness.
 
 **HTTP Caching Strategy:**
+
 - Static routes (/, /cv, /contact, /projects): Cached with `max-age=3600` (1 hour browser cache)
 - Stale-while-revalidate: 24 hours for high availability (serve stale if origin unavailable)
 - Vercel Edge Cache: Respects Cache-Control headers automatically; no special configuration required
@@ -103,6 +104,7 @@ Recommended initial approach (low complexity):
 **Performance Baseline:** Documented in [portfolio-app/docs/performance-baseline.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md). Core Web Vitals monitored via Vercel Analytics.
 
 **References:**
+
 - Performance runbook: [rbk-portfolio-performance-optimization.md](../../50-operations/runbooks/rbk-portfolio-performance-optimization.md)
 - Performance guide: [performance-optimization-guide.md](../../70-reference/performance-optimization-guide.md)
 

@@ -160,7 +160,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 - **Bundle size:** 27.8 MB total JavaScript (CI enforces 10% growth threshold)
 - **Static generation:** All project pages pre-rendered at build time with 1-hour ISR
 - **Cache strategy:** HTTP Cache-Control headers (max-age=3600, stale-while-revalidate=86400)
-- **Core Web Vitals targets:** LCP <2.5s, FID <100ms, CLS <0.1
+- **Core Web Vitals targets:** LCP < 2.5s, FID < 100ms, CLS < 0.1
 - **Performance baseline:** Documented in [portfolio-app/docs/performance-baseline.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md)
 - **Monitoring:** Vercel Analytics dashboard for real-world Core Web Vitals data
 

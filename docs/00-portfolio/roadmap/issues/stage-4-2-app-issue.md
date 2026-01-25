@@ -136,7 +136,7 @@ graph TB
     CacheCheck -->|Yes, < 1 hour| ServeCached["Serve Cached<br/>(instant)"]
     CacheCheck -->|No, > 1 hour| Revalidate["Background Revalidate<br/>(serve stale, rebuild)"]
     Revalidate --> UpdateCache["Update Cache<br/>(next request gets new)"]
-    
+
     style Start fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
     style PreRender fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
     style BuildArtifact fill:#51cf66,stroke:#2f9e44,stroke-width:2px,color:#fff
@@ -147,6 +147,7 @@ graph TB
 ### Image Optimization Configuration
 
 Next.js Image component will be configured to:
+
 - Serve responsive sizes (640px, 750px, 828px, 1080px, 1200px, 1920px, 2048px, 3840px)
 - Auto-convert to WebP format when supported by browser
 - Lazy load images below the fold
@@ -155,16 +156,19 @@ Next.js Image component will be configured to:
 ### Performance Baseline Metrics
 
 **Build Performance:**
+
 - Current baseline: [Record during implementation]
 - Target: < 30 seconds for clean build
 - Threshold: Build time increase >20% triggers investigation
 
 **Bundle Size:**
+
 - Current baseline: [Record during implementation]
 - Target: First Load JS < 100KB (Next.js recommendation)
 - Threshold: Bundle size increase >10% fails CI
 
 **Runtime Performance (Assumptions):**
+
 - Homepage (/) load time: < 2s on 4G connection
 - Project detail (/projects/[slug]) load time: < 2.5s on 4G
 - Core Web Vitals targets:
@@ -208,6 +212,7 @@ Next.js Image component will be configured to:
   - Verify pre-rendering: Check `.next/server/app/projects/` for static HTML
   - Files: `src/app/projects/[slug]/page.tsx`
   - Code example:
+
     ```typescript
     import { PROJECTS } from '@/data/projects';
 
@@ -283,12 +288,15 @@ Next.js Image component will be configured to:
   - Update `next.config.ts` to use bundle analyzer when `ANALYZE=true`
   - Files: `package.json`, `next.config.ts`
   - Code example (next.config.ts):
+
     ```typescript
     const withBundleAnalyzer = require('@next/bundle-analyzer')({
       enabled: process.env.ANALYZE === 'true',
     });
 
-    const nextConfig: NextConfig = { /* ... */ };
+    const nextConfig: NextConfig = {
+      /* ... */
+    };
 
     export default withBundleAnalyzer(nextConfig);
     ```
@@ -358,7 +366,7 @@ Next.js Image component will be configured to:
 
 - [ ] **Bundle size regression test**
   - Test: Compare current bundle size against baseline (recorded in Phase 2)
-  - Expected: Total bundle size increase <10% from baseline
+  - Expected: Total bundle size increase < 10% from baseline
   - Edge case: Large dependency addition requires justification in PR
 
 ### Runtime Validation
@@ -377,12 +385,12 @@ Next.js Image component will be configured to:
 
 - [ ] **Lighthouse audit (manual)**
   - Steps: Deploy to preview, run Chrome Lighthouse on homepage and project page
-  - Expected result: Performance score >90, LCP <2.5s, CLS <0.1
+  - Expected result: Performance score > 90, LCP < 2.5s, CLS < 0.1
   - Document scores in PR description
 
 - [ ] **Core Web Vitals check (Vercel Analytics)**
   - Steps: Deploy to staging, collect 24 hours of analytics data
-  - Expected: LCP <2.5s, FID <100ms, CLS <0.1 (P75 values)
+  - Expected: LCP < 2.5s, FID < 100ms, CLS < 0.1 (P75 values)
 
 ### Test Commands
 
@@ -461,6 +469,7 @@ No new environment variables required. Existing variables are sufficient:
 ### Vercel Configuration
 
 Vercel automatically optimizes:
+
 - Edge caching respects `Cache-Control` headers from `next.config.ts`
 - Image optimization via `next/image` component
 - Compression (gzip/brotli) enabled by default
@@ -501,15 +510,15 @@ Core Web Vitals Targets:
 
 ## Related Documentation
 
-- [Phase 4 Implementation Guide](../phase-4-implementation-guide.md) — Stage 4.2 section
-- [ADR-0013: Multi-Environment Deployment](../../10-architecture/adr/adr-0013-multi-environment-deployment.md) — Environment context for performance testing
+- [Phase 4 Implementation Guide](/docs/00-portfolio/roadmap/phase-4-implementation-guide.md) — Stage 4.2 section
+- [ADR-0013: Multi-Environment Deployment](docs/10-architecture/adr/adr-0013-multi-environment-deployment.md) — Environment context for performance testing
 - [Stage 4.2 Docs Issue](stage-4-2-docs-issue.md) — Companion documentation deliverables
 
 ---
 
 ## Notes & Assumptions
 
-- **Assumption:** Project registry remains small (<50 projects); static generation is viable
+- **Assumption:** Project registry remains small (< 50 projects); static generation is viable
   - If registry grows >100 projects, may need to implement pagination or lazy loading
 - **Assumption:** Content updates are infrequent (< once per day); 1-hour ISR revalidation is sufficient
   - If content updates become more frequent, reduce revalidation interval

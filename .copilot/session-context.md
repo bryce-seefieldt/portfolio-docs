@@ -91,7 +91,7 @@ All work in both repositories **MUST** use templates for proper governance and t
 - **portfolio-app (PR #46):**
   - Environment helpers in config.ts (`ENVIRONMENT`, `isProduction`, `isPreview`, `isStaging`, `isDevelopment`)
   - Deleted redundant promotion workflows (promote-staging.yml, promote-production.yml) — Git-based promotion via branch merges
-  - Complete .env.example with all NEXT_PUBLIC_* variables documented
+  - Complete .env.example with all NEXT*PUBLIC*\* variables documented
   - Clarified staging-first workflow in README
   - Immutability principle established (same build artifact across tiers)
 
@@ -108,6 +108,7 @@ All work in both repositories **MUST** use templates for proper governance and t
 **Objective:** Introduce caching strategy, static generation with `generateStaticParams()`, asset optimization, and performance instrumentation
 
 **Key deliverables:**
+
 - next.config.ts enhancements (caching headers, image optimization, bundle analyzer)
 - generateStaticParams() for project pages
 - Performance runbook and dossier updates

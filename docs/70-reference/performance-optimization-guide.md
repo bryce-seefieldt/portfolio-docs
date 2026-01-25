@@ -26,7 +26,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 - Cache-Control: `public, max-age=3600, stale-while-revalidate=86400`
 - JS total baseline: ~27.8 MB (Phase 2); investigate >10% growth
 - Routes: project pages are SSG with 1h ISR
-- Core Web Vitals targets: LCP <2.5s, FID <100ms, CLS <0.1
+- Core Web Vitals targets: LCP < 2.5s, FID < 100ms, CLS < 0.1
 
 ## Analytics
 

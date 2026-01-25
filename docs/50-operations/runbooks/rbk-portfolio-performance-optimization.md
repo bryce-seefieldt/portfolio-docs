@@ -22,28 +22,34 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 
 ## Procedure
 
-1) Build with bundle analyzer (optional visualization)
+1. Build with bundle analyzer (optional visualization)
+
 - Command: `ANALYZE=true pnpm build`
 - Expectation: build succeeds; routes show static/SSG; analyzer opens for bundle composition review.
 
-2) Capture build duration
+2. Capture build duration
+
 - Command: `pnpm analyze:build`
 - Expectation: build time logged (e.g., ~9.6s local). Compare to baseline in performance-baseline.md.
 
-3) Bundle size regression check (local quick guard)
+3. Bundle size regression check (local quick guard)
+
 - After build: `du -sh .next` and `find .next -name "*.js" -type f | xargs wc -c | tail -1`
 - Expectation: JS total ~27.8 MB baseline (Phase 2). Investigate if >10% growth.
 
-4) Verify Cache-Control headers (local)
+4. Verify Cache-Control headers (local)
+
 - Start: `pnpm start`
 - Command: `curl -I http://localhost:3000/projects/portfolio-app | grep Cache-Control`
 - Expectation: `public, max-age=3600, stale-while-revalidate=86400`.
 
-5) Verify Vercel Analytics data
-- Deploy preview (or prod) and open dashboard: https://vercel.com/bryce-seefieldt/portfolio-app/analytics
-- Expectation: Core Web Vitals charts populate (LCP <2.5s, FID <100ms, CLS <0.1). If empty, wait for traffic or trigger synthetic page views.
+5. Verify Vercel Analytics data
 
-6) CI bundle threshold behavior
+- Deploy preview (or prod) and open dashboard: https://vercel.com/bryce-seefieldt/portfolio-app/analytics
+- Expectation: Core Web Vitals charts populate (LCP < 2.5s, FID < 100ms, CLS < 0.1). If empty, wait for traffic or trigger synthetic page views.
+
+6. CI bundle threshold behavior
+
 - CI build step runs bundle check (10% JS growth threshold). If failing, inspect new deps and update baseline only with justification.
 
 ## Validation

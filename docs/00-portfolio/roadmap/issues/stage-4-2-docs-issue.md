@@ -125,6 +125,7 @@ tags:
 **Purpose:** Operational guide for performance analysis, optimization, and regression investigation
 
 **Scope:**
+
 - Performance baseline metrics and targets
 - Bundle size analysis and optimization
 - Caching strategy verification
@@ -133,24 +134,27 @@ tags:
 
 #### Section 2: Performance Baseline & Targets
 
-**Source of truth:** Baseline metrics live in [portfolio-app/docs/performance-baseline.md](portfolio-app/docs/performance-baseline.md); keep this docs copy concise and reference the app repo for detailed tables and thresholds.
+**Source of truth:** Baseline metrics live in [portfolio-app/docs/performance-baseline.md](https://github.com/bryce-seefieldt/portfolio-app/tree/main/docs/performance-baseline.md); keep this docs copy concise and reference the app repo for detailed tables and thresholds.
 
 **Baseline Metrics (as of Stage 4.2 completion):**
 
 ```markdown
 Build Performance:
-- Build Time: ___ seconds (target: <30s)
-- First Load JS (Homepage): ___ KB (target: <100 KB)
-- First Load JS (Project Page): ___ KB (target: <120 KB)
-- Total Bundle Size: ___ KB
+
+- Build Time: \_\_\_ seconds (target: <30s)
+- First Load JS (Homepage): \_\_\_ KB (target: <100 KB)
+- First Load JS (Project Page): \_\_\_ KB (target: <120 KB)
+- Total Bundle Size: \_\_\_ KB
 
 Runtime Performance (Production):
-- Homepage LCP: ___ ms (target: <2500ms)
-- Homepage FID: ___ ms (target: <100ms)
-- Homepage CLS: ___ (target: <0.1)
-- Project Page LCP: ___ ms (target: <2500ms)
+
+- Homepage LCP: \_\_\_ ms (target: <2500ms)
+- Homepage FID: \_\_\_ ms (target: <100ms)
+- Homepage CLS: \_\_\_ (target: <0.1)
+- Project Page LCP: \_\_\_ ms (target: <2500ms)
 
 Regression Thresholds:
+
 - Bundle size increase >10%: Requires investigation and justification
 - Build time increase >20%: Triggers warning
 - LCP increase >500ms: Requires immediate investigation
@@ -238,15 +242,18 @@ time pnpm build
 
 ```markdown
 Symptoms:
+
 - CI check fails: "Bundle size increased by X%"
 - First Load JS exceeds baseline + 10%
 
 Diagnosis:
+
 1. Run `pnpm analyze:bundle` on current branch
 2. Run on main branch for comparison
 3. Identify new/larger dependencies
 
 Resolution:
+
 - If intentional (new feature): Document in PR, update baseline
 - If unintentional: Remove dependency or find lighter alternative
 - If duplicate: Resolve version conflicts in pnpm-lock.yaml
@@ -256,16 +263,19 @@ Resolution:
 
 ```markdown
 Symptoms:
+
 - LCP increased >500ms from baseline
 - CLS increased >0.05 from baseline
 - Vercel Analytics shows red/orange metrics
 
 Diagnosis:
+
 1. Run Lighthouse on affected page
 2. Identify specific element causing LCP/CLS issue
 3. Check for recent layout changes, new images, or render-blocking resources
 
 Resolution:
+
 - LCP issue: Optimize largest contentful element (image compression, lazy load)
 - CLS issue: Add explicit width/height to images/iframes; avoid layout shifts
 - FID issue: Reduce JavaScript bundle size, optimize event handlers
@@ -274,16 +284,19 @@ Resolution:
 #### Section 6: Monitoring & Alerts
 
 **Tools:**
+
 - Vercel Analytics: Real-time Core Web Vitals from production traffic
 - Bundle Analyzer: Quarterly review of bundle composition
 - CI Checks: Automated bundle size regression detection
 
 **Alert Thresholds:**
+
 - Bundle size increase >10%: CI fails, requires review
 - LCP >2.5s (P75): Manual investigation recommended
 - CLS >0.1 (P75): Manual investigation recommended
 
 **Review Schedule:**
+
 - Weekly: Check Vercel Analytics dashboard for trends
 - Monthly: Review bundle analyzer for optimization opportunities
 - Quarterly: Comprehensive performance audit (Lighthouse, full analysis)
@@ -314,11 +327,13 @@ tags: [reference, performance, optimization, nextjs, caching, ssr, ssg, isr]
 **Purpose:** Developer reference for implementing performant features in Next.js
 
 **Prerequisite knowledge:**
+
 - Next.js App Router fundamentals
 - React Server Components
 - HTTP caching basics
 
 **Use cases:**
+
 - Implementing new routes with optimal caching
 - Optimizing existing pages for performance
 - Troubleshooting performance regressions
@@ -565,15 +580,15 @@ All documentation must meet:
 
 - [Stage 4.2 App Issue](stage-4-2-app-issue.md) — Portfolio App performance implementation
 - [Phase 4 Implementation Guide](../phase-4-implementation-guide.md) — Stage 4.2 section
-- [ADR-0013: Multi-Environment Deployment](../../10-architecture/adr/adr-0013-multi-environment-deployment.md) — Environment context for performance testing
-- [Doc Style Guide](../../_meta/doc-style-guide.md) — Documentation standards
+- [ADR-0013: Multi-Environment Deployment](docs/10-architecture/adr/adr-0013-multi-environment-deployment.md) — Environment context for performance testing
+- [Doc Style Guide](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/doc-style-guide.md) — Documentation standards
 
 ---
 
 ## Notes & Assumptions
 
 - **Assumption:** Baseline metrics will be populated during Stage 4.2 app implementation
-  - Runbook includes placeholders (___) for values to be filled in after build
+  - Runbook includes placeholders (\_\_\_) for values to be filled in after build
 - **Assumption:** Vercel Analytics provides sufficient granularity for performance monitoring
   - If more detailed metrics needed, reference guide can be extended with custom instrumentation
 - **Assumption:** Performance optimization is iterative; runbook and guide will evolve
