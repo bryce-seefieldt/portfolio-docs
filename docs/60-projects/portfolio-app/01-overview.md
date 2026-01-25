@@ -154,6 +154,16 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 - **Quality gates:** Lint, format, typecheck, registry validation, unit tests, E2E tests, secrets scan, build (all enforced)
 - **Dependencies:** ~17 production, ~15 dev (Dependabot weekly updates)
 
+## Performance Metrics (Phase 4 Stage 4.2)
+
+- **Build time:** ~3.5s (TypeScript compile + static generation)
+- **Bundle size:** 27.8 MB total JavaScript (CI enforces 10% growth threshold)
+- **Static generation:** All project pages pre-rendered at build time with 1-hour ISR
+- **Cache strategy:** HTTP Cache-Control headers (max-age=3600, stale-while-revalidate=86400)
+- **Core Web Vitals targets:** LCP < 2.5s, FID < 100ms, CLS < 0.1
+- **Performance baseline:** Documented in [portfolio-app/docs/performance-baseline.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md)
+- **Monitoring:** Vercel Analytics dashboard for real-world Core Web Vitals data
+
 ## What This Project Proves
 
 ### Technical Competency
@@ -162,6 +172,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 - Component-driven architecture with App Router
 - Responsive design with Tailwind CSS
 - Evidence-first UX (deep links to documentation)
+- Performance optimization (static generation with ISR, HTTP caching, bundle size regression detection)
 
 ### Engineering Discipline
 

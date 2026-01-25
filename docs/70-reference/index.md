@@ -67,6 +67,10 @@ Reference content is “good” when:
 - **Stale commands:** updates to toolchain invalidate instructions → update in the same PR that changes tooling.
 - **Hidden prerequisites:** commands require tools not mentioned → include prerequisites explicitly.
 
+## Reference entries
+
+- `docs/70-reference/performance-optimization-guide.md` — Performance optimization guide (Stage 4.2), with links to bundle analysis steps and Vercel Analytics dashboard.
+
 ## References
 
 Reference entries must align with:

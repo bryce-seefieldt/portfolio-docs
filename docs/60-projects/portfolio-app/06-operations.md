@@ -98,6 +98,32 @@ Responsibilities:
 - Required checks (by contract): `ci / quality`, `ci / test`, `ci / build`, `ci / link-validation`.
 - **Staging validation is required** after merge to main, before production is considered "live".
 - Quality runs `pnpm lint`, `pnpm format:check`, `pnpm typecheck`
+
+### Performance Monitoring (Phase 4 Stage 4.2)
+
+**Bundle Size Regression Detection:** CI automatically tracks JavaScript bundle size after every build. If total JS exceeds baseline (27.8 MB) by >10%, the build fails and requires investigation before merge. This prevents unreviewed dependencies or code bloat from degrading performance.
+
+**Core Web Vitals Monitoring:** Vercel Analytics dashboard (https://vercel.com/bryce-seefieldt/portfolio-app/analytics) tracks real-world performance metrics from production traffic:
+
+- LCP (Largest Contentful Paint): Target < 2.5s
+- FID (First Input Delay): Target < 100ms
+- CLS (Cumulative Layout Shift): Target < 0.1
+
+**Performance Baseline:** Build time (~3.5s), bundle size (27.8 MB), and Core Web Vitals targets documented in [portfolio-app/docs/performance-baseline.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md).
+
+**Operational Procedures:**
+
+- Bundle analysis: `ANALYZE=true pnpm build` (visualize dependency composition)
+- Build timing: `pnpm analyze:build` (measure compilation duration)
+- Cache verification: `curl -I [URL] | grep Cache-Control` (confirm headers)
+- Performance triage: See [rbk-portfolio-performance-optimization.md](../../50-operations/runbooks/rbk-portfolio-performance-optimization.md)
+
+**Regression Thresholds:**
+
+- Bundle size increase >10%: CI fails (requires justification or rollback)
+- Build time increase >20%: Warning logged (investigate if sustained)
+- LCP degradation >500ms: Manual investigation recommended
+- CLS increase >0.05: Manual investigation recommended
 - Test runs:
   - Unit tests: `pnpm test:unit` (70+ Vitest tests with ≥80% coverage validation)
   - E2E tests: `pnpm playwright test` (12 Playwright tests across Chromium, Firefox)
