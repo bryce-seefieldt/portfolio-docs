@@ -208,11 +208,11 @@ Add dynamic Open Graph metadata for project pages
 
 #### Tasks
 
-- [ ] Update `src/app/layout.tsx` with default OG metadata
+- [x] Update `src/app/layout.tsx` with default OG metadata
   - Details: Add site-wide defaults (title, description, image, URL)
   - Files: `src/app/layout.tsx`
 
-- [ ] Update `src/app/projects/[slug]/page.tsx` with dynamic metadata
+- [x] Update `src/app/projects/[slug]/page.tsx` with dynamic metadata
   - Details: Implement `generateMetadata` function using registry data
   - Files: `src/app/projects/[slug]/page.tsx`
   - Code example:
@@ -237,20 +237,20 @@ Add dynamic Open Graph metadata for project pages
     }
     ```
 
-- [ ] Add Twitter Card metadata
+- [x] Add Twitter Card metadata
   - Details: Add twitter.card, twitter.title, twitter.description
   - Files: `src/app/layout.tsx`, `src/app/projects/[slug]/page.tsx`
 
-- [ ] Test metadata with Twitter Card Validator and Facebook Sharing Debugger
+- [x] Test metadata with Twitter Card Validator and Facebook Sharing Debugger
   - Details: Verify OG tags render correctly
   - URLs: https://cards-dev.twitter.com/validator, https://developers.facebook.com/tools/debug/
 
 #### Success Criteria for This Phase
 
-- [ ] Default OG metadata present on all pages
-- [ ] Project pages have unique OG metadata with project details
-- [ ] Twitter Card validator shows correct preview
-- [ ] Facebook Sharing Debugger shows correct preview
+- [x] Default OG metadata present on all pages
+- [x] Project pages have unique OG metadata with project details
+- [x] Twitter Card validator shows correct preview
+- [x] Facebook Sharing Debugger shows correct preview
 
 ---
 
@@ -260,11 +260,11 @@ Add privacy-safe analytics with Vercel Web Analytics
 
 #### Tasks
 
-- [ ] Install Vercel Analytics package
+- [x] Install Vercel Analytics package
   - Details: `pnpm add @vercel/analytics`
   - Files: `package.json`
 
-- [ ] Add Analytics component to root layout
+- [x] Add Analytics component to root layout
   - Details: Import and render `<Analytics />` in layout.tsx
   - Files: `src/app/layout.tsx`
   - Code example:
@@ -284,19 +284,19 @@ Add privacy-safe analytics with Vercel Web Analytics
     }
     ```
 
-- [ ] Document analytics in .env.example (if configuration needed)
+- [x] Document analytics in .env.example (if configuration needed)
   - Details: Add NEXT_PUBLIC_VERCEL_ANALYTICS_ID if required
   - Files: `.env.example`
 
-- [ ] Test analytics tracking in Vercel dashboard
+- [x] Test analytics tracking in Vercel dashboard
   - Details: Deploy to Vercel, verify page views are tracked
   - Dependencies: Requires Vercel deployment
 
 #### Success Criteria for This Phase
 
-- [ ] Analytics component integrated without errors
-- [ ] Page views tracked in Vercel Analytics dashboard
-- [ ] No PII collected (confirmed in privacy settings)
+- [x] Analytics component integrated without errors
+- [x] Page views tracked in Vercel Analytics dashboard
+- [x] No PII collected (confirmed in privacy settings)
 
 ---
 
@@ -304,19 +304,19 @@ Add privacy-safe analytics with Vercel Web Analytics
 
 ### Unit Tests
 
-- [ ] Metadata generation tests
+- [x] Metadata generation tests
   - Location: `src/app/projects/[slug]/__tests__/metadata.test.ts`
   - Coverage: Verify generateMetadata returns correct structure for all projects
 
 ### Integration Tests
 
-- [ ] OG metadata rendering tests
+- [x] OG metadata rendering tests
   - Scenario: Verify OG tags present in HTML head
   - Expected: meta tags with correct property and content attributes
 
 ### E2E / Manual Testing
 
-- [ ] Social sharing validation
+- [x] Social sharing validation
   - Steps:
     1. Deploy to Vercel
     2. Share project URL on Twitter
@@ -324,7 +324,7 @@ Add privacy-safe analytics with Vercel Web Analytics
     4. Verify preview card displays correctly
   - Expected result: Rich preview with project title, description, and image
 
-- [ ] Analytics tracking verification
+- [x] Analytics tracking verification
   - Steps:
     1. Visit portfolio app in incognito mode
     2. Navigate to 2–3 project pages
@@ -353,18 +353,18 @@ pnpm verify
 
 This stage is complete when:
 
-- [ ] All project pages have dynamic Open Graph metadata
-- [ ] Twitter Card previews render correctly for shared links
-- [ ] LinkedIn/Facebook previews render correctly for shared links
-- [ ] Vercel Web Analytics integrated and tracking page views
-- [ ] No PII collected (aggregate data only)
-- [ ] Privacy implications documented
-- [ ] `pnpm verify` passes (lint, format, typecheck, build all succeed)
-- [ ] No TypeScript errors: `pnpm typecheck`
-- [ ] No ESLint violations: `pnpm lint`
-- [ ] Code is formatted: `pnpm format:check`
-- [ ] Production build succeeds: `pnpm build`
-- [ ] Social preview tested on Twitter, LinkedIn, Facebook
+- [x] All project pages have dynamic Open Graph metadata
+- [x] Twitter Card previews render correctly for shared links
+- [x] LinkedIn/Facebook previews render correctly for shared links
+- [x] Vercel Web Analytics integrated and tracking page views
+- [x] No PII collected (aggregate data only)
+- [x] Privacy implications documented
+- [x] `pnpm verify` passes (lint, format, typecheck, build all succeed)
+- [x] No TypeScript errors: `pnpm typecheck`
+- [x] No ESLint violations: `pnpm lint`
+- [x] Code is formatted: `pnpm format:check`
+- [x] Production build succeeds: `pnpm build`
+- [x] Social preview tested on Twitter, LinkedIn, Facebook
 
 ---
 
@@ -385,8 +385,8 @@ All code must meet:
 
 ### CI Pipeline Integration
 
-- [ ] No new CI steps required (metadata is build-time)
-- [ ] Analytics tested in Vercel preview deployments
+- [x] No new CI steps required (metadata is build-time)
+- [x] Analytics tested in Vercel preview deployments
 
 ### Environment Variables / Configuration
 
@@ -412,12 +412,12 @@ Documentation: See `.env.example` for complete list.
 
 ### Depends On
 
-- [ ] Stage 3.1 complete (registry data for metadata)
-- [ ] Vercel deployment active (for analytics)
+- [x] Stage 3.1 complete (registry data for metadata)
+- [x] Vercel deployment active (for analytics)
 
 ### Blocks
 
-- [ ] None (Stage 3.6 is final stage in Phase 3)
+- [x] None (Stage 3.6 is final stage in Phase 3)
 
 ### Related Work
 

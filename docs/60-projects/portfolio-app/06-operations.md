@@ -34,6 +34,46 @@ Document how the Portfolio App is operated like a production service:
 - Vercel preview/prod deployments are functioning
 - quality gates are enforced in CI and (optionally) promotion checks
 
+## Quick Reference: Three-Tier Deployment Workflow
+
+**Local Development → PR Review → Staging Validation → Production**
+
+| Phase                        | Branch                          | Action                                                                             | Validation                                                   |
+| ---------------------------- | ------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **1. Development**           | `feat/your-feature`             | Create feature branch, make changes, run `pnpm verify` locally                     | Pass local validation                                        |
+| **2. PR Review**             | `feat/your-feature` → `staging` | Open PR targeting `staging` (not `main`), get approval                             | CI checks pass, Vercel preview works                         |
+| **3. Merge to Staging**      | `staging`                       | Merge PR to staging branch                                                         | Auto-deploy to staging domain                                |
+| **4. Staging Validation**    | `staging`                       | Manual validation of critical routes on `https://staging-bns-portfolio.vercel.app` | All routes load, evidence links work, no console errors      |
+| **5. Promote to Production** | `staging` → `main`              | Merge staging to main (manual decision point)                                      | Auto-deploy to production `https://bns-portfolio.vercel.app` |
+
+**Key Rules:**
+
+- ✅ Always open PRs **targeting `staging` branch** (not `main`)
+- ✅ **Staging validation is mandatory** before production is considered complete
+- ✅ Production deploys automatically after CI passes on `main`
+- ✅ Use hotfix PRs or rollback if staging validation fails
+- ✅ Keep `staging` in sync with `main` (never commit directly to staging)
+
+**Quick Validation Checklist (Post-Merge):**
+
+```bash
+# Automated smoke tests
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test
+
+# Manual validation
+open https://staging-bns-portfolio.vercel.app
+# ✓ Home (/) loads without errors
+# ✓ CV (/cv), Projects (/projects), Contact (/contact) render
+# ✓ Project details load with evidence links
+# ✓ DevTools Console: no JavaScript errors or failed network requests
+```
+
+**If Staging Validation Fails:**
+
+- Do NOT proceed to production
+- Create hotfix PR (targeting staging) or rollback (see [rbk-portfolio-rollback.md](../../50-operations/runbooks/rbk-portfolio-rollback.md))
+- Validate staging again before promoting
+
 ## Procedure / Content
 
 ## Operational model
@@ -52,20 +92,33 @@ Responsibilities:
 - keep dependencies current and safe
 - respond to regressions promptly with rollback capability
 
-### Release gates (CI)
+### Release gates (CI + Staging Validation)
 
 - CI is a hard release gate. Merges and promotions must not proceed if required checks fail.
 - Required checks (by contract): `ci / quality`, `ci / test`, `ci / build`, `ci / link-validation`.
+- **Staging validation is required** after merge to main, before production is considered "live".
 - Quality runs `pnpm lint`, `pnpm format:check`, `pnpm typecheck`
 - Test runs:
   - Unit tests: `pnpm test:unit` (70+ Vitest tests with ≥80% coverage validation)
   - E2E tests: `pnpm playwright test` (12 Playwright tests across Chromium, Firefox)
 - Link validation runs (Stage 3.5):
   - Registry validation: `pnpm registry:validate` (checks project metadata schema)
-  - Evidence link checks: `pnpm links:check` (Playwright-based validation of all `href="/docs/*"` links)
+  - Evidence link checks: `pnpm links:check` (Playwright smoke tests)
   - Produces playwright-report artifact on failure for diagnostic use
 - Build runs `pnpm build` with frozen lockfile installs, then triggers Vercel deployment
 - If CI fails: follow the CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
+
+### Staging Validation (Pre-Production Gate)
+
+- Changes deployed to staging branch at `https://staging-bns-portfolio.vercel.app` for validation
+- **Required before production is considered complete**
+- Validation includes:
+  - Manual smoke tests of critical routes (`/`, `/cv`, `/projects`, `/contact`)
+  - Evidence link resolution verification
+  - Browser console error checks
+  - Optional automated Playwright tests via: `PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test`
+- If staging validation fails: fix via hotfix PR or rollback (see [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md))
+- If staging passes: production deployment (on main) is already live and validated
 
 ### Monitoring and analytics
 
@@ -77,6 +130,14 @@ Responsibilities:
 - If analytics must be disabled temporarily, remove `<Analytics />` from `src/app/layout.tsx` and redeploy.
 
 ### Pre-deploy local validation (developer workflow)
+
+**Three-stage validation workflow:**
+
+1. **Local** (before PR): `pnpm verify` on developer machine
+2. **CI** (automatic): GitHub Actions validates on PR and main
+3. **Staging** (after merge to main): Manual validation on production-like staging domain
+
+#### Local development validation
 
 Before committing changes or opening a PR, validate locally to catch CI failures early.
 
@@ -95,6 +156,34 @@ pnpm verify:quick
 ```
 
 Runs environment check through build steps (excluding unit and E2E tests) for rapid feedback during active development. Always run full `pnpm verify` before final push.
+
+#### Staging validation (post-merge, pre-production)
+
+After merging PR to main and deploying to staging:
+
+**Automated validation:**
+
+```bash
+# Run Playwright smoke tests against staging domain
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test
+```
+
+**Manual validation checklist:**
+
+1. Open `https://staging-bns-portfolio.vercel.app` in browser
+2. Verify critical flows:
+   - [ ] Home page loads (`/`)
+   - [ ] CV page renders (`/cv`)
+   - [ ] Projects page renders (`/projects`)
+   - [ ] Contact page renders (`/contact`)
+   - [ ] At least one project detail renders (`/projects/[slug]`)
+3. Verify evidence links:
+   - [ ] Links to Documentation App resolve
+   - [ ] Project dossier links work
+4. Browser validation:
+   - [ ] Open DevTools Console
+   - [ ] No JavaScript errors
+   - [ ] No failed network requests
 
 **Alternative approach (granular):**
 

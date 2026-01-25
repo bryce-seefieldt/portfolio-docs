@@ -5,7 +5,7 @@ sidebar_position: 3
 tags: [projects, deployment, cicd, vercel, github-actions, governance]
 ---
 
-**Status:** ✅ **Phase 1 COMPLETE (2026-01-17)** — CI quality/build gates with frozen installs; Vercel preview + production promotion with Deployment Checks configured; GitHub Ruleset protects main branch (see [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [portfolio-app-github-ruleset-config.md](/docs/70-reference/portfolio-app-github-ruleset-config.md)).
+**Status:** ✅ **Phase 4 COMPLETE (2026-01-24)** — Three-tier deployment model (Preview → Staging → Production) with staging domain mapping; CI quality/build/test gates; Vercel Deployment Checks; GitHub Ruleset protection on main and staging branches (see [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)).
 
 ## Purpose
 
@@ -18,7 +18,7 @@ Define how the Portfolio App is built and deployed with enterprise-grade governa
 
 ## Deployment Model Summary
 
-The Portfolio App deployment model consists of two distinct phases:
+The Portfolio App deployment model consists of three distinct operational phases:
 
 ### Phase 1: Setup (One-Time, Admin Tasks)
 
@@ -27,23 +27,37 @@ The Portfolio App deployment model consists of two distinct phases:
 **What:** Establish the governance infrastructure:
 
 - Connect repository to Vercel
-- Configure environment variables (preview + production scopes)
+- Configure environment variables (preview, staging, and production scopes)
 - Import GitHub Deployment Checks into Vercel
-- Create GitHub Ruleset for branch protection
+- Create GitHub Ruleset for branch protection (main and staging)
+- Map staging domain to staging branch
 
-**Document:** [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (6 phases, ~100 minutes)
+**Document:** [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (7 phases, ~120 minutes including staging setup)
 
-### Phase 2: Steady-State Operations (Repeated)
+### Phase 2: Staging Validation (Before Production)
 
-**When:** Making code changes, deploying, triaging CI failures, rolling back
+**When:** After merging changes to `main`, before production deployment
 
-**What:** Operate within established governance:
+**What:** Validate in production-like environment:
 
-- Create PR with code changes
-- Validate preview deployment
-- Merge when CI checks pass (GitHub Ruleset enforces this)
-- Production promotion automatic after checks pass (Vercel Deployment Checks enforce this)
-- If needed: triage CI failures or rollback
+- Merge main to staging branch
+- Vercel deploys to staging domain (`staging-bns-portfolio.vercel.app`)
+- Manual validation of critical flows
+- Run smoke tests against staging URL
+- Confirm evidence links and navigation work
+
+**Document:** [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md) (includes staging validation steps)
+
+### Phase 3: Production Deployment (Repeated)
+
+**When:** After successful staging validation
+
+**What:** Promote validated changes to production:
+
+- Production deployment from `main` is automatic (already deployed when merged)
+- Vercel Deployment Checks ensure CI gates pass before production promotion
+- Post-deployment validation on production domain
+- If issues found: rollback via Git revert
 
 **Documents:**
 
@@ -77,16 +91,38 @@ The Portfolio App deployment model consists of two distinct phases:
 
 ## Environments
 
+The Portfolio App operates across three tiers, each serving a distinct purpose in the validation and deployment pipeline:
+
 ### Preview (PR branches)
 
-- Every PR should generate:
-  - a Vercel preview deployment URL
-  - passing GitHub checks
-- Reviewers validate:
-  - routing, rendering, performance basics
-  - evidence links to `/docs` are correct
+- **Purpose:** Feature validation and PR review
+- **Trigger:** Automatic on PR creation
+- **Domain:** Auto-generated Vercel URL per PR (e.g., `portfolio-app-git-feat-xyz.vercel.app`)
+- **Validation:**
+  - Reviewers validate routing, rendering, and functionality
+  - Evidence links to Documentation App are verified
+  - CI checks run automatically
 
-### Production (`main`)
+### Staging (`staging` branch)
+
+- **Purpose:** Pre-production validation in production-like environment
+- **Trigger:** Manual merge from `main` to `staging`
+- **Domain:** `https://staging-bns-portfolio.vercel.app`
+- **Validation:**
+  - Full smoke test suite against staging URL
+  - Evidence link resolution and navigation flow verification
+  - Performance and accessibility spot checks
+  - Manual exploratory testing for critical paths
+
+### Production (`main` branch)
+
+- **Purpose:** Live public site serving end users
+- **Trigger:** Automatic promotion after CI checks pass (Vercel Deployment Checks)
+- **Domain:** `https://bns-portfolio.vercel.app` (production domain)
+- **Protection:**
+  - GitHub Deployment Checks gate promotion (`ci / quality`, `ci / link-validation`, `ci / build`)
+  - GitHub Ruleset requires PR approval and passing checks before merge
+  - Rollback via Git revert to last known good state
 
 - `main` is the published production branch.
 - Production domains are assigned only after required checks pass (see below).
@@ -215,6 +251,182 @@ The Portfolio App should never merge changes that:
 - introduce type errors
 - fail coverage thresholds
 - violate documented governance requirements
+
+## Staging Deployment Workflow
+
+**Purpose:** Validate changes in a production-like environment before exposing them to end users.
+
+### When to use staging
+
+- Before any production deployment
+- When validating evidence link changes
+- After major dependency updates
+- For exploratory testing of new features
+- When validating cross-browser compatibility
+
+### Local → Staging → Production Sequence
+
+#### 1. Local Development
+
+```bash
+# Create feature branch
+git checkout main && git pull
+git checkout -b feat/your-feature
+
+# Make changes and validate locally
+pnpm verify  # Or: pnpm verify:quick during development
+
+# Commit and push
+git commit -am "feat: description"
+git push origin feat/your-feature
+```
+
+#### 2. PR Review and Preview
+
+- Open PR targeting `main`
+- Vercel creates preview deployment automatically
+- Review preview URL and validate changes
+- Ensure all CI checks pass (`ci / quality`, `ci / test`, `ci / link-validation`, `ci / build`)
+- Get PR approval
+
+#### 3. Merge to Main
+
+```bash
+# Merge PR via GitHub UI (squash and merge recommended)
+# Or via CLI:
+gh pr merge <pr-number> --squash
+```
+
+#### 4. Deploy to Staging
+
+```bash
+# Switch to staging branch
+git checkout staging
+git pull origin staging
+
+# Merge main into staging
+git merge main
+# Alternative: rebase for cleaner history
+# git rebase main
+
+# Push to trigger staging deployment
+git push origin staging
+```
+
+**What happens:**
+
+- Vercel deploys to `https://staging-bns-portfolio.vercel.app`
+- CI checks run on staging branch
+- Staging domain updates to latest deployment
+
+#### 4. Validate on Staging
+
+**Manual validation checklist:**
+
+- [ ] Open `https://staging-bns-portfolio.vercel.app`
+- [ ] Home page loads without errors (`/`)
+- [ ] Navigation works (header, footer links)
+- [ ] Critical routes render (`/cv`, `/projects`, `/contact`)
+- [ ] At least one project detail page renders (`/projects/[slug]`)
+- [ ] Evidence links resolve to Documentation App
+- [ ] No console errors in browser DevTools
+- [ ] Mobile responsiveness check (resize browser or use DevTools)
+
+**Optional: Automated smoke tests against staging:**
+
+```bash
+# Run Playwright tests against staging URL
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test
+
+# Or run specific test suite
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test tests/smoke.spec.ts
+```
+
+#### 5. Promote to Production
+
+Only after staging validation passes:
+
+```bash
+# Merge staging to main to promote to production
+git checkout main
+git pull origin main
+git merge staging
+git push origin main
+```
+
+**What happens:**
+
+- Vercel automatically deploys to `https://bns-portfolio.vercel.app`
+- CI checks run on main branch
+- Production domain updates to latest deployment
+
+#### 6. Validate Production
+
+After production deployment, verify critical flows match staging validation:
+
+- [ ] Open `https://bns-portfolio.vercel.app`
+- [ ] Validate same routes and flows as staging
+- [ ] Confirm evidence links and navigation work
+- [ ] Check browser console for errors
+
+### Staging Validation Failures
+
+If staging validation reveals issues:
+
+**Option 1: Quick Fix (minor issues)**
+
+```bash
+# Create hotfix branch from main
+git checkout main
+git checkout -b fix/staging-issue
+
+# Fix the issue, validate locally
+pnpm verify
+
+# Push and create PR
+git push origin fix/staging-issue
+# Create PR, get approval, merge to main
+
+# Redeploy to staging
+git checkout staging
+git pull origin staging
+git merge main
+git push origin staging
+```
+
+**Option 2: Rollback (major issues)**
+
+```bash
+# Revert the problematic PR on main
+git checkout main
+git revert <commit-sha>
+git push origin main
+
+# Update staging
+git checkout staging
+git pull origin staging
+git merge main
+git push origin staging
+```
+
+See [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md) for detailed rollback procedures.
+
+### Staging Branch Maintenance
+
+**Keep staging synchronized with main:**
+
+- Merge `main` to `staging` after every production deployment
+- Do not commit directly to `staging`
+- Staging should always be ahead of or equal to main (never diverge)
+
+**Weekly sync (recommended):**
+
+```bash
+git checkout staging
+git pull origin staging
+git merge main  # Should be fast-forward if staging is current
+git push origin staging
+```
 
 ## Pre-deployment governance (required)
 

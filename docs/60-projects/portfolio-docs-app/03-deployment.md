@@ -2,8 +2,17 @@
 title: 'Portfolio Docs: Deployment'
 description: 'Delivery model for the Portfolio Docs App: CI/CD contract, environments, hosting expectations, release discipline, and rollback posture.'
 sidebar_position: 3
-tags: [projects, devops, cicd, deployment, vercel, github-actions]
+tags:
+  [projects, devops, cicd, deployment, vercel, github-actions, portfolio-docs]
 ---
+
+:::note
+**Portfolio Docs Deployment Model:** Direct production deployment (no staging tier).
+
+The Portfolio Docs App uses a simpler **preview → production** model. Unlike the Portfolio App (which includes a staging tier at `staging-bns-portfolio.vercel.app`), documentation is deployed directly from `main` to production at `https://portfolio-docs.vercel.app`.
+
+Evidence links from the Portfolio App to docs use `NEXT_PUBLIC_DOCS_BASE_URL`, so the app can seamlessly target either environment without code changes.
+:::
 
 ## Purpose
 
@@ -83,6 +92,15 @@ This architecture decouples **deployment creation** (immediate) from **release p
   3. Deployment Checks (GitHub Actions `ci / build`) run
   4. When checks pass: Vercel assigns the production domain
   5. When checks fail: deployment exists but remains inaccessible; requires fix-forward or rollback
+
+#### Stage 4.1 alignment: Staging strategy (portfolio-app)
+
+For Stage 4.1, the Portfolio App introduces a conceptual **staging** tier via Vercel branch/domain mapping. The Documentation App can either:
+
+- Remain a single production domain (recommended), ensuring the app links to a stable docs base via `NEXT_PUBLIC_DOCS_BASE_URL`, or
+- Optionally configure a docs staging domain mapped to a documentation branch for pre-release review.
+
+In both cases, maintain **environment-first linking** and avoid hardcoded hosts. The app should build docs URLs from `NEXT_PUBLIC_DOCS_BASE_URL` so staging and production serve identical content unless intentionally versioned.
 
 ### Build settings and contract
 

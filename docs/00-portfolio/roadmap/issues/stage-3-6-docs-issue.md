@@ -343,23 +343,23 @@ Create comprehensive reference guide for social metadata
 
 #### Tasks
 
-- [ ] Create `docs/70-reference/social-metadata-guide.md`
+- [x] Create `docs/70-reference/social-metadata-guide.md`
   - Details: Write sections for Open Graph, Twitter Cards, best practices
   - Sources: Open Graph protocol docs, Twitter developer docs, Next.js metadata docs
 
-- [ ] Add code examples for metadata generation
+- [x] Add code examples for metadata generation
   - File: `docs/70-reference/social-metadata-guide.md`
   - Outline complete: Site-wide defaults, project-specific, validation examples
 
-- [ ] Add troubleshooting section
+- [x] Add troubleshooting section
   - Details: Common issues (cache, HTTPS, truncation) with solutions
   - File: `docs/70-reference/social-metadata-guide.md`
 
 #### Success Criteria for This Phase
 
-- [ ] Social Metadata Guide published with complete reference
-- [ ] Code examples are copy/paste safe
-- [ ] Troubleshooting covers 3+ common issues
+- [x] Social Metadata Guide published with complete reference
+- [x] Code examples are copy/paste safe
+- [x] Troubleshooting covers 3+ common issues
 
 ---
 
@@ -369,28 +369,28 @@ Update Portfolio App dossier and privacy documentation
 
 #### Tasks
 
-- [ ] Update `docs/60-projects/portfolio-app/06-operations.md`
+- [x] Update `docs/60-projects/portfolio-app/06-operations.md`
   - Details: Add "Analytics Dashboard" subsection under monitoring
   - Content: Link to Vercel Analytics, explain metrics interpretation
 
-- [ ] Update `docs/60-projects/portfolio-app/08-security.md`
+- [x] Update `docs/60-projects/portfolio-app/08-security.md`
   - Details: Add "Analytics Privacy Stance" subsection
   - Content: Document privacy-safe analytics approach, GDPR compliance
 
-- [ ] Update `docs/60-projects/portfolio-app/index.md`
+- [x] Update `docs/60-projects/portfolio-app/index.md`
   - Details: Add Stage 3.6 deliverables to "Current State" section
   - Content: Social metadata, privacy-safe analytics
 
-- [ ] Update `docs/00-portfolio/roadmap/phase-3-implementation-guide.md`
+- [x] Update `docs/00-portfolio/roadmap/phase-3-implementation-guide.md`
   - Details: Mark Stage 3.6 checklist items complete
   - Content: Check off all Stage 3.6 tasks
 
 #### Success Criteria for This Phase
 
-- [ ] Operations page documents analytics access
-- [ ] Security page documents privacy stance
-- [ ] Dossier index reflects Stage 3.6 completion
-- [ ] Phase 3 guide shows Stage 3.6 complete
+- [x] Operations page documents analytics access
+- [x] Security page documents privacy stance
+- [x] Dossier index reflects Stage 3.6 completion
+- [x] Phase 3 guide shows Stage 3.6 complete
 
 ---
 
@@ -398,23 +398,23 @@ Update Portfolio App dossier and privacy documentation
 
 This stage is complete when:
 
-- [ ] Social Metadata Guide published at `docs/70-reference/social-metadata-guide.md`
-- [ ] Portfolio App dossier updated with Stage 3.6 context (operations, security, index)
-- [ ] Privacy documentation updated with analytics disclosure
-- [ ] Phase 3 Implementation Guide marked Stage 3.6 complete
-- [ ] All cross-references added to related pages
-- [ ] Documentation builds successfully: `pnpm build`
-- [ ] No broken links: Docusaurus broken link checker passes
-- [ ] Meets doc style guide standards (front matter, structure, tags)
+- [x] Social Metadata Guide published at `docs/70-reference/social-metadata-guide.md`
+- [x] Portfolio App dossier updated with Stage 3.6 context (operations, security, index)
+- [x] Privacy documentation updated with analytics disclosure
+- [x] Phase 3 Implementation Guide marked Stage 3.6 complete
+- [x] All cross-references added to related pages
+- [x] Documentation builds successfully: `pnpm build`
+- [x] No broken links: Docusaurus broken link checker passes
+- [x] Meets doc style guide standards (front matter, structure, tags)
 
 ---
 
 ## Quality Checklist
 
-- [ ] Front matter complete (title, description, sidebar_position, tags)
-- [ ] Uses standard page structure for reference guide
-- [ ] Code examples are syntax-highlighted and copy/paste safe
-- [ ] All external links are valid (Open Graph docs, Twitter docs, validator tools)
-- [ ] Mermaid diagrams render correctly
-- [ ] Cross-references use correct paths (include section numbers, .md extension)
-- [ ] Follows Docusaurus conventions (admonitions, code blocks, etc.)
+- [x] Front matter complete (title, description, sidebar_position, tags)
+- [x] Uses standard page structure for reference guide
+- [x] Code examples are syntax-highlighted and copy/paste safe
+- [x] All external links are valid (Open Graph docs, Twitter docs, validator tools)
+- [x] Mermaid diagrams render correctly
+- [x] Cross-references use correct paths (include section numbers, .md extension)
+- [x] Follows Docusaurus conventions (admonitions, code blocks, etc.)

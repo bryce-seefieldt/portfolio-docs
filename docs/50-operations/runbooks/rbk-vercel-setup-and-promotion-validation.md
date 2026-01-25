@@ -407,7 +407,146 @@ If checks don't appear after 3 minutes, verify:
 
 ---
 
-### Phase 6: Clean up and document
+### Phase 6: Configure Staging Domain & Branch Mapping (Stage 4.1)
+
+This phase adds a clear, reviewable staging tier using Vercel's branch/domain mapping while maintaining immutable builds.
+
+#### Step 6.1: Create a protected `staging` branch
+
+**In GitHub:**
+
+1. Create `staging` branch from `main`:
+   ```bash
+   git checkout main && git pull
+   git checkout -b staging
+   git push origin staging
+   ```
+2. Protect `staging` with a ruleset similar to `main` (optional but recommended):
+   - Require PR reviews
+   - Require status checks (`ci / quality`, `ci / build`)
+   - Block force pushes and deletions
+
+#### Step 6.2: Map a staging domain to the `staging` branch
+
+**In Vercel Dashboard:**
+
+1. **First, add a custom domain to your project:**
+   - Open **portfolio-app** → **Settings** → **Domains**
+   - Click **"Add a domain"**
+   - Enter your staging domain (e.g., `staging.portfolio.example.com`)
+   - Configure DNS according to Vercel's instructions (CNAME or nameserver method)
+   - Wait for the domain to be verified and assigned to production branch
+
+2. **Then, reassign the domain to the `staging` branch:**
+   - In **Settings** → **Domains**, locate the staging domain you just added
+   - Click the **"Edit"** dropdown next to the domain
+   - In the modal, find **"Connect to an environment"** section
+   - Select **"Preview"** from the dropdown
+   - In the **"Git Branch"** field, enter `staging`
+   - Click **"Save"**
+
+**Note:** The Domains section in Settings displays your project-level domain assignments. Each domain can be connected to either Production (main branch) or a specific branch in Preview environment.
+
+Result: Deployments from the `staging` branch will now serve at the staging domain. Commits to other branches will continue to use auto-generated Vercel URLs.
+
+#### Step 6.3: Environment variable strategy for staging
+
+- Vercel sets `VERCEL_ENV=preview` for non-production deployments (including `staging`).
+- Keep configuration environment-first using public-safe variables:
+  - `NEXT_PUBLIC_SITE_URL` → set to staging domain under **Preview** scope
+  - `NEXT_PUBLIC_DOCS_BASE_URL` → typically production docs; optionally a docs staging domain
+- Do not hardcode environments in code. Our helpers treat environment hints as **diagnostics only**.
+
+#### Step 6.4: Validate staging deployment
+
+##### Part A: Trigger staging deployment
+
+1. Merge changes to the `staging` branch (if not already done):
+   ```bash
+   git checkout staging
+   git pull origin staging
+   git merge main
+   git push origin staging
+   ```
+2. Vercel will automatically deploy to the staging domain
+3. Wait for the deployment to complete (monitor in Vercel dashboard)
+
+##### Part B: Verify deployment and CI gates pass
+
+Monitor the GitHub Actions CI workflow for the following gates (should all show ✅ PASS):
+
+- **Environment validation** – Checks that all required env vars are defined
+  - **Required vars:** `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_DOCS_BASE_URL`
+  - ⚠️ **If this fails:** See **Troubleshooting** section → "CI workflow fails with missing environment variables"
+- **Registry check** – Verifies build artifacts can be pushed
+- **Build gate** – Compiles the application with `pnpm build`
+- **Smoke tests** – Runs basic deployment health checks
+
+**If any gate fails:**
+
+- Click the failed step to view error logs
+- See **Troubleshooting** section at end of runbook for specific errors
+- Fix the issue locally, commit, push, and retry the workflow
+
+**If all gates pass:** Move to Part C
+
+##### Part C: Verify immutable artifact in Vercel
+
+1. Go to your Vercel dashboard: https://vercel.com/dashboard
+2. Click on **portfolio-app** project
+3. Navigate to **Deployments** tab (top menu)
+4. Look for a new deployment with:
+   - **Status**: "Ready" (green checkmark)
+   - **Branch**: `staging`
+   - **URL**: Should be `https://staging-bns-portfolio.vercel.app` (or your custom staging domain)
+5. Click on the deployment to open its details page
+6. Look for **"Commit SHA"** (usually shown in the deployment info)
+   - Note this SHA (e.g., `f6c1fa8`)
+7. Go back to GitHub Actions workflow (from Part B) and find the **commit SHA** in the logs
+   - It's typically printed in the workflow summary or build logs
+8. **Verify**: Both SHAs should match exactly (this proves the artifact is immutable—same code deployed)
+
+##### Part D: Validate staging domain
+
+1. Open your staging domain in a browser: `https://staging-bns-portfolio.vercel.app`
+2. **Verify the following:**
+   - [ ] Site loads without errors (no blank page or 500 error)
+   - [ ] **Navigation works**: Click through pages (`/cv`, `/projects`, `/contact`)
+   - [ ] **Evidence links resolve**: Find a link to portfolio-docs in the content
+     - Example: "View my architecture" or similar
+     - Click the link and verify it opens the docs site correctly
+   - [ ] **Canonical URL is correct**: Open browser DevTools (F12) → **Console** tab
+     - Verify no red errors are shown
+     - Check that `NEXT_PUBLIC_SITE_URL` in the page source reflects the staging domain
+   - [ ] **Docs base URL is correct**: Any `/docs` links should point to your production docs URL
+     - Verify by clicking a docs link and checking the resulting URL
+
+**If validation fails:**
+
+- Check that environment variables are correctly scoped in Vercel (Settings → Environment Variables)
+- Verify DNS is configured if using a custom domain
+- See **Troubleshooting** section
+
+**If validation passes:** Move to Step 6.5 (Promote to production)
+
+#### Step 6.5: Promote to production
+
+1. Merge staging to main branch:
+   ```bash
+   git checkout main
+   git pull origin main
+   git merge staging
+   git push origin main
+   ```
+2. Vercel will automatically deploy to production domain
+3. Verify CI gates pass (env, registry, build, unit + smoke tests)
+4. Monitor deployment in Vercel dashboard
+
+**Outcome:** A clear staging tier exists via branch/domain mapping; staging is validated before production deployment.
+
+---
+
+### Phase 7: Clean up and document
 
 #### Step 6.1: Delete test PR branch
 
@@ -430,19 +569,19 @@ Update the team documentation with your actual URLs:
 ```markdown
 ## Production URLs (2026-01-16)
 
-- **Portfolio App Production:** https://portfolio-app.vercel.app
-- **Portfolio App Preview:** https://portfolio-app-git-\*.vercel.app (dynamic per PR)
-- **Portfolio Docs Production:** https://docs.yourdomain.com
-- **Portfolio Docs Preview:** https://portfolio-docs-git-\*.vercel.app (dynamic per PR)
+- **Portfolio App Production:** https://bns-portfolio.vercel.app
+- **Portfolio App Staging (Preview):** https://staging-bns-portfolio-vercel.app
+- **Portfolio Docs Production:** https://bns-portfolio-docs.vercel.app
+- **Portfolio Docs Preview:** https://bns-portfolio-docs-git-\*.vercel.app (dynamic per PR)
 
 ### Environment Variables Configured
 
-| Variable                    | Preview                                       | Production                       |
-| --------------------------- | --------------------------------------------- | -------------------------------- |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | https://portfolio-docs-git-preview.vercel.app | https://docs.yourdomain.com      |
-| `NEXT_PUBLIC_SITE_URL`      | (auto-generated)                              | https://portfolio.yourdomain.com |
-| `NEXT_PUBLIC_GITHUB_URL`    | https://github.com/your-handle                | https://github.com/your-handle   |
-| ...                         | ...                                           | ...                              |
+| Variable                    | Preview                                          | Production                                       |
+| --------------------------- | ------------------------------------------------ | ------------------------------------------------ |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | https://bns-portfolio-docs.vercel.app            | https://bns-portfolio-docs.vercel.app            |
+| `NEXT_PUBLIC_SITE_URL`      | https://bns-portfolio.vercel.app                 | https://portfolio.yourdomain.com                 |
+| `NEXT_PUBLIC_GITHUB_URL`    | https://github.com/bryce-seefieldt/portfolio-app | https://github.com/bryce-seefieldt/portfolio-app |
+| ...                         | ...                                              | ...                                              |
 ```
 
 #### Step 6.3: Mark deployment as complete
@@ -542,6 +681,70 @@ Status: Live — CI quality/build gates with frozen installs; **Vercel preview +
 4. **GitHub Actions not enabled**
    - Go to repo **Settings** → **Actions** → **General**
    - Ensure **"Allow all actions and reusable workflows"** is selected
+
+### CI workflow fails with missing environment variables
+
+**Symptoms:**
+
+- CI workflow fails on staging or main branch
+- Error message: `Environment validation failed: Missing required variables`
+- Specifically missing: `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`
+
+**Root cause:**
+
+These variables must be defined in **GitHub repository settings** so the CI workflow can access them during builds.
+
+**Fix:**
+
+**Part 1: Add variables to GitHub repository**
+
+1. Go to your **portfolio-app** GitHub repository
+2. Click **Settings** (top menu)
+3. In left sidebar, click **"Secrets and variables"** → **"Actions"**
+4. Click **"New repository variable"** button (blue button, top right)
+5. Add the following variables (one at a time):
+
+| Name                          | Value                     | Example                                             |
+| ----------------------------- | ------------------------- | --------------------------------------------------- |
+| `NEXT_PUBLIC_GITHUB_URL`      | Your GitHub profile URL   | `https://github.com/bryce-seefieldt`                |
+| `NEXT_PUBLIC_DOCS_GITHUB_URL` | Your docs repo GitHub URL | `https://github.com/bryce-seefieldt/portfolio-docs` |
+
+**For each variable:**
+
+- Click **"New repository variable"**
+- Enter **Name** (exactly as shown above)
+- Enter **Value** (your GitHub URLs)
+- Click **"Add variable"**
+
+**Part 2: Verify variables in Vercel (optional but recommended)**
+
+If running workflows that deploy to Vercel, also add these to Vercel environment variables:
+
+1. Go to Vercel dashboard → **portfolio-app** project
+2. Navigate to **Settings** → **Environment Variables**
+3. For each variable, click **"Add New"**:
+   - Name: `NEXT_PUBLIC_GITHUB_URL` or `NEXT_PUBLIC_DOCS_GITHUB_URL`
+   - Value: (same as GitHub)
+   - Environment scope: **All Environments** (or **Preview** + **Production** separately if preferred)
+4. Click **"Save"**
+
+**Part 3: Verify .env.local for local development**
+
+Ensure your local `.env.local` file has these variables:
+
+```env
+NEXT_PUBLIC_GITHUB_URL=https://github.com/bryce-seefieldt
+NEXT_PUBLIC_DOCS_GITHUB_URL=https://github.com/bryce-seefieldt/portfolio-docs
+```
+
+**Part 4: Retry the workflow**
+
+1. Go to **GitHub** → **Actions**
+2. Click on the failed workflow run
+3. Click **"Re-run jobs"** button (top right)
+4. Monitor the logs for successful environment validation
+
+**Expected result:** CI workflow should now pass the environment validation gate and proceed to build/smoke tests.
 
 ---
 

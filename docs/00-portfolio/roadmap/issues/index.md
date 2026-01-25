@@ -22,7 +22,12 @@ This hub collects all roadmap issue documents that drive planning and execution 
 
 Use this index to find the canonical task descriptions, acceptance criteria, and cross-links for current and past stages.
 
-## Current Issues
+## Current Issues (Phase 4)
+
+- Stage 4.1 — App: Multi-environment deployment strategy — see [stage-4-1-app-issue.md](./stage-4-1-app-issue.md)
+- Stage 4.1 — Docs: ADR-0013, promotion & rollback runbooks — see [stage-4-1-docs-issue.md](./stage-4-1-docs-issue.md)
+
+## Completed Issues (Phase 3)
 
 - Stage 3.5 — App: CI link validation and link-check job — see [stage-3-5-app-issue.md](./stage-3-5-app-issue.md)
 - Stage 3.5 — Docs: Publish runbook and troubleshooting guide — see [stage-3-5-docs-issue.md](./stage-3-5-docs-issue.md)

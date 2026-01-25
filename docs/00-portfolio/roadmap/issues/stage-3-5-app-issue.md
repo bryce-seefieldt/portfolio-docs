@@ -61,28 +61,28 @@ This stage hardens the portfolio-app CI pipeline to block merges when registry e
 
 ### Phase 1: Scripts & Local Validation (0.5–1 hour)
 
-- [ ] Confirm or add `registry:validate` script that runs schema/slug/evidence URL checks
-- [ ] Add `links:check` script that exercises evidence links (reuse Playwright smoke tests if present)
-- [ ] Ensure scripts fail on:
+- [x] Confirm or add `registry:validate` script that runs schema/slug/evidence URL checks
+- [x] Add `links:check` script that exercises evidence links (reuse Playwright smoke tests if present)
+- [x] Ensure scripts fail on:
   - Non-matching slug regex `^[a-z0-9]+(?:-[a-z0-9]+)*$`
   - Missing dossier/threat model/ADR/runbook/GitHub evidence URLs where required
   - HTTP 4xx/5xx on docs URLs
-- [ ] Run scripts locally and capture expected outputs for CI reference
+- [x] Run scripts locally and capture expected outputs for CI reference
 
 ### Phase 2: CI Wiring (1 hour)
 
-- [ ] Update `.github/workflows/ci.yml` to add `link-validation` job
+- [x] Update `.github/workflows/ci.yml` to add `link-validation` job
   - Install deps with cache
   - Run `pnpm registry:validate` and `pnpm links:check`
   - Upload HTML/JSON report artifacts on failure
   - Make `build` depend on `link-validation`
-- [ ] Ensure CI matrix covers Node version used in repo and Playwright (if applicable)
+- [x] Ensure CI matrix covers Node version used in repo and Playwright (if applicable)
 
 ### Phase 3: Verification & Handoff (0.5–1 hour)
 
-- [ ] Run full pipeline locally: `pnpm lint`, `pnpm test`, `pnpm registry:validate`, `pnpm links:check`, `pnpm build`
-- [ ] Document failure modes and where reports are stored (for use in docs troubleshooting guide)
-- [ ] Open PR with CI updates; link companion docs issue
+- [x] Run full pipeline locally: `pnpm lint`, `pnpm test`, `pnpm registry:validate`, `pnpm links:check`, `pnpm build`
+- [x] Document failure modes and where reports are stored (for use in docs troubleshooting guide)
+- [x] Open PR with CI updates; link companion docs issue
 
 ---
 
