@@ -1,8 +1,8 @@
 ---
 title: 'Runbook: Deploy Portfolio App'
-description: 'Procedure to deploy the Portfolio App with PR previews, CI quality gates, and promotion checks before production release.'
+description: 'Procedure to deploy the Portfolio App with PR previews, staging validation, CI quality gates, and production promotion checks.'
 sidebar_position: 4
-tags: [operations, runbook, portfolio-app, deployment, vercel, cicd]
+tags: [operations, runbook, portfolio-app, deployment, vercel, cicd, staging]
 ---
 
 ## Purpose
@@ -10,31 +10,35 @@ tags: [operations, runbook, portfolio-app, deployment, vercel, cicd]
 Provide a deterministic deployment procedure for the Portfolio App that ensures:
 
 - PR review and preview validation
+- Staging validation in production-like environment
 - CI gates are green before merge
-- production promotion is gated by imported checks
-- post-deploy validation is explicit
+- Production promotion is gated by imported checks
+- Post-deploy validation is explicit
 
 ## Governance Context
 
 This runbook assumes Vercel and GitHub governance are already configured per [rbk-vercel-setup-and-promotion-validation.md](./rbk-vercel-setup-and-promotion-validation.md). Key governance already in place:
 
 - **Vercel Deployment Checks:** `ci / quality` and `ci / build` are required for production promotion
-- **GitHub Ruleset:** `main-protection` requires both checks to pass and 1 PR approval before merge
-- **Environment Variables:** Configured per scope (preview and production)
+- **GitHub Ruleset:** `main-protection` and `staging-protection` require checks to pass and PR approval before merge
+- **Environment Variables:** Configured per scope (preview, staging, and production)
+- **Staging Domain:** `staging-bns-portfolio.vercel.app` mapped to `staging` branch
 
-If governance has not been set up, see the [setup runbook](./rbk-vercel-setup-and-promotion-validation.md) first (~90 minutes).
+If governance has not been set up, see the [setup runbook](./rbk-vercel-setup-and-promotion-validation.md) first (~120 minutes including staging setup).
 
 ## Scope
 
 ### Use when
 
-- publishing any Portfolio App change
-- releasing routing/navigation updates
-- shipping new project pages or evidence link updates
+- Publishing any Portfolio App change to production
+- Releasing routing/navigation updates
+- Shipping new project pages or evidence link updates
+- Validating changes in staging before production deployment
 
 ### Do not use when
 
-- experimenting locally without intent to merge (use local validation only)
+- Experimenting locally without intent to deploy (use local validation only)
+- Making documentation-only changes (portfolio-docs has separate workflow)
 
 ## Prereqs / Inputs
 
@@ -141,30 +145,121 @@ In the PR:
 
 ### 4) Merge to `main`
 
-- merge only when all required GitHub checks are green:
+- Merge only when all required GitHub checks are green:
   - `ci / quality`
+  - `ci / test`
+  - `ci / link-validation`
   - `ci / build`
+- Use "Squash and merge" for clean history (recommended)
 
-### 5) Confirm production promotion gating
+**Note:** Production deployment happens automatically from `main` after CI checks pass, but **staging validation is required** before considering production deployment complete.
 
-After merge:
+### 5) Deploy to Staging
 
-- open Vercel deployment details
-- confirm production promotion is gated until imported checks pass:
-  - `ci / quality`
-  - `ci / build`
+After merging to `main`, promote changes to staging for validation:
 
-Expected outcome:
+```bash
+# Switch to staging branch
+git checkout staging
+git pull origin staging
 
-- production domains are assigned only after checks pass.
+# Merge main into staging
+git merge main
 
-Additionally confirm branch ruleset enforcement is active (e.g., `main-protection`) and that these checks are configured as Required in the ruleset. If Required checks are not selectable in GitHub, ensure they have executed recently on PRs and on pushes to `main`.
+# Push to trigger Vercel deployment to staging domain
+git push origin staging
+```
 
-### 6) Env var verification (required)
+**Expected outcome:**
 
-Validate that the deployment environment is configured with the expected **public-safe** environment variables. This prevents broken evidence links and inconsistent metadata between Preview and Production.
+- Vercel deploys to `https://staging-bns-portfolio.vercel.app`
+- CI checks run on staging branch
+- Staging domain updates within 1-2 minutes
 
-#### A) Verify Vercel environment variables (Preview + Production)
+### 6) Validate Staging Deployment
+
+**Manual validation (required):**
+
+1. Open `https://staging-bns-portfolio.vercel.app` in browser
+2. Verify critical paths:
+   - [ ] Home page loads (`/`)
+   - [ ] Navigation works (header, footer)
+   - [ ] CV page renders (`/cv`)
+   - [ ] Projects index renders (`/projects`)
+   - [ ] At least one project detail page renders (e.g., `/projects/portfolio-app`)
+   - [ ] Contact page renders (`/contact`)
+3. Verify evidence links:
+   - [ ] Click "View Documentation" or similar links
+   - [ ] Verify links resolve to Documentation App
+   - [ ] Check that project dossier links work
+4. Check browser console:
+   - [ ] No JavaScript errors
+   - [ ] No failed network requests
+   - [ ] No React warnings in console
+
+**Automated validation (recommended):**
+
+```bash
+# Run Playwright smoke tests against staging
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test
+
+# Or run specific test file
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test tests/smoke.spec.ts
+```
+
+**Expected outcome:**
+
+- All manual checks pass
+- Automated tests pass (if running)
+- No console errors or broken links
+
+**If staging validation fails:**
+
+- Do NOT proceed to production validation
+- See **Failure modes / Troubleshooting** section below
+- Either fix forward with hotfix PR or rollback (see [rbk-portfolio-rollback.md](./rbk-portfolio-rollback.md))
+
+### 7) Confirm Production Promotion
+
+**Production is already deployed** because:
+
+- Changes were merged to `main` in Step 4
+- Vercel automatically deploys `main` branch after CI checks pass
+- GitHub Deployment Checks ensure quality gates are met
+
+**Validation steps:**
+
+1. Navigate to Vercel dashboard → portfolio-app → Deployments
+2. Find deployment from `main` branch
+3. Verify:
+   - [ ] Status: "Ready" (green checkmark)
+   - [ ] Branch: `main`
+   - [ ] Commit SHA matches your merged PR
+   - [ ] Production domain assigned: `https://bns-portfolio.vercel.app`
+
+### 8) Validate Production Deployment
+
+**Manual validation (required after staging passes):**
+
+1. Open `https://bns-portfolio.vercel.app` in browser
+2. Verify same critical paths as staging:
+   - [ ] Home, CV, Projects, Contact pages render
+   - [ ] Evidence links resolve correctly
+   - [ ] No console errors
+3. **Compare with staging:**
+   - [ ] Production behavior matches staging validation
+   - [ ] No unexpected differences
+
+**If production validation fails but staging passed:**
+
+- Indicates environment-specific issue (check env vars)
+- See **Failure modes / Troubleshooting** section
+
+### 9) Env var verification (required)
+
+Validate that the deployment environment is configured with the expected **public-safe** environment variables. This prevents broken evidence links and inconsistent metadata between Preview, Staging, and Production.
+
+#### A) Verify Vercel environment variables (Preview + Staging + Production)
 
 In Vercel Project Settings → Environment Variables, confirm these are present:
 
@@ -173,6 +268,21 @@ Required (recommended minimum):
 - `NEXT_PUBLIC_DOCS_BASE_URL`
 
 Recommended for production polish:
+
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_GITHUB_URL`
+- `NEXT_PUBLIC_LINKEDIN_URL`
+
+Optional:
+
+- `NEXT_PUBLIC_CONTACT_EMAIL`
+
+Expected outcome:
+
+- Values are set for **Preview**, **Staging (as Preview)**, and **Production** (unless intentionally different)
+- No sensitive values are stored in any `NEXT_PUBLIC_*` variable
+
+**Note:** Staging uses Preview environment scope in Vercel because it's deployed from a non-main branch (`staging`).
 
 - `NEXT_PUBLIC_SITE_URL`
 - `NEXT_PUBLIC_GITHUB_URL`
@@ -212,36 +322,107 @@ Validate production:
 - evidence links to docs remain correct
 - no broken images/assets
 
-### 8) Record release evidence (recommended)
+### 10) Record release evidence (recommended)
 
 If change is material:
 
-- add/update a release note entry in Portfolio Docs App (portfolio program release notes)
-- update dossier pages if behavior changed
+- Add/update a release note entry in Portfolio Docs App (portfolio program release notes)
+- Update dossier pages if behavior changed
+- Document any new evidence links or navigation changes
 
 ## Validation / Expected outcomes
 
 Deployment is successful when:
 
-- production site renders correctly
-- required checks are green
-- evidence links are correct
-- no sensitive information is exposed
+- Staging validation passes (all critical paths work, no console errors)
+- Production site renders correctly
+- Production behavior matches staging
+- Required checks are green
+- Evidence links are correct
+- No sensitive information is exposed
 
 ## Rollback / Recovery
 
 Rollback if:
 
-- production rendering is broken
-- critical routes 404
+- Staging validation fails (fix or rollback before production impact)
+- Production rendering is broken
+- Critical routes 404
 - `/docs` linking is broken materially
-- sensitive publication suspected
+- Sensitive publication suspected
+- Production behavior differs unexpectedly from staging
 
 Primary rollback method:
 
-- revert the offending PR on main and redeploy (see rollback runbook).
+1. Revert the offending PR on `main`:
+
+   ```bash
+   git checkout main
+   git revert <commit-sha>
+   git push origin main
+   ```
+
+2. Update staging to match:
+
+   ```bash
+   git checkout staging
+   git pull origin staging
+   git merge main
+   git push origin staging
+   ```
+
+3. Validate rollback on both staging and production
+
+For detailed rollback procedures, see [rbk-portfolio-rollback.md](./rbk-portfolio-rollback.md).
 
 ## Failure modes / Troubleshooting
+
+### Staging validation fails
+
+**Symptoms:**
+
+- Console errors on staging
+- Evidence links broken on staging
+- Navigation doesn't work on staging
+
+**Resolution:**
+
+1. Do NOT proceed to production validation
+2. Investigate the failure locally:
+   ```bash
+   git checkout staging
+   git pull
+   pnpm install
+   pnpm verify
+   ```
+3. Choose fix strategy:
+   - **Minor issue:** Create hotfix PR, merge to main, redeploy to staging
+   - **Major issue:** Rollback main, update staging
+
+### Staging passes but production fails
+
+**Symptoms:**
+
+- Staging works correctly
+- Production has different behavior, errors, or broken links
+
+**Likely causes:**
+
+- Environment variable mismatch between Preview (staging) and Production
+- Build artifact differs between deployments
+- Caching issues
+
+**Resolution:**
+
+1. Compare environment variables in Vercel:
+   - Settings → Environment Variables
+   - Verify Preview and Production values match expectations
+2. Check Vercel deployment details:
+   - Verify both staging and production used same commit SHA
+   - Check build logs for differences
+3. Force redeploy production:
+   - Vercel → Deployments → Find production deployment → "Redeploy"
+4. If issue persists, rollback and investigate locally
 
 - Preview succeeds but prod fails:
   - compare env settings; confirm check gating; rollback if needed

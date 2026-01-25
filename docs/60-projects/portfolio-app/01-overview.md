@@ -77,6 +77,13 @@ This page defines the Portfolio App as an enterprise-grade artifact: not only a 
 - Reliability: deterministic builds; repeatable deploys; rollback readiness
 - Security: strict no-secrets posture; dependency hygiene; hardened headers (as appropriate)
 
+## Deployment & Environments (Stage 4.1)
+
+- **Environment tiers:** preview (auto) → staging (manual) → production (manual)
+- **Promotion gates:** manual workflows validate env, registry, build, tests
+- **Immutable builds:** same artifact promoted; avoids environment drift
+- **Evidence:** ADR-0013 and runbooks document the flow and rollback
+
 ## Evidence strategy (“show, don’t tell”)
 
 ### Evidence must be concrete and reproducible

@@ -199,35 +199,31 @@ Document the architectural decision to adopt explicit three-tier environment sep
    - **Production:** Manual promotion; `VERCEL_ENV=production`; user-facing
 
 4. **Promote to Staging (Step-by-Step)**
-   - Step 1: Verify main branch is ready
-     - Check: All CI checks pass on `main` branch
-     - Check: Latest commit on main is the desired build
-   - Step 2: Trigger staging promotion workflow
-     - Go to: GitHub repo → Actions → `promote-staging` workflow
-     - Click: Run workflow → Run workflow (on main branch)
-     - Wait: Workflow runs; Vercel deploys staging environment
+   - Step 1: Create PR targeting staging branch
+     - Check: All CI checks pass on feature branch
+     - Check: PR is reviewed and approved
+   - Step 2: Merge PR to staging branch
+     - Action: Merge PR via GitHub UI or CLI
+     - Result: Vercel automatically deploys to staging environment
    - Step 3: Validate staging deployment
-     - Test: `curl https://staging.portfolio.example.com/api/health`
-     - Expected: 200 response with environment: "staging"
+     - Test: Visit `https://staging-bns-portfolio.vercel.app`
      - Check: Application loads and all pages accessible
      - Smoke tests: Try key user flows (view projects, click links, etc.)
    - Step 4: Review results
      - Success: Staging is ready for promotion to production
-     - Failure: See Troubleshooting section; fix issue on main; retry
+     - Failure: See Troubleshooting section; fix issue; retry
 
 5. **Promote to Production (Step-by-Step)**
    - Step 1: Confirm staging is validated and stable
      - Prerequisite: Staging must have been validated (see above)
      - Check: No recent errors or issues observed
-   - Step 2: Trigger production promotion workflow
-     - Go to: GitHub repo → Actions → `promote-production` workflow
-     - Click: Run workflow → Run workflow (on main branch)
-     - Wait: Workflow runs; pre-deploy health checks; Vercel deploys
+   - Step 2: Merge staging to main branch
+     - Command: `git checkout main && git pull && git merge staging && git push`
+     - Result: Vercel automatically deploys to production
    - Step 3: Validate production deployment
-     - Test: `curl https://portfolio.example.com/api/health`
-     - Expected: 200 response with environment: "production"
+     - Test: Visit `https://bns-portfolio.vercel.app`
      - Check: Application loads; critical pages accessible
-     - Verify: Analytics data flowing; no error spikes
+     - Verify: No error spikes in monitoring
    - Step 4: Log promotion event
      - Document: When, who, what commit
      - Note: Any issues observed or mitigation steps taken
@@ -288,12 +284,11 @@ Document the architectural decision to adopt explicit three-tier environment sep
    - Step 3: Push revert commit to main
      - Command: `git push origin main`
      - CI will validate revert commit
-   - Step 4: Re-run promotion workflow to production
-     - GitHub Actions → promote-production → Run workflow
-     - Vercel deploys revert commit to production
+   - Step 4: Vercel auto-deploys revert to production
+     - Monitor deployment in Vercel dashboard
    - Step 5: Verify production health
-     - Test: `curl https://portfolio.example.com/api/health`
-     - Expected: 200 response; application functioning
+     - Test: Visit production site
+     - Expected: Application functioning correctly
 
 4. **Rollback Option 2: Manual Vercel Rollback**
    - Step 1: Access Vercel dashboard
@@ -309,9 +304,8 @@ Document the architectural decision to adopt explicit three-tier environment sep
    - Step 2: Force-push to main (use with caution!)
      - Command: `git push origin main --force`
      - ⚠️ Warning: This rewrites main history; use only in emergencies
-   - Step 3: Re-run promotion workflow
-     - GitHub Actions → promote-production → Run workflow
-     - Vercel deploys reverted commit
+   - Step 3: Vercel auto-deploys reverted commit
+     - Monitor deployment in Vercel dashboard
 
 6. **Post-Rollback**
    - Step 1: Create incident log
@@ -352,21 +346,20 @@ Document the architectural decision to adopt explicit three-tier environment sep
 
 ```mermaid
 graph TB
-    Start([Git Commit to main]) --> CI{CI Checks Pass?}
+    Start([Create PR to staging]) --> CI{CI Checks Pass?}
     CI -->|Fail| Failed1(["❌ Fix & Retry"])
-    CI -->|Pass| StagePrompt["Manual: Trigger<br/>promote-staging workflow"]
-    StagePrompt --> StageDeploy["Vercel Deploys to Staging<br/>VERCEL_ENV=staging"]
+    CI -->|Pass| MergeStaging["Merge PR to staging<br/>branch"]
+    MergeStaging --> StageDeploy["Vercel Auto-Deploys to Staging<br/>VERCEL_ENV=staging"]
     StageDeploy --> StageTest{Staging Valid?}
-    StageTest -->|Fail| RollbackStage(["⏮️ Investigate<br/>Fix on main"])
-    StageTest -->|Pass| ProdPrompt["Manual: Trigger<br/>promote-production workflow"]
-    ProdPrompt --> PreDeploy["Pre-deploy Health Check"]
-    PreDeploy --> ProdDeploy["Vercel Deploys to Production<br/>VERCEL_ENV=production"]
+    StageTest -->|Fail| RollbackStage(["⏮️ Investigate<br/>Fix & Retry"])
+    StageTest -->|Pass| MergeMain["Merge staging to main<br/>branch"]
+    MergeMain --> ProdDeploy["Vercel Auto-Deploys to Production<br/>VERCEL_ENV=production"]
     ProdDeploy --> ProdTest{Production Valid?}
     ProdTest -->|Fail| Rollback(["⏮️ Rollback<br/>Investigate"])
     ProdTest -->|Pass| Success(["✅ Production Ready"])
 
     style Start fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
-    style StagePrompt fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
+    style MergeStaging fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
     style StageDeploy fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
     style ProdPrompt fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
     style ProdDeploy fill:#51cf66,stroke:#2f9e44,stroke-width:2px,color:#fff

@@ -38,6 +38,24 @@ The emphasis is on **enterprise credibility**:
 
 ## Local validation workflow (required)
 
+### Three-Stage Validation: Local → CI → Staging
+
+The Portfolio App enforces quality at three distinct stages:
+
+1. **Local validation** (developer machine, before PR)
+   - Run `pnpm verify` to catch issues early
+   - Prevents CI failures and speeds up review
+
+2. **CI validation** (GitHub Actions, on PR and main)
+   - Automatic: lint, format, typecheck, unit tests, E2E tests, build
+   - Blocks merge if checks fail
+   - Required before staging validation
+
+3. **Staging validation** (production-like environment, after merge to main)
+   - Manual smoke tests on `https://staging-bns-portfolio.vercel.app`
+   - Optional automated Playwright tests against staging domain
+   - Required before production is considered "live"
+
 ### Option 1: Comprehensive verification (recommended)
 
 For a streamlined workflow with detailed reporting and full test coverage:

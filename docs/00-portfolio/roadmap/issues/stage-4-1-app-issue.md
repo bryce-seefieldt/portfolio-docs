@@ -46,19 +46,7 @@ Establish explicit environment separation (preview/staging/production) with immu
 
 ### Files to Create
 
-1. **`.github/workflows/promote-staging.yml`** — Manual workflow to promote `main` branch to staging environment
-   - Triggered on workflow dispatch (manual)
-   - Updates Vercel staging environment variables
-   - Runs smoke tests post-deployment
-   - Documents promotion checkpoint
-
-2. **`.github/workflows/promote-production.yml`** — Manual workflow to promote staging build to production
-   - Triggered on workflow dispatch with optional source ref parameter
-   - Validates health checks pre-deployment
-   - Runs production smoke tests
-   - Logs promotion event
-
-3. **`src/lib/environment.ts`** — Centralized environment configuration and helpers
+1. **`src/lib/environment.ts`** — Centralized environment configuration and helpers
    - Re-exports from config.ts or aggregates environment detection
    - Provides strongly-typed environment helpers
    - No hardcoded values; all from env vars
@@ -227,36 +215,9 @@ Establish explicit environment separation (preview/staging/production) with immu
 
 ---
 
-### Phase 2: Promotion Workflows & CI Integration (1–1.5 hours)
+### Phase 2: CI Integration & Environment Validation (0.5–1 hour)
 
 #### Tasks
-
-- [ ] **Create `.github/workflows/promote-staging.yml` workflow**
-  - Details: Workflow to manually promote main branch to staging environment
-  - Trigger: `workflow_dispatch` (manual trigger)
-  - Steps:
-    1. Checkout main branch
-    2. Log promotion start with commit SHA
-    3. Trigger Vercel staging deployment (via API or UI workflow)
-    4. Wait for deployment to complete
-    5. Run health check: `curl https://staging.portfolio.example.com/api/health`
-    6. Log success or failure
-  - Reference: GitHub Actions Vercel integration or documented process
-  - Files: `.github/workflows/promote-staging.yml`
-
-- [ ] **Create `.github/workflows/promote-production.yml` workflow**
-  - Details: Workflow to manually promote staging/main to production environment
-  - Trigger: `workflow_dispatch` with optional `source_ref` parameter (default: main)
-  - Steps:
-    1. Checkout specified ref (staging or main)
-    2. Log promotion start with commit SHA
-    3. Verify health check passes before deploying
-    4. Trigger Vercel production deployment
-    5. Wait for deployment to complete
-    6. Run smoke tests
-    7. Log promotion event
-  - Documentation: Link to runbook in docs
-  - Files: `.github/workflows/promote-production.yml`
 
 - [ ] **Update `.github/workflows/ci.yml` to validate environment variables**
   - Details: Add step to validate `.env.example` syntax and completeness
@@ -343,12 +304,12 @@ Establish explicit environment separation (preview/staging/production) with immu
 
 ### Manual Testing
 
-- [ ] **Verify promotion workflow manually**
+- [ ] **Verify staging deployment manually**
   - Steps:
-    1. Trigger promote-staging workflow from GitHub Actions UI
-    2. Monitor Vercel deployment dashboard
+    1. Merge changes to `staging` branch
+    2. Monitor Vercel deployment dashboard for automatic deployment
     3. Once deployed, curl health endpoint and verify environment is "staging"
-    4. Repeat for production
+    4. Merge staging to main for production deployment
 
 ### Test Commands
 
@@ -408,8 +369,6 @@ This stage is complete when:
 - [ ] `.env.example` documents all environment variables
 - [ ] `src/lib/config.ts` has environment helpers (`isProduction()`, `isStaging()`, etc.)
 - [ ] `vercel.json` is configured for staging/production overrides (if needed)
-- [ ] `.github/workflows/promote-staging.yml` exists and is valid
-- [ ] `.github/workflows/promote-production.yml` exists and is valid
 - [ ] `.github/workflows/ci.yml` validates environment variables
 - [ ] Local dev works with default values: `pnpm dev`
 - [ ] Local dev works with custom env vars: `.env.local` respected

@@ -199,6 +199,30 @@ Planned enhancements:
 - Keyboard focus management and enhanced a11y improvements
 - Storybook integration for component library documentation
 
+## Environment Architecture (Stage 4.1)
+
+Phase 4 introduces explicit environment separation and immutable build promotion to strengthen deployment credibility:
+
+- **Tiers:** `preview` (auto) → `staging` (manual) → `production` (manual)
+- **Immutability:** same build artifact promoted across tiers; no environment-specific rebuilds
+- **Configuration:** environment-aware helpers live in `src/lib/config.ts` (`ENVIRONMENT`, `isProduction`, `isPreview`, `isStaging`, `isDevelopment`)
+- **Gates:** manual promotion workflows in GitHub Actions validate env, registry, build, and tests prior to deploy
+
+### Diagram (Promotion Flow)
+
+```mermaid
+graph TB
+  P([Preview])-->S([Staging])-->D([Production])
+  style P fill:#ffd43b,stroke:#fab005,color:#000
+  style S fill:#ffd43b,stroke:#fab005,color:#000
+  style D fill:#51cf66,stroke:#2f9e44,color:#fff
+```
+
+### References
+
+- ADR: [docs/10-architecture/adr/adr-0013-multi-environment-deployment.md](docs/10-architecture/adr/adr-0013-multi-environment-deployment.md)
+- Runbooks: [Environment Promotion](docs/50-operations/runbooks/rbk-portfolio-environment-promotion.md), [Environment Rollback](docs/50-operations/runbooks/rbk-portfolio-environment-rollback.md)
+
 ### Testing Architecture (Stage 3.3)
 
 After Stage 3.2 established evidence visualization components, Stage 3.3 adds comprehensive test coverage to ensure registry integrity and link resolution. The testing architecture follows the testing pyramid: unit tests (Vitest) for business logic, E2E tests (Playwright) for user-facing behavior.

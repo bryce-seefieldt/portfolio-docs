@@ -1,5 +1,5 @@
-last-updated: 2026-01-23
-active-phase: Phase 3 (Scaling & Governance) — Stage 3.3 COMPLETE; Stage 3.4 READY; Stage 3.5 IN PROGRESS
+last-updated: 2026-01-24
+active-phase: Phase 4 (Enterprise-Grade Platform Maturity) — Stage 4.1 IN PROGRESS
 workspace-repos:
 
 - portfolio-app (Next.js + TypeScript)
@@ -16,7 +16,7 @@ workspace-repos:
 - **portfolio-app:** `main` (Stage 3.3 complete: registry, evidence UI, and tests wired into CI)
 - **portfolio-docs:** `main` (PRs #43-44 merged; Stage 3.3 evidence/test docs next)
 
-### Phase Progress: Phase 3 Stages 3.1–3.3 complete; Stage 3.4 ready; Stage 3.5 in execution
+### Phase Progress: Phase 3 complete; Phase 4 Stage 4.1 implementation started
 
 #### Template Enforcement (Critical)
 
@@ -84,12 +84,19 @@ All work in both repositories **MUST** use templates for proper governance and t
 
 **Status:** Complete (2026-01-22)
 
-#### 🔄 In progress: Phase 3 Stage 3.5 — CI Link Validation & Runbooks
+#### 🔄 In progress: Phase 4 Stage 4.1 — Multi-Environment Deployment Strategy
 
-- portfolio-app CI now adds `link-validation` job running `pnpm registry:validate` and `pnpm links:check` with Playwright artifacts on failure
-- Stage 3.5 issues published: /docs/00-portfolio/roadmap/issues/stage-3-5-app-issue.md and /docs/00-portfolio/roadmap/issues/stage-3-5-docs-issue.md
-- Runbooks added: /docs/50-operations/runbooks/rbk-portfolio-project-publish.md and /docs/50-operations/runbooks/troubleshooting-portfolio-publish.md
-- Next: complete Stage 3.4 ADR/documentation updates and validate runbook procedures
+**What shipped (2026-01-24):**
+
+- portfolio-app: environment helpers (`ENVIRONMENT`, `isProduction`, `isPreview`, `isStaging`, `isDevelopment`)
+- portfolio-app: `env:validate` script + CI step; promotion workflows (`promote-staging.yml`, `promote-production.yml`)
+- portfolio-docs: ADR-0013 and environment promotion/rollback runbooks
+- portfolio-docs: dossier updates (overview/architecture) and runbook index additions
+
+**Next:**
+
+- Validate promotions via manual gates (notes recorded in job summary)
+- Link ADR-0013 and runbooks in roadmap issues and release notes (Phase 4)
 
 #### 🔜 Next: Phase 3 Stage 3.4 — ADRs & Documentation Updates
 

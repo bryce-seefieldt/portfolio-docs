@@ -185,8 +185,6 @@ export function isDevelopment(): boolean {
 - [ ] `.env.example` (update with all environment variables)
 - [ ] `vercel.json` (create or update; define environment overrides for staging/prod)
 - [ ] `src/lib/config.ts` (add `ENVIRONMENT`, `isProduction()`, etc. helpers)
-- [ ] `.github/workflows/promote-staging.yml` (NEW: Manual workflow to promote to staging)
-- [ ] `.github/workflows/promote-production.yml` (NEW: Manual workflow to promote to production)
 - [ ] `docs/10-architecture/adr/adr-0013-multi-environment-deployment.md` (NEW)
 - [ ] `docs/50-operations/runbooks/rbk-portfolio-environment-promotion.md` (NEW)
 

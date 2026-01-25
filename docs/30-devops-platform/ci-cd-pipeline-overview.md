@@ -20,54 +20,35 @@ Document the CI/CD pipeline architecture, job dependencies, test integration, an
 
 ## Workflow Overview
 
-The Portfolio App and Documentation App CI/CD pipeline enforces quality gates via GitHub Actions before build and deployment.
+The Portfolio App CI/CD pipeline enforces quality gates via GitHub Actions before build and deployment, with a three-tier environment strategy (Preview → Staging → Production).
 
-### Workflow Name
+### Environment Tiers
 
-`ci` — GitHub Actions workflow for Portfolio App
+| Environment | Branch      | Deployment Trigger     | Domain                             | Purpose                          |
+| ----------- | ----------- | ---------------------- | ---------------------------------- | -------------------------------- |
+| Preview     | PR branches | Auto on PR creation    | `*.vercel.app` (auto-generated)    | Feature validation and PR review |
+| Staging     | `staging`   | Manual (merge main)    | `staging-bns-portfolio.vercel.app` | Pre-production validation        |
+| Production  | `main`      | Auto (after CI passes) | `bns-portfolio.vercel.app`         | Live public site                 |
 
-**File location**: `.github/workflows/ci.yml`
-
-**Triggers:**
-
-- Pull requests targeting `main`
-- Pushes to `main` branch
-
-**Concurrency:**
-
-- Group: `ci-${{ github.ref }}`
-- Cancel in-progress: `true`
-- Rationale: Only the latest run for a branch matters
+**Deployment flow:** PR → Preview (auto) → Merge to main → CI runs → Production (auto) → Staging (manual) → Production validated
 
 ## Job Sequence
 
-```
-┌─────────────────────────────────────┐
-│  quality                             │
-│  ├─ Lint (ESLint)                   │
-│  ├─ Format check (Prettier)         │
-│  ├─ Typecheck (TypeScript)          │
-│  └─ Auto-format Dependabot PRs      │
-└─────────────────────────────────────┘
-                  ↓
-┌─────────────────────────────────────┐
-│  secrets-scan                        │
-│  ├─ TruffleHog secret scanning      │
-│  └─ Verified secrets only           │
-└─────────────────────────────────────┘
-                  ↓
-┌─────────────────────────────────────┐
-│  test (Stage 3.3)                    │
-│  ├─ Unit tests (pnpm test:unit)     │
-│  ├─ E2E tests (pnpm playwright test)│
-│  └─ Coverage reports (artifacts)    │
-└─────────────────────────────────────┘
-                  ↓
-┌─────────────────────────────────────┐
-│  build                               │
-│  ├─ pnpm build                       │
-│  └─ Vercel deployment                │
-└─────────────────────────────────────┘
+```mermaid
+graph TB
+    Quality["Quality Job<br/>├─ Lint ESLint<br/>├─ Format check Prettier<br/>├─ Typecheck TypeScript<br/>└─ Auto-format Dependabot PRs"]
+    Secrets["Secrets-Scan Job<br/>├─ TruffleHog scanning<br/>└─ Verified secrets only"]
+    Test["Test Job Stage 3.3<br/>├─ Unit tests pnpm test:unit<br/>├─ E2E tests Playwright<br/>└─ Coverage reports artifacts"]
+    Build["Build Job<br/>├─ pnpm build<br/>└─ Vercel deployment"]
+
+    Quality --> Secrets
+    Secrets --> Test
+    Test --> Build
+
+    style Quality fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
+    style Secrets fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
+    style Test fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
+    style Build fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
 ```
 
 ### Job Execution Details
