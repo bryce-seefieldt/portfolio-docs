@@ -87,6 +87,25 @@ Recommended initial approach (low complexity):
 - URLs support env-driven placeholders (`{GITHUB_URL}`, `{DOCS_BASE_URL}`, `{DOCS_GITHUB_URL}`, `{SITE_URL}`) resolved from `NEXT_PUBLIC_*` variables to keep references portable across deploy environments.
 - Evidence fields (dossier, threat model, ADR index, runbooks, GitHub) are part of the contract so every claim on a project page links to verifiable artifacts in the docs app.
 
+### Performance & Caching Architecture (Phase 4 Stage 4.2)
+
+**Static Generation with ISR:** All project detail pages (`/projects/[slug]`) are pre-rendered at build time using `generateStaticParams()`, extracting all known slugs from the project registry. Pages revalidate every hour (ISR) to allow content updates without full rebuilds, balancing performance with freshness.
+
+**HTTP Caching Strategy:**
+- Static routes (/, /cv, /contact, /projects): Cached with `max-age=3600` (1 hour browser cache)
+- Stale-while-revalidate: 24 hours for high availability (serve stale if origin unavailable)
+- Vercel Edge Cache: Respects Cache-Control headers automatically; no special configuration required
+
+**Image Optimization:** Next.js Image component configured with responsive device sizes (640px–3840px), WebP format support, and lazy loading by default. Reduces payload and improves LCP scores.
+
+**Bundle Size Regression Detection:** CI enforces 10% JavaScript growth threshold (baseline: 27.8 MB). Build fails if bundle increases without explicit justification, preventing performance regressions from unreviewed dependencies.
+
+**Performance Baseline:** Documented in [portfolio-app/docs/performance-baseline.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md). Core Web Vitals monitored via Vercel Analytics.
+
+**References:**
+- Performance runbook: [rbk-portfolio-performance-optimization.md](../../50-operations/runbooks/rbk-portfolio-performance-optimization.md)
+- Performance guide: [performance-optimization-guide.md](../../70-reference/performance-optimization-guide.md)
+
 ### Evidence Visualization Layer (Stage 3.2)
 
 After Stage 3.1 established a data-driven registry, Stage 3.2 makes evidence visualization a first-class architectural concern through three reusable React components. Rather than relegating evidence links to project footers or separate pages, components embed evidence discovery into the main project detail experience.

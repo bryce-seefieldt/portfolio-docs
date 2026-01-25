@@ -1,5 +1,5 @@
 last-updated: 2026-01-24
-active-phase: Phase 4 (Enterprise-Grade Platform Maturity) — Stage 4.1 IN PROGRESS
+active-phase: Phase 4 (Enterprise-Grade Platform Maturity) — Stage 4.1 COMPLETE, Stage 4.2 READY
 workspace-repos:
 
 - portfolio-app (Next.js + TypeScript)
@@ -9,14 +9,14 @@ workspace-repos:
 
 # Copilot Session Context
 
-## Current State (Phase 3 — Stage 3.3 COMPLETE; Stage 3.4 READY; Stage 3.5 IN PROGRESS)
+## Current State (Phase 3 COMPLETE; Phase 4 Stage 4.1 COMPLETE; Stage 4.2 READY)
 
 ### Active Branches
 
-- **portfolio-app:** `main` (Stage 3.3 complete: registry, evidence UI, and tests wired into CI)
-- **portfolio-docs:** `main` (PRs #43-44 merged; Stage 3.3 evidence/test docs next)
+- **portfolio-app:** `main` (PR #46 created for Stage 4.1 multi-environment deployment)
+- **portfolio-docs:** `main` (PR #57 merged with Stage 4.1 comprehensive documentation)
 
-### Phase Progress: Phase 3 complete; Phase 4 Stage 4.1 implementation started
+### Phase Progress: Phase 3 complete; Phase 4 Stage 4.1 complete; Stage 4.2 (Performance Optimization) ready to begin
 
 #### Template Enforcement (Critical)
 
@@ -84,19 +84,34 @@ All work in both repositories **MUST** use templates for proper governance and t
 
 **Status:** Complete (2026-01-22)
 
-#### 🔄 In progress: Phase 4 Stage 4.1 — Multi-Environment Deployment Strategy
+#### ✅ Complete: Phase 4 Stage 4.1 — Multi-Environment Deployment Strategy
 
 **What shipped (2026-01-24):**
 
-- portfolio-app: environment helpers (`ENVIRONMENT`, `isProduction`, `isPreview`, `isStaging`, `isDevelopment`)
-- portfolio-app: `env:validate` script + CI step; promotion workflows (`promote-staging.yml`, `promote-production.yml`)
-- portfolio-docs: ADR-0013 and environment promotion/rollback runbooks
-- portfolio-docs: dossier updates (overview/architecture) and runbook index additions
+- **portfolio-app (PR #46):**
+  - Environment helpers in config.ts (`ENVIRONMENT`, `isProduction`, `isPreview`, `isStaging`, `isDevelopment`)
+  - Deleted redundant promotion workflows (promote-staging.yml, promote-production.yml) — Git-based promotion via branch merges
+  - Complete .env.example with all NEXT_PUBLIC_* variables documented
+  - Clarified staging-first workflow in README
+  - Immutability principle established (same build artifact across tiers)
 
-**Next:**
+- **portfolio-docs (PR #57 - MERGED):**
+  - ADR-0013: Multi-Environment Deployment Strategy (with mermaid diagram)
+  - rbk-portfolio-environment-promotion.md (staging validation procedures)
+  - rbk-portfolio-environment-rollback.md (incident recovery)
+  - Updated 6 portfolio-app dossier files (01-overview, 02-architecture, 03-deployment, 05-testing, 06-operations, runbook index)
 
-- Validate promotions via manual gates (notes recorded in job summary)
-- Link ADR-0013 and runbooks in roadmap issues and release notes (Phase 4)
+**Status:** COMPLETE — Three-tier deployment model operational (Preview → Staging → Production)
+
+#### 🎯 Next: Phase 4 Stage 4.2 — Performance Optimization & Measurement
+
+**Objective:** Introduce caching strategy, static generation with `generateStaticParams()`, asset optimization, and performance instrumentation
+
+**Key deliverables:**
+- next.config.ts enhancements (caching headers, image optimization, bundle analyzer)
+- generateStaticParams() for project pages
+- Performance runbook and dossier updates
+- Build size tracking and baseline metrics
 
 #### 🔜 Next: Phase 3 Stage 3.4 — ADRs & Documentation Updates
 
