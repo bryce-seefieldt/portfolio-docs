@@ -5,12 +5,14 @@ sidebar_position: 1
 tags: [features, brief, performance, caching, bundle, speed-insights, analytics]
 ---
 
-## Summary 
+## Summary
+
 **What was built:** A systematic approach to making the Portfolio App fast and keeping it fast over time.
 
 **Why it matters:** Enterprise reviewers expect production systems to be deliberately fast—not by accident, but by design with measurable proof. Stage 4.2 demonstrates that maturity.
 
 ## The Four Core Features
+
 ### 1. Pre-Rendering Pages (Static Generation + ISR)
 
 **What it does:** We build all project pages once at deploy time, rather than computing them fresh for each visitor
@@ -47,11 +49,13 @@ How it proves enterprise thinking: Shows deliberate optimization, not reactive f
 ## Monitoring & Documentation
 
 ### Performance Baseline:
+
 Documented target speeds (build time, bundle size, page load time)
 
 **Why:** Proves we measure and track; not guessing
 
 ### Vercel Speed Insights ([docs](https://vercel.com/docs/speed-insights)):
+
 Real-world Core Web Vitals data from actual visitor browsers (LCP, INP, CLS, FCP)
 
 **Why:** Proves it actually feels fast to real people, not just in theory
@@ -59,6 +63,7 @@ Real-world Core Web Vitals data from actual visitor browsers (LCP, INP, CLS, FCP
 **Packages:** `@vercel/speed-insights` with `<SpeedInsights />` component
 
 ### Vercel Web Analytics ([docs](https://vercel.com/docs/analytics)):
+
 Traffic analytics: page views, routes, referrers, devices, countries
 
 **Why:** Understand visitor behavior and traffic patterns
@@ -66,6 +71,7 @@ Traffic analytics: page views, routes, referrers, devices, countries
 **Packages:** `@vercel/analytics` with `<Analytics />` component
 
 ### Operational Runbook & Guide:
+
 Step-by-step procedures for analyzing and fixing performance issues
 
 **Why:** Demonstrates operational maturity; not "we ship it and hope"

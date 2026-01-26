@@ -2,7 +2,8 @@
 title: 'Runbook: Portfolio Performance Optimization & Monitoring'
 description: 'Procedures for verifying performance baselines, bundle size regressions, and Vercel Speed Insights (Core Web Vitals) for the Portfolio App.'
 sidebar_position: 9
-tags: [runbook, performance, optimization, monitoring, stage-4-2, speed-insights]
+tags:
+  [runbook, performance, optimization, monitoring, stage-4-2, speed-insights]
 ---
 
 ## Purpose
@@ -92,6 +93,7 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 #### Core Web Vitals Breakdown
 
 **Largest Contentful Paint (LCP)** - Loading Performance
+
 - **What it measures:** Time until largest content element appears (hero image, main heading, etc.)
 - **Target:** < 2.5 seconds
 - **Good:** 0-2500ms (green) | **Needs Improvement:** 2500-4000ms (orange) | **Poor:** > 4000ms (red)
@@ -99,6 +101,7 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 - **Dashboard view:** Click "LCP" in left panel → see breakdown by route/path/selector
 
 **Interaction to Next Paint (INP)** - Responsiveness (Primary Metric)
+
 - **What it measures:** Time from user interaction (click, tap, keypress) to browser rendering response
 - **Target:** < 200 milliseconds
 - **Good:** 0-200ms (green) | **Needs Improvement:** 200-500ms (orange) | **Poor:** > 500ms (red)
@@ -107,6 +110,7 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 - **Note:** INP replaced FID as the primary responsiveness metric (Lighthouse 10+)
 
 **Cumulative Layout Shift (CLS)** - Visual Stability
+
 - **What it measures:** How much page content shifts unexpectedly during load
 - **Target:** < 0.1
 - **Good:** 0-0.1 (green) | **Needs Improvement:** 0.1-0.25 (orange) | **Poor:** > 0.25 (red)
@@ -114,24 +118,28 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 - **Dashboard view:** Click "CLS" → see which elements cause layout shifts
 
 **First Contentful Paint (FCP)** - Initial Rendering
+
 - **What it measures:** Time until first text, image, or canvas element appears
 - **Target:** < 1.8 seconds
 - **Good:** 0-1800ms (green) | **Needs Improvement:** 1800-3000ms (orange) | **Poor:** > 3000ms (red)
 - **Dashboard view:** Click "FCP" → breakdown by route
 
 **First Input Delay (FID)** - Legacy Responsiveness (Deprecated)
+
 - **What it measures:** Time from first user interaction to browser response
 - **Target:** < 100 milliseconds
 - **Note:** Being replaced by INP; still tracked for historical comparison
 - **Status:** Use INP for modern analysis; FID for legacy baseline comparison
 
 **Other Metrics:**
+
 - **Total Blocking Time (TBT):** < 800ms - time main thread is blocked (Virtual Experience Score)
 - **Time to First Byte (TTFB):** < 800ms - server response time
 
 #### Analyzing Performance by Dimension
 
 **By Route/Path** (Most useful for identifying problem pages)
+
 1. Click any metric (e.g., LCP) in left panel
 2. Switch between **Route** (framework routes) vs **Path** (actual URLs) tabs
 3. Sort by:
@@ -141,12 +149,14 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 5. **Action:** Focus optimization on routes with orange/red scores AND high traffic
 
 **By HTML Selector** (Available for LCP, INP, CLS, FID)
+
 1. Click **Selectors** tab
 2. See specific HTML elements causing issues
 3. Example: `img.hero-image` causing slow LCP
 4. **Action:** Optimize identified elements (lazy load, compress, defer)
 
 **By Country** (Geographic Performance)
+
 1. Scroll to **Countries** section
 2. Map shows color-coded performance per region
 3. Click country for detailed breakdown
@@ -165,6 +175,7 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 #### Data Point Collection
 
 Speed Insights collects up to **6 data points per visit**:
+
 - **On page load:** TTFB, FCP
 - **On interaction:** FID, LCP
 - **On leave:** INP, CLS, LCP (if not already sent)
@@ -201,6 +212,7 @@ Speed Insights collects up to **6 data points per visit**:
 #### Purpose & Scope
 
 **Web Analytics tracks traffic & user behavior**, NOT performance metrics.
+
 - Page views, unique visitors, routes accessed
 - Referrer sources (where visitors came from)
 - Geographic distribution, devices, browsers, OS
@@ -211,16 +223,19 @@ Speed Insights collects up to **6 data points per visit**:
 #### Overview Metrics
 
 **Top of Dashboard:**
+
 1. **Visitors** - Unique visitors in selected timeframe
 2. **Page Views** - Total pages viewed
 3. **Average Visit Duration** - How long users stay on site
 4. **Bounce Rate** - % who leave after viewing one page
 
 **Time Selector** (top-right):
+
 - Predefined: Last 24h, 7d, 30d, 90d
 - Custom: Click calendar icon for specific date range
 
 **Environment Selector** (top-right):
+
 - **Production** (default) - Main site traffic
 - **Preview** - Preview deployment traffic (usually low/zero for public sites)
 - **All Environments** - Combined
@@ -228,25 +243,30 @@ Speed Insights collects up to **6 data points per visit**:
 #### Analyzing Traffic by Dimension
 
 **Pages Panel**
+
 - Lists all page URLs visited (without query params)
 - Shows views, unique visitors per page
 - **Action:** Identify most popular pages (focus optimization there)
 
 **Routes Panel**
+
 - Shows framework-defined routes (e.g., `/projects/[slug]`)
 - Useful for understanding route popularity
 - **Action:** If certain routes dominate traffic, ensure they're well-optimized
 
 **Referrers Panel**
+
 - Shows where visitors came from (external links, search engines, social media)
 - **Direct** = typed URL or bookmark
 - **Action:** Understand traffic sources; optimize for primary referrers
 
 **Countries Panel**
+
 - Geographic distribution of visitors
 - **Action:** If concentrated in specific regions, consider geo-targeted optimization
 
 **Browsers / Devices / Operating System Panels**
+
 - Browser usage (Chrome, Safari, Firefox, etc.)
 - Device types (Desktop, Mobile, Tablet)
 - OS distribution (Windows, macOS, iOS, Android)
@@ -255,6 +275,7 @@ Speed Insights collects up to **6 data points per visit**:
 #### Filtering Data
 
 Click filter icon on any panel to:
+
 - Include/exclude specific values
 - Combine filters across dimensions
 - **Example:** "Show mobile visitors from US who accessed /projects route"
@@ -269,6 +290,7 @@ Click filter icon on any panel to:
 #### Verifying Analytics Collection
 
 **Check Network Tab:**
+
 1. Open browser DevTools → Network tab
 2. Visit any page on deployed site
 3. Look for Fetch/XHR request to `/_vercel/insights/view`
@@ -277,36 +299,41 @@ Click filter icon on any panel to:
 #### Common Insights
 
 **High bounce rate on specific page:**
+
 - Content may not match user expectations (from referrer)
 - Slow load time (cross-reference with Speed Insights)
 - Broken navigation or unclear CTA
 
 **Low average visit duration:**
+
 - Content not engaging
 - Navigation issues
 - Mobile experience poor (check Devices panel)
 
 **Geographic concentration:**
+
 - If traffic heavily US-centric, consider if targeting is correct
 - If global, ensure CDN delivers well worldwide (check Speed Insights by country)
 
 **Unexpected referrers:**
+
 - May indicate backlinks or mentions
 - Verify referrers are legitimate (not spam/bot traffic)
 
 #### Comparison: Speed Insights vs Web Analytics
 
-| Aspect | Speed Insights | Web Analytics |
-|--------|----------------|---------------|
-| **Purpose** | Performance metrics | Traffic behavior |
-| **Key Metrics** | LCP, INP, CLS, FCP | Page views, visitors, referrers |
-| **Dashboard Tab** | `/speed-insights` | `/analytics` |
-| **Package** | `@vercel/speed-insights` | `@vercel/analytics` |
-| **Component** | `<SpeedInsights />` | `<Analytics />` |
-| **Script Path** | `/_vercel/speed-insights/script.js` | `/_vercel/insights/view` |
-| **Use When** | Diagnosing slow pages, optimizing load times | Understanding user behavior, traffic sources |
+| Aspect            | Speed Insights                               | Web Analytics                                |
+| ----------------- | -------------------------------------------- | -------------------------------------------- |
+| **Purpose**       | Performance metrics                          | Traffic behavior                             |
+| **Key Metrics**   | LCP, INP, CLS, FCP                           | Page views, visitors, referrers              |
+| **Dashboard Tab** | `/speed-insights`                            | `/analytics`                                 |
+| **Package**       | `@vercel/speed-insights`                     | `@vercel/analytics`                          |
+| **Component**     | `<SpeedInsights />`                          | `<Analytics />`                              |
+| **Script Path**   | `/_vercel/speed-insights/script.js`          | `/_vercel/insights/view`                     |
+| **Use When**      | Diagnosing slow pages, optimizing load times | Understanding user behavior, traffic sources |
 
 **Workflow Integration:**
+
 1. Use **Web Analytics** to identify high-traffic pages/routes
 2. Use **Speed Insights** to ensure those pages perform well
 3. Cross-reference: if high-traffic page has poor performance score, prioritize optimization

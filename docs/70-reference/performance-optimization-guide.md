@@ -2,7 +2,16 @@
 title: 'Performance Optimization Guide (Portfolio App)'
 description: 'Concise reference for bundle analysis, caching, and Vercel Speed Insights (Core Web Vitals) for the Portfolio App.'
 sidebar_position: 9
-tags: [reference, performance, caching, bundle, speed-insights, analytics, stage-4-2]
+tags:
+  [
+    reference,
+    performance,
+    caching,
+    bundle,
+    speed-insights,
+    analytics,
+    stage-4-2,
+  ]
 ---
 
 ## Purpose
@@ -69,27 +78,32 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 ## Quick Decision Tree
 
 **"My app feels slow"**
+
 1. Check Speed Insights → Real Experience Score
 2. If RES < 90 (orange/red): Click worst metric → identify problem routes/selectors
 3. Optimize identified pages/elements
 4. Redeploy → verify RES improves
 
 **"Which pages should I optimize first?"**
+
 1. Open Web Analytics → note top 3 pages by traffic
 2. Open Speed Insights → check scores for those routes
 3. Prioritize: High traffic + Low score = urgent optimization target
 
 **"Did my recent deploy make things worse?"**
+
 1. Speed Insights → check RES time graph for sudden drops
 2. Compare Production vs Preview environments
 3. If Preview worse than Production: investigate before promoting
 
 **"Where are users coming from?"**
+
 1. Web Analytics → Referrers panel
 2. Cross-check with Countries panel for geographic distribution
 3. Action: Optimize for primary referrer sources (e.g., if LinkedIn dominates, ensure mobile experience excellent)
 
 **"Is a specific page broken?"**
+
 1. Web Analytics → Pages panel → find the page
 2. Check if views dropped suddenly (possible error or navigation break)
 3. Cross-check Speed Insights → that route → look for red metrics
@@ -103,12 +117,10 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
    - Verify RES ≥ 90 (green) for Production environment
    - Review 30-day trend: any drops?
    - Check all Core Web Vitals: any orange/red zones?
-   
 2. **If issues found:**
    - Click worst metric → sort routes by score
    - Export top 10 problem routes (three-dot menu → export)
    - For each route: check Selectors tab for specific elements causing issues
-   
 3. **Geographic check:**
    - Scroll to Countries map
    - Click any orange/red countries → see their metrics
@@ -146,17 +158,14 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
    - Find route `/projects/[slug]` → note score
    - Switch to **Selectors** tab → identify slow elements (likely images)
    - Check **Devices** breakdown: Mobile vs Desktop scores differ?
-   
 2. **Web Analytics:**
    - Devices panel → what % of traffic is mobile?
    - If mobile-dominant: mobile optimization is critical
-   
 3. **Local testing:**
    - Chrome DevTools → throttle to "Slow 4G"
    - Visit the project page
    - Network tab → find large assets
    - Performance tab → see what blocks rendering
-   
 4. **Fix:**
    - Optimize images (compress, lazy load, responsive sizes)
    - Redeploy to Preview
@@ -169,11 +178,9 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
    - Pages panel → sort by views (descending)
    - Note top 5 pages
    - Routes panel → see which route patterns dominate
-   
 2. **Insight:**
    - If `/projects/portfolio-app` gets 60% of traffic: ensure it's your best showcase
    - If `/cv` gets minimal traffic but you want it prominent: consider navigation changes
-   
 3. **Cross-reference Speed Insights:**
    - For top-traffic pages: verify green scores
    - Low-traffic pages with red scores: lower priority (but still address eventually)
@@ -192,8 +199,6 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
    - Speed Insights → LCP → find route
    - New score (e.g., 1.8s, green) → improvement confirmed!
    - Check time graph: see the drop at deployment timestamp
-   
 4. **Document win:**
    - "Optimized images reduced LCP from 3.2s → 1.8s (44% improvement)"
    - Use in portfolio narrative as evidence of performance work
-
