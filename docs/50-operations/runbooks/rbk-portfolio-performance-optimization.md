@@ -83,6 +83,7 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 **Status:** Deferred to post-Phase 4 when Speed Insights add-on is enabled.
 
 Once Speed Insights is enabled:
+
 - Path: Vercel → Project **portfolio-app** → **Speed Insights** → select environment (Production or Preview)
 - **Select environment:** Pick Production (main branch) or Preview (feature branch)
 - **View metrics:** Real Experience Score (RES) should be ≥ 90 (green). If < 90, click each metric to identify problem routes/selectors

@@ -23,12 +23,12 @@ This runbook provides a framework for responding to **any** incident affecting t
 
 ## Severity Levels
 
-| Severity | Definition | Response Time | Escalation | Example |
-|----------|------------|---------------|------------|---------|
-| **SEV-4** (Low) | Non-user-impacting; cosmetic bugs, documentation errors | &lt;24 hours | None | Typo in homepage text |
-| **SEV-3** (Medium) | Users minimally affected; slow pages, minor features unavailable | &lt;4 hours | Team lead informed | Projects page slow (>5s) |
-| **SEV-2** (High) | Significant user impact; broken features, data loss risk | &lt;1 hour | On-call engineer paged | Projects page returns 500 |
-| **SEV-1** (Critical) | Complete outage; all users affected, revenue/reputation impact | Immediate | VP Eng + full team | All routes return 500 |
+| Severity             | Definition                                                       | Response Time | Escalation             | Example                   |
+| -------------------- | ---------------------------------------------------------------- | ------------- | ---------------------- | ------------------------- |
+| **SEV-4** (Low)      | Non-user-impacting; cosmetic bugs, documentation errors          | &lt;24 hours  | None                   | Typo in homepage text     |
+| **SEV-3** (Medium)   | Users minimally affected; slow pages, minor features unavailable | &lt;4 hours   | Team lead informed     | Projects page slow (>5s)  |
+| **SEV-2** (High)     | Significant user impact; broken features, data loss risk         | &lt;1 hour    | On-call engineer paged | Projects page returns 500 |
+| **SEV-1** (Critical) | Complete outage; all users affected, revenue/reputation impact   | Immediate     | VP Eng + full team     | All routes return 500     |
 
 ---
 
@@ -57,14 +57,14 @@ Ask these questions during initial triage:
 
 ### Example Classifications
 
-| Scenario | Severity | Rationale |
-|----------|----------|-----------|
-| All routes return 500 | SEV-1 | Complete outage, all users blocked, no workaround |
-| Projects page returns 404 | SEV-2 | Core feature broken, many users affected |
-| Contact form email not sending | SEV-3 | Non-core feature, users can email directly (workaround) |
-| Typo in CV page | SEV-4 | Cosmetic issue, no functional impact |
-| Slow homepage (>5s load) | SEV-3 | Performance degradation, users can still access |
-| Analytics not loading | SEV-4 | Non-user-facing feature, internal metrics only |
+| Scenario                       | Severity | Rationale                                               |
+| ------------------------------ | -------- | ------------------------------------------------------- |
+| All routes return 500          | SEV-1    | Complete outage, all users blocked, no workaround       |
+| Projects page returns 404      | SEV-2    | Core feature broken, many users affected                |
+| Contact form email not sending | SEV-3    | Non-core feature, users can email directly (workaround) |
+| Typo in CV page                | SEV-4    | Cosmetic issue, no functional impact                    |
+| Slow homepage (>5s load)       | SEV-3    | Performance degradation, users can still access         |
+| Analytics not loading          | SEV-4    | Non-user-facing feature, internal metrics only          |
 
 ---
 
@@ -72,12 +72,12 @@ Ask these questions during initial triage:
 
 ### Who to Notify
 
-| Severity | Notify | Channel | Urgency | Expected Response |
-|----------|--------|---------|---------|-------------------|
-| SEV-4 | Team lead | Slack #portfolio-updates | ASAP (business hours) | Acknowledge within 1 day |
-| SEV-3 | On-call eng + Team lead | Slack #incidents | Within 15 min | Start investigation within 15 min |
-| SEV-2 | On-call eng + VP Eng | Slack #incidents + PagerDuty page | Immediately | Start investigation within 5 min |
-| SEV-1 | Full team + VP Eng + CEO | Slack #incidents + SMS + Phone | Immediately (wake up if needed) | All hands on deck; respond within 2 min |
+| Severity | Notify                   | Channel                           | Urgency                         | Expected Response                       |
+| -------- | ------------------------ | --------------------------------- | ------------------------------- | --------------------------------------- |
+| SEV-4    | Team lead                | Slack #portfolio-updates          | ASAP (business hours)           | Acknowledge within 1 day                |
+| SEV-3    | On-call eng + Team lead  | Slack #incidents                  | Within 15 min                   | Start investigation within 15 min       |
+| SEV-2    | On-call eng + VP Eng     | Slack #incidents + PagerDuty page | Immediately                     | Start investigation within 5 min        |
+| SEV-1    | Full team + VP Eng + CEO | Slack #incidents + SMS + Phone    | Immediately (wake up if needed) | All hands on deck; respond within 2 min |
 
 ### Notification Templates
 
@@ -217,12 +217,12 @@ git log --since="2 hours ago" --oneline
 
 Follow specific runbooks if applicable:
 
-| Symptom | Likely Runbook | Root Cause Category |
-|---------|----------------|---------------------|
-| All routes return 500 after deployment | [Deployment Failure](./rbk-portfolio-deployment-failure.md) | Deployment issue |
-| Health endpoint returns 503 | [Service Degradation](./rbk-portfolio-service-degradation.md) | Data/config issue |
-| Slow response times but no errors | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md) | Performance issue |
-| Security breach suspected | Security Incident Runbook (future) | Security issue |
+| Symptom                                | Likely Runbook                                                                | Root Cause Category |
+| -------------------------------------- | ----------------------------------------------------------------------------- | ------------------- |
+| All routes return 500 after deployment | [Deployment Failure](./rbk-portfolio-deployment-failure.md)                   | Deployment issue    |
+| Health endpoint returns 503            | [Service Degradation](./rbk-portfolio-service-degradation.md)                 | Data/config issue   |
+| Slow response times but no errors      | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md) | Performance issue   |
+| Security breach suspected              | Security Incident Runbook (future)                                            | Security issue      |
 
 **If no runbook applies:**
 
@@ -326,7 +326,7 @@ Preventive Actions (tracked in GitHub):
 
 ### Purpose
 
-- Understand *why* the incident happened (not *who* to blame)
+- Understand _why_ the incident happened (not _who_ to blame)
 - Identify gaps in processes, testing, or monitoring
 - Implement preventive controls to avoid recurrence
 - Share learnings with team

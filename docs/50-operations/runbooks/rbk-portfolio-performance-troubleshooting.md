@@ -35,12 +35,14 @@ Use this runbook when you encounter:
 **Status:** Speed Insights is a **paid add-on on Vercel Hobby plan** ($10/month; included in Pro/Enterprise).
 
 **For Hobby plan users:**
+
 - `@vercel/speed-insights` package and `<SpeedInsights />` component are already implemented
 - Speed Insights script endpoint will return **204 No Content** until feature is enabled
 - To enable: Vercel project → Settings → Speed Insights → Enable (paid add-on)
 - This feature is **deferred until post-Phase 4** when budget allows
 
 **Verification:** Browser DevTools Network tab shows script endpoint status:
+
 - **204 No Content** = Not enabled (current state)
 - **200 OK with content** = Enabled and collecting data
 

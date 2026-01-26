@@ -101,11 +101,13 @@ Update runbooks when:
 - new failure modes are discovered (add to troubleshooting section)
 
 **Validation criteria:** Operations documentation is effective when:
+
 - deploy and rollback are routine, not heroic
 - common failures are fixed quickly with deterministic steps
 - PRs include evidence that runbooks remain accurate
 
 **Common failure modes:**
+
 - **Runbooks become stale:** treat as a defect; update as part of the change PR.
 - **Overly generic runbooks:** add system- and environment-specific validation signals.
 - **No rollback:** unacceptable for production-impacting procedures.
@@ -148,11 +150,12 @@ Runbooks should be your first reference during:
 
 ### Deployment Runbooks
 
-| Runbook | Purpose | MTTR Target | Severity |
-|---------|---------|-------------|----------|
-| **[Deployment Failure Recovery](./rbk-portfolio-deployment-failure.md)** | Detect and rollback failed deployments | 5 minutes | SEV-2 (High) |
+| Runbook                                                                  | Purpose                                | MTTR Target | Severity     |
+| ------------------------------------------------------------------------ | -------------------------------------- | ----------- | ------------ |
+| **[Deployment Failure Recovery](./rbk-portfolio-deployment-failure.md)** | Detect and rollback failed deployments | 5 minutes   | SEV-2 (High) |
 
 **When to use:**
+
 - Deployment shows "Failed" status in Vercel
 - All routes return 500 immediately after deployment
 - Build logs show compilation errors
@@ -160,12 +163,13 @@ Runbooks should be your first reference during:
 
 ### Incident Response Runbooks
 
-| Runbook | Purpose | MTTR Target | Severity |
-|---------|---------|-------------|----------|
-| **[General Incident Response Framework](./rbk-portfolio-incident-response.md)** | Framework for all incidents (severity levels, triage, postmortem) | Varies | All |
-| **[Service Degradation](./rbk-portfolio-service-degradation.md)** | Diagnose and resolve performance/availability issues | 10 minutes | SEV-3 (Medium) |
+| Runbook                                                                         | Purpose                                                           | MTTR Target | Severity       |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------- | -------------- |
+| **[General Incident Response Framework](./rbk-portfolio-incident-response.md)** | Framework for all incidents (severity levels, triage, postmortem) | Varies      | All            |
+| **[Service Degradation](./rbk-portfolio-service-degradation.md)**               | Diagnose and resolve performance/availability issues              | 10 minutes  | SEV-3 (Medium) |
 
 **When to use:**
+
 - Health endpoint returns 503 (degraded) or 500 (unhealthy)
 - Users report slow pages or errors
 - Error rate spikes in Vercel logs
@@ -174,12 +178,13 @@ Runbooks should be your first reference during:
 
 ### Performance Runbooks
 
-| Runbook | Purpose | MTTR Target | Severity |
-|---------|---------|-------------|----------|
-| **[Performance Optimization](./rbk-portfolio-performance-optimization.md)** | Proactive performance tuning and optimization | N/A (proactive) | — |
-| **[Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)** | Diagnose and fix performance problems | 30 minutes | SEV-3 (Medium) |
+| Runbook                                                                           | Purpose                                       | MTTR Target     | Severity       |
+| --------------------------------------------------------------------------------- | --------------------------------------------- | --------------- | -------------- |
+| **[Performance Optimization](./rbk-portfolio-performance-optimization.md)**       | Proactive performance tuning and optimization | N/A (proactive) | —              |
+| **[Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)** | Diagnose and fix performance problems         | 30 minutes      | SEV-3 (Medium) |
 
 **When to use:**
+
 - Pages load slowly (>3 seconds) but no errors
 - Bundle size exceeds baseline (>30MB)
 - Build time exceeds baseline (>4 seconds)
@@ -188,8 +193,8 @@ Runbooks should be your first reference during:
 
 ### Operational Readiness
 
-| Document | Purpose | Audience |
-|----------|---------|----------|
+| Document                                                                              | Purpose                                         | Audience                    |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------------- |
 | **[Observability & Monitoring](../../60-projects/portfolio-app/08-observability.md)** | Health checks, logging, monitoring architecture | Developers, DevOps, On-call |
 
 ---
@@ -198,16 +203,16 @@ Runbooks should be your first reference during:
 
 Match your scenario to the appropriate runbook:
 
-| I'm seeing... | Use this runbook |
-|---------------|------------------|
-| ❌ Deployment shows "Failed" in Vercel | [Deployment Failure](./rbk-portfolio-deployment-failure.md) |
-| ⚠️ Health endpoint returns 503 | [Service Degradation](./rbk-portfolio-service-degradation.md) |
-| 🔴 All routes return 500 | [Deployment Failure](./rbk-portfolio-deployment-failure.md) |
-| 🐌 Pages load slowly (>3s) but no errors | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md) |
-| 📦 Bundle size too large (>30MB) | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md) |
-| ❓ Unclear incident, need framework | [General Incident Response](./rbk-portfolio-incident-response.md) |
-| 🔍 Want to understand monitoring setup | [Observability Architecture](../../60-projects/portfolio-app/08-observability.md) |
-| ⚡ Want to improve performance proactively | [Performance Optimization](./rbk-portfolio-performance-optimization.md) |
+| I'm seeing...                              | Use this runbook                                                                  |
+| ------------------------------------------ | --------------------------------------------------------------------------------- |
+| ❌ Deployment shows "Failed" in Vercel     | [Deployment Failure](./rbk-portfolio-deployment-failure.md)                       |
+| ⚠️ Health endpoint returns 503             | [Service Degradation](./rbk-portfolio-service-degradation.md)                     |
+| 🔴 All routes return 500                   | [Deployment Failure](./rbk-portfolio-deployment-failure.md)                       |
+| 🐌 Pages load slowly (>3s) but no errors   | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)     |
+| 📦 Bundle size too large (>30MB)           | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)     |
+| ❓ Unclear incident, need framework        | [General Incident Response](./rbk-portfolio-incident-response.md)                 |
+| 🔍 Want to understand monitoring setup     | [Observability Architecture](../../60-projects/portfolio-app/08-observability.md) |
+| ⚡ Want to improve performance proactively | [Performance Optimization](./rbk-portfolio-performance-optimization.md)           |
 
 ---
 
@@ -218,6 +223,7 @@ Match your scenario to the appropriate runbook:
 **Symptoms:** Complete service outage, all users affected, all routes return 500
 
 **Quick Steps:**
+
 1. **Page on-call engineer + VP Engineering** (Slack + SMS + phone)
 2. **Create incident channel:** `#incident-INC-YYYYMMDD-NNN`
 3. **Execute runbook:** [Deployment Failure](./rbk-portfolio-deployment-failure.md) if recent deployment, otherwise [General Incident Response](./rbk-portfolio-incident-response.md)
@@ -232,6 +238,7 @@ Match your scenario to the appropriate runbook:
 **Symptoms:** Significant user impact, core features broken, partial outage
 
 **Quick Steps:**
+
 1. **Notify on-call engineer via Slack + PagerDuty**
 2. **Execute runbook:** [Service Degradation](./rbk-portfolio-service-degradation.md) or [Deployment Failure](./rbk-portfolio-deployment-failure.md)
 3. **Target resolution:** &lt;1 hour
@@ -245,6 +252,7 @@ Match your scenario to the appropriate runbook:
 **Symptoms:** Minor user impact, slow performance, non-critical features unavailable
 
 **Quick Steps:**
+
 1. **Notify team lead via Slack**
 2. **Create GitHub issue** to track
 3. **Execute runbook:** [Service Degradation](./rbk-portfolio-service-degradation.md) or [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)
@@ -258,6 +266,7 @@ Match your scenario to the appropriate runbook:
 **Symptoms:** Cosmetic issues, documentation errors, non-user-facing problems
 
 **Quick Steps:**
+
 1. **Create GitHub issue** with appropriate label
 2. **Fix during next sprint**
 3. **No incident response required**
@@ -270,21 +279,21 @@ Match your scenario to the appropriate runbook:
 
 ### Error Detection Patterns
 
-| Pattern | Where to Look | What to Search For |
-|---------|---------------|-------------------|
-| **Deployment errors** | Vercel Deployments → Build logs | `error`, `Error:`, `failed`, `FAILED` |
-| **Runtime errors** | Vercel Functions → Logs | `"level":"error"`, `500`, `timeout` |
-| **Performance issues** | Vercel Analytics | Response time >3s, LCP >2.5s |
-| **Data issues** | Health endpoint | `projectCount: 0`, `status: "degraded"` |
+| Pattern                | Where to Look                   | What to Search For                      |
+| ---------------------- | ------------------------------- | --------------------------------------- |
+| **Deployment errors**  | Vercel Deployments → Build logs | `error`, `Error:`, `failed`, `FAILED`   |
+| **Runtime errors**     | Vercel Functions → Logs         | `"level":"error"`, `500`, `timeout`     |
+| **Performance issues** | Vercel Analytics                | Response time >3s, LCP >2.5s            |
+| **Data issues**        | Health endpoint                 | `projectCount: 0`, `status: "degraded"` |
 
 ### Recovery Patterns
 
-| Issue Category | Recovery Method | Example |
-|----------------|-----------------|---------|
-| **Deployment failure** | Vercel UI rollback or Git revert | Promote previous deployment |
-| **Data corruption** | Restore from backup commit | `git show <commit>:file.yml > file.yml` |
-| **Config issue** | Revert environment variable | Vercel Settings → Env Vars → Restore |
-| **Resource exhaustion** | Clear cache or scale up | Vercel Cache → Clear All |
+| Issue Category          | Recovery Method                  | Example                                 |
+| ----------------------- | -------------------------------- | --------------------------------------- |
+| **Deployment failure**  | Vercel UI rollback or Git revert | Promote previous deployment             |
+| **Data corruption**     | Restore from backup commit       | `git show <commit>:file.yml > file.yml` |
+| **Config issue**        | Revert environment variable      | Vercel Settings → Env Vars → Restore    |
+| **Resource exhaustion** | Clear cache or scale up          | Vercel Cache → Clear All                |
 
 ### Verification Patterns
 
@@ -367,9 +376,9 @@ If you use a runbook and encounter issues:
 gh issue create \
   --title "Runbook improvement: [runbook-name]" \
   --body "Issue found: [description]
-  
+
 Suggested improvement: [what to change]
-  
+
 Context: Used during INC-YYYYMMDD-NNN" \
   --label "documentation,runbook,ops" \
   --assignee ops-team-lead
@@ -388,6 +397,7 @@ Context: Used during INC-YYYYMMDD-NNN" \
 ### Portfolio App Runbooks (All Phases)
 
 **Phase 1–3:**
+
 - `docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md` — Vercel setup
 - `docs/50-operations/runbooks/rbk-portfolio-deploy.md`
 - `docs/50-operations/runbooks/rbk-portfolio-rollback.md`
@@ -399,6 +409,7 @@ Context: Used during INC-YYYYMMDD-NNN" \
 - `docs/50-operations/runbooks/rbk-portfolio-environment-rollback.md` — Phase 4 Stage 4.1
 
 **Phase 4 Stage 4.2–4.3:**
+
 - `docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md` — Stage 4.2 proactive tuning
 - `docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md` — Stage 4.2 troubleshooting
 - `docs/50-operations/runbooks/rbk-portfolio-incident-response.md` — Stage 4.3 general framework

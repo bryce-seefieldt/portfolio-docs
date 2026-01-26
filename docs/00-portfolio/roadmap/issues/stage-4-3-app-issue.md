@@ -2,7 +2,16 @@
 title: 'Stage 4.3 — Observability & Operational Readiness (App)'
 description: 'Add health checks, structured logging, and failure mode documentation to portfolio app'
 tags:
-  [portfolio, roadmap, planning, phase-4, stage-4.3, app, observability, operations]
+  [
+    portfolio,
+    roadmap,
+    planning,
+    phase-4,
+    stage-4.3,
+    app,
+    observability,
+    operations,
+  ]
 ---
 
 # Stage 4.3: Observability & Operational Readiness — App Implementation
@@ -77,30 +86,17 @@ Enable operational visibility into portfolio app health, performance, and failur
 
 The observability system consists of three components:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Portfolio App                             │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │ Application Logic                                     │   │
-│  │ (pages, components, API routes)                       │   │
-│  └──────────────────────────────────────────────────────┘   │
-│           │                              │                    │
-│           ▼                              ▼                    │
-│  ┌──────────────────┐        ┌──────────────────────────┐   │
-│  │ Health Check     │        │ Structured Logging       │   │
-│  │ /api/health      │        │ observability.ts         │   │
-│  │ - Status 200/503 │        │ - JSON log output        │   │
-│  │ - Metrics        │        │ - Log levels             │   │
-│  │ - Environment    │        │ - Context metadata       │   │
-│  └──────────────────┘        └──────────────────────────┘   │
-│           │                              │                    │
-│           └──────────────┬───────────────┘                    │
-│                          ▼                                     │
-│           ┌─────────────────────────────┐                    │
-│           │ Vercel Logs / External      │                    │
-│           │ Monitoring System           │                    │
-│           └─────────────────────────────┘                    │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    App["Portfolio App<br/>(Next.js)<br/><br/>Pages, components,<br/>API routes"]
+    Health["Health Check Endpoint<br/>GET /api/health<br/><br/>Status: 200/503/500<br/>Metrics<br/>Environment"]
+    Logging["Structured Logging<br/>src/lib/observability.ts<br/><br/>JSON log output<br/>Log levels<br/>Context metadata"]
+    Monitoring["Vercel Logs &<br/>External Monitoring System"]
+
+    App --> Health
+    App --> Logging
+    Health --> Monitoring
+    Logging --> Monitoring
 ```
 
 ### Health Check Endpoint Design
@@ -439,11 +435,11 @@ All code must meet:
 
 ## Effort Breakdown
 
-| Phase | Task                           | Hours  | Notes                                       |
-| ----- | ------------------------------ | ------ | ------------------------------------------- |
-| 1     | Create health check endpoint   | 1–2h   | Simple GET route, environment checks        |
-| 2     | Structured logging integration | 1–2h   | observability.ts + integrate into errors    |
-| 3     | Verification & testing         | 1–2h   | Test scenarios, verify output, run pnpm ver |
+| Phase     | Task                           | Hours    | Notes                                       |
+| --------- | ------------------------------ | -------- | ------------------------------------------- |
+| 1         | Create health check endpoint   | 1–2h     | Simple GET route, environment checks        |
+| 2         | Structured logging integration | 1–2h     | observability.ts + integrate into errors    |
+| 3         | Verification & testing         | 1–2h     | Test scenarios, verify output, run pnpm ver |
 | **Total** | **Stage 4.3 App Complete**     | **4–6h** | Ready for docs & runbooks                   |
 
 ---

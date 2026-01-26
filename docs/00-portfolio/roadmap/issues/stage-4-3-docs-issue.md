@@ -2,7 +2,16 @@
 title: 'Stage 4.3 — Observability & Operational Readiness (Docs)'
 description: 'Documentation for health checks, observability architecture, and operational runbooks'
 tags:
-  [portfolio, roadmap, planning, phase-4, stage-4.3, documentation, observability, operations]
+  [
+    portfolio,
+    roadmap,
+    planning,
+    phase-4,
+    stage-4.3,
+    documentation,
+    observability,
+    operations,
+  ]
 ---
 
 # Stage 4.3: Observability & Operational Readiness — Documentation
@@ -94,6 +103,7 @@ Document the observability architecture, health check capabilities, structured l
 **Template:** Custom (architectural reference)
 
 **Front Matter:**
+
 ```yaml
 ---
 title: 'Observability & Monitoring'
@@ -106,6 +116,7 @@ tags: [observability, monitoring, health-checks, logging, architecture]
 **Content Outline:**
 
 #### Section 1: Overview
+
 **Purpose:** Explain what observability is and why it matters for portfolio app
 
 - What is observability? (vs. monitoring, logging, alerting)
@@ -114,6 +125,7 @@ tags: [observability, monitoring, health-checks, logging, architecture]
 - Architecture diagram (3-tier: app → health checks → Vercel logs → external systems)
 
 #### Section 2: Health Check Endpoint
+
 **Purpose:** Document the `/api/health` endpoint capabilities
 
 - Endpoint URL: `GET /api/health`
@@ -126,6 +138,7 @@ tags: [observability, monitoring, health-checks, logging, architecture]
   - Unhealthy response (500)
 
 #### Section 3: Structured Logging
+
 **Purpose:** Explain how structured logging works and how to use it
 
 - Log format: JSON with timestamp, level, message, context, environment
@@ -133,12 +146,17 @@ tags: [observability, monitoring, health-checks, logging, architecture]
 - Usage examples:
   ```typescript
   import { log } from '@/lib/observability';
-  log({ level: 'error', message: 'Failed to load project', context: { slug: 'abc' } });
+  log({
+    level: 'error',
+    message: 'Failed to load project',
+    context: { slug: 'abc' },
+  });
   ```
 - Viewing logs: Where to find logs in Vercel console
 - Context guidelines: What to include in context, what not to expose
 
 #### Section 4: Failure Modes Definition
+
 **Purpose:** Define what each state means and how to detect it
 
 - Table: State → Definition → User Impact → HTTP Status → Recovery
@@ -147,6 +165,7 @@ tags: [observability, monitoring, health-checks, logging, architecture]
   - Unhealthy: Critical failures, routes return 500s → Major → 500 → Execute runbook
 
 #### Section 5: Monitoring Integration
+
 **Purpose:** Explain how monitoring systems integrate with observability
 
 - Health check monitoring: External monitors poll `/api/health` endpoint
@@ -156,6 +175,7 @@ tags: [observability, monitoring, health-checks, logging, architecture]
 - Future integration: Metrics export (Prometheus, StatsD)
 
 #### Section 6: Operational Readiness Checklist
+
 **Purpose:** Provide checklist for operations team
 
 - [ ] Health endpoint deployed and accessible
@@ -172,6 +192,7 @@ tags: [observability, monitoring, health-checks, logging, architecture]
 **Template:** Operational Runbook
 
 **Front Matter:**
+
 ```yaml
 ---
 title: 'Runbook: Portfolio App Service Degradation'
@@ -184,13 +205,16 @@ tags: [runbook, operations, troubleshooting, degradation, incident-response]
 **Content Outline:**
 
 #### Section 1: Overview
+
 - **Scenario:** Application is slow, certain features unavailable, users report issues
 - **Severity:** Medium (users affected, but core functionality remains)
 - **MTTR Target:** 10 minutes (Time to restore)
 - **On-call:** Yes, notify on-call engineer
 
 #### Section 2: Trigger Detection
+
 **How to detect degradation:**
+
 - User reports in support channel (Slack, email)
 - Health endpoint returns 503 status
 - Vercel Logs show increased error rate
@@ -198,7 +222,9 @@ tags: [runbook, operations, troubleshooting, degradation, incident-response]
 - Response time monitoring shows >3s median response time
 
 #### Section 3: Triage (1 minute)
+
 **Step-by-step:**
+
 1. Confirm issue exists
    - Command: `curl https://portfolio.example.com/api/health`
    - Expected: Status 200; if 503 or 500, confirmed degraded/unhealthy
@@ -215,7 +241,9 @@ tags: [runbook, operations, troubleshooting, degradation, incident-response]
    - **Type C: Slow (200 but slow)** → Monitor for 2 min; if persists, investigate
 
 #### Section 4: Containment (2 minutes)
+
 **Limit impact while investigating:**
+
 1. Notify stakeholders
    - Post to #incidents: "Portfolio app experiencing degradation, investigating"
    - Assign incident number: `INC-YYYYMMDD-001`
@@ -227,7 +255,9 @@ tags: [runbook, operations, troubleshooting, degradation, incident-response]
    - Revert if suspected
 
 #### Section 5: Investigation (3–5 minutes)
+
 **Diagnose root cause:**
+
 1. Check Vercel Logs
    - Go to Vercel dashboard → Portfolio App → Deployments → Logs
    - Look for recent errors or warnings
@@ -246,15 +276,18 @@ tags: [runbook, operations, troubleshooting, degradation, incident-response]
    - **Category D: External Dependency** (slow/unavailable API)
 
 #### Section 6: Recovery (2–5 minutes)
+
 **Execute fix based on root cause:**
 
 **If Category A (Data Issue):**
+
 1. Check if projects.ts file corrupted
    - Command: Verify file in GitHub: `git show HEAD:src/data/projects.ts | head -20`
    - If corrupted: Revert to last known good commit
    - Trigger redeploy
 
 **If Category B (Configuration Issue):**
+
 1. Check env vars in Vercel settings
    - Go to Vercel dashboard → Settings → Environment Variables
    - Verify required vars are set: `NEXT_PUBLIC_*`, `DATABASE_URL` (if applicable)
@@ -262,19 +295,23 @@ tags: [runbook, operations, troubleshooting, degradation, incident-response]
    - Trigger redeploy
 
 **If Category C (Resource Issue):**
+
 1. Verify not hitting concurrency limits
    - Check Vercel Logs for throttling indicators
    - If persistent, may need plan upgrade
    - Temporary fix: Clear browser cache, reduce concurrent requests
 
 **If Category D (External Dependency):**
+
 1. Verify external APIs are responding
    - Test endpoint: `curl https://external-api.example.com/health`
    - If down: Create issue with external team, monitor for recovery
    - Temporary: Serve stale data if possible (fallback mechanism)
 
 #### Section 7: Verification (1–2 minutes)
+
 **Confirm fix worked:**
+
 - [ ] Health check returns 200: `curl https://portfolio.example.com/api/health`
 - [ ] Homepage loads (no 500s)
 - [ ] Projects page loads and displays projects
@@ -282,7 +319,9 @@ tags: [runbook, operations, troubleshooting, degradation, incident-response]
 - [ ] Response times back to normal (< 1s median)
 
 #### Section 8: Post-Incident (async, within 24 hours)
+
 **Document incident for learning:**
+
 1. Create incident postmortem document
    - Template: `docs/_meta/templates/template-postmortem.md`
    - Include: Trigger, root cause, timeline, resolution, preventive actions
@@ -299,6 +338,7 @@ tags: [runbook, operations, troubleshooting, degradation, incident-response]
 **Type:** Runbook / Operational Procedure
 
 **Front Matter:**
+
 ```yaml
 ---
 title: 'Runbook: Portfolio App Deployment Failure'
@@ -311,13 +351,16 @@ tags: [runbook, operations, deployment, rollback, incident-response]
 **Content Outline:**
 
 #### Section 1: Overview
+
 - **Scenario:** New deployment failed or introduced breaking changes
 - **Severity:** High (service potentially broken or unavailable)
 - **MTTR Target:** 5 minutes (rollback execution)
 - **On-call:** Yes, notify immediately
 
 #### Section 2: Failure Indicators
+
 **How to detect deployment failure:**
+
 - Deployment status shows "Failed" in Vercel dashboard (red X)
 - Health endpoint returns 500 and accessible routes return 500
 - Build logs show compilation errors
@@ -325,7 +368,9 @@ tags: [runbook, operations, deployment, rollback, incident-response]
 - Users report site completely broken
 
 #### Section 3: Triage (1 minute)
+
 **Confirm deployment is failed:**
+
 1. Check Vercel Deployments page
    - Go to Vercel dashboard → Portfolio App → Deployments
    - Identify failed deployment (red X icon)
@@ -339,7 +384,9 @@ tags: [runbook, operations, deployment, rollback, incident-response]
    - Did failure happen at runtime? (Deployment succeeds but errors at startup)
 
 #### Section 4: Immediate Containment (1 minute)
+
 **Prevent further impact:**
+
 1. Stop deploying
    - Tell team: No more deploys until this is resolved
    - Post to #deployments: "HOLD on deployments, investigating failure"
@@ -351,6 +398,7 @@ tags: [runbook, operations, deployment, rollback, incident-response]
 #### Section 5: Execute Rollback (2–3 minutes)
 
 **Option 1: Vercel UI Rollback (Fastest)**
+
 1. Go to Vercel Deployments page
 2. Find last known good deployment (green checkmark)
 3. Click on deployment
@@ -360,6 +408,7 @@ tags: [runbook, operations, deployment, rollback, incident-response]
 7. Verify: `curl https://portfolio.example.com/api/health` returns 200
 
 **Option 2: Git Rollback (if rollback button unavailable)**
+
 1. Identify broken commit: `git log --oneline | head -1`
 2. Identify last known good: `git log --oneline | head -3 | tail -1`
 3. Create rollback commit:
@@ -371,7 +420,9 @@ tags: [runbook, operations, deployment, rollback, incident-response]
 5. Wait for deployment to complete and verify health check
 
 #### Section 6: Verification (1–2 minutes)
+
 **Confirm rollback was successful:**
+
 - [ ] Health check returns 200
 - [ ] Vercel Deployments shows latest deployment as "Ready" (green)
 - [ ] Homepage accessible and renders without 500s
@@ -379,7 +430,9 @@ tags: [runbook, operations, deployment, rollback, incident-response]
 - [ ] No new errors in logs (last 2 minutes)
 
 #### Section 7: Post-Failure Investigation (async, within 2 hours)
+
 **Understand what went wrong:**
+
 1. Examine build logs
    - Go to Vercel Deployments → Failed deployment → View Build Logs
    - Identify error messages
@@ -394,7 +447,9 @@ tags: [runbook, operations, deployment, rollback, incident-response]
    - Was it a tooling issue? (build tool version, TypeScript config)
 
 #### Section 8: Implement Fix & Redeploy (async)
+
 **Resolve the issue and redeploy:**
+
 1. Fix the issue on a local branch
    - Example: Fix syntax error, add missing dependency, etc.
    - Test locally: `pnpm build`
@@ -411,7 +466,9 @@ tags: [runbook, operations, deployment, rollback, incident-response]
    - Verify health check and functionality
 
 #### Section 9: Postmortem (within 24 hours)
+
 **Document and prevent future failures:**
+
 1. Create postmortem document
    - Root cause: What was the actual issue?
    - Why wasn't it caught? (What testing/process gap?)
@@ -427,6 +484,7 @@ tags: [runbook, operations, deployment, rollback, incident-response]
 **Type:** Runbook / Framework
 
 **Front Matter:**
+
 ```yaml
 ---
 title: 'Runbook: General Incident Response'
@@ -439,17 +497,20 @@ tags: [runbook, operations, incident-response, framework, process]
 **Content Outline:**
 
 #### Section 1: Severity Levels
+
 Define severity levels for quick classification:
 
-| Severity | Definition | Response Time | Escalation |`/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md
-| -------- | ---------- | -------------- | ---------- |
-| **SEV-4** (Low) | Non-user-impacting issue; cosmetic bugs, documentation errors | < 24 hours | None |
-| **SEV-3** (Medium) | Users minimally affected; slow page load, minor features unavailable | < 4 hours | Team lead informed |
-| **SEV-2** (High) | Significant user impact; features broken, data loss risk | < 1 hour | On-call engineer paged |
-| **SEV-1** (Critical) | Complete service outage; all users affected, revenue impact | Immediate | VP Engineering paged |
+| Severity             | Definition                                                           | Response Time | Escalation             | `/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md |
+| -------------------- | -------------------------------------------------------------------- | ------------- | ---------------------- | ----------------------------------------------------------------- |
+| **SEV-4** (Low)      | Non-user-impacting issue; cosmetic bugs, documentation errors        | < 24 hours    | None                   |
+| **SEV-3** (Medium)   | Users minimally affected; slow page load, minor features unavailable | < 4 hours     | Team lead informed     |
+| **SEV-2** (High)     | Significant user impact; features broken, data loss risk             | < 1 hour      | On-call engineer paged |
+| **SEV-1** (Critical) | Complete service outage; all users affected, revenue impact          | Immediate     | VP Engineering paged   |
 
 #### Section 2: Incident Classification
+
 **Determine severity on page 1 of investigation:**
+
 - Ask: Are users blocked from core functionality?
   - Yes → SEV-2 or SEV-1 (depending on scale)
   - No → SEV-3 or SEV-4 (depending on visibility)
@@ -459,17 +520,20 @@ Define severity levels for quick classification:
   - "Typo in homepage text" → SEV-4 (cosmetic)
 
 #### Section 3: Incident Notification & Escalation
+
 **Who to notify based on severity:**
 
-| Severity | Notify | Channel | Urgency |
-| -------- | ------ | ------- | ------- |
-| SEV-4 | Team lead | Slack #portfolio-updates | ASAP (within business hours) |
-| SEV-3 | On-call eng + Team lead | Slack #incidents | Within 15 minutes |
-| SEV-2 | On-call eng + VP Eng | Slack #incidents + page on-call | Immediately |
-| SEV-1 | Full team + VP | Slack #incidents + SMS/phone call | Immediately (everyone) |
+| Severity | Notify                  | Channel                           | Urgency                      |
+| -------- | ----------------------- | --------------------------------- | ---------------------------- |
+| SEV-4    | Team lead               | Slack #portfolio-updates          | ASAP (within business hours) |
+| SEV-3    | On-call eng + Team lead | Slack #incidents                  | Within 15 minutes            |
+| SEV-2    | On-call eng + VP Eng    | Slack #incidents + page on-call   | Immediately                  |
+| SEV-1    | Full team + VP          | Slack #incidents + SMS/phone call | Immediately (everyone)       |
 
 #### Section 4: Triage Phase (first 5 minutes)
+
 **Quick assessment:**
+
 1. Verify the incident
    - Can you reproduce it? Yes/no?
    - Is it affecting multiple users or one? (check logs/metrics)
@@ -488,7 +552,9 @@ Define severity levels for quick classification:
    - Post: Incident number, description, severity, initial assessment
 
 #### Section 5: Investigation Phase (next 10–30 minutes)
+
 **Detailed diagnosis:**
+
 1. Gather information
    - What changed recently? (Deployments, env vars, config)
    - When did it start? (Exact time helps identify deployments)
@@ -505,7 +571,9 @@ Define severity levels for quick classification:
    - Who can implement the fix?
 
 #### Section 6: Mitigation & Resolution Phase (5–60 minutes depending on severity)
+
 **Fix the issue:**
+
 1. Temporary mitigation (if needed)
    - Can we serve degraded experience while fixing root cause?
    - Example: Show cached data instead of live data
@@ -524,20 +592,25 @@ Define severity levels for quick classification:
    - Confirm no new issues introduced
 
 #### Section 7: Communication
+
 **During incident:**
-- Post updates every 5–10 minutes in #incident-* channel
+
+- Post updates every 5–10 minutes in #incident-\* channel
 - Post format: `[HH:MM] {status}: {update}`
 - Example: `[15:30] INVESTIGATING: Found error in project loading, checking database`
 - Example: `[15:35] MITIGATION: Deployed rollback, services recovering`
 - Example: `[15:40] RESOLVED: All systems operational, postmortem scheduled for tomorrow`
 
 **After incident (all-clear):**
+
 - Post in #incidents: "RESOLVED: INC-20260126-001 Portfolio app degradation"
 - Include: Duration, impact, root cause (brief)
 - Schedule postmortem: "Postmortem scheduled for [date] at [time]"
 
 #### Section 8: Postmortem Phase (within 24 hours)
+
 **Learn and prevent:**
+
 1. Schedule postmortem meeting
    - Invite: Responders, team lead, affected team members
    - Duration: 30–60 minutes depending on complexity
@@ -556,7 +629,9 @@ Define severity levels for quick classification:
    - Set due date (within 1–2 sprints)
 
 #### Section 9: Follow-Up
+
 **Implement learnings:**
+
 1. Preventive controls
    - Example: Add automated alerting for error rate >5% in 1 minute
    - Example: Add pre-commit hook to prevent known issues
@@ -574,6 +649,7 @@ Define severity levels for quick classification:
 **Type:** Index / Navigation
 
 **Front Matter:**
+
 ```yaml
 ---
 title: 'Operational Runbooks'
@@ -586,6 +662,7 @@ tags: [operations, runbooks, procedures, incident-response]
 **Content Outline:**
 
 #### Section 1: Overview
+
 - What is a runbook?
 - Why runbooks matter
 - When to use each runbook
@@ -594,32 +671,38 @@ tags: [operations, runbooks, procedures, incident-response]
 #### Section 2: Runbook Catalog
 
 **Deployment Runbooks**
+
 - [Deployment Failure Recovery](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md) — Detect and rollback failed deployments (MTTR: 5 min)
 - Redeployment Procedures -`/docs/50-operations/runbooks/rbk-portfolio-redeployment.md` — Manual deployment commands and verification (future)
 
 **Incident Response Runbooks**
+
 - [General Incident Response Framework](/docs/50-operations/runbooks/rbk-portfolio-incident-response.md) — Framework for all incidents (severity levels, triage, postmortem)
 - [Service Degradation](/docs/50-operations/runbooks/rbk-portfolio-service-degradation.md) — Diagnose and resolve performance/availability issues (MTTR: 10 min)
 - Security Incident Response - `/docs/50-operations/runbooks/rbk-portfolio-security-incident.md` — Detect and respond to security issues (future)
 
 **Performance & Optimization Runbooks**
+
 - [Performance Optimization](/docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md) — Proactive performance tuning and optimization
 - [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md) — Diagnose and fix performance problems
 
 **Operational Readiness**
+
 - [Observability & Monitoring](/docs/60-projects/portfolio-app/08-observability.md) — Health checks, logging, monitoring architecture
 
 #### Section 3: Quick Reference (Severity-Based)
 
 **Critical Incident (SEV-1) Quick Steps**
+
 1. Page on-call engineer + VP Engineering
-2. Create #incident-* channel
+2. Create #incident-\* channel
 3. Execute relevant runbook (deployment failure or general incident response)
 4. Post updates every 5 min
 5. Post all-clear when resolved
 6. Schedule postmortem within 24 hours
 
 **High Severity (SEV-2) Quick Steps**
+
 1. Notify on-call engineer via Slack
 2. Follow service degradation runbook
 3. Target resolution time: < 1 hour
@@ -627,16 +710,19 @@ tags: [operations, runbooks, procedures, incident-response]
 5. Schedule postmortem within 48 hours
 
 **Medium Severity (SEV-3) Quick Steps**
+
 1. Notify team lead
 2. Create GitHub issue if not already present
 3. Investigate and fix within business hours
 4. No formal postmortem required (document in issue)
 
 #### Section 4: Runbook Template
+
 - Link to: `docs/_meta/templates/template-runbook.md` (future)
 - Use this template when creating new runbooks
 
 #### Section 5: Common Patterns
+
 - Error patterns and how to diagnose them
 - Recovery patterns (rollback, restart, reconfigure)
 - Verification patterns (health checks, log analysis)
@@ -844,7 +930,7 @@ tags: [operations, runbooks, procedures, incident-response]
   - Include: Time targets per phase, key activities
 
 - [ ] Add communication templates
-  - Details: How to update #incident-* channel during response
+  - Details: How to update #incident-\* channel during response
   - Include: Update frequency, information to include per phase
 
 - [ ] Document postmortem process

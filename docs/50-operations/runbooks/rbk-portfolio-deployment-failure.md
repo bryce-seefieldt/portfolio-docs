@@ -9,13 +9,13 @@ tags: [runbook, operations, deployment, rollback, incident-response]
 
 ## Quick Reference
 
-| | |
-|---|---|
-| **Scenario** | New deployment failed or introduced breaking changes |
-| **Severity** | High (SEV-2) — Service potentially broken or unavailable |
-| **MTTR Target** | 5 minutes (rollback execution time) |
-| **On-Call** | Yes — Notify immediately via Slack + PagerDuty |
-| **Escalation** | VP Engineering if unable to rollback within 5 minutes |
+|                 |                                                          |
+| --------------- | -------------------------------------------------------- |
+| **Scenario**    | New deployment failed or introduced breaking changes     |
+| **Severity**    | High (SEV-2) — Service potentially broken or unavailable |
+| **MTTR Target** | 5 minutes (rollback execution time)                      |
+| **On-Call**     | Yes — Notify immediately via Slack + PagerDuty           |
+| **Escalation**  | VP Engineering if unable to rollback within 5 minutes    |
 
 ---
 
@@ -112,12 +112,12 @@ curl -s https://portfolio-app.vercel.app/api/health | jq '.'
 
 **Decision tree:**
 
-| Health Check Result | Action |
-|---------------------|--------|
-| Returns `status: "healthy"` | **STOP.** Deployment is fine. Investigate other cause. |
-| Returns `status: "unhealthy"` (500) | **Continue to rollback** (runtime failure) |
-| Connection timeout or DNS error | **Continue to rollback** (deployment completely broken) |
-| Returns `status: "degraded"` (503) | Use [service degradation runbook](./rbk-portfolio-service-degradation.md) instead |
+| Health Check Result                 | Action                                                                            |
+| ----------------------------------- | --------------------------------------------------------------------------------- |
+| Returns `status: "healthy"`         | **STOP.** Deployment is fine. Investigate other cause.                            |
+| Returns `status: "unhealthy"` (500) | **Continue to rollback** (runtime failure)                                        |
+| Connection timeout or DNS error     | **Continue to rollback** (deployment completely broken)                           |
+| Returns `status: "degraded"` (503)  | Use [service degradation runbook](./rbk-portfolio-service-degradation.md) instead |
 
 #### Step 3: Identify Last Known Good Deployment
 
@@ -286,6 +286,7 @@ curl -s https://portfolio-app.vercel.app/api/health | jq '.status'
 #### Verification Checklist
 
 - [ ] **Health check returns 200 (healthy):**
+
   ```bash
   curl -s https://portfolio-app.vercel.app/api/health | jq '.status'
   # Expected: "healthy"
@@ -296,12 +297,14 @@ curl -s https://portfolio-app.vercel.app/api/health | jq '.status'
   - No error logs in function logs
 
 - [ ] **Homepage accessible (no 500s):**
+
   ```bash
   curl -I https://portfolio-app.vercel.app/ | grep HTTP
   # Expected: HTTP/2 200
   ```
 
 - [ ] **Projects page loads:**
+
   ```bash
   curl -I https://portfolio-app.vercel.app/projects | grep HTTP
   # Expected: HTTP/2 200
@@ -349,12 +352,12 @@ For build failures:
 
 **Common error patterns:**
 
-| Error Message | Root Cause | Prevention |
-|---------------|------------|------------|
-| `TS2304: Cannot find name 'X'` | TypeScript type error | Add pre-commit `pnpm typecheck` |
-| `Module not found: Can't resolve 'X'` | Missing dependency | Run `pnpm install` before commit |
-| `ESLint: X errors, Y warnings` | Linting failure | Add pre-commit `pnpm lint` |
-| `Out of memory` | Build too large or infinite loop | Investigate bundle size or build script |
+| Error Message                         | Root Cause                       | Prevention                              |
+| ------------------------------------- | -------------------------------- | --------------------------------------- |
+| `TS2304: Cannot find name 'X'`        | TypeScript type error            | Add pre-commit `pnpm typecheck`         |
+| `Module not found: Can't resolve 'X'` | Missing dependency               | Run `pnpm install` before commit        |
+| `ESLint: X errors, Y warnings`        | Linting failure                  | Add pre-commit `pnpm lint`              |
+| `Out of memory`                       | Build too large or infinite loop | Investigate bundle size or build script |
 
 ### Step 2: Examine Broken Commit
 
@@ -538,7 +541,7 @@ Error: Module not found: Can't resolve '@/lib/new-module'
 {
   "level": "error",
   "message": "Config error",
-  "context": {"error": "NEXT_PUBLIC_NEW_VAR is not defined"}
+  "context": { "error": "NEXT_PUBLIC_NEW_VAR is not defined" }
 }
 ```
 
@@ -550,11 +553,11 @@ Error: Module not found: Can't resolve '@/lib/new-module'
 
 ## Escalation
 
-| Duration | Action | Notify |
-|----------|--------|--------|
-| **0–5 min** | Execute rollback (this runbook) | On-call engineer only |
-| **5–15 min** | Escalate if rollback fails | VP Engineering via Slack + PagerDuty |
-| **>15 min** | Full team escalation | All team + CEO (if customer-facing) |
+| Duration     | Action                          | Notify                               |
+| ------------ | ------------------------------- | ------------------------------------ |
+| **0–5 min**  | Execute rollback (this runbook) | On-call engineer only                |
+| **5–15 min** | Escalate if rollback fails      | VP Engineering via Slack + PagerDuty |
+| **>15 min**  | Full team escalation            | All team + CEO (if customer-facing)  |
 
 ---
 

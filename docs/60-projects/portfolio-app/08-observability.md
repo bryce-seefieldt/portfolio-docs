@@ -9,7 +9,7 @@ tags: [observability, monitoring, health-checks, logging, architecture]
 
 ## Overview
 
-**Observability** is the ability to understand the internal state of the portfolio application by examining its outputs (logs, metrics, traces). Unlike traditional monitoring which tells you *when* something is broken, observability enables you to understand *why* it's broken and *how* to fix it.
+**Observability** is the ability to understand the internal state of the portfolio application by examining its outputs (logs, metrics, traces). Unlike traditional monitoring which tells you _when_ something is broken, observability enables you to understand _why_ it's broken and _how_ to fix it.
 
 ### Why Observability Matters
 
@@ -30,41 +30,20 @@ Future phases will add distributed tracing for request flow analysis.
 
 ### Architecture
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                     Portfolio App (Next.js)                       │
-│                                                                    │
-│  ┌────────────────────────────────────────────────────────────┐  │
-│  │ Application Logic                                           │  │
-│  │ • Pages: /, /cv, /projects, /projects/[slug], /contact     │  │
-│  │ • Components: Evidence, Section, Callout                   │  │
-│  │ • Data: projects.yml registry                              │  │
-│  └─────────────────┬───────────────────┬──────────────────────┘  │
-│                    │                   │                          │
-│                    ▼                   ▼                          │
-│  ┌─────────────────────────┐  ┌───────────────────────────────┐  │
-│  │ Health Check Endpoint   │  │ Structured Logging            │  │
-│  │                         │  │                               │  │
-│  │ GET /api/health         │  │ src/lib/observability.ts      │  │
-│  │ • Status: 200/503/500   │  │ • JSON output to console      │  │
-│  │ • Environment metadata  │  │ • Levels: info/warn/error/debug│  │
-│  │ • Project count         │  │ • Context: route, timing, etc.│  │
-│  │ • Commit SHA            │  │ • Auto environment injection  │  │
-│  │ • Build timestamp       │  │                               │  │
-│  └──────────┬──────────────┘  └───────────┬───────────────────┘  │
-│             │                             │                       │
-│             └──────────────┬──────────────┘                       │
-│                            ▼                                       │
-└────────────────────────────────────────────────────────────────────┘
-                             │
-                             ▼
-         ┌──────────────────────────────────────────────┐
-         │ Vercel Logs / External Monitoring Systems    │
-         │                                              │
-         │ • Real-time log streaming (Vercel dashboard) │
-         │ • Health check polling (uptime monitors)     │
-         │ • Future: Metrics export (Prometheus/Datadog)│
-         └──────────────────────────────────────────────┘
+```mermaid
+graph TD
+    App["Portfolio App<br/>(Next.js)<br/><br/>Pages: /, /cv, /projects, /projects/[slug], /contact<br/>Data: projects.yml registry"]
+
+    Health["Health Check Endpoint<br/>GET /api/health<br/><br/>Status: 200/503/500<br/>Environment metadata<br/>Project count<br/>Commit SHA<br/>Build timestamp"]
+
+    Logging["Structured Logging<br/>src/lib/observability.ts<br/><br/>JSON output to console<br/>Levels: info/warn/error/debug<br/>Context: route, timing, etc.<br/>Auto environment injection"]
+
+    Monitoring["Vercel Logs &<br/>External Monitoring Systems<br/><br/>Real-time log streaming<br/>Health check polling<br/>Future: Metrics export"]
+
+    App --> Health
+    App --> Logging
+    Health --> Monitoring
+    Logging --> Monitoring
 ```
 
 ---
@@ -81,24 +60,24 @@ Future phases will add distributed tracing for request flow analysis.
 
 The health endpoint returns JSON with the following fields:
 
-| Field | Type | Description | Example |
-|-------|------|-------------|---------|
-| `status` | `"healthy" \| "degraded" \| "unhealthy"` | Application health state | `"healthy"` |
-| `timestamp` | `string` (ISO 8601) | Response timestamp | `"2026-01-26T15:30:45.123Z"` |
-| `environment` | `string` | Deployment environment | `"production"` |
-| `commit` | `string` | Git commit SHA (first 7 chars) | `"a2058c7"` |
-| `buildTime` | `string` (ISO 8601) | Build timestamp | `"2026-01-26T15:20:00.000Z"` |
-| `projectCount` | `number` | Number of projects loaded | `8` |
-| `message` | `string` (optional) | Error or degradation description | `"No projects loaded"` |
-| `error` | `string` (optional) | Error message (unhealthy only) | `"Cannot load PROJECTS registry"` |
+| Field          | Type                                     | Description                      | Example                           |
+| -------------- | ---------------------------------------- | -------------------------------- | --------------------------------- |
+| `status`       | `"healthy" \| "degraded" \| "unhealthy"` | Application health state         | `"healthy"`                       |
+| `timestamp`    | `string` (ISO 8601)                      | Response timestamp               | `"2026-01-26T15:30:45.123Z"`      |
+| `environment`  | `string`                                 | Deployment environment           | `"production"`                    |
+| `commit`       | `string`                                 | Git commit SHA (first 7 chars)   | `"a2058c7"`                       |
+| `buildTime`    | `string` (ISO 8601)                      | Build timestamp                  | `"2026-01-26T15:20:00.000Z"`      |
+| `projectCount` | `number`                                 | Number of projects loaded        | `8`                               |
+| `message`      | `string` (optional)                      | Error or degradation description | `"No projects loaded"`            |
+| `error`        | `string` (optional)                      | Error message (unhealthy only)   | `"Cannot load PROJECTS registry"` |
 
 ### Status Codes
 
-| HTTP Status | State | Meaning | Action |
-|-------------|-------|---------|--------|
-| **200 OK** | Healthy | All systems operational, all checks passed | No action needed |
-| **503 Service Unavailable** | Degraded | Core functionality works, but some features unavailable | Monitor for 5 minutes; escalate if persists |
-| **500 Internal Server Error** | Unhealthy | Critical failure; service broken | Execute [incident runbook](#related-runbooks) immediately |
+| HTTP Status                   | State     | Meaning                                                 | Action                                                    |
+| ----------------------------- | --------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| **200 OK**                    | Healthy   | All systems operational, all checks passed              | No action needed                                          |
+| **503 Service Unavailable**   | Degraded  | Core functionality works, but some features unavailable | Monitor for 5 minutes; escalate if persists               |
+| **500 Internal Server Error** | Unhealthy | Critical failure; service broken                        | Execute [incident runbook](#related-runbooks) immediately |
 
 ### Response Examples
 
@@ -207,11 +186,11 @@ All logs follow the `LogEntry` interface from [`src/lib/observability.ts`](https
 
 ```typescript
 interface LogEntry {
-  timestamp: string;           // ISO 8601 timestamp
-  level: 'info' | 'warn' | 'error' | 'debug';  // Log severity
-  message: string;             // Human-readable description
-  context?: Record<string, unknown>;  // Structured metadata
-  environment?: string;        // Deployment environment
+  timestamp: string; // ISO 8601 timestamp
+  level: 'info' | 'warn' | 'error' | 'debug'; // Log severity
+  message: string; // Human-readable description
+  context?: Record<string, unknown>; // Structured metadata
+  environment?: string; // Deployment environment
 }
 ```
 
@@ -233,12 +212,12 @@ interface LogEntry {
 
 ### Log Levels
 
-| Level | Usage | Examples | Alerting |
-|-------|-------|----------|----------|
-| **info** | Normal operations, user actions, state changes | "User loaded project page", "Project registry loaded" | No alerts |
-| **warn** | Unexpected but non-critical issues | "Slow page render (3.5s)", "404 Not Found" | Alert if >10/min |
-| **error** | Failures requiring attention | "Failed to load project", "API timeout" | Alert immediately |
-| **debug** | Development debugging only | "Cache hit", "`Props: {...}`" | Disabled in prod |
+| Level     | Usage                                          | Examples                                              | Alerting          |
+| --------- | ---------------------------------------------- | ----------------------------------------------------- | ----------------- |
+| **info**  | Normal operations, user actions, state changes | "User loaded project page", "Project registry loaded" | No alerts         |
+| **warn**  | Unexpected but non-critical issues             | "Slow page render (3.5s)", "404 Not Found"            | Alert if >10/min  |
+| **error** | Failures requiring attention                   | "Failed to load project", "API timeout"               | Alert immediately |
+| **debug** | Development debugging only                     | "Cache hit", "`Props: {...}`"                         | Disabled in prod  |
 
 ### Usage Examples
 
@@ -251,14 +230,14 @@ import { log } from '@/lib/observability';
 log({
   level: 'info',
   message: 'User navigated to projects page',
-  context: { route: '/projects', referrer: '/' }
+  context: { route: '/projects', referrer: '/' },
 });
 
 // Warning: Performance issue
 log({
   level: 'warn',
   message: 'Slow page render detected',
-  context: { route: '/projects', renderTime: 3500 }
+  context: { route: '/projects', renderTime: 3500 },
 });
 ```
 
@@ -272,7 +251,7 @@ try {
 } catch (error) {
   logError('Failed to load project', error, {
     slug,
-    operation: 'loadProject'
+    operation: 'loadProject',
   });
   throw error;
 }
@@ -293,12 +272,14 @@ useEffect(() => {
 ### Context Guidelines
 
 **Do include in context:**
+
 - Route/URL: `route: '/projects/portfolio-app'`
 - Operation: `operation: 'loadProjects'`
 - Timing: `renderTime: 2500, cacheHit: false`
 - Non-sensitive IDs: `slug: 'portfolio-app'`
 
 **Do NOT include in context:**
+
 - Passwords or API keys: ❌ `apiKey: 'sk_live_...'`
 - User emails: ❌ `email: 'user@example.com'`
 - PII: ❌ `userIP: '192.168.1.1'`
@@ -345,35 +326,40 @@ The application can exist in three states, each with distinct characteristics an
 
 ### State Definitions
 
-| State | Definition | User Impact | HTTP Status | Detection | Recovery |
-|-------|------------|-------------|-------------|-----------|----------|
-| **Healthy** | All routes render successfully, analytics active, no errors in logs | None | 200 | Health endpoint returns `status: "healthy"` | N/A — system operational |
-| **Degraded** | Core routes work (homepage, CV, contact), but some features unavailable (e.g., projects page slow/broken, analytics down) | Minor — users can access most content | 503 | Health endpoint returns `status: "degraded"` OR median response time >3s | Monitor for 5 minutes; if persists, [escalate to on-call](#related-runbooks) |
-| **Unhealthy** | Critical routes fail (500 errors), projects registry empty, build failed | Major — service broken, users see errors | 500 | Health endpoint returns `status: "unhealthy"` OR 500 errors on all routes | Execute [incident runbook](#related-runbooks) immediately; consider rollback |
+| State         | Definition                                                                                                                | User Impact                              | HTTP Status | Detection                                                                 | Recovery                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ----------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| **Healthy**   | All routes render successfully, analytics active, no errors in logs                                                       | None                                     | 200         | Health endpoint returns `status: "healthy"`                               | N/A — system operational                                                     |
+| **Degraded**  | Core routes work (homepage, CV, contact), but some features unavailable (e.g., projects page slow/broken, analytics down) | Minor — users can access most content    | 503         | Health endpoint returns `status: "degraded"` OR median response time >3s  | Monitor for 5 minutes; if persists, [escalate to on-call](#related-runbooks) |
+| **Unhealthy** | Critical routes fail (500 errors), projects registry empty, build failed                                                  | Major — service broken, users see errors | 500         | Health endpoint returns `status: "unhealthy"` OR 500 errors on all routes | Execute [incident runbook](#related-runbooks) immediately; consider rollback |
 
 ### Transition Diagram
 
-```
-        ┌─────────────┐
-        │   Healthy   │ ◄──────────────────────┐
-        │ (200 OK)    │                        │
-        └──────┬──────┘                        │
-               │                               │
-               │ Data load issue               │ Recovery
-               │ Slow performance              │ (fix deployed)
-               ▼                               │
-        ┌─────────────┐                        │
-        │  Degraded   │                        │
-        │ (503 Unavailable)                    │
-        └──────┬──────┘                        │
-               │                               │
-               │ Critical failure              │
-               │ Build error                   │
-               ▼                               │
-        ┌─────────────┐                        │
-        │  Unhealthy  │ ───────────────────────┘
-        │ (500 Error) │      Rollback
-        └─────────────┘
+```mermaid
+stateDiagram-v2
+    [*] --> Healthy
+
+    Healthy --> Degraded: Data load issue<br/>Slow performance
+
+    Degraded --> Unhealthy: Critical failure<br/>Build error
+
+    Degraded --> Healthy: Recovery<br/>(fix deployed)
+
+    Unhealthy --> Healthy: Rollback
+
+    note right of Healthy
+        200 OK
+        All systems operational
+    end note
+
+    note right of Degraded
+        503 Service Unavailable
+        Core works, features unavailable
+    end note
+
+    note right of Unhealthy
+        500 Internal Server Error
+        Critical failure, service broken
+    end note
 ```
 
 ### Detection Methods
@@ -459,13 +445,13 @@ Forward Vercel logs to external systems:
 
 **Suggested alert configuration:**
 
-| Condition | Threshold | Severity | Notification | Response Time |
-|-----------|-----------|----------|--------------|---------------|
-| Health status = degraded | Immediate | Medium | Slack + Email | 15 minutes |
-| Health status = unhealthy | Immediate | High | Slack + SMS + PagerDuty | 5 minutes |
-| Response time > 3s | 3 consecutive checks | Low | Email only | 1 hour |
-| Error rate > 5% | 1 minute | High | Slack + PagerDuty | 10 minutes |
-| Endpoint unresponsive | 30 seconds | Critical | All channels | Immediate |
+| Condition                 | Threshold            | Severity | Notification            | Response Time |
+| ------------------------- | -------------------- | -------- | ----------------------- | ------------- |
+| Health status = degraded  | Immediate            | Medium   | Slack + Email           | 15 minutes    |
+| Health status = unhealthy | Immediate            | High     | Slack + SMS + PagerDuty | 5 minutes     |
+| Response time > 3s        | 3 consecutive checks | Low      | Email only              | 1 hour        |
+| Error rate > 5%           | 1 minute             | High     | Slack + PagerDuty       | 10 minutes    |
+| Endpoint unresponsive     | 30 seconds           | Critical | All channels            | Immediate     |
 
 ---
 
