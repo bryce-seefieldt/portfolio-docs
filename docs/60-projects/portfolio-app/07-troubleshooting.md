@@ -50,7 +50,7 @@ This page is a project-specific summary; authoritative procedures live in runboo
 
 ```bash
 pnpm install
-pnpm verify:quick  # Fast validation with detailed error reporting
+pnpm verify:quick  # Fast validation (skips performance checks and tests)
 ```
 
 **Alternative: Individual commands:**

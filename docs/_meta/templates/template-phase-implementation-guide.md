@@ -361,8 +361,12 @@ All stages can proceed in parallel; Stage 1.4 (CI Integration) depends on all.
 
 ```bash
 # Local verification
-pnpm verify                    # Full verification (lint, format, typecheck, build)
-pnpm verify:quick              # Fast checks (skip build)
+pnpm verify                    # Full verification (format, lint, typecheck, secrets, registry, build, performance, tests)
+pnpm verify:quick              # Fast iteration (skips performance checks and all tests; still runs build)
+
+# Performance analysis
+pnpm analyze:bundle            # Generate bundle size report (ANALYZE=true pnpm build)
+pnpm analyze:build             # Time the production build locally
 
 # Individual checks
 pnpm lint                       # ESLint

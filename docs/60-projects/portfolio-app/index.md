@@ -84,7 +84,7 @@ Portfolio App must link to evidence pages for each project:
 - ✅ **CI quality gates**: lint, format, typecheck, secrets-scan, registry validation, unit tests, E2E tests, build (all enforced)
 - ✅ **Unit test coverage**: 70+ Vitest tests (registry validation, slug helpers, link construction) with ≥80% code coverage
 - ✅ **E2E test coverage**: 12 Playwright tests across Chromium, Firefox (100% route coverage + evidence link validation)
-- ✅ **Comprehensive testing**: verify script with 9-step validation workflow (optional verify:quick for fast iteration)
+- ✅ **Comprehensive testing**: verify script with 11-step validation workflow (perf budgets + tests); verify:quick for fast iteration (skips performance checks and all tests)
 - ✅ **Secrets scanning**: CI gate via TruffleHog (PR-only); optional pre-commit hook. Local verify uses lightweight pattern scan.
 - ✅ **Security hardening**: Least-privilege CI permissions, CodeQL, Dependabot
 - ✅ **Deployment governance**: Vercel promotion gated by required checks (quality, test, build)

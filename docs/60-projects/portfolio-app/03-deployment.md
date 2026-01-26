@@ -274,7 +274,7 @@ git checkout main && git pull
 git checkout -b feat/your-feature
 
 # Make changes and validate locally
-pnpm verify  # Or: pnpm verify:quick during development
+pnpm verify  # Or: pnpm verify:quick during development (skips performance checks and all tests)
 
 # Commit and push
 git commit -am "feat: description"

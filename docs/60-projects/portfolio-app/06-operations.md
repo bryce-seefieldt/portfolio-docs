@@ -175,13 +175,13 @@ pnpm verify
 
 This runs the complete validation suite: environment check, auto-format, format validation, lint, typecheck, registry validation, build, unit tests, and E2E tests with detailed troubleshooting for failures. Mirrors CI workflow exactly.
 
-**Fast approach (skip tests):**
+**Fast approach (skip tests and performance checks):**
 
 ```bash
 pnpm verify:quick
 ```
 
-Runs environment check through build steps (excluding unit and E2E tests) for rapid feedback during active development. Always run full `pnpm verify` before final push.
+Runs environment check through build steps (skips performance verification, unit tests, and E2E tests) for rapid feedback during active development. Always run full `pnpm verify` before final push.
 
 #### Staging validation (post-merge, pre-production)
 

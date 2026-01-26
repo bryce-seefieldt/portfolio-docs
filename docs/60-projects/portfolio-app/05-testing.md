@@ -65,17 +65,19 @@ pnpm install
 pnpm verify
 ```
 
-The `verify` command runs a comprehensive 9-step validation workflow:
+The `verify` command runs a comprehensive 11-step validation workflow:
 
 1. **Environment check**: Validates Node version, pnpm availability, `.env.local` existence, and required environment variables
 2. **Auto-format**: Runs `format:write` to fix formatting issues automatically
 3. **Format validation**: Confirms formatting correctness with `format:check`
 4. **Linting**: Executes ESLint with zero-warning enforcement
 5. **Type checking**: Validates TypeScript types across the codebase
-6. **Registry validation**: Ensures project registry schema compliance and data integrity
-7. **Build**: Produces production bundle to catch build-time errors
-8. **Unit tests**: Runs Vitest suite (70+ tests: registry validation, slug helpers, link construction)
-9. **E2E tests**: Runs Playwright suite (12 tests: evidence link resolution, route coverage)
+6. **Secret scan (lightweight)**: Pattern-based scan to catch obvious secrets (local-only; CI uses TruffleHog)
+7. **Registry validation**: Ensures project registry schema compliance and data integrity
+8. **Build**: Produces production bundle to catch build-time errors
+9. **Performance verification**: Validates bundle size and cache headers against `docs/performance-baseline.yml`
+10. **Unit tests**: Runs Vitest suite (70+ tests: registry validation, slug helpers, link construction)
+11. **E2E tests**: Runs Playwright suite (12 tests: evidence link resolution, route coverage)
 
 **Benefits:**
 
@@ -83,6 +85,7 @@ The `verify` command runs a comprehensive 9-step validation workflow:
 - Auto-formats code before validation (reduces false failures)
 - Provides color-coded output for quick status assessment
 - Includes detailed troubleshooting guidance for each failure type
+- Protects performance budgets by enforcing bundle size and cache headers locally
 - Mirrors CI workflow for local/remote consistency
 - Generates summary report with next steps
 
@@ -101,7 +104,7 @@ For rapid feedback during active development without tests:
 pnpm verify:quick
 ```
 
-Runs steps 1-7 above, **skips unit and E2E tests** (steps 8-9).
+Runs steps 1-8 above, **skips performance checks and all tests** (steps 9-11).
 
 **When to use:**
 

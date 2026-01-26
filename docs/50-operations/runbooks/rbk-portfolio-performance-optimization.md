@@ -12,7 +12,8 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 
 ## Source of truth
 
-- Baseline metrics and thresholds live in the app repo: [`portfolio-app/docs/performance-baseline.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md)
+- Baseline metrics and thresholds (machine-readable): [`portfolio-app/docs/performance-baseline.yml`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.yml)
+- Baseline documentation (human-readable): [`portfolio-app/docs/performance-baseline.md`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md)
 - Vercel Speed Insights dashboard (Core Web Vitals): [portfolio-app/speed-insights](https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights)
 - Vercel Web Analytics dashboard (traffic/visits): [portfolio-app/analytics](https://vercel.com/bryce-seefieldts-projects/portfolio-app/analytics)
 - Vercel Speed Insights docs: https://vercel.com/docs/speed-insights
@@ -26,42 +27,70 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 
 ## Procedure
 
-1. Build with bundle analyzer (optional visualization)
+### Phase A: Local Verification (Pre-Deploy)
+
+**Purpose:** Catch potential performance regressions in bundle size and caching before deployment. These steps verify code changes, NOT real-user experience.
+
+#### Step 1: Build with bundle analyzer (optional visualization)
 
 - Command: `ANALYZE=true pnpm build`
 - Expectation: build succeeds; routes show static/SSG; analyzer opens for bundle composition review.
+- **When to use:** If you want visual breakdown of what's in your JavaScript bundles (useful after adding large dependencies).
 
-2. Capture build duration
+#### Step 2: Capture build duration
 
 - Command: `pnpm analyze:build`
-- Expectation: build time logged (e.g., ~9.6s local). Compare to baseline in performance-baseline.md.
+- Expectation: build time logged (e.g., ~9.6s local). Compare to baseline in performance-baseline.yml.
+- **When to use:** After code changes; if build time creeps up, may indicate new bottlenecks.
+- **Action:** If > 10% slower than baseline, see [Slow Build Time troubleshooting](./rbk-portfolio-performance-troubleshooting.md#slow-build-time).
 
-3. Bundle size regression check (local quick guard)
+#### Step 3: Bundle size regression check (local quick guard)
 
 - After build: `du -sh .next` and `find .next -name "*.js" -type f | xargs wc -c | tail -1`
 - Expectation: JS total ~27.8 MB baseline (Phase 2). Investigate if > 10% growth.
+- **When to use:** Every pre-deploy; catches accidental bloat before it hits production.
+- **Action:** If > 10% growth, see [Bundle Size Regression troubleshooting](./rbk-portfolio-performance-troubleshooting.md#bundle-size-regression).
 
-4. Verify Cache-Control headers (local)
+#### Step 4: Verify Cache-Control headers (local)
 
 - Start: `pnpm start`
 - Command: `curl -I http://localhost:3000/projects/portfolio-app | grep Cache-Control`
 - Expectation: `public, max-age=3600, stale-while-revalidate=86400`.
+- **When to use:** After changes to next.config.ts or layout; ensures caching strategy is in place.
+- **Action:** If headers missing, see [Cache Headers Missing troubleshooting](./rbk-portfolio-performance-troubleshooting.md#cache-headers-missing). If headers different, see [Cache Headers Mismatch troubleshooting](./rbk-portfolio-performance-troubleshooting.md#cache-headers-mismatch).
 
-5. Verify Vercel Speed Insights data
+**Summary of Phase A:** If all checks pass, you've verified code-level optimizations are correct. Ready to deploy.
 
-- Deploy preview (or prod) and open dashboard: https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights
+---
 
-- Expectation: Core Web Vitals charts populate with Real Experience Score (RES). Key metrics: LCP < 2.5s, INP < 200ms, CLS < 0.1, FCP < 1.8s. Legacy FID < 100ms also tracked. If empty, wait for traffic or trigger page views.
+### Phase B: Deployed Verification (Post-Deploy)
 
-6. Enable & view Speed Insights in Vercel (if needed)
+**Purpose:** Monitor real-user Core Web Vitals performance after deployment. Speed Insights shows how actual visitors experience your app, NOT hypothetical performance.
+
+#### Step 5: Deploy and verify Speed Insights data collection
+
+- Deploy to preview (feature branch) or production (main branch).
+- Open Speed Insights dashboard: https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights
+- Expectation: Dashboard loads; within 5-10 minutes of traffic, Core Web Vitals charts should populate with Real Experience Score (RES).
+- **Key metrics to appear:** LCP < 2.5s, INP < 200ms, CLS < 0.1, FCP < 1.8s (FID < 100ms also tracked but legacy).
+- **If empty:** Wait for traffic. Need at least a few page views to generate data. Generate traffic by visiting home + project pages manually.
+
+#### Step 6: Enable & review Speed Insights in Vercel dashboard
 
 - Path: Vercel → Project **portfolio-app** → **Speed Insights** → select environment (Production or Preview).
-- If disabled: click **Enable Speed Insights** (available on all plans), then redeploy or hit pages to generate traffic.
-- View P75 metrics (75th percentile user experience); adjust date range; confirm environment matches deployed branch.
-- Key metrics: Real Experience Score (RES), LCP, INP, CLS, FCP. See [metrics guide](https://vercel.com/docs/speed-insights/metrics).
-- If empty: hit home + project pages in that environment, wait a few minutes, refresh dashboard; ensure no ad/tracker blocking.
+- **If disabled:** Click **Enable Speed Insights** (available on all plans). This is a per-project toggle. Once enabled, redeploy or generate traffic to start collecting data.
+- **Select environment:** Pick Production (main branch) or Preview (feature branch) depending on what you want to review.
+- **View metrics:** Real Experience Score (RES) should be ≥ 90 (green). If < 90, click each metric to identify problem routes/selectors. See [Vercel metrics guide](https://vercel.com/docs/speed-insights/metrics) and [Poor Speed Insights Scores troubleshooting](./rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90).
+- **Adjust date range:** Use date picker (top-right) to focus on specific timeframe (e.g., last 7 days, since deployment).
+- **Confirm data:** If still empty after 10 minutes and traffic, verify: (a) Speed Insights enabled, (b) correct environment selected, (c) `@vercel/speed-insights` package installed, (d) `<SpeedInsights />` component in layout, (e) no ad/script blockers preventing data collection.
 
-### Reading the Speed Insights Dashboard
+**Summary of Phase B:** Real-user performance verified. If RES ≥ 90, all metrics green, you've confirmed the deployment performs well for actual visitors.
+
+---
+
+## Monitoring & Analysis Guides
+
+### Understanding Speed Insights Dashboard
 
 **Dashboard URL:** https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights  
 **Reference:** [Using Speed Insights](https://vercel.com/docs/speed-insights/using-speed-insights) | [Metrics Guide](https://vercel.com/docs/speed-insights/metrics)
@@ -200,11 +229,155 @@ Speed Insights collects up to **6 data points per visit**:
 - High-traffic routes with orange/red scores
 - Geographic disparities (e.g., APAC slow, US fast)
 
-7. CI bundle threshold behavior
+#### Step 8: CI bundle threshold behavior (continuous monitoring)
 
-- CI build step runs bundle check (10% JS growth threshold). If failing, inspect new deps and update baseline only with justification.
+- Note: CI build step runs bundle check (10% JS growth threshold). If failing, inspect new deps and update baseline only with justification.
+- This is an automated gate during PR/deployment; if it fails, address in Phase A (local checks) before redeploying.
 
-### Reading the Web Analytics Dashboard
+---
+
+#### Step 7: Review Speed Insights dashboard insights
+
+**Dashboard URL:** https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights  
+**Reference:** [Using Speed Insights](https://vercel.com/docs/speed-insights/using-speed-insights) | [Metrics Guide](https://vercel.com/docs/speed-insights/metrics)
+
+#### Understanding the Overview
+
+1. **Real Experience Score (RES)** - Top-level metric
+   - Weighted average of all Core Web Vitals from real user devices
+   - Score range: 0-100 with color coding:
+     - **90-100 (green)**: Good - excellent user experience
+     - **50-89 (orange)**: Needs Improvement - functional but suboptimal
+     - **0-49 (red)**: Poor - serious performance issues
+   - Target: **≥ 90** for production
+   - Based on P75 (75th percentile) by default - represents experience of fastest 75% of users
+
+2. **Time-based Graph**
+   - Shows RES trend over selected timeframe
+   - Click percentile dropdown to switch between P75 (default), P90, P95, P99
+   - **P75**: Excludes slowest 25% of users (balanced view)
+   - **P99**: Excludes slowest 1% (best-case scenario)
+   - Use date range picker (top-right) for custom timeframes
+
+3. **Environment Selector** (top-right)
+   - **Production**: Main branch deployed to production URL
+   - **Preview**: Feature branch preview deployments
+   - **All Environments**: Combined view
+   - Always verify you're viewing the correct environment for your analysis
+
+#### Core Web Vitals Breakdown
+
+**Largest Contentful Paint (LCP)** - Loading Performance
+
+- **What it measures:** Time until largest content element appears (hero image, main heading, etc.)
+- **Target:** < 2.5 seconds
+- **Good:** 0-2500ms (green) | **Needs Improvement:** 2500-4000ms (orange) | **Poor:** > 4000ms (red)
+- **How to improve:** Optimize images, reduce server response time, eliminate render-blocking resources
+- **Dashboard view:** Click "LCP" in left panel → see breakdown by route/path/selector
+
+**Interaction to Next Paint (INP)** - Responsiveness (Primary Metric)
+
+- **What it measures:** Time from user interaction (click, tap, keypress) to browser rendering response
+- **Target:** < 200 milliseconds
+- **Good:** 0-200ms (green) | **Needs Improvement:** 200-500ms (orange) | **Poor:** > 500ms (red)
+- **How to improve:** Reduce JavaScript execution time, defer non-critical scripts, optimize event handlers
+- **Dashboard view:** Click "INP" → see which elements/interactions are slow
+- **Note:** INP replaced FID as the primary responsiveness metric (Lighthouse 10+)
+
+**Cumulative Layout Shift (CLS)** - Visual Stability
+
+- **What it measures:** How much page content shifts unexpectedly during load
+- **Target:** < 0.1
+- **Good:** 0-0.1 (green) | **Needs Improvement:** 0.1-0.25 (orange) | **Poor:** > 0.25 (red)
+- **How to improve:** Set image/video dimensions, avoid inserting content above existing content, use CSS transforms
+- **Dashboard view:** Click "CLS" → see which elements cause layout shifts
+
+**First Contentful Paint (FCP)** - Initial Rendering
+
+- **What it measures:** Time until first text, image, or canvas element appears
+- **Target:** < 1.8 seconds
+- **Good:** 0-1800ms (green) | **Needs Improvement:** 1800-3000ms (orange) | **Poor:** > 3000ms (red)
+- **Dashboard view:** Click "FCP" → breakdown by route
+
+**First Input Delay (FID)** - Legacy Responsiveness (Deprecated)
+
+- **What it measures:** Time from first user interaction to browser response
+- **Target:** < 100 milliseconds
+- **Note:** Being replaced by INP; still tracked for historical comparison
+- **Status:** Use INP for modern analysis; FID for legacy baseline comparison
+
+**Other Metrics:**
+
+- **Total Blocking Time (TBT):** < 800ms - time main thread is blocked (Virtual Experience Score)
+- **Time to First Byte (TTFB):** < 800ms - server response time
+
+#### Analyzing Performance by Dimension
+
+**By Route/Path** (Most useful for identifying problem pages)
+
+1. Click any metric (e.g., LCP) in left panel
+2. Switch between **Route** (framework routes) vs **Path** (actual URLs) tabs
+3. Sort by:
+   - **Score** (lowest first = worst performers)
+   - **Data Points** (most traffic first)
+4. Click **View all** to see complete list with filters
+5. **Action:** Focus optimization on routes with orange/red scores AND high traffic
+
+**By HTML Selector** (Available for LCP, INP, CLS, FID)
+
+1. Click **Selectors** tab
+2. See specific HTML elements causing issues
+3. Example: `img.hero-image` causing slow LCP
+4. **Action:** Optimize identified elements (lazy load, compress, defer)
+
+**By Country** (Geographic Performance)
+
+1. Scroll to **Countries** section
+2. Map shows color-coded performance per region
+3. Click country for detailed breakdown
+4. **Action:** If specific regions are slow, consider CDN optimization or regional edge functions
+
+#### Interpreting Percentiles
+
+- **P75 (default):** 75% of users experience this speed or better
+  - Example: P75 LCP = 2.0s means 75% of users see content in ≤ 2.0s, 25% wait longer
+- **P90:** 90% experience this or better (excludes slowest 10%)
+- **P95:** 95% experience this or better (excludes slowest 5%)
+- **P99:** 99% experience this or better (near best-case)
+
+**Best Practice:** Use P75 for general health, P90/P95 to catch outliers
+
+#### Data Point Collection
+
+Speed Insights collects up to **6 data points per visit**:
+
+- **On page load:** TTFB, FCP
+- **On interaction:** FID, LCP
+- **On leave:** INP, CLS, LCP (if not already sent)
+
+**Note:** Only hard navigations (first page view) are tracked. Next.js client-side route changes don't generate new data points.
+
+#### Actionable Workflow
+
+1. **Check RES Score:** Is it green (≥90)? If yes, monitor periodically. If orange/red, continue analysis.
+2. **Identify worst metric:** Which Core Web Vital is dragging down the score? (Red/orange)
+3. **Find problem routes:** Click that metric → sort by score → identify low-scoring high-traffic pages
+4. **Drill into selectors:** Switch to Selectors tab → see which elements cause issues
+5. **Check geography:** If specific regions lag, consider CDN/edge optimization
+6. **Compare environments:** Switch between Production/Preview to validate fixes before promoting
+7. **Monitor trends:** Use time graph to see if recent deploys improved/degraded performance
+
+#### Red Flags to Investigate
+
+- RES score < 90 (orange/red)
+- Any metric in red zone (LCP > 4s, INP > 500ms, CLS > 0.25)
+- Sudden score drop after deployment (check time graph)
+- High-traffic routes with orange/red scores
+- Geographic disparities (e.g., APAC slow, US fast)
+
+---
+
+### Understanding Web Analytics Dashboard
 
 **Dashboard URL:** https://vercel.com/bryce-seefieldts-projects/portfolio-app/analytics  
 **Reference:** [Using Web Analytics](https://vercel.com/docs/analytics/using-web-analytics) | [Filtering](https://vercel.com/docs/analytics/filtering)
@@ -357,3 +530,14 @@ Click filter icon on any panel to:
 - Cache headers missing in prod: verify next.config.ts headers and redeploy; Vercel may cache prior headers until next deploy.
 - Speed Insights empty: verify project/branch matches dashboard, allow time for data ingestion (few minutes post-deploy), ensure no script blocking, check `/_vercel/speed-insights/script.js` loads in browser DevTools Network tab.
 - Wrong metrics showing: Speed Insights = performance (LCP, INP, CLS); Web Analytics = traffic (page views, routes). Use correct dashboard tab.
+
+**For detailed troubleshooting procedures, see:**
+
+**[Performance Optimization Troubleshooting Runbook](./rbk-portfolio-performance-troubleshooting.md)**
+
+Common issues covered:
+
+- [Bundle Size Regression](./rbk-portfolio-performance-troubleshooting.md#bundle-size-regression) - Exceeds 10% growth threshold
+- [Slow Build Time](./rbk-portfolio-performance-troubleshooting.md#slow-build-time) - > 4.2s warning threshold
+- [Cache Headers Missing](./rbk-portfolio-performance-troubleshooting.md#cache-headers-missing) - Not configured or not applying
+- [Poor Speed Insights Scores](./rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90) - RES < 90, metrics in red zones
