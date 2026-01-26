@@ -20,23 +20,34 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 
 ## Source of truth
 
-- Detailed baseline metrics: [`portfolio-app/docs/performance-baseline.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md)
+- Baseline metrics (machine-readable): [`portfolio-app/docs/performance-baseline.yml`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.yml)
+- Baseline documentation (human-readable): [`portfolio-app/docs/performance-baseline.md`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/docs/performance-baseline.md)
 - Vercel Speed Insights (Core Web Vitals): [portfolio-app/speed-insights](https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights)
 - Vercel Web Analytics (traffic): [portfolio-app/analytics](https://vercel.com/bryce-seefieldts-projects/portfolio-app/analytics)
 - Vercel docs: [Speed Insights](https://vercel.com/docs/speed-insights) | [Web Analytics](https://vercel.com/docs/analytics)
+- Troubleshooting: [Performance Troubleshooting Runbook](../operations/runbooks/rbk-portfolio-performance-troubleshooting.md)
 
 ## Commands
 
-- Build with analyzer: `ANALYZE=true pnpm build`
+- Build with analyzer: `pnpm analyze:bundle` (sets `ANALYZE=true` and runs `pnpm build`)
 - Time build locally: `pnpm analyze:build`
+- Full verification with performance gates: `pnpm verify` (bundle size + cache checks)
+- Quick verification during dev: `pnpm verify:quick` (skips performance checks and all tests)
 - Check JS total: `find .next -name "*.js" -type f | xargs wc -c | tail -1`
 - Check cache header (local): `curl -I http://localhost:3000/projects/portfolio-app | grep Cache-Control`
 
 ## Expected signals
 
-- Cache-Control: `public, max-age=3600, stale-while-revalidate=86400`
+- Cache-Control (HTML): `no-store, must-revalidate` (App Router default)
+- ISR Revalidation: 3600 seconds (1 hour) via route segment config
+- Static Assets: Aggressive caching with long max-age
 - JS total baseline: ~27.8 MB (Phase 2); investigate >10% growth
 - Routes: project pages are SSG with 1h ISR
+
+**Note:** Next.js App Router returns `no-store` for HTML but caching still works via:
+- Route segment config (`export const revalidate = 3600`)
+- Vercel Edge Network caching (respects revalidate setting)
+- This is expected behavior and doesn't indicate a caching problem
 - Core Web Vitals targets (see [Vercel metrics guide](https://vercel.com/docs/speed-insights/metrics)):
   - LCP (Largest Contentful Paint) < 2.5s
   - INP (Interaction to Next Paint) < 200ms (primary responsiveness metric)
@@ -71,7 +82,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 
 ## Notes
 
-- CI enforces 10% JS growth threshold; update baseline only with explicit justification.
+- CI enforces 10% JS growth threshold; update baseline only with explicit justification. See [Bundle Size Regression troubleshooting](../operations/runbooks/rbk-portfolio-performance-troubleshooting.md#bundle-size-regression) if failing.
 - Turbopack is enabled; keep `turbopack: {}` in next.config.ts to avoid webpack conflicts when analyzer plugin is present.
 - Both `@vercel/analytics` (traffic) and `@vercel/speed-insights` (performance) are installed; they serve different purposes.
 
@@ -81,7 +92,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 
 1. Check Speed Insights → Real Experience Score
 2. If RES < 90 (orange/red): Click worst metric → identify problem routes/selectors
-3. Optimize identified pages/elements
+3. Optimize identified pages/elements (see [Poor Speed Insights Scores troubleshooting](../operations/runbooks/rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90))
 4. Redeploy → verify RES improves
 
 **"Which pages should I optimize first?"**

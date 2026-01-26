@@ -1278,11 +1278,12 @@ graph TB
 
 ```bash
 # Local verification (comprehensive)
-pnpm verify                    # Full verification (lint, format, typecheck, build)
-pnpm verify:quick              # Fast checks (skip build)
+pnpm verify                    # Full verification (format, lint, typecheck, secrets, registry, build, performance, tests)
+pnpm verify:quick              # Fast iteration (skips performance checks and all tests; still runs build)
 
 # Performance analysis
-pnpm run analyze:bundle        # Generate bundle size report
+pnpm analyze:bundle            # Generate bundle size report (ANALYZE=true pnpm build)
+pnpm analyze:build             # Time the production build locally
 
 # Health check (local dev)
 curl http://localhost:3000/api/health
