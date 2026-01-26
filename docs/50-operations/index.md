@@ -80,7 +80,7 @@ Ops docs are “correct” when:
 
 ## Runbooks & Procedures
 
-See **[Runbooks Index](./runbooks/README.md)** for operational procedures:
+See **[Runbooks Index](./runbooks/index.md)** for operational procedures:
 
 - **[General Incident Response](./runbooks/rbk-portfolio-incident-response.md)** — Framework for all incidents (severity levels, triage, postmortem)
 - **[Service Degradation](./runbooks/rbk-portfolio-service-degradation.md)** — Diagnose and resolve performance/availability issues (MTTR: 10 min)
