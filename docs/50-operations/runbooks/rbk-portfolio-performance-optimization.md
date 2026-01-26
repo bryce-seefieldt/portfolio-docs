@@ -69,22 +69,29 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 
 #### Step 5: Deploy and verify Speed Insights data collection
 
-- Deploy to preview (feature branch) or production (main branch).
-- Open Speed Insights dashboard: https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights
-- Expectation: Dashboard loads; within 5-10 minutes of traffic, Core Web Vitals charts should populate with Real Experience Score (RES).
-- **Key metrics to appear:** LCP < 2.5s, INP < 200ms, CLS < 0.1, FCP < 1.8s (FID < 100ms also tracked but legacy).
-- **If empty:** Wait for traffic. Need at least a few page views to generate data. Generate traffic by visiting home + project pages manually.
+**Status:** Speed Insights requires Vercel Pro plan or $10/month add-on on Hobby plan. This step is deferred until plan upgrade.
+
+- **Prerequisite:** Speed Insights must be enabled in Vercel project settings (requires paid add-on on Hobby plan)
+- **How to enable:** Vercel project → Settings → Speed Insights → Enable (pay-what-you-want, starts at $10/month)
+- Once enabled: Deploy to preview (feature branch) or production (main branch)
+- **Timeline:** Within 5-10 minutes of traffic, Core Web Vitals charts populate with Real Experience Score (RES)
+- **Key metrics:** LCP < 2.5s, INP < 200ms, CLS < 0.1, FCP < 1.8s
+- **If empty:** Wait for traffic (need ~50-100 page views for reliable P75 metrics)
 
 #### Step 6: Enable & review Speed Insights in Vercel dashboard
 
-- Path: Vercel → Project **portfolio-app** → **Speed Insights** → select environment (Production or Preview).
-- **If disabled:** Click **Enable Speed Insights** (available on all plans). This is a per-project toggle. Once enabled, redeploy or generate traffic to start collecting data.
-- **Select environment:** Pick Production (main branch) or Preview (feature branch) depending on what you want to review.
-- **View metrics:** Real Experience Score (RES) should be ≥ 90 (green). If < 90, click each metric to identify problem routes/selectors. See [Vercel metrics guide](https://vercel.com/docs/speed-insights/metrics) and [Poor Speed Insights Scores troubleshooting](./rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90).
-- **Adjust date range:** Use date picker (top-right) to focus on specific timeframe (e.g., last 7 days, since deployment).
-- **Confirm data:** If still empty after 10 minutes and traffic, verify: (a) Speed Insights enabled, (b) correct environment selected, (c) `@vercel/speed-insights` package installed, (d) `<SpeedInsights />` component in layout, (e) no ad/script blockers preventing data collection.
+**Status:** Deferred to post-Phase 4 when Speed Insights add-on is enabled.
 
-**Summary of Phase B:** Real-user performance verified. If RES ≥ 90, all metrics green, you've confirmed the deployment performs well for actual visitors.
+Once Speed Insights is enabled:
+- Path: Vercel → Project **portfolio-app** → **Speed Insights** → select environment (Production or Preview)
+- **Select environment:** Pick Production (main branch) or Preview (feature branch)
+- **View metrics:** Real Experience Score (RES) should be ≥ 90 (green). If < 90, click each metric to identify problem routes/selectors
+- **Adjust date range:** Use date picker (top-right) to focus on timeframe (e.g., last 7 days since deployment)
+- **Troubleshooting:** See [Vercel metrics guide](https://vercel.com/docs/speed-insights/metrics) and [Poor Speed Insights Scores troubleshooting](./rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90)
+
+**Summary of Phase B:** Deferred. Once Speed Insights enabled, follow steps above to verify real-user performance.
+
+**Note on Status 204 responses:** Script endpoint returning 204 No Content indicates Speed Insights is not enabled. This is expected until the feature is purchased and enabled in project settings.
 
 ---
 

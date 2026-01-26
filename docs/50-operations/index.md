@@ -78,6 +78,16 @@ Ops docs are “correct” when:
 - **Rollback missing:** deployment is documented but rollback is not → fix immediately.
 - **IR is theoretical:** no severity model or comms plan → add minimal viable IR scaffolding.
 
+## Runbooks & Procedures
+
+See **[Runbooks Index](./runbooks/README.md)** for operational procedures:
+
+- **[General Incident Response](./runbooks/rbk-portfolio-incident-response.md)** — Framework for all incidents (severity levels, triage, postmortem)
+- **[Service Degradation](./runbooks/rbk-portfolio-service-degradation.md)** — Diagnose and resolve performance/availability issues (MTTR: 10 min)
+- **[Deployment Failure Recovery](./runbooks/rbk-portfolio-deployment-failure.md)** — Detect and rollback failed deployments (MTTR: 5 min)
+
+For observability architecture and monitoring setup, see [Portfolio App Observability Documentation](../60-projects/portfolio-app/08-observability.md).
+
 ## References
 
 Operational changes must be synchronized with:

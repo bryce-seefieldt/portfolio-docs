@@ -25,8 +25,24 @@ Use this runbook when you encounter:
 - ⚠ **Local verification warnings** from `pnpm verify`
 - 🐌 **Slow build times** (> 4.2 seconds local, > 5 seconds CI)
 - 🚫 **Missing or incorrect Cache-Control headers**
-- 📉 **Poor Vercel Speed Insights scores** (RES < 90)
+- 📉 **Poor Vercel Speed Insights scores** (RES < 90) — **Note:** Speed Insights requires Vercel Pro plan or paid add-on ($10/month) on Hobby plan
 - 🔴 **Core Web Vitals in red zones** (LCP > 4s, INP > 500ms, CLS > 0.25)
+
+---
+
+## Speed Insights Paid Feature Note
+
+**Status:** Speed Insights is a **paid add-on on Vercel Hobby plan** ($10/month; included in Pro/Enterprise).
+
+**For Hobby plan users:**
+- `@vercel/speed-insights` package and `<SpeedInsights />` component are already implemented
+- Speed Insights script endpoint will return **204 No Content** until feature is enabled
+- To enable: Vercel project → Settings → Speed Insights → Enable (paid add-on)
+- This feature is **deferred until post-Phase 4** when budget allows
+
+**Verification:** Browser DevTools Network tab shows script endpoint status:
+- **204 No Content** = Not enabled (current state)
+- **200 OK with content** = Enabled and collecting data
 
 ---
 
