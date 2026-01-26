@@ -536,6 +536,7 @@ Click filter icon on any panel to:
 **[Performance Optimization Troubleshooting Runbook](./rbk-portfolio-performance-troubleshooting.md)**
 
 Common issues covered:
+
 - [Bundle Size Regression](./rbk-portfolio-performance-troubleshooting.md#bundle-size-regression) - Exceeds 10% growth threshold
 - [Slow Build Time](./rbk-portfolio-performance-troubleshooting.md#slow-build-time) - > 4.2s warning threshold
 - [Cache Headers Missing](./rbk-portfolio-performance-troubleshooting.md#cache-headers-missing) - Not configured or not applying

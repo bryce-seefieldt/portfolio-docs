@@ -2,7 +2,8 @@
 title: 'Runbook: Performance Optimization Troubleshooting'
 description: 'Diagnostic procedures and solutions for performance-related issues in the Portfolio App, including bundle size regressions, slow build times, and caching problems.'
 sidebar_position: 10
-tags: [runbook, troubleshooting, performance, optimization, debugging, stage-4-2]
+tags:
+  [runbook, troubleshooting, performance, optimization, debugging, stage-4-2]
 ---
 
 ## Purpose
@@ -34,6 +35,7 @@ Use this runbook when you encounter:
 ### Symptom
 
 **CI Failure:**
+
 ```
 ✗ Bundle size check FAILED
   Current: 32.5 MB | Baseline: 27.8 MB | Growth: +16.9%
@@ -41,6 +43,7 @@ Use this runbook when you encounter:
 ```
 
 **Local Verification:**
+
 ```
 ✗ FAIL  Total JavaScript  32.5 MB  27.8 MB  (+16.9%)
 ⚠ CI build will FAIL - bundle size exceeds 10% growth threshold
@@ -64,6 +67,7 @@ ANALYZE=true pnpm build
 ```
 
 **What to look for:**
+
 - Browser opens with interactive bundle visualization
 - Check **chunk sizes** in left panel (largest first)
 - Identify **unexpected dependencies** or **duplicates**
@@ -108,26 +112,29 @@ grep -r "import.*from.*moment" src/
 #### Solution 1: Remove or Replace Large Dependencies
 
 **If dependency is unnecessary:**
+
 ```bash
 pnpm remove <package-name>
 ```
 
 **If dependency can be replaced with lighter alternative:**
 
-| Heavy Package | Lighter Alternative | Savings |
-|---------------|---------------------|---------|
-| `moment` | `date-fns` | ~60 KB |
-| `lodash` (full) | `lodash-es` (tree-shakeable) | ~40 KB |
-| `axios` | `fetch` (native) | ~15 KB |
+| Heavy Package   | Lighter Alternative          | Savings |
+| --------------- | ---------------------------- | ------- |
+| `moment`        | `date-fns`                   | ~60 KB  |
+| `lodash` (full) | `lodash-es` (tree-shakeable) | ~40 KB  |
+| `axios`         | `fetch` (native)             | ~15 KB  |
 
 #### Solution 2: Use Specific Imports
 
 **Bad:**
+
 ```typescript
 import _ from 'lodash'; // Imports entire library
 ```
 
 **Good:**
+
 ```typescript
 import debounce from 'lodash/debounce'; // Only imports debounce
 ```
@@ -157,8 +164,8 @@ If bundle growth is **intentional and necessary** (e.g., new critical feature):
      bundle:
        total_js_mb: 32.5
        total_js_bytes: 34078720
-       size_warning_threshold_mb: 35.8  # 10% above new baseline
-       size_failure_threshold_mb: 39.0  # 20% above new baseline
+       size_warning_threshold_mb: 35.8 # 10% above new baseline
+       size_failure_threshold_mb: 39.0 # 20% above new baseline
      ```
    - `docs/performance-baseline.md` (update tables with new values)
 3. Update metadata:
@@ -188,6 +195,7 @@ pnpm verify
 ### Symptom
 
 **Local verification warning:**
+
 ```
 ⚠ SLOW  Total Build Time  5.2s  3.5s
 Build time (5.2s) exceeds warning threshold (4.2s)
@@ -245,15 +253,10 @@ pnpm analyze:build 2>&1 | tee build-log.txt
 ```json
 {
   "include": [
-    "src/**/*",  // Good: Specific to src
-    "!src/**/*.test.ts"  // Good: Excludes test files
+    "src/**/*", // Good: Specific to src
+    "!src/**/*.test.ts" // Good: Excludes test files
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "out",
-    "build"
-  ]
+  "exclude": ["node_modules", ".next", "out", "build"]
 }
 ```
 
@@ -266,14 +269,14 @@ If many project pages:
 
 export async function generateStaticParams() {
   const projects = await getProjects();
-  
+
   // Before: Generate all pages
   // return projects.map(p => ({ slug: p.slug }));
-  
+
   // After: Generate only published/featured pages
   return projects
-    .filter(p => p.published && p.featured)
-    .map(p => ({ slug: p.slug }));
+    .filter((p) => p.published && p.featured)
+    .map((p) => ({ slug: p.slug }));
 }
 ```
 
@@ -316,6 +319,7 @@ time pnpm build
 ### Symptom
 
 **Local verification failure:**
+
 ```
 ✗ Missing  Cache-Control Header
 Expected: public, max-age=3600, stale-while-revalidate=86400
@@ -338,6 +342,7 @@ grep -A 10 "headers" next.config.ts
 ```
 
 **Should contain:**
+
 ```typescript
 async headers() {
   return [
@@ -387,7 +392,7 @@ If missing from `next.config.ts`:
 // next.config.ts
 const config: NextConfig = {
   // ... existing config
-  
+
   async headers() {
     return [
       {
@@ -427,15 +432,18 @@ If headers are being overridden:
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
-  
+
   // Don't override Cache-Control for static assets
   if (!request.nextUrl.pathname.startsWith('/_next')) {
     // Add headers only if not already set
     if (!response.headers.has('Cache-Control')) {
-      response.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
+      response.headers.set(
+        'Cache-Control',
+        'public, max-age=3600, stale-while-revalidate=86400'
+      );
     }
   }
-  
+
   return response;
 }
 ```
@@ -461,6 +469,7 @@ curl -I http://localhost:3000/projects/portfolio-app
 ### Symptom
 
 **Local verification warning:**
+
 ```
 ⚠ Mismatch  Cache-Control Header
 Found:    public, max-age=7200, stale-while-revalidate=86400
@@ -489,7 +498,8 @@ If mismatch is **unintentional**, standardize across all routes:
 
 ```typescript
 // next.config.ts - Single source of truth for cache headers
-const CACHE_CONTROL_VALUE = 'public, max-age=3600, stale-while-revalidate=86400';
+const CACHE_CONTROL_VALUE =
+  'public, max-age=3600, stale-while-revalidate=86400';
 
 export default {
   async headers() {
@@ -510,6 +520,7 @@ export default {
 ### Symptom
 
 Vercel Speed Insights dashboard shows:
+
 - Real Experience Score (RES) < 90 (orange/red)
 - Core Web Vitals in warning/poor zones
 
@@ -518,6 +529,7 @@ Vercel Speed Insights dashboard shows:
 #### Step 1: Identify Worst Metric
 
 In Speed Insights dashboard:
+
 1. Note which metric is **red or orange** (LCP, INP, CLS, FCP)
 2. Click that metric to see route breakdown
 3. Identify highest-traffic routes with poor scores
@@ -541,11 +553,13 @@ In Speed Insights dashboard:
 #### LCP (Largest Contentful Paint) > 2.5s
 
 **Root causes:**
+
 - Large, unoptimized images
 - Slow server response (TTFB)
 - Render-blocking resources
 
 **Solutions:**
+
 ```typescript
 // Use Next.js Image component with optimization
 import Image from 'next/image';
@@ -563,11 +577,13 @@ import Image from 'next/image';
 #### INP (Interaction to Next Paint) > 200ms
 
 **Root causes:**
+
 - Heavy JavaScript execution on interaction
 - Blocking event handlers
 - Large client-side state updates
 
 **Solutions:**
+
 ```typescript
 // Debounce expensive operations
 import { debounce } from 'lodash';
@@ -583,11 +599,13 @@ element.addEventListener('scroll', handler, { passive: true });
 #### CLS (Cumulative Layout Shift) > 0.1
 
 **Root causes:**
+
 - Images without dimensions
 - Ads/embeds loading dynamically
 - Fonts causing layout shift (FOUT/FOIT)
 
 **Solutions:**
+
 ```typescript
 // Always specify image dimensions
 <Image
@@ -606,6 +624,7 @@ element.addEventListener('scroll', handler, { passive: true });
 ### Verification
 
 After fixes:
+
 1. Deploy to Preview environment
 2. Generate traffic (visit affected pages 10+ times)
 3. Wait 10-15 minutes for data
@@ -672,6 +691,7 @@ graph TD
 ### Error: "Bundle size check FAILED"
 
 **Full message:**
+
 ```
 ✗ CI build will FAIL - bundle size exceeds 10% growth threshold
   Current: 32.5 MB | Threshold: 30.6 MB
@@ -686,6 +706,7 @@ graph TD
 ### Error: "Build time exceeds warning threshold"
 
 **Full message:**
+
 ```
 ⚠ Build time (5.2s) exceeds warning threshold (4.2s)
 ```
@@ -695,6 +716,7 @@ graph TD
 ### Error: "Cache-Control header not found"
 
 **Full message:**
+
 ```
 ✗ Cache-Control header not found
   Expected header: public, max-age=3600, stale-while-revalidate=86400
@@ -770,21 +792,21 @@ If issues persist after following this guide:
 
 ### Performance Thresholds
 
-| Metric | Baseline | Warning (+20%) | Failure (+20%) |
-|--------|----------|----------------|----------------|
-| Build Time | 3.5s | 4.2s | 4.2s |
-| Bundle Size | 27.8 MB | 30.6 MB (+10%) | 33.4 MB (+20%) |
-| .next Size | 337 MB | ~405 MB | ~405 MB |
+| Metric      | Baseline | Warning (+20%) | Failure (+20%) |
+| ----------- | -------- | -------------- | -------------- |
+| Build Time  | 3.5s     | 4.2s           | 4.2s           |
+| Bundle Size | 27.8 MB  | 30.6 MB (+10%) | 33.4 MB (+20%) |
+| .next Size  | 337 MB   | ~405 MB        | ~405 MB        |
 
 ### Core Web Vitals Targets
 
 | Metric | Good (Green) | Needs Improvement (Orange) | Poor (Red) |
-|--------|--------------|----------------------------|------------|
-| LCP | < 2.5s | 2.5s - 4.0s | > 4.0s |
-| INP | < 200ms | 200ms - 500ms | > 500ms |
-| CLS | < 0.1 | 0.1 - 0.25 | > 0.25 |
-| FCP | < 1.8s | 1.8s - 3.0s | > 3.0s |
-| TTFB | < 800ms | 800ms - 1800ms | > 1800ms |
+| ------ | ------------ | -------------------------- | ---------- |
+| LCP    | < 2.5s       | 2.5s - 4.0s                | > 4.0s     |
+| INP    | < 200ms      | 200ms - 500ms              | > 500ms    |
+| CLS    | < 0.1        | 0.1 - 0.25                 | > 0.25     |
+| FCP    | < 1.8s       | 1.8s - 3.0s                | > 3.0s     |
+| TTFB   | < 800ms      | 800ms - 1800ms             | > 1800ms   |
 
 ### Useful Commands
 

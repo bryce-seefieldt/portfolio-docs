@@ -25,7 +25,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 - Vercel Speed Insights (Core Web Vitals): [portfolio-app/speed-insights](https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights)
 - Vercel Web Analytics (traffic): [portfolio-app/analytics](https://vercel.com/bryce-seefieldts-projects/portfolio-app/analytics)
 - Vercel docs: [Speed Insights](https://vercel.com/docs/speed-insights) | [Web Analytics](https://vercel.com/docs/analytics)
-- Troubleshooting: [Performance Troubleshooting Runbook](../operations/runbooks/rbk-portfolio-performance-troubleshooting.md)
+- Troubleshooting: [Performance Troubleshooting Runbook](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)
 
 ## Commands
 
@@ -45,6 +45,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 - Routes: project pages are SSG with 1h ISR
 
 **Note:** Next.js App Router returns `no-store` for HTML but caching still works via:
+
 - Route segment config (`export const revalidate = 3600`)
 - Vercel Edge Network caching (respects revalidate setting)
 - This is expected behavior and doesn't indicate a caching problem
@@ -69,7 +70,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 - Ensure recent preview/prod deploy; allow time for ingestion.
 - If empty: verify Speed Insights enabled, hit pages (home + project) in that environment, wait a few minutes, refresh.
 - Package: `@vercel/speed-insights` with `<SpeedInsights />` component in layout.
-- **Deep dive:** See [runbook dashboard guide](docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md#reading-the-speed-insights-dashboard) for detailed interpretation instructions.
+- **Deep dive:** See [runbook dashboard guide](docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md#monitoring--analysis-guides) for detailed interpretation instructions.
 
 ## Web Analytics (Traffic & Behavior)
 
@@ -78,11 +79,11 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 - Key panels: Pages, Routes, Referrers, Countries, Browsers, Devices
 - **Use case:** Identify high-traffic pages → prioritize optimization in Speed Insights
 - Package: `@vercel/analytics` with `<Analytics />` component in layout.
-- **Deep dive:** See [runbook dashboard guide](docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md#reading-the-web-analytics-dashboard) for detailed usage instructions.
+- **Deep dive:** See [runbook dashboard guide](docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md#monitoring--analysis-guides) for detailed usage instructions.
 
 ## Notes
 
-- CI enforces 10% JS growth threshold; update baseline only with explicit justification. See [Bundle Size Regression troubleshooting](../operations/runbooks/rbk-portfolio-performance-troubleshooting.md#bundle-size-regression) if failing.
+- CI enforces 10% JS growth threshold; update baseline only with explicit justification. See [Bundle Size Regression troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md#bundle-size-regression) if failing.
 - Turbopack is enabled; keep `turbopack: {}` in next.config.ts to avoid webpack conflicts when analyzer plugin is present.
 - Both `@vercel/analytics` (traffic) and `@vercel/speed-insights` (performance) are installed; they serve different purposes.
 
@@ -92,7 +93,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 
 1. Check Speed Insights → Real Experience Score
 2. If RES < 90 (orange/red): Click worst metric → identify problem routes/selectors
-3. Optimize identified pages/elements (see [Poor Speed Insights Scores troubleshooting](../operations/runbooks/rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90))
+3. Optimize identified pages/elements (see [Poor Speed Insights Scores troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90))
 4. Redeploy → verify RES improves
 
 **"Which pages should I optimize first?"**

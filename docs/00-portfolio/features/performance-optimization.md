@@ -46,7 +46,7 @@ How it proves enterprise thinking: Shows deliberate optimization, not reactive f
 
 **Enterprise thinking:** Quality gate that reviewers recognize; not subjective, measurable
 
-**Troubleshooting:** If CI fails or local verification shows bundle warnings, see [Bundle Size Regression Guide](../../operations/runbooks/rbk-portfolio-performance-troubleshooting.md#bundle-size-regression)
+**Troubleshooting:** If CI fails or local verification shows bundle warnings, see [Bundle Size Regression Guide](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md#bundle-size-regression)
 
 ## Monitoring & Documentation
 
@@ -79,8 +79,9 @@ Step-by-step procedures for analyzing and fixing performance issues
 **Why:** Demonstrates operational maturity; not "we ship it and hope"
 
 **Resources:**
-- [Performance Optimization Runbook](../../operations/runbooks/rbk-portfolio-performance-optimization.md) - Step-by-step verification procedures
-- [Performance Troubleshooting Guide](../../operations/runbooks/rbk-portfolio-performance-troubleshooting.md) - Diagnostic procedures and solutions for common issues
+
+- [Performance Optimization Runbook](/docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md) - Step-by-step verification procedures
+- [Performance Troubleshooting Guide](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md) - Diagnostic procedures and solutions for common issues
 
 ## Rationale
 
