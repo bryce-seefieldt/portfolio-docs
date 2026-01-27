@@ -38,9 +38,9 @@ graph LR
     A["Your Code"] --> B["PR Review"]
     B --> C["Staging Validation"]
     C --> D["Production"]
-    
+
     E["✓ Tests\n✓ Build\n✓ Lint\n✓ Security"]
-    
+
     style A fill:#e1f5ff
     style B fill:#fff3e0
     style C fill:#f3e5f5
@@ -163,15 +163,15 @@ graph TD
     D --> E["Phase 4.3: Health Check<br/>Verify staging is healthy"]
     E --> F["Deploy to Production"]
     F --> G["Continuous Monitoring"]
-    
+
     G --> H["Phase 4.2: Monitor Performance"]
     G --> I["Phase 4.3: Monitor Health 24/7"]
     G --> J["Phase 4.4: Monitor Security Threats"]
-    
+
     H --> K["Instant Alerts on Issues"]
     I --> K
     J --> K
-    
+
     style A fill:#e3f2fd
     style B fill:#fff3e0
     style C fill:#fce4ec
