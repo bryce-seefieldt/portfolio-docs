@@ -2,7 +2,17 @@
 title: 'Performance Optimization Briefing (Portfolio App)'
 description: 'Simple and concise explanation of bundle analysis, caching, Vercel Speed Insights (Core Web Vitals), and Web Analytics for the Portfolio App.'
 sidebar_position: 1
-tags: [features, brief, performance, caching, bundle, speed-insights, analytics, stage-4-2]
+tags:
+  [
+    features,
+    brief,
+    performance,
+    caching,
+    bundle,
+    speed-insights,
+    analytics,
+    stage-4-2,
+  ]
 ---
 
 ## Summary
