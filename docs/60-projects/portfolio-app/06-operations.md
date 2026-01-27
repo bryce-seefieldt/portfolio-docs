@@ -34,6 +34,24 @@ Document how the Portfolio App is operated like a production service:
 - Vercel preview/prod deployments are functioning
 - quality gates are enforced in CI and (optionally) promotion checks
 
+## Security Operations & Incident Response (Stage 4.4)
+
+Security incidents follow structured runbooks for deterministic response:
+
+**Runbooks:**
+
+- **[Dependency Vulnerability Response](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)** — Detect, triage, and remediate CVEs with MTTR targets (Critical: 24h, High: 48h, Medium: 2 weeks, Low: 4 weeks)
+- **[Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)** — Contain and investigate suspected secret leaks; rotate credentials; prevent recurrence
+
+**Policies:**
+
+- **[Security Policies & Governance](/docs/40-security/security-policies.md)** — Formal policies for dependency audit, secrets management, security headers, and incident response
+- **[Risk Register](/docs/40-security/risk-register.md)** — Inventory of known risks with severity, mitigations, and acceptance status
+
+**MTTR Targets & Escalation:**
+
+If MTTR targets are at risk, escalate to team lead immediately. Document all incidents in postmortem template (see runbooks).
+
 ## Quick Reference: Three-Tier Deployment Workflow
 
 **Local Development → PR Review → Staging Validation → Production**
@@ -154,6 +172,28 @@ Responsibilities:
   - Confirm page views register for `/`, `/projects`, and at least one project slug.
   - Verify no personally identifiable information is shown (aggregate metrics only).
 - If analytics must be disabled temporarily, remove `<Analytics />` from `src/app/layout.tsx` and redeploy.
+
+### Security Monitoring (Stage 4.4)
+
+**Dependency Vulnerability Monitoring:**
+
+- Dependabot scans weekly; PRs created for all available updates
+- GitHub Security Alerts notify immediately of CVEs
+- `pnpm audit` policy enforced in CI
+- See [Dependency Vulnerability Runbook](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md) for response procedures
+
+**Security Headers & CSP Monitoring:**
+
+- Verify headers present: `curl -I https://production-domain.com/`
+- Monitor CSP violations in browser console (DevTools)
+- Review logs for unexpected external script/style injection attempts
+- Quarterly review CSP policy; upgrade path to nonces/hashes documented
+
+**Secrets Scanning:**
+
+- TruffleHog runs in CI to detect leaked credentials
+- Log scrubbing prevents secrets in output
+- Pre-commit hooks recommended for local validation
 
 ### Pre-deploy local validation (developer workflow)
 

@@ -25,7 +25,7 @@ Describe the Portfolio App architecture at a level that is:
 ### Out of scope
 
 - CI/CD implementation details (see `deployment.md`)
-- security threat enumeration (see `security.md`)
+- security threat enumeration (see [threat-models/portfolio-app-threat-model-v2.md](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md))
 
 ## Prereqs / Inputs
 

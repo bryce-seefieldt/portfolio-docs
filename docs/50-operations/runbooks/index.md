@@ -191,6 +191,20 @@ Runbooks should be your first reference during:
 - Core Web Vitals degradation
 - Proactive performance improvement initiatives
 
+### Security Incident Runbooks
+
+| Runbook                                                                              | Purpose                                                        | MTTR Target              | Severity         |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------- | ------------------------ | ---------------- |
+| **[Dependency Vulnerability Response](./rbk-portfolio-dependency-vulnerability.md)** | Detect, triage, and remediate CVEs in npm dependencies         | Critical: 24h, High: 48h | SEV-2 (High)     |
+| **[Secrets Incident Response](./rbk-portfolio-secrets-incident.md)**                 | Contain and investigate suspected secret leaks or exfiltration | Critical: ≤5min          | SEV-1 (Critical) |
+
+**When to use:**
+
+- CVE alert or security advisory on a dependency
+- Suspected credentials, tokens, or API keys committed to repo
+- Third-party report of potential vulnerability
+- Detected by secrets scanning or security audit
+
 ### Operational Readiness
 
 | Document                                                                              | Purpose                                         | Audience                    |
@@ -213,6 +227,8 @@ Match your scenario to the appropriate runbook:
 | ❓ Unclear incident, need framework        | [General Incident Response](./rbk-portfolio-incident-response.md)                 |
 | 🔍 Want to understand monitoring setup     | [Observability Architecture](../../60-projects/portfolio-app/08-observability.md) |
 | ⚡ Want to improve performance proactively | [Performance Optimization](./rbk-portfolio-performance-optimization.md)           |
+| 🔐 CVE alert or dependency vulnerability   | [Dependency Vulnerability Response](./rbk-portfolio-dependency-vulnerability.md)  |
+| 🚨 Suspected secret leak in repo           | [Secrets Incident Response](./rbk-portfolio-secrets-incident.md)                  |
 
 ---
 
@@ -233,6 +249,8 @@ Match your scenario to the appropriate runbook:
 
 **MTTR Target:** 15 minutes
 
+**If Secrets Incident:** Execute [Secrets Incident Response](./rbk-portfolio-secrets-incident.md) immediately; MTTR ≤5 min for critical secrets
+
 ### High Severity (SEV-2) — Urgent Response
 
 **Symptoms:** Significant user impact, core features broken, partial outage
@@ -241,11 +259,13 @@ Match your scenario to the appropriate runbook:
 
 1. **Notify on-call engineer via Slack + PagerDuty**
 2. **Execute runbook:** [Service Degradation](./rbk-portfolio-service-degradation.md) or [Deployment Failure](./rbk-portfolio-deployment-failure.md)
-3. **Target resolution:** &lt;1 hour
+3. **Target resolution:** less than 1 hour
 4. **Post updates every 10 minutes**
 5. **Schedule postmortem within 48 hours**
 
 **MTTR Target:** 1 hour
+
+**If Dependency CVE (High):** Execute [Dependency Vulnerability Response](./rbk-portfolio-dependency-vulnerability.md); MTTR 48 hours
 
 ### Medium Severity (SEV-3) — Normal Response
 

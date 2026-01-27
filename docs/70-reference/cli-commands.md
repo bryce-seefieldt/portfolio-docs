@@ -7,6 +7,14 @@ tags: [cli, wsl2, powershell, linux]
 
 ## Network
 
+### Kill Process
+
+This command terminates all processes listening on TCP port 3000. The `fuser` utility identifies which processes are using a specified file or network port, and the `-k` flag kills those processes. Useful for freeing up port 3000 when a process won't exit gracefully.
+
+```bash
+fuser -k 3000/tcp
+```
+
 ### List Sockets
 
 This command lists all listening TCP network sockets along with their associated process information, then filters the results to show only those using port 3000. Useful for identifying which process is using port 3000 in a WSL environment.

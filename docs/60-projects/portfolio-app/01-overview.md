@@ -115,6 +115,20 @@ Together, these components embed evidence verification into the user experience,
 
 See [Architecture — Evidence Visualization Layer](/docs/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer-stage-32) for full details.
 
+### Security Posture Hardening (Stage 4.4)
+
+Stage 4.4 extends the portfolio app's security posture with OWASP-recommended HTTP security headers, Content Security Policy enforcement, threat model extension to cover deployment and runtime risks, and formal dependency audit policy. This demonstrates security-first delivery discipline.
+
+**Key implementations:**
+
+- OWASP security headers (X-Frame-Options, X-Content-Type-Options, CSP) configured in `next.config.ts`
+- Content Security Policy with `default-src 'self'` to prevent XSS
+- Environment variable security contract (no secrets in `NEXT_PUBLIC_*`)
+- Threat model v2 covering deployment, runtime, and supply chain threats
+- Formal dependency vulnerability audit policy with MTTR targets
+
+See [Security Hardening Documentation](/docs/60-projects/portfolio-app/09-security-hardening.md) for implementation details.
+
 ## Validation / Expected outcomes
 
 - A third-party reviewer can quickly verify:

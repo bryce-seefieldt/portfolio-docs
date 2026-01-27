@@ -88,3 +88,23 @@ Security posture changes must be reflected in:
 - ADRs (`10-architecture/adr/`) when architectural impact exists
 - pipeline documentation (`30-devops-platform/`) when enforcement is automated
 - runbooks (`50-operations/`) if incidents, alerts, or response procedures change
+
+## Stage 4.4 Security Posture Deepening
+
+**New Documentation (Stage 4.4):**
+
+- **[Threat Model v2](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)** — Extended threat model covering deployment surface and runtime misconfiguration risks with STRIDE analysis, residual risks, and mitigation summary
+- **[Risk Register](/docs/40-security/risk-register.md)** — Inventory of known security risks with severity, mitigations, and acceptance status; quarterly review schedule
+- **[Security Policies & Governance](/docs/40-security/security-policies.md)** — Formal policies for dependency audit, secrets management, security headers, and incident response
+
+**Operational & Implementation References:**
+
+- **[Security Hardening Implementation](/docs/60-projects/portfolio-app/09-security-hardening.md)** — OWASP security headers, CSP policy, environment variable security, and testing procedures
+- **[Dependency Vulnerability Runbook](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)** — Procedures for detecting, triaging, and remediating CVEs with MTTR targets
+- **[Secrets Incident Runbook](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)** — Deterministic response to suspected secret leaks or exfiltration
+
+**Portfolio App Dossier References:**
+
+- [Overview — Security Posture Hardening](/docs/60-projects/portfolio-app/01-overview.md#security-posture-hardening-stage-44)
+- [Architecture — Security References](/docs/60-projects/portfolio-app/02-architecture.md#out-of-scope)
+- [Operations — Security Monitoring](/docs/60-projects/portfolio-app/06-operations.md#security-operations--incident-response-stage-44)
