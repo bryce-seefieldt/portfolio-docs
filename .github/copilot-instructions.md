@@ -106,8 +106,8 @@ This docs platform is itself a **first-class project** (and the first project do
   - Docs repo source: `NEXT_PUBLIC_DOCS_GITHUB_URL + "blob/main/docs/10-architecture/adr/adr-0011-data-driven-project-registry.md"`
   - App repo source: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/registry.ts`
 
-**Phase 3 status:** Complete (3.1–3.6). Phase 4 Stages 4.1–4.3 complete; Stage 4.4 (Security Posture Deepening) in planning.
-**Current work:** Stage 4.3 observability documentation complete (health check guide, runbooks). Stage 4.4 focuses on security threat model extension, risk register, CSP policy documentation, and dependency audit runbook.
+**Project Status:** Complete Phase 3 (3.1–3.6). Phase 4 Stages 4.1–4.4 complete; Stage 4.5 (UX, Content, Advanced Features) ready to begin.
+**Current work:** Stage 4.4 security posture deepening complete. App PR #61 (security headers, CSP, env documentation) and Docs PR #67 (threat model v2, risk register, policies, security hardening guide, dependency vulnerability runbook, phase-4-summary) both open and ready for review/merge. Both builds passing. Next: Stage 4.5 UX/content focus.
 
 ## Relationship to the future Portfolio project
 

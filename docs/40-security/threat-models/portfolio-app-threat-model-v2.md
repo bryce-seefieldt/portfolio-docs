@@ -51,8 +51,8 @@ Stage 4.4 extends the Portfolio App threat model to include deployment surface a
 
 ## References and Validation
 
-- Risk register: [docs/40-security/risk-register.md](../risk-register.md)
-- Security policies: [docs/40-security/security-policies.md](../security-policies.md)
-- Security hardening guide: [docs/60-projects/portfolio-app/09-security-hardening.md](../../60-projects/portfolio-app/09-security-hardening.md)
-- Dependency vulnerability runbook: [docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md](../../50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)
+- Risk register: [docs/40-security/risk-register.md](docs/40-security/risk-register.md)
+- Security policies: [docs/40-security/security-policies.md](docs/40-security/security-policies.md)
+- Security hardening guide: [Security hardening dossier](/docs/60-projects/portfolio-app/04-security.md)
+- Dependency vulnerability runbook: [docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md](docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)
 - Validate headers/CSP: `curl -I https://example.com/` and browser DevTools (no CSP violations)

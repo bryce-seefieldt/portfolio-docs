@@ -127,7 +127,32 @@ Stage 4.4 extends the portfolio app's security posture with OWASP-recommended HT
 - Threat model v2 covering deployment, runtime, and supply chain threats
 - Formal dependency vulnerability audit policy with MTTR targets
 
-See [Security Hardening Documentation](/docs/60-projects/portfolio-app/09-security-hardening.md) for implementation details.
+See [Security Hardening Documentation](/docs/60-projects/portfolio-app/04-security.md) for implementation details.
+
+### User Experience & SEO Optimization (Stage 4.5)
+
+Stage 4.5 enhances the portfolio app's user experience with dark mode theming, scroll animations, and comprehensive SEO metadata for maximum discoverability and professional polish.
+
+**Key implementations:**
+
+- **Dark mode theme system**: Class-based dark/light toggle with localStorage persistence, system preference detection, WCAG AA contrast compliance
+- **Scroll animations**: Intersection Observer-based fade-in animations respecting `prefers-reduced-motion`
+- **Back-to-top button**: Smooth scroll navigation for long pages
+- **SEO metadata**: Complete Open Graph and Twitter Card tags for rich social previews
+- **JSON-LD structured data**: Person and WebSite schemas for semantic search engine understanding
+- **Bidirectional evidence linking**: Portfolio claims linked to documentation proof
+
+See comprehensive documentation in domain sections:
+
+- **Engineering Standards:** [UX Design System](../../20-engineering/ux-design-system.md) - Design system standards, component patterns, navigation architecture, accessibility standards
+- **Reference:** [Theme System Reference](../../70-reference/theme-system-reference.md) - CSS variables catalog, theme switching mechanism, troubleshooting
+- **Reference:** [SEO & Social Metadata Reference](../../70-reference/seo-metadata-guide.md) - Metadata architecture, structured data, rich previews, optimization checklist
+
+See architectural decisions (ADRs):
+
+- [ADR-0014: Class-Based Dark Mode with CSS Variables](/docs/10-architecture/adr/adr-0014-class-based-dark-mode.md) - Class-based theming rationale
+- [ADR-0015: Open Graph + Twitter Cards + JSON-LD](/docs/10-architecture/adr/adr-0015-metadata-strategy.md) - Tri-layer metadata strategy
+- [ADR-0016: Scroll Animation Strategy (Intersection Observer)](/docs/10-architecture/adr/adr-0016-scroll-animations.md) - Performance-first animations
 
 ## Validation / Expected outcomes
 

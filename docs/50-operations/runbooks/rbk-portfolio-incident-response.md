@@ -492,7 +492,7 @@ gh issue create \
 - [Deployment Failure](./rbk-portfolio-deployment-failure.md)
 - [Performance Optimization](./rbk-portfolio-performance-optimization.md)
 - [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)
-- [Observability Architecture](../../60-projects/portfolio-app/08-observability.md)
+- [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md)
 
 ---
 

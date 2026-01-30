@@ -582,7 +582,7 @@ vercel ls | head -5
 ### External Links
 
 - [Vercel Deployments](https://vercel.com/bryce-seefieldts-projects/portfolio-app/deployments)
-- [Observability Documentation](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/60-projects/portfolio-app/08-observability.md)
+- [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md)
 
 ### Related Runbooks
 

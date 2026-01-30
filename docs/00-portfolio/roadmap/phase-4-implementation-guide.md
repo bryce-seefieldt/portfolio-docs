@@ -667,186 +667,22 @@ pnpm audit
 
 ---
 
-## STAGE 4.5: UX, Content Credibility & Advanced Features (6–8 hours)
+## STAGE 4.5: UX, Content Credibility & Advanced Features (4–5 hours)
 
-**What:** Enhance portfolio UX with richer content (blog/case studies), interactive features (contact form), improved navigation/search, SEO optimization, theming, and animations—while ensuring all claims link to verifiable evidence.
+**What:** Enhance portfolio UX with improved navigation/search, SEO optimization, theming, and animations—while ensuring all claims link to verifiable evidence. Scope reduced from original plan to focus on Phase 4 delivery priorities; blog/case studies and contact form deferred to Phase 5.
 
 **Key Files/Components:**
 
 - Portfolio App:
-  - `src/app` (new or enhanced pages)
-  - `src/components` (new components for blog, case studies, contact form)
-  - `src/data` (new data files for blog/case study entries)
-  - `next.config.ts` (SEO configuration)
   - `src/app/layout.tsx` (enhanced metadata + theme setup)
-
-- New Content:
-  - Blog/case study MDX files (if using MDX) or database if using CMS
-  - Contact form with email integration
+  - `src/components` (new components for navigation, theme toggle, animations)
+  - `next.config.ts` (SEO configuration)
 
 - Documentation:
   - UX architecture documentation
   - SEO strategy documentation
-  - Content management runbook
 
 **Design Specifications:**
-
-### Content Types & Enhancements
-
-#### 1. Case Studies / Blog (Rich Content)
-
-**Purpose:** Showcase project depth and personality; demonstrate communication skills.
-
-**Approach Options:**
-
-**Option A: MDX-Based (Git-Backed, Recommended)**
-
-- Blog posts as `.mdx` files in `src/content/blog/` and `src/content/case-studies/`
-- Front matter with metadata (title, date, tags, excerpt)
-- Route: `/blog/[slug]` and `/case-studies/[slug]`
-- No external CMS; everything in Git
-
-**Option B: Headless CMS (Contentful, Sanity, etc.)**
-
-- More flexible content management UI
-- Risk: External dependency; requires careful secret management
-- Not recommended for Phase 4 (keep it simple)
-
-**Recommendation for Phase 4:** Start with MDX; keep content in Git.
-
-**Example Structure:**
-
-```
-src/content/
-├── blog/
-│   ├── 2026-01-24-nextjs-16-setup.mdx
-│   ├── 2026-01-25-tailwind-v4-migration.mdx
-│   └── ...
-├── case-studies/
-│   ├── portfolio-app.mdx
-│   ├── portfolio-docs.mdx
-│   └── ...
-└── metadata.ts (index of all content files)
-```
-
-#### 2. Interactive Contact Form
-
-**Purpose:** Demonstrate full-stack capability (form handling, email integration, validation).
-
-**Implementation:**
-
-```typescript
-// src/app/contact/page.tsx
-"use client";
-
-import { useState } from "react";
-
-export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      if (response.ok) {
-        setStatus("success");
-        setForm({ name: "", email: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch (error) {
-      setStatus("error");
-    }
-  };
-
-  return (
-    <div>
-      <h1>Contact</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          required
-        />
-        <textarea
-          placeholder="Message"
-          value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          required
-        />
-        <button type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Sending..." : "Send"}
-        </button>
-      </form>
-      {status === "success" && <p>Message sent!</p>}
-      {status === "error" && <p>Error sending message. Try again.</p>}
-    </div>
-  );
-}
-```
-
-```typescript
-// src/app/api/contact/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-
-export async function POST(request: NextRequest) {
-  const { name, email, message } = await request.json();
-
-  // Validate input
-  if (!name || !email || !message) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
-  }
-
-  // Anti-spam: Check for patterns (basic)
-  if (message.length > 5000 || name.length > 100) {
-    return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
-  }
-
-  try {
-    // Send email via SendGrid or similar service
-    // const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
-    //   method: "POST",
-    //   headers: { Authorization: `Bearer ${process.env.SENDGRID_API_KEY}` },
-    //   body: JSON.stringify({
-    //     personalizations: [{ to: [{ email: "your-email@example.com" }] }],
-    //     from: { email: "noreply@portfolio.example.com" },
-    //     subject: `New message from ${name}`,
-    //     content: [{ type: "text/plain", value: message }],
-    //     reply_to: { email },
-    //   }),
-    // });
-
-    // For Phase 4, placeholder: Log to Vercel console
-    console.log(
-      `[CONTACT FORM] From: ${email}, Name: ${name}, Message: ${message.slice(0, 100)}...`
-    );
-
-    return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    console.error('Contact form error:', error);
-    return NextResponse.json({ error: 'Failed to send' }, { status: 500 });
-  }
-}
-```
-
-#### 3. Enhanced Navigation & Search
 
 - Add sticky navbar with logo + nav links
 - Add "back to top" button on long pages
@@ -934,48 +770,40 @@ export const metadata: Metadata = {
 
 **Implementation:**
 
-- Portfolio App: Evidence links in project cards, contact page, CV
+- Portfolio App: Evidence links in project cards, CV
 - Documentation: Cross-links back to portfolio app features
 
 **Example:**
 
 - Portfolio App: "See my security posture → /docs/security/threat-models/portfolio-app-threat-model-v2"
-- Docs: "This threat model is explained in the portfolio app under the Security section"
+- Docs: "This threat model is referenced in the portfolio app's evidence section"
 
 **Files to Create/Modify:**
 
-- [ ] `src/app/blog/` (NEW: Blog route and pages)
-- [ ] `src/app/case-studies/` (NEW: Case studies route and pages)
-- [ ] `src/app/contact/page.tsx` (enhance or update)
-- [ ] `src/app/api/contact/route.ts` (NEW: Contact form endpoint)
-- [ ] `src/content/blog/` (NEW: Blog post MDX files)
-- [ ] `src/content/case-studies/` (NEW: Case study MDX files)
-- [ ] `src/content/metadata.ts` (NEW: Content index)
 - [ ] `src/components/ThemeToggle.tsx` (NEW: Dark mode toggle)
 - [ ] `src/components/NavigationEnhanced.tsx` (NEW: Enhanced sticky navbar)
 - [ ] `src/app/layout.tsx` (enhance with SEO, theme toggle)
 - [ ] `next.config.ts` (SEO configuration)
-- [ ] `docs/60-projects/portfolio-app/09-content-strategy.md` (NEW: UX/Content strategy)
+- [ ] `docs/60-projects/portfolio-app/09-ux-strategy.md` (NEW: UX strategy & navigation)
 - [ ] `docs/60-projects/portfolio-app/10-seo-strategy.md` (NEW: SEO strategy)
 
 **Success check:**
 
-- [ ] Blog/case study routes render correctly
-- [ ] Contact form submits successfully (logs to Vercel console in Phase 4)
 - [ ] Dark mode toggle works and persists to localStorage
 - [ ] Enhanced navigation is sticky and accessible
 - [ ] SEO metadata is complete (title, description, OG, JSON-LD)
+- [ ] Theming system functional across pages
+- [ ] Navigation responsive on mobile and desktop
 - [ ] All portfolio claims link to evidence docs
-- [ ] Bidirectional linking is verified (spot-check 5 links)
+- [ ] Bidirectional linking verified (spot-check 5 links)
 - [ ] Performance remains acceptable (Core Web Vitals ok)
 - [ ] Mobile UX is smooth and responsive
-- [ ] PR created with title: `feat: Stage 4.5 - UX, content credibility & advanced features`
+- [ ] PR created with title: `feat: Stage 4.5 - UX enhancements & SEO optimization`
 
 **Related documentation:**
 
-- UX Architecture & Content Strategy
+- UX Strategy & Navigation Architecture
 - SEO Strategy & Configuration
-- Content Management Runbook
 
 ---
 
