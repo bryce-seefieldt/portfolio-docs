@@ -207,9 +207,9 @@ Runbooks should be your first reference during:
 
 ### Operational Readiness
 
-| Document                                                                              | Purpose                                         | Audience                    |
-| ------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------------- |
-| **[Observability & Monitoring](../../60-projects/portfolio-app/08-observability.md)** | Health checks, logging, monitoring architecture | Developers, DevOps, On-call |
+| Document                                                                                  | Purpose                                         | Audience                    |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------------- |
+| **[Observability & Monitoring](/docs/30-devops-platform/observability-health-checks.md)** | Health checks, logging, monitoring architecture | Developers, DevOps, On-call |
 
 ---
 
@@ -217,18 +217,18 @@ Runbooks should be your first reference during:
 
 Match your scenario to the appropriate runbook:
 
-| I'm seeing...                              | Use this runbook                                                                  |
-| ------------------------------------------ | --------------------------------------------------------------------------------- |
-| ❌ Deployment shows "Failed" in Vercel     | [Deployment Failure](./rbk-portfolio-deployment-failure.md)                       |
-| ⚠️ Health endpoint returns 503             | [Service Degradation](./rbk-portfolio-service-degradation.md)                     |
-| 🔴 All routes return 500                   | [Deployment Failure](./rbk-portfolio-deployment-failure.md)                       |
-| 🐌 Pages load slowly (>3s) but no errors   | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)     |
-| 📦 Bundle size too large (>30MB)           | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)     |
-| ❓ Unclear incident, need framework        | [General Incident Response](./rbk-portfolio-incident-response.md)                 |
-| 🔍 Want to understand monitoring setup     | [Observability Architecture](../../60-projects/portfolio-app/08-observability.md) |
-| ⚡ Want to improve performance proactively | [Performance Optimization](./rbk-portfolio-performance-optimization.md)           |
-| 🔐 CVE alert or dependency vulnerability   | [Dependency Vulnerability Response](./rbk-portfolio-dependency-vulnerability.md)  |
-| 🚨 Suspected secret leak in repo           | [Secrets Incident Response](./rbk-portfolio-secrets-incident.md)                  |
+| I'm seeing...                              | Use this runbook                                                                         |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| ❌ Deployment shows "Failed" in Vercel     | [Deployment Failure](./rbk-portfolio-deployment-failure.md)                              |
+| ⚠️ Health endpoint returns 503             | [Service Degradation](./rbk-portfolio-service-degradation.md)                            |
+| 🔴 All routes return 500                   | [Deployment Failure](./rbk-portfolio-deployment-failure.md)                              |
+| 🐌 Pages load slowly (>3s) but no errors   | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)            |
+| 📦 Bundle size too large (>30MB)           | [Performance Troubleshooting](./rbk-portfolio-performance-troubleshooting.md)            |
+| ❓ Unclear incident, need framework        | [General Incident Response](./rbk-portfolio-incident-response.md)                        |
+| 🔍 Want to understand monitoring setup     | [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md) |
+| ⚡ Want to improve performance proactively | [Performance Optimization](./rbk-portfolio-performance-optimization.md)                  |
+| 🔐 CVE alert or dependency vulnerability   | [Dependency Vulnerability Response](./rbk-portfolio-dependency-vulnerability.md)         |
+| 🚨 Suspected secret leak in repo           | [Secrets Incident Response](./rbk-portfolio-secrets-incident.md)                         |
 
 ---
 
@@ -441,7 +441,7 @@ Context: Used during INC-YYYYMMDD-NNN" \
 - Runbook template: `docs/_meta/templates/template-runbook.md` (internal-only)
 - ADRs: `docs/10-architecture/adr/`
 - Threat models: `docs/40-security/threat-models/`
-- Observability: `docs/60-projects/portfolio-app/08-observability.md`
+- Observability: `docs/30-devops-platform/observability-health-checks.md`
 
 ---
 

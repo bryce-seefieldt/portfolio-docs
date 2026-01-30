@@ -99,7 +99,7 @@ Security posture changes must be reflected in:
 
 **Operational & Implementation References:**
 
-- **[Security Hardening Implementation](/docs/60-projects/portfolio-app/09-security-hardening.md)** — OWASP security headers, CSP policy, environment variable security, and testing procedures
+- **[Security Hardening Implementation](/docs/60-projects/portfolio-app/04-security.md)** — OWASP security headers, CSP policy, environment variable security, and testing procedures
 - **[Dependency Vulnerability Runbook](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)** — Procedures for detecting, triaging, and remediating CVEs with MTTR targets
 - **[Secrets Incident Runbook](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)** — Deterministic response to suspected secret leaks or exfiltration
 

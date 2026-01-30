@@ -688,7 +688,7 @@ tags: [operations, runbooks, procedures, incident-response]
 
 **Operational Readiness**
 
-- [Observability & Monitoring](/docs/60-projects/portfolio-app/08-observability.md) — Health checks, logging, monitoring architecture
+- [Observability & Monitoring](/docs/30-devops-platform/observability-health-checks.md) — Health checks, logging, monitoring architecture
 
 #### Section 3: Quick Reference (Severity-Based)
 

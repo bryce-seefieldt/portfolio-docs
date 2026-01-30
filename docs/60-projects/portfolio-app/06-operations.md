@@ -173,6 +173,18 @@ Responsibilities:
   - Verify no personally identifiable information is shown (aggregate metrics only).
 - If analytics must be disabled temporarily, remove `<Analytics />` from `src/app/layout.tsx` and redeploy.
 
+### Observability & Health Checks (Stage 4.5)
+
+Comprehensive observability strategy: [Observability & Health Checks](../../30-devops-platform/observability-health-checks.md)
+
+Covers:
+
+- Health endpoint specification and response format
+- Structured logging patterns for debugging
+- Failure mode definitions and recovery procedures
+- Monitoring strategy and metrics approach
+- Future enhancements (custom metrics, alerting)
+
 ### Security Monitoring (Stage 4.4)
 
 **Dependency Vulnerability Monitoring:**

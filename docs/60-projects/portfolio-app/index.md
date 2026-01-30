@@ -14,7 +14,6 @@ tags: [projects, portfolio, nextjs, typescript, devops, security, operations]
 - [Testing](05-testing.md)
 - [Operations](06-operations.md)
 - [Troubleshooting](07-troubleshooting.md)
-- [Observability](08-observability.md)
 
 ## Purpose
 
@@ -131,7 +130,7 @@ Portfolio App must link to evidence pages for each project:
 - ✅ **Observability & Operational Readiness**: Complete (Stage 4.3)
   - **Health Check Endpoint**: `/api/health` returns 200/503/500 with status, projectCount, environment metadata
   - **Structured Logging**: JSON logs via `src/lib/observability.ts` (log(), logError()) integrated into error boundaries
-  - **Observability Architecture**: Complete reference documentation ([08-observability.md](./08-observability.md)) covering health checks, logging, failure modes, monitoring integration
+  - **Observability Architecture**: Complete reference documentation ([Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md)) covering health checks, logging, failure modes, monitoring integration
   - **Operational Runbooks**: 3 comprehensive procedures with MTTR targets
     - [General Incident Response](../../50-operations/runbooks/rbk-portfolio-incident-response.md) — Framework for all incidents (severity levels, triage, postmortem)
     - [Service Degradation](../../50-operations/runbooks/rbk-portfolio-service-degradation.md) — Diagnose and resolve performance/availability issues (MTTR: 10 min)

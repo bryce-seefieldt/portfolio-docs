@@ -86,7 +86,7 @@ See **[Runbooks Index](./runbooks/index.md)** for operational procedures:
 - **[Service Degradation](./runbooks/rbk-portfolio-service-degradation.md)** — Diagnose and resolve performance/availability issues (MTTR: 10 min)
 - **[Deployment Failure Recovery](./runbooks/rbk-portfolio-deployment-failure.md)** — Detect and rollback failed deployments (MTTR: 5 min)
 
-For observability architecture and monitoring setup, see [Portfolio App Observability Documentation](../60-projects/portfolio-app/08-observability.md).
+For observability architecture and monitoring setup, see [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md).
 
 ## References
 

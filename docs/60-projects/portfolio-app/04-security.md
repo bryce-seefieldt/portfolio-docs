@@ -250,6 +250,18 @@ Every PR must confirm:
 - [ ] CodeQL scan passes
 - [ ] Secrets scan passes
 
+## Security Hardening (Stage 4.4)
+
+Comprehensive hardening documentation: [Portfolio App Security Controls](../../40-security/portfolio-app-security-controls.md)
+
+Covers:
+
+- OWASP security headers (X-Frame-Options, X-Content-Type-Options, CSP)
+- Content Security Policy configuration and rationale
+- Environment variable security contract
+- Dependency audit policy and MTTR targets
+- Implementation checklists
+
 ## Known Limitations & Accepted Risks
 
 ### Out of Scope (Intentional)

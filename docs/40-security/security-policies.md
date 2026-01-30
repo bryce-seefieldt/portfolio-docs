@@ -182,5 +182,5 @@ Environment variables prefixed with `NEXT_PUBLIC_*` are publicly accessible in t
 
 - Threat model v2: [threat-models/portfolio-app-threat-model-v2.md](./threat-models/portfolio-app-threat-model-v2.md)
 - Risk register: [risk-register.md](./risk-register.md)
-- Security hardening: [../60-projects/portfolio-app/09-security-hardening.md](../60-projects/portfolio-app/09-security-hardening.md)
+- Security hardening: [../60-projects/portfolio-app/04-security.md](../60-projects/portfolio-app/04-security.md)
 - Runbooks: [../50-operations/runbooks/rbk-portfolio-secrets-incident.md](../50-operations/runbooks/rbk-portfolio-secrets-incident.md) and [../50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md](../50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)

@@ -244,6 +244,84 @@ graph TB
 - ADR: [docs/10-architecture/adr/adr-0013-multi-environment-deployment.md](docs/10-architecture/adr/adr-0013-multi-environment-deployment.md)
 - Runbooks: [Environment Promotion](docs/50-operations/runbooks/rbk-portfolio-environment-promotion.md), [Environment Rollback](docs/50-operations/runbooks/rbk-portfolio-environment-rollback.md)
 
+## User Experience & Theme Architecture (Stage 4.5)
+
+Phase 4 Stage 4.5 introduces a comprehensive UX enhancement layer with dark mode theming, scroll animations, and SEO optimization to elevate the portfolio app to professional-grade polish.
+
+### Theme System Architecture
+
+**Class-based dark mode** with CSS variables and React state management:
+
+- **CSS Variables:** 50+ variables for colors, shadows, transitions defined in `:root` (light) and `html.dark` (dark)
+- **Theme Toggle:** Client component with localStorage persistence and system preference fallback
+- **No FOUC:** Inline initialization script in `<head>` applies theme before first paint
+- **WCAG AA Compliance:** All color combinations tested for 4.5:1 contrast minimum
+- **Accessibility:** Respects `prefers-reduced-motion` for smooth transitions
+
+**Components:**
+
+- `ThemeToggle.tsx` — Interactive light/dark mode switcher with sun/moon icons
+- `globals.css` — CSS variable definitions with smooth transitions
+- `layout.tsx` — Theme initialization script (prevents flash of unstyled content)
+
+**Diagram: Theme State Flow**
+
+```mermaid
+graph TD
+    A[Page Load] --> B{localStorage?}
+    B -->|Yes| C[Apply stored theme]
+    B -->|No| D{System prefers dark?}
+    D -->|Yes| E[Apply dark theme]
+    D -->|No| F[Apply light theme]
+    C --> G[ThemeToggle mounted]
+    E --> G
+    F --> G
+    G --> H[User clicks]
+    H --> I[Update localStorage]
+    I --> J[Toggle html.dark]
+    J --> K[CSS variables update]
+```
+
+### Animation Architecture
+
+**Performance-first scroll animations** using Intersection Observer API:
+
+- **ScrollFadeIn.tsx** — Reusable wrapper component for fade-in-on-scroll effects
+- **BackToTop.tsx** — Smooth scroll-to-top button appearing after 300px scroll
+- **No scroll listeners:** Intersection Observer is more performant than scroll events
+- **Accessibility:** Respects `prefers-reduced-motion` media query
+- **GPU-accelerated:** Uses `opacity` and `transform` for smooth transitions
+
+**Animation Timing:**
+
+- Fast transitions: 150ms (hover states)
+- Base transitions: 200ms (theme changes, fade-ins)
+- Slow transitions: 300ms (page transitions)
+
+### SEO & Metadata Architecture
+
+**Comprehensive metadata** for search engines and social media:
+
+- **Meta Tags:** Title templates, descriptions, keywords for all pages
+- **Open Graph:** Rich previews on Facebook, LinkedIn, Slack (1200x630px image)
+- **Twitter Cards:** `summary_large_image` for X/Twitter sharing
+- **JSON-LD Structured Data:** Person and WebSite schemas for semantic search
+- **Robots:** Explicit indexing directives (`index, follow`, `max-image-preview: large`)
+
+**Structured Data Schemas:**
+
+1. **Person Schema** — Portfolio owner identity with `sameAs` links to GitHub/LinkedIn
+2. **WebSite Schema** — Site metadata with SearchAction for sitelinks search box
+3. **Breadcrumb Schema** — Navigation context (planned for Phase 5)
+
+**Evidence Linking:** Bidirectional cross-references between portfolio claims and documentation proof.
+
+### References
+
+- **UX Strategy Guide:** [09-ux-strategy.md](../../20-engineering/ux-design-system.md) — Design decisions, navigation architecture, accessibility
+- **SEO Strategy Guide:** [10-seo-strategy.md](../../70-reference/seo-metadata-guide.md) — Metadata architecture, structured data, optimization
+- **Theme System Guide:** [11-theme-system-guide.md](../../70-reference/theme-system-reference.md) — CSS variables, theme implementation, extension
+
 ### Testing Architecture (Stage 3.3)
 
 After Stage 3.2 established evidence visualization components, Stage 3.3 adds comprehensive test coverage to ensure registry integrity and link resolution. The testing architecture follows the testing pyramid: unit tests (Vitest) for business logic, E2E tests (Playwright) for user-facing behavior.
@@ -486,6 +564,16 @@ Component organization:
 - Automatic class sorting via `prettier-plugin-tailwindcss`
 - Responsive design: mobile-first with `sm:`, `md:`, `lg:` breakpoints
 
+### User Experience & Theme Architecture (Stage 4.5)
+
+**Dark mode theming:** Class-based dark/light mode system with localStorage persistence and system preference fallback. CSS variables define all colors; theme toggle in header switches `dark` class on `<html>`. See [ADR-0014: Class-Based Dark Mode with CSS Variables](docs/10-architecture/adr/adr-0014-class-based-dark-mode.md) for design decisions and [Theme System Reference](../../70-reference/theme-system-reference.md) for implementation details.
+
+**Scroll animations:** Intersection Observer-based animations trigger fade-in effects as content enters viewport. Respects `prefers-reduced-motion` for accessibility. See [ADR-0016: Scroll Animation Strategy](docs/10-architecture/adr/adr-0016-scroll-animations.md) for performance reasoning.
+
+**Navigation enhancements:** Back-to-top button for long pages; sticky header for quick access to main navigation.
+
+**Full design system:** [UX Design System](../../20-engineering/ux-design-system.md) in engineering domain covers component patterns, layout strategies, accessibility standards, and best practices shared across portfolio projects.
+
 ## Navigation and information architecture
 
 ### Top navigation
@@ -510,20 +598,16 @@ Fixed header with:
 
 ## Metadata and SEO strategy
 
-### Current approach
+### Stage 4.5 implementation
 
-Metadata configured in `src/app/layout.tsx`:
+Comprehensive tri-layer metadata strategy for social sharing and search engine optimization:
 
-- Title template: `"%s | Portfolio"` (appended to page-level titles)
-- Description: concise value proposition
-- `metadataBase`: intentionally `undefined` (deferred until production domain finalized)
+- **Open Graph tags:** Rich previews on Facebook, LinkedIn, Discord, Slack
+- **Twitter Cards:** Optimized `summary_large_image` card format for X/Twitter
+- **JSON-LD structured data:** Person and WebSite schemas for semantic search understanding
+- **Metadata cascade:** Global defaults in `layout.tsx` with per-page overrides
 
-### Future enhancements (Phase 2+)
-
-- OpenGraph tags for social sharing
-- Twitter card metadata
-- Structured data (JSON-LD) for projects and CV
-- Canonical URLs once domain is live
+See [ADR-0015: Open Graph + Twitter Cards + JSON-LD Metadata Strategy](docs/10-architecture/adr/adr-0015-metadata-strategy.md) for design decisions and [SEO & Social Metadata Reference](docs/70-reference/seo-metadata-guide.md) for implementation details and troubleshooting.
 
 ## Toolchain and runtime
 
@@ -537,7 +621,7 @@ Metadata configured in `src/app/layout.tsx`:
 
 - Enabled via `next.config.ts` (`reactCompiler: true`)
 - Automatic optimization of components and hooks
-- See ADR-0009 for decision rationale and validation criteria
+- See [ADR-0016](../../10-architecture/adr/adr-0016-scroll-animations.md) for decision rationale and validation criteria
 
 ### Package manager
 
@@ -577,24 +661,24 @@ Metadata configured in `src/app/layout.tsx`:
 
 ## Technology Stack (Complete Inventory)
 
-| Category               | Technology           | Version  | Rationale                                                                      |
-| ---------------------- | -------------------- | -------- | ------------------------------------------------------------------------------ |
-| **Framework**          | Next.js              | v16.1.3  | App Router, React Server Components, static optimization, industry standard    |
-| **UI Library**         | React                | v19.2.3  | Concurrent features, automatic batching, modern rendering                      |
-| **Language**           | TypeScript           | v5+      | Strict mode, type safety, developer experience                                 |
-| **Styling**            | Tailwind CSS         | v4       | Utility-first, JIT compilation, minimal CSS bundle                             |
-| **CSS Processing**     | @tailwindcss/postcss | v4       | CSS transformation and optimization                                            |
-| **Package Manager**    | pnpm                 | v10.0.0  | Fast, efficient, frozen lockfiles in CI                                        |
-| **Compiler**           | Next.js SWC          | Built-in | Rust-based, 17x faster than Babel                                              |
-| **React Optimizer**    | React Compiler       | v1.0.0   | Automatic memoization, ADR-0009                                                |
-| **E2E Testing**        | Playwright           | v1.57.0  | Multi-browser smoke tests, 100% route coverage                                 |
-| **Linting**            | ESLint               | v9       | Flat config, Next.js presets, TypeScript integration                           |
-| **Formatting**         | Prettier             | v3.8.0   | Code formatting, Tailwind class sorting                                        |
-| **CI/CD**              | GitHub Actions       | -        | Quality + build jobs, frozen lockfiles                                         |
-| **Hosting**            | Vercel               | -        | Preview + production, edge CDN, promotion checks                               |
-| **Security Scanning**  | CodeQL               | -        | JavaScript/TypeScript static analysis                                          |
-| **Dependency Updates** | Dependabot           | -        | Weekly updates, grouped, majors excluded                                       |
-| **Secrets Scanning**   | TruffleHog           | v3.85.0  | CI gate (PRs); optional pre-commit; local verify uses lightweight pattern scan |
+| Category               | Technology           | Version  | Rationale                                                                                             |
+| ---------------------- | -------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| **Framework**          | Next.js              | v16.1.3  | App Router, React Server Components, static optimization, industry standard                           |
+| **UI Library**         | React                | v19.2.3  | Concurrent features, automatic batching, modern rendering                                             |
+| **Language**           | TypeScript           | v5+      | Strict mode, type safety, developer experience                                                        |
+| **Styling**            | Tailwind CSS         | v4       | Utility-first, JIT compilation, minimal CSS bundle                                                    |
+| **CSS Processing**     | @tailwindcss/postcss | v4       | CSS transformation and optimization                                                                   |
+| **Package Manager**    | pnpm                 | v10.0.0  | Fast, efficient, frozen lockfiles in CI                                                               |
+| **Compiler**           | Next.js SWC          | Built-in | Rust-based, 17x faster than Babel                                                                     |
+| **React Optimizer**    | React Compiler       | v1.0.0   | Automatic memoization, [ADR-0009](../../10-architecture/adr/adr-0009-portfolio-app-react-compiler.md) |
+| **E2E Testing**        | Playwright           | v1.57.0  | Multi-browser smoke tests, 100% route coverage                                                        |
+| **Linting**            | ESLint               | v9       | Flat config, Next.js presets, TypeScript integration                                                  |
+| **Formatting**         | Prettier             | v3.8.0   | Code formatting, Tailwind class sorting                                                               |
+| **CI/CD**              | GitHub Actions       | -        | Quality + build jobs, frozen lockfiles                                                                |
+| **Hosting**            | Vercel               | -        | Preview + production, edge CDN, promotion checks                                                      |
+| **Security Scanning**  | CodeQL               | -        | JavaScript/TypeScript static analysis                                                                 |
+| **Dependency Updates** | Dependabot           | -        | Weekly updates, grouped, majors excluded                                                              |
+| **Secrets Scanning**   | TruffleHog           | v3.85.0  | CI gate (PRs); optional pre-commit; local verify uses lightweight pattern scan                        |
 
 ### Notable Architectural Decisions
 
@@ -602,7 +686,7 @@ Metadata configured in `src/app/layout.tsx`:
 - **No database**: Static content model (scalable via data files)
 - **No form backend**: Contact via static methods (email link)
 - **Evidence links**: Deep integration with Docusaurus documentation
-- **React Compiler**: Enabled for automatic optimization (ADR-0009)
+- **React Compiler**: Enabled for automatic optimization ([ADR-0009](../../10-architecture/adr/adr-0009-portfolio-app-react-compiler.md))
 
 ## High-Level Request Flow
 

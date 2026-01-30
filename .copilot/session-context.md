@@ -1,5 +1,5 @@
-last-updated: 2026-01-27
-active-phase: Phase 4 (Enterprise-Grade Platform Maturity) — Stage 4.3 COMPLETE, Stage 4.4 READY
+last-updated: 2026-01-28
+active-phase: Phase 4 (Enterprise-Grade Platform Maturity) — Stage 4.4 COMPLETE, Stage 4.5 READY
 workspace-repos:
 
 - portfolio-app (Next.js + TypeScript)
@@ -9,14 +9,14 @@ workspace-repos:
 
 # Copilot Session Context
 
-## Current State (Phase 3 COMPLETE; Phase 4 Stage 4.1 COMPLETE; Stage 4.2 READY)
+## Current State (Phase 3 COMPLETE; Phase 4 Stages 4.1–4.4 COMPLETE; Stage 4.5 READY)
 
 ### Active Branches
 
-- **portfolio-app:** `main` (PR #46 created for Stage 4.1 multi-environment deployment)
-- **portfolio-docs:** `main` (PR #57 merged with Stage 4.1 comprehensive documentation)
+- **portfolio-app:** `main` (PR #61 created for Stage 4.4 security posture deepening)
+- **portfolio-docs:** `main` (PR #67 created for Stage 4.4 comprehensive security documentation)
 
-### Phase Progress: Phase 3 complete; Phase 4 Stage 4.1 complete; Stage 4.2 (Performance Optimization) ready to begin
+### Phase Progress: Phase 3 complete; Phase 4 Stages 4.1–4.4 complete; Stage 4.5 (UX, Content, Advanced Features) ready to begin
 
 #### Template Enforcement (Critical)
 
@@ -103,21 +103,40 @@ All work in both repositories **MUST** use templates for proper governance and t
 
 **Status:** COMPLETE — Three-tier deployment model operational (Preview → Staging → Production)
 
-#### 🎯 Next: Phase 4 Stage 4.2 — Performance Optimization & Measurement
+#### ✅ Complete: Phase 4 Stage 4.4 — Security Posture Deepening
 
-**Objective:** Introduce caching strategy, static generation with `generateStaticParams()`, asset optimization, and performance instrumentation
+**What shipped (2026-01-28):**
+
+- **portfolio-app (PR #61):**
+  - 6 OWASP security headers configured in next.config.ts (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy, Content-Security-Policy)
+  - CSP policy: `default-src 'self'` with specific directives for scripts, styles, images, fonts, and connections
+  - Cache headers (max-age=3600, stale-while-revalidate=86400) configured
+  - `.env.example` documentation for public-safe environment variable contract
+  - README.md Stage 4.4 security section with evidence links
+
+- **portfolio-docs (PR #67):**
+  - **threat-model-v2.md** (172 lines): STRIDE analysis covering deployment surface and runtime threats
+  - **risk-register.md** (86 lines): 8 identified risks with severity scoring and acceptance status
+  - **security-policies.md** (186 lines): Dependency audit, secrets management, headers, and incident response policies with MTTR targets
+  - **09-security-hardening.md** (275 lines): CSP deep dive, trade-off analysis, testing procedures
+  - **rbk-portfolio-dependency-vulnerability.md** (437 lines): Full incident response runbook with phases 0–4, MTTR targets, and troubleshooting
+  - **phase-4-summary.md** (259 lines): Four pillars overview with Mermaid diagrams explaining Phase 4 value
+  - Updated 3 dossier pages (01-overview, 02-architecture, 06-operations) with Stage 4.4 references
+  - Updated security and operations index pages
+
+**Status:** COMPLETE (2026-01-28) — 3 files changed, 34 insertions (app); 16 files changed, 2,510 insertions (docs). Both builds passing. PRs #61 and #67 OPEN and ready for review/merge.
+
+#### 🎯 Next: Phase 4 Stage 4.5 — UX, Content, Advanced Features
+
+**Objective:** Complete remaining Stage 4 deliverables focused on UX improvements, static optimization, and advanced feature rollout
 
 **Key deliverables:**
 
-- next.config.ts enhancements (caching headers, image optimization, bundle analyzer)
-- generateStaticParams() for project pages
-- Performance runbook and dossier updates
-- Build size tracking and baseline metrics
-
-#### 🔜 Next: Phase 3 Stage 3.4 — ADRs & Documentation Updates
-
-- Document Stage 3 decisions (ADR-0011/0012 updates), dossier refresh, and registry schema guide alignment
-- Keep template enforcement unchanged; use Phase Stage templates for paired app/docs issues
+- Static generation optimization (generateStaticParams for projects)
+- Performance metrics instrumentation
+- UI/UX polish (animations, responsiveness refinement, accessibility audit)
+- Content enrichment (detailed project case studies, advanced filtering)
+- Build size tracking and metrics baseline
 
 ---
 
