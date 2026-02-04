@@ -99,6 +99,7 @@ Update runbooks when:
 - deployment mechanics change
 - monitoring/alerts change
 - new failure modes are discovered (add to troubleshooting section)
+- Phase 5 hardening reveals drift between documented steps and actual behavior
 
 **Validation criteria:** Operations documentation is effective when:
 

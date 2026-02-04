@@ -67,6 +67,9 @@ Release notes are public. Do not include:
 
 Add new entries at the top.
 
+- **2026-02-04 — Portfolio Phase 5 Initiated (Professionalization & Freeze Plan)**
+  - `20260204-portfolio-phase-5-freeze.md`
+  - Reviewer guide, evidence checklist, known limitations, Phase 5 kickoff
 - **2026-01-30 — Portfolio App Phase 4 Complete (Reliability + Security + UX/SEO)**
   - `20260130-portfolio-app-phase-4-complete.md`
   - Observability and runbooks, security controls and threat model updates, UX/SEO/theming documentation, ADRs
