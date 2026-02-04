@@ -76,7 +76,7 @@ The `verify` command runs a comprehensive 11-step validation workflow:
 7. **Registry validation**: Ensures project registry schema compliance and data integrity
 8. **Build**: Produces production bundle to catch build-time errors
 9. **Performance verification**: Validates bundle size and cache headers against `docs/performance-baseline.yml`
-10. **Unit tests**: Runs Vitest suite (70+ tests: registry validation, slug helpers, link construction)
+10. **Unit tests**: Runs Vitest suite (~120 tests: registry validation, slug helpers, link construction, structured data, observability)
 11. **E2E tests**: Runs Playwright suite (12 tests: evidence link resolution, route coverage)
 
 **Benefits:**
@@ -342,14 +342,14 @@ npx playwright show-report    # View HTML test report
 
 **Coverage:**
 
-- 70 unit tests across 3 test suites
+- ~120 unit tests across core `src/lib/` suites
 - All tests passing locally and in CI
 - Code coverage: ≥80% for `src/lib/` modules
 
 **Local execution:**
 
 ```bash
-pnpm test:unit      # Run all 70+ unit tests (CI-like execution)
+pnpm test:unit      # Run all ~120 unit tests (CI-like execution)
 pnpm test           # Run tests in watch mode (for development)
 pnpm test:coverage  # Run tests and generate coverage report
 pnpm test:ui        # Visual UI mode for debugging failing tests

@@ -37,7 +37,7 @@ graph TB
         I2["Data fetching"]
     end
 
-    subgraph UNIT["Unit Tests (Vitest) - ~70 tests"]
+    subgraph UNIT["Unit Tests (Vitest) - ~120 tests"]
         U1["Registry validation (Zod schemas)"]
         U2["Slug helpers (format, uniqueness)"]
         U3["Link construction (URL building)"]
@@ -53,7 +53,7 @@ graph TB
 
 ### Coverage Targets
 
-- **Unit tests**: ≥80% for all `src/lib/` modules
+- **Unit tests**: ≥80% for all `src/lib/` modules (current suite exceeds this baseline)
 - **E2E tests**: 100% route coverage for all project pages
 - **Build-time validation**: Registry schema enforcement via Zod
 
