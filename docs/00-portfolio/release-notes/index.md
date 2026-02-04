@@ -67,6 +67,9 @@ Release notes are public. Do not include:
 
 Add new entries at the top.
 
+- **2026-02-04 — Portfolio v1.0 Release (Phase 5 Freeze)**
+  - `20260204-portfolio-v1-0.md`
+  - Reviewer guide, evidence checklist, known limitations, v1.0 freeze
 - **2026-02-04 — Portfolio Phase 5 Initiated (Professionalization & Freeze Plan)**
   - `20260204-portfolio-phase-5-freeze.md`
   - Reviewer guide, evidence checklist, known limitations, Phase 5 kickoff
