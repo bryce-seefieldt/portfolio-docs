@@ -240,14 +240,14 @@ Phase 5 is best executed as **sequential steps** since each stage builds evidenc
 
 ## Timeline & Resource Estimate
 
-| Step | Task                                   | Duration | Status | Notes |
-| ---- | -------------------------------------- | -------- | ------ | ----- |
-| 1    | Narrative & IA refinement              | 6–8h     | Ready  | —     |
-| 2    | Evidence validation & reviewer guide   | 6–8h     | Ready  | —     |
-| 3    | Production hardening pass              | 5–7h     | Ready  | —     |
-| 4    | External professionalism signals       | 5–6h     | Ready  | —     |
-| 5    | Final review & freeze                  | 4–6h     | Ready  | —     |
-| **Total** | **Phase 5 Complete**               | **28–36h** | **Ready** | — |
+| Step      | Task                                 | Duration   | Status    | Notes |
+| --------- | ------------------------------------ | ---------- | --------- | ----- |
+| 1         | Narrative & IA refinement            | 6–8h       | Ready     | —     |
+| 2         | Evidence validation & reviewer guide | 6–8h       | Ready     | —     |
+| 3         | Production hardening pass            | 5–7h       | Ready     | —     |
+| 4         | External professionalism signals     | 5–6h       | Ready     | —     |
+| 5         | Final review & freeze                | 4–6h       | Ready     | —     |
+| **Total** | **Phase 5 Complete**                 | **28–36h** | **Ready** | —     |
 
 **Resource allocation:**
 
@@ -304,11 +304,11 @@ A reviewer can validate Phase 5 completion through:
 
 ## Risk Mitigation
 
-| Risk | Likelihood | Impact | Mitigation |
-| ---- | ---------- | ------ | ---------- |
-| Scope creep | Med | Med | Keep Phase 5 focused on refinement, not new features |
-| Reviewer confusion | Med | High | Provide reviewer guide and explicit entry points |
-| Evidence drift | Low | High | Use evidence audit checklist before release |
+| Risk               | Likelihood | Impact | Mitigation                                           |
+| ------------------ | ---------- | ------ | ---------------------------------------------------- |
+| Scope creep        | Med        | Med    | Keep Phase 5 focused on refinement, not new features |
+| Reviewer confusion | Med        | High   | Provide reviewer guide and explicit entry points     |
+| Evidence drift     | Low        | High   | Use evidence audit checklist before release          |
 
 ---
 

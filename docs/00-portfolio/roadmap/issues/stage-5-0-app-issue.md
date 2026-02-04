@@ -76,6 +76,7 @@ Env safety → Reliable behavior
   - Files: `src/data/projects.yml` or `src/data/projects.ts`
 
 **Success Criteria:**
+
 - [ ] Narrative is concise and evidence-first
 - [ ] Summaries are reviewer-friendly
 
@@ -89,6 +90,7 @@ Env safety → Reliable behavior
   - Files: `src/lib/config.ts`
 
 **Success Criteria:**
+
 - [ ] Error handling UX validated
 - [ ] Env safety verified
 
@@ -102,6 +104,7 @@ Env safety → Reliable behavior
   - Files: `LICENSE`
 
 **Success Criteria:**
+
 - [ ] README guides reviewers clearly
 - [ ] License present and accurate
 

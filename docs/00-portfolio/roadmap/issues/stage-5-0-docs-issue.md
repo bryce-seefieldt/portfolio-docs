@@ -86,6 +86,7 @@ Phase 5 documentation work ensures every major claim is traceable, navigation is
 - [ ] Update `docs/60-projects/index.md` for “start here” guidance
 
 **Success Criteria:**
+
 - [ ] Navigation is reviewer-friendly
 - [ ] Entry points are clear and short
 
@@ -99,6 +100,7 @@ Phase 5 documentation work ensures every major claim is traceable, navigation is
   - File: `docs/00-portfolio/reviewer-guide.md`
 
 **Success Criteria:**
+
 - [ ] Claims are traceable to evidence
 - [ ] Reviewer guide validates portfolio in <15 minutes
 
@@ -112,6 +114,7 @@ Phase 5 documentation work ensures every major claim is traceable, navigation is
   - File: `docs/00-portfolio/release-notes/<date>-portfolio-v1.md`
 
 **Success Criteria:**
+
 - [ ] Known limitations published
 - [ ] Release notes published
 

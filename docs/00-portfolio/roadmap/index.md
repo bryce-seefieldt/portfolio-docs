@@ -363,22 +363,22 @@ Show depth and breadth across languages and disciplines while maintaining enterp
 ### Implementation focus (Phase 5 planning)
 
 - **Narrative & information architecture refinement**
-   - Portfolio App: sharpen homepage narrative, project summaries, and senior-level decision callouts
-   - Docs App: improve navigation clarity, index hubs, and “start here” flows
+  - Portfolio App: sharpen homepage narrative, project summaries, and senior-level decision callouts
+  - Docs App: improve navigation clarity, index hubs, and “start here” flows
 - **Evidence validation & cross-checking**
-   - Audit every major claim for linked evidence
-   - Remove speculative language and undocumented assumptions
-   - Add reviewer guide + evidence checklist
+  - Audit every major claim for linked evidence
+  - Remove speculative language and undocumented assumptions
+  - Add reviewer guide + evidence checklist
 - **Production hardening pass**
-   - Improve error handling UX and graceful degradation
-   - Verify build reproducibility and environment safety
-   - Update runbooks/ADRs to reflect final state
+  - Improve error handling UX and graceful degradation
+  - Verify build reproducibility and environment safety
+  - Update runbooks/ADRs to reflect final state
 - **External signals of professionalism**
-   - Consistent naming, clean commit history, README entry points
-   - License clarity and contribution notes
+  - Consistent naming, clean commit history, README entry points
+  - License clarity and contribution notes
 - **Final review & freeze**
-   - Feature freeze + documentation freeze
-   - Tag release v1.0 with release notes and known limitations
+  - Feature freeze + documentation freeze
+  - Tag release v1.0 with release notes and known limitations
 
 ### Required evidence artifacts
 
