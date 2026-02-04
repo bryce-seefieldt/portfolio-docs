@@ -346,7 +346,7 @@ Make adding projects predictable, low-friction, and consistent with governance.
 
 ### Objective
 
-Show depth and breadth across languages and disciplines while maintaining enterprise consistency.
+Show depth and breadth across languages and disciplines while maintaining enterprise consistency, and ensure the portfolio is reviewer-ready under time pressure.
 
 ### Deliverables
 
@@ -360,16 +360,44 @@ Show depth and breadth across languages and disciplines while maintaining enterp
   - filtering/sorting projects by capability and proof type
   - “verification-first” display patterns
 
+### Implementation focus (Phase 5 planning)
+
+- **Narrative & information architecture refinement**
+   - Portfolio App: sharpen homepage narrative, project summaries, and senior-level decision callouts
+   - Docs App: improve navigation clarity, index hubs, and “start here” flows
+- **Evidence validation & cross-checking**
+   - Audit every major claim for linked evidence
+   - Remove speculative language and undocumented assumptions
+   - Add reviewer guide + evidence checklist
+- **Production hardening pass**
+   - Improve error handling UX and graceful degradation
+   - Verify build reproducibility and environment safety
+   - Update runbooks/ADRs to reflect final state
+- **External signals of professionalism**
+   - Consistent naming, clean commit history, README entry points
+   - License clarity and contribution notes
+- **Final review & freeze**
+   - Feature freeze + documentation freeze
+   - Tag release v1.0 with release notes and known limitations
+
 ### Required evidence artifacts
 
 - Project dossiers per project
 - ADRs for significant cross-cutting platform decisions
 - Security/ops artifacts scaled appropriately to each project
+- Evidence audit checklist
+- Reviewer guide (“How to review this portfolio”)
 
 ### Acceptance criteria
 
 - The portfolio reads like a cohesive program, not a collection of unrelated demos.
 - Evidence remains current and traceable across the entire system.
+- Reviewers can validate claims quickly with a clear reviewer path.
+- Final release tagged with known limitations documented.
+
+### Implementation guide
+
+- See [Phase 5 Implementation Guide](phase-5-implementation-guide.md) for detailed steps, checklists, and success criteria.
 
 ---
 
