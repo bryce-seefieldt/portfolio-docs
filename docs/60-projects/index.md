@@ -15,6 +15,17 @@ This section contains project-specific dossiers. Each dossier is a structured pa
 - how it is secured (threat model, controls, security testing)
 - how it is operated (runbooks, observability, recovery posture)
 
+## Start here (reviewer path)
+
+1. Portfolio App dossier: [/docs/60-projects/portfolio-app/index.md](/docs/60-projects/portfolio-app/index.md)
+2. Portfolio Docs App dossier: [/docs/60-projects/portfolio-docs-app/index.md](/docs/60-projects/portfolio-docs-app/index.md)
+3. Validate cross-cutting evidence:
+
+- ADRs: [/docs/10-architecture/adr/index.md](/docs/10-architecture/adr/index.md)
+- Threat models: [/docs/40-security/threat-models/index.md](/docs/40-security/threat-models/index.md)
+- Runbooks: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
+- Evidence checklist: [/docs/70-reference/evidence-audit-checklist.md](/docs/70-reference/evidence-audit-checklist.md)
+
 ## Scope
 
 ### In scope

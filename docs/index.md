@@ -40,6 +40,18 @@ This is not “notes.” It is a living, version-controlled evidence system.
 - **Security / Platform reviewers**: threat models, controls, scans, and operational procedures
 - **Future you + AI agents**: a reliable system for planning and implementing changes
 
+## Start here (fast reviewer path)
+
+1. Reviewer guide: [/docs/00-portfolio/reviewer-guide.md](/docs/00-portfolio/reviewer-guide.md)
+2. Read the portfolio roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
+3. Open the Portfolio App dossier: [/docs/60-projects/portfolio-app/index.md](/docs/60-projects/portfolio-app/index.md)
+4. Validate evidence quickly:
+
+- ADRs: [/docs/10-architecture/adr/index.md](/docs/10-architecture/adr/index.md)
+- Threat models: [/docs/40-security/threat-models/index.md](/docs/40-security/threat-models/index.md)
+- Runbooks: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
+- Evidence checklist: [/docs/70-reference/evidence-audit-checklist.md](/docs/70-reference/evidence-audit-checklist.md)
+
 ## How this repository is organized
 
 Top-level domains (each has its own `index.md` and governance):

@@ -2,6 +2,12 @@
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
+## Reviewer quickstart
+
+- Reviewer guide: [docs/00-portfolio/reviewer-guide.md](./docs/00-portfolio/reviewer-guide.md)
+- Portfolio App dossier: [docs/60-projects/portfolio-app/index.md](./docs/60-projects/portfolio-app/index.md)
+- Evidence audit checklist: [docs/70-reference/evidence-audit-checklist.md](./docs/70-reference/evidence-audit-checklist.md)
+
 ## Installation
 
 ```bash
