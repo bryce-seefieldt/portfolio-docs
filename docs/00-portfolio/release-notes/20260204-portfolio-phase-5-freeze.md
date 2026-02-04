@@ -34,8 +34,8 @@ Phase 5 professionalization is in progress. This release note documents the revi
 
 - `pnpm verify` (docs) passes locally
 - `pnpm verify` (app) passes locally with warnings:
-	- build time above warning threshold (14.0s vs 4.2s)
-	- `.next` JavaScript bundle scan reported no JS files found
+  - build time above warning threshold (14.0s vs 4.2s)
+  - `.next` JavaScript bundle scan reported no JS files found
 - Cross-links verified for reviewer path artifacts
 
 # Known limitations
