@@ -1,7 +1,7 @@
 {
   "label": "Incident Response",
   "position": 2,
-    "collapsible": true,
+  "collapsible": true,
   "collapsed": true,
   "link": {
     "type": "doc",

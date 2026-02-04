@@ -70,5 +70,5 @@ Incidents must reference:
 
 - Runbook catalog: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
 - Incident handbook: [/docs/50-operations/incident-response/incident-handbook.md](/docs/50-operations/incident-response/incident-handbook.md)
-- Postmortem template: [/docs/_meta/templates/template-postmortem.md](/docs/_meta/templates/template-postmortem.md)
+- Postmortem template: [/docs/\_meta/templates/template-postmortem.md](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/templates/template-postmortem.md)
 - Observability & health checks: [/docs/30-devops-platform/observability-health-checks.md](/docs/30-devops-platform/observability-health-checks.md)

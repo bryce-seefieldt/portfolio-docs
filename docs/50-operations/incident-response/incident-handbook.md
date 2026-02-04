@@ -30,18 +30,18 @@ Provide a consolidated incident response handbook that supports on-call responde
 
 Match your scenario to the appropriate runbook:
 
-| I'm seeing...                              | Use this runbook                                                                         |
-| ------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| ❌ Deployment shows "Failed" in Vercel     | [Deployment Failure](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md)   |
-| ⚠️ Health endpoint returns 503             | [Service Degradation](/docs/50-operations/runbooks/rbk-portfolio-service-degradation.md) |
-| 🔴 All routes return 500                   | [Deployment Failure](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md)   |
-| 🐌 Pages load slowly (>3s) but no errors   | [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md) |
-| 📦 Bundle size too large (>30MB)           | [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md) |
-| ❓ Unclear incident, need framework        | [General Incident Response](/docs/50-operations/runbooks/rbk-portfolio-incident-response.md) |
-| 🔍 Want to understand monitoring setup     | [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md) |
-| ⚡ Want to improve performance proactively | [Performance Optimization](/docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md) |
+| I'm seeing...                              | Use this runbook                                                                                            |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| ❌ Deployment shows "Failed" in Vercel     | [Deployment Failure](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md)                      |
+| ⚠️ Health endpoint returns 503             | [Service Degradation](/docs/50-operations/runbooks/rbk-portfolio-service-degradation.md)                    |
+| 🔴 All routes return 500                   | [Deployment Failure](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md)                      |
+| 🐌 Pages load slowly (>3s) but no errors   | [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)    |
+| 📦 Bundle size too large (>30MB)           | [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)    |
+| ❓ Unclear incident, need framework        | [General Incident Response](/docs/50-operations/runbooks/rbk-portfolio-incident-response.md)                |
+| 🔍 Want to understand monitoring setup     | [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md)                    |
+| ⚡ Want to improve performance proactively | [Performance Optimization](/docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md)          |
 | 🔐 CVE alert or dependency vulnerability   | [Dependency Vulnerability Response](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md) |
-| 🚨 Suspected secret leak in repo           | [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) |
+| 🚨 Suspected secret leak in repo           | [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                 |
 
 ---
 

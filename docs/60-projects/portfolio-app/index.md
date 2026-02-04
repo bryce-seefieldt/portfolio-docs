@@ -81,7 +81,7 @@ Portfolio App must link to evidence pages for each project:
 
 ## Evidence map (review-first)
 
-- ADRs: [/docs/10-architecture/adr/](/docs/10-architecture/adr/)
+- ADRs: [/docs/10-architecture/adr/](/docs/10-architecture/adr/index.md)
 - Threat model: [/docs/40-security/threat-models/portfolio-app-threat-model-v2.md](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)
 - Runbooks: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
 - CI/CD governance: [/docs/30-devops-platform/ci-cd-pipeline-overview.md](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
