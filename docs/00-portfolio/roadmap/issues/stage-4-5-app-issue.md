@@ -653,7 +653,6 @@ No data migrations or breaking changes; safe to revert anytime.
 ### Related Work
 
 - Related documentation: [Stage 4.5 Docs Issue](./stage-4-5-docs-issue.md)
-- Related guide: [Future Features & Advanced Enhancements](../future-features.md) (blog, contact form deferred to Phase 5)
 
 ---
 
@@ -816,9 +815,5 @@ export function ThemeToggle(): JSX.Element {
 ## Related Issues
 
 - **Paired Documentation Issue:** [Stage 4.5 — UX Enhancements & SEO Optimization (Docs)](./stage-4-5-docs-issue.md)
-- **Future Work:** [Future Features & Advanced Enhancements](../future-features.md)
-  - Blog & Case Studies (Phase 5+)
-  - Interactive Contact Form (Phase 5+)
-  - Advanced Search (Algolia integration; Phase 5+)
 
 ---

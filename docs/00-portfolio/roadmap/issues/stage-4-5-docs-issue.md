@@ -417,7 +417,6 @@ html.dark {
 **Internal documentation links:**
 
 - Link to: [Stage 4.5 Implementation Guide](../phase-4-implementation-guide.md#stage-45-ux-content-credibility--advanced-features-45-hours)
-- Link to: [Future Features](../future-features.md) (for Phase 5+ enhancement paths)
 - Link from: [01-overview.md](docs/60-projects/portfolio-app/01-overview.md) (add UX section)
 - Link from: [02-architecture.md](docs/60-projects/portfolio-app/02-architecture.md) (add UX subsystem)
 
@@ -776,7 +775,6 @@ All documentation is complete when:
 **Links to existing docs:**
 
 - Link to: [Phase 4 Implementation Guide](../phase-4-implementation-guide.md) (parent stage documentation)
-- Link to: [Future Features](../future-features.md) (Phase 5+ enhancements referenced)
 - Link from: [Project Dossier Overview](../../../60-projects/portfolio-app/01-overview.md)
 - Link from: [Project Architecture](../../../60-projects/portfolio-app/02-architecture.md)
 
@@ -916,6 +914,5 @@ Before marking this stage complete:
 - **Blocked by:** Stage 4.5 App implementation must be complete before documentation can be finalized
 - **Related documentation:**
   - [Phase 4 Implementation Guide](../phase-4-implementation-guide.md)
-  - [Future Features & Advanced Enhancements](../future-features.md) (Phase 5+ content and blog)
 
 ---
