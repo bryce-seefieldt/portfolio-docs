@@ -205,7 +205,7 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 2. **Test gate** (`ci / test`)
    - Unit tests (pnpm test:unit - 70+ Vitest tests)
    - Coverage validation (≥80% for src/lib/)
-   - E2E tests (pnpm playwright test - 12 tests across Chromium, Firefox)
+  - E2E tests (pnpm test:e2e - 58 tests across Chromium, Firefox)
 3. **Build gate** (`ci / build`)
    - Next.js build must succeed
    - Vercel deployment initiated
@@ -224,11 +224,11 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 
 **E2E Tests (Playwright):**
 
-- 12 test cases across 2 browsers (Chromium, Firefox)
+- 58 test cases across 2 browsers (Chromium, Firefox)
 - Routes tested: `/`, `/cv`, `/projects`, `/contact`, `/projects/[slug]`
-- Evidence link resolution validation
-- Component rendering validation (EvidenceBlock, BadgeGroup)
-- Responsive design verification (mobile, tablet, desktop)
+- 404 handling for unknown routes and invalid slugs
+- Health + metadata endpoints: `/api/health`, `/robots.txt`, `/sitemap.xml`
+- Evidence link rendering and accessibility on `/projects/portfolio-app`
 - Runtime: ~10 seconds
 - CI integration: Tests run in `ci / test` job after unit tests
 
@@ -336,10 +336,10 @@ git push origin staging
 
 ```bash
 # Run Playwright tests against staging URL
-PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm test:e2e
 
 # Or run specific test suite
-PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test tests/smoke.spec.ts
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm test:e2e:single
 ```
 
 #### 5. Promote to Production

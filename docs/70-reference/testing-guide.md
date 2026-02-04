@@ -25,7 +25,7 @@ The Portfolio App follows a testing pyramid: broad unit tests at the base, fewer
 
 ```mermaid
 graph TB
-    subgraph E2E["E2E Tests (Playwright) - ~12 tests"]
+    subgraph E2E["E2E Tests (Playwright) - ~58 tests"]
         E1["Evidence link resolution"]
         E2["Component rendering"]
         E3["Route coverage (user journeys)"]
@@ -68,7 +68,7 @@ graph TB
 
 **Why Playwright over Cypress?**
 
-- Multi-browser support (Chromium, Firefox, WebKit)
+- Multi-browser support (Chromium, Firefox)
 - Better performance at scale
 - Superior API for responsive design testing
 - Faster test execution
@@ -307,15 +307,17 @@ pnpm exec playwright install
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './e2e',
-  fullyParallel: true,
+  testDir: './tests/e2e',
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI || process.env.DEBUG ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000',
+    trace: process.env.DEBUG ? 'on' : 'on-first-retry',
+    screenshot: process.env.DEBUG ? 'only-on-failure' : 'off',
+    video: process.env.DEBUG ? 'retain-on-failure' : 'off',
   },
   projects: [
     {
@@ -326,26 +328,25 @@ export default defineConfig({
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
   ],
-  webServer: {
-    command: 'pnpm dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: process.env.CI
+    ? undefined
+    : {
+        command: 'pnpm dev',
+        url: 'http://localhost:3000',
+        reuseExistingServer: !process.env.CI,
+      },
 });
 ```
 
 ### Test File Naming
 
-- **Location**: `e2e/`
+- **Location**: `tests/e2e/`
 - **Pattern**: `[feature].spec.ts`
 - **Examples**:
-  - `e2e/evidence-links.spec.ts` — Evidence link resolution tests
-  - `e2e/smoke.spec.ts` — Smoke tests for all routes
+  - `tests/e2e/smoke.spec.ts` — Smoke tests for core routes + docs link presence
+  - `tests/e2e/routes.spec.ts` — Route coverage (project slugs, 404s, metadata endpoints)
+  - `tests/e2e/evidence-links.spec.ts` — Evidence link rendering and accessibility
 
 ### E2E Test Template
 
@@ -373,15 +374,25 @@ test.describe('Feature Name', () => {
 });
 ```
 
-### Evidence Link Resolution Tests
+### Current E2E Coverage (tests/e2e)
 
-**What to test**:
+**What is currently covered**:
 
-1. Project pages render without errors
-2. EvidenceBlock component displays all 5 evidence categories
-3. All evidence links have correct href attributes
-4. BadgeGroup displays correct badges based on evidence presence
-5. Responsive design (mobile/tablet/desktop)
+1. Core routes: `/`, `/cv`, `/projects`, `/contact`
+2. Project detail routes discovered from `/projects`
+3. 404 handling for unknown routes and invalid project slugs
+4. Health and metadata endpoints: `/api/health`, `/robots.txt`, `/sitemap.xml`
+5. Evidence link rendering and accessibility on `/projects/portfolio-app`
+6. Responsive checks (mobile/tablet/desktop) for evidence content
+
+### Evidence Link Resolution Tests (optional enhancement)
+
+**Recommended additions**:
+
+1. EvidenceBlock component displays all 5 evidence categories
+2. Evidence links have correct href attributes
+3. BadgeGroup displays correct badges based on evidence presence
+4. Responsive design (mobile/tablet/desktop)
 
 **Example test**:
 
@@ -432,16 +443,16 @@ test.describe('Evidence Link Resolution', () => {
 
 ```bash
 # Run all E2E tests
-pnpm playwright test
+pnpm test:e2e
 
 # Interactive UI mode (recommended for development)
-pnpm playwright test --ui
-
-# Specific browser only
-pnpm playwright test --project=chromium
+pnpm test:e2e:ui
 
 # Debug mode (step through tests)
-pnpm playwright test --debug
+pnpm test:e2e:debug
+
+# Run a single spec (smoke tests)
+pnpm test:e2e:single
 
 # View test report (after running tests)
 pnpm playwright show-report

@@ -76,7 +76,7 @@ If MTTR targets are at risk, escalate to team lead immediately. Document all inc
 
 ```bash
 # Automated smoke tests
-PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm test:e2e
 
 # Manual validation
 open https://staging-bns-portfolio.vercel.app
@@ -144,7 +144,7 @@ Responsibilities:
 - CLS increase >0.05: Manual investigation recommended
 - Test runs:
   - Unit tests: `pnpm test:unit` (70+ Vitest tests with ≥80% coverage validation)
-  - E2E tests: `pnpm playwright test` (12 Playwright tests across Chromium, Firefox)
+  - E2E tests: `pnpm test:e2e` (13 Playwright tests across Chromium, Firefox)
 - Link validation runs (Stage 3.5):
   - Registry validation: `pnpm registry:validate` (checks project metadata schema)
   - Evidence link checks: `pnpm links:check` (Playwright smoke tests)
@@ -160,7 +160,7 @@ Responsibilities:
   - Manual smoke tests of critical routes (`/`, `/cv`, `/projects`, `/contact`)
   - Evidence link resolution verification
   - Browser console error checks
-  - Optional automated Playwright tests via: `PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test`
+  - Optional automated Playwright tests via: `PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm test:e2e`
 - If staging validation fails: fix via hotfix PR or rollback (see [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md))
 - If staging passes: production deployment (on main) is already live and validated
 
@@ -243,7 +243,7 @@ After merging PR to main and deploying to staging:
 
 ```bash
 # Run Playwright smoke tests against staging domain
-PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm test:e2e
 ```
 
 **Manual validation checklist:**

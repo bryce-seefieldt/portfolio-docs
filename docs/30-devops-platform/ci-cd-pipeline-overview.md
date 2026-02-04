@@ -206,11 +206,11 @@ trufflesecurity/trufflehog@main \
 9. **Run E2E tests**
 
    ```bash
-   pnpm playwright test
+   pnpm test:e2e
    ```
 
-   - Multi-browser: Chromium, Firefox, WebKit
-   - 12 tests covering all routes
+   - Multi-browser: Chromium, Firefox
+   - 58 tests covering core routes, slugs, 404s, metadata endpoints, and evidence links
    - 2 retries in CI, 0 locally
    - HTML report generated
 
@@ -356,7 +356,7 @@ pnpm test:coverage  # View coverage report
 
 ```bash
 pnpm dev  # Start dev server
-pnpm playwright test --ui  # Debug in interactive UI
+pnpm test:e2e:ui  # Debug in interactive UI
 ```
 
 **Timeout waiting for server**:
@@ -390,7 +390,7 @@ pnpm registry:list  # List all projects
 
 ### Parallelization
 
-- **Browsers**: E2E tests run in parallel across Chromium, Firefox, WebKit
+- **Browsers**: E2E tests run in parallel across Chromium and Firefox
 - **Workers**: 1 worker in CI (sequential), unlimited locally
 - **Jobs**: Quality → Test → Build (sequential dependencies)
 

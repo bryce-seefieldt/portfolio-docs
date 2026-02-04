@@ -400,15 +400,15 @@ describe('Registry Validation', () => {
 
 **Routes Tested**:
 
-- All project pages: `/projects/[slug]`
-- Evidence link navigation and href correctness
-- Component rendering (EvidenceBlock, BadgeGroup, VerificationBadge)
-- Responsive design across viewports (mobile: 390px, tablet: 768px, desktop: 1440px)
-- Gold standard badge display for portfolio-app
+- Core routes: `/`, `/cv`, `/projects`, `/contact`
+- Project detail routes discovered from `/projects`
+- 404 handling for unknown routes and invalid slugs
+- Health + metadata endpoints: `/api/health`, `/robots.txt`, `/sitemap.xml`
+- Basic docs link presence on `/projects/portfolio-app`
 
 **Coverage Target**: 100% route coverage for all project pages
 
-**Test File**: `e2e/evidence-links.spec.ts` and `tests/e2e/smoke.spec.ts`
+**Test Files**: `tests/e2e/smoke.spec.ts` and `tests/e2e/routes.spec.ts`
 
 **Example Test**:
 
@@ -434,7 +434,7 @@ Tests run in GitHub Actions **before build** to enforce quality gates:
    - Run unit tests: `pnpm test:unit`
    - Install Playwright browsers
    - Start dev server
-   - Run E2E tests: `pnpm playwright test`
+  - Run E2E tests: `pnpm test:e2e`
    - Upload coverage reports as artifacts
 3. **Build Job** (depends on test job):
    - Build fails if any tests fail
@@ -460,7 +460,7 @@ This ensures broken tests prevent production deployments.
 
 **Why Playwright over Cypress?**
 
-- Multi-browser support out-of-the-box (Chromium, Firefox, WebKit)
+- Multi-browser support out-of-the-box (Chromium, Firefox)
 - Better performance at scale and superior API for responsive design testing
 - Faster test execution and better debugging experience
 
@@ -901,7 +901,7 @@ export const TIMELINE: TimelineEntry[] = [
 - **ADRs**: Architecture decisions (`/docs/10-architecture/adr/adr-xxxx-...`)
 - **CI Workflows**: Build and test pipelines (GitHub Actions `.github/workflows/`)
 - **Unit Tests**: Registry, slug, link validation (Vitest, `src/lib/__tests__/`)
-- **E2E Tests**: Route coverage, evidence link resolution (Playwright, `e2e/evidence-links.spec.ts`)
+- **E2E Tests**: Route coverage and metadata endpoints (Playwright, `tests/e2e/*.spec.ts`)
 
 **Benefits**:
 

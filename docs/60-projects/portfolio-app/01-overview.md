@@ -217,7 +217,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 
 - CI quality gates (ESLint max-warnings=0, Prettier, TypeScript strict)
 - Automated unit testing (Vitest: 70+ tests for registry, links, slugs)
-- Automated E2E testing (Playwright: 12 multi-browser smoke tests)
+- Automated E2E testing (Playwright: smoke + route coverage across Chromium and Firefox)
 - Secrets scanning (CI gate via TruffleHog; optional pre-commit; local verify uses a lightweight pattern scan)
 - Frozen lockfile installs (deterministic builds)
 - PR-only merge discipline (GitHub Ruleset enforcement)
@@ -252,7 +252,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 The Portfolio App implements a comprehensive testing pyramid:
 
 - **Unit tests (Vitest):** 70+ tests covering registry validation, link construction, and slug validation
-- **E2E tests (Playwright):** 12 multi-browser smoke tests verifying all routes and evidence links
+- **E2E tests (Playwright):** 58 test cases across Chromium + Firefox covering core routes, project slugs, 404s, health/robots/sitemap, and evidence link rendering
 - **Coverage targets:** ≥80% for `src/lib/` (utility functions), 100% route coverage for E2E
 - **CI integration:** Tests run on every PR and merge; failures block deployment
 
@@ -267,7 +267,7 @@ All required checks must pass before merge (GitHub Ruleset enforcement):
 3. **Type safety:** TypeScript strict mode (no `any`)
 4. **Build:** Next.js compilation succeeds
 5. **Unit tests:** Vitest suite passes + ≥80% coverage thresholds met
-6. **E2E tests:** Playwright tests pass across Chromium, Firefox (12 tests)
+6. **E2E tests:** Playwright tests pass across Chromium, Firefox (58 tests)
 7. **Secrets:** TruffleHog scans with `--only-verified` flag
 8. **Supply chain:** CodeQL + Dependabot for dependency hygiene
 
@@ -282,7 +282,7 @@ secrets-scan (TruffleHog --only-verified)
   ↓
 test (unit tests + E2E tests)
   ├─ pnpm test:unit (70+ Vitest tests)
-  └─ pnpm playwright test (12 E2E tests)
+  └─ pnpm test:e2e (58 E2E tests)
   ↓
 build (Next.js compile + Vercel deploy)
 ```
