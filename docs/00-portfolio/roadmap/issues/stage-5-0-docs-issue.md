@@ -102,7 +102,7 @@ Phase 5 documentation work ensures every major claim is traceable, navigation is
 **Success Criteria:**
 
 - [ ] Claims are traceable to evidence
-- [ ] Reviewer guide validates portfolio in <15 minutes
+- [ ] Reviewer guide validates portfolio in < 15 minutes
 
 ---
 

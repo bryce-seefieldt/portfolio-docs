@@ -104,7 +104,7 @@ Phase 5 is best executed as **sequential steps** since each stage builds evidenc
 
 #### 2b. Reviewer guide
 
-- Provide a concise path for reviewers to validate claims in <15 minutes.
+- Provide a concise path for reviewers to validate claims in < 15 minutes.
 
 **Files to create/modify:**
 
