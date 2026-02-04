@@ -67,6 +67,9 @@ Release notes are public. Do not include:
 
 Add new entries at the top.
 
+- **2026-01-30 — Portfolio App Phase 4 Complete (Reliability + Security + UX/SEO)**
+  - `20260130-portfolio-app-phase-4-complete.md`
+  - Observability and runbooks, security controls and threat model updates, UX/SEO/theming documentation, ADRs
 - **2026-01-20 — Portfolio App Phase 2 Complete (Gold Standard Project)**
   - `20260120-portfolio-app-phase-2-gold-standard.md`
   - Comprehensive dossier, STRIDE threat model, enhanced CV, gold standard project page, smoke tests

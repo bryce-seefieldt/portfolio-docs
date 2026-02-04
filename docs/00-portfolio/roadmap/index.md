@@ -101,7 +101,7 @@ For each phase or milestone:
 - **Phase 1:** Portfolio App foundation (repo, CI, deployment, core routes) — ✅ Complete (2026-01-17)
 - **Phase 2:** “Gold standard” content (one exemplary project + deep evidence) — ✅ Complete (2026-01-21)
 - **Phase 3:** Scaling content model (repeatable project publishing pipeline) — ✅ Complete (Stage 3.6 complete 2026-01-23)
-- **Phase 4:** Reliability + security hardening (enterprise credibility upgrades)
+- **Phase 4:** Reliability + security hardening (enterprise credibility upgrades) — ✅ Complete (2026-01-30)
 - **Phase 5:** Advanced demonstrations (multi-language demos, platform proofs, eval-first artifacts)
 
 Each phase includes:
@@ -308,7 +308,7 @@ Make adding projects predictable, low-friction, and consistent with governance.
 
 ## Phase 4 — Reliability, performance, and security hardening (enterprise maturity)
 
-**Status:** Ready to Execute — see [Phase 4 Implementation Guide](/docs/00-portfolio/roadmap/phase-4-implementation-guide.md)
+**Status:** ✅ Complete (2026-01-30) — see [Phase 4 Implementation Guide](/docs/00-portfolio/roadmap/phase-4-implementation-guide.md) and [Release Note: Phase 4 Completion](/docs/00-portfolio/release-notes/20260130-portfolio-app-phase-4-complete.md)
 
 ### Deliverables (Portfolio App)
 

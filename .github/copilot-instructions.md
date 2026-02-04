@@ -414,9 +414,41 @@ For **evidence documents** created within or outside phases, use:
 
 - ADRs: `docs/10-architecture/adr/`
 - Runbooks: `docs/50-operations/runbooks/`
+- Incident response governance: `docs/50-operations/incident-response/`
 - Threat models: `docs/40-security/threat-models/`
-- Postmortems: `docs/50-operations/runbooks/` (in postmortem subsection)
+- Postmortems: `docs/50-operations/incident-response/postmortems/`
 - Project dossiers: `docs/60-projects/[project-name]/`
+
+## Project Dossier Structure (Front Door + Annexes)
+
+Project dossier indexes (e.g., `docs/60-projects/portfolio-app/index.md`) must stay **reviewer-first**:
+
+- Purpose + scope
+- Reviewer path (links to dossier subpages)
+- Evidence map (ADRs, threat model, runbooks, CI)
+- Current status (3–6 bullets max)
+- See also (appendices)
+
+Detailed progress logs and metric-heavy content belong in appendices:
+
+- `appendix-progress.md` — phase/stage checklists and completion notes
+- `appendix-metrics.md` — test counts, CI gates, thresholds, performance signals
+
+Release timeline narrative belongs in `docs/00-portfolio/release-notes/` (not dossier index pages).
+
+## Operations Governance: Runbooks vs Incident Response
+
+**Runbooks (`docs/50-operations/runbooks/`)**
+
+- Purpose: deterministic, step-by-step operational procedures (deploy, rollback, triage, recovery)
+- Must follow runbook template structure with validation + rollback
+- The runbooks index is a **front door + catalog** only (short “when to use” guidance; no handbook-level detail)
+
+**Incident Response (`docs/50-operations/incident-response/`)**
+
+- Purpose: governance and operating model for incidents (severity, comms cadence, lifecycle)
+- The incident handbook contains quick selectors, severity guidance, operational patterns, and tooling
+- Keep handbook content out of runbook indexes to avoid discoverability and maintenance drift
 
 ---
 
