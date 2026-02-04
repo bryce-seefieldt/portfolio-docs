@@ -205,7 +205,9 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 2. **Test gate** (`ci / test`)
    - Unit tests (pnpm test:unit - 70+ Vitest tests)
    - Coverage validation (≥80% for src/lib/)
-  - E2E tests (pnpm test:e2e - 58 tests across Chromium, Firefox)
+
+- E2E tests (pnpm test:e2e - 58 tests across Chromium, Firefox)
+
 3. **Build gate** (`ci / build`)
    - Next.js build must succeed
    - Vercel deployment initiated

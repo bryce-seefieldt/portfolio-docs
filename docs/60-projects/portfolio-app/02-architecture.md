@@ -434,8 +434,10 @@ Tests run in GitHub Actions **before build** to enforce quality gates:
    - Run unit tests: `pnpm test:unit`
    - Install Playwright browsers
    - Start dev server
-  - Run E2E tests: `pnpm test:e2e`
-   - Upload coverage reports as artifacts
+
+- Run E2E tests: `pnpm test:e2e`
+- Upload coverage reports as artifacts
+
 3. **Build Job** (depends on test job):
    - Build fails if any tests fail
    - Merge is blocked if CI fails
