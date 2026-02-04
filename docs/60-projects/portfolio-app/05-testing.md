@@ -77,7 +77,7 @@ The `verify` command runs a comprehensive 11-step validation workflow:
 8. **Build**: Produces production bundle to catch build-time errors
 9. **Performance verification**: Validates bundle size and cache headers against `docs/performance-baseline.yml`
 10. **Unit tests**: Runs Vitest suite (~120 tests: registry validation, slug helpers, link construction, structured data, observability)
-11. **E2E tests**: Runs Playwright suite (12 tests: evidence link resolution, route coverage)
+11. **E2E tests**: Runs Playwright suite (58 tests across Chromium + Firefox: smoke + route coverage + metadata endpoints + evidence links)
 
 **Benefits:**
 
@@ -124,7 +124,7 @@ pnpm format:check  # Prettier validation (or format:write to fix)
 pnpm typecheck     # TypeScript type checking
 pnpm build         # Production build
 pnpm test:unit     # Unit tests (Vitest)
-pnpm playwright test # E2E tests (Playwright)
+pnpm test:e2e       # E2E tests (Playwright)
 ```
 
 **When to use individual commands:**
@@ -134,7 +134,7 @@ pnpm playwright test # E2E tests (Playwright)
 - Understanding what each check does
 - Integrating with editor/IDE workflows
 - Running only unit tests (without E2E): `pnpm test:unit`
-- Debugging E2E tests: `pnpm playwright test --ui` or `pnpm playwright test --debug`
+- Debugging E2E tests: `pnpm test:e2e:ui` or `pnpm test:e2e:debug`
 
 ### Local preview server
 
@@ -279,16 +279,17 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
 
 **Coverage:**
 
-- 12 test cases across 2 browsers (Chromium, Firefox)
+- 58 test cases across 2 browsers (Chromium, Firefox)
 - Core routes: `/`, `/cv`, `/projects`, `/contact`
-- Dynamic routes: `/projects/[slug]` (example: `/projects/portfolio-app`)
-- Evidence link resolution validation (dossier, threat model, ADRs, runbooks)
-- BadgeGroup component display validation
-- Responsive design verification (mobile, tablet, desktop)
+- Dynamic routes: `/projects/[slug]` (discovered from `/projects`)
+- 404 handling for unknown routes and invalid slugs
+- Health + metadata endpoints: `/api/health`, `/robots.txt`, `/sitemap.xml`
+- Evidence link rendering and accessibility on `/projects/portfolio-app`
+- Responsive checks for evidence content (mobile/tablet/desktop)
 
 **Configuration:**
 
-- Test directory: `e2e/`
+- Test directory: `tests/e2e/`
 - Config file: `playwright.config.ts`
 - Browsers: Chromium, Firefox (WebKit excluded for stability)
 - Retries: 2 in CI, 0 locally
@@ -298,32 +299,32 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
 **Running E2E Tests:**
 
 ```bash
-pnpm playwright test          # Run all E2E tests headlessly
-pnpm playwright test --ui     # Open Playwright UI mode (local dev)
-pnpm playwright test --debug  # Run tests in debug mode with inspector
+pnpm test:e2e          # Run all E2E tests headlessly
+pnpm test:e2e:ui       # Open Playwright UI mode (local dev)
+pnpm test:e2e:debug    # Run tests in debug mode with inspector
 npx playwright show-report    # View HTML test report
 ```
 
 **CI Integration:**
 
-- Tests run in `ci / test` job after successful build
+- Tests run in `ci / test` job before build
 - Playwright browsers installed via `npx playwright install --with-deps`
 - Dev server started with `pnpm dev &` and readiness check via `wait-on http://localhost:3000`
-- Tests execute with `pnpm playwright test`
+- Tests execute with `pnpm test:e2e`
 - HTML test reports generated (`.gitignored`)
 - Build fails if any E2E tests fail
 
 **Test Scripts:**
 
-- `pnpm playwright test` — Run all E2E tests
-- `pnpm playwright test --ui` — Interactive UI mode for debugging
-- `pnpm playwright test --debug` — Debug mode with step-through inspector
+- `pnpm test:e2e` — Run all E2E tests
+- `pnpm test:e2e:ui` — Interactive UI mode for debugging
+- `pnpm test:e2e:debug` — Debug mode with step-through inspector
 
 **Evidence:**
 
 - PR #10: https://github.com/bryce-seefieldt/portfolio-app/pull/10
-- Test runtime: ~10 seconds for 12 tests across 2 browsers
-- Test file: `e2e/evidence-links.spec.ts`
+- Test runtime: ~25 seconds for 58 tests across 2 browsers
+- Test files: `tests/e2e/smoke.spec.ts`, `tests/e2e/routes.spec.ts`, `tests/e2e/evidence-links.spec.ts`
 - All tests passing in CI and local environments
 
 **Next.js 15 Compatibility Fix:**
@@ -534,7 +535,7 @@ A PR is acceptable when:
   - `ci / quality` (lint, format, typecheck)
   - `ci / build` (build + smoke tests)
 - preview deployment renders as expected
-- smoke tests pass (12/12 tests)
+- E2E tests pass (58/58 test cases, 2 browsers)
 - no broken evidence links are introduced
 - if behavior changes materially:
   - dossier updated

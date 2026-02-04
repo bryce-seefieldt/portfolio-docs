@@ -647,7 +647,7 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph E2E["E2E Tests - ~12 tests"]
+    subgraph E2E["E2E Tests - ~58 tests"]
         E1["Evidence link resolution"]
         E2["Component rendering"]
         E3["Route coverage"]
@@ -675,7 +675,7 @@ graph TB
 ````markdown
 ```mermaid
 graph TB
-    subgraph E2E["E2E Tests - ~12 tests"]
+    subgraph E2E["E2E Tests - ~58 tests"]
         E1["Evidence link resolution"]
         E2["Component rendering"]
         E3["Route coverage"]

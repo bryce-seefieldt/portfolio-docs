@@ -31,7 +31,7 @@ Centralize quantitative quality signals and operational thresholds referenced by
 ## Test Coverage Signals
 
 - Unit tests (Vitest): 70+ tests covering registry validation and link helpers
-- E2E tests (Playwright): 12 tests across Chromium and Firefox
+- E2E tests (Playwright): 58 tests across Chromium and Firefox
 - Coverage target: ≥80% for core `src/lib/` modules
 
 ## Verification Workflow (Local)
