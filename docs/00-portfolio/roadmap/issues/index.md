@@ -22,10 +22,22 @@ This hub collects all roadmap issue documents that drive planning and execution 
 
 Use this index to find the canonical task descriptions, acceptance criteria, and cross-links for current and past stages.
 
-## Current Issues (Phase 4)
+## Current Issues
+
+- None (Phase 4 complete)
+
+## Completed Issues (Phase 4)
 
 - Stage 4.1 — App: Multi-environment deployment strategy — see [stage-4-1-app-issue.md](./stage-4-1-app-issue.md)
 - Stage 4.1 — Docs: ADR-0013, promotion & rollback runbooks — see [stage-4-1-docs-issue.md](./stage-4-1-docs-issue.md)
+- Stage 4.2 — App: Performance optimization & measurement — see [stage-4-2-app-issue.md](./stage-4-2-app-issue.md)
+- Stage 4.2 — Docs: Performance runbooks & reference — see [stage-4-2-docs-issue.md](./stage-4-2-docs-issue.md)
+- Stage 4.3 — App: Observability & operational readiness — see [stage-4-3-app-issue.md](./stage-4-3-app-issue.md)
+- Stage 4.3 — Docs: Observability & runbooks — see [stage-4-3-docs-issue.md](./stage-4-3-docs-issue.md)
+- Stage 4.4 — App: Security posture deepening — see [stage-4-4-app-issue.md](./stage-4-4-app-issue.md)
+- Stage 4.4 — Docs: Security hardening artifacts — see [stage-4-4-docs-issue.md](./stage-4-4-docs-issue.md)
+- Stage 4.5 — App: UX/SEO enhancements — see [stage-4-5-app-issue.md](./stage-4-5-app-issue.md)
+- Stage 4.5 — Docs: UX/SEO/theme documentation — see [stage-4-5-docs-issue.md](./stage-4-5-docs-issue.md)
 
 ## Completed Issues (Phase 3)
 
@@ -57,3 +69,4 @@ Use this index to find the canonical task descriptions, acceptance criteria, and
 
 - Roadmap hub: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
 - Phase 3 Implementation Guide: [/docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
+- Phase 4 Implementation Guide: [/docs/00-portfolio/roadmap/phase-4-implementation-guide.md](/docs/00-portfolio/roadmap/phase-4-implementation-guide.md)

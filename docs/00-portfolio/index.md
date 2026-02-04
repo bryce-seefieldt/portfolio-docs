@@ -58,18 +58,19 @@ Recommended initial files (create these first):
 - `phase-1-completion-checklist.md` — master checklist for Phase 1 final validation (admin tasks)
 - `release-notes/` — versioned release notes (e.g., v0.1.0, v0.2.0)
 
-## Current Status (Phase 3)
+## Current Status (Phase 4)
 
 - Phase 1: ✅ Complete (portfolio-app foundation with CI, Vercel previews, dossier + ADRs + runbooks)
 - Phase 2: ✅ Complete (gold standard exemplar, Playwright smoke tests in CI, STRIDE compliance, secrets scanning gate)
-- Phase 3: 🟡 In progress — Stage 3.1 (registry + validation) complete; Stage 3.2 (EvidenceBlock/Badges) in flight
+- Phase 3: ✅ Complete (data-driven registry, evidence visualization, CI validation)
+- Phase 4: ✅ Complete (2026-01-30) — reliability, security hardening, observability, UX/SEO/theming
 
 Navigation to active artifacts:
 
 - Roadmap hub: [roadmap/index.md](./roadmap/index.md)
-- Implementation guides: [roadmap/phase-1-implementation-guide.md](./roadmap/phase-1-implementation-guide.md), [roadmap/phase-2-implementation-guide.md](./roadmap/phase-2-implementation-guide.md), [roadmap/phase-3-implementation-guide.md](./roadmap/phase-3-implementation-guide.md)
-- Stage issues: [roadmap/issues/index.md](./roadmap/issues/index.md) (Stage 3.1 and 3.2 app/docs issues)
-- Release notes: [release-notes/index.md](./release-notes/index.md) (Phase 1 and Phase 2 milestones)
+- Implementation guides: [roadmap/phase-1-implementation-guide.md](./roadmap/phase-1-implementation-guide.md), [roadmap/phase-2-implementation-guide.md](./roadmap/phase-2-implementation-guide.md), [roadmap/phase-3-implementation-guide.md](./roadmap/phase-3-implementation-guide.md), [roadmap/phase-4-implementation-guide.md](./roadmap/phase-4-implementation-guide.md)
+- Stage issues: [roadmap/issues/index.md](./roadmap/issues/index.md) (Phase 4 stage issues)
+- Release notes: [release-notes/index.md](./release-notes/index.md) (Phase 4 completion entry)
 
 ## Portfolio writing guidelines (strict)
 
