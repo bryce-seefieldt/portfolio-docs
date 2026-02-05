@@ -56,6 +56,7 @@ The dev server uses the environment variables from `.env.local` to configure sit
 - Recommended: `pnpm verify` (runs format, lint, typecheck, format:check, audit, build)
 - Faster iteration: `pnpm verify:quick` (skips the build gate; rerun full `pnpm verify` before opening a PR)
 - Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm audit && pnpm build`
+- Audit posture: CI blocks high/critical advisories; lower severities are logged and require a ticket or risk entry if persistent
 - Optional audit report: `pnpm verify -- --audit-json` (writes `audit-report.json`)
 
 ## Build

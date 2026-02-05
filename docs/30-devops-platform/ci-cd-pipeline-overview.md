@@ -96,11 +96,11 @@ graph TB
 
 5. **Auto-format for Dependabot PRs** (conditional)
 
-   ```bash
-   if: ${{ github.actor == 'dependabot[bot]' }}
-   pnpm format:write || true
-   # Auto-commit if changes detected
-   ```
+```bash
+if: ${{ github.actor == 'dependabot[bot]' }}
+pnpm format:write || true
+# Auto-commit if changes detected
+```
 
 6. **Lint** (fails on warnings)
 
@@ -121,9 +121,13 @@ graph TB
    ```
 
 9. **Dependency audit**
+
    ```bash
    pnpm audit --audit-level=high
    ```
+
+   - **Gate**: high/critical advisories fail the job
+   - **Visibility**: lower severities are logged separately (non-blocking)
 
 **Outcome**: Fails if any checks fail; blocks subsequent jobs
 

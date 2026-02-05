@@ -157,6 +157,8 @@ Hard rules:
    # Optional audit report: pnpm verify -- --audit-json
    ```
 
+   **Audit posture:** CI blocks high/critical advisories; lower severities are logged and require a ticket or risk entry if persistent.
+
 4. **Commit and push** (`.env.local` is gitignored; do not commit)
 
 ### PR Discipline (no changes)

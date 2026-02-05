@@ -43,12 +43,13 @@ The Portfolio Docs App enforces a comprehensive quality gate framework that ensu
 
 ### Quality gates overview
 
-| Gate          | Command             | What it validates                                 | When it runs   |
-| ------------- | ------------------- | ------------------------------------------------- | -------------- |
-| **Lint**      | `pnpm lint`         | Code quality, TypeScript/React best practices     | PR + main (CI) |
-| **Typecheck** | `pnpm typecheck`    | TypeScript type safety in config and components   | PR + main (CI) |
-| **Format**    | `pnpm format:check` | Code style consistency (Prettier)                 | PR + main (CI) |
-| **Build**     | `pnpm build`        | Documentation integrity, broken links, navigation | PR + main (CI) |
+| Gate          | Command                         | What it validates                                 | When it runs   |
+| ------------- | ------------------------------- | ------------------------------------------------- | -------------- |
+| **Lint**      | `pnpm lint`                     | Code quality, TypeScript/React best practices     | PR + main (CI) |
+| **Typecheck** | `pnpm typecheck`                | TypeScript type safety in config and components   | PR + main (CI) |
+| **Format**    | `pnpm format:check`             | Code style consistency (Prettier)                 | PR + main (CI) |
+| **Audit**     | `pnpm audit --audit-level=high` | High/critical dependency vulnerabilities          | PR + main (CI) |
+| **Build**     | `pnpm build`                    | Documentation integrity, broken links, navigation | PR + main (CI) |
 
 All gates are enforced via GitHub Actions and must pass before:
 
@@ -113,6 +114,9 @@ Runs in parallel, typically completes in < 2 minutes:
 2. `pnpm lint` (ESLint)
 3. `pnpm typecheck` (TypeScript)
 4. `pnpm format:check` (Prettier)
+5. `pnpm audit --audit-level=high` (high/critical advisories gate)
+
+**Visibility:** lower-severity advisories are logged separately (non-blocking) and require a ticket or risk register entry if persistent.
 
 **Purpose:** Catch code quality issues early before expensive build operations.
 

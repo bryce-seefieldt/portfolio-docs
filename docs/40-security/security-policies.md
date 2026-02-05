@@ -80,7 +80,7 @@ All responses include OWASP-recommended security headers. Content Security Polic
 | X-XSS-Protection        | 1; mode=block                                                                                                                  | Legacy XSS protection (defense-in-depth) |
 | Referrer-Policy         | strict-origin-when-cross-origin                                                                                                | Control referrer leakage                 |
 | Permissions-Policy      | geolocation=(), microphone=(), camera=()                                                                                       | Disable unused APIs                      |
-| Content-Security-Policy | default-src 'self'; script-src 'self' 'nonce-<per-request>' https://cdn.vercel-analytics.com; style-src 'self' 'unsafe-inline' | Prevent XSS, control external scripts    |
+| Content-Security-Policy | default-src 'self'; script-src 'self' 'nonce-per-request' https://cdn.vercel-analytics.com; style-src 'self' 'unsafe-inline' | Prevent XSS, control external scripts    |
 
 **Trade-Off: `unsafe-inline` Styles**
 

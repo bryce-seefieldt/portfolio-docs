@@ -542,6 +542,13 @@ pnpm verify -- --audit-json
 pnpm verify -- --audit-json=artifacts/audit-report.json
 ```
 
+For the portfolio-app repo, you can surface lower-severity audit findings during verification:
+
+```bash
+pnpm verify -- --audit-all
+pnpm verify -- --audit-level=critical
+```
+
 ## CI Integration
 
 ### Test Job in GitHub Actions
