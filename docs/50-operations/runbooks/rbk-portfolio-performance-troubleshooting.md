@@ -347,7 +347,7 @@ Expected: public, max-age=3600, stale-while-revalidate=86400
 
 1. **Missing headers configuration** in `next.config.ts`
 2. **Route is dynamically rendered** (not static/SSG)
-3. **Middleware overriding headers**
+3. **Proxy overriding headers**
 4. **Development mode** (headers only apply in production)
 
 ### Diagnostic Steps
@@ -441,14 +441,14 @@ export const dynamic = 'force-static';
 export const revalidate = 3600; // ISR: 1 hour
 ```
 
-#### Solution 3: Check Middleware
+#### Solution 3: Check Proxy
 
 If headers are being overridden:
 
 ```typescript
-// middleware.ts
+// proxy.ts
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const response = NextResponse.next();
 
   // Don't override Cache-Control for static assets
@@ -497,7 +497,7 @@ Expected: public, max-age=3600, stale-while-revalidate=86400
 ### Root Causes
 
 1. **Route-specific caching strategy** (intentional)
-2. **Conflicting headers** from middleware or API routes
+2. **Conflicting headers** from proxy or API routes
 3. **Outdated baseline** (strategy changed but baseline not updated)
 
 ### Solutions
@@ -696,7 +696,7 @@ graph TD
     D --> F[Rebuild: pnpm build && pnpm start]
     E --> G{Route is static/SSG?}
     G -->|No| H[Force static: export dynamic = 'force-static']
-    G -->|Yes| I[Check middleware for overrides]
+    G -->|Yes| I[Check proxy for overrides]
     H --> F
     I --> F
     F --> J[Test: curl -I localhost:3000/route]

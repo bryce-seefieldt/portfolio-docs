@@ -154,7 +154,10 @@ Hard rules:
    pnpm start       # preview
    pnpm verify      # required before PR
    # Optional for faster iteration: pnpm verify:quick (skip build, rerun full verify before PR)
+   # Optional audit report: pnpm verify -- --audit-json
    ```
+
+   **Audit posture:** CI blocks high/critical advisories; lower severities are logged and require a ticket or risk entry if persistent.
 
 4. **Commit and push** (`.env.local` is gitignored; do not commit)
 
@@ -242,7 +245,7 @@ Runs all quality checks with auto-formatting and detailed error reporting (envir
 **Option 2 - Individual commands:**
 
 ```bash
-pnpm format:write && pnpm lint && pnpm typecheck && pnpm build
+pnpm format:write && pnpm lint && pnpm typecheck && pnpm audit && pnpm build
 ```
 
 Secrets scanning:
@@ -260,7 +263,7 @@ For **portfolio-docs**:
 
 - Recommended: `pnpm verify`
 - Faster iteration: `pnpm verify:quick` (skips the build gate; run `pnpm verify` before opening a PR)
-- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`
+- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm audit && pnpm build`
 
 All checks must pass before opening a PR.
 

@@ -53,9 +53,11 @@ The dev server uses the environment variables from `.env.local` to configure sit
 
 ### Pre-PR verification (required)
 
-- Recommended: `pnpm verify` (runs format, lint, typecheck, format:check, build)
+- Recommended: `pnpm verify` (runs format, lint, typecheck, format:check, audit, build)
 - Faster iteration: `pnpm verify:quick` (skips the build gate; rerun full `pnpm verify` before opening a PR)
-- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`
+- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm audit && pnpm build`
+- Audit posture: CI blocks high/critical advisories; lower severities are logged and require a ticket or risk entry if persistent
+- Optional audit report: `pnpm verify -- --audit-json` (writes `audit-report.json`)
 
 ## Build
 
@@ -99,7 +101,8 @@ This command generates static content into the `build` directory. The same comma
 - `pnpm lint` / `pnpm lint:fix` — ESLint check / auto-fix
 - `pnpm typecheck` — TypeScript type validation
 - `pnpm format:check` / `pnpm format:write` — Prettier check / write
-- `pnpm verify` — full local quality gates (format, lint, typecheck, format:check, build)
+- `pnpm audit` — dependency audit (high severity)
+- `pnpm verify` — full local quality gates (format, lint, typecheck, format:check, audit, build)
 - `pnpm verify:quick` — skip build for faster iteration (run full `pnpm verify` before PR)
 
 ### Reference

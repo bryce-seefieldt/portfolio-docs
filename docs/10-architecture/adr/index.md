@@ -127,3 +127,7 @@ This ADR system is successful when:
 - Documentation App ADR examples: `docs/10-architecture/adr/adr-0001-adopt-docusaurus-for-portfolio-docs.md`
 - Threat models: `docs/40-security/threat-models/`
 - Runbooks: `docs/50-operations/runbooks/`
+
+## Recent ADRs
+
+- [ADR-0018: React2Shell Hardening Baseline](/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md)

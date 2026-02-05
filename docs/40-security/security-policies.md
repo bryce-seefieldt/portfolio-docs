@@ -21,7 +21,7 @@ The portfolio app uses a strict dependency audit and update policy to minimize v
 **Enforcement:**
 
 - Dependabot PRs require review before merge (standard PR process)
-- `pnpm audit` runs in CI (optional check; failures documented in risk register)
+- `pnpm audit --audit-level=high` runs in CI (required check; failures documented in risk register)
 - Frozen lockfile installs in CI (`pnpm install --frozen-lockfile`) prevent transitive surprises
 
 **Ownership:** Development team (all PRs), DevOps (Dependabot configuration)
@@ -73,20 +73,20 @@ All responses include OWASP-recommended security headers. Content Security Polic
 
 **Required Headers:**
 
-| Header                  | Policy                                                                                                                                              | Purpose                                  |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| X-Frame-Options         | DENY                                                                                                                                                | Prevent clickjacking                     |
-| X-Content-Type-Options  | nosniff                                                                                                                                             | Prevent MIME sniffing                    |
-| X-XSS-Protection        | 1; mode=block                                                                                                                                       | Legacy XSS protection (defense-in-depth) |
-| Referrer-Policy         | strict-origin-when-cross-origin                                                                                                                     | Control referrer leakage                 |
-| Permissions-Policy      | geolocation=(), microphone=(), camera=()                                                                                                            | Disable unused APIs                      |
-| Content-Security-Policy | default-src 'self'; script-src 'self' 'unsafe-inline' vercel.live; style-src 'self' 'unsafe-inline'; connect-src 'self' vitals.vercel-analytics.com | Prevent XSS, control external scripts    |
+| Header                  | Policy                                                                                                                       | Purpose                                  |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| X-Frame-Options         | DENY                                                                                                                         | Prevent clickjacking                     |
+| X-Content-Type-Options  | nosniff                                                                                                                      | Prevent MIME sniffing                    |
+| X-XSS-Protection        | 1; mode=block                                                                                                                | Legacy XSS protection (defense-in-depth) |
+| Referrer-Policy         | strict-origin-when-cross-origin                                                                                              | Control referrer leakage                 |
+| Permissions-Policy      | geolocation=(), microphone=(), camera=()                                                                                     | Disable unused APIs                      |
+| Content-Security-Policy | default-src 'self'; script-src 'self' 'nonce-per-request' https://cdn.vercel-analytics.com; style-src 'self' 'unsafe-inline' | Prevent XSS, control external scripts    |
 
-**Trade-Off: `unsafe-inline` Scripts**
+**Trade-Off: `unsafe-inline` Styles**
 
-- **Why Required:** Next.js framework requires inline styles/scripts for hydration
-- **Risk Mitigation:** CSP still prevents external injection and inline event handlers (blocked by CSP default-src)
-- **Future Path:** Upgrade to nonces/hashes when external script dependencies stabilize
+- **Why Required:** Next.js framework requires inline styles for hydration
+- **Risk Mitigation:** Script execution is nonce-gated; external scripts are tightly scoped
+- **Future Path:** Evaluate style nonces/hashes when framework support is stable
 
 **Validation:**
 
@@ -100,6 +100,28 @@ curl -I http://localhost:3000/ | grep -E "X-Frame-Options|X-Content-Type-Options
 ```
 
 **Ownership:** Development team (configuration), DevOps (validation in CI)
+
+---
+
+## Mutation Safety Policy (React2Shell Hardening)
+
+**Policy Statement:**
+
+All mutation endpoints must validate input strictly, enforce CSRF protection, and apply rate limiting. Generic deserialization or dynamic execution is prohibited.
+
+**Procedures:**
+
+- **Validation:** Zod schema validation for all POST/PUT/DELETE payloads
+- **CSRF:** Double-submit token enforcement for any non-idempotent route
+- **Rate limiting:** Per-IP throttling on mutation routes
+- **CSP:** Per-request nonce for inline scripts
+
+**Enforcement:**
+
+- Linting and code review reject dynamic evaluation patterns
+- CI audit gate must pass for releases
+
+**Ownership:** Development team (implementation), DevOps (CI enforcement)
 
 ---
 

@@ -56,6 +56,12 @@ jobs:
       - name: Format check
         run: pnpm format:check
 
+      - name: Audit gate (high/critical)
+        run: pnpm audit --audit-level=high
+
+      - name: Audit visibility (all severities)
+        run: pnpm audit --audit-level=low || true
+
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15

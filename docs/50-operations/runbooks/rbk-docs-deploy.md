@@ -85,6 +85,7 @@ Then run **all quality gates** (required):
 pnpm format:write  # Auto-fix formatting
 pnpm lint          # ESLint
 pnpm typecheck     # TypeScript
+pnpm audit --audit-level=high  # Dependency vulnerability gate
 pnpm format:check  # Prettier
 pnpm build         # Docusaurus build
 ```
@@ -92,6 +93,7 @@ pnpm build         # Docusaurus build
 Expected outcome:
 
 - All quality gates pass without errors or warnings.
+- Dependency audit passes at `--audit-level=high`.
 - Build succeeds without broken links or structural errors.
 
 ### 2) Open PR (required)

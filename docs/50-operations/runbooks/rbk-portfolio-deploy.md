@@ -62,7 +62,7 @@ If suspected, stop and treat as an incident.
 
 - Local validation passed (choose one approach):
   - **Comprehensive:** `pnpm verify` (auto-formats, runs all checks with detailed reporting)
-  - **Individual:** `pnpm lint && pnpm format:check && pnpm typecheck && pnpm build`
+  - **Individual:** `pnpm lint && pnpm format:check && pnpm typecheck && pnpm audit --audit-level=high && pnpm build`
 - PR readiness:
   - PR template completed with security note (“No secrets added”)
   - Vercel preview exists and routes render (`/`, `/cv`, `/projects`, one project detail)
@@ -82,7 +82,7 @@ pnpm install
 pnpm verify  # Runs all 8 checks with detailed error reporting
 ```
 
-This runs: environment check, auto-format, format validation, lint, typecheck, secret scanning, registry validation, build, and smoke tests.
+This runs: environment check, auto-format, format validation, lint, typecheck, audit, secret scanning, registry validation, build, and smoke tests.
 
 **Alternative: Quick validation (skip tests):**
 
@@ -99,6 +99,7 @@ pnpm install
 pnpm format:write      # Auto-fix formatting
 pnpm lint              # ESLint (zero warnings)
 pnpm typecheck         # TypeScript validation
+pnpm audit --audit-level=high  # Dependency vulnerability gate
 pnpm registry:validate # Projects YAML schema check
 pnpm build             # Production build
 pnpm test              # Smoke tests (Playwright - 12 tests)

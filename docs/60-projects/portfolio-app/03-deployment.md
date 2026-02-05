@@ -202,6 +202,9 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
    - lint (ESLint)
    - format check (Prettier)
    - typecheck (TypeScript)
+
+- audit (pnpm audit --audit-level=high)
+
 2. **Test gate** (`ci / test`)
    - Unit tests (pnpm test:unit - 70+ Vitest tests)
    - Coverage validation (≥80% for src/lib/)

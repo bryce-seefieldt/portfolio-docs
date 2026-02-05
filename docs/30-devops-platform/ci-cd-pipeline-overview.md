@@ -36,7 +36,7 @@ The Portfolio App CI/CD pipeline enforces quality gates via GitHub Actions befor
 
 ```mermaid
 graph TB
-    Quality["Quality Job<br/>├─ Lint ESLint<br/>├─ Format check Prettier<br/>├─ Typecheck TypeScript<br/>└─ Auto-format Dependabot PRs"]
+   Quality["Quality Job<br/>├─ Lint ESLint<br/>├─ Format check Prettier<br/>├─ Typecheck TypeScript<br/>├─ Dependency audit<br/>└─ Auto-format Dependabot PRs"]
     Secrets["Secrets-Scan Job<br/>├─ TruffleHog scanning<br/>└─ Verified secrets only"]
     Test["Test Job Stage 3.3<br/>├─ Unit tests pnpm test:unit<br/>├─ E2E tests Playwright<br/>└─ Coverage reports artifacts"]
     Build["Build Job<br/>├─ pnpm build<br/>└─ Vercel deployment"]
@@ -96,11 +96,11 @@ graph TB
 
 5. **Auto-format for Dependabot PRs** (conditional)
 
-   ```bash
-   if: ${{ github.actor == 'dependabot[bot]' }}
-   pnpm format:write || true
-   # Auto-commit if changes detected
-   ```
+```bash
+if: ${{ github.actor == 'dependabot[bot]' }}
+pnpm format:write || true
+# Auto-commit if changes detected
+```
 
 6. **Lint** (fails on warnings)
 
@@ -115,9 +115,19 @@ graph TB
    ```
 
 8. **Typecheck**
+
    ```bash
    pnpm typecheck
    ```
+
+9. **Dependency audit**
+
+   ```bash
+   pnpm audit --audit-level=high
+   ```
+
+   - **Gate**: high/critical advisories fail the job
+   - **Visibility**: lower severities are logged separately (non-blocking)
 
 **Outcome**: Fails if any checks fail; blocks subsequent jobs
 
@@ -182,7 +192,7 @@ trufflesecurity/trufflehog@main \
    ```
 
    - Vitest with coverage reporting
-   - Coverage targets: ≥80% lines, functions; ≥75% branches
+   - Coverage targets: ≥95% lines, functions, branches, statements
    - Fails if coverage targets not met
 
 6. **Install Playwright browsers**
@@ -210,7 +220,7 @@ trufflesecurity/trufflehog@main \
    ```
 
    - Multi-browser: Chromium, Firefox
-   - 58 tests covering core routes, slugs, 404s, metadata endpoints, and evidence links
+   - 66 tests covering core routes, slugs, 404s, metadata endpoints, evidence links, and security APIs
    - 2 retries in CI, 0 locally
    - HTML report generated
 
@@ -343,6 +353,13 @@ pnpm format:write  # Fix formatting
 pnpm typecheck  # Run locally to debug
 ```
 
+**Dependency audit failures**:
+
+```bash
+pnpm audit --audit-level=high
+pnpm up --latest
+```
+
 ### Test Job Failures
 
 **Unit tests fail**:
@@ -433,7 +450,7 @@ pnpm registry:list  # List all projects
 ### Test Reports
 
 - **Playwright Report**: Generated after E2E tests
-- **Command**: `pnpm playwright show-report`
+- **Command**: `pnpm exec playwright show-report`
 - **Location**: `.playwright/report/`
 
 ## Related Documentation

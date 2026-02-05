@@ -24,7 +24,10 @@ HTTP security headers are a defense-in-depth mechanism. They instruct the browse
 | `Permissions-Policy`      | `geolocation=(), microphone=(), camera=()` | Disable unused device APIs                   |
 | `Content-Security-Policy` | (see below)                                | Prevent XSS and control script/style sources |
 
-**Configuration Location:** `next.config.ts` → `headers()` function
+**Configuration Location:**
+
+- Base headers: `next.config.ts` → `headers()`
+- CSP nonce: `src/proxy.ts` (per-request)
 
 ### Verification
 
@@ -52,7 +55,7 @@ A browser security mechanism that restricts where scripts, styles, images, and o
 
 ```
 default-src 'self';
-script-src 'self' 'unsafe-inline' vercel.live;
+script-src 'self' 'nonce-<per-request>' https://cdn.vercel-analytics.com;
 style-src 'self' 'unsafe-inline';
 img-src 'self' data: https:;
 font-src 'self';
@@ -61,23 +64,23 @@ connect-src 'self' vitals.vercel-analytics.com
 
 ### CSP Directives Explained
 
-| Directive     | Value                                | Purpose                                                                |
-| ------------- | ------------------------------------ | ---------------------------------------------------------------------- |
-| `default-src` | `'self'`                             | Default: only allow resources from same origin                         |
-| `script-src`  | `'self' 'unsafe-inline' vercel.live` | Scripts from same origin + inline (Next.js) + Vercel Live (hot reload) |
-| `style-src`   | `'self' 'unsafe-inline'`             | Styles from same origin + inline (Next.js styling)                     |
-| `img-src`     | `'self' data: https:`                | Images from same origin, data URIs, and HTTPS                          |
-| `font-src`    | `'self'`                             | Fonts from same origin only                                            |
-| `connect-src` | `'self' vitals.vercel-analytics.com` | Network requests (fetch, XHR) to same origin + Vercel Analytics        |
+| Directive     | Value                                                           | Purpose                                                          |
+| ------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `default-src` | `'self'`                                                        | Default: only allow resources from same origin                   |
+| `script-src`  | `'self' 'nonce-<per-request>' https://cdn.vercel-analytics.com` | Scripts from same origin + nonce-gated inline + Vercel Analytics |
+| `style-src`   | `'self' 'unsafe-inline'`                                        | Styles from same origin + inline (Next.js styling)               |
+| `img-src`     | `'self' data: https:`                                           | Images from same origin, data URIs, and HTTPS                    |
+| `font-src`    | `'self'`                                                        | Fonts from same origin only                                      |
+| `connect-src` | `'self' vitals.vercel-analytics.com`                            | Network requests (fetch, XHR) to same origin + Vercel Analytics  |
 
-### Trade-Off: Why `unsafe-inline`?
+### Trade-Off: Why `unsafe-inline` for styles?
 
-**The Challenge:** Next.js injects inline styles and scripts for app hydration, CSS-in-JS, and dynamic optimization. Removing `unsafe-inline` would break the framework.
+**The Challenge:** Next.js injects inline styles for app hydration and dynamic optimization. Removing `unsafe-inline` would break rendering.
 
 **Current Mitigation:**
 
+- Script execution is nonce-gated per request
 - CSP still prevents external script injection
-- CSP still prevents inline event handlers (e.g., `onclick="alert()"`)
 - Framework controls what inline code is injected (no user-controlled input)
 
 **Future Upgrade Path:**
@@ -123,7 +126,7 @@ curl -I http://localhost:3000/
 # X-XSS-Protection: 1; mode=block
 # Referrer-Policy: strict-origin-when-cross-origin
 # Permissions-Policy: geolocation=(), microphone=(), camera=()
-# Content-Security-Policy: default-src 'self'; ...
+# Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-...'; ...
 ```
 
 ### Test CSP in Browser
@@ -238,6 +241,25 @@ Automatic scanning on all PRs using TruffleHog:
 - **Scope:** Entire repository contents
 - **Pattern detection:** Credit cards, API keys, tokens, certificates
 - **Gate:** PR cannot merge if secrets detected
+
+---
+
+## Mutation Safety Controls
+
+### Input Validation
+
+- All mutation endpoints validate input with Zod.
+- Unknown or malformed payloads are rejected with `400`.
+
+### CSRF Protection
+
+- Double-submit CSRF tokens are issued via `/api/csrf`.
+- Non-idempotent routes require `x-csrf` header matching the `csrf` cookie.
+
+### Rate Limiting
+
+- Mutation endpoints are throttled per IP to reduce abuse.
+- Requests exceeding limits return `429`.
 
 ### Prevention Checklist
 
