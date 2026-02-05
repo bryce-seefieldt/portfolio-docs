@@ -20,14 +20,14 @@ Security hardening updates are now in place for both the Portfolio Docs App and 
 - Docs hardening plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/docs/40-security/portfolio-docs-hardening-implementation-plan.md)
 - ADR-0019 (docs hardening baseline): [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
 - ADR-0018 (app hardening baseline): [/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md](/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md)
-- Host-level headers configuration for docs: [vercel.json](vercel.json)
+- Host-level headers configuration for docs: [vercel.json](https://github.com/bryce-seefieldt/portfolio-docs/blob/main/vercel.json)
 
 # Changed
 
 - Security policies updated with docs-specific CSP and MDX controls: [/docs/40-security/security-policies.md](/docs/40-security/security-policies.md)
 - Docs deployment runbook now includes header verification: [/docs/50-operations/runbooks/rbk-docs-deploy.md](/docs/50-operations/runbooks/rbk-docs-deploy.md)
 - Docs dossier security page references hardening plan and header checks: [/docs/60-projects/portfolio-docs-app/04-security.md](/docs/60-projects/portfolio-docs-app/04-security.md)
-- PR checklist includes MDX review and header verification prompts: [/.github/PULL_REQUEST_TEMPLATE.md](/.github/PULL_REQUEST_TEMPLATE.md)
+- PR checklist includes MDX review and header verification prompts: [/.github/PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/.github/PULL_REQUEST_TEMPLATE.md)
 
 # Governance and security baselines
 
