@@ -95,14 +95,14 @@ All responses include OWASP-recommended security headers. Content Security Polic
 
 **Required Headers:**
 
-| Header                  | Policy                                                                                                                       | Purpose                                  |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| X-Frame-Options         | DENY                                                                                                                         | Prevent clickjacking                     |
-| X-Content-Type-Options  | nosniff                                                                                                                      | Prevent MIME sniffing                    |
-| X-XSS-Protection        | 1; mode=block                                                                                                                | Legacy XSS protection (defense-in-depth) |
-| Referrer-Policy         | strict-origin-when-cross-origin                                                                                              | Control referrer leakage                 |
-| Permissions-Policy      | geolocation=(), microphone=(), camera=()                                                                                     | Disable unused APIs                      |
-| Content-Security-Policy | default-src 'self'; script-src 'self' 'nonce-per-request' https://cdn.vercel-analytics.com; style-src 'self' 'unsafe-inline' | Prevent XSS, control external scripts    |
+| Header                    | Policy                                                                                                                       | Purpose                                  |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| X-Frame-Options           | DENY                                                                                                                         | Prevent clickjacking                     |
+| X-Content-Type-Options    | nosniff                                                                                                                      | Prevent MIME sniffing                    |
+| X-XSS-Protection          | 1; mode=block                                                                                                                | Legacy XSS protection (defense-in-depth) |
+| Referrer-Policy           | strict-origin-when-cross-origin                                                                                              | Control referrer leakage                 |
+| Permissions-Policy        | geolocation=(), microphone=(), camera=()                                                                                     | Disable unused APIs                      |
+| Content-Security-Policy   | default-src 'self'; script-src 'self' 'nonce-per-request' https://cdn.vercel-analytics.com; style-src 'self' 'unsafe-inline' | Prevent XSS, control external scripts    |
 | Strict-Transport-Security | max-age=31536000; includeSubDomains; preload                                                                                 | Enforce HTTPS across domains             |
 
 **Trade-Off: `unsafe-inline` Styles**
