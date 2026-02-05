@@ -24,7 +24,8 @@ Use this index to find the canonical task descriptions, acceptance criteria, and
 
 ## Current Issues
 
-- None (Phase 4 complete)
+- Stage 6.0 — App: Phase 6 full implementation — see [stage-6-0-app-issue.md](./stage-6-0-app-issue.md)
+- Stage 6.0 — Docs: Phase 6 full implementation — see [stage-6-0-docs-issue.md](./stage-6-0-docs-issue.md)
 
 ## Completed Issues (Phase 4)
 
