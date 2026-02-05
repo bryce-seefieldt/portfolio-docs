@@ -65,34 +65,72 @@ No secrets are committed to the repository or logged. All secrets are stored in 
 
 ---
 
+## MDX Usage Policy (Docs)
+
+**Policy Statement:**
+
+MDX is treated as code. Use Markdown by default and require explicit review for new or modified MDX files.
+
+**Procedures:**
+
+- Default to Markdown for standard docs pages.
+- Use MDX only when a component or interactive example is required.
+- Review MDX changes for embedded scripts, external calls, and data exposure.
+- Keep MDX components minimal and documented.
+
+**Enforcement:**
+
+- PR checklist requires MDX review when applicable.
+- Security reviewers spot-check MDX diffs for unsafe behavior.
+
+**Ownership:** Development team (authoring discipline), reviewers (MDX scrutiny)
+
+---
+
 ## Security Headers Policy
 
 **Policy Statement:**
 
-All responses include OWASP-recommended security headers. Content Security Policy is enforced with `default-src 'self'` to prevent XSS. Headers are configured in `next.config.ts` and validated in CI.
+All responses include OWASP-recommended security headers. Content Security Policy is enforced with `default-src 'self'` to reduce XSS risk. Headers are configured per platform (Next.js app via `next.config.ts`, Docusaurus docs via `vercel.json`) and validated in preview and production.
 
 **Required Headers:**
 
-| Header                  | Policy                                                                                                                       | Purpose                                  |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| X-Frame-Options         | DENY                                                                                                                         | Prevent clickjacking                     |
-| X-Content-Type-Options  | nosniff                                                                                                                      | Prevent MIME sniffing                    |
-| X-XSS-Protection        | 1; mode=block                                                                                                                | Legacy XSS protection (defense-in-depth) |
-| Referrer-Policy         | strict-origin-when-cross-origin                                                                                              | Control referrer leakage                 |
-| Permissions-Policy      | geolocation=(), microphone=(), camera=()                                                                                     | Disable unused APIs                      |
-| Content-Security-Policy | default-src 'self'; script-src 'self' 'nonce-per-request' https://cdn.vercel-analytics.com; style-src 'self' 'unsafe-inline' | Prevent XSS, control external scripts    |
+| Header                    | Policy                                                                                                                       | Purpose                                  |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| X-Frame-Options           | DENY                                                                                                                         | Prevent clickjacking                     |
+| X-Content-Type-Options    | nosniff                                                                                                                      | Prevent MIME sniffing                    |
+| X-XSS-Protection          | 1; mode=block                                                                                                                | Legacy XSS protection (defense-in-depth) |
+| Referrer-Policy           | strict-origin-when-cross-origin                                                                                              | Control referrer leakage                 |
+| Permissions-Policy        | geolocation=(), microphone=(), camera=()                                                                                     | Disable unused APIs                      |
+| Content-Security-Policy   | default-src 'self'; script-src 'self' 'nonce-per-request' https://cdn.vercel-analytics.com; style-src 'self' 'unsafe-inline' | Prevent XSS, control external scripts    |
+| Strict-Transport-Security | max-age=31536000; includeSubDomains; preload                                                                                 | Enforce HTTPS across domains             |
 
 **Trade-Off: `unsafe-inline` Styles**
 
-- **Why Required:** Next.js framework requires inline styles for hydration
-- **Risk Mitigation:** Script execution is nonce-gated; external scripts are tightly scoped
-- **Future Path:** Evaluate style nonces/hashes when framework support is stable
+- **Why Required:** Frameworks may inject inline styles for hydration and theme setup
+- **Risk Mitigation:** Script execution is tightly scoped; external sources are restricted
+- **Future Path:** Replace inline styles with hashes or nonces when feasible
+
+**Docs CSP profile (Docusaurus):**
+
+- `default-src 'self'`
+- `script-src 'self' 'unsafe-inline'`
+- `style-src 'self' 'unsafe-inline'`
+- `img-src 'self' data: https:`
+- `font-src 'self' data:`
+- `object-src 'none'`
+- `frame-ancestors 'none'`
+- `base-uri 'self'`
+- `form-action 'self'`
 
 **Validation:**
 
 ```bash
-# Test locally
+# Test locally (app)
 curl -I http://localhost:3000/ | grep -E "X-Frame-Options|X-Content-Type-Options|Content-Security-Policy"
+
+# Test preview/prod (docs)
+curl -I https://<docs-domain>/ | grep -E "X-Frame-Options|X-Content-Type-Options|Content-Security-Policy"
 
 # Browser DevTools
 # → Network → select any request → Response Headers → verify all headers present

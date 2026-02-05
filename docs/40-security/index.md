@@ -96,6 +96,11 @@ Use these documents to plan and govern React2Shell-class hardening work:
 - Implementation guide: [/docs/40-security/react2shell-hardening-implementation-guide.md](/docs/40-security/react2shell-hardening-implementation-guide.md)
 - ADR-0018: [/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md](/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md)
 
+## Portfolio Docs Hardening Program
+
+- Implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/docs/40-security/portfolio-docs-hardening-implementation-plan.md)
+- ADR-0019: [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
+
 ## Stage 4.4 Security Posture Deepening
 
 **New Documentation (Stage 4.4):**

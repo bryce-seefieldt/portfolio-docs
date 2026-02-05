@@ -36,6 +36,29 @@ This page documents the security posture of the Portfolio Docs App as a public-f
 - Publication safety rules are enforced culturally and via tooling where possible
 - The docs content model is understood (filesystem-driven docs; `_meta` internal-only)
 
+## Planned hardening updates
+
+The Portfolio Docs App follows a dedicated hardening plan that focuses on CI audit gates, host-level security headers, and publication safety controls. See the plan and ADR for the current scope and evidence checklist:
+
+- Implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/docs/40-security/portfolio-docs-hardening-implementation-plan.md)
+- ADR-0019: [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
+
+## Host-level security headers
+
+Security headers for the docs platform are enforced at the hosting layer via `vercel.json` and apply to all routes. The baseline includes CSP, XFO, nosniff, referrer policy, permissions policy, and HSTS.
+
+**Validation:**
+
+```bash
+curl -I https://<docs-domain>/ | grep -E "Content-Security-Policy|X-Frame-Options|X-Content-Type-Options|Referrer-Policy|Permissions-Policy|Strict-Transport-Security"
+```
+
+## MDX usage controls
+
+- Default to Markdown for content.
+- Treat new MDX files as code changes requiring explicit review.
+- Avoid client-side behavior in MDX unless it is strictly necessary and documented.
+
 ## Procedure / Content
 
 ## Threat surface summary

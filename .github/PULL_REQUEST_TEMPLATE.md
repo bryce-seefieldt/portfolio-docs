@@ -34,6 +34,8 @@
 ## Security
 
 - [ ] No secrets added (confirmed)
+- [ ] New/updated MDX reviewed as code (if applicable)
+- [ ] Hosting header changes validated (if applicable)
 - [ ] If security-relevant: threat model / controls updated or issue created
   - Link to update/issue:
 
