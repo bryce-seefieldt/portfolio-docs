@@ -118,4 +118,4 @@ Define a bounded, docs-specific hardening plan for the Portfolio Docs app that m
 - ADR-0019: [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
 - Security policies: [/docs/40-security/security-policies.md](/docs/40-security/security-policies.md)
 - Risk register: [/docs/40-security/risk-register.md](/docs/40-security/risk-register.md)
-- Security index: [/docs/40-security/](/docs/40-security/)
+- Security index: [/docs/40-security/](/docs/40-security/index.md)
