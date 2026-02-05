@@ -242,7 +242,7 @@ Runs all quality checks with auto-formatting and detailed error reporting (envir
 **Option 2 - Individual commands:**
 
 ```bash
-pnpm format:write && pnpm lint && pnpm typecheck && pnpm build
+pnpm format:write && pnpm lint && pnpm typecheck && pnpm audit && pnpm build
 ```
 
 Secrets scanning:
@@ -260,7 +260,7 @@ For **portfolio-docs**:
 
 - Recommended: `pnpm verify`
 - Faster iteration: `pnpm verify:quick` (skips the build gate; run `pnpm verify` before opening a PR)
-- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm build`
+- Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm audit && pnpm build`
 
 All checks must pass before opening a PR.
 

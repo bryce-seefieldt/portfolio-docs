@@ -25,7 +25,7 @@ The Portfolio App follows a testing pyramid: broad unit tests at the base, fewer
 
 ```mermaid
 graph TB
-    subgraph E2E["E2E Tests (Playwright) - ~58 tests"]
+    subgraph E2E["E2E Tests (Playwright) - ~66 tests"]
         E1["Evidence link resolution"]
         E2["Component rendering"]
         E3["Route coverage (user journeys)"]
@@ -37,7 +37,7 @@ graph TB
         I2["Data fetching"]
     end
 
-    subgraph UNIT["Unit Tests (Vitest) - ~120 tests"]
+    subgraph UNIT["Unit Tests (Vitest) - ~133 tests"]
         U1["Registry validation (Zod schemas)"]
         U2["Slug helpers (format, uniqueness)"]
         U3["Link construction (URL building)"]
@@ -53,9 +53,20 @@ graph TB
 
 ### Coverage Targets
 
-- **Unit tests**: ≥80% for all `src/lib/` modules (current suite exceeds this baseline)
+- **Unit tests**: ≥95% for all `src/lib/` modules (enforced in CI)
 - **E2E tests**: 100% route coverage for all project pages
 - **Build-time validation**: Registry schema enforcement via Zod
+
+### Security Verification (React2Shell hardening)
+
+Run these checks when security posture or dependencies change:
+
+```bash
+pnpm audit --audit-level=high
+pnpm lint
+pnpm typecheck
+pnpm build
+```
 
 ### Design Rationale
 
@@ -73,11 +84,11 @@ graph TB
 - Superior API for responsive design testing
 - Faster test execution
 
-**Why ≥80% coverage, not 100%?**
+**Why ≥95% coverage, not 100%?**
 
-- Balance between quality and development velocity
-- 80% catches most regressions without testing implementation details
-- Reduces test maintenance burden for trivial code (re-exports, empty handlers)
+- Security-sensitive helpers and registry validation warrant higher confidence
+- 95% leaves room for minimal untestable edges (CLI entrypoints, process exit)
+- Coverage focus remains on behavior, not incidental implementation details
 
 ## Unit Testing with Vitest
 
@@ -104,10 +115,10 @@ export default defineConfig({
       reporter: ['text', 'json', 'html', 'text-summary'],
       include: ['src/lib/**/*.ts'],
       exclude: ['src/lib/__tests__/**', 'src/lib/**/*.test.ts'],
-      lines: 80,
-      functions: 80,
-      branches: 75,
-      statements: 80,
+      lines: 95,
+      functions: 95,
+      branches: 95,
+      statements: 95,
     },
     include: ['src/lib/__tests__/**/*.test.ts'],
   },
@@ -258,6 +269,12 @@ describe('Link Construction Helpers', () => {
 });
 ```
 
+### Coverage Pitfalls and Fixes
+
+- **Branch coverage gaps in env helpers**: Call `vi.resetModules()` after setting `process.env` so module exports are recalculated.
+- **Registry CLI coverage**: Mock `fs`/`js-yaml` in tests and exclude CLI entrypoints with `/* c8 ignore */` to avoid process execution paths.
+- **Zod URL validations**: Keep placeholder interpolation on fields typed as URLs to avoid invalid URL failures in tests.
+
 ### Running Unit Tests
 
 ```bash
@@ -285,10 +302,10 @@ After running `pnpm test:coverage`:
 
 **Coverage thresholds**:
 
-- Lines: 80%
-- Functions: 80%
-- Branches: 75%
-- Statements: 80%
+- Lines: 95%
+- Functions: 95%
+- Branches: 95%
+- Statements: 95%
 
 ## E2E Testing with Playwright
 
@@ -374,6 +391,62 @@ test.describe('Feature Name', () => {
 });
 ```
 
+### Security API Test Example
+
+Use Playwright's `request` fixture to validate CSRF and rate limiting behavior:
+
+```typescript
+import { test, expect } from '@playwright/test';
+
+test('echo endpoint enforces CSRF and rate limits', async ({ request }) => {
+  const blocked = await request.post('/api/echo', { data: { message: 'hi' } });
+  expect(blocked.status()).toBe(403);
+
+  const csrfResponse = await request.get('/api/csrf');
+  const { csrf } = await csrfResponse.json();
+  const setCookie = csrfResponse.headers()['set-cookie'];
+
+  const allowed = await request.post('/api/echo', {
+    data: { message: 'hello' },
+    headers: {
+      'x-csrf': csrf,
+      cookie: setCookie,
+    },
+  });
+
+  expect(allowed.status()).toBe(200);
+  const payload = await allowed.json();
+  expect(payload.echo).toBe('hello');
+});
+```
+
+```typescript
+import { test, expect } from '@playwright/test';
+
+test('echo endpoint rate limits repeated requests', async ({ request }) => {
+  const ip = `203.0.113.${Math.floor(Math.random() * 200) + 1}`;
+  const csrfResponse = await request.get('/api/csrf');
+  const { csrf } = await csrfResponse.json();
+  const setCookie = csrfResponse.headers()['set-cookie'];
+
+  let lastStatus = 0;
+  for (let i = 0; i < 31; i += 1) {
+    const response = await request.post('/api/echo', {
+      data: { message: `ping-${i}` },
+      headers: {
+        'x-forwarded-for': ip,
+        'x-csrf': csrf,
+        cookie: setCookie,
+      },
+    });
+
+    lastStatus = response.status();
+  }
+
+  expect(lastStatus).toBe(429);
+});
+```
+
 ### Current E2E Coverage (tests/e2e)
 
 **What is currently covered**:
@@ -384,6 +457,7 @@ test.describe('Feature Name', () => {
 4. Health and metadata endpoints: `/api/health`, `/robots.txt`, `/sitemap.xml`
 5. Evidence link rendering and accessibility on `/projects/portfolio-app`
 6. Responsive checks (mobile/tablet/desktop) for evidence content
+7. Security endpoints (`/api/csrf`, `/api/echo`) and CSP nonce headers
 
 ### Evidence Link Resolution Tests (optional enhancement)
 
@@ -455,7 +529,7 @@ pnpm test:e2e:debug
 pnpm test:e2e:single
 
 # View test report (after running tests)
-pnpm playwright show-report
+pnpm exec playwright show-report
 ```
 
 ## CI Integration
@@ -582,7 +656,7 @@ await expect(page.locator('text=Evidence Artifacts')).toBeVisible();
 
 **Solution**: Check that test files are included in `coverage.include` in `vitest.config.ts`. Verify that tests are actually running for the code paths.
 
-**Problem**: Cannot achieve 80% coverage target
+**Problem**: Cannot achieve 95% coverage target
 
 **Solution**: Review uncovered lines in the coverage report. Consider if those lines are worth testing or if the coverage target is appropriate for that module.
 

@@ -73,7 +73,7 @@ Use this to validate:
 
 ### 2) Quality checks (before opening PR)
 
-- Recommended: `pnpm verify` (runs format:write, lint, typecheck, format:check, build)
+- Recommended: `pnpm verify` (runs format:write, lint, typecheck, format:check, audit, build)
 - Faster iteration: `pnpm verify:quick` (skips the build gate; rerun full `pnpm verify` before PR)
 - Manual equivalent:
 
@@ -82,6 +82,7 @@ pnpm format:write  # Auto-fix formatting
 pnpm lint          # ESLint: code quality
 pnpm typecheck     # TypeScript: type safety
 pnpm format:check  # Prettier: code style
+pnpm audit         # Dependency audit (high severity)
 pnpm build         # Docusaurus production build
 ```
 

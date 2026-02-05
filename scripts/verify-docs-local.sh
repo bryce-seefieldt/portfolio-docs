@@ -30,6 +30,7 @@ BOLD='\033[1m'
 
 FAILURES=0
 WARNINGS=0
+AUDIT_FAILED=false
 
 print_header() {
   echo ""
@@ -107,15 +108,29 @@ else
   print_failure "Format check failed"
 fi
 
+print_section "Step 5: Dependency audit (pnpm audit --audit-level=high)"
+AUDIT_OUTPUT=$(pnpm audit --audit-level=high 2>&1)
+AUDIT_EXIT_CODE=$?
+
+if [ $AUDIT_EXIT_CODE -eq 0 ]; then
+  print_success "Dependency audit passed (no high/critical vulnerabilities)"
+else
+  AUDIT_FAILED=true
+  print_failure "Dependency audit failed"
+  echo ""
+  echo "$AUDIT_OUTPUT" | head -50
+  echo ""
+fi
+
 if [ "$SKIP_BUILD" = false ]; then
-  print_section "Step 5: Production build (build)"
+  print_section "Step 6: Production build (build)"
   if pnpm build; then
     print_success "Build passed"
   else
     print_failure "Build failed"
   fi
 else
-  print_section "Step 5: Production build (skipped)"
+  print_section "Step 6: Production build (skipped)"
   print_warning "Build skipped by flag --skip-build"
 fi
 
@@ -137,6 +152,14 @@ echo "Next steps:"
 echo "  1) Review any failures above"
 echo "  2) Fix issues and rerun this script"
 echo "  3) When clean, open PR with evidence that checks passed"
+
+if [ "$AUDIT_FAILED" = true ]; then
+  echo ""
+  echo "Audit troubleshooting:"
+  echo "  - Re-run: pnpm audit --audit-level=high"
+  echo "  - Update vulnerable dependencies: pnpm up --latest"
+  echo "  - If no fix exists, document the risk in docs/40-security/risk-register.md"
+fi
 
 if [ $FAILURES -gt 0 ]; then
   exit 1

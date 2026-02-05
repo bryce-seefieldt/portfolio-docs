@@ -65,19 +65,20 @@ pnpm install
 pnpm verify
 ```
 
-The `verify` command runs a comprehensive 11-step validation workflow:
+The `verify` command runs a comprehensive 12-step validation workflow:
 
 1. **Environment check**: Validates Node version, pnpm availability, `.env.local` existence, and required environment variables
 2. **Auto-format**: Runs `format:write` to fix formatting issues automatically
 3. **Format validation**: Confirms formatting correctness with `format:check`
 4. **Linting**: Executes ESLint with zero-warning enforcement
 5. **Type checking**: Validates TypeScript types across the codebase
-6. **Secret scan (lightweight)**: Pattern-based scan to catch obvious secrets (local-only; CI uses TruffleHog)
-7. **Registry validation**: Ensures project registry schema compliance and data integrity
-8. **Build**: Produces production bundle to catch build-time errors
-9. **Performance verification**: Validates bundle size and cache headers against `docs/performance-baseline.yml`
-10. **Unit tests**: Runs Vitest suite (~120 tests: registry validation, slug helpers, link construction, structured data, observability)
-11. **E2E tests**: Runs Playwright suite (58 tests across Chromium + Firefox: smoke + route coverage + metadata endpoints + evidence links)
+6. **Dependency audit**: Runs `pnpm audit --audit-level=high` for high/critical CVEs
+7. **Secret scan (lightweight)**: Pattern-based scan to catch obvious secrets (local-only; CI uses TruffleHog)
+8. **Registry validation**: Ensures project registry schema compliance and data integrity
+9. **Build**: Produces production bundle to catch build-time errors
+10. **Performance verification**: Validates bundle size and cache headers against `docs/performance-baseline.yml`
+11. **Unit tests**: Runs Vitest suite (~133 tests: registry validation, slug helpers, link construction, structured data, observability, security helpers)
+12. **E2E tests**: Runs Playwright suite (66 tests across Chromium + Firefox: smoke + route coverage + metadata endpoints + evidence links + security APIs)
 
 **Benefits:**
 
@@ -104,7 +105,7 @@ For rapid feedback during active development without tests:
 pnpm verify:quick
 ```
 
-Runs steps 1-8 above, **skips performance checks and all tests** (steps 9-11).
+Runs steps 1-9 above, **skips performance checks and all tests** (steps 10-12).
 
 **When to use:**
 
@@ -122,6 +123,7 @@ pnpm install
 pnpm lint          # ESLint validation
 pnpm format:check  # Prettier validation (or format:write to fix)
 pnpm typecheck     # TypeScript type checking
+pnpm audit         # Dependency audit (high severity)
 pnpm build         # Production build
 pnpm test:unit     # Unit tests (Vitest)
 pnpm test:e2e       # E2E tests (Playwright)
@@ -155,6 +157,7 @@ Status: Implemented in Phase 1.
 - `pnpm lint`
 - `pnpm format:check`
 - `pnpm typecheck`
+- `pnpm audit --audit-level=high`
 
 ### Gate 2: Build
 
@@ -279,12 +282,14 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
 
 **Coverage:**
 
-- 58 test cases across 2 browsers (Chromium, Firefox)
+- 66 test cases across 2 browsers (Chromium, Firefox)
 - Core routes: `/`, `/cv`, `/projects`, `/contact`
 - Dynamic routes: `/projects/[slug]` (discovered from `/projects`)
 - 404 handling for unknown routes and invalid slugs
 - Health + metadata endpoints: `/api/health`, `/robots.txt`, `/sitemap.xml`
 - Evidence link rendering and accessibility on `/projects/portfolio-app`
+- Security endpoints: `/api/csrf`, `/api/echo` (CSRF + rate limit coverage)
+- Security headers: CSP nonce present on HTML responses
 - Responsive checks for evidence content (mobile/tablet/desktop)
 
 **Configuration:**
@@ -302,7 +307,7 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
 pnpm test:e2e          # Run all E2E tests headlessly
 pnpm test:e2e:ui       # Open Playwright UI mode (local dev)
 pnpm test:e2e:debug    # Run tests in debug mode with inspector
-npx playwright show-report    # View HTML test report
+pnpm exec playwright show-report    # View HTML test report
 ```
 
 **CI Integration:**
@@ -323,7 +328,7 @@ npx playwright show-report    # View HTML test report
 **Evidence:**
 
 - PR #10: https://github.com/bryce-seefieldt/portfolio-app/pull/10
-- Test runtime: ~25 seconds for 58 tests across 2 browsers
+- Test runtime: ~30-45 seconds for 66 tests across 2 browsers
 - Test files: `tests/e2e/smoke.spec.ts`, `tests/e2e/routes.spec.ts`, `tests/e2e/evidence-links.spec.ts`
 - All tests passing in CI and local environments
 
@@ -343,14 +348,14 @@ npx playwright show-report    # View HTML test report
 
 **Coverage:**
 
-- ~120 unit tests across core `src/lib/` suites
+- ~133 unit tests across core `src/lib/` suites
 - All tests passing locally and in CI
-- Code coverage: ≥80% for `src/lib/` modules
+- Code coverage: ≥95% for `src/lib/` modules
 
 **Local execution:**
 
 ```bash
-pnpm test:unit      # Run all ~120 unit tests (CI-like execution)
+pnpm test:unit      # Run all ~133 unit tests (CI-like execution)
 pnpm test           # Run tests in watch mode (for development)
 pnpm test:coverage  # Run tests and generate coverage report
 pnpm test:ui        # Visual UI mode for debugging failing tests
@@ -496,7 +501,7 @@ pnpm test:debug
 - Command: `pnpm test:unit`
 - Coverage reports uploaded as artifacts
 - Build fails if any tests fail
-- Must pass ≥80% coverage thresholds (lines, functions, branches, statements)
+- Must pass ≥95% coverage thresholds (lines, functions, branches, statements)
 
 **Coverage Report:**
 
@@ -508,10 +513,10 @@ After running `pnpm test:coverage`:
 
 **Coverage thresholds** (enforced in CI):
 
-- Lines: ≥80%
-- Functions: ≥80%
-- Branches: ≥75%
-- Statements: ≥80%
+- Lines: ≥95%
+- Functions: ≥95%
+- Branches: ≥95%
+- Statements: ≥95%
 
 #### Evidence Links
 

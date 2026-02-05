@@ -26,6 +26,7 @@ Stage 4.4 extends the Portfolio App threat model to include deployment surface a
 | ----------------- | ------------------------------- | -------------------- | -------------------------- | -------- | -------------------------------------------------------------------------------- |
 | Config Drift      | Env var misconfiguration        | Environment contract | Wrong URLs/config deployed | Major    | Env validation, promotion gates, `.env.example` guidance                         |
 | Dependency Vuln   | Malicious/vulnerable dependency | Build/runtime        | RCE at build or runtime    | Critical | Dependabot, lockfile integrity, audit policy, new dependency runbook             |
+| Framework RCE     | Deserialization exploit (R2S)   | Runtime surface      | Remote code execution      | Critical | Patch SLA, CSP nonce, strict input validation, CSRF, rate limiting               |
 | CSP Violation     | Inline script/style bypass      | Browser security     | XSS payload executes       | High     | CSP with default-src 'self', limited script/style directives, monitor violations |
 | Performance Abuse | DDoS or resource exhaustion     | Server resources     | Degraded UX/outage         | Medium   | CDN shielding (Vercel), rate limiting future, health checks                      |
 | Secrets in Logs   | Sensitive data logged           | Logs                 | Credential/key compromise  | Critical | Structured logging, log scrubbing, secret scanning, no secrets in env vars       |
@@ -46,7 +47,7 @@ Stage 4.4 extends the Portfolio App threat model to include deployment surface a
 | Dependencies    | Dependabot updates, frozen lockfile installs, audit policy and runbook, CodeQL                |
 | Config          | Environment validation, promotion gates, Stage 4.4 security headers/CSP                       |
 | Deployment      | Branch protection, required checks, immutable deploys, staging validation                     |
-| Runtime         | CSP, OWASP headers, error boundaries, health checks                                           |
+| Runtime         | CSP nonce, OWASP headers, strict validation, CSRF, rate limiting, health checks               |
 | XSS             | CSP, framework security defaults, no dangerous user input, monitoring                         |
 
 ## References and Validation

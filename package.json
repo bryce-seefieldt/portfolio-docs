@@ -18,6 +18,7 @@
     "lint:fix": "eslint . --fix",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
+    "audit": "pnpm audit --audit-level=high",
     "verify": "./scripts/verify-docs-local.sh",
     "verify:quick": "./scripts/verify-docs-local.sh --skip-build"
   },

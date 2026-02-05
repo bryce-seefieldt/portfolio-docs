@@ -43,7 +43,7 @@ This page documents how the Portfolio Docs App is built and deployed as a produc
 
 - Docusaurus site builds locally:
   - `pnpm start`
-  - `pnpm verify` (full local quality gates; `pnpm verify:quick` skips build for iteration)
+  - `pnpm verify` (full local quality gates, includes audit; `pnpm verify:quick` skips build for iteration)
 - PR-only merge workflow to `main`
 - A hosting target selected (e.g., Vercel) and connected via Git integration (public-safe assumption)
 - Repository includes a CI workflow that runs at least the required gates
@@ -156,7 +156,7 @@ DOCUSAURUS_PORTFOLIO_APP_URL=https://bns-portfolio-app.vercel.app
 
 Vercel is configured to require **two GitHub Actions checks** before promoting a deployment to production:
 
-1. **`ci / quality`** — Fast-fail quality gates (lint, typecheck, format)
+1. **`ci / quality`** — Fast-fail quality gates (lint, typecheck, format, audit)
 2. **`ci / build`** — Documentation build integrity (broken links, structure validation)
 
 Both checks must pass for production promotion. This ensures:
