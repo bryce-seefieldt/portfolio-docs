@@ -7,14 +7,25 @@
 set -euo pipefail
 
 SKIP_BUILD=false
+AUDIT_JSON=false
+AUDIT_REPORT_PATH="audit-report.json"
 for arg in "$@"; do
   case "$arg" in
     --skip-build)
       SKIP_BUILD=true
       ;;
+    --audit-json)
+      AUDIT_JSON=true
+      ;;
+    --audit-json=*)
+      AUDIT_JSON=true
+      AUDIT_REPORT_PATH="${arg#*=}"
+      ;;
     --help|-h)
-      echo "Usage: $0 [--skip-build]"
-      echo "  --skip-build   Run all checks except the production build (for quick iteration)"
+      echo "Usage: $0 [--skip-build] [--audit-json[=path]]"
+      echo "  --skip-build        Run all checks except the production build (for quick iteration)"
+      echo "  --audit-json        Save pnpm audit JSON output to audit-report.json"
+      echo "  --audit-json=path   Save pnpm audit JSON output to a custom path"
       exit 0
       ;;
   esac
@@ -109,17 +120,31 @@ else
 fi
 
 print_section "Step 5: Dependency audit (pnpm audit --audit-level=high)"
-AUDIT_OUTPUT=$(pnpm audit --audit-level=high 2>&1)
-AUDIT_EXIT_CODE=$?
+if [ "$AUDIT_JSON" = true ]; then
+  AUDIT_OUTPUT=$(pnpm audit --audit-level=high --json 2>&1)
+  AUDIT_EXIT_CODE=$?
+  echo "$AUDIT_OUTPUT" > "$AUDIT_REPORT_PATH"
+else
+  AUDIT_OUTPUT=$(pnpm audit --audit-level=high 2>&1)
+  AUDIT_EXIT_CODE=$?
+fi
 
 if [ $AUDIT_EXIT_CODE -eq 0 ]; then
   print_success "Dependency audit passed (no high/critical vulnerabilities)"
+  if [ "$AUDIT_JSON" = true ]; then
+    print_info "Audit report saved to ${AUDIT_REPORT_PATH}"
+  fi
 else
   AUDIT_FAILED=true
   print_failure "Dependency audit failed"
   echo ""
-  echo "$AUDIT_OUTPUT" | head -50
+  echo "Audit output (full):"
   echo ""
+  echo "$AUDIT_OUTPUT"
+  echo ""
+  if [ "$AUDIT_JSON" = true ]; then
+    print_info "Audit report saved to ${AUDIT_REPORT_PATH}"
+  fi
 fi
 
 if [ "$SKIP_BUILD" = false ]; then
@@ -158,6 +183,8 @@ if [ "$AUDIT_FAILED" = true ]; then
   echo "Audit troubleshooting:"
   echo "  - Re-run: pnpm audit --audit-level=high"
   echo "  - Update vulnerable dependencies: pnpm up --latest"
+  echo "  - Identify direct vs transitive advisory impact in the audit output"
+  echo "  - Review ${AUDIT_REPORT_PATH} for machine-readable details (if generated)"
   echo "  - If no fix exists, document the risk in docs/40-security/risk-register.md"
 fi
 

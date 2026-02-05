@@ -75,6 +75,7 @@ Use this to validate:
 
 - Recommended: `pnpm verify` (runs format:write, lint, typecheck, format:check, audit, build)
 - Faster iteration: `pnpm verify:quick` (skips the build gate; rerun full `pnpm verify` before PR)
+- Optional audit report: `pnpm verify -- --audit-json` (writes `audit-report.json`)
 - Manual equivalent:
 
 ```bash

@@ -532,6 +532,16 @@ pnpm test:e2e:single
 pnpm exec playwright show-report
 ```
 
+### Optional Audit Report
+
+For the docs repo, you can capture a machine-readable audit report during local verification:
+
+```bash
+pnpm verify -- --audit-json
+# Or save to a custom path:
+pnpm verify -- --audit-json=artifacts/audit-report.json
+```
+
 ## CI Integration
 
 ### Test Job in GitHub Actions

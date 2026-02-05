@@ -154,6 +154,7 @@ Hard rules:
    pnpm start       # preview
    pnpm verify      # required before PR
    # Optional for faster iteration: pnpm verify:quick (skip build, rerun full verify before PR)
+   # Optional audit report: pnpm verify -- --audit-json
    ```
 
 4. **Commit and push** (`.env.local` is gitignored; do not commit)
