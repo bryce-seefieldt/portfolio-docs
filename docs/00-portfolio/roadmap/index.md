@@ -103,6 +103,7 @@ For each phase or milestone:
 - **Phase 3:** Scaling content model (repeatable project publishing pipeline) — ✅ Complete (Stage 3.6 complete 2026-01-23)
 - **Phase 4:** Reliability + security hardening (enterprise credibility upgrades) — ✅ Complete (2026-01-30)
 - **Phase 5:** Advanced demonstrations (multi-language demos, platform proofs, eval-first artifacts)
+- **Phase 6:** Capstone, evolution, and long-term signal (optional)
 
 Each phase includes:
 
@@ -398,6 +399,48 @@ Show depth and breadth across languages and disciplines while maintaining enterp
 ### Implementation guide
 
 - See [Phase 5 Implementation Guide](phase-5-implementation-guide.md) for detailed steps, checklists, and success criteria.
+
+---
+
+## Phase 6 — Capstone, evolution, and long-term signal (optional)
+
+### Objective
+
+Preserve credibility over time by defining what belongs, how change is governed, and how the portfolio evolves without noise.
+
+### Deliverables
+
+- Portfolio inclusion criteria and explicit exclusions ("what does not belong")
+- Portfolio versioning strategy (release cadence, tags, change log expectations)
+- Deprecation and archival policy for projects, docs, and references
+- Change intake workflow (proposal, evidence audit, reviewer impact)
+- Maintenance posture guidance (stability window, update thresholds)
+
+### Implementation focus
+
+- **Restraint and judgment**
+  - Keep the surface area stable and reduce churn-driven risk.
+- **Governed evolution**
+  - Add work only when it strengthens credibility and evidence depth.
+- **Reviewer confidence**
+  - Make the rules and lifecycle of the portfolio explicit and easy to validate.
+
+### Required evidence artifacts
+
+- ADR documenting portfolio lifecycle/versioning strategy
+- Policy docs covering inclusion criteria and deprecation/archival expectations
+- Runbook updates for archival/change control procedures
+- Release note entry documenting Phase 6 completion
+
+### Acceptance criteria
+
+- New projects are gated by a published inclusion checklist and evidence criteria.
+- Versioning and deprecation policies are documented and linked from core hubs.
+- Reviewers can understand how the portfolio evolves without losing trust.
+
+### Implementation guide
+
+- See [Phase 6 Implementation Guide](phase-6-implementation-guide.md) for detailed steps, checklists, and success criteria.
 
 ---
 

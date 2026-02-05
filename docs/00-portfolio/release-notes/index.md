@@ -67,6 +67,9 @@ Release notes are public. Do not include:
 
 Add new entries at the top.
 
+- **2026-02-05 — Portfolio Phase 6 Governance Baseline**
+  - `20260205-portfolio-phase-6.md`
+  - Eligibility criteria, versioning policy, archival policy, change intake
 - **2026-02-04 — Portfolio v1.0 Release (Phase 5 Freeze)**
   - `20260204-portfolio-v1-0.md`
   - Reviewer guide, evidence checklist, known limitations, v1.0 freeze

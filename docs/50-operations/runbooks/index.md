@@ -206,6 +206,17 @@ Runbooks should be your first reference during:
 - Third-party report of potential vulnerability
 - Detected by secrets scanning or security audit
 
+### Maintenance Runbooks
+
+| Runbook                                                         | Purpose                                       | MTTR Target | Severity |
+| --------------------------------------------------------------- | --------------------------------------------- | ----------- | -------- |
+| **[Portfolio Archival Procedure](./rbk-portfolio-archival.md)** | Deprecate or archive portfolio content safely | N/A         | Low      |
+
+**When to use:**
+
+- Retiring portfolio content while preserving evidence links
+- Documenting deprecation and archival actions
+
 ### Operational Readiness
 
 | Document                                                                                  | Purpose                                         | Audience                    |
