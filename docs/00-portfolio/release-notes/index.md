@@ -67,6 +67,9 @@ Release notes are public. Do not include:
 
 Add new entries at the top.
 
+- **2026-02-05 — Portfolio Security Hardening (Docs + App)**
+  - `20260205-portfolio-security-hardening.md`
+  - CSP headers, audit gates, hardening ADRs, and docs governance updates
 - **2026-02-05 — Portfolio Phase 6 Governance Baseline**
   - `20260205-portfolio-phase-6.md`
   - Eligibility criteria, versioning policy, archival policy, change intake
