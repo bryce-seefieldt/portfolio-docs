@@ -165,6 +165,20 @@ Perform spot-check navigation on production:
 - [ ] Architecture domain (`/docs/architecture`) with sidebar navigation works
 - [ ] Operations runbooks load (`/docs/operations/runbooks`)
 
+### 6a) Verify security headers (docs hardening)
+
+Confirm the hosting layer is applying baseline headers from `vercel.json`:
+
+```bash
+curl -I https://<docs-domain>/ | grep -E "Content-Security-Policy|X-Frame-Options|X-Content-Type-Options|Referrer-Policy|Permissions-Policy|Strict-Transport-Security"
+```
+
+Expected outcome:
+
+- CSP present and scoped to `self`
+- X-Frame-Options is `DENY`
+- HSTS is present for production domains
+
 ### 7) Roll forward or rollback decision
 
 If post-deploy validation discovers issues:

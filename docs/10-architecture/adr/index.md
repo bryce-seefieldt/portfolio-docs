@@ -131,3 +131,4 @@ This ADR system is successful when:
 ## Recent ADRs
 
 - [ADR-0018: React2Shell Hardening Baseline](/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md)
+- [ADR-0019: Portfolio Docs Hardening Baseline](/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
