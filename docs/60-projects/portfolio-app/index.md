@@ -8,6 +8,7 @@ tags: [projects, portfolio, nextjs, typescript, devops, security, operations]
 ## Dossier Contents
 
 - [Overview](01-overview.md)
+- [Feature Inventory](feature-inventory.md)
 - [Architecture](02-architecture.md)
 - [Deployment](03-deployment.md)
 - [Security](04-security.md)

@@ -512,6 +512,15 @@ Exceptions:
 - Example: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml`
 - Use this format for: workflow files, non-Docusaurus configs, build artifacts, source code
 
+## Feature documentation formatting rules
+
+When authoring feature pages, follow the conventions defined in
+[docs/\_meta/templates/template-feature-details.md](docs/_meta/templates/template-feature-details.md):
+
+- Wrap route names in backticks, for example `/projects`.
+- GitHub source and test links should use a `/portfolio-app/...` label.
+- Internal docs links should use `/docs/...` with a leading slash.
+
 ## Diagram standards (mandatory)
 
 **ALL diagrams created within `docs/` subdirectories MUST use Mermaid format exclusively — never PNG, SVG, ASCII art, or external tools.**

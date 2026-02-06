@@ -1,0 +1,10 @@
+{
+  "label": "Documentation and Governance Integration",
+  "position": 10,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "portfolio/features/docs-governance-integration/index"
+  }
+}

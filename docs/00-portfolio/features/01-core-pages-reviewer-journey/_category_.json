@@ -1,0 +1,10 @@
+{
+  "label": "Core Pages and Reviewer Journey",
+  "position": 1,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "portfolio/features/core-pages-reviewer-journey/index"
+  }
+}
