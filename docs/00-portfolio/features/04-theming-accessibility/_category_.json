@@ -1,0 +1,10 @@
+{
+  "label": "Theming and Accessibility",
+  "position": 4,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "portfolio/features/theming-accessibility/index"
+  }
+}

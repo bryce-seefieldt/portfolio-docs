@@ -1,0 +1,10 @@
+{
+  "label": "Evidence-First Content Model",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "portfolio/features/evidence-first-content-model/index"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "label": "SEO, Metadata, and Structured Data",
+  "position": 5,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "portfolio/features/seo-metadata-structured-data/index"
+  }
+}
