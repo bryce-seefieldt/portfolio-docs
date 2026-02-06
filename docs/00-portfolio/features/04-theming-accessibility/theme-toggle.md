@@ -1,6 +1,6 @@
 ---
-title: "Feature: Theme Toggle"
-description: "Class-based light and dark theme toggle with persistence."
+title: 'Feature: Theme Toggle'
+description: 'Class-based light and dark theme toggle with persistence.'
 sidebar_position: 1
 tags: [portfolio, features, theming, accessibility]
 ---

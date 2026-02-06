@@ -1,6 +1,6 @@
 ---
-title: "Feature: Analytics Monitoring"
-description: "Vercel Web Analytics and performance monitoring."
+title: 'Feature: Analytics Monitoring'
+description: 'Vercel Web Analytics and performance monitoring.'
 sidebar_position: 4
 tags: [portfolio, features, observability, analytics]
 ---

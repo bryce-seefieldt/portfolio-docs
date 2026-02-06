@@ -1,6 +1,6 @@
 ---
-title: "Feature: Back-to-Top Button"
-description: "Scroll-aware back-to-top control with reduced-motion support."
+title: 'Feature: Back-to-Top Button'
+description: 'Scroll-aware back-to-top control with reduced-motion support.'
 sidebar_position: 2
 tags: [portfolio, features, navigation, ux]
 ---

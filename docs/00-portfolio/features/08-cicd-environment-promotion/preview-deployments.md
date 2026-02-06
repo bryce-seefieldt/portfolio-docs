@@ -1,6 +1,6 @@
 ---
-title: "Feature: Preview Deployments"
-description: "Automatic PR preview environments for validation."
+title: 'Feature: Preview Deployments'
+description: 'Automatic PR preview environments for validation.'
 sidebar_position: 1
 tags: [portfolio, features, cicd, deployments]
 ---

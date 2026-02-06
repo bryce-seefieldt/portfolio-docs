@@ -1,6 +1,6 @@
 ---
-title: "Feature: Rollback Workflow"
-description: "Git revert based rollback for production issues."
+title: 'Feature: Rollback Workflow'
+description: 'Git revert based rollback for production issues.'
 sidebar_position: 4
 tags: [portfolio, features, cicd, rollback]
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Feature: Reviewer Guidance"
-description: "Explicit guidance to lead reviewers to the evidence trail."
+title: 'Feature: Reviewer Guidance'
+description: 'Explicit guidance to lead reviewers to the evidence trail.'
 sidebar_position: 2
 tags: [portfolio, features, documentation, reviewer]
 ---

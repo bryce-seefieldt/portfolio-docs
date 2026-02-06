@@ -1,6 +1,6 @@
 ---
-title: "Feature: Secrets Hygiene"
-description: "Public-safe configuration and secrets scanning discipline."
+title: 'Feature: Secrets Hygiene'
+description: 'Public-safe configuration and secrets scanning discipline.'
 sidebar_position: 2
 tags: [portfolio, features, security, secrets]
 ---

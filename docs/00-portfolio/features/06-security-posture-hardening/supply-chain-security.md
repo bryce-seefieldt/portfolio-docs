@@ -1,6 +1,6 @@
 ---
-title: "Feature: Supply Chain Security"
-description: "Dependabot, CodeQL, and audit gates for dependencies."
+title: 'Feature: Supply Chain Security'
+description: 'Dependabot, CodeQL, and audit gates for dependencies.'
 sidebar_position: 3
 tags: [portfolio, features, security, supply-chain]
 ---

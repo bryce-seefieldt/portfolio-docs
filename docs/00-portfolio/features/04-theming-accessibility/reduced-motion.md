@@ -1,6 +1,6 @@
 ---
-title: "Feature: Reduced Motion Support"
-description: "Respects user motion preferences across animations and transitions."
+title: 'Feature: Reduced Motion Support'
+description: 'Respects user motion preferences across animations and transitions.'
 sidebar_position: 4
 tags: [portfolio, features, theming, accessibility]
 ---

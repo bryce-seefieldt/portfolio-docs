@@ -1,6 +1,6 @@
 ---
-title: "Feature: Health Endpoint"
-description: "Health and status endpoint for operational visibility."
+title: 'Feature: Health Endpoint'
+description: 'Health and status endpoint for operational visibility.'
 sidebar_position: 3
 tags: [portfolio, features, observability, health]
 ---

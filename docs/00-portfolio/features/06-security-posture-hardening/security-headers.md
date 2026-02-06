@@ -1,6 +1,6 @@
 ---
-title: "Feature: Security Headers"
-description: "OWASP-aligned security headers and CSP enforcement."
+title: 'Feature: Security Headers'
+description: 'OWASP-aligned security headers and CSP enforcement.'
 sidebar_position: 1
 tags: [portfolio, features, security, headers]
 ---

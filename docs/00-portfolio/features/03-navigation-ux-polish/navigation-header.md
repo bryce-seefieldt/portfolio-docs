@@ -1,6 +1,6 @@
 ---
-title: "Feature: Navigation Header"
-description: "Sticky navigation with desktop links and mobile menu."
+title: 'Feature: Navigation Header'
+description: 'Sticky navigation with desktop links and mobile menu.'
 sidebar_position: 1
 tags: [portfolio, features, navigation, header]
 ---

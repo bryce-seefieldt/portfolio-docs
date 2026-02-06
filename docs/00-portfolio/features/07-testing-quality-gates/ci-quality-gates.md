@@ -1,6 +1,6 @@
 ---
-title: "Feature: CI Quality Gates"
-description: "Lint, format, typecheck, and audit gates enforced in CI."
+title: 'Feature: CI Quality Gates'
+description: 'Lint, format, typecheck, and audit gates enforced in CI.'
 sidebar_position: 1
 tags: [portfolio, features, testing, quality]
 ---

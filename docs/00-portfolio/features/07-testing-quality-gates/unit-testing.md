@@ -1,6 +1,6 @@
 ---
-title: "Feature: Unit Testing"
-description: "Vitest-based unit tests for registry, config, and helpers."
+title: 'Feature: Unit Testing'
+description: 'Vitest-based unit tests for registry, config, and helpers.'
 sidebar_position: 2
 tags: [portfolio, features, testing, unit]
 ---

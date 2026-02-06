@@ -1,6 +1,6 @@
 ---
-title: "Feature: ISR and Caching"
-description: "Incremental static regeneration and cache-control behavior."
+title: 'Feature: ISR and Caching'
+description: 'Incremental static regeneration and cache-control behavior.'
 sidebar_position: 1
 tags: [portfolio, features, performance, caching]
 ---

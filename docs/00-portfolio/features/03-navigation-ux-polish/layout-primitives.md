@@ -1,6 +1,6 @@
 ---
-title: "Feature: Layout Primitives"
-description: "Shared section and callout components for consistent page structure."
+title: 'Feature: Layout Primitives'
+description: 'Shared section and callout components for consistent page structure.'
 sidebar_position: 4
 tags: [portfolio, features, navigation, ux]
 ---

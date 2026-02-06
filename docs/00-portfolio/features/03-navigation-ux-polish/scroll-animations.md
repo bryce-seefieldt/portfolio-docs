@@ -1,6 +1,6 @@
 ---
-title: "Feature: Scroll Reveal Animations"
-description: "Intersection Observer based fade-in transitions for content blocks."
+title: 'Feature: Scroll Reveal Animations'
+description: 'Intersection Observer based fade-in transitions for content blocks.'
 sidebar_position: 3
 tags: [portfolio, features, navigation, ux]
 ---

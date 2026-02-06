@@ -1,6 +1,6 @@
 ---
-title: "Feature: Staging Promotion"
-description: "Manual staging validation before production promotion."
+title: 'Feature: Staging Promotion'
+description: 'Manual staging validation before production promotion.'
 sidebar_position: 2
 tags: [portfolio, features, cicd, staging]
 ---

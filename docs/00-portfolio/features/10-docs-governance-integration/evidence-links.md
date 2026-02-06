@@ -1,6 +1,6 @@
 ---
-title: "Feature: Evidence Links"
-description: "Direct links from the app to dossiers, ADRs, and runbooks."
+title: 'Feature: Evidence Links'
+description: 'Direct links from the app to dossiers, ADRs, and runbooks.'
 sidebar_position: 1
 tags: [portfolio, features, documentation, evidence]
 ---

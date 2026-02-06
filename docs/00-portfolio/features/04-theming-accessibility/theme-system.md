@@ -1,6 +1,6 @@
 ---
-title: "Feature: Theme System"
-description: "CSS variable theme system with light/dark tokens and transitions."
+title: 'Feature: Theme System'
+description: 'CSS variable theme system with light/dark tokens and transitions.'
 sidebar_position: 3
 tags: [portfolio, features, theming, accessibility]
 ---

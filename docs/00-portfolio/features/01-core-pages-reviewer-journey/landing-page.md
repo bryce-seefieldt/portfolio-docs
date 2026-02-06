@@ -17,7 +17,7 @@ tags: [portfolio, features, core-pages, landing]
 - hero narrative and value proposition
 - reviewer evaluation path callout
 - primary calls to action (CTAs)
-    - e.g. CV, Projects, Evidence Docs
+  - e.g. CV, Projects, Evidence Docs
 - featured work highlights
 
 ### Out of scope

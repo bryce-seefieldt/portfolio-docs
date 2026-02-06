@@ -1,6 +1,6 @@
 ---
-title: "Feature: Metadata Baseline"
-description: "Global metadata for SEO and social previews."
+title: 'Feature: Metadata Baseline'
+description: 'Global metadata for SEO and social previews.'
 sidebar_position: 1
 tags: [portfolio, features, seo, metadata]
 ---

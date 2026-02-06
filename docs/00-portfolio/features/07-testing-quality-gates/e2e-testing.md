@@ -1,6 +1,6 @@
 ---
-title: "Feature: End-to-End Testing"
-description: "Playwright E2E coverage for routes, links, and metadata."
+title: 'Feature: End-to-End Testing'
+description: 'Playwright E2E coverage for routes, links, and metadata.'
 sidebar_position: 3
 tags: [portfolio, features, testing, e2e]
 ---

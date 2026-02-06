@@ -1,6 +1,6 @@
 ---
-title: "Feature: Bundle Size Regression Detection"
-description: "CI enforcement of bundle size thresholds."
+title: 'Feature: Bundle Size Regression Detection'
+description: 'CI enforcement of bundle size thresholds.'
 sidebar_position: 2
 tags: [portfolio, features, performance, bundle]
 ---

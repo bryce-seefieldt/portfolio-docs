@@ -1,6 +1,6 @@
 ---
-title: "Feature: Local Verification Workflow"
-description: "Single-command local verification for quality and tests."
+title: 'Feature: Local Verification Workflow'
+description: 'Single-command local verification for quality and tests.'
 sidebar_position: 4
 tags: [portfolio, features, testing, verification]
 ---

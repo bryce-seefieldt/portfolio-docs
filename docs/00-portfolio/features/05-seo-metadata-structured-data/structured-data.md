@@ -1,6 +1,6 @@
 ---
-title: "Feature: Structured Data (JSON-LD)"
-description: "Schema.org Person and Website structured data for search engines."
+title: 'Feature: Structured Data (JSON-LD)'
+description: 'Schema.org Person and Website structured data for search engines.'
 sidebar_position: 2
 tags: [portfolio, features, seo, structured-data]
 ---

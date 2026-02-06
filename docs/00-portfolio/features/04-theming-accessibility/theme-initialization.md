@@ -1,6 +1,6 @@
 ---
-title: "Feature: Theme Initialization"
-description: "Pre-hydration script to prevent flash of incorrect theme."
+title: 'Feature: Theme Initialization'
+description: 'Pre-hydration script to prevent flash of incorrect theme.'
 sidebar_position: 2
 tags: [portfolio, features, theming, accessibility]
 ---
