@@ -53,7 +53,7 @@ export function getPublicBaseUrl(): string {
 
 ```ts
 // RATIONALE: This branded type prevents mixing user-provided strings with validated IDs.
-type ProjectSlug = string & { readonly __brand: "ProjectSlug" };
+type ProjectSlug = string & { readonly __brand: 'ProjectSlug' };
 
 // SECURITY: `slug` originates from the route param (untrusted input). Validate/normalize before use.
 export function normalizeSlug(slug: string): ProjectSlug {
@@ -64,7 +64,7 @@ export function normalizeSlug(slug: string): ProjectSlug {
 ### React: client boundary and UX intent
 
 ```tsx
-"use client";
+'use client';
 // RATIONALE: Client component required for interactive state + event handlers.
 // PERF: Keep client surface minimal; pass serialized props from server when possible.
 
@@ -80,7 +80,7 @@ export function ExpandableSection() {
 ```ts
 // REGRESSION: This failed when registry interpolation removed trailing slashes.
 // SECURITY: Ensure untrusted slugs never produce external redirects.
-it("guards against invalid project slugs", () => {
+it('guards against invalid project slugs', () => {
   // Arrange / Act / Assert
 });
 ```
@@ -116,9 +116,11 @@ jobs:
 # README.md (same folder as JSON config)
 
 ## Purpose
+
 This config defines the public-safe registry schema contract for portfolio-app.
 
 ## Validation
+
 Validated by pnpm registry:validate in CI and during pnpm verify.
 ```
 

@@ -4,6 +4,7 @@ description: 'Deep dive guidance for writing, reviewing, and maintaining high-va
 sidebar_position: 3
 tags: [engineering, standards, commentary, documentation, portfolio-app]
 ---
+
 ## Purpose
 
 Help engineers write code comments that explain intent, constraints, and risk without repeating what the code already says. This guide also defines how reviewers evaluate commentary quality and how teams prevent comment drift.
@@ -82,7 +83,7 @@ If advanced type tricks, complex generics, or unusual patterns are used, add int
 
 ```ts
 // RATIONALE: Branded type prevents mixing user-provided strings with validated IDs.
-type ProjectSlug = string & { readonly __brand: "ProjectSlug" };
+type ProjectSlug = string & { readonly __brand: 'ProjectSlug' };
 ```
 
 ## How to write high-value comments
@@ -159,7 +160,7 @@ export function getPublicBaseUrl(): string {
 If a file is a client component, comment why:
 
 ```tsx
-"use client";
+'use client';
 // RATIONALE: Client component required for interactive state + event handlers.
 // PERF: Keep client surface minimal; pass serialized props from server when possible.
 ```
@@ -189,7 +190,10 @@ Prefer comments that explain token usage, theming constraints, or reduced-motion
 /* RATIONALE: Tokens remain centralized to prevent theme drift between app + docs. */
 /* A11Y: Respect prefers-reduced-motion for animations/transitions. */
 @media (prefers-reduced-motion: reduce) {
-  .animated { transition: none; animation: none; }
+  .animated {
+    transition: none;
+    animation: none;
+  }
 }
 ```
 
@@ -199,7 +203,7 @@ Tests are commentary. Make test titles behavioral. Comment only for regressions 
 
 ```ts
 // REGRESSION: This failed when registry interpolation removed trailing slashes.
-it("guards against invalid project slugs", () => {
+it('guards against invalid project slugs', () => {
   // Arrange / Act / Assert
 });
 ```
