@@ -37,10 +37,12 @@ graph TB
         I2["Data fetching"]
     end
 
-    subgraph UNIT["Unit Tests (Vitest) - ~133 tests"]
-        U1["Registry validation (Zod schemas)"]
-        U2["Slug helpers (format, uniqueness)"]
-        U3["Link construction (URL building)"]
+    subgraph UNIT["Unit Tests (Vitest)"]
+      U1["Registry validation (Zod schemas)"]
+      U2["Slug helpers (format, uniqueness)"]
+      U3["Link construction (URL building)"]
+      U4["API route handlers"]
+      U5["Component/page render tests"]
     end
 
     E2E --> INT
@@ -53,7 +55,7 @@ graph TB
 
 ### Coverage Targets
 
-- **Unit tests**: ≥95% for all `src/lib/` modules (enforced in CI)
+- **Unit tests**: ≥95% for all source modules tracked by Vitest coverage (current scope: `src/**/*.{ts,tsx}`)
 - **E2E tests**: 100% route coverage for all project pages
 - **Build-time validation**: Registry schema enforcement via Zod
 
@@ -92,6 +94,8 @@ pnpm build
 
 ## Unit Testing with Vitest
 
+Current baseline: 195 unit tests across 39 files (see `pnpm test:coverage` output for the latest totals).
+
 ### Setup & Configuration
 
 **Installation:**
@@ -110,17 +114,23 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
+    setupFiles: ['./src/test/setup.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'text-summary'],
-      include: ['src/lib/**/*.ts'],
-      exclude: ['src/lib/__tests__/**', 'src/lib/**/*.test.ts'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/__tests__/**',
+        'src/**/*.test.{ts,tsx}',
+        'src/test/**',
+        'src/**/globals.css',
+      ],
       lines: 95,
       functions: 95,
       branches: 95,
       statements: 95,
     },
-    include: ['src/lib/__tests__/**/*.test.ts'],
+    include: ['src/**/__tests__/**/*.test.{ts,tsx}'],
   },
   resolve: {
     alias: {
@@ -132,12 +142,41 @@ export default defineConfig({
 
 ### Test File Naming
 
-- **Location**: `src/lib/__tests__/`
-- **Pattern**: `[module].test.ts`
+- **Location**: `src/**/__tests__/`
+- **Pattern**: `[module].test.ts` or `[module].test.tsx`
 - **Examples**:
   - `src/lib/__tests__/registry.test.ts` — Tests for `src/lib/registry.ts`
-  - `src/lib/__tests__/config.test.ts` — Tests for `src/lib/config.ts`
-  - `src/lib/__tests__/slugHelpers.test.ts` — Tests for slug validation
+  - `src/app/__tests__/projects-page.test.tsx` — Page rendering tests
+  - `src/components/__tests__/EvidenceBlock.test.tsx` — Component rendering tests
+  - `src/app/api/__tests__/echo.test.ts` — Route handler tests
+
+  ### Current Unit Test Coverage Areas
+  - `src/lib/` helpers (registry, config, structured data, observability, security)
+  - `src/app/` pages (layout, home, CV, contact, projects, project detail)
+  - `src/app/api/` handlers (csrf, echo, health)
+  - `src/components/` UI components (navigation, theme, evidence, badges)
+  - `src/data/` wrappers and CV content
+  - `src/proxy.ts` middleware behavior
+
+### UI Tests (React components/pages)
+
+Use jsdom for UI tests and keep the default Vitest environment as node.
+
+```ts
+// @vitest-environment jsdom
+```
+
+Recommended tooling:
+
+- React Testing Library (`@testing-library/react`)
+- jest-dom matchers (`@testing-library/jest-dom`)
+
+UI tests cover components, pages, and client-side behaviors (scrolling, motion preferences, navigation). The default Vitest environment stays `node`, with jsdom opted-in per test file.
+
+### API Route Handler Tests
+
+Route handlers are unit-tested by invoking exported `GET`/`POST` handlers with `Request` objects.
+Focus on status codes, validation errors, and JSON payloads.
 
 ### Unit Test Template
 
@@ -622,6 +661,8 @@ This ensures:
 3. Coverage reports are available for review
 
 ## Troubleshooting
+
+For CI check failures and coverage gate triage, see [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
 
 ### Unit Test Failures
 

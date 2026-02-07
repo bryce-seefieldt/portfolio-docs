@@ -1,6 +1,6 @@
 ---
 title: 'Feature: Unit Testing'
-description: 'Vitest-based unit tests for registry, config, and helpers.'
+description: 'Vitest-based unit tests for registry, APIs, components, and pages.'
 sidebar_position: 2
 tags: [portfolio, features, testing, unit]
 ---
@@ -15,7 +15,7 @@ tags: [portfolio, features, testing, unit]
 ### In scope
 
 - Vitest unit test suite
-- core library coverage targets
+- full source coverage targets
 
 ### Out of scope
 
@@ -33,7 +33,7 @@ tags: [portfolio, features, testing, unit]
 
 - Feature name: Unit testing
 - Feature group: Testing and quality gates
-- Technical summary: Runs deterministic tests on core utilities and validation logic.
+- Technical summary: Runs deterministic tests across core utilities, API handlers, components, and pages.
 - Low-tech summary: Confirms the app logic works before shipping.
 
 ### Feature in action
@@ -44,7 +44,7 @@ tags: [portfolio, features, testing, unit]
 
 #### Manual
 
-- Steps: Run `pnpm test:unit` and review output.
+- Steps: Run `pnpm test:unit` and review output (currently 195 tests across 39 files).
 - What to look for: All tests pass with expected coverage.
 - Artifacts or reports to inspect: CI test job logs.
 
@@ -55,6 +55,10 @@ tags: [portfolio, features, testing, unit]
   - [`/portfolio-app/src/lib/__tests__/registry-functions.test.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/__tests__/registry-functions.test.ts)
   - [`/portfolio-app/src/lib/__tests__/linkConstruction.test.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/__tests__/linkConstruction.test.ts)
   - [`/portfolio-app/src/lib/__tests__/config.test.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/__tests__/config.test.ts)
+  - [`/portfolio-app/src/app/api/__tests__/echo.test.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/api/__tests__/echo.test.ts)
+  - [`/portfolio-app/src/app/__tests__/projects-page.test.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/__tests__/projects-page.test.tsx)
+  - [`/portfolio-app/src/components/__tests__/NavigationEnhanced.test.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/__tests__/NavigationEnhanced.test.tsx)
+  - [`/portfolio-app/src/__tests__/proxy.test.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/__tests__/proxy.test.ts)
 - E2E tests: None.
 
 ### Potential behavior if broken or misconfigured
@@ -97,7 +101,7 @@ tags: [portfolio, features, testing, unit]
 ## Validation / Expected outcomes
 
 - Unit tests pass in CI and locally.
-- Coverage targets are met.
+- Coverage targets are met across the full source tree.
 
 ## Failure modes / Troubleshooting
 
