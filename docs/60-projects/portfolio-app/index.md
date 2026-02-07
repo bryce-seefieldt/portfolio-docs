@@ -87,11 +87,6 @@ Portfolio App must link to evidence pages for each project:
 - Runbooks: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
 - CI/CD governance: [/docs/30-devops-platform/ci-cd-pipeline-overview.md](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
 
-## See also (appendices)
-
-- [Appendix: Progress & completion log](/docs/60-projects/portfolio-app/appendix-progress.md)
-- [Appendix: Metrics & quality signals](/docs/60-projects/portfolio-app/appendix-metrics.md)
-
 ## Reviewer path
 
 - Open the Portfolio App repo and inspect CI workflows (`ci`, CodeQL, Dependabot) for required checks and naming stability.
