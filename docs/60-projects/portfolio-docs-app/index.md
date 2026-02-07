@@ -94,15 +94,15 @@ This dossier is considered “complete enough for first publication” when:
   - this hub page is the category landing page
 - claims in these pages map to concrete governance/pipeline/security/ops artifacts (even if some artifacts are initially stubbed)
 
-## Current State (Phase 3–Stage 3.5)
+## Current State
 
 - ✅ **Docs infrastructure**: Docusaurus + TypeScript configured for enterprise authoring patterns
-- ✅ **Architecture and governance**: 7-page dossier with full threat model, security analysis, and operational baseline (Phase 2)
-- ✅ **CI/CD pipeline**: Quality gates (lint, format check, link validation); build determinism enforced with frozen lockfiles; branch protection via required checks (Phase 3.3)
+- ✅ **Architecture and governance**: 7-page dossier with full threat model, security analysis, and operational baseline
+- ✅ **CI/CD pipeline**: Quality gates (lint, format check, link validation); build determinism enforced with frozen lockfiles; branch protection via required checks
 - ✅ **Security hardening plan**: ADR-0019 and the docs hardening implementation plan published; audit gates and header validation tracked via the security program
-- ✅ **Testing and validation**: Complete build/link/lint/format quality gates; local `pnpm verify` script with 8-step workflow (Phase 3.3)
-- ✅ **Operational procedures**: Comprehensive runbooks and governance documentation in `docs/50-operations/runbooks/` (Phase 3–Stage 3.5)
-  - **Project Publish Runbook**: 6-phase, time-boxed procedure (3 hours) for portfolio app project publication
+- ✅ **Testing and validation**: Complete build/link/lint/format quality gates; local `pnpm verify` script with 8-step workflow
+- ✅ **Operational procedures**: Comprehensive runbooks and governance documentation in `docs/50-operations/runbooks/`
+  - **Project Publish Runbook**: 6-step, time-boxed procedure (3 hours) for portfolio app project publication
     - Covers Planning → Registry Entry → Dossier Update → Link Validation → PR/Review → Post-Publish
     - Validation signals: `pnpm registry:validate`, `pnpm links:check`, `pnpm build`
     - Includes rollback and abort procedures

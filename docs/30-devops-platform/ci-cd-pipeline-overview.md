@@ -38,7 +38,7 @@ The Portfolio App CI/CD pipeline enforces quality gates via GitHub Actions befor
 graph TB
    Quality["Quality Job<br/>├─ Lint ESLint<br/>├─ Format check Prettier<br/>├─ Typecheck TypeScript<br/>├─ Dependency audit<br/>└─ Auto-format Dependabot PRs"]
     Secrets["Secrets-Scan Job<br/>├─ TruffleHog scanning<br/>└─ Verified secrets only"]
-    Test["Test Job Stage 3.3<br/>├─ Unit tests pnpm test:unit<br/>├─ E2E tests Playwright<br/>└─ Coverage reports artifacts"]
+   Test["Test Job<br/>├─ Unit tests pnpm test:unit<br/>├─ E2E tests Playwright<br/>└─ Coverage reports artifacts"]
     Build["Build Job<br/>├─ pnpm build<br/>└─ Vercel deployment"]
 
     Quality --> Secrets
@@ -131,7 +131,7 @@ pnpm format:write || true
 
 **Outcome**: Fails if any checks fail; blocks subsequent jobs
 
-#### 2. Secrets-Scan Job (Phase 2 Enhancement)
+#### 2. Secrets-Scan Job (Enhancement)
 
 **Purpose**: Detect accidental secrets in code and configuration
 
@@ -159,7 +159,7 @@ trufflesecurity/trufflehog@main \
 
 **Evidence**: ADR-XXXX (secrets scanning strategy)
 
-#### 3. Test Job (Stage 3.3)
+#### 3. Test Job
 
 **Purpose**: Run unit and E2E tests before build
 

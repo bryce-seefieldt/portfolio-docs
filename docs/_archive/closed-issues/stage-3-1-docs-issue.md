@@ -4,6 +4,9 @@ description: 'Documents the registry decision (ADR-0011) and publishes a compreh
 tags: [portfolio, roadmap, planning, phase-3, stage-3.1, docs, adr, reference]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 3.1: ADR-0011 & Registry Schema Documentation
 
 https://github.com/bryce-seefieldt/portfolio-docs/issues/42

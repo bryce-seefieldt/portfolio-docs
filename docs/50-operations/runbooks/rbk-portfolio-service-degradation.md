@@ -81,7 +81,7 @@ time curl -s https://portfolio-app.vercel.app/projects > /dev/null
 
 Follow these steps sequentially. Each phase has a time target to meet the 10-minute MTTR goal.
 
-### Phase 1: Triage (1 minute)
+### Step 1: Triage (1 minute)
 
 **Objective:** Confirm degradation exists and assess initial scope.
 
@@ -154,13 +154,13 @@ curl -I https://portfolio-app.vercel.app/contact | grep HTTP
 
 Based on triage, classify the degradation type:
 
-- **Type A: Degraded (503 status)** → Data loading or resource issue → Skip to **Phase 2: Containment**
-- **Type B: Slow but functional (200 status, >3s response)** → Performance degradation → Skip to **Phase 3: Investigation**
-- **Type C: Intermittent errors** → Flaky dependency or caching issue → Skip to **Phase 3: Investigation**
+- **Type A: Degraded (503 status)** → Data loading or resource issue → Skip to **Step 2: Containment**
+- **Type B: Slow but functional (200 status, >3s response)** → Performance degradation → Skip to **Step 3: Investigation**
+- **Type C: Intermittent errors** → Flaky dependency or caching issue → Skip to **Step 3: Investigation**
 
 ---
 
-### Phase 2: Containment (2 minutes)
+### Step 2: Containment (2 minutes)
 
 **Objective:** Limit impact and notify stakeholders while investigating root cause.
 
@@ -225,7 +225,7 @@ vercel env ls --scope production
 
 ---
 
-### Phase 3: Investigation (3–5 minutes)
+### Step 3: Investigation (3–5 minutes)
 
 **Objective:** Identify root cause using logs and error patterns.
 
@@ -296,7 +296,7 @@ Based on error analysis, classify into one of four categories:
 
 ---
 
-### Phase 4: Recovery (2–5 minutes)
+### Step 4: Recovery (2–5 minutes)
 
 **Objective:** Execute fix based on identified root cause category.
 
@@ -402,7 +402,7 @@ curl -I https://api.github.com/repos/bryce-seefieldt/portfolio-app
 
 ---
 
-### Phase 5: Verification (1–2 minutes)
+### Step 5: Verification (1–2 minutes)
 
 **Objective:** Confirm degradation is resolved and service is fully restored.
 
@@ -498,7 +498,7 @@ Use the postmortem template to document the incident:
 3. **Root Cause Analysis:**
    - **What happened:** `projects.yml` file corrupted during merge conflict resolution
    - **Why it happened:** No automated validation of `projects.yml` syntax before deployment
-   - **Why it wasn't caught:** CI checks didn't include `pnpm registry:validate` (added in Phase 3, but not enforced)
+  - **Why it wasn't caught:** CI checks didn't include `pnpm registry:validate` (added in an enhancement pass, but not enforced)
 
 4. **Resolution:**
    - Restored `projects.yml` from previous working commit
@@ -519,7 +519,7 @@ Create GitHub issues for each preventive action:
 gh issue create --title "Add registry validation to required CI checks" \
   --body "Prevent corrupted projects.yml from deploying by enforcing pnpm registry:validate in CI. Ref: INC-20260126-001" \
   --label "ci,enhancement,postmortem-followup" \
-  --milestone "Phase 4.3"
+  --milestone "Service Degradation"
 ```
 
 Assign owner and due date to each issue.

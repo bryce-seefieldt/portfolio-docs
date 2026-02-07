@@ -15,6 +15,9 @@ tags:
   ]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 4.5: UX Enhancements & SEO Optimization — Documentation
 
 **Type:** Documentation / Architecture Guide  

@@ -227,27 +227,27 @@ Context: Used during INC-YYYYMMDD-NNN" \
 - `docs/50-operations/runbooks/rbk-docs-rollback.md`
 - `docs/50-operations/runbooks/rbk-docs-broken-links-triage.md`
 
-### Portfolio App Runbooks (All Phases)
+### Portfolio App Runbooks
 
-**Phase 1–3:**
+**Core operations:**
 
 - `docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md` — Vercel setup
 - `docs/50-operations/runbooks/rbk-portfolio-deploy.md`
 - `docs/50-operations/runbooks/rbk-portfolio-rollback.md`
 - `docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`
-- `docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md` — Phase 2 secrets incident response
-- `docs/50-operations/runbooks/rbk-portfolio-project-publish.md` — Phase 3 Stage 3.5
-- `docs/50-operations/runbooks/troubleshooting-portfolio-publish.md` — Phase 3 Stage 3.5
-- `docs/50-operations/runbooks/rbk-portfolio-environment-promotion.md` — Phase 4 Stage 4.1
-- `docs/50-operations/runbooks/rbk-portfolio-environment-rollback.md` — Phase 4 Stage 4.1
+- `docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md` — Secrets incident response
+- `docs/50-operations/runbooks/rbk-portfolio-project-publish.md` — Project publishing
+- `docs/50-operations/runbooks/troubleshooting-portfolio-publish.md` — Publish troubleshooting
+- `docs/50-operations/runbooks/rbk-portfolio-environment-promotion.md` — Environment promotion
+- `docs/50-operations/runbooks/rbk-portfolio-environment-rollback.md` — Environment rollback
 
-**Phase 4 Stage 4.2–4.3:**
+**Performance and incidents:**
 
-- `docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md` — Stage 4.2 proactive tuning
-- `docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md` — Stage 4.2 troubleshooting
-- `docs/50-operations/runbooks/rbk-portfolio-incident-response.md` — Stage 4.3 general framework
-- `docs/50-operations/runbooks/rbk-portfolio-service-degradation.md` — Stage 4.3 degradation procedures
-- `docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md` — Stage 4.3 deployment failure recovery
+- `docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md` — Proactive tuning
+- `docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md` — Troubleshooting
+- `docs/50-operations/runbooks/rbk-portfolio-incident-response.md` — General framework
+- `docs/50-operations/runbooks/rbk-portfolio-service-degradation.md` — Degradation procedures
+- `docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md` — Deployment failure recovery
 
 ### Related Documentation
 

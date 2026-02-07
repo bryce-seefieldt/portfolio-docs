@@ -64,7 +64,7 @@ Related runbooks:
 
 ## Procedure / Content
 
-### Phase 0: Triage (≤5 min)
+### Step 0: Triage (≤5 min)
 
 Determine severity and containment strategy.
 
@@ -84,9 +84,9 @@ Determine severity and containment strategy.
    - Duration of exposure?
 
 3. **Assess severity:**
-   - **Critical:** High-value credential (deployment token, prod DB password) + public exposure → Proceed to **Phase 1: Emergency Contain (≤5 min)**
-   - **High:** Moderate credential (staging API key) + limited exposure → **Phase 1: Emergency Contain (≤30 min)**
-   - **Medium:** Low-value secret or limited exposure → **Phase 1: Emergency Contain (≤2 hrs)**
+   - **Critical:** High-value credential (deployment token, prod DB password) + public exposure → Proceed to **Step 1: Emergency Contain (≤5 min)**
+   - **High:** Moderate credential (staging API key) + limited exposure → **Step 1: Emergency Contain (≤30 min)**
+   - **Medium:** Low-value secret or limited exposure → **Step 1: Emergency Contain (≤2 hrs)**
 
 #### 0b) Notify (if needed)
 
@@ -96,7 +96,7 @@ Determine severity and containment strategy.
 
 ---
 
-### Phase 1: Emergency Contain (≤5 min for Critical)
+### Step 1: Emergency Contain (≤5 min for Critical)
 
 **Goal:** Stop the leak; make the secret inaccessible.
 
@@ -133,7 +133,7 @@ Determine severity and containment strategy.
 
 ---
 
-### Phase 2: Investigation (5–30 min)
+### Step 2: Investigation (5–30 min)
 
 **Goal:** Determine scope, timeline, and exposure duration.
 
@@ -179,7 +179,7 @@ Determine severity and containment strategy.
 
 ---
 
-### Phase 3: Remediation (15–60 min)
+### Step 3: Remediation (15–60 min)
 
 **Goal:** Remove the leak; update systems; prevent recurrence.
 
@@ -240,7 +240,7 @@ grep ".env.local\|.env.*.local" .gitignore || echo "⚠️ Warning: .env.local n
 
 ---
 
-### Phase 4: Validation (5–10 min)
+### Step 4: Validation (5–10 min)
 
 **Goal:** Confirm the leak is contained and systems are healthy.
 
@@ -275,7 +275,7 @@ curl -I https://<portfolio-domain>/
 
 ---
 
-### Phase 5: Post-Incident Postmortem (30 min–1 hr)
+### Step 5: Post-Incident Postmortem (30 min–1 hr)
 
 **Goal:** Document what happened and prevent recurrence.
 
@@ -299,7 +299,7 @@ Create `docs/_meta/postmortem-YYYY-MM-DD-secrets-incident.md`:
 
 - Developer accidentally committed `.env.local` or hardcoded a secret
 - Pre-commit hook was not active / not catching the secret
-- CI secrets scanning was not yet enabled (if Phase 2 enhancement not complete)
+- CI secrets scanning was not yet enabled (if the enhancement was not complete)
 - Manual review missed the secret in PR
 
 ## Impact
@@ -324,13 +324,13 @@ Create `docs/_meta/postmortem-YYYY-MM-DD-secrets-incident.md`:
 - [ ] CI secrets scanning gate enabled (TruffleHog in workflow)
 - [ ] Team notified; best practices refreshed
 
-### Medium-term (Phase 2+)
+### Medium-term
 
 - [ ] Add GitHub's native secrets scanning (if not already enabled)
 - [ ] Rotate all long-lived tokens to short-lived / OIDC
 - [ ] Review and tighten `.env.example` and `.gitignore`
 
-### Long-term (Phase 3+)
+### Long-term
 
 - [ ] Centralized secrets management (e.g., AWS Secrets Manager)
 - [ ] Automated secret rotation policies
@@ -364,7 +364,7 @@ If the incident reveals a new threat or mitigation gap, update [portfolio-app-th
 #### 5d) Close the incident
 
 1. Mark postmortem as closed
-2. Update Issue #24 (Phase 2 planning) if relevant
+2. Update Issue #24 (planning) if relevant
 3. Consider ADR if policy changes needed
 
 ---
@@ -398,7 +398,7 @@ If the incident reveals a new threat or mitigation gap, update [portfolio-app-th
 - [ ] Rotate credential immediately
 - [ ] Rollback deployment (if deployed)
 - [ ] Notify team
-- [ ] Proceed to Investigation phase
+- [ ] Proceed to the investigation step
 
 ### Investigation Checklist (5–30 min)
 
@@ -439,4 +439,4 @@ If the incident reveals a new threat or mitigation gap, update [portfolio-app-th
 - Threat Model: [Incident Response](/docs/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
 - Rollback Runbook: [rbk-portfolio-rollback.md](./rbk-portfolio-rollback.md)
 - CI Triage Runbook: [rbk-portfolio-ci-triage.md](./rbk-portfolio-ci-triage.md)
-- Phase 2 Implementation: [phase-2-implementation-guide.md](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
+- Planning references: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)

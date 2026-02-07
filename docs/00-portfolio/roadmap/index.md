@@ -103,7 +103,8 @@ For each phase or milestone:
 - **Phase 3:** Scaling content model (repeatable project publishing pipeline) — ✅ Complete (Stage 3.6 complete 2026-01-23)
 - **Phase 4:** Reliability + security hardening (enterprise credibility upgrades) — ✅ Complete (2026-01-30)
 - **Phase 5:** Advanced demonstrations (multi-language demos, platform proofs, eval-first artifacts)
-- **Phase 6:** Capstone, evolution, and long-term signal (optional)
+- **Phase 6:** Capstone, evolution, and long-term signal — ✅ Complete (2026-02-05)
+- **Phase 7:** Coverage expansion, docs governance, and archival hardening — 🚧 In progress (2026-02-06)
 
 Each phase includes:
 
@@ -274,6 +275,8 @@ Beyond baseline Phase 1, Phase 2 includes optional hardening controls that stren
 
 ## Phase 3 — Repeatable project publishing pipeline (scale without chaos)
 
+**Status:** ✅ Complete (2026-01-23) — see [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
+
 ### Objective
 
 Make adding projects predictable, low-friction, and consistent with governance.
@@ -345,6 +348,8 @@ Make adding projects predictable, low-friction, and consistent with governance.
 
 ## Phase 5 — Advanced demonstrations and multi-language portfolio expansion
 
+**Status:** ⏳ Planned
+
 ### Objective
 
 Show depth and breadth across languages and disciplines while maintaining enterprise consistency, and ensure the portfolio is reviewer-ready under time pressure.
@@ -402,7 +407,9 @@ Show depth and breadth across languages and disciplines while maintaining enterp
 
 ---
 
-## Phase 6 — Capstone, evolution, and long-term signal (optional)
+## Phase 6 — Capstone, evolution, and long-term signal
+
+**Status:** ✅ Complete (2026-02-05) — see [Phase 6 Implementation Guide](/docs/00-portfolio/roadmap/phase-6-implementation-guide.md)
 
 ### Objective
 
@@ -441,6 +448,26 @@ Preserve credibility over time by defining what belongs, how change is governed,
 ### Implementation guide
 
 - See [Phase 6 Implementation Guide](phase-6-implementation-guide.md) for detailed steps, checklists, and success criteria.
+
+---
+
+## Phase 7 — Coverage expansion, docs governance, and archival hardening
+
+**Status:** 🚧 In progress (2026-02-06) — see [Phase 7 Implementation Guide](/docs/00-portfolio/roadmap/phase-7-implementation-guide.md)
+
+### Objective
+
+Document and operationalize post-Phase 6 hardening across app testing, docs governance, and archive visibility controls while keeping build integrity and reviewability intact.
+
+### Deliverables
+
+- Expanded unit coverage across app routes, components, API handlers, data wrappers, and middleware
+- Testing governance refresh (ADR-0020 + guide/runbook updates aligned to `ci / test`)
+- Archive hardening: closed issues moved to `docs/_archive/` and excluded from builds
+
+### Implementation guide
+
+- See [Phase 7 Implementation Guide](/docs/00-portfolio/roadmap/phase-7-implementation-guide.md) for stages, validation, and success criteria.
 
 ---
 

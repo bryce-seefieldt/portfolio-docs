@@ -63,6 +63,9 @@ If archival would break evidence links or remove required artifacts, stop and up
 - Add an archival notice to the affected page(s)
 - Update any index pages to mark the item as archived
 - Ensure a replacement link or rationale is documented
+- Choose one archive visibility option:
+	- **Option 1 (Draft):** add `draft: true` in front matter to prevent rendering.
+	- **Option 2 (Archive folder):** move content under `docs/_archive/` and exclude it from the docs build.
 
 ### 3) Update governance artifacts
 
@@ -74,6 +77,7 @@ If archival would break evidence links or remove required artifacts, stop and up
 
 - Run local link checks (`pnpm build` in portfolio-docs)
 - Confirm no broken links or missing references
+- If using Option 2, verify inbound links are updated or intentionally preserved as historical references
 
 ### 5) Merge and publish
 

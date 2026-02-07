@@ -260,7 +260,7 @@ export const metadata: Metadata = {
 **Example workflow:**
 
 ```typescript
-// Before: "Portfolio App - Stage 4.5"
+// Before: "Portfolio App - UX + SEO"
 export const metadata = {
   title: 'Portfolio App',
   description:
@@ -383,7 +383,7 @@ export const metadata = {
 
 ## Implementation Roadmap
 
-**Phase 1 (Current):** Core OG + Twitter + JSON-LD
+**Current:** Core OG + Twitter + JSON-LD
 
 - ✅ Open Graph for all pages
 - ✅ Twitter Cards with summary_large_image
@@ -391,13 +391,13 @@ export const metadata = {
 - ✅ WebSite schema on homepage
 - ✅ Breadcrumb schema on subpages
 
-**Phase 2 (Future):** Blog Support
+**Future:** Blog Support
 
 - BlogPosting schema for blog posts
 - Article schema for case studies
 - Author schema for bylines
 
-**Phase 3 (Future):** Advanced Metadata
+**Future:** Advanced Metadata
 
 - VideoObject schema for demos/demos
 - FAQPage schema for FAQ section

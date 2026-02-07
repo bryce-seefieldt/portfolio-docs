@@ -57,7 +57,7 @@ The Portfolio App is intentionally paired with the **Portfolio Documentation App
 - `architecture.md` — system design, content model, component boundaries
 - `deployment.md` — CI/CD contract, environments, release governance, domains
 - `security.md` — threat surface and enforceable controls (public-safe)
-- `testing.md` — quality gate definitions and test strategy (phased)
+- `testing.md` — quality gate definitions and test strategy (maturity-based)
 - `operations.md` — runbooks, maintenance cadence, recovery assumptions
 - `troubleshooting.md` — common failure modes and deterministic fixes
 
@@ -76,7 +76,7 @@ Portfolio App must link to evidence pages for each project:
 
 - Route skeleton implemented: `/`, `/cv`, `/projects`, `/projects/[slug]`, `/contact`.
 - CI gates enforced: `ci / quality` and `ci / build` with required checks and frozen lockfile installs.
-- Evidence artifacts complete: ADRs, threat model, runbooks, and dossier pages updated through Phase 4.
+- Evidence artifacts complete: ADRs, threat model, runbooks, and dossier pages updated through the current hardening cycle.
 - Observability and operational readiness documented with health checks and MTTR runbooks.
 - UX/SEO/theming upgrades documented with references and decision records.
 

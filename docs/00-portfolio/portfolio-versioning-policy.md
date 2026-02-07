@@ -23,7 +23,7 @@ Define a stable versioning strategy so reviewers can interpret change scope quic
 
 ## Prereqs / Inputs
 
-- Phase 6 implementation guide
+- Governance implementation guide
 - Release notes index
 - ADR-0017 (portfolio versioning and lifecycle)
 
@@ -48,7 +48,7 @@ Use semantic versioning (SemVer): `vMAJOR.MINOR.PATCH`.
 
 - Release note entry in `/docs/00-portfolio/release-notes/`
 - Links to evidence artifacts (dossiers, ADRs, runbooks) when affected
-- Update to roadmap status if a phase milestone is completed
+- Update to roadmap status if a major milestone is completed
 
 ### Tagging guidance
 

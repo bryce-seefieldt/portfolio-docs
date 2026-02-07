@@ -48,11 +48,15 @@ Define how portfolio content is deprecated and archived without breaking reviewe
 - Do not remove evidence referenced in release notes or dossiers
 - Update indices to reflect archived status
 - Add a release note entry when archiving is material
+- Use one of the approved archive visibility options:
+	- **Option 1 (Draft):** keep content in place but mark pages as draft so they do not render in builds.
+	- **Option 2 (Archive folder):** move content to `docs/_archive/` and exclude it from the rendered docs.
 
 ### Link integrity requirements
 
 - No broken internal links after archival
 - Use explicit archival notes instead of deleting pages
+- If moving pages to `docs/_archive/`, update inbound links or document replacements where needed
 
 ## Validation / Expected outcomes
 

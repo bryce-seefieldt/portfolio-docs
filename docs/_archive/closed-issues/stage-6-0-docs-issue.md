@@ -4,6 +4,9 @@ description: 'Documentation issue covering the full Phase 6 governance and longe
 tags: [portfolio, roadmap, planning, phase-6, stage-6.0, docs, governance]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 6.0: Phase 6 Full Implementation — Documentation
 
 **Type:** Documentation / Governance / Release Notes  

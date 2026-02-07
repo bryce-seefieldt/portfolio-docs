@@ -5,6 +5,9 @@ tags:
   [portfolio, roadmap, planning, phase-4, stage-4-1, docs, adr, runbook, devops]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 4.1: Multi-Environment Deployment Strategy — Documentation
 
 **Type:** ADR / Runbook / Reference  

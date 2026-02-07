@@ -14,6 +14,9 @@ tags:
   ]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 4.3: Observability & Operational Readiness — Documentation
 
 **Type:** Documentation / Runbooks / Reference  

@@ -246,7 +246,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 
 **Current approach:** All nav items remain visible on mobile (horizontal scroll if needed)
 
-**Future (Phase 5):** Hamburger menu for screens < 640px
+**Future (planned):** Hamburger menu for screens < 640px
 
 ---
 
@@ -292,14 +292,14 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 
 ### Mobile Responsiveness
 
-**Current Implementation (Phase 4.5):**
+**Current Implementation:**
 
 - Horizontal scroll navigation on small screens
 - All links remain visible
 - Touch-friendly spacing (gap-4)
 - Theme toggle always visible
 
-**Future Enhancement (Phase 5):**
+**Future Enhancement:**
 
 - Hamburger menu for screens < md
 - Slide-in navigation drawer

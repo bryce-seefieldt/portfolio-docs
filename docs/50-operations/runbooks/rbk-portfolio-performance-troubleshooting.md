@@ -39,7 +39,7 @@ Use this runbook when you encounter:
 - `@vercel/speed-insights` package and `<SpeedInsights />` component are already implemented
 - Speed Insights script endpoint will return **204 No Content** until feature is enabled
 - To enable: Vercel project → Settings → Speed Insights → Enable (paid add-on)
-- This feature is **deferred until post-Phase 4** when budget allows
+- This feature is **deferred until a later hardening pass** when budget allows
 
 **Verification:** Browser DevTools Network tab shows script endpoint status:
 

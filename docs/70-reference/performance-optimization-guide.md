@@ -3,15 +3,7 @@ title: 'Performance Optimization Guide (Portfolio App)'
 description: 'Concise reference for bundle analysis, caching, and Vercel Speed Insights (Core Web Vitals) for the Portfolio App.'
 sidebar_position: 9
 tags:
-  [
-    reference,
-    performance,
-    caching,
-    bundle,
-    speed-insights,
-    analytics,
-    stage-4-2,
-  ]
+   [reference, performance, caching, bundle, speed-insights, analytics]
 ---
 
 ## Purpose
@@ -41,7 +33,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 - Cache-Control (HTML): `no-store, must-revalidate` (App Router default)
 - ISR Revalidation: 3600 seconds (1 hour) via route segment config
 - Static Assets: Aggressive caching with long max-age
-- JS total baseline: ~27.8 MB (Phase 2); investigate >10% growth
+- JS total baseline: ~27.8 MB; investigate >10% growth
 - Routes: project pages are SSG with 1h ISR
 
 **Note:** Next.js App Router returns `no-store` for HTML but caching still works via:

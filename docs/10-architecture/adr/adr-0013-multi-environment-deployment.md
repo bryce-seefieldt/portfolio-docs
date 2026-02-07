@@ -7,7 +7,7 @@ tags: [adr, deployment, environments, devops, phase-4, stage-4-1]
 
 ## Problem Statement
 
-Pre-Phase 4 deployments rely on preview auto-deploys and production manual promotion. Without an explicit **staging** tier and **immutable builds**, validation is limited and "works locally"/"works in preview" surprises can reach production.
+Before the multi-environment rollout, deployments rely on preview auto-deploys and production manual promotion. Without an explicit **staging** tier and **immutable builds**, validation is limited and "works locally"/"works in preview" surprises can reach production.
 
 ## Decision
 

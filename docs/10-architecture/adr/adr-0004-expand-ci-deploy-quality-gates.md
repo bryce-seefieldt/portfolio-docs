@@ -96,7 +96,7 @@ Minimum required jobs:
    - `pnpm lint` (ESLint)
    - `pnpm format:check` (Prettier check, no writes)
    - `pnpm typecheck` (TypeScript type checking)
-   - Optional (phase 2): `pnpm lint:md` (Markdown lint)
+  - Optional enhancement: `pnpm lint:md` (Markdown lint)
 
 2. **Build job** (hard integrity gate)
    - `pnpm build` (must fail on broken links / structural issues)
@@ -176,7 +176,7 @@ Required scripts (names are part of the “contract”):
 - `typecheck` → `tsc --noEmit`
 - `build` → Docusaurus build (already present)
 
-Optional phase 2:
+Optional enhancements:
 
 - `lint:md` → Markdown lint (markdownlint-cli2 or equivalent)
 - `lint:links` → external link checker (later; avoid gating early due to flakiness)

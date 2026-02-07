@@ -7,7 +7,7 @@ tags: [security, threat-model, deployment, runtime, stride]
 
 ## Executive Summary
 
-Stage 4.4 extends the Portfolio App threat model to include deployment surface and runtime misconfiguration risks. Focus areas: configuration drift, dependency compromise, CSP bypass attempts, performance abuse, and secret exposure in logs. Residual risks (Vercel infrastructure, CDN/npm supply chain, browser 0-days) are documented and tracked in the risk register. Mitigations center on environment validation, dependency audit policy, OWASP security headers with CSP, and structured logging.
+This updated threat model extends the Portfolio App coverage to include deployment surface and runtime misconfiguration risks. Focus areas: configuration drift, dependency compromise, CSP bypass attempts, performance abuse, and secret exposure in logs. Residual risks (Vercel infrastructure, CDN/npm supply chain, browser 0-days) are documented and tracked in the risk register. Mitigations center on environment validation, dependency audit policy, OWASP security headers with CSP, and structured logging.
 
 ## STRIDE Analysis for Deployment Surface
 
@@ -45,7 +45,7 @@ Stage 4.4 extends the Portfolio App threat model to include deployment surface a
 | --------------- | --------------------------------------------------------------------------------------------- |
 | Secrets         | TruffleHog scanning, structured logging, environment contract (no secrets), `.env` discipline |
 | Dependencies    | Dependabot updates, frozen lockfile installs, audit policy and runbook, CodeQL                |
-| Config          | Environment validation, promotion gates, Stage 4.4 security headers/CSP                       |
+| Config          | Environment validation, promotion gates, security headers/CSP                                  |
 | Deployment      | Branch protection, required checks, immutable deploys, staging validation                     |
 | Runtime         | CSP nonce, OWASP headers, strict validation, CSRF, rate limiting, health checks               |
 | XSS             | CSP, framework security defaults, no dangerous user input, monitoring                         |

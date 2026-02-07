@@ -5,7 +5,7 @@ sidebar_position: 4
 tags: [projects, security, sdlc, supply-chain, web, portfolio]
 ---
 
-Status: **Live — Phase 2** — Dependabot + CodeQL + public-safe env policy + comprehensive threat model (STRIDE).
+Status: **Live — Baseline security controls** — Dependabot + CodeQL + public-safe env policy + comprehensive threat model (STRIDE).
 
 ## Purpose
 
@@ -55,7 +55,7 @@ For each threat, the model documents:
 - implemented mitigations
 - validation procedures
 
-**Status:** Live and aligned with Phase 2 baseline and Phase 2+ recommended controls.
+**Status:** Live and aligned with baseline and extended recommended controls.
 
 ---
 
@@ -116,7 +116,7 @@ For each threat, the model documents:
 - ensure no sensitive runtime env vars leak to client
 - keep public logs minimal and non-sensitive
 
-## Step 3 security posture (baseline)
+## Baseline security posture
 
 ### Supply chain controls
 
@@ -211,7 +211,7 @@ grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 - ✅ Secrets scanning gate (TruffleHog, PR-only in CI)
 - ✅ Required checks before merge (quality, secrets-scan, build, CodeQL)
 
-## Security Controls (Phase 2)
+## Security Controls (Baseline)
 
 | Control                  | Status       | Evidence                                                                                                                |
 | ------------------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -250,7 +250,7 @@ Every PR must confirm:
 - [ ] CodeQL scan passes
 - [ ] Secrets scan passes
 
-## Security Hardening (Stage 4.4)
+## Security Hardening
 
 Comprehensive hardening documentation: [Portfolio App Security Controls](../../40-security/portfolio-app-security-controls.md)
 

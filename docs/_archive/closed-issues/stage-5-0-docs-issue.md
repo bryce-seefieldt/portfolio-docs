@@ -5,6 +5,9 @@ tags:
   [portfolio, roadmap, planning, phase-5, stage-5.0, docs, professionalization]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 5.0: Phase 5 Full Implementation — Documentation
 
 **Type:** Documentation / Reference / Release Notes  

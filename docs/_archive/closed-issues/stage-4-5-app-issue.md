@@ -4,6 +4,9 @@ description: 'Implement UX improvements: dark mode, enhanced navigation, SEO opt
 tags: [portfolio, roadmap, planning, phase-4, stage-4-5, app, ux, seo, theming]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 4.5: UX Enhancements & SEO Optimization — App Implementation
 
 **Type:** Feature / Enhancement / Implementation  

@@ -136,7 +136,7 @@ Next update: 30 minutes
 
 ## Response Phases
 
-### Phase 1: Triage (First 5 minutes)
+### Step 1: Triage (First 5 minutes)
 
 **Objective:** Verify incident, assess scope, classify severity, notify stakeholders.
 
@@ -176,7 +176,7 @@ Example: `INC-20260126-001`
 
 ---
 
-### Phase 2: Investigation (10–30 minutes)
+### Step 2: Investigation (10–30 minutes)
 
 **Objective:** Identify root cause through systematic diagnosis.
 
@@ -242,7 +242,7 @@ Categorize into:
 
 ---
 
-### Phase 3: Mitigation & Resolution (5–60 minutes)
+### Step 3: Mitigation & Resolution (5–60 minutes)
 
 **Objective:** Fix the issue or implement temporary mitigation.
 
@@ -270,7 +270,7 @@ Categorize into:
 
 ---
 
-### Phase 4: Communication
+### Step 4: Communication
 
 #### During Incident
 
@@ -415,7 +415,7 @@ gh issue create \
   --title "Add registry validation to CI (postmortem INC-20260126-001)" \
   --body "Prevent corrupted projects.yml from deploying." \
   --label "ci,enhancement,postmortem-followup" \
-  --milestone "Phase 4.3" \
+   --milestone "Incident Response" \
   --assignee oncall-engineer
 ```
 

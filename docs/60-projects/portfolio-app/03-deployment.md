@@ -5,7 +5,7 @@ sidebar_position: 3
 tags: [projects, deployment, cicd, vercel, github-actions, governance]
 ---
 
-**Status:** ✅ **Phase 4 COMPLETE (2026-01-24)** — Three-tier deployment model (Preview → Staging → Production) with staging domain mapping; CI quality/build/test gates; Vercel Deployment Checks; GitHub Ruleset protection on main and staging branches (see [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)).
+**Status:** ✅ **Complete (2026-01-24)** — Three-tier deployment model (Preview → Staging → Production) with staging domain mapping; CI quality/build/test gates; Vercel Deployment Checks; GitHub Ruleset protection on main and staging branches (see [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)).
 
 ## Purpose
 
@@ -18,9 +18,9 @@ Define how the Portfolio App is built and deployed with enterprise-grade governa
 
 ## Deployment Model Summary
 
-The Portfolio App deployment model consists of three distinct operational phases:
+The Portfolio App deployment model consists of three distinct operational steps:
 
-### Phase 1: Setup (One-Time, Admin Tasks)
+### Step 1: Setup (One-Time, Admin Tasks)
 
 **When:** Initial Vercel project configuration and GitHub governance setup
 
@@ -32,9 +32,9 @@ The Portfolio App deployment model consists of three distinct operational phases
 - Create GitHub Ruleset for branch protection (main and staging)
 - Map staging domain to staging branch
 
-**Document:** [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (7 phases, ~120 minutes including staging setup)
+**Document:** [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (seven steps, ~120 minutes including staging setup)
 
-### Phase 2: Staging Validation (Before Production)
+### Step 2: Staging Validation (Before Production)
 
 **When:** After merging changes to `main`, before production deployment
 
@@ -48,7 +48,7 @@ The Portfolio App deployment model consists of three distinct operational phases
 
 **Document:** [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md) (includes staging validation steps)
 
-### Phase 3: Production Deployment (Repeated)
+### Step 3: Production Deployment (Repeated)
 
 **When:** After successful staging validation
 
@@ -215,7 +215,7 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
    - Next.js build must succeed
    - Vercel deployment initiated
 
-**Status:** Unit tests implemented in Stage 3.3 (PR #XX, merged 2026-01-22). E2E tests implemented in Phase 2 (PR #10, merged 2026-01-17).
+**Status:** Unit tests implemented in PR #XX (merged 2026-01-22). E2E tests implemented in PR #10 (merged 2026-01-17).
 
 ### Test coverage
 
@@ -492,7 +492,7 @@ Outcome:
 | **Making a code change and deploying to production**    | [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md)                                                                   | ~15 min |
 | **CI check failed (lint/format/typecheck/build)**       | [rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)                                                             | ~10 min |
 | **Need to rollback production**                         | [rbk-portfolio-rollback.md](docs/50-operations/runbooks/rbk-portfolio-rollback.md)                                                               | ~10 min |
-| **Need to configure environment variables after setup** | See [Phase 2 in setup runbook](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#phase-2-configure-environment-variables) | ~15 min |
+| **Need to configure environment variables after setup** | See [environment variable setup in the runbook](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md#step-2-configure-environment-variables) | ~15 min |
 
 ## References
 

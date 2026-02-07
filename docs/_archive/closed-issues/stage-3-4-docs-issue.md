@@ -5,6 +5,9 @@ tags:
   [portfolio, roadmap, planning, phase-3, stage-3.4, docs, documentation, adr]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 3.4: ADRs & Documentation Updates — Documentation
 
 **Type:** Documentation / ADR / Reference  

@@ -4,51 +4,51 @@ status: 'accepted'
 date: 2026-01-17
 sidebar_position: 1.0
 tags:
-  [adr, architecture, portfolio-program, exemplar, quality-baseline, phase-2]
+  [adr, architecture, portfolio-program, exemplar, quality-baseline]
 ---
 
 # ADR-0010: Portfolio App as Gold Standard Exemplar Project
 
 ## Context
 
-Phase 2 of the Portfolio Program (see [roadmap.md](/docs/00-portfolio/roadmap/index.md#phase-2--gold-standard-project-and-credibility-baseline) requires selecting one exemplary project to demonstrate senior-level engineering discipline. This project will serve as the template and quality bar for all future portfolio entries.
+The exemplar milestone of the Portfolio Program (see [roadmap](/docs/00-portfolio/roadmap/index.md)) requires selecting one exemplary project to demonstrate senior-level engineering discipline. This project will serve as the template and quality bar for all future portfolio entries.
 
 Candidate projects were evaluated:
 
 | Criterion                                 | Portfolio App         | Portfolio Docs    | Past Project          | Mini-Demo                 |
 | ----------------------------------------- | --------------------- | ----------------- | --------------------- | ------------------------- |
 | **Already deployed & operational**        | ✅ Yes                | ✅ Yes            | ⚠️ Maybe              | ❌ No                     |
-| **Governance trail (Phase 1 documented)** | ✅ Complete           | ✅ Strong         | ⚠️ Partial            | ❌ None                   |
+| **Governance trail (baseline documented)** | ✅ Complete           | ✅ Strong         | ⚠️ Partial            | ❌ None                   |
 | **Scope (manageable)**                    | ✅ ~500 LOC           | ⚠️ Large codebase | ⚠️ Varies             | ✅ Defined                |
 | **Real-world complexity**                 | ✅ Moderate           | ✅ High           | ⚠️ Varies             | ⚠️ Artificial             |
 | **Establishes clear precedent**           | ✅ Next steps obvious | ⚠️ Less clear     | ❌ Hard to generalize | ❌ Limited transfer value |
 
 ## Decision
 
-**Portfolio App** is selected as the Phase 2 gold standard exemplar project.
+**Portfolio App** is selected as the gold standard exemplar project.
 
 This means:
 
 - Portfolio App becomes the reference implementation for professional engineering discipline
 - All future portfolio projects must meet or exceed this quality bar
 - The dossier structure, threat model approach, and runbook patterns established for portfolio-app become the standard template
-- Phase 2 will comprehensively document and test portfolio-app; Phase 3+ will add additional projects following the same approach
+- The exemplar milestone will comprehensively document and test portfolio-app; subsequent expansion will add additional projects following the same approach
 
 ## Rationale
 
 1. **Already deployed and operational**
-   - Phase 1 complete (Vercel + GitHub Checks deployed, live evidence accessible)
+  - Baseline complete (Vercel + GitHub Checks deployed, live evidence accessible)
    - Live production deployment validates governance model
    - No backfill work to "make production-ready"
 
-2. **Complete governance trail from Phase 1**
+2. **Complete governance trail from the baseline**
    - ADRs exist (ADR-0007, ADR-0008)
    - Threat model started (can be expanded with STRIDE analysis)
    - Deployment dossier created (can be comprehensive)
    - CI/CD governance established and proven in practice
    - Release notes document decisions and changes
 
-3. **Manageable scope for Phase 2**
+3. **Manageable scope for the exemplar milestone**
    - ~500 lines of application code
    - 5 core routes (not overwhelming)
    - Clear intent: evidence-first UX + links to docs
@@ -61,7 +61,7 @@ This means:
    - Operations patterns: deploy/rollback/triage procedures
    - Real deployment challenges (URLs, env vars, preview vs production)
 
-5. **Sets clear precedent for Phase 3+**
+5. **Sets clear precedent for subsequent expansion**
    - Dossier structure becomes template (other projects follow same 10 sections)
    - Threat model approach (STRIDE analysis) becomes standard
    - Runbook pattern (deploy/triage/rollback) becomes repeatable
@@ -103,7 +103,7 @@ A senior engineer reviewing **portfolio-app** should conclude:
 
 - ✅ **Operations are documented and repeatable**
   - Evidence: Runbooks for deploy, CI triage, rollback with step-by-step procedures
-  - Links to: Real procedures tested and proven (Phase 1 deployment completed)
+  - Links to: Real procedures tested and proven (baseline deployment completed)
 
 - ✅ **Testing is automated and integrated in CI**
   - Evidence: Smoke tests (100% route coverage) run on every PR + merge
@@ -121,11 +121,11 @@ A senior engineer reviewing **portfolio-app** should conclude:
 - **Documentation becomes scalable:** Dossier + threat model + runbooks template can be repeated
 - **Pattern library grows:** Each project adds examples of solutions (security, testing, operations)
 - **Evidence-first approach proven:** Reviewers can validate engineering posture through artifacts
-- **Phase 3 is accelerated:** Second project will be faster because template exists
+- **Expansion is accelerated:** Second project will be faster because template exists
 
 ### Challenges
 
-- **Portfolio App requires Phase 2 investment** (~19–32 hours)
+- **Portfolio App requires exemplar investment** (~19–32 hours)
   - Comprehensive dossier (10 sections, ~4000 words)
   - Threat model with STRIDE analysis
   - Three operational runbooks
@@ -139,7 +139,7 @@ A senior engineer reviewing **portfolio-app** should conclude:
   - Acceptable trade-off: quality over quantity
 
 - **Retrospective documentation required**
-  - Some Phase 1 decisions already made; must be documented in ADRs
+  - Some baseline decisions already made; must be documented in ADRs
   - Threat model exists at high level; must be detailed with STRIDE analysis
   - Runbooks exist conceptually; must be written and tested
 
@@ -150,7 +150,7 @@ A senior engineer reviewing **portfolio-app** should conclude:
 **Rationale:** Also deployed, demonstrates ops maturity for Docusaurus platform  
 **Rejected because:**
 
-- Larger codebase (harder to document comprehensively in Phase 2)
+- Larger codebase (harder to document comprehensively in the exemplar milestone)
 - Less diverse skill showcase (documentation platform, not full app)
 - Roadmap suggests portfolio-app is the "face" of the program
 
@@ -163,7 +163,7 @@ A senior engineer reviewing **portfolio-app** should conclude:
 - Maintenance burden (may not be active or current)
 - Harder to establish future precedent (one-off case vs. repeatable pattern)
 
-### 3. Mini-demonstration project (written as part of Phase 2)
+### 3. Mini-demonstration project (written as part of the exemplar milestone)
 
 **Rationale:** Can be designed specifically to showcase capabilities  
 **Rejected because:**
@@ -172,20 +172,20 @@ A senior engineer reviewing **portfolio-app** should conclude:
 - Harder for reviewers to trust (custom-built vs. lived experience)
 - Still requires same documentation effort; no advantage
 
-### 4. Multiple smaller projects in Phase 2
+### 4. Multiple smaller projects in the exemplar milestone
 
 **Rationale:** Faster coverage, more portfolio entries  
 **Rejected because:**
 
 - Spreads effort too thin; none get comprehensive documentation
 - Harder to establish quality bar (conflicting standards)
-- Better to "go deep" on one project, then "scale" in Phase 3
+- Better to "go deep" on one project, then "scale" in subsequent expansion
 
 ## Implementation
 
-**Location:** [Phase 2 Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
+**Location:** [Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
 
-**Phase 2 deliverables for portfolio-app:**
+**Exemplar deliverables for portfolio-app:**
 
 1. **STEP 2:** Smoke test infrastructure (Playwright) — ~3–5 hours
 2. **STEP 3:** Comprehensive project dossier (10 sections) — ~4–6 hours
@@ -194,7 +194,7 @@ A senior engineer reviewing **portfolio-app** should conclude:
 5. **STEP 6:** ADR for testing strategy — ~1–2 hours
 6. **STEP 7:** Enhanced project detail page (gold standard badge) — ~2–3 hours
 7. **STEP 8:** Meaningful CV page (capability-to-proof mapping) — ~2–3 hours
-8. **STEP 9:** Phase 2 release note — ~1–2 hours
+8. **STEP 9:** Release note — ~1–2 hours
 9. **STEP 10:** PR creation and end-to-end verification — ~1–2 hours
 
 **Total effort:** ~19–32 hours (2–4 weeks at 10–15 hrs/week)
@@ -205,9 +205,9 @@ A senior engineer reviewing **portfolio-app** should conclude:
 - **Week 2:** STEPS 3–5 (dossier + threat model + runbooks)
 - **Week 3:** STEPS 6–10 (ADR + CV + project page + release note + validation)
 
-## Success metrics (post-Phase 2)
+## Success metrics (post-implementation)
 
-After Phase 2 completes, verify:
+After implementation completes, verify:
 
 - ✅ **Coverage:** 100% of core routes accessible; clear evidence trails for each
 - ✅ **Clarity:** Each route explains what it proves about engineering discipline
@@ -218,8 +218,8 @@ After Phase 2 completes, verify:
 
 ## Related documents
 
-- [Phase 2 Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md) — step-by-step procedures
-- [Phase 1 Release Notes](/docs/00-portfolio/release-notes/20260117-portfolio-app-phase-1-complete.md) — Phase 1 completion status
+- [Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md) — step-by-step procedures
+- [Foundation Release Notes](/docs/00-portfolio/release-notes/20260117-portfolio-app-phase-1-complete.md) — baseline completion status
 - [Portfolio Roadmap](/docs/00-portfolio/roadmap/index.md) — program-level planning
 - [ADR-0007: Vercel + Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) — deployment decisions
 - [ADR-0008: CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md) — CI governance decisions

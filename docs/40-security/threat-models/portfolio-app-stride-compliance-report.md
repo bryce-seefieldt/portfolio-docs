@@ -8,7 +8,7 @@ tags: [security, threat-model, compliance, audit, portfolio-app, sdlc, stride]
 # Portfolio App STRIDE Compliance Report
 
 **Report Date:** 2026-01-19  
-**Status:** Phase 2 — Gold Standard Baseline  
+**Status:** Enhanced baseline — Gold Standard  
 **Scope:** Portfolio App source code + CI/CD + operational procedures  
 **Auditor:** Architecture & Security (via threat model review)
 
@@ -16,9 +16,9 @@ tags: [security, threat-model, compliance, audit, portfolio-app, sdlc, stride]
 
 ## Executive Summary
 
-The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations and has achieved **Phase 2 recommended enhancements** for secrets scanning and CI permission hardening.
+The Portfolio App is **COMPLIANT** with all baseline STRIDE mitigations and has achieved recommended enhancements for secrets scanning and CI permission hardening.
 
-| STRIDE Category            | Threats | Phase 1 Status | Phase 2 Status                | Evidence                                                                   |
+| STRIDE Category            | Threats | Baseline Status | Enhanced Status              | Evidence                                                                   |
 | -------------------------- | ------- | -------------- | ----------------------------- | -------------------------------------------------------------------------- |
 | **Spoofing**               | 1       | ✅ Complete    | ✅ Complete                   | Vercel auto-HTTPS; domain lockdown (owner responsibility)                  |
 | **Tampering**              | 3       | ✅ Complete    | ⬆️ **Enhanced**               | CI permissions tightened; secrets scanning added                           |
@@ -26,7 +26,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | **Information Disclosure** | 3       | ✅ Complete    | ⬆️ **Enhanced**               | Secrets scanning gate + pre-commit hooks added; no hardcoded secrets found |
 | **Denial of Service**      | 2       | ✅ Complete    | ✅ Complete                   | Vercel DDoS protection; smoke tests validate performance                   |
 | **Elevation of Privilege** | 2       | ✅ Complete    | ✅ Complete                   | GitHub Rulesets enforce PR + checks; OIDC tokens used                      |
-| **TOTAL**                  | **12**  | **✅ 12/12**   | **✅ 12/12 + 2 enhancements** | All controls implemented; Phase 2 hardening complete                       |
+| **TOTAL**                  | **12**  | **✅ 12/12**   | **✅ 12/12 + 2 enhancements** | All controls implemented; hardening complete                               |
 
 ---
 
@@ -58,7 +58,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | --------------------------------------------- | -------- | ----------- | ----------------------------------------------------------------------------- |
 | Git → GitHub Actions → Vercel deployment only | ✅       | ✅          | No manual SSH/FTP configured; all deployments via Vercel GitHub integration   |
 | GitHub Rulesets enforce PR review             | ✅       | ✅          | Branch protection active; PRs require 1 approval + all checks green           |
-| Required checks before merge                  | ✅       | ✅          | `ci/quality`, `ci/build`, `secrets-scan` (Phase 2 added), CodeQL all required |
+| Required checks before merge                  | ✅       | ✅          | `ci/quality`, `ci/build`, `secrets-scan` (added in enhancement pass), CodeQL all required |
 | Vercel promotion checks                       | ✅       | ✅          | Vercel dashboard: Required Checks = `ci/quality`, `ci/build`                  |
 | Immutable deployments                         | ✅       | ✅          | Vercel uses content-addressed deployments; Git revert is the only rollback    |
 
@@ -76,14 +76,14 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 | Mitigation                             | Required | Implemented    | Evidence                                                                                                     |
 | -------------------------------------- | -------- | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| Least-privilege workflow permissions   | ✅       | ✅ **Phase 2** | Global permissions removed; jobs specify: `contents: read` or `write` as needed                              |
+| Least-privilege workflow permissions   | ✅       | ✅ **Enhanced** | Global permissions removed; jobs specify: `contents: read` or `write` as needed                              |
 | No long-lived secrets in workflows     | ✅       | ✅             | No secrets stored in `.github/workflows`; Vercel uses OIDC tokens (short-lived)                              |
 | All workflow changes require PR review | ✅       | ✅             | GitHub Ruleset enforces PR review on all branches including `.github/`                                       |
 | Actions pinned by SHA (or Dependabot)  | ⚠️       | ⚠️             | Actions currently pinned to `@v<N>` tags; Dependabot can be enabled for future PRs                           |
 | Minimize postinstall hooks             | ✅       | ✅             | `pnpm` config: `enable-pre-post-scripts: false` (blocks unsafe hooks)                                        |
-| Secrets scanning gate enforced         | ✅       | ✅ **Phase 2** | TruffleHog job added to CI; runs on all PRs (PR-only conditional prevents BASE==HEAD failure on push events) |
+| Secrets scanning gate enforced         | ✅       | ✅ **Enhanced** | TruffleHog job added to CI; runs on all PRs (PR-only conditional prevents BASE==HEAD failure on push events) |
 
-**Compliance Status:** ✅ **95% — Phase 2 enhancements complete; optional SHA pinning deferred**
+**Compliance Status:** ✅ **95% — Enhancements complete; optional SHA pinning deferred**
 
 **Evidence Artifacts:**
 
@@ -145,9 +145,9 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | CI doesn't log env vars             | ✅       | ✅          | CI workflow `set -x` not used; GitHub Actions masks secrets by default                                                                               |
 | GitHub Actions OIDC tokens          | ✅       | ✅          | Vercel OIDC integration used (short-lived tokens); no long-lived PATs in `GITHUB_TOKEN`                                                              |
 | PR template "No secrets" checklist  | ✅       | ✅          | [PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md) includes: "No secrets added" |
-| **Secrets scanning gate (Phase 2)** | ⬆️       | ✅ **NEW**  | TruffleHog CI job added; scans all PRs for verified secrets (CI-only; local verify uses a lightweight pattern scan)                                  |
+| **Secrets scanning gate (Enhancement)** | ⬆️       | ✅ **NEW**  | TruffleHog CI job added; scans all PRs for verified secrets (CI-only; local verify uses a lightweight pattern scan)                                  |
 
-**Compliance Status:** ✅ **100% — Phase 1 complete + Phase 2 enhancement**
+**Compliance Status:** ✅ **100% — Baseline complete + enhancement**
 
 **Evidence Artifacts:**
 
@@ -184,7 +184,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | Minimal MDX usage              | ✅       | ✅          | Portfolio App uses no MDX; only static React components                                |
 | No `dangerouslySetInnerHTML`   | ✅       | ✅          | Grep audit: `grep -r "dangerouslySetInnerHTML"` returns no results                     |
 | No third-party trackers        | ✅       | ✅          | No GA, Segment, Mixpanel, or ad networks; static content only                          |
-| CSP headers (optional Phase 3) | ⚠️       | ⚠️          | Not yet implemented; can be added via Vercel `vercel.json` in Phase 3                  |
+| CSP headers (optional future enhancement) | ⚠️       | ⚠️          | Not yet implemented; can be added via Vercel `vercel.json` in a future hardening pass  |
 
 **Compliance Status:** ✅ **100% — All required controls verified; optional CSP deferred**
 
@@ -224,9 +224,9 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | Performance budget mindset                   | ✅       | ✅          | Project dossier emphasizes "minimal client JS"; code review checklist includes perf spot-checks                                                                            |
 | Spot-check in preview                        | ✅       | ✅          | PR review process includes preview validation; routes tested locally                                                                                                       |
 | Smoke tests validate load                    | ✅       | ✅          | [tests/e2e/smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts) validates route load times; Playwright tests all core routes |
-| Performance budget checks (optional Phase 3) | ⚠️       | ⚠️          | Lighthouse CI not yet integrated; can be added in Phase 3                                                                                                                  |
+| Performance budget checks (optional future enhancement) | ⚠️       | ⚠️          | Lighthouse CI not yet integrated; can be added in a future hardening pass                                                                                                   |
 
-**Compliance Status:** ✅ **100% — All Phase 2 controls verified**
+**Compliance Status:** ✅ **100% — All enhanced controls verified**
 
 **Evidence Artifacts:**
 
@@ -255,7 +255,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 **Evidence Artifacts:**
 
 - GitHub Rulesets: [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (setup verified)
-- CI Workflow: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L1-L17) (permissions scoped per Phase 2 enhancement)
+- CI Workflow: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L1-L17) (permissions scoped per enhancement)
 - Threat Model: [Elevation of Privilege — Threat 1](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-1-attacker-gains-elevated-permissions-in-the-github-organization-or-vercel)
 
 ---
@@ -280,7 +280,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 ---
 
-## Phase 2 Enhancements Summary
+## Enhancements Summary
 
 ### Enhancements Implemented (as of 2026-01-19)
 
@@ -321,7 +321,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | Deploy runbook            | `rbk-portfolio-deploy.md`           | ✅             | Complete; tested procedure    |
 | Rollback runbook          | `rbk-portfolio-rollback.md`         | ✅             | ~1 min rollback; Git revert   |
 | CI triage runbook         | `rbk-portfolio-ci-triage.md`        | ✅             | Deterministic troubleshooting |
-| Secrets incident response | `rbk-portfolio-secrets-incident.md` | ✅ **Phase 2** | Complete; 5-phase procedure   |
+| Secrets incident response | `rbk-portfolio-secrets-incident.md` | ✅ **Enhanced** | Complete; 5-step procedure   |
 
 ---
 
@@ -336,7 +336,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | Type check        | `pnpm typecheck`         | TypeScript strict            | ✅ Required in CI               |
 | Build             | `pnpm build`             | Prod build                   | ✅ Required in CI               |
 | Smoke tests       | `pnpm test` (Playwright) | 12 tests; Chromium + Firefox | ✅ Required in CI               |
-| Secrets scan      | `secrets:scan` (CI-only) | TruffleHog verified in CI    | ✅ **Phase 2 — Required in CI** |
+| Secrets scan      | `secrets:scan` (CI-only) | TruffleHog verified in CI    | ✅ **Required in CI** |
 | CodeQL            | CodeQL workflow          | JavaScript/TypeScript        | ✅ Required in CI               |
 
 ### Manual Validation Checklist (per deploy)
@@ -352,7 +352,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 ## Residual Risks & Future Enhancements
 
-### Accepted Risks (Phase 1)
+### Accepted Risks (Baseline)
 
 | Risk                                                  | Mitigation                       | Acceptance Criteria                         |
 | ----------------------------------------------------- | -------------------------------- | ------------------------------------------- |
@@ -360,7 +360,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 | Account compromise can bypass checks                  | 2FA + limited collaborators      | Acceptable in single-maintainer model       |
 | Vercel platform risk                                  | Vercel SLAs and security posture | Beyond app scope; monitored externally      |
 
-### Phase 3+ Optional Enhancements
+### Optional Enhancements (Future)
 
 | Enhancement                             | Threat Mitigated            | Priority | Effort |
 | --------------------------------------- | --------------------------- | -------- | ------ |
@@ -377,22 +377,22 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 ### Overall STRIDE Coverage
 
 - **Spoofing:** 100% ✅
-- **Tampering:** 100% ✅ (+ Phase 2 enhancements)
+- **Tampering:** 100% ✅ (+ enhancements)
 - **Repudiation:** 100% ✅
-- **Information Disclosure:** 100% ✅ (+ Phase 2 enhancements)
+- **Information Disclosure:** 100% ✅ (+ enhancements)
 - **Denial of Service:** 100% ✅
 - **Elevation of Privilege:** 100% ✅
 
-### Phase 2 Status
+### Enhancement Status
 
 - **Controls Implemented:** 12/12 baseline + 5 enhancements ✅
-- **Code Review:** All Phase 2 enhancements in CI workflow, package.json, new runbook
+- **Code Review:** All enhancements in CI workflow, package.json, new runbook
 - **Testing:** Secrets scanning gate integrated into required checks
 - **Documentation:** Compliance report + secrets incident runbook + updated threat model
 
 ### Overall Rating
 
-**✅ COMPLIANT — Phase 2 Gold Standard Baseline**
+**✅ COMPLIANT — Gold Standard Baseline**
 
 ---
 
@@ -400,8 +400,8 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 ### Immediate (0–2 weeks)
 
-1. ✅ Merge Phase 2 enhancements (secrets scanning, CI permissions, pre-commit hooks)
-2. ✅ Update threat model with Phase 2 controls (already completed in PR #33)
+1. ✅ Merge enhancements (secrets scanning, CI permissions, pre-commit hooks)
+2. ✅ Update threat model with enhancements (already completed in PR #33)
 3. ✅ Verify CI passes with new secrets-scan gate
 4. Team training: secrets handling and incident response procedures
 
@@ -411,14 +411,14 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 2. Test secrets incident response runbook (simulate scenario)
 3. Audit GitHub collaborators and verify 2FA enabled
 
-### Medium-term (Phase 3, 1–2 months)
+### Medium-term (1–2 months)
 
 1. Enable Dependabot for GitHub Actions SHA pinning
 2. Add CSP headers via `vercel.json`
 3. Integrate Lighthouse CI for performance budgets
 4. Review and tighten `.env.example` and `.gitignore`
 
-### Long-term (Phase 4+, 3+ months)
+### Long-term (3+ months)
 
 1. Secrets rotation automation
 2. Centralized secrets management (AWS Secrets Manager or similar)
@@ -447,15 +447,14 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 - [Deploy](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
 - [Rollback](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
 - [CI Triage](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
-- [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) (Phase 2)
+- [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)
 
-### Phase 2 Planning
+### Planning References
 
-- [Phase 2 Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
 - [Roadmap](/docs/00-portfolio/roadmap/index.md)
 
 ---
 
 **Report Approved:** 2026-01-19  
-**Next Review:** After Phase 3 (when new features introduced)  
+**Next Review:** After major feature expansion (when new features introduced)  
 **Owner:** Architecture & Security

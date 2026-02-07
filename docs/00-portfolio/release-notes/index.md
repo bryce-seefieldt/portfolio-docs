@@ -67,6 +67,9 @@ Release notes are public. Do not include:
 
 Add new entries at the top.
 
+- **2026-02-06 — Portfolio Roadmap Issues Archived**
+  - `20260206-portfolio-roadmap-issues-archived.md`
+  - Archive notices added to roadmap issue pages and index
 - **2026-02-05 — Portfolio Security Hardening (Docs + App)**
   - `20260205-portfolio-security-hardening.md`
   - CSP headers, audit gates, hardening ADRs, and docs governance updates

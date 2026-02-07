@@ -33,7 +33,7 @@ Define a bounded, docs-specific hardening plan for the Portfolio Docs app that m
 
 ## Implementation Plan
 
-### Phase 1: Audit Gate + Visibility (CI)
+### Step 1: Audit Gate + Visibility (CI)
 
 **Goal:** block high/critical vulnerabilities while logging lower-severity advisories.
 
@@ -48,7 +48,7 @@ Define a bounded, docs-specific hardening plan for the Portfolio Docs app that m
 - CI fails on high/critical advisories.
 - CI logs lower-severity advisories for review.
 
-### Phase 2: Host-Level Security Headers
+### Step 2: Host-Level Security Headers
 
 **Goal:** enforce browser-side protections for a static site.
 
@@ -69,7 +69,7 @@ Define a bounded, docs-specific hardening plan for the Portfolio Docs app that m
 - `curl -I` confirms headers on preview + production.
 - No console CSP violations in normal page load.
 
-### Phase 3: Publication Safety Controls
+### Step 3: Publication Safety Controls
 
 **Goal:** prevent accidental disclosure in public docs.
 
@@ -84,7 +84,7 @@ Define a bounded, docs-specific hardening plan for the Portfolio Docs app that m
 - PR templates and contributor guidance include the safety checklist.
 - CI secrets scan passes on PRs.
 
-### Phase 4: Governance + Documentation
+### Step 4: Governance + Documentation
 
 **Goal:** ensure policy is durable and reviewable.
 

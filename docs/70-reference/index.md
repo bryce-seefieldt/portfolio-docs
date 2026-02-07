@@ -69,7 +69,7 @@ Reference content is “good” when:
 
 ## Reference entries
 
-- `docs/70-reference/performance-optimization-guide.md` — Performance optimization guide (Stage 4.2), with links to bundle analysis steps and Vercel Analytics dashboard.
+- `docs/70-reference/performance-optimization-guide.md` — Performance optimization guide, with links to bundle analysis steps and Vercel Analytics dashboard.
 - `docs/70-reference/commentary-examples.md` — Short, canonical commentary examples for the portfolio-app codebase.
 
 ## References

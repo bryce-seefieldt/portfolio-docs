@@ -18,7 +18,7 @@ Provide a concise reference for the project registry schema, validation rules, a
 
 ## Prereqs / Inputs
 
-- Portfolio App registry implementation (Stage 3.1)
+- Portfolio App registry implementation
 - Environment variables: `NEXT_PUBLIC_DOCS_BASE_URL`, `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`, `NEXT_PUBLIC_SITE_URL`
 - Validation scripts: `pnpm registry:validate`, `pnpm registry:list`
 

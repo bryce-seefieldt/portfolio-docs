@@ -2,12 +2,12 @@
 title: 'Troubleshooting: Portfolio Publish & Link Validation'
 description: 'Common errors and fixes for project publishing, registry validation, and link checks.'
 sidebar_position: 11
-tags: [troubleshooting, operations, publishing, links, registry, phase-3]
+tags: [troubleshooting, operations, publishing, links, registry]
 ---
 
 ## Purpose
 
-Provide fast fixes for the most common failures during project publishing under Stage 3.5: registry validation errors, slug violations, broken dossier/evidence links, and CI link-check failures.
+Provide fast fixes for the most common failures during project publishing: registry validation errors, slug violations, broken dossier/evidence links, and CI link-check failures.
 
 ## How to Use This Guide
 
@@ -80,7 +80,7 @@ Provide fast fixes for the most common failures during project publishing under 
 ## References
 
 - Publish runbook: /docs/50-operations/runbooks/rbk-portfolio-project-publish.md
-- Stage 3.5 issues: /docs/00-portfolio/roadmap/issues/stage-3-5-app-issue.md, /docs/00-portfolio/roadmap/issues/stage-3-5-docs-issue.md
+- Archived issue records for the publishing workflow (app + docs)
 - Registry schema guide: /docs/70-reference/registry-schema-guide.md
 - Copilot instructions (docs): /.github/copilot-instructions.md
 - Copilot instructions (app): https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/copilot-instructions.md

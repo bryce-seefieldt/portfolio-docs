@@ -77,7 +77,7 @@ This page defines the Portfolio App as an enterprise-grade artifact: not only a 
 - Reliability: deterministic builds; repeatable deploys; rollback readiness
 - Security: strict no-secrets posture; dependency hygiene; hardened headers (as appropriate)
 
-## Deployment & Environments (Stage 4.1)
+## Deployment & Environments
 
 - **Environment tiers:** preview (auto) → staging (manual) → production (manual)
 - **Promotion gates:** manual workflows validate env, registry, build, tests
@@ -103,7 +103,7 @@ Every significant claim should map to one of:
 - Delivery maturity (CI + promotion checks)
 - Security awareness (safe content, hardening, dependency hygiene)
 
-### Evidence-First Component Library (Stage 3.2)
+### Evidence-First Component Library
 
 The Portfolio App introduces a reusable component library for standardized evidence linking:
 
@@ -113,11 +113,11 @@ The Portfolio App introduces a reusable component library for standardized evide
 
 Together, these components embed evidence verification into the user experience, making "show your work" a visual, interactive expectation rather than a hidden link hunt.
 
-See [Architecture — Evidence Visualization Layer](/docs/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer-stage-32) for full details.
+See [Architecture — Evidence Visualization Layer](/docs/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer) for full details.
 
-### Security Posture Hardening (Stage 4.4)
+### Security Posture Hardening
 
-Stage 4.4 extends the portfolio app's security posture with OWASP-recommended HTTP security headers, Content Security Policy enforcement, threat model extension to cover deployment and runtime risks, and formal dependency audit policy. This demonstrates security-first delivery discipline.
+Security hardening extends the portfolio app's posture with OWASP-recommended HTTP security headers, Content Security Policy enforcement, threat model extension to cover deployment and runtime risks, and formal dependency audit policy. This demonstrates security-first delivery discipline.
 
 **Key implementations:**
 
@@ -129,9 +129,9 @@ Stage 4.4 extends the portfolio app's security posture with OWASP-recommended HT
 
 See [Security Hardening Documentation](/docs/60-projects/portfolio-app/04-security.md) for implementation details.
 
-### User Experience & SEO Optimization (Stage 4.5)
+### User Experience & SEO Optimization
 
-Stage 4.5 enhances the portfolio app's user experience with dark mode theming, scroll animations, and comprehensive SEO metadata for maximum discoverability and professional polish.
+The UX and SEO enhancement work adds dark mode theming, scroll animations, and comprehensive metadata for maximum discoverability and professional polish.
 
 **Key implementations:**
 
@@ -182,7 +182,7 @@ The Portfolio App is a production TypeScript web application that serves as an i
 
 Key value: Not just a portfolio site—a working exemplar of how senior engineers build, secure, operate, and document production systems.
 
-## Key Metrics (Phase 2 Baseline)
+## Key Metrics (Baseline)
 
 - **Lines of code:** ~500 (application), ~600 (tests: 70+ unit tests, 12 E2E tests)
 - **Routes:** 5 core routes (/, /cv, /projects, /contact, /projects/[slug])
@@ -193,7 +193,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 - **Quality gates:** Lint, format, typecheck, registry validation, unit tests, E2E tests, secrets scan, build (all enforced)
 - **Dependencies:** ~17 production, ~15 dev (Dependabot weekly updates)
 
-## Performance Metrics (Phase 4 Stage 4.2)
+## Performance Metrics (Optimization Baseline)
 
 - **Build time:** ~3.5s (TypeScript compile + static generation)
 - **Bundle size:** 27.8 MB total JavaScript (CI enforces 10% growth threshold)
@@ -245,7 +245,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 - Threat model (STRIDE analysis with 12 threat scenarios)
 - Operational runbooks (deploy, secrets incident, CI triage, rollback)
 
-## Quality Standards (Stage 3.3)
+## Quality Standards
 
 ### Testing Strategy
 
@@ -256,7 +256,7 @@ The Portfolio App implements a comprehensive testing pyramid:
 - **Coverage targets:** ≥80% for `src/lib/` (utility functions), 100% route coverage for E2E
 - **CI integration:** Tests run on every PR and merge; failures block deployment
 
-See [Testing Guide](/docs/reference/testing-guide) for comprehensive patterns, setup, and troubleshooting. Implementation details available in [Testing — Phase 3](/docs/60-projects/portfolio-app/05-testing.md#phase-3-unit-tests-implemented--stage-33).
+See [Testing Guide](/docs/reference/testing-guide) for comprehensive patterns, setup, and troubleshooting. Implementation details available in [Testing — Unit Tests](/docs/60-projects/portfolio-app/05-testing.md#unit-tests-implemented).
 
 ### Code Quality Gates
 

@@ -24,7 +24,7 @@ Document known limitations and intentional omissions to keep expectations clear 
 
 ## Prereqs / Inputs
 
-- Phase 5 implementation guide
+- Implementation guide
 - Current roadmap and release notes
 
 ## Procedure / Content
@@ -65,4 +65,4 @@ Document known limitations and intentional omissions to keep expectations clear 
 
 - Roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
 - Release notes: [/docs/00-portfolio/release-notes/index.md](/docs/00-portfolio/release-notes/index.md)
-- Phase 5 guide: [/docs/00-portfolio/roadmap/phase-5-implementation-guide.md](/docs/00-portfolio/roadmap/phase-5-implementation-guide.md)
+- Professionalization implementation guide: [/docs/00-portfolio/roadmap/phase-5-implementation-guide.md](/docs/00-portfolio/roadmap/phase-5-implementation-guide.md)

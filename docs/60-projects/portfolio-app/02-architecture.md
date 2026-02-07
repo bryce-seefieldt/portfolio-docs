@@ -52,7 +52,7 @@ Describe the Portfolio App architecture at a level that is:
 
 ## Routing and UX architecture (recommended vs current)
 
-Note: Items marked (implemented) exist in Phase 1. Items marked (planned) are illustrative and not yet implemented.
+Note: Items marked (implemented) exist in the initial baseline. Items marked (planned) are illustrative and not yet implemented.
 
 - `/` — landing, “Start Here,” primary narrative (implemented)
 - `/cv` — interactive CV (timeline + skill proof) (implemented)
@@ -79,7 +79,7 @@ Recommended initial approach (low complexity):
 - generate pages from the data model with stable slugs
 - keep long-form writeups in Docusaurus, linked from project pages
 
-### Data-Driven Registry (Phase 3)
+### Data-Driven Registry
 
 - Registry lives in the Portfolio App at [portfolio-app/src/data/projects.yml](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/data/projects.yml) and is validated by [portfolio-app/src/lib/registry.ts](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/registry.ts).
 - Loader flow: YAML → env placeholder interpolation (`NEXT_PUBLIC_*`) → Zod validation (slug uniqueness, URL shape) → typed export via `src/data/projects.ts` → page components.
@@ -87,7 +87,7 @@ Recommended initial approach (low complexity):
 - URLs support env-driven placeholders (`{GITHUB_URL}`, `{DOCS_BASE_URL}`, `{DOCS_GITHUB_URL}`, `{SITE_URL}`) resolved from `NEXT_PUBLIC_*` variables to keep references portable across deploy environments.
 - Evidence fields (dossier, threat model, ADR index, runbooks, GitHub) are part of the contract so every claim on a project page links to verifiable artifacts in the docs app.
 
-### Performance & Caching Architecture (Phase 4 Stage 4.2)
+### Performance & Caching Architecture
 
 **Static Generation with ISR:** All project detail pages (`/projects/[slug]`) are pre-rendered at build time using `generateStaticParams()`, extracting all known slugs from the project registry. Pages revalidate every hour (ISR) to allow content updates without full rebuilds, balancing performance with freshness.
 
@@ -108,9 +108,9 @@ Recommended initial approach (low complexity):
 - Performance runbook: [rbk-portfolio-performance-optimization.md](../../50-operations/runbooks/rbk-portfolio-performance-optimization.md)
 - Performance guide: [performance-optimization-guide.md](../../70-reference/performance-optimization-guide.md)
 
-### Evidence Visualization Layer (Stage 3.2)
+### Evidence Visualization Layer
 
-After Stage 3.1 established a data-driven registry, Stage 3.2 makes evidence visualization a first-class architectural concern through three reusable React components. Rather than relegating evidence links to project footers or separate pages, components embed evidence discovery into the main project detail experience.
+After the registry was established, the evidence visualization layer makes evidence a first-class architectural concern through three reusable React components. Rather than relegating evidence links to project footers or separate pages, components embed evidence discovery into the main project detail experience.
 
 #### Component Architecture
 
@@ -175,7 +175,7 @@ Components integrate into `/projects/[slug]` page (`src/app/projects/[slug]/page
 
 Evidence data flows:
 
-1. Registry loads from `src/data/projects.yml` (Stage 3.1)
+1. Registry loads from `src/data/projects.yml`
 2. Registry validates slug uniqueness, URL validity, evidence link patterns
 3. Components receive `Project` type (TypeScript)
 4. Components extract `evidence` and `isGoldStandard` fields
@@ -208,7 +208,7 @@ Evidence data flows:
 - Portability: URLs remain consistent across environments and deploy variations
 - Maintainability: Adding new projects or changing evidence URLs requires registry edit only
 
-#### Future Extensions (Post-Stage 3.2)
+#### Future Extensions
 
 Planned enhancements:
 
@@ -220,9 +220,9 @@ Planned enhancements:
 - Keyboard focus management and enhanced a11y improvements
 - Storybook integration for component library documentation
 
-## Environment Architecture (Stage 4.1)
+## Environment Architecture
 
-Phase 4 introduces explicit environment separation and immutable build promotion to strengthen deployment credibility:
+The environment model introduces explicit separation and immutable build promotion to strengthen deployment credibility:
 
 - **Tiers:** `preview` (auto) → `staging` (manual) → `production` (manual)
 - **Immutability:** same build artifact promoted across tiers; no environment-specific rebuilds
@@ -244,9 +244,9 @@ graph TB
 - ADR: [docs/10-architecture/adr/adr-0013-multi-environment-deployment.md](docs/10-architecture/adr/adr-0013-multi-environment-deployment.md)
 - Runbooks: [Environment Promotion](docs/50-operations/runbooks/rbk-portfolio-environment-promotion.md), [Environment Rollback](docs/50-operations/runbooks/rbk-portfolio-environment-rollback.md)
 
-## User Experience & Theme Architecture (Stage 4.5)
+## User Experience & Theme Architecture
 
-Phase 4 Stage 4.5 introduces a comprehensive UX enhancement layer with dark mode theming, scroll animations, and SEO optimization to elevate the portfolio app to professional-grade polish.
+The UX enhancement layer introduces dark mode theming, scroll animations, and SEO optimization to elevate the portfolio app to professional-grade polish.
 
 ### Theme System Architecture
 
@@ -312,7 +312,7 @@ graph TD
 
 1. **Person Schema** — Portfolio owner identity with `sameAs` links to GitHub/LinkedIn
 2. **WebSite Schema** — Site metadata with SearchAction for sitelinks search box
-3. **Breadcrumb Schema** — Navigation context (planned for Phase 5)
+3. **Breadcrumb Schema** — Navigation context (planned for a future enhancement)
 
 **Evidence Linking:** Bidirectional cross-references between portfolio claims and documentation proof.
 
@@ -322,9 +322,9 @@ graph TD
 - **SEO Strategy Guide:** [10-seo-strategy.md](../../70-reference/seo-metadata-guide.md) — Metadata architecture, structured data, optimization
 - **Theme System Guide:** [11-theme-system-guide.md](../../70-reference/theme-system-reference.md) — CSS variables, theme implementation, extension
 
-### Testing Architecture (Stage 3.3)
+### Testing Architecture
 
-After Stage 3.2 established evidence visualization components, Stage 3.3 adds comprehensive test coverage to ensure registry integrity and link resolution. The testing architecture follows the testing pyramid: unit tests (Vitest) for business logic, E2E tests (Playwright) for user-facing behavior.
+After the evidence visualization layer was established, the testing architecture adds comprehensive test coverage to ensure registry integrity and link resolution. The testing architecture follows the testing pyramid: unit tests (Vitest) for business logic, E2E tests (Playwright) for user-facing behavior.
 
 #### Testing Pyramid
 
@@ -355,13 +355,13 @@ After Stage 3.2 established evidence visualization components, Stage 3.3 adds co
 
 **Modules Tested**:
 
-1. `src/lib/registry.ts` (Stage 3.1)
+1. `src/lib/registry.ts`
    - Valid project entries pass Zod schema validation
    - Invalid entries (missing fields, malformed slugs, duplicate slugs) are rejected
    - Required field validation (title, description, tags, tech stack, evidence links)
    - Slug uniqueness enforcement across entire registry
 
-2. `src/lib/config.ts` (Stage 3.1)
+2. `src/lib/config.ts`
    - `docsUrl()` builds URLs with `NEXT_PUBLIC_DOCS_BASE_URL` environment variable
    - `githubUrl()` builds GitHub URLs correctly
    - `docsGithubUrl()` builds documentation GitHub URLs
@@ -369,7 +369,7 @@ After Stage 3.2 established evidence visualization components, Stage 3.3 adds co
    - Fallback behavior when environment variables are missing
    - URL normalization (trailing slashes, leading slashes)
 
-3. `src/lib/slugHelpers.ts` (Stage 3.1)
+3. `src/lib/slugHelpers.ts`
    - Slug format enforcement: regex `^[a-z0-9]+(?:-[a-z0-9]+)*$`
    - Rejection of uppercase, spaces, special characters
    - Edge cases: empty strings, unicode characters, emoji
@@ -477,7 +477,7 @@ This ensures broken tests prevent production deployments.
 
 - **Testing Guide**: [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md) — Comprehensive patterns and examples
 - **Testing Dossier**: [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md) — CI gates and local validation
-- **Implementation**: [stage-3-3-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-app-issue.md) — GitHub issue with acceptance criteria
+- **Implementation**: Archived issue record with acceptance criteria
 
 ### Evidence-link strategy
 
@@ -508,7 +508,7 @@ Example evidence link types:
 - `public/`:
   - static assets with stable names
 - `tests/`:
-  - unit and e2e tests (phased)
+  - unit and e2e tests (maturity-based)
 
 ## Repository structure (current)
 
@@ -555,9 +555,9 @@ Component organization:
 ### Dark mode strategy
 
 - System preference-based (uses `prefers-color-scheme` media query)
-- No explicit toggle UI in Phase 1 (intentional minimalism)
+- No explicit toggle UI in the initial baseline (intentional minimalism)
 - All components use Tailwind `dark:` variants for dark mode styling
-- Future: consider explicit toggle with local storage (Phase 2+)
+- Future: consider explicit toggle with local storage
 
 ### Styling patterns
 
@@ -566,7 +566,7 @@ Component organization:
 - Automatic class sorting via `prettier-plugin-tailwindcss`
 - Responsive design: mobile-first with `sm:`, `md:`, `lg:` breakpoints
 
-### User Experience & Theme Architecture (Stage 4.5)
+### User Experience & Theme Architecture
 
 **Dark mode theming:** Class-based dark/light mode system with localStorage persistence and system preference fallback. CSS variables define all colors; theme toggle in header switches `dark` class on `<html>`. See [ADR-0014: Class-Based Dark Mode with CSS Variables](docs/10-architecture/adr/adr-0014-class-based-dark-mode.md) for design decisions and [Theme System Reference](../../70-reference/theme-system-reference.md) for implementation details.
 
@@ -592,15 +592,15 @@ Fixed header with:
 - Documentation App link
 - Enterprise evidence model statement
 
-### Intentional omissions (Phase 1)
+### Intentional omissions (baseline)
 
 - No dark mode toggle (system preference only)
 - No authentication or user accounts
-- No search (deferred to docs app or Phase 3+)
+- No search (deferred to docs app or a later enhancement)
 
 ## Metadata and SEO strategy
 
-### Stage 4.5 implementation
+### Metadata implementation
 
 Comprehensive tri-layer metadata strategy for social sharing and search engine optimization:
 
@@ -736,7 +736,7 @@ src/
     └── config.ts       # Environment config helpers
 ```
 
-## Component Library (Phase 2 Patterns)
+## Component Library (Patterns)
 
 ### GoldStandardBadge Component
 
@@ -768,7 +768,7 @@ import { GoldStandardBadge } from '@/components/GoldStandardBadge';
 
 **Location**: `src/components/Callout.tsx`
 
-**Design Evolution (Phase 2)**:
+**Design Evolution**:
 
 - Added `type` prop with three variants: `"default"`, `"warning"`, `"info"`
 - **Default**: Blue theme (`bg-blue-50`, `text-blue-900`, `border-blue-200`)
@@ -914,7 +914,7 @@ export const TIMELINE: TimelineEntry[] = [
 
 ## Scalability Patterns
 
-Current (Phase 2):
+Current:
 
 - Static project data in TypeScript (typed, version-controlled)
 - Manual content updates via code changes + PRs
@@ -922,7 +922,7 @@ Current (Phase 2):
 - Data-driven CV timeline (src/data/cv.ts)
 - Gold standard conditional rendering (slug-based)
 
-Planned (Phase 3+):
+Planned:
 
 - CMS or API-driven project data (Contentful, headless CMS)
 - Automated evidence link validation

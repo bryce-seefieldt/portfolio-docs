@@ -332,37 +332,37 @@ erDiagram
 
 - Project timelines
 - Milestone tracking
-- Phase planning
+- Milestone planning
 - Resource allocation
 
 **Example:**
 
 ```mermaid
 gantt
-    title Phase 3 Implementation Timeline
+    title Implementation Timeline
     dateFormat YYYY-MM-DD
-    section Stage 3.1
+    section Workstream 1
     Registry Implementation    :done, s31, 2026-01-15, 3d
-    section Stage 3.2
+    section Workstream 2
     Evidence Components       :done, s32, 2026-01-18, 2d
-    section Stage 3.3
+    section Workstream 3
     Testing                   :active, s33, 2026-01-20, 2d
-    section Stage 3.4
+    section Workstream 4
     Documentation             :s34, 2026-01-22, 2d
 ```
 
 ````markdown
 ```mermaid
 gantt
-    title Phase 3 Implementation Timeline
+    title Implementation Timeline
     dateFormat YYYY-MM-DD
-    section Stage 3.1
+    section Workstream 1
     Registry Implementation    :done, s31, 2026-01-15, 3d
-    section Stage 3.2
+    section Workstream 2
     Evidence Components       :done, s32, 2026-01-18, 2d
-    section Stage 3.3
+    section Workstream 3
     Testing                   :active, s33, 2026-01-20, 2d
-    section Stage 3.4
+    section Workstream 4
     Documentation             :s34, 2026-01-22, 2d
 ```
 ````

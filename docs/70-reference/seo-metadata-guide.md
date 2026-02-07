@@ -28,7 +28,7 @@ Complete technical reference for implementing SEO metadata, structured data (JSO
 
 - SEO strategy and business goals (see Planning docs)
 - Monitoring and analytics (see Operations docs)
-- Blog SEO patterns (Phase 5+)
+- Blog SEO patterns (future enhancement)
 
 ---
 

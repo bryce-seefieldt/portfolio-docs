@@ -35,9 +35,9 @@ This model is written to be public-safe and verifiable.
 
 - Owner: portfolio maintainer
 - Date: 2026-01-19
-- Status: **Live — Phase 2** (STRIDE-aligned; reviewed and validated)
+- Status: **Live — Baseline + enhancements** (STRIDE-aligned; reviewed and validated)
 - Last reviewed: 2026-01-19
-- Next review: after Phase 3 (when new features introduced)
+- Next review: after major feature expansion (when new features introduced)
 - Architecture references:
   - Portfolio App dossier: `docs/60-projects/portfolio-app/`
   - ADRs: ADR-0005, ADR-0006, ADR-0007
@@ -175,7 +175,7 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
   - Dependabot scans for security advisories (enabled, required review)
   - CodeQL scanning of JavaScript/TypeScript (GH native)
   - minimize dependencies (reduce attack surface)
-  - consider npm audit or Snyk checks (optional hardening phase 3+)
+  - consider npm audit or Snyk checks (optional hardening later)
 - **Validation:**
   - CI uses `--frozen-lockfile` (visible in workflow)
   - dependency PRs require review before merge
@@ -217,7 +217,7 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
   - CI does not log environment variable values
   - GitHub Actions use OIDC or limited-lifetime tokens (Vercel OIDC)
   - PR template includes "No secrets added" checklist
-  - secrets scanning gate recommended (phase 2+)
+  - secrets scanning gate recommended (enhancement)
 - **Validation:**
   - `grep -r "SECRET\|TOKEN\|API_KEY" src/` returns no hardcoded values
   - `.env.local` is in `.gitignore`
@@ -248,7 +248,7 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
   - MDX used only for component demos; treated as code (strict review)
   - Avoid `dangerouslySetInnerHTML` or equivalent
   - No third-party trackers or ad services
-  - Content Security Policy (CSP) headers (optional, phase 3+)
+  - Content Security Policy (CSP) headers (optional, future enhancement)
   - Vercel provides DDoS and request filtering
 - **Validation:**
   - PR review flags MDX changes
@@ -280,8 +280,8 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
 - **Mitigations:**
   - performance budget mindset (keep JS minimal)
   - spot-check core routes in preview (reviewer responsibility)
-  - consider adding performance budget checks (phase 3+)
-  - Playwright smoke tests validate route load (phase 2+)
+  - consider adding performance budget checks (future enhancement)
+  - Playwright smoke tests validate route load (recommended enhancement)
   - rollback procedure (fast revert)
 - **Validation:**
   - core routes load in &lt;2 seconds locally and in preview
@@ -328,7 +328,7 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
 
 ## Mitigation Summary: Enforceable SDLC Controls
 
-### Phase 1 Controls (Baseline — Currently Implemented)
+### Baseline Controls (Currently Implemented)
 
 - ✅ PR-only merges to `main` (branch protection, GitHub Rulesets)
 - ✅ CI quality gates required:
@@ -340,13 +340,13 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
 - ✅ No secrets policy with explicit PR template checklist
 - ✅ `.env.local` and secrets gitignored
 
-### Phase 2 Recommended Controls (Planned)
+### Recommended Controls (Planned)
 
 - secrets scanning gate (CI) — e.g., `git-secrets`, `truffleHog`, or GitHub's native scanner
 - dependency auditing for high-severity advisories (npm audit or Snyk)
 - e2e smoke tests for all core routes (Playwright — 100% coverage)
 
-### Phase 3+ Enhancements (Future)
+### Future Enhancements
 
 - Performance budget checks (Lighthouse CI or similar)
 - Content Security Policy (CSP) hardening
@@ -440,7 +440,6 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
 - [Rollback](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
 - [CI Triage](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 
-### Phase 2 Planning
+### Planning References
 
 - [Roadmap](/docs/00-portfolio/roadmap/index.md)
-- [Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)

@@ -93,9 +93,9 @@ This architecture decouples **deployment creation** (immediate) from **release p
   4. When checks pass: Vercel assigns the production domain
   5. When checks fail: deployment exists but remains inaccessible; requires fix-forward or rollback
 
-#### Stage 4.1 alignment: Staging strategy (portfolio-app)
+#### Staging alignment: Portfolio App strategy
 
-For Stage 4.1, the Portfolio App introduces a conceptual **staging** tier via Vercel branch/domain mapping. The Documentation App can either:
+The Portfolio App introduces a conceptual **staging** tier via Vercel branch/domain mapping. The Documentation App can either:
 
 - Remain a single production domain (recommended), ensuring the app links to a stable docs base via `NEXT_PUBLIC_DOCS_BASE_URL`, or
 - Optionally configure a docs staging domain mapped to a documentation branch for pre-release review.

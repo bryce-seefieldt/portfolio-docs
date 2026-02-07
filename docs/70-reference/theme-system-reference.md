@@ -411,7 +411,7 @@ transition: width, height, margin, padding;
 
 ## Future Enhancements
 
-### Multiple Themes (Phase 5+)
+### Multiple Themes (future enhancement)
 
 Support for additional themes beyond light/dark:
 

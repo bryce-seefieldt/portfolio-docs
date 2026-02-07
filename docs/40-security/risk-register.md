@@ -27,7 +27,7 @@ The risk register documents known security risks, their severity, mitigations, a
 | R8  | Insider threat (malicious dev) | Internal     | Very Low   | Critical | **Low**    | Code review, audit logs, least privilege                  | **Accepted** | Quarterly |
 | R9  | Framework deserialization RCE  | Runtime      | Medium     | Critical | **High**   | Patch SLA, CSP nonce, strict validation, CSRF, rate limit | Mitigated    | Quarterly |
 
-\*Asterisk indicates Stage 4.4 newly identified or re-assessed risk
+*Asterisk indicates newly identified or re-assessed risk
 
 ## Risk Acceptance Justification
 

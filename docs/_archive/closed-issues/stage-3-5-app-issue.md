@@ -4,6 +4,9 @@ description: 'Add registry validation, link format checks, evidence URL verifica
 tags: [portfolio, roadmap, planning, phase-3, stage-3.5, app, ci, validation]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 3.5: CI Link Validation & Runbooks — App Implementation
 
 **Type:** Feature / CI Enhancement  

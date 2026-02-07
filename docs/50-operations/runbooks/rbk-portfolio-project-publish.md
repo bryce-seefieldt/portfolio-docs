@@ -2,12 +2,12 @@
 title: 'Runbook: Portfolio Project Publish'
 description: 'End-to-end procedure for publishing a project with registry validation, evidence links, and CI link checks.'
 sidebar_position: 10
-tags: [runbook, operations, publishing, phase-3, registry, links]
+tags: [runbook, operations, publishing, registry, links]
 ---
 
 ## Purpose
 
-Provide a deterministic, time-boxed procedure for publishing a new project in the Portfolio Program using the Phase 3 data-driven registry and evidence-first patterns. This runbook ensures every publish includes registry validation, link checks, and documented verification steps.
+Provide a deterministic, time-boxed procedure for publishing a new project in the Portfolio Program using the data-driven registry and evidence-first patterns. This runbook ensures every publish includes registry validation, link checks, and documented verification steps.
 
 ## Audience
 
@@ -24,8 +24,8 @@ Operations and engineering collaborators who publish or review new projects. Ass
   - `NEXT_PUBLIC_SITE_URL`
 - Reference materials:
   - Registry schema: /docs/70-reference/registry-schema-guide.md
-  - Phase guide: /docs/00-portfolio/roadmap/phase-3-implementation-guide.md
-  - Companion issues: /docs/00-portfolio/roadmap/issues/stage-3-5-app-issue.md and /docs/00-portfolio/roadmap/issues/stage-3-5-docs-issue.md
+   - Implementation guide: /docs/00-portfolio/roadmap/phase-3-implementation-guide.md
+   - Archived issue records for the publishing workflow (app + docs)
 
 ## Validation Signals (must stay green)
 
@@ -37,7 +37,7 @@ Operations and engineering collaborators who publish or review new projects. Ass
 ## Procedure (time-boxed)
 
 1. **Planning (30 min)**
-   - Review the Stage 3.5 issues (app + docs) for scope and acceptance criteria.
+   - Review the archived issue records (app + docs) for scope and acceptance criteria.
    - Confirm target dossier location under `docs/60-projects/` and evidence links you expect to provide (dossier, ADRs, threat model, runbooks, GitHub repo).
 
 2. **Registry Entry (30 min)**
@@ -58,7 +58,7 @@ Operations and engineering collaborators who publish or review new projects. Ass
    - Expected outcomes: no Playwright failures; Next.js build succeeds without registry errors.
 
 5. **PR Creation & Review (30 min)**
-   - Open PRs in both repos referencing the Stage 3.5 issues with closing keywords.
+   - Open PRs in both repos with clear scope and closing keywords.
    - Include evidence section: commands run, CI job links, and note “no secrets added.”
    - Ensure CI `link-validation`, `quality`, `test`, and `build` are green.
 
@@ -72,7 +72,7 @@ Operations and engineering collaborators who publish or review new projects. Ass
 - ✅ `pnpm links:check` passes locally and in CI (artifact only on failure)
 - ✅ `pnpm build` passes locally and in CI `build`
 - ✅ All evidence links resolve (dossier, threat model, ADRs, runbooks, GitHub repo)
-- ✅ PRs reference Stage 3.5 issues and include evidence commands
+- ✅ PRs include evidence commands and cross-links
 
 ## Rollback / Abort
 

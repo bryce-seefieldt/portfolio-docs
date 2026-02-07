@@ -101,9 +101,9 @@ Use these documents to plan and govern React2Shell-class hardening work:
 - Implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/docs/40-security/portfolio-docs-hardening-implementation-plan.md)
 - ADR-0019: [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
 
-## Stage 4.4 Security Posture Deepening
+## Security Posture Deepening
 
-**New Documentation (Stage 4.4):**
+**New Documentation:**
 
 - **[Threat Model v2](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)** — Extended threat model covering deployment surface and runtime misconfiguration risks with STRIDE analysis, residual risks, and mitigation summary
 - **[Risk Register](/docs/40-security/risk-register.md)** — Inventory of known security risks with severity, mitigations, and acceptance status; quarterly review schedule

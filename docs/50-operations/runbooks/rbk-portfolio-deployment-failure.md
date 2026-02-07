@@ -86,7 +86,7 @@ curl -s https://portfolio-app.vercel.app/api/health
 
 ## Response Procedure
 
-### Phase 1: Triage (1 minute)
+### Step 1: Triage (1 minute)
 
 **Objective:** Confirm deployment failure and identify last known good deployment.
 
@@ -152,7 +152,7 @@ curl -s https://portfolio-app-<unique-id>.vercel.app/api/health | jq '.status'
 
 ---
 
-### Phase 2: Immediate Containment (1 minute)
+### Step 2: Immediate Containment (1 minute)
 
 **Objective:** Prevent further deployments and notify team.
 
@@ -191,7 +191,7 @@ Next update: 2 minutes
 
 ---
 
-### Phase 3: Execute Rollback (2–3 minutes)
+### Step 3: Execute Rollback (2–3 minutes)
 
 **Objective:** Restore service by promoting last known good deployment or reverting code.
 
@@ -204,7 +204,7 @@ Two rollback options available (choose fastest):
 **Steps:**
 
 1. Go to [Vercel Deployments](https://vercel.com/bryce-seefieldts-projects/portfolio-app/deployments)
-2. Find last known good deployment (verified in Phase 1, Step 3)
+2. Find last known good deployment (verified in Step 1, Step 3)
 3. Click on that deployment row
 4. Click **"Promote to Production"** button (top right)
 5. Confirm: "Yes, promote this deployment"
@@ -279,7 +279,7 @@ curl -s https://portfolio-app.vercel.app/api/health | jq '.status'
 
 ---
 
-### Phase 4: Verification (1–2 minutes)
+### Step 4: Verification (1–2 minutes)
 
 **Objective:** Confirm rollback was successful and service is fully restored.
 

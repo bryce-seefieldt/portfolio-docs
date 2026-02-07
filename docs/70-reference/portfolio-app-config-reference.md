@@ -59,7 +59,7 @@ export default nextConfig;
 
 - `basePath` — if deploying to a subpath (not planned)
 - `images.remotePatterns` — for external image optimization (when needed)
-- `experimental.ppr` — Partial Prerendering (Phase 3+)
+- `experimental.ppr` — Partial Prerendering (future enhancement)
 
 ### References
 

@@ -9,7 +9,7 @@ tags: [adr, architecture, phase-6, governance, versioning, lifecycle]
 
 The portfolio requires a clear and stable way to signal change scope over time. Without a versioning and lifecycle policy, reviewers cannot quickly interpret the impact of updates, and maintainers lack a consistent rule set for releasing and retiring content.
 
-**Trigger:** Phase 6 governance work calls for explicit inclusion criteria, deprecation rules, and a versioning strategy that preserves reviewer trust.
+**Trigger:** Governance work calls for explicit inclusion criteria, deprecation rules, and a versioning strategy that preserves reviewer trust.
 
 ---
 
@@ -67,7 +67,7 @@ Key points:
 2. **No formal versioning**
    - Pros: less overhead
    - Cons: inconsistent signals, weak auditability
-   - Why not chosen: undermines governance goals for Phase 6
+   - Why not chosen: undermines governance goals for the baseline
 
 ---
 
@@ -75,7 +75,7 @@ Key points:
 
 - Publish versioning and archival policies in `docs/00-portfolio/`.
 - Add change intake checklist for governance enforcement.
-- Add Phase 6 release note and update index links.
+- Add governance release note and update index links.
 
 ---
 

@@ -7,7 +7,7 @@ tags: [projects, testing, quality-gates, ci, nextjs, typescript]
 
 ## Purpose
 
-Define what “testing” means for the Portfolio App at each maturity phase, and specify the CI quality gates required to merge and release.
+Define what “testing” means for the Portfolio App at each maturity step, and specify the CI quality gates required to merge and release.
 
 The emphasis is on **enterprise credibility**:
 
@@ -21,7 +21,7 @@ The emphasis is on **enterprise credibility**:
 
 - required local validation commands
 - required CI checks (quality + build)
-- phased test strategy (unit then e2e)
+- maturity-based test strategy (unit then e2e)
 - acceptance criteria for “release-ready”
 
 ### Out of scope
@@ -38,9 +38,9 @@ The emphasis is on **enterprise credibility**:
 
 ## Local validation workflow (required)
 
-### Three-Stage Validation: Local → CI → Staging
+### Three-Step Validation: Local → CI → Staging
 
-The Portfolio App enforces quality at three distinct stages:
+The Portfolio App enforces quality at three distinct steps:
 
 1. **Local validation** (developer machine, before PR)
    - Run `pnpm verify` to catch issues early
@@ -152,7 +152,7 @@ This starts the Next.js development server at `http://localhost:3000`.
 
 ## CI quality gates (required)
 
-Status: Implemented in Phase 1.
+Status: Implemented in the baseline.
 
 ### Gate 1: Quality
 
@@ -264,11 +264,11 @@ pnpm format:write  # local fix
 
 **Governance note:** Auto-format only runs for Dependabot; human PRs still require manual formatting to maintain developer discipline.
 
-## Phased testing strategy
+## Maturity-based testing strategy
 
 Note: Items marked (implemented) are in the current state. Others are (planned).
 
-### Phase 1 (MVP): Gates + manual smoke checks (implemented)
+### Foundation (MVP): Gates + manual smoke checks (implemented)
 
 - quality + build gates
 - manual review on preview deployments:
@@ -276,9 +276,9 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
   - page rendering
   - key links to `/docs`
 
-### Phase 2: Automated E2E tests with Playwright (implemented)
+### Automation: Automated E2E tests with Playwright (implemented)
 
-**Status:** Implemented in PR #10 (merged 2026-01-17). Enhanced in Stage 3.3 to validate evidence link resolution.
+**Status:** Implemented in PR #10 (merged 2026-01-17). Enhanced later to validate evidence link resolution.
 
 **Framework:** Playwright (multi-browser E2E testing)
 
@@ -340,7 +340,7 @@ pnpm exec playwright show-report    # View HTML test report
 - Changed `params: { slug: string }` to `params: Promise<{ slug: string }>`
 - Added `await` for params destructuring in `[slug]/page.tsx`
 
-### Phase 3: Unit tests (implemented — Stage 3.3)
+### Unit Tests (implemented)
 
 **Status:** Implemented in PR #XX (2026-01-22).
 
@@ -528,10 +528,10 @@ After running `pnpm test:coverage`:
 #### Evidence Links
 
 - **Test Guide:** [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md#unit-testing-with-vitest)
-- **PR #XX:** Stage 3.3 unit tests implementation
+- **PR #XX:** Unit tests implementation
 - **Configuration:** `vitest.config.ts`
 
-### Phase 4: Extended E2E coverage (Stage 3.3 enhanced)
+### Coverage Expansion: Extended E2E coverage
 
 - Expand Playwright coverage:
   - form submissions (contact page)

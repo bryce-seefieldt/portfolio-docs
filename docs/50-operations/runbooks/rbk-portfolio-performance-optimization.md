@@ -47,7 +47,7 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 #### Step 3: Bundle size regression check (local quick guard)
 
 - After build: `du -sh .next` and `find .next -name "*.js" -type f | xargs wc -c | tail -1`
-- Expectation: JS total ~27.8 MB baseline (Phase 2). Investigate if > 10% growth.
+- Expectation: JS total ~27.8 MB baseline. Investigate if > 10% growth.
 - **When to use:** Every pre-deploy; catches accidental bloat before it hits production.
 - **Action:** If > 10% growth, see [Bundle Size Regression troubleshooting](./rbk-portfolio-performance-troubleshooting.md#bundle-size-regression).
 
@@ -80,7 +80,7 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 
 #### Step 6: Enable & review Speed Insights in Vercel dashboard
 
-**Status:** Deferred to post-Phase 4 when Speed Insights add-on is enabled.
+**Status:** Deferred to a later hardening pass when Speed Insights add-on is enabled.
 
 Once Speed Insights is enabled:
 

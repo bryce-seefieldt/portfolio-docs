@@ -322,7 +322,7 @@ curl -s https://production-domain.com/api/health | jq '.status'
 
 ## Future Enhancements
 
-### Metrics Export (Phase 5)
+### Metrics Export (Planned)
 
 Add quantitative metrics for performance tracking:
 
@@ -332,7 +332,7 @@ Add quantitative metrics for performance tracking:
 
 **Implementation approach:** Prometheus metrics at `/api/metrics` or StatsD export
 
-### Distributed Tracing (Phase 5)
+### Distributed Tracing (Planned)
 
 Add request tracing for debugging cross-service calls:
 
@@ -342,7 +342,7 @@ Add request tracing for debugging cross-service calls:
 
 **Tools:** OpenTelemetry, Vercel APM, Datadog APM
 
-### Automated Incident Creation (Phase 5)
+### Automated Incident Creation (Planned)
 
 Auto-create GitHub issues when incidents occur:
 

@@ -29,7 +29,7 @@ Challenges arise when linking across repos:
 4. **Testing complexity:** Unit tests cannot assume a specific domain; environment-based testing is inconsistent
 5. **Portability:** If the portfolio is cloned/forked, hardcoded URLs become invalid; users must hunt for and update all references
 
-**Trigger:** Phase 3 evidence-first architecture requires extensive cross-repo linking (dossier paths, ADRs, threat models, runbooks). A scalable, portable linking strategy is essential.
+**Trigger:** Evidence-first architecture requires extensive cross-repo linking (dossier paths, ADRs, threat models, runbooks). A scalable, portable linking strategy is essential.
 
 ---
 
@@ -233,7 +233,7 @@ portfolio/
 
 ## Implementation
 
-### Phase 1: Environment-First Configuration (Stage 3.1)
+### Step 1: Environment-First Configuration
 
 - Created `src/lib/config.ts` with helpers `docsUrl()`, `githubUrl()`, `docsGithubUrl()`
 - Exported constants: `DOCS_BASE_URL`, `GITHUB_URL`, `DOCS_GITHUB_URL`, `SITE_URL`
@@ -259,13 +259,13 @@ export function githubUrl(path: string): string {
 }
 ```
 
-### Phase 2: Evidence Links in Registry (Stage 3.1)
+### Step 2: Evidence Links in Registry
 
 - Updated `src/data/projects.yml` to use placeholders (`{GITHUB_URL}`, `{DOCS_BASE_URL}`)
 - Loader validates URLs after interpolation
 - Evidence schema supports dossier, threat model, ADR, runbook paths
 
-### Phase 3: Unit & E2E Tests (Stage 3.3)
+### Step 3: Unit & E2E Tests
 
 - `src/lib/__tests__/config.test.ts`: 18 tests verifying `docsUrl()`, `githubUrl()` behavior with env vars set/unset
 - `e2e/evidence-links.spec.ts`: 12 Playwright tests verifying evidence links resolve correctly
@@ -376,5 +376,5 @@ A: No. Commit `.env.example` (template) only. Each environment has its own `.env
 ## Author & Review
 
 - **Date:** 2026-01-22
-- **Author:** GitHub Copilot (Phase 3 Implementation)
+- **Author:** Bryce Seefieldt
 - **Status:** Approved and documented

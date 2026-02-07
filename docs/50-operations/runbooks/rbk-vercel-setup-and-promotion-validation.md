@@ -60,7 +60,7 @@ This runbook implements the decision in [ADR-0007: Host Portfolio App on Vercel 
 
 ## Procedure / Content
 
-### Phase 1: Connect portfolio-app to Vercel
+### Step 1: Connect portfolio-app to Vercel
 
 #### Step 1.1: Create or access Vercel project
 
@@ -107,7 +107,7 @@ On the **"Import Project"** page, configure:
 
 ---
 
-### Phase 2: Configure environment variables
+### Step 2: Configure environment variables
 
 #### Step 2.1: Determine environment variable values
 
@@ -184,7 +184,7 @@ For now, **use Vercel's default preview URLs** and finalize domain strategy late
 
 ---
 
-### Phase 3: Set up GitHub Deployment Checks (Production Promotion Gating)
+### Step 3: Set up GitHub Deployment Checks (Production Promotion Gating)
 
 This phase implements the decision in [ADR-0007](../../10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) to gate production promotion on `ci / quality` and `ci / build` passing.
 
@@ -254,7 +254,7 @@ ci / build       | production | blocking
 
 ---
 
-### Phase 4: Configure GitHub Ruleset (Optional but Recommended)
+### Step 4: Configure GitHub Ruleset (Optional but Recommended)
 
 This phase adds an additional safeguard: GitHub branch protection rules to prevent merge to `main` if CI checks don't pass.
 
@@ -295,7 +295,7 @@ Add these for enterprise rigor:
 
 ---
 
-### Phase 5: End-to-End Validation
+### Step 5: End-to-End Validation
 
 #### Step 5.1: Create test PR
 
@@ -407,7 +407,7 @@ If checks don't appear after 3 minutes, verify:
 
 ---
 
-### Phase 6: Configure Staging Domain & Branch Mapping (Stage 4.1)
+### Step 6: Configure Staging Domain & Branch Mapping
 
 This phase adds a clear, reviewable staging tier using Vercel's branch/domain mapping while maintaining immutable builds.
 
@@ -546,7 +546,7 @@ Monitor the GitHub Actions CI workflow for the following gates (should all show 
 
 ---
 
-### Phase 7: Clean up and document
+### Step 7: Clean up and document
 
 #### Step 6.1: Delete test PR branch
 

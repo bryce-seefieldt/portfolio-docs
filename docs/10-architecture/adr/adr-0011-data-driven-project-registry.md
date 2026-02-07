@@ -29,7 +29,7 @@ Document the decision to replace hardcoded project metadata with a YAML-backed r
 
 - Decision date: 2026-01-20
 - Status: Accepted
-- Related work: Portfolio App Stage 3.1 (registry & validation)
+- Related work: Portfolio App registry and validation
 - Dependencies: `js-yaml`, `zod`, `tsx`, environment variables (`NEXT_PUBLIC_*`)
 
 ## Decision Record
@@ -137,7 +137,7 @@ const ProjectSchema = z
 4. Replace static exports in `src/data/projects.ts` with validated loader outputs
 5. Add scripts: `registry:validate`, `registry:list`
 6. Update dossiers and reference docs to describe the model
-7. Add tests (Stage 3.3) to guard slug/URL rules
+7. Add tests to guard slug/URL rules
 
 ### Success Criteria
 

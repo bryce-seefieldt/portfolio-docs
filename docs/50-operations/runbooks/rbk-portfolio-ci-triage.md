@@ -187,7 +187,7 @@ Fix:
    - **Problem:** Module load order causes environment variables to not be visible during registry loading
    - **Solution (Fixed in commit 1a1e272):** Use `process.env` directly in `interpolate()` function instead of module-level imports
    - **Prevention:** Ensure `NEXT_PUBLIC_*` environment variables are set before build
-   - **Reference:** [Stage 3.1 Known Issues](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md#known-issues--solutions)
+  - **Reference:** Archived known-issues entry in the docs archive
 
 3. **Environment variable check:**
 
@@ -220,7 +220,7 @@ pnpm build               # Expect: ✓ Compiled successfully
 
 #### E) Smoke test failures (`pnpm test`)
 
-**Status:** Smoke tests implemented in Phase 2 (PR #10).
+**Status:** Smoke tests implemented in PR #10.
 
 Symptoms:
 

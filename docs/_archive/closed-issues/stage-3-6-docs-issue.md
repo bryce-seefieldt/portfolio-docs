@@ -5,6 +5,9 @@ tags:
   [portfolio, roadmap, planning, phase-3, stage-3.6, docs, reference, analytics]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 3.6: Analytics & Social Metadata — Documentation
 
 **Type:** Documentation / Reference  

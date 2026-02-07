@@ -4,6 +4,9 @@ description: 'Portfolio App governance readiness and validation for Phase 6.'
 tags: [portfolio, roadmap, planning, phase-6, stage-6.0, app, governance]
 ---
 
+> **Archive notice:** Archived 2026-02-06. This issue is retained for historical traceability only.
+> See release note: /docs/00-portfolio/release-notes/20260206-portfolio-roadmap-issues-archived.md
+
 # Stage 6.0: Phase 6 Full Implementation — App Implementation
 
 **Type:** Validation / Governance Readiness  

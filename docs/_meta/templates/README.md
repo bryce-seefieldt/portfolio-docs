@@ -1,3 +1,126 @@
+#### **1. Implementation Guide** (`template-phase-implementation-guide.md`)
+**Purpose:** Master plan for a milestone that coordinates both app and docs delivery.
+**When to use:**
+Creating the detailed execution plan for a new milestone (e.g., "Implementation Guide")
+Scope: entire milestone, both repositories, all workstreams
+Creates single source of truth for milestone sequencing, dependencies, and success criteria
+Prerequisites and readiness verification
+Sequential steps OR parallel tracks (choose one approach)
+Implementation tasks with milestone-specific sequencing
+Testing strategy per track
+Checklist for start/during/end of milestone
+**Output:** Created as GitHub issue in `portfolio-app` repository
+**How it works:**
+1. Read at kickoff to align team on scope and sequencing
+2. Reference throughout the milestone to ensure tasks are tracked
+3. Update after completion with actual effort and lessons learned
+
+---
+
+#### **2. Workstream App Issue** (`template-phase-stage-app-issue.md`)
+**Purpose:** GitHub issue template for app/code implementation work within a workstream.
+**When to use:**
+Creating an issue for app code work (e.g., "Step 1: Data-Driven Registry — App Implementation")
+Scope: app repository (`portfolio-app`), specific workstream
+Linked to a companion docs workstream issue
+**Key sections:**
+Overview and objectives for the workstream
+Implementation tasks broken into sequential steps
+Testing strategy (unit, integration, E2E)
+Acceptance criteria with measurable outcomes
+**Output:** Created as GitHub issue in `portfolio-app` repository
+**How it works:**
+1. Copy template as issue body when creating the GitHub issue
+2. Fill required sections before marking "Ready for Development"
+3. Link to companion docs workstream issue in "Linked Issues"
+4. Reference this issue in PR commit messages and PR description
+5. Verify all acceptance criteria before marking complete
+
+---
+
+#### **3. Workstream Docs Issue** (`template-phase-stage-docs-issue.md`)
+**Purpose:** GitHub issue template for documentation/analysis work within a workstream.
+**When to use:**
+Creating an issue for docs work (e.g., "Step 1: Data-Driven Registry — Documentation")
+Scope: docs repository (`portfolio-docs`), specific workstream
+Linked to a companion app workstream issue
+**Key sections:**
+Overview and objectives for the documentation deliverable
+Content structure and outline
+For guides: audience, prerequisites, key concepts, examples
+Success criteria and verification steps
+
+---
+
+## Implementation Guide
+You are planning a major development milestone
+The milestone spans 2–4 weeks and includes multiple deliverables
+Content structure and outline
+The template provides a standardized structure for planning milestones that includes:
+For guides: audience, prerequisites, key concepts, examples
+1. **Executive Overview:** Milestone purpose, duration, deliverables
+3. **Implementation Structure:** Choice of two approaches:
+   - **Sequential Steps:** For linear, cumulative work (e.g., foundation milestone)
+   - **Modular Tracks:** For independent, parallel-capable work (e.g., scale-up milestone)
+
+4. **Implementation Checklists:** Organized by step/track with verification items
+**How it works:**
+### Definition of Done (Implementation Guide)
+1. Copy template as issue body when creating the GitHub issue
+2. Replace all [X] placeholders with actual milestone number and details
+3. Choose **one approach:**
+   - **Sequential Steps:** For milestones where each step builds on prior work
+   - **Modular Tracks:** For milestones with independent deliverables
+4. For each step/track:
+7. Link to any new ADRs, runbooks, or threat models created during the milestone
+## GitHub Issue Templates (for Workstreams)
+**Key sections:**
+You are implementing a feature or workstream in `portfolio-app`
+The workstream involves creating/updating TypeScript/React files
+**Example Workstream Names:**
+**4. Generic GitHub Issue** (`template-github-issue-generic.md`)
+**Purpose:** General-purpose GitHub issue template for standalone work NOT related to phase stages.
+**When to use:**
+Creating issues for ad-hoc work, urgent fixes, improvements, or one-off tasks
+Scope: repository-agnostic; can be used in `portfolio-app` or `portfolio-docs`
+NOT tied to a phase stage
+**Supported types:**
+Bug reports (with reproduction steps)
+Feature requests (with problem statement)
+Enhancements/improvements
+Documentation (single-page updates)
+Refactoring
+Maintenance
+Other
+**Key sections:**
+Description (with type-specific subsections)
+Scope (in/out of scope clarity)
+Acceptance criteria (checkboxes)
+Files affected
+Proposed solution (optional, for complex issues)
+Testing strategy (manual and automated)
+Effort estimate with task breakdown
+Dependencies and blocking relationships
+Checklists (before starting, during, before PR, etc.)
+Resolution documentation (filled in when complete)
+**Output:** Created as GitHub issue in either repository
+**How it works:**
+1. Copy template as issue body when creating the GitHub issue
+2. Keep only sections relevant to the issue type
+3. Provide clear acceptance criteria
+4. Reference this issue in PR commit messages
+5. Fill in "Resolution" section before closing
+
+---
+
+## Minimum acceptance checklist (quick reference)
+Use this as a final scan before opening a PR:
+## Troubleshooting
+### “Where should this go?”
+### “This feels too heavy for a small change.”
+---
+## References
+This document is authoritative for artifact usage and DoD enforcement across the repository.
 ---
 title: 'Templates Guide and Definitions of Done'
 description: 'How to use documentation templates in this repository, including when to use each artifact type and the minimum Definition of Done (DoD) required for acceptance.'
