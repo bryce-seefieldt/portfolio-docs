@@ -103,7 +103,8 @@ For each phase or milestone:
 - **Phase 3:** Scaling content model (repeatable project publishing pipeline) — ✅ Complete (Stage 3.6 complete 2026-01-23)
 - **Phase 4:** Reliability + security hardening (enterprise credibility upgrades) — ✅ Complete (2026-01-30)
 - **Phase 5:** Advanced demonstrations (multi-language demos, platform proofs, eval-first artifacts)
-- **Phase 6:** Capstone, evolution, and long-term signal (optional)
+- **Phase 6:** Capstone, evolution, and long-term signal — ✅ Complete (2026-02-05)
+- **Phase 7:** Quality gates, feature catalog, and documentation maturity (current)
 
 Each phase includes:
 
@@ -402,7 +403,9 @@ Show depth and breadth across languages and disciplines while maintaining enterp
 
 ---
 
-## Phase 6 — Capstone, evolution, and long-term signal (optional)
+## Phase 6 — Capstone, evolution, and long-term signal
+
+**Status:** ✅ Complete (2026-02-05) — see [Phase 6 Implementation Guide](phase-6-implementation-guide.md)
 
 ### Objective
 
@@ -441,6 +444,25 @@ Preserve credibility over time by defining what belongs, how change is governed,
 ### Implementation guide
 
 - See [Phase 6 Implementation Guide](phase-6-implementation-guide.md) for detailed steps, checklists, and success criteria.
+
+---
+
+## Phase 7 — Quality gates, feature catalog, and documentation maturity
+
+### Objective
+
+Capture and consolidate the post-Phase 6 work that deepened testing coverage, formalized the feature catalog, and tightened CI and verification expectations across both repos.
+
+### Deliverables
+
+- Expanded automated test coverage for core pages, components, and API routes in the Portfolio App
+- Feature catalog documentation spanning product journey, evidence model, UX polish, theming, SEO, security, testing, CI/CD, performance, and docs governance
+- Commentary standard and examples to keep reviewer narratives consistent and evidence-linked
+- Updated CI/testing guidance and local verification steps for the Docs App
+
+### Implementation guide
+
+- See [Phase 7 Implementation Guide](phase-7-implementation-guide.md) for detailed steps, checklists, and success criteria.
 
 ---
 
