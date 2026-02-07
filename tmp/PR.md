@@ -2,166 +2,52 @@
 
 ## What changed
 
-### Architecture & Documentation Improvements
-- **ADR-0013**: Added new Architecture Decision Record for multi-environment deployment strategy (Preview → Staging → Production)
-- **Deployment Documentation**: Consolidated and clarified three-tier deployment model across all relevant docs
-- **Runbooks Enhanced**: Expanded deployment and environment promotion procedures with detailed step-by-step guidance
-- **Operations Guide**: Integrated quick-reference workflow table into operations guide with phase-by-phase breakdown
-- **CI/CD Diagram**: Converted ASCII job sequence to professional Mermaid flowchart per style guide
-
-### Portfolio App Dossier Updates (Complete)
-- **01-overview.md**: Added multi-environment deployment context
-- **02-architecture.md**: Enhanced with Vercel environment strategy and promotion gates
-- **03-deployment.md**: Complete rewrite - Phase model, environment strategy, deployment procedure, rollback posture
-- **05-testing.md**: Added three-stage validation workflow (Local → CI → Staging)
-- **06-operations.md**: New quick-reference workflow table + comprehensive operational procedures
-- **Deleted 04-staging-workflow-summary.md**: Content consolidated into 06-operations.md
-
-### Portfolio Docs App Alignment
-- **02-architecture.md**: Clarified different deployment model (direct main → production, no staging gate)
-- **03-deployment.md**: Updated environment strategy and Vercel configuration
-
-### New Runbooks
-- **rbk-portfolio-environment-promotion.md**: Detailed environment promotion procedures
-- **rbk-portfolio-environment-rollback.md**: Emergency rollback procedures
-
-### Enhanced Runbooks
-- **rbk-portfolio-deploy.md**: +251 lines - Complete deployment workflow with preflight checks, CI validation, staging validation, post-deploy checklist
-- **rbk-vercel-setup-and-promotion-validation.md**: +225 lines - Comprehensive 7-phase Vercel setup and staging domain configuration
-
-### Roadmap & Issue Tracking
-- **stage-4-1-app-issue.md**: Updated with deployment architecture decisions
-- **stage-4-1-docs-issue.md**: Clarified docs improvements and ADR additions
-- **phase-4-implementation-guide.md**: Updated completion status
+- Removed milestone/phase references across docs and runbooks.
+- Normalized labels in reference and implementation guidance.
+- Archived roadmap issues into docs/_archive/closed-issues with release note.
 
 ## Why
 
-The Portfolio App deployment model was incomplete and inconsistent:
-
-1. **Problem 1**: README documented wrong workflow order (main → staging defeated staging-first validation)
-2. **Problem 2**: Manual promotion workflows were redundant with automatic Git-triggered Vercel deployments
-3. **Problem 3**: Documentation inconsistencies across multiple files about PR targeting and promotion flow
-4. **Problem 4**: Staging workflow quick reference was siloed in standalone document instead of integrated with operational guidance
-5. **Problem 5**: ASCII diagrams were not accessible or version-controllable
-
-This PR implements the correct model:
-- **Feature branch** → PR targets `staging` (not main) → Merge to staging → Auto-deploy to staging-bns-portfolio.vercel.app → Manual validation → Merge to main → Auto-deploy to bns-portfolio.vercel.app
-- Removed redundant promotion workflows (chose automatic Git-triggered model)
-- Consolidated documentation to single source of truth (03-deployment.md + 06-operations.md + runbooks)
-- Integrated quick-reference workflow into operations guide with actionable checkpoints
-- Converted ASCII diagram to Mermaid format per style guide
+- Keep documentation readable as a completed guide without milestone framing.
 
 ## Scope
 
-- [x] Docs content update (deployment model clarification)
-- [x] New section/folder (ADR-0013 + new runbooks)
-- [x] CI/CD / workflows (documented removed promote-*.yml workflows)
-- [x] Security / SDLC controls (deployment gates, branch protection, promotion checks)
-- [x] Operations / runbooks (deploy, promote, rollback procedures)
+- [x] Docs content update
+- [x] New section/folder (_category_ + index hub)
+- [ ] Templates / style guide
+- [ ] CI/CD / workflows
+- [ ] Security / threat model / SDLC controls
+- [x] Operations / runbooks / IR / DR
 
 ## Evidence
 
-- [x] `ci / quality` passed (lint, typecheck, format)
-- [x] `ci / build` passed (Docusaurus build + broken links check)
-- [x] `codeql` checks passed
-- [x] Closes #56 (Consolidate staging workflow documentation) - also addresses portfolio-app #9
-- Links / screenshots / notes:
-  - Docusaurus build verified: `pnpm build` passed cleanly
-  - All new ADRs and runbooks follow template structure (Purpose/Scope/Procedure/Validation/Troubleshooting/Refs)
-  - Mermaid diagram follows style guide (TB direction, semantic colors, 2px stroke, white text)
-  - No broken references to deleted 04-staging-workflow-summary.md (verified with grep_search)
+- [ ] `ci / quality` passed (lint, typecheck, format)
+- [ ] `ci / build` passed (Docusaurus build + broken links check)
+- [ ] `codeql` checks passed
+- [ ] Includes closing keyword for linked issue (e.g., Closes #123)
+- Links / screenshots / notes: N/A
 
 ## Nav / Structure
 
 - [x] New/updated folders include `_category_.json` or `_category_.yml`
 - [x] New section has an index hub (generated-index or curated index doc)
-- [x] Sidebars/autogenerated navigation renders correctly
-- Notes:
-  - Runbook index updated with new Stage 4 runbooks
-  - ADRs index updated with ADR-0013
-  - Portfolio-app dossier simplified to 7 focused documents (deleted redundant staging-workflow-summary)
+- [ ] Sidebars/autogenerated navigation renders correctly
 
 ## Security
 
 - [x] No secrets added (confirmed)
-- [x] Deployment gates and branch protection enforced via GitHub Ruleset and Vercel Deployment Checks
-- [x] ADR-0013 documents deployment security decisions
-- [x] No hardcoded domains or sensitive configuration
+- [x] New/updated MDX reviewed as code (if applicable)
+- [ ] Hosting header changes validated (if applicable)
+- [ ] If security-relevant: threat model / controls updated or issue created
+  - Link to update/issue:
 
 ## Quality checklist
 
-- [x] Front matter included (title, description, tags; sidebar_position for ordering)
-- [x] Uses standard page structure (Purpose / Scope / Procedure / Validation / Troubleshooting / Refs)
-- [x] Commands are copy/paste safe and specify shell (`bash`)
-- [x] Destructive steps include rollback guidance (revert procedures documented)
-- [x] Mermaid diagram follows style guide (TB direction, semantic colors, 2px stroke, accessibility)
-- [x] Runbooks include pre/post conditions and troubleshooting sections
+- [x] Front matter included (title, description, tags; sidebar fields if needed)
+- [ ] Uses standard page structure (Purpose / Scope / Procedure / Validation / Troubleshooting / Refs)
+- [x] Commands are copy/paste safe and specify shell (`bash`/`powershell`)
+- [x] Any destructive steps include rollback guidance
 
-## Notes for reviewers
+## Notes for reviewers (optional)
 
-### Key Changes to Review
-
-1. **Deployment Model**: Three-tier (Preview → Staging → Production) with staging-first validation gate
-2. **Staging Workflow Table**: Quick reference in 06-operations.md showing all 5 phases with branch, action, and validation columns
-3. **Architecture Decision**: ADR-0013 documents multi-environment promotion strategy with decision context
-4. **Runbook Enhancements**: 
-   - rbk-portfolio-deploy.md: +251 lines with preflight checks, CI validation, staging validation, post-deploy confirmation
-   - rbk-vercel-setup-and-promotion-validation.md: +225 lines with 7-phase Vercel and GitHub governance setup
-5. **Removed Workflows**: promote-staging.yml and promote-production.yml workflows deleted from portfolio-app (redundant with Vercel auto-deploy on git push)
-
-### Testing / Validation
-
-- All links verified (internal and to external docs)
-- No broken references to deleted 04-staging-workflow-summary.md
-- Diagram styling aligns with mermaid-diagram-style-guide.md standards
-- Docusaurus build passes with no warnings
-
-### What This Demonstrates
-
-- Enterprise deployment governance (three-tier validation, promotion checks)
-- Infrastructure-as-code discipline (Git as system of record)
-- Operational maturity (runbooks, rollback procedures, validation gates)
-- Documentation quality (consistency across multiple files, professional diagram formatting)
-
-### Dependencies / Related Work
-
-- **portfolio-app**: Updated README.md to reflect staging-first workflow
-- **portfolio-app**: Deleted promote-staging.yml and promote-production.yml workflows
-- **portfolio-app**: Updated all docs references to removed workflows (8+ files)
-- **portfolio-docs**: Removed 04-staging-workflow-summary.md (consolidated into 06-operations.md)
-
-### Recommended Review Order
-
-1. ADR-0013 (architecture decision)
-2. docs/60-projects/portfolio-app/03-deployment.md (the main document)
-3. docs/60-projects/portfolio-app/06-operations.md (quick reference + operational model)
-4. docs/50-operations/runbooks/rbk-portfolio-deploy.md (authoritative runbook)
-5. docs/30-devops-platform/ci-cd-pipeline-overview.md (diagram and environment tiers table)
-     - PULL_REQUEST_TEMPLATE.md when CI jobs change
-     - scripts/verify-docs-local.sh when verification steps change
-   - Includes validation checklists, failure consequences, and concrete examples
-   - Prevents documentation drift between actual workflows and contributor-facing docs
-
-3. **Dossier updates**:
-   - Portfolio App: Documented Stage 3.5 link validation CI job and publication runbooks
-   - Portfolio Docs App: Added "Current State (Phase 3–Stage 3.5)" section with runbook links
-
-4. **PR template alignment**:
-   - Evidence section now lists actual CI jobs: `ci / quality`, `ci / build`, `codeql`
-   - Removed generic "pnpm build passed" in favor of specific CI job checklist
-
-5. **Cross-linking**:
-   - All runbooks cross-reference related procedures
-   - Issues index and phase guide updated with Stage 3.5 status
-   - Session context reflects active Stage 3.5 work
-
-**Testing:**
-
-- Local verification: All files pass `pnpm verify` (lint, typecheck, format, build)
-- Navigation: All new runbooks render correctly in docs site
-- Links: All cross-references resolve correctly
-
-**Phase 3 status:**
-
-- Stages 3.1-3.4: Complete
-- Stage 3.5: In progress (CI implementation complete, runbooks created, testing and PRs pending)
+- Includes relocation of roadmap issue docs into docs/_archive/closed-issues and a release note entry.
