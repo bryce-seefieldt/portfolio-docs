@@ -1,7 +1,7 @@
 ---
 title: 'Portfolio App: Feature Inventory'
 description: 'Guided tour of portfolio-app features sourced from roadmap, ADRs, runbooks, and implementation.'
-sidebar_position: 2.5
+sidebar_position: 10
 tags: [projects, portfolio, features, guided-tour, nextjs]
 ---
 
