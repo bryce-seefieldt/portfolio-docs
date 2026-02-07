@@ -477,7 +477,6 @@ This ensures broken tests prevent production deployments.
 
 - **Testing Guide**: [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md) — Comprehensive patterns and examples
 - **Testing Dossier**: [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md) — CI gates and local validation
-- **Implementation**: [stage-3-3-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-app-issue.md) — GitHub issue with acceptance criteria
 
 ### Evidence-link strategy
 
