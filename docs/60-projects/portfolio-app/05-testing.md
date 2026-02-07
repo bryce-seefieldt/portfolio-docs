@@ -77,7 +77,7 @@ The `verify` command runs a comprehensive 12-step validation workflow:
 8. **Registry validation**: Ensures project registry schema compliance and data integrity
 9. **Build**: Produces production bundle to catch build-time errors
 10. **Performance verification**: Validates bundle size and cache headers against `docs/performance-baseline.yml`
-11. **Unit tests**: Runs Vitest suite (~133 tests: registry validation, slug helpers, link construction, structured data, observability, security helpers)
+11. **Unit tests**: Runs Vitest suite (195 tests across 39 files: lib helpers, API handlers, components, pages, data wrappers, proxy middleware, structured data, observability, security helpers)
 12. **E2E tests**: Runs Playwright suite (66 tests across Chromium + Firefox: smoke + route coverage + metadata endpoints + evidence links + security APIs)
 
 **Benefits:**
@@ -126,6 +126,7 @@ pnpm typecheck     # TypeScript type checking
 pnpm audit         # Dependency audit (high severity)
 pnpm build         # Production build
 pnpm test:unit     # Unit tests (Vitest)
+pnpm test:coverage # Unit tests with full src coverage
 pnpm test:e2e       # E2E tests (Playwright)
 ```
 
@@ -136,6 +137,7 @@ pnpm test:e2e       # E2E tests (Playwright)
 - Understanding what each check does
 - Integrating with editor/IDE workflows
 - Running only unit tests (without E2E): `pnpm test:unit`
+- Auditing coverage for the full source tree: `pnpm test:coverage`
 - Debugging E2E tests: `pnpm test:e2e:ui` or `pnpm test:e2e:debug`
 
 ### Local preview server
@@ -344,18 +346,18 @@ pnpm exec playwright show-report    # View HTML test report
 
 **Framework:** Vitest (fast, ESM-native unit testing)
 
-**Purpose:** Validate registry schema, slug rules, and link construction helpers at build time to ensure data integrity
+**Purpose:** Validate registry schema, slug rules, API handlers, UI components/pages, and link construction helpers to ensure data integrity and reviewer-facing behavior
 
 **Coverage:**
 
-- ~133 unit tests across core `src/lib/` suites
+- 195 unit tests across 39 files in `src/lib/`, `src/app/` (pages + API handlers), `src/components/`, `src/data/`, and `src/proxy.ts`
 - All tests passing locally and in CI
-- Code coverage: ≥95% for `src/lib/` modules
+- Code coverage: ≥95% for all source modules tracked by Vitest coverage (current scope: `src/**/*.{ts,tsx}`)
 
 **Local execution:**
 
 ```bash
-pnpm test:unit      # Run all ~133 unit tests (CI-like execution)
+pnpm test:unit      # Run all 195 unit tests (CI-like execution)
 pnpm test           # Run tests in watch mode (for development)
 pnpm test:coverage  # Run tests and generate coverage report
 pnpm test:ui        # Visual UI mode for debugging failing tests
@@ -494,6 +496,11 @@ pnpm test:debug
 - `src/lib/__tests__/registry.test.ts` — Registry validation (17 tests)
 - `src/lib/__tests__/slugHelpers.test.ts` — Slug format and deduplication (19 tests)
 - `src/lib/__tests__/config.test.ts` — Link construction helpers (34 tests)
+- `src/app/api/__tests__/` — API route handlers (csrf, echo, health)
+- `src/app/__tests__/` — App Router pages (layout, home, contact, projects, not found, error)
+- `src/components/__tests__/` — UI components (navigation, theme, badges, evidence blocks)
+- `src/data/__tests__/` — Data wrappers and CV content
+- `src/__tests__/proxy.test.ts` — Middleware CSP and nonce behavior
 
 **CI Integration:**
 

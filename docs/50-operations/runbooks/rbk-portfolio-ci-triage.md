@@ -16,15 +16,17 @@ CI failures are treated as “stop-the-line” events. The correct response is t
 This runbook assumes Vercel and GitHub governance are already configured per [rbk-vercel-setup-and-promotion-validation.md](./rbk-vercel-setup-and-promotion-validation.md). Required checks are:
 
 - `ci / quality` (lint, format:check, typecheck)
+- `ci / test` (unit tests, coverage, E2E tests)
 - `ci / build` (Next.js build)
 
-When either check fails, this runbook provides deterministic diagnosis and fix procedures. See [rbk-portfolio-deploy.md](./rbk-portfolio-deploy.md) for the deploy workflow where CI gating is enforced.
+When any required check fails, this runbook provides deterministic diagnosis and fix procedures. See [rbk-portfolio-deploy.md](./rbk-portfolio-deploy.md) for the deploy workflow where CI gating is enforced.
 
 ## Scope
 
 ### Use when
 
 - `ci / quality` fails (lint, format:check, typecheck)
+- `ci / test` fails (unit tests, coverage, E2E tests)
 - `ci / build` fails (Next build)
 - Vercel promotion is blocked due to failing checks
 
@@ -40,6 +42,9 @@ When either check fails, this runbook provides deterministic diagnosis and fix p
   - `pnpm format:check`
   - `pnpm typecheck`
   - `pnpm build`
+  - `pnpm test:unit`
+  - `pnpm test:coverage`
+  - `pnpm test:e2e`
 
 ## Procedure / Content
 
@@ -61,6 +66,10 @@ When either check fails, this runbook provides deterministic diagnosis and fix p
   - Smoke tests (`pnpm test` - 12 tests across Chromium + Firefox)
   - depends on `ci / quality` being green
   - note: `secrets-scan` is not a strict dependency (only runs on PRs, but all PRs require it via branch protection)
+- `ci / test` job runs:
+  - `pnpm test:unit`
+  - `pnpm test:e2e`
+  - uploads coverage artifacts from `pnpm test:coverage` when configured
 
 ### 1) Identify the failing check and error class
 
@@ -256,6 +265,19 @@ pnpm test:ui         # Opens Playwright UI mode
 # CI debugging
 # - Download HTML test report artifact from failed CI run
 # - Open playwright-report/index.html locally to see screenshots/traces
+
+#### F) Unit test or coverage failures (`pnpm test:unit` / `pnpm test:coverage`)
+
+Symptoms:
+
+- Vitest failures in UI, API route handlers, data wrappers, or lib helpers
+- Coverage thresholds failing after new code paths are added
+
+Fix:
+
+- Run `pnpm test:unit` to reproduce and isolate the failing test
+- Run `pnpm test:coverage` to identify uncovered files or branches
+- Add or update unit tests for affected modules (pages, components, API handlers)
 ```
 
 Fix workflow:
