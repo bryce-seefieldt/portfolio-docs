@@ -223,13 +223,13 @@ Phase 7 is best represented as sequential steps because the documentation additi
 
 ## Timeline & Resource Estimate
 
-| Step/Stage | Task                                      | Duration | Status   | Notes |
-| ---------- | ----------------------------------------- | -------- | -------- | ----- |
-| 1          | Security hardening documentation           | 5-7h     | Complete | —     |
-| 2          | Feature catalog + commentary standard      | 5-7h     | Complete | —     |
-| 3          | Testing guidance + CI gates documentation  | 4-6h     | Complete | —     |
-| 4          | Portfolio-app test coverage expansion      | 4-6h     | Complete | —     |
-| **Total**  | **Phase 7 Complete**                       | **18-26h** | **Complete** | — |
+| Step/Stage | Task                                      | Duration   | Status       | Notes |
+| ---------- | ----------------------------------------- | ---------- | ------------ | ----- |
+| 1          | Security hardening documentation          | 5-7h       | Complete     | —     |
+| 2          | Feature catalog + commentary standard     | 5-7h       | Complete     | —     |
+| 3          | Testing guidance + CI gates documentation | 4-6h       | Complete     | —     |
+| 4          | Portfolio-app test coverage expansion     | 4-6h       | Complete     | —     |
+| **Total**  | **Phase 7 Complete**                      | **18-26h** | **Complete** | —     |
 
 **Resource allocation:**
 
