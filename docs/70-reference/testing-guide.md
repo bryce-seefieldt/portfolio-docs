@@ -114,7 +114,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
-    setupFiles: ["./src/test/setup.ts"],
+    setupFiles: ['./src/test/setup.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'text-summary'],
@@ -151,7 +151,6 @@ export default defineConfig({
   - `src/app/api/__tests__/echo.test.ts` — Route handler tests
 
   ### Current Unit Test Coverage Areas
-
   - `src/lib/` helpers (registry, config, structured data, observability, security)
   - `src/app/` pages (layout, home, CV, contact, projects, project detail)
   - `src/app/api/` handlers (csrf, echo, health)
