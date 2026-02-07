@@ -2007,10 +2007,6 @@ With Phase 2 establishing credibility through one exemplary project, Phase 3 wil
 
 - **Phase 3 Implementation Guide:** [/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md))
 - **Roadmap (Phase 3 section):** [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md#phase-3--repeatable-project-publishing-pipeline-scale-without-chaos)
-- **Stage 3.1 App Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md)
-- **Stage 3.1 Docs Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-1-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-1-docs-issue.md)
-- **Stage 3.2 App Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)
-- **Stage 3.2 Docs Issue:** [/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)
 
 ---
 

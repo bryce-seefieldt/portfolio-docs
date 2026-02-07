@@ -187,7 +187,6 @@ Fix:
    - **Problem:** Module load order causes environment variables to not be visible during registry loading
    - **Solution (Fixed in commit 1a1e272):** Use `process.env` directly in `interpolate()` function instead of module-level imports
    - **Prevention:** Ensure `NEXT_PUBLIC_*` environment variables are set before build
-   - **Reference:** [Stage 3.1 Known Issues](/docs/00-portfolio/roadmap/issues/stage-3-1-app-issue.md#known-issues--solutions)
 
 3. **Environment variable check:**
 
