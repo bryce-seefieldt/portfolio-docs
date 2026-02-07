@@ -72,6 +72,8 @@ Supported types:
 
 - Treat `60-projects/portfolio-web-app/` as the canonical service doc set; each demo project mirrors the same headings (architecture, deployment, ops, security).
 
+- Portfolio-app code commentary guidance: [docs/20-engineering/commentary-standard.md](./docs/20-engineering/commentary-standard.md) and examples in [docs/70-reference/commentary-examples.md](./docs/70-reference/commentary-examples.md).
+
 ## Content
 
 - Product/portfolio narrative → docs/00-portfolio/
