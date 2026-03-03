@@ -100,11 +100,11 @@ For each phase or milestone:
 - **Phase 0:** Baseline governance + evidence scaffolding (Docs App hardened)
 - **Phase 1:** Portfolio App foundation (repo, CI, deployment, core routes) — ✅ Complete (2026-01-17)
 - **Phase 2:** “Gold standard” content (one exemplary project + deep evidence) — ✅ Complete (2026-01-21)
-- **Phase 3:** Scaling content model (repeatable project publishing pipeline) — ✅ Complete (Stage 3.6 complete 2026-01-23)
+- **Phase 3:** Scaling content model (repeatable project publishing pipeline) — ✅ Complete (2026-01-23)
 - **Phase 4:** Reliability + security hardening (enterprise credibility upgrades) — ✅ Complete (2026-01-30)
-- **Phase 5:** Advanced demonstrations (multi-language demos, platform proofs, eval-first artifacts)
+- **Phase 5:** Advanced demonstrations (multi-language demos, platform proofs, eval-first artifacts) — ✅ Complete (2026-02-04)
 - **Phase 6:** Capstone, evolution, and long-term signal — ✅ Complete (2026-02-05)
-- **Phase 7:** Quality gates, feature catalog, and documentation maturity (current)
+- **Phase 7:** Quality gates, feature catalog, and documentation maturity — ✅ Complete (2026-02-14)
 
 Each phase includes:
 
@@ -449,18 +449,65 @@ Preserve credibility over time by defining what belongs, how change is governed,
 
 ## Phase 7 — Quality gates, feature catalog, and documentation maturity
 
+**Status:** ✅ Complete (2026-02-14) — see [Phase 7 Implementation Guide](phase-7-implementation-guide.md)
+
 ### Objective
 
 Capture and consolidate the post-Phase 6 work that deepened testing coverage, formalized the feature catalog, and tightened CI and verification expectations across both repos.
 
 ### Deliverables
 
-- Expanded automated test coverage for core pages, components, and API routes in the Portfolio App
-- Feature catalog documentation spanning product journey, evidence model, UX polish, theming, SEO, security, testing, CI/CD, performance, and docs governance
-- Commentary standard and examples to keep reviewer narratives consistent and evidence-linked
-- Updated CI/testing guidance and local verification steps for the Docs App
+**Portfolio App:**
+- Expanded automated test coverage for core pages, components, API routes, data utilities, and library functions
+- Enhanced test setup and configuration for consistent test execution
+- CI gates updated with stricter coverage expectations
 
-### Implementation guide
+**Portfolio Docs:**
+- Feature catalog documentation spanning product journey, evidence model, UX polish, theming, SEO, security, testing, CI/CD, performance, and docs governance
+- Commentary standard and examples aligned with reviewer guidance
+- Security hardening ADRs and implementation plans
+- Updated CI/testing documentation and local verification scripts
+
+### Key Changes Captured
+
+**Step 1: Security Hardening (5-7 hrs)**
+- ADR-0018 (React2Shell hardening baseline) and ADR-0019 (portfolio docs hardening baseline)
+- Security hardening implementation guides for both apps
+- Updated threat models and risk registers
+
+**Step 2: Feature Catalog & Commentary (5-7 hrs)**
+- Full feature catalog with 10 feature domains documented
+- Commentary standards and examples for consistent review narratives
+- Updated portfolio navigation to reference feature catalog
+
+**Step 3: Testing & CI Gates (4-6 hrs)**
+- Updated CI/CD pipeline documentation
+- Enhanced verification scripts with optional audit reporting
+- Updated runbooks for deployment and CI triage
+
+**Step 4: Portfolio App Test Coverage (4-6 hrs)**
+- New tests across pages, components, APIs, data, and utilities
+- Coverage expansion from baseline to comprehensive
+- Integration into CI quality gates
+
+### Required Evidence Artifacts
+
+- ADRs for hardening baselines and governance decisions
+- Feature catalog and commentary standards
+- Updated dossiers for both apps
+- Security and testing documentation
+- Release notes documenting Phase 7 completion
+
+### Acceptance Criteria
+
+- ✅ Feature catalog published and version-tracked
+- ✅ Commentary standards enforce evidence-linking
+- ✅ Security hardening controls documented and verified
+- ✅ Testing depth materially expanded across both apps
+- ✅ CI gates tightened and documented
+- ✅ All changes deployed and verified in production
+
+### Implementation Guide
 
 - See [Phase 7 Implementation Guide](phase-7-implementation-guide.md) for detailed steps, checklists, and success criteria.
 
