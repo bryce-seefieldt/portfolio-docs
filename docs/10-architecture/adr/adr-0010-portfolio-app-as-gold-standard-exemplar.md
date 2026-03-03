@@ -15,13 +15,13 @@ Phase 2 of the Portfolio Program (see [roadmap.md](/docs/00-portfolio/roadmap/in
 
 Candidate projects were evaluated:
 
-| Criterion                                 | Portfolio App         | Portfolio Docs    | Past Project          | Mini-Demo                 |
-| ----------------------------------------- | --------------------- | ----------------- | --------------------- | ------------------------- |
-| **Already deployed & operational**        | ✅ Yes                | ✅ Yes            | ⚠️ Maybe              | ❌ No                     |
-| **Governance trail (documented)** | ✅ Complete           | ✅ Strong         | ⚠️ Partial            | ❌ None                   |
-| **Scope (manageable)**                    | ✅ ~500 LOC           | ⚠️ Large codebase | ⚠️ Varies             | ✅ Defined                |
-| **Real-world complexity**                 | ✅ Moderate           | ✅ High           | ⚠️ Varies             | ⚠️ Artificial             |
-| **Establishes clear precedent**           | ✅ Next steps obvious | ⚠️ Less clear     | ❌ Hard to generalize | ❌ Limited transfer value |
+| Criterion                          | Portfolio App         | Portfolio Docs    | Past Project          | Mini-Demo                 |
+| ---------------------------------- | --------------------- | ----------------- | --------------------- | ------------------------- |
+| **Already deployed & operational** | ✅ Yes                | ✅ Yes            | ⚠️ Maybe              | ❌ No                     |
+| **Governance trail (documented)**  | ✅ Complete           | ✅ Strong         | ⚠️ Partial            | ❌ None                   |
+| **Scope (manageable)**             | ✅ ~500 LOC           | ⚠️ Large codebase | ⚠️ Varies             | ✅ Defined                |
+| **Real-world complexity**          | ✅ Moderate           | ✅ High           | ⚠️ Varies             | ⚠️ Artificial             |
+| **Establishes clear precedent**    | ✅ Next steps obvious | ⚠️ Less clear     | ❌ Hard to generalize | ❌ Limited transfer value |
 
 ## Decision
 

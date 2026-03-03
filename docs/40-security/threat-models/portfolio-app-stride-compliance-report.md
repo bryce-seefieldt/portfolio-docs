@@ -18,15 +18,15 @@ tags: [security, threat-model, compliance, audit, portfolio-app, sdlc, stride]
 
 The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes hardening enhancements for secrets scanning and CI permission controls.
 
-| STRIDE Category            | Threats | Baseline Status | Enhancement Status            | Evidence                                                                   |
-| -------------------------- | ------- | --------------- | ----------------------------- | -------------------------------------------------------------------------- |
-| **Spoofing**               | 1       | ✅ Complete     | ✅ Complete                   | Vercel auto-HTTPS; domain lockdown (owner responsibility)                  |
-| **Tampering**              | 3       | ✅ Complete     | ⬆️ **Enhanced**               | CI permissions tightened; secrets scanning added                           |
-| **Repudiation**            | 1       | ✅ Complete     | ✅ Complete                   | Git audit trail enforced; PR review required                               |
-| **Information Disclosure** | 3       | ✅ Complete     | ⬆️ **Enhanced**               | Secrets scanning gate + pre-commit hooks added; no hardcoded secrets found |
-| **Denial of Service**      | 2       | ✅ Complete     | ✅ Complete                   | Vercel DDoS protection; smoke tests validate performance                   |
-| **Elevation of Privilege** | 2       | ✅ Complete     | ✅ Complete                   | GitHub Rulesets enforce PR + checks; OIDC tokens used                      |
-| **TOTAL**                  | **12**  | **✅ 12/12**    | **✅ 12/12 + enhancements**   | All controls implemented; hardening enhancements active                    |
+| STRIDE Category            | Threats | Baseline Status | Enhancement Status          | Evidence                                                                   |
+| -------------------------- | ------- | --------------- | --------------------------- | -------------------------------------------------------------------------- |
+| **Spoofing**               | 1       | ✅ Complete     | ✅ Complete                 | Vercel auto-HTTPS; domain lockdown (owner responsibility)                  |
+| **Tampering**              | 3       | ✅ Complete     | ⬆️ **Enhanced**             | CI permissions tightened; secrets scanning added                           |
+| **Repudiation**            | 1       | ✅ Complete     | ✅ Complete                 | Git audit trail enforced; PR review required                               |
+| **Information Disclosure** | 3       | ✅ Complete     | ⬆️ **Enhanced**             | Secrets scanning gate + pre-commit hooks added; no hardcoded secrets found |
+| **Denial of Service**      | 2       | ✅ Complete     | ✅ Complete                 | Vercel DDoS protection; smoke tests validate performance                   |
+| **Elevation of Privilege** | 2       | ✅ Complete     | ✅ Complete                 | GitHub Rulesets enforce PR + checks; OIDC tokens used                      |
+| **TOTAL**                  | **12**  | **✅ 12/12**    | **✅ 12/12 + enhancements** | All controls implemented; hardening enhancements active                    |
 
 ---
 
@@ -316,12 +316,12 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 ### Operational Controls
 
-| Control                   | Document                            | Status         | Evidence                      |
-| ------------------------- | ----------------------------------- | -------------- | ----------------------------- |
-| Deploy runbook            | `rbk-portfolio-deploy.md`           | ✅             | Complete; tested procedure    |
-| Rollback runbook          | `rbk-portfolio-rollback.md`         | ✅             | ~1 min rollback; Git revert   |
-| CI triage runbook         | `rbk-portfolio-ci-triage.md`        | ✅             | Deterministic troubleshooting |
-| Secrets incident response | `rbk-portfolio-secrets-incident.md` | ✅ Active | Complete; 5-step procedure   |
+| Control                   | Document                            | Status    | Evidence                      |
+| ------------------------- | ----------------------------------- | --------- | ----------------------------- |
+| Deploy runbook            | `rbk-portfolio-deploy.md`           | ✅        | Complete; tested procedure    |
+| Rollback runbook          | `rbk-portfolio-rollback.md`         | ✅        | ~1 min rollback; Git revert   |
+| CI triage runbook         | `rbk-portfolio-ci-triage.md`        | ✅        | Deterministic troubleshooting |
+| Secrets incident response | `rbk-portfolio-secrets-incident.md` | ✅ Active | Complete; 5-step procedure    |
 
 ---
 
