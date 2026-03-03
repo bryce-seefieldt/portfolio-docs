@@ -47,8 +47,8 @@ Use these links as the canonical source for validation steps, test coverage, and
 
 These are explicitly documented as planned in the architecture and roadmap; keep this list current as items ship.
 
-- Optional `/labs` and `/security` routes for experiments and public posture summaries in [Architecture](/docs/60-projects/portfolio-app/02-architecture.md#routing-and-ux-architecture-recommended-vs-current).
-- Enhanced evidence analytics and link validation dashboards in [Architecture](/docs/60-projects/portfolio-app/02-architecture.md#future-extensions-post-stage-32).
+- Optional `/labs` and `/security` routes for experiments and public posture summaries in [Architecture](./02-architecture.md).
+- Enhanced evidence analytics and link validation dashboards in [Architecture -> Future Extensions](./02-architecture.md)
 
 ## References
 
