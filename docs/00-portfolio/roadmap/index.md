@@ -458,11 +458,13 @@ Capture and consolidate the post-Phase 6 work that deepened testing coverage, fo
 ### Deliverables
 
 **Portfolio App:**
+
 - Expanded automated test coverage for core pages, components, API routes, data utilities, and library functions
 - Enhanced test setup and configuration for consistent test execution
 - CI gates updated with stricter coverage expectations
 
 **Portfolio Docs:**
+
 - Feature catalog documentation spanning product journey, evidence model, UX polish, theming, SEO, security, testing, CI/CD, performance, and docs governance
 - Commentary standard and examples aligned with reviewer guidance
 - Security hardening ADRs and implementation plans
@@ -471,21 +473,25 @@ Capture and consolidate the post-Phase 6 work that deepened testing coverage, fo
 ### Key Changes Captured
 
 **Step 1: Security Hardening (5-7 hrs)**
+
 - ADR-0018 (React2Shell hardening baseline) and ADR-0019 (portfolio docs hardening baseline)
 - Security hardening implementation guides for both apps
 - Updated threat models and risk registers
 
 **Step 2: Feature Catalog & Commentary (5-7 hrs)**
+
 - Full feature catalog with 10 feature domains documented
 - Commentary standards and examples for consistent review narratives
 - Updated portfolio navigation to reference feature catalog
 
 **Step 3: Testing & CI Gates (4-6 hrs)**
+
 - Updated CI/CD pipeline documentation
 - Enhanced verification scripts with optional audit reporting
 - Updated runbooks for deployment and CI triage
 
 **Step 4: Portfolio App Test Coverage (4-6 hrs)**
+
 - New tests across pages, components, APIs, data, and utilities
 - Coverage expansion from baseline to comprehensive
 - Integration into CI quality gates
