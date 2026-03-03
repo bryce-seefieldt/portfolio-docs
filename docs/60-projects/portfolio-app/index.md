@@ -72,13 +72,13 @@ Portfolio App must link to evidence pages for each project:
 - “See the threat model”
 - “View runbooks / release notes”
 
-## Current State
+## Current Capability Snapshot
 
-- Route skeleton implemented: `/`, `/cv`, `/projects`, `/projects/[slug]`, `/contact`.
+- Core route surface: `/`, `/cv`, `/projects`, `/projects/[slug]`, `/contact`.
 - CI gates enforced: `ci / quality` and `ci / build` with required checks and frozen lockfile installs.
-- Evidence artifacts complete: ADRs, threat model, runbooks, and dossier pages updated through Phase 4.
-- Observability and operational readiness documented with health checks and MTTR runbooks.
-- UX/SEO/theming upgrades documented with references and decision records.
+- Evidence artifacts are maintained as first-class deliverables: ADRs, threat model, runbooks, and dossier pages.
+- Observability and operational readiness are documented with health checks and MTTR runbooks.
+- UX/SEO/theming capabilities are documented with references and decision records.
 
 ## Evidence map (review-first)
 

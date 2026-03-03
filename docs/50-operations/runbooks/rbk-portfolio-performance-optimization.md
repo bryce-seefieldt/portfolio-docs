@@ -80,7 +80,7 @@ Operational steps to confirm performance baselines, detect regressions (bundle s
 
 #### Step 6: Enable & review Speed Insights in Vercel dashboard
 
-**Status:** Deferred to post-Phase 4 when Speed Insights add-on is enabled.
+**Status:** Deferred until Speed Insights add-on is enabled.
 
 Once Speed Insights is enabled:
 
@@ -90,7 +90,7 @@ Once Speed Insights is enabled:
 - **Adjust date range:** Use date picker (top-right) to focus on timeframe (e.g., last 7 days since deployment)
 - **Troubleshooting:** See [Vercel metrics guide](https://vercel.com/docs/speed-insights/metrics) and [Poor Speed Insights Scores troubleshooting](./rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90)
 
-**Summary of Phase B:** Deferred. Once Speed Insights enabled, follow steps above to verify real-user performance.
+**Summary of Step B:** Deferred. Once Speed Insights is enabled, follow steps above to verify real-user performance.
 
 **Note on Status 204 responses:** Script endpoint returning 204 No Content indicates Speed Insights is not enabled. This is expected until the feature is purchased and enabled in project settings.
 

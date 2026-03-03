@@ -219,7 +219,7 @@ pnpm build               # Expect: ✓ Compiled successfully
 
 #### E) Smoke test failures (`pnpm test`)
 
-**Status:** Smoke tests implemented in Phase 2 (PR #10).
+Smoke tests are part of the current CI quality baseline.
 
 Symptoms:
 

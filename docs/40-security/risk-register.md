@@ -20,14 +20,12 @@ The risk register documents known security risks, their severity, mitigations, a
 | R1  | Dependency vulnerability (CVE) | Supply Chain | Medium     | High     | **High**   | Dependabot monitoring, frozen lockfile, audit policy      | Mitigated    | Quarterly |
 | R2  | Config drift (env var error)   | Deployment   | Medium     | High     | **High**   | Validation, promotion gates, `.env.example`               | Mitigated    | Quarterly |
 | R3  | Secrets accidentally logged    | Operations   | Low        | Critical | **High**   | TruffleHog scan, structured logging, secrets runbook      | Mitigated    | Quarterly |
-| R4  | CSP nonce misconfiguration     | Security     | Low        | High     | **Medium** | CSP nonce enforcement, header validation, CI checks       | Mitigated\*  | Post-4.4  |
+| R4  | CSP nonce misconfiguration     | Security     | Low        | High     | **Medium** | CSP nonce enforcement, header validation, CI checks       | Mitigated    | Quarterly |
 | R5  | Vercel infrastructure breach   | External     | Very Low   | Critical | **Medium** | Trust Vercel controls, immutable deploys, least privilege | **Accepted** | Quarterly |
 | R6  | npm/CDN supply chain attack    | External     | Low        | Critical | **Medium** | Lockfile integrity, audit policy, review                  | **Accepted** | Quarterly |
 | R7  | Browser 0-day XSS              | External     | Very Low   | Critical | **Low**    | CSP, framework updates, dependency scanning               | **Accepted** | Quarterly |
 | R8  | Insider threat (malicious dev) | Internal     | Very Low   | Critical | **Low**    | Code review, audit logs, least privilege                  | **Accepted** | Quarterly |
 | R9  | Framework deserialization RCE  | Runtime      | Medium     | Critical | **High**   | Patch SLA, CSP nonce, strict validation, CSRF, rate limit | Mitigated    | Quarterly |
-
-\*Asterisk indicates Stage 4.4 newly identified or re-assessed risk
 
 ## Risk Acceptance Justification
 

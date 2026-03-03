@@ -18,7 +18,7 @@ Candidate projects were evaluated:
 | Criterion                                 | Portfolio App         | Portfolio Docs    | Past Project          | Mini-Demo                 |
 | ----------------------------------------- | --------------------- | ----------------- | --------------------- | ------------------------- |
 | **Already deployed & operational**        | ✅ Yes                | ✅ Yes            | ⚠️ Maybe              | ❌ No                     |
-| **Governance trail (Phase 1 documented)** | ✅ Complete           | ✅ Strong         | ⚠️ Partial            | ❌ None                   |
+| **Governance trail (documented)** | ✅ Complete           | ✅ Strong         | ⚠️ Partial            | ❌ None                   |
 | **Scope (manageable)**                    | ✅ ~500 LOC           | ⚠️ Large codebase | ⚠️ Varies             | ✅ Defined                |
 | **Real-world complexity**                 | ✅ Moderate           | ✅ High           | ⚠️ Varies             | ⚠️ Artificial             |
 | **Establishes clear precedent**           | ✅ Next steps obvious | ⚠️ Less clear     | ❌ Hard to generalize | ❌ Limited transfer value |
