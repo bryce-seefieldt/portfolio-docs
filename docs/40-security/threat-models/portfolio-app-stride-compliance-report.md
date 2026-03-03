@@ -8,7 +8,7 @@ tags: [security, threat-model, compliance, audit, portfolio-app, sdlc, stride]
 # Portfolio App STRIDE Compliance Report
 
 **Report Date:** 2026-01-19  
-**Status:** Phase 2 — Gold Standard Baseline  
+**Status:** Current baseline with hardening enhancements  
 **Scope:** Portfolio App source code + CI/CD + operational procedures  
 **Auditor:** Architecture & Security (via threat model review)
 
@@ -16,17 +16,17 @@ tags: [security, threat-model, compliance, audit, portfolio-app, sdlc, stride]
 
 ## Executive Summary
 
-The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations and has achieved **Phase 2 recommended enhancements** for secrets scanning and CI permission hardening.
+The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes hardening enhancements for secrets scanning and CI permission controls.
 
-| STRIDE Category            | Threats | Phase 1 Status | Phase 2 Status                | Evidence                                                                   |
-| -------------------------- | ------- | -------------- | ----------------------------- | -------------------------------------------------------------------------- |
-| **Spoofing**               | 1       | ✅ Complete    | ✅ Complete                   | Vercel auto-HTTPS; domain lockdown (owner responsibility)                  |
-| **Tampering**              | 3       | ✅ Complete    | ⬆️ **Enhanced**               | CI permissions tightened; secrets scanning added                           |
-| **Repudiation**            | 1       | ✅ Complete    | ✅ Complete                   | Git audit trail enforced; PR review required                               |
-| **Information Disclosure** | 3       | ✅ Complete    | ⬆️ **Enhanced**               | Secrets scanning gate + pre-commit hooks added; no hardcoded secrets found |
-| **Denial of Service**      | 2       | ✅ Complete    | ✅ Complete                   | Vercel DDoS protection; smoke tests validate performance                   |
-| **Elevation of Privilege** | 2       | ✅ Complete    | ✅ Complete                   | GitHub Rulesets enforce PR + checks; OIDC tokens used                      |
-| **TOTAL**                  | **12**  | **✅ 12/12**   | **✅ 12/12 + 2 enhancements** | All controls implemented; Phase 2 hardening complete                       |
+| STRIDE Category            | Threats | Baseline Status | Enhancement Status          | Evidence                                                                   |
+| -------------------------- | ------- | --------------- | --------------------------- | -------------------------------------------------------------------------- |
+| **Spoofing**               | 1       | ✅ Complete     | ✅ Complete                 | Vercel auto-HTTPS; domain lockdown (owner responsibility)                  |
+| **Tampering**              | 3       | ✅ Complete     | ⬆️ **Enhanced**             | CI permissions tightened; secrets scanning added                           |
+| **Repudiation**            | 1       | ✅ Complete     | ✅ Complete                 | Git audit trail enforced; PR review required                               |
+| **Information Disclosure** | 3       | ✅ Complete     | ⬆️ **Enhanced**             | Secrets scanning gate + pre-commit hooks added; no hardcoded secrets found |
+| **Denial of Service**      | 2       | ✅ Complete     | ✅ Complete                 | Vercel DDoS protection; smoke tests validate performance                   |
+| **Elevation of Privilege** | 2       | ✅ Complete     | ✅ Complete                 | GitHub Rulesets enforce PR + checks; OIDC tokens used                      |
+| **TOTAL**                  | **12**  | **✅ 12/12**    | **✅ 12/12 + enhancements** | All controls implemented; hardening enhancements active                    |
 
 ---
 
@@ -282,7 +282,7 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 ## Phase 2 Enhancements Summary
 
-### Enhancements Implemented (as of 2026-01-19)
+### Enhancements Implemented
 
 | Enhancement                               | Threat Mitigated                | Status      | Evidence                                                                                                      |
 | ----------------------------------------- | ------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------- |
@@ -316,12 +316,12 @@ The Portfolio App is **COMPLIANT** with all Phase 1 baseline STRIDE mitigations 
 
 ### Operational Controls
 
-| Control                   | Document                            | Status         | Evidence                      |
-| ------------------------- | ----------------------------------- | -------------- | ----------------------------- |
-| Deploy runbook            | `rbk-portfolio-deploy.md`           | ✅             | Complete; tested procedure    |
-| Rollback runbook          | `rbk-portfolio-rollback.md`         | ✅             | ~1 min rollback; Git revert   |
-| CI triage runbook         | `rbk-portfolio-ci-triage.md`        | ✅             | Deterministic troubleshooting |
-| Secrets incident response | `rbk-portfolio-secrets-incident.md` | ✅ **Phase 2** | Complete; 5-phase procedure   |
+| Control                   | Document                            | Status    | Evidence                      |
+| ------------------------- | ----------------------------------- | --------- | ----------------------------- |
+| Deploy runbook            | `rbk-portfolio-deploy.md`           | ✅        | Complete; tested procedure    |
+| Rollback runbook          | `rbk-portfolio-rollback.md`         | ✅        | ~1 min rollback; Git revert   |
+| CI triage runbook         | `rbk-portfolio-ci-triage.md`        | ✅        | Deterministic troubleshooting |
+| Secrets incident response | `rbk-portfolio-secrets-incident.md` | ✅ Active | Complete; 5-step procedure    |
 
 ---
 

@@ -50,17 +50,17 @@ Describe the Portfolio App architecture at a level that is:
   - dossiers, ADRs, threat models, runbooks, postmortems
 - provide traceability and enterprise governance narrative
 
-## Routing and UX architecture (recommended vs current)
+## Routing and UX architecture
 
-Note: Items marked (implemented) exist in Phase 1. Items marked (planned) are illustrative and not yet implemented.
+Current and optional route surface:
 
-- `/` — landing, “Start Here,” primary narrative (implemented)
-- `/cv` — interactive CV (timeline + skill proof) (implemented)
-- `/projects` — curated gallery (implemented)
-- `/projects/[slug]` — project details (evidence links) (implemented)
-- `/contact` — static contact method (no auth, no form initially) (implemented)
-- `/labs` — experiments / prototypes / R&D notes (optional) (planned)
-- `/security` — public security posture summary (high-level, safe) (planned)
+- `/` — landing, “Start Here,” primary narrative
+- `/cv` — interactive CV (timeline + skill proof)
+- `/projects` — curated gallery
+- `/projects/[slug]` — project details (evidence links)
+- `/contact` — static contact method (no auth, no form initially)
+- `/labs` — experiments / prototypes / R&D notes (optional)
+- `/security` — public security posture summary (high-level, safe) (optional)
 
 ## Content model (pragmatic and scalable)
 
@@ -79,7 +79,7 @@ Recommended initial approach (low complexity):
 - generate pages from the data model with stable slugs
 - keep long-form writeups in Docusaurus, linked from project pages
 
-### Data-Driven Registry (Phase 3)
+### Data-Driven Registry
 
 - Registry lives in the Portfolio App at [portfolio-app/src/data/projects.yml](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/data/projects.yml) and is validated by [portfolio-app/src/lib/registry.ts](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/registry.ts).
 - Loader flow: YAML → env placeholder interpolation (`NEXT_PUBLIC_*`) → Zod validation (slug uniqueness, URL shape) → typed export via `src/data/projects.ts` → page components.
@@ -87,7 +87,7 @@ Recommended initial approach (low complexity):
 - URLs support env-driven placeholders (`{GITHUB_URL}`, `{DOCS_BASE_URL}`, `{DOCS_GITHUB_URL}`, `{SITE_URL}`) resolved from `NEXT_PUBLIC_*` variables to keep references portable across deploy environments.
 - Evidence fields (dossier, threat model, ADR index, runbooks, GitHub) are part of the contract so every claim on a project page links to verifiable artifacts in the docs app.
 
-### Performance & Caching Architecture (Phase 4 Stage 4.2)
+### Performance & Caching Architecture
 
 **Static Generation with ISR:** All project detail pages (`/projects/[slug]`) are pre-rendered at build time using `generateStaticParams()`, extracting all known slugs from the project registry. Pages revalidate every hour (ISR) to allow content updates without full rebuilds, balancing performance with freshness.
 
@@ -108,9 +108,9 @@ Recommended initial approach (low complexity):
 - Performance runbook: [rbk-portfolio-performance-optimization.md](../../50-operations/runbooks/rbk-portfolio-performance-optimization.md)
 - Performance guide: [performance-optimization-guide.md](../../70-reference/performance-optimization-guide.md)
 
-### Evidence Visualization Layer (Stage 3.2)
+### Evidence Visualization Layer
 
-After Stage 3.1 established a data-driven registry, Stage 3.2 makes evidence visualization a first-class architectural concern through three reusable React components. Rather than relegating evidence links to project footers or separate pages, components embed evidence discovery into the main project detail experience.
+The evidence visualization layer makes evidence discovery a first-class architectural concern through three reusable React components. Rather than relegating evidence links to project footers or separate pages, components embed evidence discovery into the main project detail experience.
 
 #### Component Architecture
 
@@ -913,15 +913,15 @@ export const TIMELINE: TimelineEntry[] = [
 
 ## Scalability Patterns
 
-Current (Phase 2):
+Current baseline:
 
 - Static project data in TypeScript (typed, version-controlled)
 - Manual content updates via code changes + PRs
 - Evidence links hardcoded per project
-- Data-driven CV timeline (src/data/cv.ts)
+- Data-driven CV timeline (`src/data/cv.ts`)
 - Gold standard conditional rendering (slug-based)
 
-Planned (Phase 3+):
+Potential enhancements:
 
 - CMS or API-driven project data (Contentful, headless CMS)
 - Automated evidence link validation

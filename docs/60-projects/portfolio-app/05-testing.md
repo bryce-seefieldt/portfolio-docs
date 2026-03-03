@@ -224,9 +224,9 @@ pnpm format:write  # local fix
 - Checks run on PRs and on pushes to `main` to gate production promotion and keep ruleset enforcement valid.
 - Check naming stability is mandatory; changing names would break required-check enforcement and Vercel promotion alignment.
 
-### Dependabot CI hardening (implemented)
+### Dependabot CI hardening
 
-**Status:** Implemented in PR #15 (merged 2026-01-19).
+This control is active in the current CI baseline.
 
 **Problem:** Dependabot PRs fail quality checks due to `pnpm-lock.yaml` formatting violations. Dependabot regenerates lockfiles but does not run Prettier, causing `pnpm format:check` to fail.
 
@@ -264,11 +264,11 @@ pnpm format:write  # local fix
 
 **Governance note:** Auto-format only runs for Dependabot; human PRs still require manual formatting to maintain developer discipline.
 
-## Phased testing strategy
+## Testing strategy evolution
 
-Note: Items marked (implemented) are in the current state. Others are (planned).
+Note: This section distinguishes baseline controls from expanded controls for ongoing maintenance.
 
-### Phase 1 (MVP): Gates + manual smoke checks (implemented)
+### Baseline: Gates + manual smoke checks
 
 - quality + build gates
 - manual review on preview deployments:
@@ -276,9 +276,9 @@ Note: Items marked (implemented) are in the current state. Others are (planned).
   - page rendering
   - key links to `/docs`
 
-### Phase 2: Automated E2E tests with Playwright (implemented)
+### Expanded coverage: Automated E2E tests with Playwright
 
-**Status:** Implemented in PR #10 (merged 2026-01-17). Enhanced in Stage 3.3 to validate evidence link resolution.
+Playwright coverage includes evidence link resolution and route-level verification as part of the current baseline.
 
 **Framework:** Playwright (multi-browser E2E testing)
 
@@ -340,9 +340,9 @@ pnpm exec playwright show-report    # View HTML test report
 - Changed `params: { slug: string }` to `params: Promise<{ slug: string }>`
 - Added `await` for params destructuring in `[slug]/page.tsx`
 
-### Phase 3: Unit tests (implemented — Stage 3.3)
+### Expanded coverage: Unit tests
 
-**Status:** Implemented in PR #XX (2026-01-22).
+Unit testing is part of the current quality baseline and enforced in CI.
 
 **Framework:** Vitest (fast, ESM-native unit testing)
 

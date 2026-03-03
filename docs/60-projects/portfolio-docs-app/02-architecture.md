@@ -59,7 +59,7 @@ This page describes the Portfolio Docs App architecture at a practical level:
     - `DOCUSAURUS_GITHUB_*` (GitHub links, edit URLs, navbars)
     - `DOCUSAURUS_PORTFOLIO_APP_URL` (cross-linking to portfolio-app)
 
-### Environment alignment (Stage 4.1)
+### Environment alignment
 
 - The app’s staging tier is implemented via Vercel branch/domain mapping. Documentation can remain on a single production domain while the app uses `NEXT_PUBLIC_DOCS_BASE_URL` to link consistently.
 - If desired, a docs staging domain can be mapped to a docs branch for preview review. Keep linking **environment-first** and avoid hardcoding hosts.

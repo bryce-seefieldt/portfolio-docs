@@ -5,7 +5,7 @@ sidebar_position: 3
 tags: [projects, deployment, cicd, vercel, github-actions, governance]
 ---
 
-**Status:** ✅ **Phase 4 COMPLETE (2026-01-24)** — Three-tier deployment model (Preview → Staging → Production) with staging domain mapping; CI quality/build/test gates; Vercel Deployment Checks; GitHub Ruleset protection on main and staging branches (see [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)).
+**Deployment posture:** Three-tier deployment model (Preview → Staging → Production) with staging domain mapping; CI quality/build/test gates; Vercel Deployment Checks; GitHub Ruleset protection on main and staging branches (see [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)).
 
 ## Purpose
 
@@ -18,9 +18,9 @@ Define how the Portfolio App is built and deployed with enterprise-grade governa
 
 ## Deployment Model Summary
 
-The Portfolio App deployment model consists of three distinct operational phases:
+The Portfolio App deployment model consists of three distinct operational tracks:
 
-### Phase 1: Setup (One-Time, Admin Tasks)
+### Track 1: Setup (One-Time, Admin Tasks)
 
 **When:** Initial Vercel project configuration and GitHub governance setup
 
@@ -34,7 +34,7 @@ The Portfolio App deployment model consists of three distinct operational phases
 
 **Document:** [rbk-vercel-setup-and-promotion-validation.md](docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (7 phases, ~120 minutes including staging setup)
 
-### Phase 2: Staging Validation (Before Production)
+### Track 2: Staging Validation (Before Production)
 
 **When:** After merging changes to `main`, before production deployment
 
@@ -48,7 +48,7 @@ The Portfolio App deployment model consists of three distinct operational phases
 
 **Document:** [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md) (includes staging validation steps)
 
-### Phase 3: Production Deployment (Repeated)
+### Track 3: Production Deployment (Repeated)
 
 **When:** After successful staging validation
 
@@ -215,7 +215,7 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
    - Next.js build must succeed
    - Vercel deployment initiated
 
-**Status:** Unit tests implemented in Stage 3.3 (PR #XX, merged 2026-01-22). E2E tests implemented in Phase 2 (PR #10, merged 2026-01-17).
+Unit and E2E test gates are active in the deployment quality pipeline.
 
 ### Test coverage
 
@@ -239,7 +239,7 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 
 ### Dependabot automation
 
-**Status:** Implemented in PR #15 (merged 2026-01-19).
+Dependabot auto-format support is active for dependency PRs.
 
 - Auto-format step runs only for Dependabot PRs
 - Prevents lockfile formatting failures

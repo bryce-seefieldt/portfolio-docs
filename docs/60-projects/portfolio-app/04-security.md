@@ -55,7 +55,7 @@ For each threat, the model documents:
 - implemented mitigations
 - validation procedures
 
-**Status:** Live and aligned with Phase 2 baseline and Phase 2+ recommended controls.
+**Security posture:** Live and aligned with the current baseline controls and recommended hardening controls.
 
 ---
 

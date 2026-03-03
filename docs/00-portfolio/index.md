@@ -55,22 +55,23 @@ Recommended initial files (create these first):
 - `product-brief.md` — one-page narrative of the product and its differentiators
 - `capabilities-map.md` — “proof matrix” mapping skills → artifacts → evidence
 - `roadmap.md` — a living plan for delivery increments and maturity milestones
-- `phase-1-completion-checklist.md` — master checklist for Phase 1 final validation (admin tasks)
 - `release-notes/` — versioned release notes (e.g., v0.1.0, v0.2.0)
 
-## Current Status (Phase 4)
+## Current Portfolio Posture
 
-- Phase 1: ✅ Complete (portfolio-app foundation with CI, Vercel previews, dossier + ADRs + runbooks)
-- Phase 2: ✅ Complete (gold standard exemplar, Playwright smoke tests in CI, STRIDE compliance, secrets scanning gate)
-- Phase 3: ✅ Complete (data-driven registry, evidence visualization, CI validation)
-- Phase 4: ✅ Complete (2026-01-30) — reliability, security hardening, observability, UX/SEO/theming
+The portfolio program currently operates as an end-to-end, enterprise-style documentation and delivery system:
+
+- `portfolio-app` is production-deployed with CI quality gates, test gates, and promotion governance.
+- `portfolio-docs` serves as the evidence engine with dossiers, ADRs, threat models, runbooks, and policy artifacts.
+- Cross-repo evidence linking is established and maintained as a first-class review workflow.
+- Security and operations documentation are integrated into day-to-day delivery, not tracked as separate project phases.
 
 Navigation to active artifacts:
 
 - Roadmap hub: [roadmap/index.md](./roadmap/index.md)
 - Implementation guides: [roadmap/phase-1-implementation-guide.md](./roadmap/phase-1-implementation-guide.md), [roadmap/phase-2-implementation-guide.md](./roadmap/phase-2-implementation-guide.md), [roadmap/phase-3-implementation-guide.md](./roadmap/phase-3-implementation-guide.md), [roadmap/phase-4-implementation-guide.md](./roadmap/phase-4-implementation-guide.md)
-- Stage issues: [roadmap/issues/index.md](./roadmap/issues/index.md) (Phase 4 stage issues)
-- Release notes: [release-notes/index.md](./release-notes/index.md) (Phase 4 completion entry)
+- Delivery issues: [roadmap/issues/index.md](./roadmap/issues/index.md)
+- Release notes: [release-notes/index.md](./release-notes/index.md)
 
 ## Portfolio writing guidelines (strict)
 

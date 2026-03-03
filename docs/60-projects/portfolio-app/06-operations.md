@@ -34,7 +34,7 @@ Document how the Portfolio App is operated like a production service:
 - Vercel preview/prod deployments are functioning
 - quality gates are enforced in CI and (optionally) promotion checks
 
-## Security Operations & Incident Response (Stage 4.4)
+## Security Operations & Incident Response
 
 Security incidents follow structured runbooks for deterministic response:
 
@@ -56,7 +56,7 @@ If MTTR targets are at risk, escalate to team lead immediately. Document all inc
 
 **Local Development → PR Review → Staging Validation → Production**
 
-| Phase                        | Branch                          | Action                                                                             | Validation                                                   |
+| Step                         | Branch                          | Action                                                                             | Validation                                                   |
 | ---------------------------- | ------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | **1. Development**           | `feat/your-feature`             | Create feature branch, make changes, run `pnpm verify` locally                     | Pass local validation                                        |
 | **2. PR Review**             | `feat/your-feature` → `staging` | Open PR targeting `staging` (not `main`), get approval                             | CI checks pass, Vercel preview works                         |
@@ -117,7 +117,7 @@ Responsibilities:
 - **Staging validation is required** after merge to main, before production is considered "live".
 - Quality runs `pnpm lint`, `pnpm format:check`, `pnpm typecheck`
 
-### Performance Monitoring (Phase 4 Stage 4.2)
+### Performance Monitoring
 
 **Bundle Size Regression Detection:** CI automatically tracks JavaScript bundle size after every build. If total JS exceeds baseline (27.8 MB) by >10%, the build fails and requires investigation before merge. This prevents unreviewed dependencies or code bloat from degrading performance.
 
@@ -145,7 +145,7 @@ Responsibilities:
 - Test runs:
   - Unit tests: `pnpm test:unit` (70+ Vitest tests with ≥80% coverage validation)
   - E2E tests: `pnpm test:e2e` (13 Playwright tests across Chromium, Firefox)
-- Link validation runs (Stage 3.5):
+- Link validation runs:
   - Registry validation: `pnpm registry:validate` (checks project metadata schema)
   - Evidence link checks: `pnpm links:check` (Playwright smoke tests)
   - Produces playwright-report artifact on failure for diagnostic use
@@ -173,7 +173,7 @@ Responsibilities:
   - Verify no personally identifiable information is shown (aggregate metrics only).
 - If analytics must be disabled temporarily, remove `<Analytics />` from `src/app/layout.tsx` and redeploy.
 
-### Observability & Health Checks (Stage 4.5)
+### Observability & Health Checks
 
 Comprehensive observability strategy: [Observability & Health Checks](../../30-devops-platform/observability-health-checks.md)
 
@@ -185,7 +185,7 @@ Covers:
 - Monitoring strategy and metrics approach
 - Future enhancements (custom metrics, alerting)
 
-### Security Monitoring (Stage 4.4)
+### Security Monitoring
 
 **Dependency Vulnerability Monitoring:**
 
