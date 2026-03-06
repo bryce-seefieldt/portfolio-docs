@@ -52,6 +52,39 @@ const config: Config = {
     mermaid: true,
   },
 
+  // Custom webpack configuration to filter warnings
+  plugins: [
+    function webpackWarningPlugin() {
+      return {
+        name: 'webpack-warning-filter',
+        configureWebpack(_config, isServer) {
+          if (!isServer) {
+            return {};
+          }
+
+          return {
+            module: {
+              parser: {
+                javascript: {
+                  exprContextCritical: false,
+                },
+              },
+            },
+            ignoreWarnings: [
+              // Suppress vscode-languageserver-types warning from mermaid → langium chain
+              {
+                module:
+                  /vscode-languageserver-types[\\/]lib[\\/]umd[\\/]main\.js$/,
+                message:
+                  /Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/,
+              },
+            ],
+          };
+        },
+      };
+    },
+  ],
+
   presets: [
     [
       'classic',

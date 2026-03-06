@@ -38,32 +38,32 @@ This is not “notes.” It is a living, version-controlled evidence system.
 - **Recruiters / Hiring Managers**: a curated, legible narrative of capabilities and outcomes
 - **Engineers / Technical Leads**: deep technical detail, standards, and evidence of maturity
 - **Security / Platform reviewers**: threat models, controls, scans, and operational procedures
-- **Future you + AI agents**: a reliable system for planning and implementing changes
+- **Developer & AI agents**: a reliable system for planning and implementing changes
 
 ## Start here (fast reviewer path)
 
-1. Reviewer guide: [/docs/00-portfolio/reviewer-guide.md](/docs/00-portfolio/reviewer-guide.md)
-2. Read the portfolio roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
-3. Open the Portfolio App dossier: [/docs/60-projects/portfolio-app/index.md](/docs/60-projects/portfolio-app/index.md)
-4. Validate evidence quickly:
+1. [Reviewer guide](/docs/00-portfolio/reviewer-guide.md)
+2. [Portfolio App Development Roadmap](/docs/00-portfolio/roadmap/index.md)
+3. [Portfolio App Project Dossier](/docs/60-projects/portfolio-app/index.md)
+4. Application evidence validation:
 
-- ADRs: [/docs/10-architecture/adr/index.md](/docs/10-architecture/adr/index.md)
-- Threat models: [/docs/40-security/threat-models/index.md](/docs/40-security/threat-models/index.md)
-- Runbooks: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
-- Evidence checklist: [/docs/70-reference/evidence-audit-checklist.md](/docs/70-reference/evidence-audit-checklist.md)
+- [ADRs](/docs/10-architecture/adr/index.md)
+- [Threat Models](/docs/40-security/threat-models/index.md)
+- [Runbooks](/docs/50-operations/runbooks/index.md)
+- [Evidence checklist](/docs/70-reference/evidence-audit-checklist.md)
 
 ## How this repository is organized
 
 Top-level domains (each has its own `index.md` and governance):
 
-- `00-portfolio/` — curated portfolio narrative (capabilities, roadmap, release notes)
-- `10-architecture/` — system design, C4 views, ADRs, integrations, data flows
-- `20-engineering/` — standards, local dev, testing strategy, dependency management
-- `30-devops-platform/` — CI/CD, environments, infra, observability, rollback strategy
-- `40-security/` — security posture, threat models, secure SDLC controls, evidence
-- `50-operations/` — runbooks, incident response, DR/BCP, service management
-- `60-projects/` — per-project dossiers (portfolio app + demos)
-- `70-reference/` — CLI/config references and quick operational diagnostics
+- [`00-portfolio/`](/docs/00-portfolio/index.md) — curated portfolio narrative (capabilities, roadmap, release notes)
+- [`10-architecture/`](/docs/10-architecture/index.md) — system design, C4 views, ADRs, integrations, data flows
+- [`20-engineering/`](/docs/20-engineering/index.md) — standards, local dev, testing strategy, dependency management
+- [`30-devops-platform/`](/docs/30-devops-platform/index.md) — CI/CD, environments, infra, observability, rollback strategy
+- [`40-security/`](/docs/40-security/index.md) — security posture, threat models, secure SDLC controls, evidence
+- [`50-operations/`](/docs/50-operations//index.md) — runbooks, incident response, DR/BCP, service management
+- [`60-projects/`](/docs/60-projects//index.md) — per-project dossiers (portfolio app + demos)
+- [`70-reference/`](/docs/70-reference/index.md) — CLI/config references and quick operational diagnostics
 
 ## Documentation governance model
 

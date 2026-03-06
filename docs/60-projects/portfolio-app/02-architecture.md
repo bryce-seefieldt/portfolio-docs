@@ -208,7 +208,7 @@ Evidence data flows:
 - Portability: URLs remain consistent across environments and deploy variations
 - Maintainability: Adding new projects or changing evidence URLs requires registry edit only
 
-#### Future Extensions (Post-Stage 3.2)
+#### Future Extensions
 
 Planned enhancements:
 
