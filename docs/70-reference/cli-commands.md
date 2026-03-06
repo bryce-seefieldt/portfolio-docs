@@ -46,7 +46,7 @@ Example Output:
 172.24.176.1
 ```
 
-:::Note
+:::note
 
 The actual IP address will vary depending on your WSL2 instance and network configuration.
 
