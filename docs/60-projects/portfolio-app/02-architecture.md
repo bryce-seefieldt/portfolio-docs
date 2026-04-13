@@ -591,11 +591,11 @@ Fixed header with:
 - Documentation App link
 - Enterprise evidence model statement
 
-### Intentional omissions (Phase 1)
+### Intentional omissions (current baseline)
 
 - No dark mode toggle (system preference only)
 - No authentication or user accounts
-- No search (deferred to docs app or Phase 3+)
+- No in-app search (discovery remains docs-driven and evidence-first)
 
 ## Metadata and SEO strategy
 

@@ -120,7 +120,8 @@ The Portfolio App operates across three tiers, each serving a distinct purpose i
 - **Trigger:** Automatic promotion after CI checks pass (Vercel Deployment Checks)
 - **Domain:** `https://bns-portfolio.vercel.app` (production domain)
 - **Protection:**
-  - GitHub Deployment Checks gate promotion (`ci / quality`, `ci / link-validation`, `ci / build`)
+  - GitHub Deployment Checks gate promotion (`ci / quality`, `ci / build`)
+  - Pipeline prerequisites for successful promotion (`ci / test`, `ci / link-validation`)
   - GitHub Ruleset requires PR approval and passing checks before merge
   - Rollback via Git revert to last known good state
 
@@ -197,7 +198,17 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 
 ### Minimum required checks
 
-1. **Quality gate** (`ci / quality`)
+1. **Ruleset/deployment required checks**
+
+  - `ci / quality`
+  - `ci / build`
+
+2. **Pipeline prerequisite checks**
+
+  - `ci / test`
+  - `ci / link-validation`
+
+3. **Quality gate** (`ci / quality`)
    - Auto-format step (Dependabot PRs only)
    - lint (ESLint)
    - format check (Prettier)
@@ -205,13 +216,17 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 
 - audit (pnpm audit --audit-level=high)
 
-2. **Test gate** (`ci / test`)
-   - Unit tests (pnpm test:unit - 70+ Vitest tests)
+4. **Test gate** (`ci / test`)
+  - Unit tests (pnpm test:unit)
    - Coverage validation (≥80% for src/lib/)
 
-- E2E tests (pnpm test:e2e - 58 tests across Chromium, Firefox)
+- E2E tests (pnpm test:e2e across Chromium and Firefox)
 
-3. **Build gate** (`ci / build`)
+5. **Link-validation gate** (`ci / link-validation`)
+  - Registry validation (`pnpm registry:validate`)
+  - Evidence link checks (`pnpm links:check`)
+
+6. **Build gate** (`ci / build`)
    - Next.js build must succeed
    - Vercel deployment initiated
 
@@ -221,7 +236,7 @@ Unit and E2E test gates are active in the deployment quality pipeline.
 
 **Unit Tests (Vitest):**
 
-- 70+ test cases covering registry, slug helpers, link construction
+- Unit coverage includes registry, slug helpers, and link construction
 - Files tested: `src/lib/__tests__/registry.test.ts`, `slugHelpers.test.ts`, `config.test.ts`
 - Coverage target: ≥80% for all `src/lib/` modules
 - Runtime: ~5 seconds
@@ -229,7 +244,7 @@ Unit and E2E test gates are active in the deployment quality pipeline.
 
 **E2E Tests (Playwright):**
 
-- 58 test cases across 2 browsers (Chromium, Firefox)
+- Multi-browser checks across Chromium and Firefox
 - Routes tested: `/`, `/cv`, `/projects`, `/contact`, `/projects/[slug]`
 - 404 handling for unknown routes and invalid slugs
 - Health + metadata endpoints: `/api/health`, `/robots.txt`, `/sitemap.xml`

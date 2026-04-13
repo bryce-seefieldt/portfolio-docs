@@ -37,7 +37,7 @@ The security objective is to demonstrate credible enterprise practices:
 
 ## Threat Model Reference
 
-**Comprehensive threat analysis:** See [Threat Model: Portfolio App](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+**Comprehensive threat analysis:** See [Threat Model: Portfolio App](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)
 
 The dedicated threat model uses the **STRIDE** methodology to enumerate threats across six categories:
 
@@ -185,14 +185,14 @@ grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 
 # Local secret hygiene (lightweight):
 # The local verification script runs a pattern-based scan (no TruffleHog).
-# CI runs the full `secrets:scan` stage using TruffleHog on PRs.
+# CI runs the full `secrets-scan` job using TruffleHog on PRs.
 # To opt-in locally, use pre-commit or install TruffleHog, but it's not required.
 ```
 
 **Secrets scanning scope:**
 
 - Local verification does NOT run TruffleHog. A lightweight pattern scan is included.
-- The TruffleHog-based `secrets:scan` runs in CI on PRs and must pass.
+- The TruffleHog-based `secrets-scan` job runs in CI on PRs and must pass.
 - Optional local opt-in:
   - **Pre-commit**: `pip install pre-commit && pre-commit install` (runs TruffleHog on commits)
   - **Manual**: Install TruffleHog CLI if you want to run `pnpm secrets:scan` locally
@@ -209,7 +209,9 @@ grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 
 - ✅ Least-privilege permissions (scoped per job)
 - ✅ Secrets scanning gate (TruffleHog, PR-only in CI)
-- ✅ Required checks before merge (quality, secrets-scan, build, CodeQL)
+- ✅ Ruleset/deployment required checks before merge (`ci / quality`, `ci / build`)
+- ✅ Pipeline prerequisite checks enforced (`ci / test`, `ci / link-validation`)
+- ✅ CodeQL workflow enabled as a separate security analysis gate
 
 ## Security Controls (Phase 2)
 
@@ -220,9 +222,9 @@ grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 | Least-privilege CI perms | ✅ Enforced  | [ci.yml job permissions](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L19-L22)   |
 | CodeQL scanning          | ✅ Enforced  | [codeql.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/codeql.yml)                   |
 | Dependabot updates       | ✅ Enabled   | [dependabot.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/dependabot.yml)                     |
-| Threat model             | ✅ Complete  | [portfolio-app-threat-model.md](/docs/40-security/threat-models/portfolio-app-threat-model.md)                          |
+| Threat model             | ✅ Complete  | [portfolio-app-threat-model-v2.md](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)                    |
 | Incident response        | ✅ Ready     | [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                     |
-| Unit tests               | ✅ Enforced  | [src/lib/**tests**/](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/__tests__) (70+ tests)          |
+| Unit tests               | ✅ Enforced  | [src/lib/**tests**/](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/__tests__)                       |
 | E2E tests                | ✅ Enforced  | [tests/e2e](https://github.com/bryce-seefieldt/portfolio-app/tree/main/tests/e2e)                                       |
 | Frozen lockfiles         | ✅ Enforced  | [ci.yml build step](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)                |
 | PR template              | ✅ Active    | [PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md) |

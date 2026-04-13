@@ -55,9 +55,9 @@ The Portfolio App is intentionally paired with the **Portfolio Documentation App
 
 - `overview.md` — product framing, scope, NFRs, evidence map
 - `architecture.md` — system design, content model, component boundaries
-- `deployment.md` — CI/CD contract, environments, release governance, domains
+- `03-deployment.md` — CI/CD contract, environments, release governance, domains
 - `security.md` — threat surface and enforceable controls (public-safe)
-- `testing.md` — quality gate definitions and test strategy (phased)
+- `05-testing.md` — quality gate definitions and test strategy
 - `operations.md` — runbooks, maintenance cadence, recovery assumptions
 - `troubleshooting.md` — common failure modes and deterministic fixes
 
@@ -75,7 +75,7 @@ Portfolio App must link to evidence pages for each project:
 ## Current Capability Snapshot
 
 - Core route surface: `/`, `/cv`, `/projects`, `/projects/[slug]`, `/contact`.
-- CI gates enforced: `ci / quality` and `ci / build` with required checks and frozen lockfile installs.
+- CI pipeline gates enforced: `ci / quality`, `ci / test`, `ci / link-validation`, and `ci / build` with frozen lockfile installs; `ci / quality` and `ci / build` are the baseline required checks used in ruleset/deployment gating.
 - Evidence artifacts are maintained as first-class deliverables: ADRs, threat model, runbooks, and dossier pages.
 - Observability and operational readiness are documented with health checks and MTTR runbooks.
 - UX/SEO/theming capabilities are documented with references and decision records.
@@ -93,7 +93,7 @@ Portfolio App must link to evidence pages for each project:
 - Review PR discipline and branch protection/ruleset settings to confirm required checks are enforced.
 - Validate build determinism locally with `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` (frozen lockfile).
 - Follow evidence links from the app into this dossier, ADR index, threat model, and runbooks to confirm traceability.
-- **Review the [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)** to understand security assumptions and mitigations across STRIDE categories.
+- **Review the [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)** to understand security assumptions and mitigations across STRIDE categories.
 
 ## Validation / Expected outcomes
 
@@ -104,8 +104,8 @@ Portfolio App must link to evidence pages for each project:
 
 ## Failure modes / Troubleshooting
 
-- Broken deployments due to routing/base path mismatch → see `deployment.md` + runbooks
-- Build failures due to lint/format/typecheck drift → see `testing.md`
+- Broken deployments due to routing/base path mismatch → see `03-deployment.md` + runbooks
+- Build failures due to lint/format/typecheck drift → see `05-testing.md`
 - Content drift / stale project pages → enforce release notes and dossier updates
 
 ## References

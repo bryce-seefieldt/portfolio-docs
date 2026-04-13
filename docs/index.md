@@ -61,8 +61,8 @@ Top-level domains (each has its own `index.md` and governance):
 - [`20-engineering/`](/docs/20-engineering/index.md) — standards, local dev, testing strategy, dependency management
 - [`30-devops-platform/`](/docs/30-devops-platform/index.md) — CI/CD, environments, infra, observability, rollback strategy
 - [`40-security/`](/docs/40-security/index.md) — security posture, threat models, secure SDLC controls, evidence
-- [`50-operations/`](/docs/50-operations//index.md) — runbooks, incident response, DR/BCP, service management
-- [`60-projects/`](/docs/60-projects//index.md) — per-project dossiers (portfolio app + demos)
+- [`50-operations/`](/docs/50-operations/index.md) — runbooks, incident response, DR/BCP, service management
+- [`60-projects/`](/docs/60-projects/index.md) — per-project dossiers (portfolio app + demos)
 - [`70-reference/`](/docs/70-reference/index.md) — CLI/config references and quick operational diagnostics
 
 ## Documentation governance model
