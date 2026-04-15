@@ -200,13 +200,13 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 
 1. **Ruleset/deployment required checks**
 
-  - `ci / quality`
-  - `ci / build`
+- `ci / quality`
+- `ci / build`
 
 2. **Pipeline prerequisite checks**
 
-  - `ci / test`
-  - `ci / link-validation`
+- `ci / test`
+- `ci / link-validation`
 
 3. **Quality gate** (`ci / quality`)
    - Auto-format step (Dependabot PRs only)
@@ -217,14 +217,16 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
 - audit (pnpm audit --audit-level=high)
 
 4. **Test gate** (`ci / test`)
-  - Unit tests (pnpm test:unit)
-   - Coverage validation (≥80% for src/lib/)
+
+- Unit tests (pnpm test:unit)
+- Coverage validation (≥80% for src/lib/)
 
 - E2E tests (pnpm test:e2e across Chromium and Firefox)
 
 5. **Link-validation gate** (`ci / link-validation`)
-  - Registry validation (`pnpm registry:validate`)
-  - Evidence link checks (`pnpm links:check`)
+
+- Registry validation (`pnpm registry:validate`)
+- Evidence link checks (`pnpm links:check`)
 
 6. **Build gate** (`ci / build`)
    - Next.js build must succeed
