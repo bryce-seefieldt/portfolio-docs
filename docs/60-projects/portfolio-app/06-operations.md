@@ -120,7 +120,7 @@ Responsibilities:
 
 ### Performance Monitoring
 
-**Bundle Size Regression Detection:** CI automatically tracks JavaScript bundle size after every build. If total JS exceeds baseline (27.8 MB) by >10%, the build fails and requires investigation before merge. This prevents unreviewed dependencies or code bloat from degrading performance.
+**Bundle Size Regression Detection:** CI automatically tracks JavaScript bundle size after every build. If total JS exceeds baseline (27.8 MB) by > 10%, the build fails and requires investigation before merge. This prevents unreviewed dependencies or code bloat from degrading performance.
 
 **Core Web Vitals Monitoring:** Vercel Analytics dashboard (https://vercel.com/bryce-seefieldt/portfolio-app/analytics) tracks real-world performance metrics from production traffic:
 
@@ -144,7 +144,7 @@ Responsibilities:
 - LCP degradation >500ms: Manual investigation recommended
 - CLS increase >0.05: Manual investigation recommended
 - Test runs:
-  - Unit tests: `pnpm test:unit` (Vitest suite with ≥80% coverage validation target for `src/lib/`)
+  - Unit tests: `pnpm test:unit` (Vitest suite with ≥ 80% coverage validation target for `src/lib/`)
   - E2E tests: `pnpm test:e2e` (Playwright suite across Chromium and Firefox)
 - Link validation runs:
   - Registry validation: `pnpm registry:validate` (checks project metadata schema)
