@@ -106,8 +106,8 @@ This docs platform is itself a **first-class project** (and the first project do
   - Docs repo source: `NEXT_PUBLIC_DOCS_GITHUB_URL + "blob/main/docs/10-architecture/adr/adr-0011-data-driven-project-registry.md"`
   - App repo source: `https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/registry.ts`
 
-**Project Status:** Complete Phase 3 (3.1–3.6). Phase 4 Stages 4.1–4.4 complete; Stage 4.5 (UX, Content, Advanced Features) ready to begin.
-**Current work:** Stage 4.4 security posture deepening complete. App PR #61 (security headers, CSP, env documentation) and Docs PR #67 (threat model v2, risk register, policies, security hardening guide, dependency vulnerability runbook, phase-4-summary) both open and ready for review/merge. Both builds passing. Next: Stage 4.5 UX/content focus.
+**Project Status:** Portfolio program implementation is complete through Phase 7 (quality gates, feature catalog, and documentation maturity).
+**Current work:** Ongoing maintenance and improvement work focuses on keeping architecture, security, operations, and project dossier evidence aligned with live implementation.
 
 ## Relationship to the future Portfolio project
 
@@ -836,7 +836,7 @@ When linking from one page to another **within** the portfolio-docs repository:
 
 - ✅ `[roadmap.md](/docs/00-portfolio/roadmap/index.md)`
 - ✅ `[Architecture ADRs](/docs/10-architecture/adr/)`
-- ✅ `[Threat model](/docs/40-security/threat-models/portfolio-app-threat-model.md)`
+- ✅ `[Threat model](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)`
 - ❌ `[roadmap](/docs/portfolio/roadmap)` (missing prefix + extension)
 - ❌ `https://github.com/bryce-seefieldt/portfolio-docs/blob/main/docs/00-portfolio/roadmap.md` (use relative links for internal nav)
 

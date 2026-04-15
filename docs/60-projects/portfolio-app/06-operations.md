@@ -113,13 +113,14 @@ Responsibilities:
 ### Release gates (CI + Staging Validation)
 
 - CI is a hard release gate. Merges and promotions must not proceed if required checks fail.
-- Required checks (by contract): `ci / quality`, `ci / test`, `ci / build`, `ci / link-validation`.
+- Required checks (ruleset/deployment): `ci / quality`, `ci / build`.
+- Pipeline prerequisite checks: `ci / test`, `ci / link-validation`.
 - **Staging validation is required** after merge to main, before production is considered "live".
 - Quality runs `pnpm lint`, `pnpm format:check`, `pnpm typecheck`
 
 ### Performance Monitoring
 
-**Bundle Size Regression Detection:** CI automatically tracks JavaScript bundle size after every build. If total JS exceeds baseline (27.8 MB) by >10%, the build fails and requires investigation before merge. This prevents unreviewed dependencies or code bloat from degrading performance.
+**Bundle Size Regression Detection:** CI automatically tracks JavaScript bundle size after every build. If total JS exceeds baseline (27.8 MB) by > 10%, the build fails and requires investigation before merge. This prevents unreviewed dependencies or code bloat from degrading performance.
 
 **Core Web Vitals Monitoring:** Vercel Analytics dashboard (https://vercel.com/bryce-seefieldt/portfolio-app/analytics) tracks real-world performance metrics from production traffic:
 
@@ -143,8 +144,8 @@ Responsibilities:
 - LCP degradation >500ms: Manual investigation recommended
 - CLS increase >0.05: Manual investigation recommended
 - Test runs:
-  - Unit tests: `pnpm test:unit` (70+ Vitest tests with ≥80% coverage validation)
-  - E2E tests: `pnpm test:e2e` (13 Playwright tests across Chromium, Firefox)
+  - Unit tests: `pnpm test:unit` (Vitest suite with ≥ 80% coverage validation target for `src/lib/`)
+  - E2E tests: `pnpm test:e2e` (Playwright suite across Chromium and Firefox)
 - Link validation runs:
   - Registry validation: `pnpm registry:validate` (checks project metadata schema)
   - Evidence link checks: `pnpm links:check` (Playwright smoke tests)
@@ -365,8 +366,8 @@ Create under `docs/50-operations/runbooks/`:
 
 ## References
 
-- Deployment dossier: `docs/60-projects/portfolio-app/deployment.md`
-- Testing dossier: `docs/60-projects/portfolio-app/testing.md`
+- Deployment dossier: `docs/60-projects/portfolio-app/03-deployment.md`
+- Testing dossier: `docs/60-projects/portfolio-app/05-testing.md`
 - Runbooks index: [docs/50-operations/runbooks/index.md](docs/50-operations/runbooks/index.md)
 - CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 - Postmortem template (internal-only): `docs/_meta/templates/template-postmortem.md`

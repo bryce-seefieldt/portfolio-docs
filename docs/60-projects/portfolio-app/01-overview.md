@@ -184,14 +184,14 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 
 ## Key Metrics (Current Baseline)
 
-- **Lines of code:** ~500 (application), ~600 (tests: 70+ unit tests, 12 E2E tests)
+- **Program status:** Implemented through Phase 7 with active maintenance and continuous improvement.
 - **Routes:** 5 core routes (/, /cv, /projects, /contact, /projects/[slug])
-- **CI checks:** 5 required (quality, secrets-scan, test, build, CodeQL)
-- **Test coverage:** 70+ unit tests (≥80% coverage), 12 E2E tests (100% route coverage)
+- **CI pipeline checks:** quality, test, link-validation, build (with PR-only secrets scanning and separate CodeQL workflow)
+- **Test posture:** automated unit and Playwright suites are enforced in CI and local verification flows
 - **Deployment frequency:** On every merge to main (automatic)
 - **Mean time to rollback:** ~1 minute (Git revert + CI)
 - **Quality gates:** Lint, format, typecheck, registry validation, unit tests, E2E tests, secrets scan, build (all enforced)
-- **Dependencies:** ~17 production, ~15 dev (Dependabot weekly updates)
+- **Dependencies:** actively maintained with Dependabot and CI audit gates
 
 ## Performance Metrics
 
@@ -216,7 +216,7 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 ### Engineering Discipline
 
 - CI quality gates (ESLint max-warnings=0, Prettier, TypeScript strict)
-- Automated unit testing (Vitest: 70+ tests for registry, links, slugs)
+- Automated unit testing (Vitest coverage for registry, links, and slug validation)
 - Automated E2E testing (Playwright: smoke + route coverage across Chromium and Firefox)
 - Secrets scanning (CI gate via TruffleHog; optional pre-commit; local verify uses a lightweight pattern scan)
 - Frozen lockfile installs (deterministic builds)
@@ -251,8 +251,8 @@ Key value: Not just a portfolio site—a working exemplar of how senior engineer
 
 The Portfolio App implements a comprehensive testing pyramid:
 
-- **Unit tests (Vitest):** 70+ tests covering registry validation, link construction, and slug validation
-- **E2E tests (Playwright):** 58 test cases across Chromium + Firefox covering core routes, project slugs, 404s, health/robots/sitemap, and evidence link rendering
+- **Unit tests (Vitest):** coverage for registry validation, link construction, and slug validation
+- **E2E tests (Playwright):** route and evidence-link validation across supported browsers
 - **Coverage targets:** ≥80% for `src/lib/` (utility functions), 100% route coverage for E2E
 - **CI integration:** Tests run on every PR and merge; failures block deployment
 
@@ -267,7 +267,7 @@ All required checks must pass before merge (GitHub Ruleset enforcement):
 3. **Type safety:** TypeScript strict mode (no `any`)
 4. **Build:** Next.js compilation succeeds
 5. **Unit tests:** Vitest suite passes + ≥80% coverage thresholds met
-6. **E2E tests:** Playwright tests pass across Chromium, Firefox (58 tests)
+6. **E2E tests:** Playwright tests pass across Chromium and Firefox
 7. **Secrets:** TruffleHog scans with `--only-verified` flag
 8. **Supply chain:** CodeQL + Dependabot for dependency hygiene
 
@@ -276,15 +276,15 @@ All required checks must pass before merge (GitHub Ruleset enforcement):
 The GitHub Actions workflow orchestrates quality gates with job dependencies:
 
 ```
-quality (lint, format, typecheck)
+quality (lint, format, typecheck, audit)
   ↓
-secrets-scan (TruffleHog --only-verified)
+test (unit + E2E)
   ↓
-test (unit tests + E2E tests)
-  ├─ pnpm test:unit (70+ Vitest tests)
-  └─ pnpm test:e2e (58 E2E tests)
+link-validation (registry + evidence links)
   ↓
-build (Next.js compile + Vercel deploy)
+build (Next.js compile + deployment gate)
+
+PR-only: secrets-scan (TruffleHog)
 ```
 
 All jobs must pass; failures block subsequent stages. Tests are separated into distinct steps for clarity:
