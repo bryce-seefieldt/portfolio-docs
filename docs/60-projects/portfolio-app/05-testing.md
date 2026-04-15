@@ -77,8 +77,8 @@ The `verify` command runs a comprehensive 12-step validation workflow:
 8. **Registry validation**: Ensures project registry schema compliance and data integrity
 9. **Build**: Produces production bundle to catch build-time errors
 10. **Performance verification**: Validates bundle size and cache headers against `docs/performance-baseline.yml`
-11. **Unit tests**: Runs Vitest suite (195 tests across 39 files: lib helpers, API handlers, components, pages, data wrappers, proxy middleware, structured data, observability, security helpers)
-12. **E2E tests**: Runs Playwright suite (66 tests across Chromium + Firefox: smoke + route coverage + metadata endpoints + evidence links + security APIs)
+11. **Unit tests**: Runs the Vitest suite across lib helpers, API handlers, components, pages, data wrappers, proxy middleware, structured data, observability, and security helpers
+12. **E2E tests**: Runs the Playwright suite across Chromium + Firefox for smoke, route coverage, metadata endpoints, evidence links, and security API coverage
 
 **Benefits:**
 
@@ -221,6 +221,8 @@ pnpm format:write  # local fix
 ### Merge gates (GitHub ruleset)
 
 - Required checks: `ci / quality`, `ci / build` (must exist and run to be selectable as required).
+- Pipeline prerequisites: `ci / test`, `ci / link-validation` (must pass for build promotion path to succeed).
+- PR-only security gate: `secrets-scan` runs on pull requests.
 - Checks run on PRs and on pushes to `main` to gate production promotion and keep ruleset enforcement valid.
 - Check naming stability is mandatory; changing names would break required-check enforcement and Vercel promotion alignment.
 
@@ -284,7 +286,7 @@ Playwright coverage includes evidence link resolution and route-level verificati
 
 **Coverage:**
 
-- 66 test cases across 2 browsers (Chromium, Firefox)
+- Multi-browser checks across 2 browsers (Chromium, Firefox)
 - Core routes: `/`, `/cv`, `/projects`, `/contact`
 - Dynamic routes: `/projects/[slug]` (discovered from `/projects`)
 - 404 handling for unknown routes and invalid slugs
@@ -330,7 +332,7 @@ pnpm exec playwright show-report    # View HTML test report
 **Evidence:**
 
 - PR #10: https://github.com/bryce-seefieldt/portfolio-app/pull/10
-- Test runtime: ~30-45 seconds for 66 tests across 2 browsers
+- Test runtime: ~30-45 seconds for the current multi-browser suite
 - Test files: `tests/e2e/smoke.spec.ts`, `tests/e2e/routes.spec.ts`, `tests/e2e/evidence-links.spec.ts`
 - All tests passing in CI and local environments
 
@@ -350,14 +352,14 @@ Unit testing is part of the current quality baseline and enforced in CI.
 
 **Coverage:**
 
-- 195 unit tests across 39 files in `src/lib/`, `src/app/` (pages + API handlers), `src/components/`, `src/data/`, and `src/proxy.ts`
+- Broad unit coverage across `src/lib/`, `src/app/` (pages + API handlers), `src/components/`, `src/data/`, and `src/proxy.ts`
 - All tests passing locally and in CI
 - Code coverage: ≥95% for all source modules tracked by Vitest coverage (current scope: `src/**/*.{ts,tsx}`)
 
 **Local execution:**
 
 ```bash
-pnpm test:unit      # Run all 195 unit tests (CI-like execution)
+pnpm test:unit      # Run unit tests once (CI-like execution)
 pnpm test           # Run tests in watch mode (for development)
 pnpm test:coverage  # Run tests and generate coverage report
 pnpm test:ui        # Visual UI mode for debugging failing tests
@@ -547,7 +549,7 @@ A PR is acceptable when:
   - `ci / quality` (lint, format, typecheck)
   - `ci / build` (build + smoke tests)
 - preview deployment renders as expected
-- E2E tests pass (58/58 test cases, 2 browsers)
+- E2E tests pass across supported browsers
 - no broken evidence links are introduced
 - if behavior changes materially:
   - dossier updated

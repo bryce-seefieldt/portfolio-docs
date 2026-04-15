@@ -102,7 +102,7 @@ pnpm build
 - confirm Vercel build settings align with repo scripts
 - compare preview/prod logs and ensure checks are required for promotion
 
-## Symptom: `secrets:scan` CI stage fails (or appears skipped)
+## Symptom: `secrets-scan` CI job fails (or appears skipped)
 
 ### Likely causes
 
@@ -115,9 +115,9 @@ pnpm build
 **Scope clarification:**
 
 - Local verification does not run TruffleHog. It includes a lightweight pattern-based scan.
-- The TruffleHog-based `secrets:scan` runs automatically in CI on PRs and must pass.
+- The TruffleHog-based `secrets-scan` job runs automatically in CI on PRs and must pass.
 
-**If CI `secrets:scan` fails:**
+**If CI `secrets-scan` fails:**
 
 1. Inspect CI logs for detected strings and file paths.
 2. Remove any real secrets; rotate tokens if exposure occurred.
@@ -181,6 +181,6 @@ pnpm build
 ## References
 
 - Portfolio App dossier hub: `docs/60-projects/portfolio-app/index.md`
-- Testing and gates: `docs/60-projects/portfolio-app/testing.md`
-- Deployment governance: `docs/60-projects/portfolio-app/deployment.md`
+- Testing and gates: `docs/60-projects/portfolio-app/05-testing.md`
+- Deployment governance: `docs/60-projects/portfolio-app/03-deployment.md`
 - Runbooks index: `docs/50-operations/runbooks/index.md`
