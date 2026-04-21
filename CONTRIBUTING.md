@@ -215,6 +215,7 @@ A PR is merge-ready only if:
 2. **Build passes**
    - `pnpm build` succeeds (no broken links; no broken refs)
    - CI workflow `ci / build` passes (GitHub Actions)
+   - CI workflow `ci / policy-consistency` is informational and should be reviewed for drift warnings
 3. **Deployment Checks understanding**
    - Understand that after merge, production deployment is **automatic**
    - Deployment domain assignment is **gated** by **both** Deployment Checks passing (`ci / quality` and `ci / build`)
@@ -252,9 +253,9 @@ pnpm format:write && pnpm lint && pnpm typecheck && pnpm audit && pnpm build
 
 Secrets scanning:
 
-- CI gate runs `secrets:scan` via TruffleHog on PRs.
-- Local verification does not run TruffleHog; a lightweight pattern-based scan is included.
-- Optional local opt-in: enable pre-commit to run TruffleHog automatically:
+- CI policy requires secrets scanning for repositories where a dedicated secrets-scan job is configured.
+- This repository's mandatory merge gates are defined by active CI jobs and protected branch settings.
+- Optional local opt-in: enable pre-commit to run secret scanning automatically:
 
 ```bash
 pip install pre-commit
@@ -266,6 +267,13 @@ For **portfolio-docs**:
 - Recommended: `pnpm verify`
 - Faster iteration: `pnpm verify:quick` (skips the build gate; run `pnpm verify` before opening a PR)
 - Manual equivalent: `pnpm format:write && pnpm lint && pnpm typecheck && pnpm format:check && pnpm audit && pnpm build`
+- Optional policy drift check (non-blocking): `pnpm policy:check`
+
+Policy consistency:
+
+- `pnpm policy:check` is warning-only and designed for fast drift triage.
+- `pnpm policy:check:strict` fails on warnings and is recommended for governance-focused PRs.
+- Approved exceptions are managed in `scripts/policy-consistency-allowlist.txt`.
 
 All checks must pass before opening a PR.
 

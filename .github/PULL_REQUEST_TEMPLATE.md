@@ -22,7 +22,9 @@
 - [ ] `ci / quality` passed (lint, typecheck, format)
 - [ ] `ci / build` passed (Docusaurus build + broken links check)
 - [ ] `codeql` checks passed
+- [ ] `pnpm policy:check` reviewed (non-blocking drift warnings triaged)
 - [ ] Includes closing keyword for linked issue (e.g., Closes #123)
+- Policy warnings triage summary:
 - Links / screenshots / notes:
 
 ## Nav / Structure

@@ -20,7 +20,9 @@
     "format:write": "prettier --write .",
     "audit": "pnpm audit --audit-level=high",
     "verify": "./scripts/verify-docs-local.sh",
-    "verify:quick": "./scripts/verify-docs-local.sh --skip-build"
+    "verify:quick": "./scripts/verify-docs-local.sh --skip-build",
+    "policy:check": "./scripts/policy-consistency-check.sh",
+    "policy:check:strict": "./scripts/policy-consistency-check.sh --strict"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.0",

@@ -318,7 +318,7 @@ trufflesecurity/trufflehog@main \
 
 ```yaml
 env:
-  NEXT_PUBLIC_DOCS_BASE_URL: https://bns-portfolio-docs.vercel.app
+   NEXT_PUBLIC_DOCS_BASE_URL: https://your-docs-domain.example
   NEXT_PUBLIC_GITHUB_URL: https://github.com/bryce-seefieldt/portfolio-app
   NEXT_PUBLIC_DOCS_GITHUB_URL: https://github.com/bryce-seefieldt/portfolio-docs
   NEXT_PUBLIC_SITE_URL: https://bryce-portfolio-app.vercel.app
@@ -458,7 +458,7 @@ pnpm registry:list  # List all projects
 - **Testing Guide**: [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md)
 - **Portfolio App Testing**: [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md)
 - **Portfolio App Architecture**: [docs/60-projects/portfolio-app/02-architecture.md](/docs/60-projects/portfolio-app/02-architecture.md#testing-architecture-stage-33)
-- **Security ADRs**: [docs/architecture/adr/](/docs/architecture/adr/) (CI security decisions)
+- **Security ADRs**: [docs/10-architecture/adr/](/docs/10-architecture/adr/index.md) (CI security decisions)
 - **CI Triage Runbook**: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 
 ## Maintenance & Evolution

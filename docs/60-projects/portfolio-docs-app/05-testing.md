@@ -213,14 +213,14 @@ Quality gates are “working” when:
 - **Lint failure**: Run `pnpm lint:fix` to auto-fix where possible; review ESLint errors and update code to comply
 - **Typecheck failure**: Review TypeScript errors; update types or use `@ts-expect-error` with justification for edge cases
 - **Format failure**: Run `pnpm format:write` to auto-format all files; commit the changes
-- **Build failure due to broken links**: Remove premature links; use path references until the target exists; see [Broken Links Triage runbook](/docs/operations/runbooks/rbk-docs-broken-links-triage)
+- **Build failure due to broken links**: Remove premature links; use path references until the target exists; see [Broken Links Triage runbook](/docs/50-operations/runbooks/rbk-docs-broken-links-triage.md)
 - **Lint rules become noisy**: Adjust rules carefully in `eslint.config.mjs` and document governance changes as a controlled decision (consider ADR if major change)
 - **Formatting drift**: Enforce formatting checks in CI (already configured); ensure contributors run `pnpm format:write` before committing
 
 ## References
 
-- ADR-0004: Expand CI and Deployment Quality Gates: [adr-0004-expand-ci-deploy-quality-gates.md](/docs/architecture/adr/adr-0004-expand-ci-deploy-quality-gates)
+- ADR-0004: Expand CI and Deployment Quality Gates: [adr-0004-expand-ci-deploy-quality-gates.md](/docs/10-architecture/adr/adr-0004-expand-ci-deploy-quality-gates.md)
 - Documentation style guide (internal-only): `docs/_meta/doc-style-guide.md`
 - Contribution rules and PR checklists (repo root): `CONTRIBUTING.md` / `.github/PULL_REQUEST_TEMPLATE.md`
 - Deployment model: [03-deployment.md](./03-deployment.md)
-- Operations runbooks: [rbk-docs-deploy.md](/docs/operations/runbooks/rbk-docs-deploy)
+- Operations runbooks: [rbk-docs-deploy.md](/docs/50-operations/runbooks/rbk-docs-deploy.md)

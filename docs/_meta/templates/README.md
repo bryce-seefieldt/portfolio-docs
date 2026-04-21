@@ -801,11 +801,18 @@ Before marking the issue done:
 
 **App Implementation Example:**
 
-See [STAGE-3.1-APP-ISSUE.MD](/docs/00-portfolio/STAGE-3.1-APP-ISSUE.MD) for a complete example of the App Issue template in use for portfolio-app Stage 3.1.
+See [roadmap issues index](/docs/00-portfolio/roadmap/issues/) for active and completed stage issue records.
 
 **Documentation Example:**
 
-See [STAGE-3.1-DOCS-ISSUE.md](/docs/00-portfolio/STAGE-3.1-DOCS-ISSUE.md) for a complete example of the Docs Issue template in use for portfolio-docs Stage 3.1.
+See [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide/) for a full paired app/docs stage planning example.
+
+### Policy Consistency Requirements
+
+- Use `/docs/...` internal links for rendered docs pages.
+- Use full GitHub blob links for non-rendered files.
+- Do not hardcode production hosts in template examples.
+- Phase/stage temporal guidance belongs in roadmap/issues, not canonical policy docs.
 
 ### Definition of Done (GitHub Issues)
 

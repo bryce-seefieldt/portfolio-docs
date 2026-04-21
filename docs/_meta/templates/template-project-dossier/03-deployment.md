@@ -107,7 +107,7 @@ Both checks must pass for production promotion. This ensures:
 - Documentation builds successfully
 - No broken links or navigation errors
 
-See [ADR-0004](/docs/architecture/adr/adr-0004-expand-ci-deploy-quality-gates) for rationale and [Testing](./05-testing.md) for quality gate details.
+See [ADR-0004](/docs/10-architecture/adr/adr-0004-expand-ci-deploy-quality-gates.md) for rationale and [Testing](./05-testing.md) for quality gate details.
 
 ### Deployment Checks flow
 
