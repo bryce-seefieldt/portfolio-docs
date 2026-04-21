@@ -163,7 +163,7 @@ Perform spot-check navigation on production:
 - [ ] Portfolio section (`/docs/portfolio` or equivalent) accessible
 - [ ] Projects dossier (`/docs/projects`) accessible
 - [ ] Architecture domain (`/docs/architecture`) with sidebar navigation works
-- [ ] Operations runbooks load (`/docs/operations/runbooks`)
+- [ ] Operations runbooks load (`/docs/50-operations/runbooks/`)
 
 ### 6a) Verify security headers (docs hardening)
 

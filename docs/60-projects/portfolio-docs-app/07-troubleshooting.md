@@ -178,15 +178,15 @@ When the site builds successfully locally but fails in production (Vercel), refe
 
 - **Symptom: Site returns 404 or pages are missing**
   - Likely cause: Output directory misconfigured
-  - See: [Output directory mismatch](/docs/operations/runbooks/rbk-docs-deploy#failure-output-directory-mismatch-404-errors-or-missing-pages)
+  - See: [Output directory mismatch](/docs/50-operations/runbooks/rbk-docs-deploy.md#failure-output-directory-mismatch-404-errors-or-missing-pages)
 
 - **Symptom: Build fails with dependency/version errors in Vercel (but passes locally)**
   - Likely cause: pnpm lockfile drift or version mismatch
-  - See: [pnpm lockfile/version mismatch](/docs/operations/runbooks/rbk-docs-deploy#failure-pnpm-lockfile-drift-or-version-mismatch)
+  - See: [pnpm lockfile/version mismatch](/docs/50-operations/runbooks/rbk-docs-deploy.md#failure-pnpm-lockfile-drift-or-version-mismatch)
 
 - **Symptom: Build shows no output or unclear status**
   - Likely cause: Build step ignored or webhook misconfigured
-  - See: [Missing build logs](/docs/operations/runbooks/rbk-docs-deploy#failure-missing-build-logs-or-build-doesnt-start)
+  - See: [Missing build logs](/docs/50-operations/runbooks/rbk-docs-deploy.md#failure-missing-build-logs-or-build-doesnt-start)
 
 ## Failure modes / Troubleshooting
 

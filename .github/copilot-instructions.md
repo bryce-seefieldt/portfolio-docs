@@ -27,6 +27,20 @@ It has two goals:
 
 This repository is a **portfolio artifact** intended to demonstrate enterprise-level engineering discipline: docs-as-code governance, reproducibility, CI quality gates, security hygiene, operational readiness, and decision traceability.
 
+## Governance Tier Model (Canonical)
+
+This repository uses a three-tier policy model to prevent policy drift.
+
+- **Tier A (Mandatory controls):** safety, security, CI gates, publication constraints, and evidence traceability rules. These are non-negotiable.
+- **Tier B (Standards):** authoring and linking conventions that define consistency and reviewer ergonomics.
+- **Tier C (Delivery guidance):** phase/stage-specific implementation guidance, temporary plans, and execution notes.
+
+Rules for tier usage:
+
+- Tier A and Tier B content belongs in this file and the governance charter under `docs/_meta/`.
+- Tier C content MUST NOT live in canonical policy sections; it belongs in roadmap pages, issues, and project execution docs.
+- If a requirement says "MUST" but has no enforcement path (CI check, script check, PR template check, or review checklist), downgrade it to "SHOULD" until enforcement exists.
+
 ---
 
 # Copilot Agent Mission and Responsibilities
@@ -80,7 +94,7 @@ This repository is a **Docusaurus (TypeScript) docs-as-code system** that hosts:
 
 This docs platform is itself a **first-class project** (and the first project dossier entry) and must be treated like a production system.
 
-## Data-driven project registry (Stage 3.1)
+## Data-driven project registry
 
 - Portfolio App now sources projects from a YAML registry; schema and validation rules must be documented and kept in sync.
 - Registry schema reference: [docs/70-reference/registry-schema-guide.md](docs/70-reference/registry-schema-guide.md); decision record: [docs/10-architecture/adr/adr-0011-data-driven-project-registry.md](docs/10-architecture/adr/adr-0011-data-driven-project-registry.md).
@@ -456,14 +470,15 @@ Release timeline narrative belongs in `docs/00-portfolio/release-notes/` (not do
 
 ## Front matter
 
-Every doc MUST include:
+Front matter requirements by scope:
 
-7.  PR discipline: use closing keyword (e.g., Closes #123) when linking issues.
+- **Public docs pages (`docs/**`excluding`docs/\_meta/**`):** MUST include front matter with at least `title`, `description`, and `tags`.
+- **Navigable pages in sidebar categories:** SHOULD include `sidebar_position` when ordering is curated.
+- **Internal templates (`docs/\_meta/templates/**`):\*\* MAY omit front matter when the artifact is a raw template body.
 
-- `description`
-- `tags`
-  When appropriate, include:
-- `sidebar_position`
+PR discipline remains mandatory and separate from front matter rules:
+
+- Use a closing keyword in PR descriptions when linking issues (for example: `Closes #123`).
 
 ## Standard page shape
 
@@ -490,21 +505,24 @@ Exceptions:
 
 ## Linking policy (critical)
 
+**Canonical rule (Tier B):** use env-first URL construction for deployed links and use stable internal `/docs/...` links for cross-page documentation links. Do not hardcode production hostnames in policy or implementation examples, except where an explicit production URL example is required for operational troubleshooting.
+
 ### Internal Links (within portfolio-docs)
 
 - Use **relative paths starting with `/docs/`**
-- **MUST include section prefix numbers:** `./00-portfolio/.` not `./portfolio/.`
-- **MUST include `.md` file extension**
-- Example: `[roadmap.md](/docs/00-portfolio/roadmap/index.md)`
+- Include section prefix numbers in the source path (for example `00-portfolio`, `10-architecture`)
+- Prefer route-style links for rendered pages (for example `/docs/00-portfolio/roadmap/`)
+- `.md` extension links are allowed for legacy content and should be normalized opportunistically
+- Example: `[Roadmap](/docs/00-portfolio/roadmap/)`
 - Do NOT link to pages that do not exist yet
 - Broken links must be fixed immediately; builds should fail when they occur
 
 ### External Links (linking FROM portfolio-app TO portfolio-docs)
 
-- Use **production deployment URL prefix:** `https://bns-portfolio-docs.vercel.app/docs/`
-- Do **NOT include section prefix numbers:** use `/portfolio/` not `/00-portfolio/`
+- Build links with environment variables (for example `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/roadmap"`)
+- Do **NOT** hardcode production hosts in code or templates
 - Do **NOT include `.md` file extension**
-- Example: `https://bns-portfolio-docs.vercel.app/docs/portfolio/roadmap`
+- Example: `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/roadmap"`
 
 ### Repository Links (non-rendered content)
 
@@ -523,7 +541,11 @@ When authoring feature pages, follow the conventions defined in
 
 ## Diagram standards (mandatory)
 
-**ALL diagrams created within `docs/` subdirectories MUST use Mermaid format exclusively — never PNG, SVG, ASCII art, or external tools.**
+Diagram source of truth rules:
+
+- Architecture, workflow, state, and sequence diagrams under `docs/**` MUST use Mermaid source.
+- Static images are allowed for non-diagram assets (for example logos, social preview cards, screenshots, scanned evidence), with clear context and alt text.
+- ASCII diagrams and externally hosted editable diagram links are not allowed as canonical documentation artifacts.
 
 - When adding or updating any diagram, follow the canonical style rules in [docs/70-reference/mermaid-diagram-style-guide.md](docs/70-reference/mermaid-diagram-style-guide.md) to ensure palette, shapes, and layout stay consistent across the site.
 
@@ -618,7 +640,7 @@ flowchart TD
 
 ### Anti-patterns (never do these)
 
-- ❌ Never commit PNG/SVG/image exports — always commit Mermaid source syntax
+- ❌ Never commit image-only architecture diagrams when Mermaid source is feasible
 - ❌ Never use ASCII art or hand-drawn diagrams in source docs
 - ❌ Never create diagrams without surrounding explanation text
 - ❌ Never link to external diagram services (Lucidchart, Draw.io, etc.)
@@ -761,14 +783,14 @@ The Portfolio Docs App uses environment variables to support portability across 
 
 ### Core Variables
 
-| Variable                       | Purpose                       | Local                   | Production                              |
-| ------------------------------ | ----------------------------- | ----------------------- | --------------------------------------- |
-| `DOCUSAURUS_SITE_URL`          | Base URL for SEO, sitemap     | `http://localhost:3000` | `https://bns-portfolio-docs.vercel.app` |
-| `DOCUSAURUS_BASE_URL`          | Subpath (if any)              | `/`                     | `/`                                     |
-| `DOCUSAURUS_GITHUB_ORG`        | GitHub org/user               | your-username           | bryce-seefieldt                         |
-| `DOCUSAURUS_GITHUB_REPO_DOCS`  | Docs repo name                | portfolio-docs          | portfolio-docs                          |
-| `DOCUSAURUS_GITHUB_REPO_APP`   | App repo name (cross-linking) | portfolio-app           | portfolio-app                           |
-| `DOCUSAURUS_PORTFOLIO_APP_URL` | Portfolio App URL             | `http://localhost:3000` | `https://bns-portfolio-app.vercel.app`  |
+| Variable                       | Purpose                       | Local                   | Production                         |
+| ------------------------------ | ----------------------------- | ----------------------- | ---------------------------------- |
+| `DOCUSAURUS_SITE_URL`          | Base URL for SEO, sitemap     | `http://localhost:3000` | `https://your-docs-domain.example` |
+| `DOCUSAURUS_BASE_URL`          | Subpath (if any)              | `/`                     | `/`                                |
+| `DOCUSAURUS_GITHUB_ORG`        | GitHub org/user               | your-username           | bryce-seefieldt                    |
+| `DOCUSAURUS_GITHUB_REPO_DOCS`  | Docs repo name                | portfolio-docs          | portfolio-docs                     |
+| `DOCUSAURUS_GITHUB_REPO_APP`   | App repo name (cross-linking) | portfolio-app           | portfolio-app                      |
+| `DOCUSAURUS_PORTFOLIO_APP_URL` | Portfolio App URL             | `http://localhost:3000` | `https://your-app-domain.example`  |
 
 ### File Structure
 
@@ -812,7 +834,7 @@ When creating URLs inside portfolio-docs source (Markdown/MDX under `docs/`):
 
 - **Docs hub pages using `index.md`:**
   - When constructing **published site URLs**, do **not** include `index.md` in the path.
-  - Example: `docs/00-portfolio/index.md` → published at `https://bns-portfolio-docs.vercel.app/docs/portfolio/` (built as `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/"`).
+  - Example: `docs/00-portfolio/index.md` -> published using `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/"`.
 
 - **Non-hosted files (e.g., `docs/\_meta/**` or any file not rendered by the site):\*\*
   - Link to the GitHub blob URL: `https://github.com/<org>/<repo>/blob/main/<path>`
@@ -911,120 +933,13 @@ Never place internal authoring mechanics into public-facing domains unless expli
 
 ---
 
-# Phase 3 Stage 3.2 — Documentation Work
+# Temporal Guidance Handling (Tier C)
 
-## Overview
+Phase/stage-specific guidance is required for delivery work but is intentionally excluded from canonical policy sections.
 
-Stage 3.2 is the EvidenceBlock component implementation stage (portfolio-app) paired with documentation updates (portfolio-docs).
-
-The app work creates three reusable React components for evidence visualization. The docs work involves:
-
-1. Updating Portfolio App dossier with component architecture details
-2. Ensuring ADRs and runbooks remain aligned
-3. Updating copilot-instructions in portfolio-app with component specs (already done)
-
-## Documentation Tasks for Stage 3.2
-
-### 1. Update Portfolio App Dossier (`docs/60-projects/portfolio-app/`)
-
-**Files to update:**
-
-- `01-overview.md` — Add brief mention of component library introduction
-- `02-architecture.md` — Add new section: "Evidence Visualization Layer (Stage 3.2)"
-
-**Section Content (02-architecture.md):**
-
-Create a new subsection after the registry section:
-
-```markdown
-### Evidence Visualization Layer (Stage 3.2)
-
-**Components:**
-
-Three new React components standardize evidence artifact linking:
-
-- `EvidenceBlock.tsx` — Renders evidence cards (dossier, threat model, ADRs, runbooks, GitHub)
-- `VerificationBadge.tsx` — Status badges indicating evidence completeness (docs-available, threat-model, gold-standard, adr-complete)
-- `BadgeGroup.tsx` — Multi-badge container with conditional rendering based on project evidence
-
-**Integration:**
-
-- Used on `/projects/[slug]` pages to display project evidence trail
-- Allows reviewers to verify evidence availability at a glance
-- Responsive design: mobile (1 col) → tablet (2 cols) → desktop (3 cols)
-
-**Styling:**
-
-- Tailwind CSS 4 with `dark:` mode support
-- Gold Standard badge: amber colors (reference: GoldStandardBadge.tsx)
-- Other evidence badges: blue, violet, indigo (matching evidence type)
-
-**Maintainability:**
-
-- Components accept `project: Project` prop from registry
-- Uses environment-aware URL helpers (`docsUrl()`, `githubUrl()`)
-- No hardcoded links; all evidence paths from `src/data/projects.yml`
-
-**See Also:**
-
-- Component specifications: [`@/app/.github/copilot-instructions.md`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/copilot-instructions.md) (Section 8 — Phase 3 Stage 3.2)
-- Stage 3.2 app issue: [stage-3.2-app-issue](/docs/00-portfolio/roadmap/issues/stage-3.2-app-issue.md) (linked in PR)
-```
-
-### 2. Update Copilot Instructions (Already Done)
-
-The portfolio-app copilot-instructions already received Section 8 updates with full component specifications. No additional docs work needed here.
-
-### 3. Verify Evidence Link Consistency
-
-**Checklist for docs review:**
-
-- [ ] All evidence paths in dossier match `src/data/projects.yml` schema
-- [ ] ADRs and threat models referenced in dossier still exist and are not broken links
-- [ ] Runbook paths are accurate (check against `docs/50-operations/runbooks/` structure)
-- [ ] No new gaps introduced in evidence availability for portfolio-app
-
-### 4. Update Release Notes (Post-Implementation)
-
-**File:** `docs/00-portfolio/release-notes/` (create new entry if needed or update existing draft)
-
-After Stage 3.2 completes, add entry:
-
-```markdown
-## Stage 3.2: Evidence Components (2026-01-XX)
-
-**What changed:**
-
-- Introduced EvidenceBlock component for standardized evidence linking
-- Introduced VerificationBadge component for status indicators
-- Introduced BadgeGroup utility for multi-badge rendering
-- Updated project detail pages (`/projects/[slug]`) to integrate components
-
-**Why:**
-
-- Standardizes how projects display evidence artifacts (dossier, threat model, ADRs, runbooks)
-- Enables reviewers to quickly verify evidence availability
-- Supports gold-standard designation and quality signals
-
-**Impact:**
-
-- All featured project pages now display evidence badges and linked artifacts
-- Responsive design improves mobile UX for evidence discovery
-- Dark mode support for consistent portfolio experience
-
-**Evidence:**
-
-- PR: portfolio-app#XY
-- Components: `src/components/{EvidenceBlock,VerificationBadge,BadgeGroup}.tsx`
-- Dossier update: [Portfolio App Architecture — Evidence Visualization](/docs/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer-stage-32)
-```
-
-## Documentation Quality Standards for Stage 3.2
-
-- Component descriptions must be specific about props, styling, and responsive behavior
-- Evidence link validation is critical: verify all paths resolve when stage is complete
-- Maintain consistency between app and docs: if component props change, dossier documentation must reflect that
-- Use Mermaid diagrams if helpful (e.g., component hierarchy or evidence flow diagram)
+- Place temporal execution details under roadmap content and issue trackers (for example `docs/00-portfolio/roadmap/` and associated issue docs).
+- Keep canonical policy files stable and evergreen.
+- If a temporal section is copied into this file during implementation, remove it before merge and link to its source-of-truth roadmap/issue page.
 
 ---
 

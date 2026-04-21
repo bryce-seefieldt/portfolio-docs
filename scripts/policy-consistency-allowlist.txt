@@ -1,0 +1,14 @@
+# policy-consistency-allowlist.txt
+# Format: <rule>|<regex>
+# Rules: hardcoded-host, legacy-link-path, front-matter, temporal-guidance
+
+# Approved operational and environment contract examples that intentionally reference production hosts.
+hardcoded-host|docs/_meta/env/portfolio-docs-env-contract\.md:
+hardcoded-host|docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation\.md:
+hardcoded-host|docs/50-operations/runbooks/rbk-portfolio-service-degradation\.md:
+
+# Legacy closed-issue archives are excluded from active remediation.
+hardcoded-host|docs/_archive/
+legacy-link-path|docs/_archive/
+legacy-link-path|docs/_meta/policy-drift-remediation-checklist\.md:
+

@@ -1,19 +1,19 @@
+---
 title: 'Roadmap Planning: Issues'
-description: 'Canonical hub for roadmap issue documents used to plan, track, and cross-link Phase/Stage implementation work across the Portfolio App and Docs.'
+description: 'Canonical hub for roadmap issue documents used to plan, track, and cross-link phase and stage implementation work across the Portfolio App and Docs.'
 sidebar_position: 1
 tags:
-[
-portfolio,
-roadmap,
-planning,
-git,
-github,
-issues,
-documentation,
-devops,
-operations,
-]
-
+  [
+    portfolio,
+    roadmap,
+    planning,
+    git,
+    github,
+    issues,
+    documentation,
+    devops,
+    operations,
+  ]
 ---
 
 ## Overview
@@ -29,9 +29,9 @@ Use this index to find the canonical task descriptions, acceptance criteria, and
 ## Authoring Conventions
 
 - Front matter required: title, description, tags.
-- Title format: `Stage X.Y — <scope>` with `(App)` or `(Docs)` when useful.
+- Title format: `Stage X.Y - <scope>` with `(App)` or `(Docs)` when useful.
 - Keep descriptions concise and action-oriented; add tags for phase/stage/app-or-docs.
-- Cross-link the companion issue (App ↔ Docs) and the Phase Implementation Guide.
+- Cross-link the companion issue (App and Docs) and the Phase Implementation Guide.
 
 ## Workflow
 

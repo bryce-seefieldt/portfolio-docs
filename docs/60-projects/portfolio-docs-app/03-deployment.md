@@ -127,12 +127,12 @@ Vercel automatically loads environment variables for the build process. Key vari
 **Required for production promotion:**
 
 ```env
-DOCUSAURUS_SITE_URL=https://bns-portfolio-docs.vercel.app
+DOCUSAURUS_SITE_URL=https://your-docs-domain.example
 DOCUSAURUS_BASE_URL=/
 DOCUSAURUS_GITHUB_ORG=bryce-seefieldt
 DOCUSAURUS_GITHUB_REPO_DOCS=portfolio-docs
 DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
-DOCUSAURUS_PORTFOLIO_APP_URL=https://bns-portfolio-app.vercel.app
+DOCUSAURUS_PORTFOLIO_APP_URL=https://your-app-domain.example
 ```
 
 **Configuration:**
@@ -167,7 +167,7 @@ Both checks must pass for production promotion. This ensures:
 - Documentation builds successfully
 - No broken links or navigation errors
 
-See [ADR-0004](/docs/architecture/adr/adr-0004-expand-ci-deploy-quality-gates) for rationale and [Testing](./05-testing.md) for quality gate details.
+See [ADR-0004](/docs/10-architecture/adr/adr-0004-expand-ci-deploy-quality-gates.md) for rationale and [Testing](./05-testing.md) for quality gate details.
 
 ### Deployment Checks flow
 
