@@ -7,9 +7,5 @@
     "jsx": "react-jsx",
     "skipLibCheck": true
   },
-  "exclude": [
-    ".docusaurus",
-    "build",
-    "node_modules"
-  ]
+  "exclude": [".docusaurus", "build", "node_modules"]
 }
