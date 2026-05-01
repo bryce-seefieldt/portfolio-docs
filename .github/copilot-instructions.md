@@ -176,7 +176,8 @@ This scaffolding is intentional and must remain stable unless governed by an ADR
 - `pnpm build` must pass locally before PR.
 - CI must run `pnpm build` and block merge on failure.
 - Broken internal links must be treated as failures (never “work around” by weakening gates).
-qui
+  qui
+
 ### Dependabot PR CI failures
 
 When a Dependabot PR causes CI job failures (e.g., `ci / quality`, `ci / build`, `ci / policy-consistency`), treat it as a stop-the-line event. Do not merge with failing checks.
