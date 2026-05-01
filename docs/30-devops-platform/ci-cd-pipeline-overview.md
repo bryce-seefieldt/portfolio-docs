@@ -332,6 +332,31 @@ None required for Portfolio App (all config is public)
 
 ## Troubleshooting Common Failures
 
+### Dependabot PR remediation boundaries
+
+Dependabot automation currently auto-formats PRs, but only for formatting drift. Maintainer intervention is still required when a Dependabot PR fails on:
+
+- `typecheck`
+- `lint`
+- `test`
+- `build`
+- `link-validation`
+
+First-responder workflow:
+
+1. identify failing check and step from GitHub Actions logs
+2. checkout the Dependabot PR branch locally
+3. reproduce with repo verification command (`pnpm verify`)
+4. apply minimal fix and push back to the PR branch
+
+Use [Dependabot PR CI Remediation](/docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md) for full command-level procedure.
+
+### Known failure patterns (dependency upgrades)
+
+- TypeScript major updates can fail on deprecated tsconfig options (for example `TS5101` around deprecated `baseUrl` usage).
+- Lockfile formatting is usually auto-healed for Dependabot PRs, but configuration and type-system failures are not.
+- Re-running CI without a code/config fix is only appropriate for transient infrastructure flakes.
+
 ### Quality Job Failures
 
 **ESLint violations**:

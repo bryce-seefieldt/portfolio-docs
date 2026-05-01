@@ -288,7 +288,29 @@ Fix workflow:
 - Re-run locally to confirm fix
 - Push and verify CI passes
 
-#### 4) Validate and push fix
+#### 4) Dependabot PR branch strategy (explicit)
+
+When the failing PR author is `dependabot[bot]`, use this branch workflow:
+
+```bash
+gh pr checkout <PR_NUMBER> --repo bryce-seefieldt/portfolio-app
+pnpm install --frozen-lockfile
+pnpm verify
+```
+
+After applying the fix:
+
+```bash
+git add -A
+git commit -m "fix(ci): resolve Dependabot PR failure"
+git push
+```
+
+If push is rejected, create a maintainer branch from the checked-out state and open a replacement PR that references the Dependabot PR.
+
+For full responder flow and cross-repo check matrix, see [Dependabot PR CI Remediation](/docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md).
+
+#### 5) Validate and push fix
 
 After changes:
 
@@ -302,12 +324,12 @@ pnpm test  # Smoke tests
 
 Commit and push to PR branch.
 
-#### 5) Confirm CI is green and promotion unblocks
+#### 6) Confirm CI is green and promotion unblocks
 
 - Confirm GitHub checks pass.
 - Confirm Vercel promotion gates clear.
 
-#### 6) Prevent recurrence
+#### 7) Prevent recurrence
 
 If the failure mode is likely to repeat:
 

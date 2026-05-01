@@ -41,6 +41,7 @@ Match your scenario to the appropriate runbook:
 | 🔍 Want to understand monitoring setup     | [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md)                    |
 | ⚡ Want to improve performance proactively | [Performance Optimization](/docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md)          |
 | 🔐 CVE alert or dependency vulnerability   | [Dependency Vulnerability Response](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md) |
+| 🤖 Dependabot PR checks are failing        | [Dependabot PR CI Remediation](/docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md)            |
 | 🚨 Suspected secret leak in repo           | [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                 |
 
 ---
@@ -235,6 +236,7 @@ Context: Used during INC-YYYYMMDD-NNN" \
 - `docs/50-operations/runbooks/rbk-portfolio-deploy.md`
 - `docs/50-operations/runbooks/rbk-portfolio-rollback.md`
 - `docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`
+- `docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md`
 - `docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md` — secrets incident response
 - `docs/50-operations/runbooks/rbk-portfolio-project-publish.md` — project publication workflow
 - `docs/50-operations/runbooks/troubleshooting-portfolio-publish.md` — publication troubleshooting
