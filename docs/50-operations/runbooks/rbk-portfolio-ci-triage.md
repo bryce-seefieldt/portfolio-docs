@@ -34,6 +34,42 @@ When any required check fails, this runbook provides deterministic diagnosis and
 
 - failures are unrelated to CI (use relevant operational runbooks)
 
+## Temporary Exception Policy (Dependabot)
+
+Use this section when a dependency-automation update repeatedly fails CI for environmental or tooling compatibility reasons and no safe same-day fix is available.
+
+### Current temporary exception
+
+- Scope: `github-actions` Dependabot updates for `pnpm/action-setup`
+- Ignored range: `>=6.0.0 <7.0.0`
+- Owner: Maintainer on-call
+- Opened: 2026-05-01
+- Review/expiry date: 2026-06-01
+
+### Why this exception exists
+
+- CI fails at `pnpm install --frozen-lockfile` with `ERR_PNPM_BROKEN_LOCKFILE` after the `pnpm/action-setup` v6 update.
+- The same commit installs successfully locally, indicating a CI setup compatibility issue rather than a deterministic project lockfile defect.
+
+### Exit criteria (required to lift ignore)
+
+1. A focused validation PR that bumps `pnpm/action-setup` to v6 passes `ci/quality`, `ci/build`, and `ci/policy-consistency`.
+2. No lockfile parser/install regression appears in reruns for the validation PR.
+3. At least one subsequent merged PR remains green with the upgraded action.
+
+### Immediate reopen triggers
+
+1. New upstream patch/minor release in the ignored major range.
+2. Security advisory affecting the currently pinned action version/SHA.
+3. Expiry date reached without a completed revalidation PR.
+
+### Required tracking actions
+
+1. Open a tracking issue labeled `dependencies` and `ci`.
+2. Link failing run evidence and this runbook section.
+3. Schedule a calendar reminder for the expiry date.
+4. Remove the Dependabot ignore immediately after successful revalidation.
+
 ## Prereqs / Inputs
 
 - Access to GitHub Actions logs for the failing run

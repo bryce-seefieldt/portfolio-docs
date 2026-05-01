@@ -52,6 +52,16 @@ updates:
     labels:
       - 'dependencies'
 
+    # TEMPORARY: v6 currently fails CI install with ERR_PNPM_BROKEN_LOCKFILE
+    # Exit criteria to remove this ignore:
+    # 1) v6 update PR passes ci/quality, ci/build, and ci/policy-consistency
+    # 2) no lockfile parser regression is observed in follow-up validation
+    # 3) re-evaluate on or before 2026-06-01
+    ignore:
+      - dependency-name: 'pnpm/action-setup'
+        versions:
+          - '>=6.0.0 <7.0.0'
+
     groups:
       gha-all:
         patterns:
