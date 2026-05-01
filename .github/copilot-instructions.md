@@ -176,7 +176,18 @@ This scaffolding is intentional and must remain stable unless governed by an ADR
 - `pnpm build` must pass locally before PR.
 - CI must run `pnpm build` and block merge on failure.
 - Broken internal links must be treated as failures (never “work around” by weakening gates).
+### Dependabot PR CI failures
 
+When a Dependabot PR causes CI job failures (e.g., `ci / quality`, `ci / build`, `ci / policy-consistency`), treat it as a stop-the-line event. Do not merge with failing checks.
+
+**Remediation procedure:** Follow [`docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`](../docs/50-operations/runbooks/rbk-portfolio-ci-triage.md) — specifically the **Temporary Exception Policy (Dependabot)** section — for the full diagnosis and resolution procedure, including:
+
+- rollback steps (pin action to prior SHA)
+- how to add a temporary Dependabot ignore rule in `.github/dependabot.yml`
+- exit criteria and expiry tracking required before lifting any exception
+- required tracking issue and calendar reminder
+
+**Current active exception:** `pnpm/action-setup` v6 (github-actions ecosystem) is ignored due to `ERR_PNPM_BROKEN_LOCKFILE` under the GitHub Actions runner. See tracking issue [#103](https://github.com/bryce-seefieldt/portfolio-docs/issues/103). Review/expiry: 2026-06-01.
 ## 6) Public safety rules are mandatory
 
 Never commit or publish:
