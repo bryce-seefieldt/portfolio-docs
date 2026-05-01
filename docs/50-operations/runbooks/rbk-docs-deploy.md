@@ -295,6 +295,49 @@ git commit -m "style: apply prettier formatting"
 
 See [Testing](docs/60-projects/portfolio-docs-app/05-testing.md) for quality gate details.
 
+### Failure: Dependabot PR fails quality/build and needs maintainer patch
+
+**Symptom:**
+
+- A Dependabot PR is open but one or more checks remain red (`ci / quality` and/or `ci / build`)
+- Re-running all jobs does not clear the failure
+
+**Likely cause:**
+
+- Non-format issue not handled by Dependabot auto-format logic (for example typecheck or build configuration break)
+
+**Diagnostics:**
+
+```bash
+gh pr checks <PR_NUMBER> --repo bryce-seefieldt/portfolio-docs
+gh pr checkout <PR_NUMBER> --repo bryce-seefieldt/portfolio-docs
+pnpm install --frozen-lockfile
+pnpm verify
+```
+
+If needed for targeted triage:
+
+```bash
+pnpm lint
+pnpm format:check
+pnpm typecheck
+pnpm build
+pnpm policy:check
+```
+
+**Fix workflow:**
+
+1. Apply the minimal change that resolves the failing step.
+2. Re-run `pnpm verify` locally.
+3. Commit and push directly to the checked-out Dependabot branch.
+4. Confirm checks are green in GitHub before merge.
+
+**Known pattern example:**
+
+- TypeScript upgrade failures (for example `TS5101` deprecation errors) can require tsconfig migration updates rather than application code changes.
+
+For end-to-end bot PR recovery procedure, see [Dependabot PR CI Remediation](/docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md).
+
 ### Failure: Output directory mismatch (404 errors or missing pages)
 
 **Symptom:**

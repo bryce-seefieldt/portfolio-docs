@@ -208,12 +208,15 @@ Runbooks should be your first reference during:
 
 ### Maintenance Runbooks
 
-| Runbook                                                         | Purpose                                       | MTTR Target | Severity |
-| --------------------------------------------------------------- | --------------------------------------------- | ----------- | -------- |
-| **[Portfolio Archival Procedure](./rbk-portfolio-archival.md)** | Deprecate or archive portfolio content safely | N/A         | Low      |
+| Runbook                                                                   | Purpose                                         | MTTR Target | Severity |
+| ------------------------------------------------------------------------- | ----------------------------------------------- | ----------- | -------- |
+| **[Dependabot PR CI Remediation](./rbk-dependabot-pr-ci-remediation.md)** | Diagnose and patch failing Dependabot PR checks | 30 minutes  | SEV-3    |
+| **[Portfolio Archival Procedure](./rbk-portfolio-archival.md)**           | Deprecate or archive portfolio content safely   | N/A         | Low      |
 
 **When to use:**
 
+- Dependabot PR has failing CI checks and needs maintainer patching
+- A dependency-update PR passes locally for Dependabot formatting but fails on typecheck, test, or build
 - Retiring portfolio content while preserving evidence links
 - Documenting deprecation and archival actions
 

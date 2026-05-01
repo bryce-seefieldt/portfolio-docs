@@ -75,7 +75,7 @@ The Portfolio Docs App is deployed to **Vercel** with the following workflow:
 
 - **Preview deployments** for all PR branches (one per PR)
 - **Production deployment** from `main` (automatic on merge)
-- **Deployment Checks** gate: production domain is assigned only after GitHub Actions `ci / build` checks pass
+- **Deployment Checks** gate: production domain is assigned only after GitHub Actions `ci / quality` and `ci / build` checks pass
 - **Build determinism** via Corepack and pinned pnpm version (`package.json#packageManager: "pnpm@10.0.0"`)
 
 **Learn more:**
@@ -84,6 +84,7 @@ The Portfolio Docs App is deployed to **Vercel** with the following workflow:
 - [Portfolio Docs Deployment Model](./docs/60-projects/portfolio-docs-app/03-deployment.md) (dossier page)
 - [Deploy Runbook](./docs/50-operations/runbooks/rbk-docs-deploy.md) (step-by-step deployment guide)
 - [Rollback Runbook](./docs/50-operations/runbooks/rbk-docs-rollback.md) (emergency recovery)
+- [Dependabot PR CI Remediation Runbook](./docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md) (failing dependency-update PR workflow)
 
 ### Local build and test
 
