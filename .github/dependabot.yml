@@ -59,8 +59,6 @@ updates:
     # 3) re-evaluate on or before 2026-06-01
     ignore:
       - dependency-name: 'pnpm/action-setup'
-        versions:
-          - '>=6.0.0 <7.0.0'
 
     groups:
       gha-all:
