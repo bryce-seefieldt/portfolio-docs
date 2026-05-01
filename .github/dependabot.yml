@@ -57,6 +57,7 @@ updates:
     # 1) v6 update PR passes ci/quality, ci/build, and ci/policy-consistency
     # 2) no lockfile parser regression is observed in follow-up validation
     # 3) re-evaluate on or before 2026-06-01
+    # Tracking issue: #103
     ignore:
       - dependency-name: 'pnpm/action-setup'
 
