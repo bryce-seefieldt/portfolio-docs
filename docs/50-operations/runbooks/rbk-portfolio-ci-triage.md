@@ -45,6 +45,7 @@ Use this section when a dependency-automation update repeatedly fails CI for env
 - Owner: Maintainer on-call
 - Opened: 2026-05-01
 - Review/expiry date: 2026-06-01
+- Tracking issue: [#103](https://github.com/bryce-seefieldt/portfolio-docs/issues/103)
 
 ### Why this exception exists
 
@@ -65,7 +66,7 @@ Use this section when a dependency-automation update repeatedly fails CI for env
 
 ### Required tracking actions
 
-1. Open a tracking issue labeled `dependencies` and `ci`.
+1. Open a tracking issue labeled `documentation` and `enhancement`.
 2. Link failing run evidence and this runbook section.
 3. Schedule a calendar reminder for the expiry date.
 4. Remove the Dependabot ignore immediately after successful revalidation.
