@@ -63,6 +63,6 @@ Document known limitations and intentional omissions to keep expectations clear 
 
 ## References
 
-- Roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
-- Release notes: [/docs/00-portfolio/release-notes/index.md](/docs/00-portfolio/release-notes/index.md)
-- Portfolio index: [/docs/00-portfolio/index.md](/docs/00-portfolio/index.md)
+- Roadmap: [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md)
+- Release notes: [/docs/00-portfolio/release-notes/index.md](/00-portfolio/release-notes/index.md)
+- Portfolio index: [/docs/00-portfolio/index.md](/00-portfolio/index.md)

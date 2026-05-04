@@ -73,6 +73,6 @@ Use semantic versioning (SemVer): `vMAJOR.MINOR.PATCH`.
 
 ## References
 
-- Release notes: [/docs/00-portfolio/release-notes/index.md](/docs/00-portfolio/release-notes/index.md)
-- Roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
-- ADR-0017: [/docs/10-architecture/adr/adr-0017-portfolio-versioning-and-lifecycle.md](/docs/10-architecture/adr/adr-0017-portfolio-versioning-and-lifecycle.md)
+- Release notes: [/docs/00-portfolio/release-notes/index.md](/00-portfolio/release-notes/index.md)
+- Roadmap: [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md)
+- ADR-0017: [/docs/10-architecture/adr/adr-0017-portfolio-versioning-and-lifecycle.md](/10-architecture/adr/adr-0017-portfolio-versioning-and-lifecycle.md)

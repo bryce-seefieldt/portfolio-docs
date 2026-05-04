@@ -38,10 +38,10 @@ Provide a repeatable, evidence-first checklist to validate claims across the Por
 
 **Evidence to verify:**
 
-- Portfolio App dossier: [/docs/60-projects/portfolio-app/index.md](/docs/60-projects/portfolio-app/index.md)
-- ADR index: [/docs/10-architecture/adr/index.md](/docs/10-architecture/adr/index.md)
-- Threat models: [/docs/40-security/threat-models/index.md](/docs/40-security/threat-models/index.md)
-- Runbooks: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
+- Portfolio App dossier: [/docs/60-projects/portfolio-app/index.md](/60-projects/portfolio-app/index.md)
+- ADR index: [/docs/10-architecture/adr/index.md](/10-architecture/adr/index.md)
+- Threat models: [/docs/40-security/threat-models/index.md](/40-security/threat-models/index.md)
+- Runbooks: [/docs/50-operations/runbooks/index.md](/50-operations/runbooks/index.md)
 
 ### 2) Testing and CI claims
 
@@ -51,9 +51,9 @@ Provide a repeatable, evidence-first checklist to validate claims across the Por
 
 **Evidence to verify:**
 
-- CI pipeline overview: [/docs/30-devops-platform/ci-cd-pipeline-overview.md](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
-- Testing guide: [/docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md)
-- Portfolio App testing dossier: [/docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md)
+- CI pipeline overview: [/docs/30-devops-platform/ci-cd-pipeline-overview.md](/30-devops-platform/ci-cd-pipeline-overview.md)
+- Testing guide: [/docs/70-reference/testing-guide.md](/70-reference/testing-guide.md)
+- Portfolio App testing dossier: [/docs/60-projects/portfolio-app/05-testing.md](/60-projects/portfolio-app/05-testing.md)
 
 ### 3) Security and operations claims
 
@@ -63,9 +63,9 @@ Provide a repeatable, evidence-first checklist to validate claims across the Por
 
 **Evidence to verify:**
 
-- Security dossier: [/docs/60-projects/portfolio-app/04-security.md](/docs/60-projects/portfolio-app/04-security.md)
-- Threat models: [/docs/40-security/threat-models/index.md](/docs/40-security/threat-models/index.md)
-- Runbooks: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
+- Security dossier: [/docs/60-projects/portfolio-app/04-security.md](/60-projects/portfolio-app/04-security.md)
+- Threat models: [/docs/40-security/threat-models/index.md](/40-security/threat-models/index.md)
+- Runbooks: [/docs/50-operations/runbooks/index.md](/50-operations/runbooks/index.md)
 
 ### 4) Documentation integrity
 
@@ -75,9 +75,9 @@ Provide a repeatable, evidence-first checklist to validate claims across the Por
 
 **Evidence to verify:**
 
-- Roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
-- Release notes: [/docs/00-portfolio/release-notes/index.md](/docs/00-portfolio/release-notes/index.md)
-- Dossier contract: [/docs/60-projects/index.md](/docs/60-projects/index.md)
+- Roadmap: [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md)
+- Release notes: [/docs/00-portfolio/release-notes/index.md](/00-portfolio/release-notes/index.md)
+- Dossier contract: [/docs/60-projects/index.md](/60-projects/index.md)
 
 ## Validation / Expected outcomes
 
@@ -93,6 +93,6 @@ Provide a repeatable, evidence-first checklist to validate claims across the Por
 
 ## References
 
-- Roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
-- Testing guide: [/docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md)
+- Roadmap: [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md)
+- Testing guide: [/docs/70-reference/testing-guide.md](/70-reference/testing-guide.md)
 - Dossier template: [/docs/\_meta/templates/template-project-dossier/](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/templates/template-project-dossier/)

@@ -10,7 +10,7 @@ tags:
 **Type:** Documentation / ADR / Reference  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.4  
-**Linked Issue:** [stage-3-4-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-4-app-issue.md)  
+**Linked Issue:** [stage-3-4-app-issue.md](/00-portfolio/roadmap/issues/stage-3-4-app-issue.md)  
 **Duration Estimate:** 3–4 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-22  
@@ -162,8 +162,8 @@ tags: [adr, architecture, phase-3, registry, data-driven]
 
 #### Section 6: Implementation
 
-- Implementation guide: [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
-- Schema reference: [Registry Schema Guide](/docs/70-reference/registry-schema-guide.md)
+- Implementation guide: [Phase 3 Implementation Guide](/00-portfolio/roadmap/phase-3-implementation-guide.md)
+- Schema reference: [Registry Schema Guide](/70-reference/registry-schema-guide.md)
 - Related components: EvidenceBlock, VerificationBadge (Stage 3.2)
 
 ---
@@ -466,8 +466,8 @@ This stage is complete and ready to deploy when:
 
 ## References & Related Issues
 
-- **Companion app issue:** [Stage 3.4: ADRs & Documentation — App Implementation](/docs/00-portfolio/roadmap/issues/stage-3-4-app-issue.md)
-- **Parent guide:** [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
+- **Companion app issue:** [Stage 3.4: ADRs & Documentation — App Implementation](/00-portfolio/roadmap/issues/stage-3-4-app-issue.md)
+- **Parent guide:** [Phase 3 Implementation Guide](/00-portfolio/roadmap/phase-3-implementation-guide.md)
 - **Predecessor stages:**
   - Stage 3.1: Data-Driven Registry (complete)
   - Stage 3.2: Evidence Components (complete)

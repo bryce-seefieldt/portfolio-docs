@@ -83,7 +83,7 @@ tags: [portfolio, features, documentation, reviewer]
 
 ### Additional internal references
 
-- [`/20-engineering/ux-design-system.md`](/docs/20-engineering/ux-design-system.md)
+- [`/20-engineering/ux-design-system.md`](/20-engineering/ux-design-system.md)
 
 ### External reference links
 

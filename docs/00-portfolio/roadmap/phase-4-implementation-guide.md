@@ -1131,13 +1131,13 @@ pnpm start                      # Local dev server
 
 ## Reference Documentation
 
-- [Roadmap — Portfolio Program](/docs/00-portfolio/roadmap/index.md)
-- [Phase 3 Implementation Guide (predecessor)](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
-- [Architecture Decision Records (ADRs)](/docs/10-architecture/adr/index.md)
+- [Roadmap — Portfolio Program](/00-portfolio/roadmap/index.md)
+- [Phase 3 Implementation Guide (predecessor)](/00-portfolio/roadmap/phase-3-implementation-guide.md)
+- [Architecture Decision Records (ADRs)](/10-architecture/adr/index.md)
 - [Project Dossier Template](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/templates/template-project-dossier/)
 - [Runbook Template](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/templates/template-runbook.md)
 - [Threat Model Template](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/templates/template-threat-model.md)
-- [Performance Guide (TBD)](/docs/70-reference/index.md)
+- [Performance Guide (TBD)](/70-reference/index.md)
 
 ---
 

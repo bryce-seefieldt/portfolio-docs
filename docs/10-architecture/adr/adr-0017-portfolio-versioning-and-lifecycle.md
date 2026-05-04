@@ -96,6 +96,6 @@ Key points:
 
 ## References
 
-- Versioning policy: [/docs/00-portfolio/portfolio-versioning-policy.md](/docs/00-portfolio/portfolio-versioning-policy.md)
-- Archival policy: [/docs/00-portfolio/portfolio-archival-policy.md](/docs/00-portfolio/portfolio-archival-policy.md)
-- Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/docs/00-portfolio/portfolio-change-intake.md)
+- Versioning policy: [/docs/00-portfolio/portfolio-versioning-policy.md](/00-portfolio/portfolio-versioning-policy.md)
+- Archival policy: [/docs/00-portfolio/portfolio-archival-policy.md](/00-portfolio/portfolio-archival-policy.md)
+- Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/00-portfolio/portfolio-change-intake.md)

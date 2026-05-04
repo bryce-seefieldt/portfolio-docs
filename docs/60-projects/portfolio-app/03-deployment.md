@@ -5,7 +5,7 @@ sidebar_position: 3
 tags: [projects, deployment, cicd, vercel, github-actions, governance]
 ---
 
-**Deployment posture:** Three-tier deployment model (Preview → Staging → Production) with staging domain mapping; CI quality/build/test gates; Vercel Deployment Checks; GitHub Ruleset protection on main and staging branches (see [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)).
+**Deployment posture:** Three-tier deployment model (Preview → Staging → Production) with staging domain mapping; CI quality/build/test gates; Vercel Deployment Checks; GitHub Ruleset protection on main and staging branches (see [rbk-vercel-setup-and-promotion-validation.md](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) and [rbk-portfolio-deploy.md](/50-operations/runbooks/rbk-portfolio-deploy.md)).
 
 ## Purpose
 
@@ -431,7 +431,7 @@ git merge main
 git push origin staging
 ```
 
-See [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md) for detailed rollback procedures.
+See [rbk-portfolio-rollback.md](/50-operations/runbooks/rbk-portfolio-rollback.md) for detailed rollback procedures.
 
 ### Staging Branch Maintenance
 

@@ -51,12 +51,12 @@ This runbook implements the decision in [ADR-0007: Host Portfolio App on Vercel 
 
 ### Key constants (from documentation)
 
-| Item                          | Value                                                                               | Reference                                                           |
-| ----------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| **Required CI checks**        | `ci / quality`, `ci / build`                                                        | [CI workflow](/docs/70-reference/portfolio-app-config-reference.md) |
-| **Environment variables**     | See Environment Variable Contract (`/docs/_meta/env/portfolio-app-env-contract.md`) | `.env.example` in repo                                              |
-| **Docs base URL (local dev)** | `http://localhost:3001`                                                             | Portfolio Docs local default                                        |
-| **Documentation repo URL**    | (URL of portfolio-docs Vercel deployment)                                           | To be determined during setup                                       |
+| Item                          | Value                                                                               | Reference                                                      |
+| ----------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| **Required CI checks**        | `ci / quality`, `ci / build`                                                        | [CI workflow](/70-reference/portfolio-app-config-reference.md) |
+| **Environment variables**     | See Environment Variable Contract (`/docs/_meta/env/portfolio-app-env-contract.md`) | `.env.example` in repo                                         |
+| **Docs base URL (local dev)** | `http://localhost:3001`                                                             | Portfolio Docs local default                                   |
+| **Documentation repo URL**    | (URL of portfolio-docs Vercel deployment)                                           | To be determined during setup                                  |
 
 ## Procedure / Content
 
@@ -770,7 +770,7 @@ NEXT_PUBLIC_DOCS_GITHUB_URL=https://github.com/bryce-seefieldt/portfolio-docs
 ## Related artifacts
 
 - [ADR-0007: Portfolio App Hosting on Vercel](docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
-- [Portfolio App Deployment Dossier](/docs/60-projects/portfolio-app/03-deployment.md)
-- [Portfolio App Config Reference](/docs/70-reference/portfolio-app-config-reference.md)
+- [Portfolio App Deployment Dossier](/60-projects/portfolio-app/03-deployment.md)
+- [Portfolio App Config Reference](/70-reference/portfolio-app-config-reference.md)
 - Portfolio App Environment Contract (`/docs/_meta/env/portfolio-app-env-contract.md`)
-- [CI Triage Runbook](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- [CI Triage Runbook](/50-operations/runbooks/rbk-portfolio-ci-triage.md)

@@ -17,20 +17,20 @@ Phase 4 is complete. The portfolio now demonstrates enterprise-grade operational
 
 # Added
 
-- Observability & Health Checks guide: [/docs/30-devops-platform/observability-health-checks.md](/docs/30-devops-platform/observability-health-checks.md)
-- UX design system guide: [/docs/20-engineering/ux-design-system.md](/docs/20-engineering/ux-design-system.md)
-- SEO metadata reference: [/docs/70-reference/seo-metadata-guide.md](/docs/70-reference/seo-metadata-guide.md)
-- Theme system reference: [/docs/70-reference/theme-system-reference.md](/docs/70-reference/theme-system-reference.md)
+- Observability & Health Checks guide: [/docs/30-devops-platform/observability-health-checks.md](/30-devops-platform/observability-health-checks.md)
+- UX design system guide: [/docs/20-engineering/ux-design-system.md](/20-engineering/ux-design-system.md)
+- SEO metadata reference: [/docs/70-reference/seo-metadata-guide.md](/70-reference/seo-metadata-guide.md)
+- Theme system reference: [/docs/70-reference/theme-system-reference.md](/70-reference/theme-system-reference.md)
 - ADRs for dark mode, metadata strategy, and scroll animations:
-  - [/docs/10-architecture/adr/adr-0014-class-based-dark-mode.md](/docs/10-architecture/adr/adr-0014-class-based-dark-mode.md)
-  - [/docs/10-architecture/adr/adr-0015-metadata-strategy.md](/docs/10-architecture/adr/adr-0015-metadata-strategy.md)
-  - [/docs/10-architecture/adr/adr-0016-scroll-animations.md](/docs/10-architecture/adr/adr-0016-scroll-animations.md)
+  - [/docs/10-architecture/adr/adr-0014-class-based-dark-mode.md](/10-architecture/adr/adr-0014-class-based-dark-mode.md)
+  - [/docs/10-architecture/adr/adr-0015-metadata-strategy.md](/10-architecture/adr/adr-0015-metadata-strategy.md)
+  - [/docs/10-architecture/adr/adr-0016-scroll-animations.md](/10-architecture/adr/adr-0016-scroll-animations.md)
 
 # Changed
 
 - Portfolio dossier updated for Phase 4 features and evidence links:
-  - [/docs/60-projects/portfolio-app/01-overview.md](/docs/60-projects/portfolio-app/01-overview.md)
-  - [/docs/60-projects/portfolio-app/02-architecture.md](/docs/60-projects/portfolio-app/02-architecture.md)
+  - [/docs/60-projects/portfolio-app/01-overview.md](/60-projects/portfolio-app/01-overview.md)
+  - [/docs/60-projects/portfolio-app/02-architecture.md](/60-projects/portfolio-app/02-architecture.md)
 - Operations and security references updated to new observability and security locations
 
 # Removed

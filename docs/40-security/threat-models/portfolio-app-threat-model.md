@@ -412,8 +412,8 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
 
 ### Production availability issue
 
-1. Follow [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
-2. Use [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md) if needed
+1. Follow [rbk-portfolio-ci-triage.md](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+2. Use [rbk-portfolio-rollback.md](/50-operations/runbooks/rbk-portfolio-rollback.md) if needed
 3. Post-incident: Review and update runbooks
 
 ---
@@ -422,25 +422,25 @@ STRIDE categories: **S**poofing (identity), **T**ampering (data integrity), **R*
 
 ### Portfolio App Dossier
 
-- [Security](/docs/60-projects/portfolio-app/04-security.md)
-- [Deployment](/docs/60-projects/portfolio-app/03-deployment.md)
-- [Architecture](/docs/60-projects/portfolio-app/02-architecture.md)
+- [Security](/60-projects/portfolio-app/04-security.md)
+- [Deployment](/60-projects/portfolio-app/03-deployment.md)
+- [Architecture](/60-projects/portfolio-app/02-architecture.md)
 
 ### Architecture Decision Records (ADRs)
 
-- [ADR-0005: Portfolio App Stack (Next.js + TypeScript)](/docs/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md)
-- [ADR-0006: Separate Portfolio App from Evidence Engine (Docs)](/docs/10-architecture/adr/adr-0006-separate-portfolio-app-from-evidence-engine-docs.md)
-- [ADR-0007: Portfolio App Hosting (Vercel) with Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+- [ADR-0005: Portfolio App Stack (Next.js + TypeScript)](/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md)
+- [ADR-0006: Separate Portfolio App from Evidence Engine (Docs)](/10-architecture/adr/adr-0006-separate-portfolio-app-from-evidence-engine-docs.md)
+- [ADR-0007: Portfolio App Hosting (Vercel) with Promotion Checks](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
 
 ### Operational Runbooks
 
 60-projects/portfolio-app
 
-- [Deploy](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
-- [Rollback](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
-- [CI Triage](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- [Deploy](/50-operations/runbooks/rbk-portfolio-deploy.md)
+- [Rollback](/50-operations/runbooks/rbk-portfolio-rollback.md)
+- [CI Triage](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 
 ### Phase 2 Planning
 
-- [Roadmap](/docs/00-portfolio/roadmap/index.md)
-- [Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
+- [Roadmap](/00-portfolio/roadmap/index.md)
+- [Implementation Guide](/00-portfolio/roadmap/phase-2-implementation-guide.md)

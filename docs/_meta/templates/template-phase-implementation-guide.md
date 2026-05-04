@@ -386,10 +386,10 @@ pnpm start                      # Local dev server
 ## Reference Documentation
 
 - [Roadmap — Phase [X]]([link])
-- [Architecture Decision Records (ADRs)](/docs/10-architecture/adr/index.md)
-- [Project Dossier Template](/docs/_meta/templates/template-project-dossier/)
-- [Runbook Template](/docs/_meta/templates/template-runbook.md)
-- [Threat Model Template](/docs/_meta/templates/template-threat-model.md)
+- [Architecture Decision Records (ADRs)](/10-architecture/adr/index.md)
+- [Project Dossier Template](/_meta/templates/template-project-dossier/)
+- [Runbook Template](/_meta/templates/template-runbook.md)
+- [Threat Model Template](/_meta/templates/template-threat-model.md)
 
 ---
 

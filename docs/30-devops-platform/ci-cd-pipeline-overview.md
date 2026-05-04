@@ -400,7 +400,7 @@ First-responder workflow:
 3. reproduce with repo verification command (`pnpm verify`)
 4. apply minimal fix and push back to the PR branch
 
-Use [Dependabot PR CI Remediation](/docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md) for full command-level procedure.
+Use [Dependabot PR CI Remediation](/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md) for full command-level procedure.
 
 ### Known failure patterns (dependency upgrades)
 
@@ -540,11 +540,11 @@ pnpm registry:list  # List all projects
 
 ## Related Documentation
 
-- **Testing Guide**: [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md)
-- **Portfolio App Testing**: [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md)
-- **Portfolio App Architecture**: [docs/60-projects/portfolio-app/02-architecture.md](/docs/60-projects/portfolio-app/02-architecture.md#testing-architecture-stage-33)
-- **Security ADRs**: [docs/10-architecture/adr/](/docs/10-architecture/adr/index.md) (CI security decisions)
-- **CI Triage Runbook**: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- **Testing Guide**: [docs/70-reference/testing-guide.md](/70-reference/testing-guide.md)
+- **Portfolio App Testing**: [docs/60-projects/portfolio-app/05-testing.md](/60-projects/portfolio-app/05-testing.md)
+- **Portfolio App Architecture**: [docs/60-projects/portfolio-app/02-architecture.md](/60-projects/portfolio-app/02-architecture.md#testing-architecture-stage-33)
+- **Security ADRs**: [docs/10-architecture/adr/](/10-architecture/adr/index.md) (CI security decisions)
+- **CI Triage Runbook**: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 
 ## Maintenance & Evolution
 

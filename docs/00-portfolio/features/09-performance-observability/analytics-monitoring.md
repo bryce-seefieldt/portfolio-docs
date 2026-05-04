@@ -81,7 +81,7 @@ tags: [portfolio, features, observability, analytics]
 
 ### Additional internal references
 
-- [`/30-devops-platform/observability-health-checks.md`](/docs/30-devops-platform/observability-health-checks.md)
+- [`/30-devops-platform/observability-health-checks.md`](/30-devops-platform/observability-health-checks.md)
 
 ### External reference links
 

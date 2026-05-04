@@ -398,4 +398,4 @@ Automatic scanning on all PRs using TruffleHog:
 - [Content Security Policy (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
 - [Next.js Security Headers](https://nextjs.org/docs/app/api-reference/next-config-js/headers)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- [Threat Model: Portfolio App](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)
+- [Threat Model: Portfolio App](/40-security/threat-models/portfolio-app-threat-model-v2.md)

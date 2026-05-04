@@ -247,7 +247,7 @@ grep -r "localhost:3000" build/  # Should appear if DOCUSAURUS_SITE_URL is local
 - Repository root: `.env.example` (canonical contract)
 - Docusaurus config: `docusaurus.config.ts` (implementation)
 - Docusaurus docs: [Using Environment Variables](https://docusaurus.io/docs/deployment#using-environment-variables)
-- Portfolio App env contract: [portfolio-app-env-contract.md](/docs/_meta/env/portfolio-app-env-contract.md)
+- Portfolio App env contract: [portfolio-app-env-contract.md](/_meta/env/portfolio-app-env-contract.md)
 
 ---
 

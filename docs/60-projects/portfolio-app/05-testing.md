@@ -537,7 +537,7 @@ After running `pnpm test:coverage`:
 
 #### Evidence Links
 
-- **Test Guide:** [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md#unit-testing-with-vitest)
+- **Test Guide:** [docs/70-reference/testing-guide.md](/70-reference/testing-guide.md#unit-testing-with-vitest)
 - **PR #XX:** Stage 3.3 unit tests implementation
 - **Configuration:** `vitest.config.ts`
 

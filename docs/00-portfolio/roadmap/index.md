@@ -147,7 +147,7 @@ Ensure the Documentation App is a credible enterprise evidence engine with stron
 
 ## Phase 1 — Portfolio App foundation (production-quality skeleton)
 
-**Status:** ✅ Complete (2026-01-17) — see [Phase 1 Implementation Guide](/docs/00-portfolio/roadmap/phase-1-implementation-guide.md)
+**Status:** ✅ Complete (2026-01-17) — see [Phase 1 Implementation Guide](/00-portfolio/roadmap/phase-1-implementation-guide.md)
 
 ### Objective
 
@@ -185,7 +185,7 @@ Stand up the Portfolio App with enterprise-grade SDLC controls and a minimal, po
 
 ## Phase 2 — “Gold standard” project and credibility baseline
 
-**Status:** ✅ Complete (2026-01-21) — see [Phase 2 Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
+**Status:** ✅ Complete (2026-01-21) — see [Phase 2 Implementation Guide](/00-portfolio/roadmap/phase-2-implementation-guide.md)
 
 ### Objective
 
@@ -271,7 +271,7 @@ Beyond baseline Phase 1, Phase 2 includes optional hardening controls that stren
 - ✅ STRIDE compliance report generated
 - ✅ All controls integrated into PR workflow
 
-## See [Phase 2 Implementation Guide — STEP 4a/4b](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md#step-4a-phase-2-security-enhancements-hardening-controls--23-hours) for detailed procedures.
+## See [Phase 2 Implementation Guide — STEP 4a/4b](/00-portfolio/roadmap/phase-2-implementation-guide.md#step-4a-phase-2-security-enhancements-hardening-controls--23-hours) for detailed procedures.
 
 ## Phase 3 — Repeatable project publishing pipeline (scale without chaos)
 
@@ -310,7 +310,7 @@ Make adding projects predictable, low-friction, and consistent with governance.
 
 ## Phase 4 — Reliability, performance, and security hardening (enterprise maturity)
 
-**Status:** ✅ Complete (2026-01-30) — see [Phase 4 Implementation Guide](/docs/00-portfolio/roadmap/phase-4-implementation-guide.md) and [Release Note: Phase 4 Completion](/docs/00-portfolio/release-notes/20260130-portfolio-app-phase-4-complete.md)
+**Status:** ✅ Complete (2026-01-30) — see [Phase 4 Implementation Guide](/00-portfolio/roadmap/phase-4-implementation-guide.md) and [Release Note: Phase 4 Completion](/00-portfolio/release-notes/20260130-portfolio-app-phase-4-complete.md)
 
 ### Deliverables (Portfolio App)
 

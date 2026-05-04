@@ -20,7 +20,7 @@ tags:
 **Type:** Testing / Quality Assurance  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.3  
-**Linked Issue:** [stage-3-3-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-docs-issue.md)  
+**Linked Issue:** [stage-3-3-docs-issue.md](/00-portfolio/roadmap/issues/stage-3-3-docs-issue.md)  
 **Duration Estimate:** 4–6 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-22  

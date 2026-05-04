@@ -14,7 +14,7 @@ This guide configures GitHub branch protection **rulesets** to enforce:
 - Block force-push and branch deletion
 - Automatic stale review dismissal
 
-This implements the governance model described in [ADR-0008: Portfolio App CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md).
+This implements the governance model described in [ADR-0008: Portfolio App CI Quality Gates](/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md).
 
 ## Prerequisites
 
@@ -213,10 +213,10 @@ Click **"Create"** to save the ruleset.
 
 ## Related Artifacts
 
-- [ADR-0008: Portfolio App CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)
-- [ADR-0007: Portfolio App Hosting on Vercel](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
-- [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
-- [Portfolio App Deployment Dossier](/docs/60-projects/portfolio-app/03-deployment.md)
+- [ADR-0008: Portfolio App CI Quality Gates](/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)
+- [ADR-0007: Portfolio App Hosting on Vercel](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+- [Vercel Setup Runbook](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
+- [Portfolio App Deployment Dossier](/60-projects/portfolio-app/03-deployment.md)
 - [GitHub Rulesets Documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets)
 
 ---

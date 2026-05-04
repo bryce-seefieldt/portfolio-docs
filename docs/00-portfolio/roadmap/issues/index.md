@@ -41,6 +41,6 @@ Use this index to find the canonical task descriptions, acceptance criteria, and
 
 ## See Also
 
-- Roadmap hub: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
-- Phase 3 Implementation Guide: [/docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
-- Phase 4 Implementation Guide: [/docs/00-portfolio/roadmap/phase-4-implementation-guide.md](/docs/00-portfolio/roadmap/phase-4-implementation-guide.md)
+- Roadmap hub: [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md)
+- Phase 3 Implementation Guide: [/docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/00-portfolio/roadmap/phase-3-implementation-guide.md)
+- Phase 4 Implementation Guide: [/docs/00-portfolio/roadmap/phase-4-implementation-guide.md](/00-portfolio/roadmap/phase-4-implementation-guide.md)

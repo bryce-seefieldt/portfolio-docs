@@ -270,6 +270,6 @@ pnpm verify
 
 - React2Shell report: `/tmp/react2shell-report.md`
 - React2Shell hardening research: `/tmp/react2shell-hardening-research.md`
-- Security policies: [/docs/40-security/security-policies.md](/docs/40-security/security-policies.md)
-- Risk register: [/docs/40-security/risk-register.md](/docs/40-security/risk-register.md)
-- Portfolio App security controls: [/docs/40-security/portfolio-app-security-controls.md](/docs/40-security/portfolio-app-security-controls.md)
+- Security policies: [/docs/40-security/security-policies.md](/40-security/security-policies.md)
+- Risk register: [/docs/40-security/risk-register.md](/40-security/risk-register.md)
+- Portfolio App security controls: [/docs/40-security/portfolio-app-security-controls.md](/40-security/portfolio-app-security-controls.md)

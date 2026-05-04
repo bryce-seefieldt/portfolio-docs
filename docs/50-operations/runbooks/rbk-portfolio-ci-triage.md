@@ -371,7 +371,7 @@ git push
 
 If push is rejected, create a maintainer branch from the checked-out state and open a replacement PR that references the Dependabot PR.
 
-For full responder flow and cross-repo check matrix, see [Dependabot PR CI Remediation](/docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md).
+For full responder flow and cross-repo check matrix, see [Dependabot PR CI Remediation](/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md).
 
 #### 5) Validate and push fix
 

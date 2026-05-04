@@ -138,7 +138,7 @@ Runbooks should be your first reference during:
 
 ### How to Use Runbooks During an Incident
 
-1. **Identify the scenario** — Match symptoms to runbook using the [Incident Response Handbook](/docs/50-operations/incident-response/incident-handbook.md)
+1. **Identify the scenario** — Match symptoms to runbook using the [Incident Response Handbook](/50-operations/incident-response/incident-handbook.md)
 2. **Follow steps sequentially** — Don't skip steps unless explicitly told to
 3. **Track progress** — Check off completed steps, note timestamps
 4. **Escalate when indicated** — Follow escalation procedures if MTTR target missed
@@ -222,9 +222,9 @@ Runbooks should be your first reference during:
 
 ### Operational Readiness
 
-| Document                                                                                  | Purpose                                         | Audience                    |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------------- |
-| **[Observability & Monitoring](/docs/30-devops-platform/observability-health-checks.md)** | Health checks, logging, monitoring architecture | Developers, DevOps, On-call |
+| Document                                                                             | Purpose                                         | Audience                    |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------- | --------------------------- |
+| **[Observability & Monitoring](/30-devops-platform/observability-health-checks.md)** | Health checks, logging, monitoring architecture | Developers, DevOps, On-call |
 
 ---
 
@@ -232,4 +232,4 @@ Runbooks should be your first reference during:
 
 For severity guidance, quick selectors, and operational patterns, use the incident handbook:
 
-- [Incident Response Handbook](/docs/50-operations/incident-response/incident-handbook.md)
+- [Incident Response Handbook](/50-operations/incident-response/incident-handbook.md)

@@ -946,10 +946,10 @@ A reviewer can validate Phase 1 completion through:
    - Check environment variables are applied (links to docs resolve)
 
 3. **Documentation Evidence:**
-   - Review [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md)
-   - Review [ADR-0005](/docs/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md), [ADR-0006](/docs/10-architecture/adr/adr-0006-separate-portfolio-app-from-evidence-engine-docs.md), [ADR-0007](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
-   - Review [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
-   - Review [Operational Runbooks](/docs/50-operations/runbooks/index.md)
+   - Review [Portfolio App Dossier](/60-projects/portfolio-app/index.md)
+   - Review [ADR-0005](/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md), [ADR-0006](/10-architecture/adr/adr-0006-separate-portfolio-app-from-evidence-engine-docs.md), [ADR-0007](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+   - Review [Threat Model](/40-security/threat-models/portfolio-app-threat-model.md)
+   - Review [Operational Runbooks](/50-operations/runbooks/index.md)
 
 4. **Governance Validation:**
    - Create test PR in portfolio-app
@@ -1026,9 +1026,9 @@ With Phase 1 establishing production infrastructure and governance, Phase 2 will
 
 ### Planning Documents
 
-- **Phase 2 Implementation Guide:** [/docs/00-portfolio/roadmap/phase-2-implementation-guide.md](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
-- **Roadmap (Phase 2 section):** [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md#phase-2--gold-standard-project-and-credibility-baseline)
-- **ADR-0010:** [Portfolio App as Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+- **Phase 2 Implementation Guide:** [/docs/00-portfolio/roadmap/phase-2-implementation-guide.md](/00-portfolio/roadmap/phase-2-implementation-guide.md)
+- **Roadmap (Phase 2 section):** [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md#phase-2--gold-standard-project-and-credibility-baseline)
+- **ADR-0010:** [Portfolio App as Gold Standard Exemplar](/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
 
 ---
 
@@ -1036,25 +1036,25 @@ With Phase 1 establishing production infrastructure and governance, Phase 2 will
 
 Quick troubleshooting reference for Phase 1 implementation:
 
-| Problem                                    | Quick Fix                                                                                           | Detailed Guide                                                                                                            |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| **Vercel waits for checks indefinitely**   | Verify `ci.yml` runs on `push: [main]` and check names match exactly (`ci / quality`, `ci / build`) | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
-| **Preview deployment fails**               | Verify Node version (20.x) and pnpm version (9+) match in Vercel settings                           | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
-| **Evidence links broken in preview**       | Verify `NEXT_PUBLIC_DOCS_BASE_URL` is set for Preview scope in Vercel                               | [Portfolio App Dossier - Deployment](/docs/60-projects/portfolio-app/03-deployment.md)                                    |
-| **Merge button disabled when checks pass** | Verify GitHub Ruleset is **Active** (not Evaluate/Disabled)                                         | [portfolio-app-github-ruleset-config.md](/docs/70-reference/portfolio-app-github-ruleset-config.md)                       |
-| **CI checks don't appear in PR**           | Wait 3–5 minutes; verify `.github/workflows/ci.yml` exists and is valid; check Actions tab          | [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)                                     |
-| **Environment variables not applied**      | Trigger manual redeploy in Vercel after saving environment variables                                | [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
-| **Production promotion doesn't trigger**   | Verify Deployment Checks are scoped to Production only; check CI passed before merge                | [ADR-0007](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)                      |
+| Problem                                    | Quick Fix                                                                                           | Detailed Guide                                                                                                       |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Vercel waits for checks indefinitely**   | Verify `ci.yml` runs on `push: [main]` and check names match exactly (`ci / quality`, `ci / build`) | [rbk-vercel-setup-and-promotion-validation.md](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Preview deployment fails**               | Verify Node version (20.x) and pnpm version (9+) match in Vercel settings                           | [rbk-vercel-setup-and-promotion-validation.md](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Evidence links broken in preview**       | Verify `NEXT_PUBLIC_DOCS_BASE_URL` is set for Preview scope in Vercel                               | [Portfolio App Dossier - Deployment](/60-projects/portfolio-app/03-deployment.md)                                    |
+| **Merge button disabled when checks pass** | Verify GitHub Ruleset is **Active** (not Evaluate/Disabled)                                         | [portfolio-app-github-ruleset-config.md](/70-reference/portfolio-app-github-ruleset-config.md)                       |
+| **CI checks don't appear in PR**           | Wait 3–5 minutes; verify `.github/workflows/ci.yml` exists and is valid; check Actions tab          | [rbk-portfolio-ci-triage.md](/50-operations/runbooks/rbk-portfolio-ci-triage.md)                                     |
+| **Environment variables not applied**      | Trigger manual redeploy in Vercel after saving environment variables                                | [rbk-vercel-setup-and-promotion-validation.md](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
+| **Production promotion doesn't trigger**   | Verify Deployment Checks are scoped to Production only; check CI passed before merge                | [ADR-0007](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)                      |
 
 ---
 
 ## Related Documentation
 
-- **Roadmap:** [Portfolio Web Application Roadmap](/docs/00-portfolio/roadmap/index.md)
-- **Phase 2 Implementation Guide:** [Phase 2: Gold Standard Project](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
-- **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/index.md)
-- **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/index.md)
-- **Runbooks Index:** [Operations Runbooks](/docs/50-operations/runbooks/index.md)
+- **Roadmap:** [Portfolio Web Application Roadmap](/00-portfolio/roadmap/index.md)
+- **Phase 2 Implementation Guide:** [Phase 2: Gold Standard Project](/00-portfolio/roadmap/phase-2-implementation-guide.md)
+- **Portfolio App Dossier:** [Project Portfolio App](/60-projects/portfolio-app/index.md)
+- **ADR Index:** [Architecture Decision Records](/10-architecture/adr/index.md)
+- **Runbooks Index:** [Operations Runbooks](/50-operations/runbooks/index.md)
 
 ---
 

@@ -672,23 +672,23 @@ tags: [operations, runbooks, procedures, incident-response]
 
 **Deployment Runbooks**
 
-- [Deployment Failure Recovery](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md) — Detect and rollback failed deployments (MTTR: 5 min)
+- [Deployment Failure Recovery](/50-operations/runbooks/rbk-portfolio-deployment-failure.md) — Detect and rollback failed deployments (MTTR: 5 min)
 - Redeployment Procedures -`/docs/50-operations/runbooks/rbk-portfolio-redeployment.md` — Manual deployment commands and verification (future)
 
 **Incident Response Runbooks**
 
-- [General Incident Response Framework](/docs/50-operations/runbooks/rbk-portfolio-incident-response.md) — Framework for all incidents (severity levels, triage, postmortem)
-- [Service Degradation](/docs/50-operations/runbooks/rbk-portfolio-service-degradation.md) — Diagnose and resolve performance/availability issues (MTTR: 10 min)
+- [General Incident Response Framework](/50-operations/runbooks/rbk-portfolio-incident-response.md) — Framework for all incidents (severity levels, triage, postmortem)
+- [Service Degradation](/50-operations/runbooks/rbk-portfolio-service-degradation.md) — Diagnose and resolve performance/availability issues (MTTR: 10 min)
 - Security Incident Response - `/docs/50-operations/runbooks/rbk-portfolio-security-incident.md` — Detect and respond to security issues (future)
 
 **Performance & Optimization Runbooks**
 
-- [Performance Optimization](/docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md) — Proactive performance tuning and optimization
-- [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md) — Diagnose and fix performance problems
+- [Performance Optimization](/50-operations/runbooks/rbk-portfolio-performance-optimization.md) — Proactive performance tuning and optimization
+- [Performance Troubleshooting](/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md) — Diagnose and fix performance problems
 
 **Operational Readiness**
 
-- [Observability & Monitoring](/docs/30-devops-platform/observability-health-checks.md) — Health checks, logging, monitoring architecture
+- [Observability & Monitoring](/30-devops-platform/observability-health-checks.md) — Health checks, logging, monitoring architecture
 
 #### Section 3: Quick Reference (Severity-Based)
 

@@ -85,7 +85,7 @@ Start with **portfolio-app** as the gold standard. Rationale:
 
 **Action items:**
 
-1. ✅ **Decision documented in ADR-0010** — see [ADR-0010: Portfolio App as Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+1. ✅ **Decision documented in ADR-0010** — see [ADR-0010: Portfolio App as Gold Standard Exemplar](/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
    - Portfolio App selected as the exemplary project
    - Rationale, consequences, and implementation approach documented
    - Alternatives considered and rejected
@@ -803,8 +803,8 @@ git config core.hooksPath .git/hooks  # One-time setup
 
 **Threat Model Alignment:**
 
-- Ref: [Threat Model — Information Disclosure](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-1-attacker-exfiltrates-secrets-from-environment-or-repository)
-- Ref: [Threat Model — Tampering](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-modifies-ci-workflows-or-build-scripts-to-inject-malicious-code)
+- Ref: [Threat Model — Information Disclosure](/40-security/threat-models/portfolio-app-threat-model.md#threat-1-attacker-exfiltrates-secrets-from-environment-or-repository)
+- Ref: [Threat Model — Tampering](/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-modifies-ci-workflows-or-build-scripts-to-inject-malicious-code)
 
 **Success check:**
 
@@ -849,7 +849,7 @@ git config core.hooksPath .git/hooks  # One-time setup
 
 **Threat Model Alignment:**
 
-- Ref: [Threat Model — Incident Response](/docs/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
+- Ref: [Threat Model — Incident Response](/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
 - Covers: Information Disclosure (T1) response
 - Covers: Suspected malicious deployment response (T2)
 
@@ -898,13 +898,13 @@ This section summarizes all Phase 2 security and operational hardening applied t
 
 ### Operational Hardening
 
-- ✅ **Secrets incident response runbook** created: [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)
+- ✅ **Secrets incident response runbook** created: [rbk-portfolio-secrets-incident.md](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)
   - 5-phase response procedure: Detection → Containment → Eradication → Recovery → Postmortem
   - Aligned with STRIDE threat model mitigations
 - ✅ **Existing runbooks verified** for operational readiness:
-  - [rbk-portfolio-deploy.md](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
-  - [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
-  - [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+  - [rbk-portfolio-deploy.md](/50-operations/runbooks/rbk-portfolio-deploy.md)
+  - [rbk-portfolio-rollback.md](/50-operations/runbooks/rbk-portfolio-rollback.md)
+  - [rbk-portfolio-ci-triage.md](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 
 ### Evidence Artifacts
 
@@ -912,8 +912,8 @@ This section summarizes all Phase 2 security and operational hardening applied t
 - **Pre-commit Config:** [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml)
 - **Package Scripts:** [package.json](https://github.com/bryce-seefieldt/portfolio-app/blob/main/package.json)
 - **Smoke Tests:** [tests/e2e/smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts)
-- **Threat Model:** [Portfolio App STRIDE](/docs/40-security/threat-models/portfolio-app-threat-model.md)
-- **All Runbooks:** [Operations Runbooks Index](/docs/50-operations/runbooks/index.md)
+- **Threat Model:** [Portfolio App STRIDE](/40-security/threat-models/portfolio-app-threat-model.md)
+- **All Runbooks:** [Operations Runbooks Index](/50-operations/runbooks/index.md)
 
 ---
 
@@ -988,11 +988,11 @@ git push origin feat/my-feature
 
 ## Rollback
 
-If an issue is discovered post-deployment, see [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md).
+If an issue is discovered post-deployment, see [rbk-portfolio-rollback.md](/50-operations/runbooks/rbk-portfolio-rollback.md).
 
 ## Troubleshooting
 
-- Checks fail: See [rbk-portfolio-ci-triage.md](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- Checks fail: See [rbk-portfolio-ci-triage.md](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 - Preview doesn't update: Refresh Vercel dashboard or wait 2 minutes
 
 ````
@@ -1528,7 +1528,7 @@ export default function CVPage() {
 
 **Completion notes:**
 
-- Release note published: [20260120-portfolio-app-phase-2-gold-standard.md](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+- Release note published: [20260120-portfolio-app-phase-2-gold-standard.md](/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
 
 release-notes/20260120-portfolio-app-phase-2-gold-standard.md(/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
 
@@ -1657,8 +1657,8 @@ The Phase 2 release is valid when:
 
 ## Architecture & Governance References
 
-- [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md) (location TBD during implementation)
-- [Threat Model: Portfolio App](/docs/40-security/threat-models/) (location TBD during implementation)
+- [Portfolio App Dossier](/60-projects/portfolio-app/index.md) (location TBD during implementation)
+- [Threat Model: Portfolio App](/40-security/threat-models/) (location TBD during implementation)
 - Operational runbooks (created during Phase 2):
   - Deploy runbook
   - CI triage runbook
@@ -1864,11 +1864,11 @@ A reviewer can validate Phase 2 completion through:
    - Click evidence links to docs; verify they resolve correctly
 
 3. **Documentation Evidence:**
-   - Review [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md)
-   - Review [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
-   - Review [ADR-0010](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
-   - Review [Operational Runbooks](/docs/50-operations/runbooks/index.md)
-   - Review [Release Notes](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+   - Review [Portfolio App Dossier](/60-projects/portfolio-app/index.md)
+   - Review [Threat Model](/40-security/threat-models/portfolio-app-threat-model.md)
+   - Review [ADR-0010](/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+   - Review [Operational Runbooks](/50-operations/runbooks/index.md)
+   - Review [Release Notes](/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
 
 4. **Automated Tests:**
    - Clone portfolio-app repo
@@ -1898,11 +1898,11 @@ A reviewer can validate Phase 2 completion through:
 
 **Evidence:**
 
-- [STRIDE compliance report](/docs/40-security/threat-models/portfolio-app-stride-compliance-report.md)
-- [Threat model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+- [STRIDE compliance report](/40-security/threat-models/portfolio-app-stride-compliance-report.md)
+- [Threat model](/40-security/threat-models/portfolio-app-threat-model.md)
 - [CI workflow](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml) (quality, secrets-scan, build, tests)
 - [Pre-commit config](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) (TruffleHog)
-- [Runbooks](/docs/50-operations/runbooks/index.md) (deploy, rollback, CI triage, secrets incident)
+- [Runbooks](/50-operations/runbooks/index.md) (deploy, rollback, CI triage, secrets incident)
 
 ---
 
@@ -2005,21 +2005,21 @@ With Phase 2 establishing credibility through one exemplary project, Phase 3 wil
 
 ### Planning Documents
 
-- **Phase 3 Implementation Guide:** [/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md))
-- **Roadmap (Phase 3 section):** [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md#phase-3--repeatable-project-publishing-pipeline-scale-without-chaos)
+- **Phase 3 Implementation Guide:** [/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)](/00-portfolio/roadmap/phase-3-implementation-guide.md))
+- **Roadmap (Phase 3 section):** [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md#phase-3--repeatable-project-publishing-pipeline-scale-without-chaos)
 
 ---
 
 ## Related Documentation
 
-- **Roadmap:** [Portfolio Web Application Roadmap](/docs/00-portfolio/roadmap/index.md)
-- **Phase 1 Implementation Guide:** [Phase 1: Portfolio App Foundation](/docs/00-portfolio/roadmap/phase-1-implementation-guide.md)
-- **ADR-0010:** [Portfolio App as Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
-- **Phase 2 Release Notes:** [20260119 Portfolio App Phase 2 Complete](/docs/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
-- **Portfolio App Dossier:** [Project Portfolio App](/docs/60-projects/portfolio-app/index.md)
-- **Threat Model:** [Portfolio App Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model.md)
-- **Runbooks Index:** [Operations Runbooks](/docs/50-operations/runbooks/index.md)
-- **ADR Index:** [Architecture Decision Records](/docs/10-architecture/adr/index.md)
+- **Roadmap:** [Portfolio Web Application Roadmap](/00-portfolio/roadmap/index.md)
+- **Phase 1 Implementation Guide:** [Phase 1: Portfolio App Foundation](/00-portfolio/roadmap/phase-1-implementation-guide.md)
+- **ADR-0010:** [Portfolio App as Gold Standard Exemplar](/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+- **Phase 2 Release Notes:** [20260119 Portfolio App Phase 2 Complete](/00-portfolio/release-notes/20260120-portfolio-app-phase-2-gold-standard.md)
+- **Portfolio App Dossier:** [Project Portfolio App](/60-projects/portfolio-app/index.md)
+- **Threat Model:** [Portfolio App Threat Model](/40-security/threat-models/portfolio-app-threat-model.md)
+- **Runbooks Index:** [Operations Runbooks](/50-operations/runbooks/index.md)
+- **ADR Index:** [Architecture Decision Records](/10-architecture/adr/index.md)
 
 ---
 
