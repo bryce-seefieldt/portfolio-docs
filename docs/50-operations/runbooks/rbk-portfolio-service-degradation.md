@@ -263,14 +263,14 @@ Access logs to find error patterns:
 
 Categorize errors by pattern to identify root cause:
 
-| Error Pattern                    | Likely Cause                            | Root Cause Category                 |
-| -------------------------------- | --------------------------------------- | ----------------------------------- |
-| `Cannot load PROJECTS registry`  | Empty or corrupted `projects.yml`       | **Category A: Data Issue**          |
-| `NEXT_PUBLIC_* variable missing` | Environment variable not set            | **Category B: Configuration Issue** |
+| Error Pattern                           | Likely Cause                                                          | Root Cause Category                 |
+| --------------------------------------- | --------------------------------------------------------------------- | ----------------------------------- |
+| `Cannot load PROJECTS registry`         | Empty or corrupted `projects.yml`                                     | **Category A: Data Issue**          |
+| `NEXT_PUBLIC_* variable missing`        | Environment variable not set                                          | **Category B: Configuration Issue** |
 | `508 INFINITE_LOOP_DETECTED` on `/docs` | `DOCS_UPSTREAM_URL` set to app's own domain, or `vercel.json` missing | **Category B: Configuration Issue** |
-| `Timeout calling external API`   | Slow/unavailable external dependency    | **Category D: External Dependency** |
-| `Out of memory` / `ETIMEDOUT`    | Resource exhaustion (CPU/memory limits) | **Category C: Resource Issue**      |
-| `Module not found`               | Missing dependency or build failure     | **Category B: Configuration Issue** |
+| `Timeout calling external API`          | Slow/unavailable external dependency                                  | **Category D: External Dependency** |
+| `Out of memory` / `ETIMEDOUT`           | Resource exhaustion (CPU/memory limits)                               | **Category C: Resource Issue**      |
+| `Module not found`                      | Missing dependency or build failure                                   | **Category B: Configuration Issue** |
 
 #### Step 3: Identify Root Cause Category
 

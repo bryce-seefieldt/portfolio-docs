@@ -199,8 +199,14 @@ The Portfolio App serves documentation at `/docs/*` via Vercel edge-layer rewrit
 ```json
 {
   "rewrites": [
-    { "source": "/docs", "destination": "https://bns-portfolio-docs.vercel.app/docs" },
-    { "source": "/docs/:path*", "destination": "https://bns-portfolio-docs.vercel.app/docs/:path*" }
+    {
+      "source": "/docs",
+      "destination": "https://bns-portfolio-docs.vercel.app/docs"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "https://bns-portfolio-docs.vercel.app/docs/:path*"
+    }
   ]
 }
 ```
@@ -212,6 +218,7 @@ The Portfolio App serves documentation at `/docs/*` via Vercel edge-layer rewrit
 - The docs origin (`bns-portfolio-docs.vercel.app`) is not a secret and is safe to hardcode.
 
 **Do not:**
+
 - Set `DOCS_UPSTREAM_URL` in Vercel — this variable is deprecated and unused.
 - Add `/docs` rewrites back to `next.config.ts` — this caused the production loop incident.
 
