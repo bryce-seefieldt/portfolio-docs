@@ -372,7 +372,7 @@ env:
    NEXT_PUBLIC_DOCS_BASE_URL: https://your-docs-domain.example
   NEXT_PUBLIC_GITHUB_URL: https://github.com/bryce-seefieldt/portfolio-app
   NEXT_PUBLIC_DOCS_GITHUB_URL: https://github.com/bryce-seefieldt/portfolio-docs
-  NEXT_PUBLIC_SITE_URL: https://bryce-portfolio-app.vercel.app
+  NEXT_PUBLIC_SITE_URL: https://bns-portfolio.vercel.app
 ```
 
 **Rationale**: Non-sensitive public URLs used for registry interpolation during CI builds
