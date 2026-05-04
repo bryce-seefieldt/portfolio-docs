@@ -219,6 +219,11 @@ vercel env ls --scope production
 # - NEXT_PUBLIC_GITHUB_URL
 # - NEXT_PUBLIC_DOCS_BASE_URL
 # - NEXT_PUBLIC_SITE_URL
+#
+# NOTE: DOCS_UPSTREAM_URL should NOT be present — it is deprecated.
+# /docs routing is handled by vercel.json edge rewrites (no env var needed).
+# If DOCS_UPSTREAM_URL is set to bryce.seefieldt.ca, delete it immediately
+# as it will cause INFINITE_LOOP_DETECTED (508) errors on /docs routes.
 ```
 
 **Mitigation:** Revert env var to previous value if suspected cause, then redeploy.
@@ -262,6 +267,7 @@ Categorize errors by pattern to identify root cause:
 | -------------------------------- | --------------------------------------- | ----------------------------------- |
 | `Cannot load PROJECTS registry`  | Empty or corrupted `projects.yml`       | **Category A: Data Issue**          |
 | `NEXT_PUBLIC_* variable missing` | Environment variable not set            | **Category B: Configuration Issue** |
+| `508 INFINITE_LOOP_DETECTED` on `/docs` | `DOCS_UPSTREAM_URL` set to app's own domain, or `vercel.json` missing | **Category B: Configuration Issue** |
 | `Timeout calling external API`   | Slow/unavailable external dependency    | **Category D: External Dependency** |
 | `Out of memory` / `ETIMEDOUT`    | Resource exhaustion (CPU/memory limits) | **Category C: Resource Issue**      |
 | `Module not found`               | Missing dependency or build failure     | **Category B: Configuration Issue** |
