@@ -15,13 +15,14 @@ tags: [portfolio, features, testing, e2e]
 ### In scope
 
 - route coverage across core pages
-- evidence link checks
+- evidence link DOM presence and non-empty `href` validation (remote URL reachability is not asserted)
 - metadata endpoints where applicable
 
 ### Out of scope
 
 - unit test logic
 - performance budgets
+- live external URL reachability assertions (handled by a separate monitor)
 
 ## Prereqs / Inputs
 
@@ -40,13 +41,14 @@ tags: [portfolio, features, testing, e2e]
 ### Feature in action
 
 - Where to see it working: `pnpm test:e2e` in the app repo.
+- Related live monitor: `pnpm links:check:external` (scheduled/on-demand workflow, non-blocking for PRs).
 
 ### Confirmation Process
 
 #### Manual
 
 - Steps: Run `pnpm test:e2e` locally or against staging.
-- What to look for: All routes pass, evidence links resolve.
+- What to look for: All routes return HTTP < 400; evidence link elements render in the DOM with non-empty `href` attributes (remote URL reachability is not asserted by the test suite).
 - Artifacts or reports to inspect: Playwright HTML report on failures.
 
 #### Tests
@@ -98,11 +100,13 @@ tags: [portfolio, features, testing, e2e]
 
 ## Validation / Expected outcomes
 
-- E2E tests pass for core routes and evidence links.
+- E2E tests pass for core routes (HTTP < 400) and API endpoints.
+- Evidence link elements render in the DOM with non-empty `href` attributes; remote connectivity to the docs site or GitHub is **not** verified by the test suite.
 
 ## Failure modes / Troubleshooting
 
 - Browser failures: reinstall Playwright browsers or use CI runners.
+- External URL outage/noise: use the external-link monitor results for triage, not PR-blocking E2E failures.
 
 ## References
 

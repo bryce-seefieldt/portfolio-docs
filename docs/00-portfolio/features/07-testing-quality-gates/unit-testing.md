@@ -8,7 +8,7 @@ tags: [portfolio, features, testing, unit]
 ## Purpose
 
 - Feature name: Unit testing
-- Why this feature exists: Validate core logic such as registry validation and link construction.
+- Why this feature exists: Validate core logic such as registry validation and link URL string construction (not remote reachability).
 
 ## Scope
 

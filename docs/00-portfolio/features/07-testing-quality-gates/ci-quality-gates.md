@@ -17,11 +17,13 @@ tags: [portfolio, features, testing, quality]
 - lint, format, and typecheck gates
 - audit policy for high/critical vulnerabilities
 - required checks naming stability
+- deterministic required checks for PR merge confidence
 
 ### Out of scope
 
 - unit and E2E test execution (covered in separate features)
 - deployment checks and promotion
+- live third-party connectivity checks that can fail due to external uptime/rate limits
 
 ## Prereqs / Inputs
 
@@ -34,12 +36,13 @@ tags: [portfolio, features, testing, quality]
 
 - Feature name: CI quality gates
 - Feature group: Testing and quality gates
-- Technical summary: Enforces linting, formatting, typechecking, and audit policy on every PR.
+- Technical summary: Enforces linting, formatting, typechecking, and audit policy on every PR with deterministic required checks.
 - Low-tech summary: Prevents low-quality changes from merging.
 
 ### Feature in action
 
 - Where to see it working: GitHub Actions checks on PRs and main.
+- Related monitor: `external-link-monitor` workflow runs scheduled/on-demand live checks for external evidence URLs (non-blocking by design).
 
 ### Confirmation Process
 
@@ -100,6 +103,7 @@ tags: [portfolio, features, testing, quality]
 ## Validation / Expected outcomes
 
 - Quality checks run on every PR and block merge on failure.
+- Live external evidence-link connectivity is monitored separately and does not destabilize required PR checks.
 
 ## Failure modes / Troubleshooting
 

@@ -32,7 +32,8 @@ Define how testing and quality gate features are documented and validated.
 
 - local verification should mirror CI gates
 - coverage thresholds must be stated and enforced
-- E2E coverage must include core routes and evidence links
+- E2E coverage must include core routes and evidence link DOM/href assertions
+- live external evidence-link connectivity checks should run as scheduled/on-demand monitoring, not required PR gates
 - unit test coverage scope must include all source modules, excluding tests and setup-only files
 
 ## Validation / Expected outcomes
