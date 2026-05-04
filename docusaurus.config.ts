@@ -15,8 +15,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url:
-    process.env.DOCUSAURUS_SITE_URL || 'https://bryce.seefieldt.ca',
+  url: process.env.DOCUSAURUS_SITE_URL || 'https://bryce.seefieldt.ca',
   // Set the /<baseUrl>/ pathname under which your site is served
   // Docs are served at /docs/ under the main portfolio domain.
   // Override with DOCUSAURUS_BASE_URL env var (e.g. '/' for standalone preview).
@@ -33,8 +32,7 @@ const config: Config = {
   // Custom fields for cross-repository linking
   customFields: {
     portfolioAppUrl:
-      process.env.DOCUSAURUS_PORTFOLIO_APP_URL ||
-      'https://bryce.seefieldt.ca',
+      process.env.DOCUSAURUS_PORTFOLIO_APP_URL || 'https://bryce.seefieldt.ca',
     githubOrgUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}`,
     githubRepoDocsUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}`,
     githubRepoAppUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_APP || 'portfolio-app'}`,
