@@ -15,7 +15,7 @@ tags: [portfolio, features, testing, e2e]
 ### In scope
 
 - route coverage across core pages
-- evidence link checks
+- evidence link DOM presence and non-empty `href` validation (remote URL reachability is not asserted)
 - metadata endpoints where applicable
 
 ### Out of scope
@@ -46,7 +46,7 @@ tags: [portfolio, features, testing, e2e]
 #### Manual
 
 - Steps: Run `pnpm test:e2e` locally or against staging.
-- What to look for: All routes pass, evidence links resolve.
+- What to look for: All routes return HTTP < 400; evidence link elements render in the DOM with non-empty `href` attributes (remote URL reachability is not asserted by the test suite).
 - Artifacts or reports to inspect: Playwright HTML report on failures.
 
 #### Tests
@@ -98,7 +98,8 @@ tags: [portfolio, features, testing, e2e]
 
 ## Validation / Expected outcomes
 
-- E2E tests pass for core routes and evidence links.
+- E2E tests pass for core routes (HTTP < 400) and API endpoints.
+- Evidence link elements render in the DOM with non-empty `href` attributes; remote connectivity to the docs site or GitHub is **not** verified by the test suite.
 
 ## Failure modes / Troubleshooting
 
