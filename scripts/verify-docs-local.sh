@@ -43,6 +43,41 @@ FAILURES=0
 WARNINGS=0
 AUDIT_FAILED=false
 
+# Safety cleanup for any background process this script may start.
+# Current flow does not start a local server, but this prevents future orphaned processes.
+TRACKED_PIDS=()
+
+track_process() {
+  local pid="$1"
+  if [ -n "$pid" ]; then
+    TRACKED_PIDS+=("$pid")
+  fi
+}
+
+stop_process() {
+  local pid="$1"
+  if [ -z "$pid" ]; then
+    return
+  fi
+  local child_pid
+  for child_pid in $(pgrep -P "$pid" 2>/dev/null || true); do
+    stop_process "$child_pid"
+  done
+  if kill -0 "$pid" 2>/dev/null; then
+    kill "$pid" 2>/dev/null || true
+    wait "$pid" 2>/dev/null || true
+  fi
+}
+
+cleanup_tracked_processes() {
+  local pid
+  for pid in "${TRACKED_PIDS[@]:-}"; do
+    stop_process "$pid"
+  done
+}
+
+trap cleanup_tracked_processes EXIT INT TERM
+
 print_header() {
   echo ""
   echo -e "${BOLD}${BLUE}═══════════════════════════════════════════════════════════════════════════${NC}"
