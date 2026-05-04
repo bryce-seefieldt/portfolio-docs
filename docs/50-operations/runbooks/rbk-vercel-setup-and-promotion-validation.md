@@ -51,12 +51,12 @@ This runbook implements the decision in [ADR-0007: Host Portfolio App on Vercel 
 
 ### Key constants (from documentation)
 
-| Item                          | Value                                                                               | Reference                                                           |
-| ----------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Item                          | Value                                                                               | Reference                                                      |
+| ----------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | **Required CI checks**        | `ci / quality`, `ci / build`                                                        | [CI workflow](/70-reference/portfolio-app-config-reference.md) |
-| **Environment variables**     | See Environment Variable Contract (`/docs/_meta/env/portfolio-app-env-contract.md`) | `.env.example` in repo                                              |
-| **Docs base URL (local dev)** | `http://localhost:3001`                                                             | Portfolio Docs local default                                        |
-| **Documentation repo URL**    | (URL of portfolio-docs Vercel deployment)                                           | To be determined during setup                                       |
+| **Environment variables**     | See Environment Variable Contract (`/docs/_meta/env/portfolio-app-env-contract.md`) | `.env.example` in repo                                         |
+| **Docs base URL (local dev)** | `http://localhost:3001`                                                             | Portfolio Docs local default                                   |
+| **Documentation repo URL**    | (URL of portfolio-docs Vercel deployment)                                           | To be determined during setup                                  |
 
 ## Procedure / Content
 
@@ -569,17 +569,17 @@ Update the team documentation with your actual URLs:
 ```markdown
 ## Production URLs (2026-01-16)
 
-- **Portfolio App Production:** https://bns-portfolio.vercel.app
-- **Portfolio App Staging (Preview):** https://staging-bns-portfolio-vercel.app
-- **Portfolio Docs Production:** https://bns-portfolio-docs.vercel.app
-- **Portfolio Docs Preview:** https://bns-portfolio-docs-git-\*.vercel.app (dynamic per PR)
+- **Portfolio App Production:** https://bryce.seefieldt.ca (canonical domain)
+- **Portfolio App Staging (Preview):** https://staging-bns-portfolio-vercel.app (example)
+- **Portfolio Docs Production:** https://bryce.seefieldt.ca/docs (canonical domain)
+- **Portfolio Docs Preview:** https://bns-portfolio-docs.vercel.app (Vercel preview origin)
 
 ### Environment Variables Configured
 
 | Variable                    | Preview                                          | Production                                       |
 | --------------------------- | ------------------------------------------------ | ------------------------------------------------ |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | https://bns-portfolio-docs.vercel.app            | https://bns-portfolio-docs.vercel.app            |
-| `NEXT_PUBLIC_SITE_URL`      | https://bns-portfolio.vercel.app                 | https://portfolio.yourdomain.com                 |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | https://bns-portfolio-docs.vercel.app/docs/      | https://bryce.seefieldt.ca/docs                  |
+| `NEXT_PUBLIC_SITE_URL`      | https://bns-portfolio.vercel.app                 | https://bryce.seefieldt.ca                       |
 | `NEXT_PUBLIC_GITHUB_URL`    | https://github.com/bryce-seefieldt/portfolio-app | https://github.com/bryce-seefieldt/portfolio-app |
 | ...                         | ...                                              | ...                                              |
 ```

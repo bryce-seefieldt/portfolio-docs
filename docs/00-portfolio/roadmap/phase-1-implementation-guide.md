@@ -1036,8 +1036,8 @@ With Phase 1 establishing production infrastructure and governance, Phase 2 will
 
 Quick troubleshooting reference for Phase 1 implementation:
 
-| Problem                                    | Quick Fix                                                                                           | Detailed Guide                                                                                                            |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Problem                                    | Quick Fix                                                                                           | Detailed Guide                                                                                                       |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | **Vercel waits for checks indefinitely**   | Verify `ci.yml` runs on `push: [main]` and check names match exactly (`ci / quality`, `ci / build`) | [rbk-vercel-setup-and-promotion-validation.md](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
 | **Preview deployment fails**               | Verify Node version (20.x) and pnpm version (9+) match in Vercel settings                           | [rbk-vercel-setup-and-promotion-validation.md](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) |
 | **Evidence links broken in preview**       | Verify `NEXT_PUBLIC_DOCS_BASE_URL` is set for Preview scope in Vercel                               | [Portfolio App Dossier - Deployment](/60-projects/portfolio-app/03-deployment.md)                                    |

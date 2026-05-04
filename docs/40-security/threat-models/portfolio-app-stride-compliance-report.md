@@ -200,11 +200,11 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 #### Threat 1: Attacker Floods Domain with Requests
 
-| Mitigation                 | Required | Implemented | Evidence                                                                                                    |
-| -------------------------- | -------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
-| Vercel DDoS protection     | ✅       | ✅          | Built-in; Vercel dashboard shows DDoS protection enabled                                                    |
-| Static-first content model | ✅       | ✅          | No heavy compute per request; static Next.js optimization                                                   |
-| Minimal client JS          | ✅       | ✅          | **Target: < 50KB gzipped**; minimal React components (no heavy libraries)                                   |
+| Mitigation                 | Required | Implemented | Evidence                                                                                               |
+| -------------------------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------ |
+| Vercel DDoS protection     | ✅       | ✅          | Built-in; Vercel dashboard shows DDoS protection enabled                                               |
+| Static-first content model | ✅       | ✅          | No heavy compute per request; static Next.js optimization                                              |
+| Minimal client JS          | ✅       | ✅          | **Target: < 50KB gzipped**; minimal React components (no heavy libraries)                              |
 | Rollback readiness         | ✅       | ✅          | [rbk-portfolio-rollback.md](/50-operations/runbooks/rbk-portfolio-rollback.md) tested; ~1 min rollback |
 
 **Compliance Status:** ✅ **100% — All controls verified**
@@ -262,12 +262,12 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 #### Threat 2: Attacker Escalates via Social Engineering or Process Bypass
 
-| Mitigation                          | Required | Implemented | Evidence                                                                                                                                                   |
-| ----------------------------------- | -------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR template security checklist      | ✅       | ✅          | [PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md) includes mandatory checks          |
-| GitHub Rulesets require 1+ approval | ✅       | ✅          | Ruleset: `main-protection` enforces 1 approval minimum (configurable, currently 1)                                                                         |
-| Dismissal of stale reviews          | ✅       | ✅          | Enabled: stale reviews are dismissed if branch is updated                                                                                                  |
-| Required status checks              | ✅       | ✅          | Checks required: `ci / quality`, `ci / build`, `secrets-scan`, CodeQL (all must pass)                                                                      |
+| Mitigation                          | Required | Implemented | Evidence                                                                                                                                              |
+| ----------------------------------- | -------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR template security checklist      | ✅       | ✅          | [PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md) includes mandatory checks     |
+| GitHub Rulesets require 1+ approval | ✅       | ✅          | Ruleset: `main-protection` enforces 1 approval minimum (configurable, currently 1)                                                                    |
+| Dismissal of stale reviews          | ✅       | ✅          | Enabled: stale reviews are dismissed if branch is updated                                                                                             |
+| Required status checks              | ✅       | ✅          | Checks required: `ci / quality`, `ci / build`, `secrets-scan`, CodeQL (all must pass)                                                                 |
 | Reviewer guidance provided          | ✅       | ✅          | [ADR-0007](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) documents promotion gates and review responsibilities |
 
 **Compliance Status:** ✅ **100% — All controls verified**
@@ -290,7 +290,7 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 | **Least-Privilege CI Permissions**        | Tampering (T2), Elevation (E1)  | ✅ Complete | [ci.yml#L1-L17](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L1-L17)   |
 | **Pre-commit Hook (TruffleHog)**          | Information Disclosure (T1)     | ✅ Complete | [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) |
 | **Local Verification Scan**               | Information Disclosure (T1)     | ✅ Complete | Lightweight pattern-based scan; TruffleHog not run locally                                                    |
-| **Secrets Incident Runbook**              | Information Disclosure (T1, T2) | ✅ Complete | [rbk-portfolio-secrets-incident.md](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)           |
+| **Secrets Incident Runbook**              | Information Disclosure (T1, T2) | ✅ Complete | [rbk-portfolio-secrets-incident.md](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                |
 
 ---
 

@@ -222,8 +222,8 @@ Runbooks should be your first reference during:
 
 ### Operational Readiness
 
-| Document                                                                                  | Purpose                                         | Audience                    |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------------- |
+| Document                                                                             | Purpose                                         | Audience                    |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------- | --------------------------- |
 | **[Observability & Monitoring](/30-devops-platform/observability-health-checks.md)** | Health checks, logging, monitoring architecture | Developers, DevOps, On-call |
 
 ---

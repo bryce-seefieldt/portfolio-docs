@@ -34,9 +34,9 @@ This is analogous to Next.js `NEXT_PUBLIC_*` convention in the Portfolio App.
 - **Purpose**: Base URL of the deployed site (used for SEO, sitemap, canonical URLs)
 - **Used in**: `docusaurus.config.ts` (`url` field)
 - **Local**: `http://localhost:3000`
-- **Production**: `https://bns-portfolio-docs.vercel.app`
+- **Production**: `https://bryce.seefieldt.ca/docs` (canonical domain; preview: `https://bns-portfolio-docs.vercel.app`)
 - **Required**: Yes
-- **Default**: `https://bns-portfolio-docs.vercel.app` (fallback in config)
+- **Default**: `https://bryce.seefieldt.ca/docs` (fallback in config)
 
 #### `DOCUSAURUS_BASE_URL`
 
@@ -79,9 +79,9 @@ This is analogous to Next.js `NEXT_PUBLIC_*` convention in the Portfolio App.
 - **Purpose**: URL of the Portfolio App (for cross-linking from docs to live app)
 - **Used in**: `docusaurus.config.ts` (customFields.portfolioAppUrl)
 - **Local**: `http://localhost:3000` (if running portfolio-app locally)
-- **Production**: `https://bns-portfolio-app.vercel.app`
+- **Production**: `https://bryce.seefieldt.ca` (canonical domain; preview: `https://bns-portfolio.vercel.app`)
 - **Required**: No (used for doc → app navigation)
-- **Default**: `https://bns-portfolio-app.vercel.app` (fallback in config)
+- **Default**: `https://bryce.seefieldt.ca` (fallback in config)
 
 ## Optional Variables
 
@@ -109,16 +109,14 @@ This is analogous to Next.js `NEXT_PUBLIC_*` convention in the Portfolio App.
 
 ```typescript
 const config: Config = {
-  url:
-    process.env.DOCUSAURUS_SITE_URL || 'https://bns-portfolio-docs.vercel.app',
-  baseUrl: process.env.DOCUSAURUS_BASE_URL || '/',
+  url: process.env.DOCUSAURUS_SITE_URL || 'https://bryce.seefieldt.ca/docs',
+  baseUrl: process.env.DOCUSAURUS_BASE_URL || '/docs/',
   organizationName: process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt',
   projectName: process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs',
 
   customFields: {
     portfolioAppUrl:
-      process.env.DOCUSAURUS_PORTFOLIO_APP_URL ||
-      'https://bns-portfolio-app.vercel.app',
+      process.env.DOCUSAURUS_PORTFOLIO_APP_URL || 'https://bryce.seefieldt.ca',
     githubOrgUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}`,
     githubRepoDocsUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}`,
     githubRepoAppUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_APP || 'portfolio-app'}`,
@@ -164,7 +162,7 @@ Environment variables set in Vercel dashboard (Project Settings → Environment 
 Environment variables set in Vercel dashboard:
 
 - **Scope**: Production
-- **Values**: Production URLs (`https://bns-portfolio-docs.vercel.app`, etc.)
+- **Values**: Production URLs (`https://bryce.seefieldt.ca/docs`, etc.)
 
 ## File Precedence
 
@@ -228,7 +226,7 @@ grep -r "localhost:3000" build/  # Should appear if DOCUSAURUS_SITE_URL is local
 
 - **Symptom**: Documentation links to portfolio-app use `localhost` in production
 - **Cause**: `DOCUSAURUS_PORTFOLIO_APP_URL` not set correctly in Vercel
-- **Fix**: Set `DOCUSAURUS_PORTFOLIO_APP_URL=https://bns-portfolio-app.vercel.app` in Vercel dashboard (Production scope)
+- **Fix**: Set `DOCUSAURUS_PORTFOLIO_APP_URL=https://bryce.seefieldt.ca` in Vercel dashboard (Production scope)
 
 ### Edit links broken
 

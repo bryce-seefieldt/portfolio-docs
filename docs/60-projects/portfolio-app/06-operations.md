@@ -56,13 +56,13 @@ If MTTR targets are at risk, escalate to team lead immediately. Document all inc
 
 **Local Development → PR Review → Staging Validation → Production**
 
-| Step                         | Branch                          | Action                                                                             | Validation                                                   |
-| ---------------------------- | ------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **1. Development**           | `feat/your-feature`             | Create feature branch, make changes, run `pnpm verify` locally                     | Pass local validation                                        |
-| **2. PR Review**             | `feat/your-feature` → `staging` | Open PR targeting `staging` (not `main`), get approval                             | CI checks pass, Vercel preview works                         |
-| **3. Merge to Staging**      | `staging`                       | Merge PR to staging branch                                                         | Auto-deploy to staging domain                                |
-| **4. Staging Validation**    | `staging`                       | Manual validation of critical routes on `https://staging-bns-portfolio.vercel.app` | All routes load, evidence links work, no console errors      |
-| **5. Promote to Production** | `staging` → `main`              | Merge staging to main (manual decision point)                                      | Auto-deploy to production `https://bns-portfolio.vercel.app` |
+| Step                         | Branch                          | Action                                                                             | Validation                                              |
+| ---------------------------- | ------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| **1. Development**           | `feat/your-feature`             | Create feature branch, make changes, run `pnpm verify` locally                     | Pass local validation                                   |
+| **2. PR Review**             | `feat/your-feature` → `staging` | Open PR targeting `staging` (not `main`), get approval                             | CI checks pass, Vercel preview works                    |
+| **3. Merge to Staging**      | `staging`                       | Merge PR to staging branch                                                         | Auto-deploy to staging domain                           |
+| **4. Staging Validation**    | `staging`                       | Manual validation of critical routes on `https://staging-bns-portfolio.vercel.app` | All routes load, evidence links work, no console errors |
+| **5. Promote to Production** | `staging` → `main`              | Merge staging to main (manual decision point)                                      | Auto-deploy to production `https://bryce.seefieldt.ca`  |
 
 **Key Rules:**
 
