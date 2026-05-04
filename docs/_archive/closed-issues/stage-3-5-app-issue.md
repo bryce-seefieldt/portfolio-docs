@@ -9,7 +9,7 @@ tags: [portfolio, roadmap, planning, phase-3, stage-3.5, app, ci, validation]
 **Type:** Feature / CI Enhancement  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.5  
-**Linked Issue:** [stage-3-5-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-5-docs-issue.md)  
+**Linked Issue:** [stage-3-5-docs-issue.md](/00-portfolio/roadmap/issues/stage-3-5-docs-issue.md)  
 **Duration Estimate:** 2–3 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-23  

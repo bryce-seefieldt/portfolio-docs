@@ -76,11 +76,11 @@ tags: [portfolio, features, observability, health]
 
 ### Runbooks
 
-- [`/50-operations/runbooks/rbk-portfolio-service-degradation.md`](/docs/50-operations/runbooks/rbk-portfolio-service-degradation.md)
+- [`/50-operations/runbooks/rbk-portfolio-service-degradation.md`](/50-operations/runbooks/rbk-portfolio-service-degradation.md)
 
 ### Additional internal references
 
-- [`/30-devops-platform/observability-health-checks.md`](/docs/30-devops-platform/observability-health-checks.md)
+- [`/30-devops-platform/observability-health-checks.md`](/30-devops-platform/observability-health-checks.md)
 
 ### External reference links
 

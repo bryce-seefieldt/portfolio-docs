@@ -66,6 +66,6 @@ Provide a repeatable intake process that enforces evidence requirements and prot
 
 ## References
 
-- Eligibility criteria: [/docs/00-portfolio/portfolio-eligibility-criteria.md](/docs/00-portfolio/portfolio-eligibility-criteria.md)
-- Evidence audit checklist: [/docs/70-reference/evidence-audit-checklist.md](/docs/70-reference/evidence-audit-checklist.md)
-- Release notes: [/docs/00-portfolio/release-notes/index.md](/docs/00-portfolio/release-notes/index.md)
+- Eligibility criteria: [/docs/00-portfolio/portfolio-eligibility-criteria.md](/00-portfolio/portfolio-eligibility-criteria.md)
+- Evidence audit checklist: [/docs/70-reference/evidence-audit-checklist.md](/70-reference/evidence-audit-checklist.md)
+- Release notes: [/docs/00-portfolio/release-notes/index.md](/00-portfolio/release-notes/index.md)

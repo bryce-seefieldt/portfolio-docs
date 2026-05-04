@@ -75,7 +75,7 @@ tags: [portfolio, features, seo, metadata]
 
 ### ADRs
 
-- [`/10-architecture/adr/adr-0015-metadata-strategy.md`](/docs/10-architecture/adr/adr-0015-metadata-strategy.md)
+- [`/10-architecture/adr/adr-0015-metadata-strategy.md`](/10-architecture/adr/adr-0015-metadata-strategy.md)
 
 ### Runbooks
 
@@ -83,8 +83,8 @@ tags: [portfolio, features, seo, metadata]
 
 ### Additional internal references
 
-- [`/70-reference/seo-metadata-guide.md`](/docs/70-reference/seo-metadata-guide.md)
-- [`/70-reference/social-metadata-guide.md`](/docs/70-reference/social-metadata-guide.md)
+- [`/70-reference/seo-metadata-guide.md`](/70-reference/seo-metadata-guide.md)
+- [`/70-reference/social-metadata-guide.md`](/70-reference/social-metadata-guide.md)
 
 ### External reference links
 

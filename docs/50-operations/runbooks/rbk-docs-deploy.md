@@ -336,7 +336,7 @@ pnpm policy:check
 
 - TypeScript upgrade failures (for example `TS5101` deprecation errors) can require tsconfig migration updates rather than application code changes.
 
-For end-to-end bot PR recovery procedure, see [Dependabot PR CI Remediation](/docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md).
+For end-to-end bot PR recovery procedure, see [Dependabot PR CI Remediation](/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md).
 
 ### Failure: Output directory mismatch (404 errors or missing pages)
 

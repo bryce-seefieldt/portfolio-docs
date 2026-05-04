@@ -510,7 +510,7 @@ Core Web Vitals Targets:
 
 ## Related Documentation
 
-- [Phase 4 Implementation Guide](/docs/00-portfolio/roadmap/phase-4-implementation-guide.md) — Stage 4.2 section
+- [Phase 4 Implementation Guide](/00-portfolio/roadmap/phase-4-implementation-guide.md) — Stage 4.2 section
 - [ADR-0013: Multi-Environment Deployment](docs/10-architecture/adr/adr-0013-multi-environment-deployment.md) — Environment context for performance testing
 - [Stage 4.2 Docs Issue](stage-4-2-docs-issue.md) — Companion documentation deliverables
 

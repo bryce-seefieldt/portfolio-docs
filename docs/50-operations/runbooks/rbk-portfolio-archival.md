@@ -116,6 +116,6 @@ If validation fails, revert the archival changes and correct links before retryi
 
 ## References
 
-- Portfolio archival policy: [/docs/00-portfolio/portfolio-archival-policy.md](/docs/00-portfolio/portfolio-archival-policy.md)
-- Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/docs/00-portfolio/portfolio-change-intake.md)
-- Release notes: [/docs/00-portfolio/release-notes/index.md](/docs/00-portfolio/release-notes/index.md)
+- Portfolio archival policy: [/docs/00-portfolio/portfolio-archival-policy.md](/00-portfolio/portfolio-archival-policy.md)
+- Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/00-portfolio/portfolio-change-intake.md)
+- Release notes: [/docs/00-portfolio/release-notes/index.md](/00-portfolio/release-notes/index.md)

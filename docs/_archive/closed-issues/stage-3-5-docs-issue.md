@@ -10,7 +10,7 @@ tags:
 **Type:** Documentation / Runbook / Troubleshooting  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.5  
-**Linked Issue:** [stage-3-5-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-5-app-issue.md)  
+**Linked Issue:** [stage-3-5-app-issue.md](/00-portfolio/roadmap/issues/stage-3-5-app-issue.md)  
 **Duration Estimate:** 2–3 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-23  

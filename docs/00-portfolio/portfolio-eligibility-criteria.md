@@ -72,6 +72,6 @@ Define clear rules for what belongs in the portfolio, what does not, and the min
 
 ## References
 
-- Reviewer guide: [/docs/00-portfolio/reviewer-guide.md](/docs/00-portfolio/reviewer-guide.md)
-- Evidence audit checklist: [/docs/70-reference/evidence-audit-checklist.md](/docs/70-reference/evidence-audit-checklist.md)
-- Roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
+- Reviewer guide: [/docs/00-portfolio/reviewer-guide.md](/00-portfolio/reviewer-guide.md)
+- Evidence audit checklist: [/docs/70-reference/evidence-audit-checklist.md](/70-reference/evidence-audit-checklist.md)
+- Roadmap: [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md)

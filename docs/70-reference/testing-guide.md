@@ -801,7 +801,7 @@ await expect(page.locator('text=Evidence Artifacts')).toBeVisible();
 
 ## See Also
 
-- [Registry Schema Guide](/docs/70-reference/registry-schema-guide.md) — Field-by-field registry reference
-- [Portfolio App: Testing](/docs/60-projects/portfolio-app/05-testing.md) — Testing dossier and CI gates
+- [Registry Schema Guide](/70-reference/registry-schema-guide.md) — Field-by-field registry reference
+- [Portfolio App: Testing](/60-projects/portfolio-app/05-testing.md) — Testing dossier and CI gates
 - [Vitest Documentation](https://vitest.dev) — Official Vitest docs
 - [Playwright Documentation](https://playwright.dev) — Official Playwright docs

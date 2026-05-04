@@ -1111,6 +1111,6 @@ sequenceDiagram
 ## See Also
 
 - [Mermaid Official Documentation](https://mermaid.js.org/) — Complete syntax reference
-- [Testing Guide](/docs/70-reference/testing-guide.md) — Example testing pyramid diagram
+- [Testing Guide](/70-reference/testing-guide.md) — Example testing pyramid diagram
 - [Doc Style Guide](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/doc-style-guide.md) — General documentation standards
 - [Mermaid Live Editor](https://mermaid.live) — Online diagram editor and validator

@@ -86,7 +86,7 @@ tags: [portfolio, features, core-pages, project-detail]
 
 ### ADRs
 
-- [`/10-architecture/adr/adr-0011-data-driven-project-registry.md`](/docs/10-architecture/adr/adr-0011-data-driven-project-registry.md)
+- [`/10-architecture/adr/adr-0011-data-driven-project-registry.md`](/10-architecture/adr/adr-0011-data-driven-project-registry.md)
 
 ### Runbooks
 
@@ -94,9 +94,9 @@ tags: [portfolio, features, core-pages, project-detail]
 
 ### Additional internal references
 
-- [`/70-reference/registry-schema-guide.md`](/docs/70-reference/registry-schema-guide.md)
-- [`/70-reference/seo-metadata-guide.md`](/docs/70-reference/seo-metadata-guide.md)
-- [`/70-reference/testing-guide.md`](/docs/70-reference/testing-guide.md)
+- [`/70-reference/registry-schema-guide.md`](/70-reference/registry-schema-guide.md)
+- [`/70-reference/seo-metadata-guide.md`](/70-reference/seo-metadata-guide.md)
+- [`/70-reference/testing-guide.md`](/70-reference/testing-guide.md)
 
 ### External reference links
 

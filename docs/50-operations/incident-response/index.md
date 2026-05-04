@@ -48,7 +48,7 @@ Incident responders should know:
 
 Severity must map to user impact and recovery urgency. Use the severity guidance in the handbook:
 
-- [Incident Response Handbook](/docs/50-operations/incident-response/incident-handbook.md)
+- [Incident Response Handbook](/50-operations/incident-response/incident-handbook.md)
 
 ## Communications (Minimum Standard)
 
@@ -68,7 +68,7 @@ Incidents must reference:
 
 ## References
 
-- Runbook catalog: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
-- Incident handbook: [/docs/50-operations/incident-response/incident-handbook.md](/docs/50-operations/incident-response/incident-handbook.md)
+- Runbook catalog: [/docs/50-operations/runbooks/index.md](/50-operations/runbooks/index.md)
+- Incident handbook: [/docs/50-operations/incident-response/incident-handbook.md](/50-operations/incident-response/incident-handbook.md)
 - Postmortem template: [/docs/\_meta/templates/template-postmortem.md](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/docs/_meta/templates/template-postmortem.md)
-- Observability & health checks: [/docs/30-devops-platform/observability-health-checks.md](/docs/30-devops-platform/observability-health-checks.md)
+- Observability & health checks: [/docs/30-devops-platform/observability-health-checks.md](/30-devops-platform/observability-health-checks.md)

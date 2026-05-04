@@ -93,8 +93,8 @@ tags: [portfolio, features, core-pages, landing]
 
 ### Additional internal references
 
-- [`/20-engineering/ux-design-system.md`](/docs/20-engineering/ux-design-system.md)
-- [`/70-reference/portfolio-app-config-reference.md`](/docs/70-reference/portfolio-app-config-reference.md)
+- [`/20-engineering/ux-design-system.md`](/20-engineering/ux-design-system.md)
+- [`/70-reference/portfolio-app-config-reference.md`](/70-reference/portfolio-app-config-reference.md)
 
 ### External reference links
 

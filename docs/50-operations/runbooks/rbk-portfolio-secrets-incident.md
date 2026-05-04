@@ -18,7 +18,7 @@ This is a **"stop-the-line" incident** requiring immediate action to:
 
 ## Governance Context
 
-This runbook implements the threat model's [Incident Response / Suspected secret publication](/docs/40-security/threat-models/portfolio-app-threat-model.md#incident-response) procedure. All actions assume:
+This runbook implements the threat model's [Incident Response / Suspected secret publication](/40-security/threat-models/portfolio-app-threat-model.md#incident-response) procedure. All actions assume:
 
 - GitHub Actions logs are retained and auditable
 - Vercel deployments are immutable and traceable to Git commits
@@ -349,7 +349,7 @@ Create `docs/_meta/postmortem-YYYY-MM-DD-secrets-incident.md`:
 
 #### 5b) Update threat model (if needed)
 
-If the incident reveals a new threat or mitigation gap, update [portfolio-app-threat-model.md](/docs/40-security/threat-models/portfolio-app-threat-model.md):
+If the incident reveals a new threat or mitigation gap, update [portfolio-app-threat-model.md](/40-security/threat-models/portfolio-app-threat-model.md):
 
 1. Add the threat if not already covered
 2. Document new mitigations
@@ -384,7 +384,7 @@ If the incident reveals a new threat or mitigation gap, update [portfolio-app-th
 
 ### Need help?
 
-- Refer to threat model: [Incident Response](/docs/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
+- Refer to threat model: [Incident Response](/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
 - Refer to rollback runbook: [rbk-portfolio-rollback.md](./rbk-portfolio-rollback.md)
 - Consult team / escalate if severity is unclear
 
@@ -436,7 +436,7 @@ If the incident reveals a new threat or mitigation gap, update [portfolio-app-th
 
 ## References
 
-- Threat Model: [Incident Response](/docs/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
+- Threat Model: [Incident Response](/40-security/threat-models/portfolio-app-threat-model.md#incident-response)
 - Rollback Runbook: [rbk-portfolio-rollback.md](./rbk-portfolio-rollback.md)
 - CI Triage Runbook: [rbk-portfolio-ci-triage.md](./rbk-portfolio-ci-triage.md)
-- Phase 2 Implementation: [phase-2-implementation-guide.md](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
+- Phase 2 Implementation: [phase-2-implementation-guide.md](/00-portfolio/roadmap/phase-2-implementation-guide.md)

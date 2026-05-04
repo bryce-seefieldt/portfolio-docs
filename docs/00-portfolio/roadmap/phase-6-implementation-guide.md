@@ -105,8 +105,8 @@ Specify the minimum evidence requirements for any new project entry.
 
 **Related documentation:**
 
-- See: [Reviewer Guide](/docs/00-portfolio/reviewer-guide.md)
-- Reference: [Evidence Audit Checklist](/docs/70-reference/evidence-audit-checklist.md)
+- See: [Reviewer Guide](/00-portfolio/reviewer-guide.md)
+- Reference: [Evidence Audit Checklist](/70-reference/evidence-audit-checklist.md)
 
 ---
 
@@ -160,8 +160,8 @@ Create guidance for retiring projects or documents while preserving evidence int
 
 **Related documentation:**
 
-- See: [Roadmap](/docs/00-portfolio/roadmap/index.md)
-- Reference: [ADR Index](/docs/10-architecture/adr/index.md)
+- See: [Roadmap](/00-portfolio/roadmap/index.md)
+- Reference: [ADR Index](/10-architecture/adr/index.md)
 
 ---
 
@@ -204,8 +204,8 @@ Add a release note entry documenting the Phase 6 governance update.
 
 **Related documentation:**
 
-- See: [Release Notes](/docs/00-portfolio/release-notes/index.md)
-- Reference: [Runbooks](/docs/50-operations/runbooks/index.md)
+- See: [Release Notes](/00-portfolio/release-notes/index.md)
+- Reference: [Runbooks](/50-operations/runbooks/index.md)
 
 ---
 
@@ -385,11 +385,11 @@ pnpm start
 
 ## Reference Documentation
 
-- [Roadmap - Phase 6](/docs/00-portfolio/roadmap/index.md)
-- [Reviewer Guide](/docs/00-portfolio/reviewer-guide.md)
-- [Evidence Audit Checklist](/docs/70-reference/evidence-audit-checklist.md)
-- [ADR Index](/docs/10-architecture/adr/index.md)
-- [Runbooks Index](/docs/50-operations/runbooks/index.md)
+- [Roadmap - Phase 6](/00-portfolio/roadmap/index.md)
+- [Reviewer Guide](/00-portfolio/reviewer-guide.md)
+- [Evidence Audit Checklist](/70-reference/evidence-audit-checklist.md)
+- [ADR Index](/10-architecture/adr/index.md)
+- [Runbooks Index](/50-operations/runbooks/index.md)
 
 ---
 

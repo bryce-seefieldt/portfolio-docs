@@ -158,7 +158,7 @@ const config: Config = {
           items: [
             {
               label: 'Portfolio Documentation',
-              to: '/docs',
+              to: '/',
             },
           ],
         },

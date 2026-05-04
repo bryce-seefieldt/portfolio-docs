@@ -25,7 +25,7 @@ Describe the Portfolio App architecture at a level that is:
 ### Out of scope
 
 - CI/CD implementation details (see `deployment.md`)
-- security threat enumeration (see [threat-models/portfolio-app-threat-model-v2.md](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md))
+- security threat enumeration (see [threat-models/portfolio-app-threat-model-v2.md](/40-security/threat-models/portfolio-app-threat-model-v2.md))
 
 ## Prereqs / Inputs
 
@@ -475,8 +475,8 @@ This ensures broken tests prevent production deployments.
 
 #### See Also
 
-- **Testing Guide**: [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md) — Comprehensive patterns and examples
-- **Testing Dossier**: [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md) — CI gates and local validation
+- **Testing Guide**: [docs/70-reference/testing-guide.md](/70-reference/testing-guide.md) — Comprehensive patterns and examples
+- **Testing Dossier**: [docs/60-projects/portfolio-app/05-testing.md](/60-projects/portfolio-app/05-testing.md) — CI gates and local validation
 
 ### Evidence-link strategy
 

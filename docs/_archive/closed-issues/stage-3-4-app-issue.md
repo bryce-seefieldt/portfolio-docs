@@ -10,7 +10,7 @@ tags:
 **Type:** Documentation / Configuration Update  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.4  
-**Linked Issue:** [stage-3-4-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-4-docs-issue.md)  
+**Linked Issue:** [stage-3-4-docs-issue.md](/00-portfolio/roadmap/issues/stage-3-4-docs-issue.md)  
 **Duration Estimate:** 1–2 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-22  
@@ -175,7 +175,7 @@ This stage is complete when:
 This stage depends on:
 
 - **portfolio-docs Stage 3.4 issue completion:** ADR-0011 and ADR-0012 must be published in docs before this app issue can add accurate links
-- **Companion issue:** [stage-3-4-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-4-docs-issue.md)
+- **Companion issue:** [stage-3-4-docs-issue.md](/00-portfolio/roadmap/issues/stage-3-4-docs-issue.md)
 
 **Merge order:** Docs PRs must merge to `main` first; then app issue can reference published URLs and create its PR.
 
@@ -207,8 +207,8 @@ This stage is complete and ready to merge when:
 
 ## Related Issues & Links
 
-- **Companion docs issue:** [Stage 3.4: ADRs & Documentation — Documentation](/docs/00-portfolio/roadmap/issues/stage-3-4-docs-issue.md)
-- **Parent phase:** [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
+- **Companion docs issue:** [Stage 3.4: ADRs & Documentation — Documentation](/00-portfolio/roadmap/issues/stage-3-4-docs-issue.md)
+- **Parent phase:** [Phase 3 Implementation Guide](/00-portfolio/roadmap/phase-3-implementation-guide.md)
 - **Related ADRs (being created in docs issue):**
   - ADR-0011: Data-Driven Project Registry
   - ADR-0012: Cross-Repo Documentation Linking

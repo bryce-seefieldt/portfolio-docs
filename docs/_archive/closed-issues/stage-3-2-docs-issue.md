@@ -9,7 +9,7 @@ tags: [portfolio, roadmap, planning, phase-3, stage-3.2, docs, documentation]
 **Type:** Documentation / Reference  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.2  
-**Linked Issue:** [stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)  
+**Linked Issue:** [stage-3-2-app-issue.md](/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)  
 **Duration Estimate:** 2–3 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-21  
@@ -19,7 +19,7 @@ tags: [portfolio, roadmap, planning, phase-3, stage-3.2, docs, documentation]
 
 ## Overview
 
-This stage complements the app implementation ([stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)) by updating portfolio-docs with architecture explanations, ensuring evidence consistency, and documenting the component-driven evidence visualization approach.
+This stage complements the app implementation ([stage-3-2-app-issue.md](/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)) by updating portfolio-docs with architecture explanations, ensuring evidence consistency, and documenting the component-driven evidence visualization approach.
 
 While the app work creates three reusable React components (`EvidenceBlock`, `VerificationBadge`, `BadgeGroup`), this docs work ensures reviewers understand:
 
@@ -113,7 +113,7 @@ The Portfolio App introduces a reusable component library for standardized evide
 
 Together, these components embed evidence verification into the user experience, making "show your work" a visual, interactive expectation rather than a hidden link hunt.
 
-See [Architecture — Evidence Visualization Layer](/docs/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer-stage-32) for full details.
+See [Architecture — Evidence Visualization Layer](/60-projects/portfolio-app/02-architecture.md#evidence-visualization-layer-stage-32) for full details.
 ```
 
 #### 2. Comprehensive Update to `02-architecture.md`
@@ -245,9 +245,9 @@ Evidence data flow:
 #### See Also
 
 - **Component Specifications:** Portfolio App Copilot Instructions, Section 8 — [Phase 3 Stage 3.2](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/copilot-instructions.md#8-phase-3-stage-32--evidenceblock-components)
-- **Implementation Details:** [stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)
-- **Registry Schema:** [docs/70-reference/registry-schema-guide.md](/docs/70-reference/registry-schema-guide.md)
-- **Gold Standard:** [ADR-0010 — Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+- **Implementation Details:** [stage-3-2-app-issue.md](/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)
+- **Registry Schema:** [docs/70-reference/registry-schema-guide.md](/70-reference/registry-schema-guide.md)
+- **Gold Standard:** [ADR-0010 — Gold Standard Exemplar](/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
 
 ```
 
@@ -341,9 +341,9 @@ However, if reviewers ask:
 
 ## Related Issues
 
-- **Linked:** [stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md) (companion implementation)
+- **Linked:** [stage-3-2-app-issue.md](/00-portfolio/roadmap/issues/stage-3-2-app-issue.md) (companion implementation)
 - **Dependency:** stage-3-1-docs-issue.md (completed) — registry documentation published
-- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
+- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
 - **Related ADR:** ADR-0010 — Gold Standard Exemplar
 
 ---
@@ -397,7 +397,7 @@ This docs work is **intentionally limited** to dossier updates and verification.
 The components themselves are NOT documented in portfolio-docs (that would be redundant). Instead:
 - Architecture page explains **why** components exist and **how** they're designed
 - Copilot instructions in portfolio-app contain **full specs** (props, styling, behavior)
-- GitHub issue ([stage-3-2-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)) contains **implementation tasks**
+- GitHub issue ([stage-3-2-app-issue.md](/00-portfolio/roadmap/issues/stage-3-2-app-issue.md)) contains **implementation tasks**
 
 This keeps implementation details close to code and architecture explanations close to decision rationale.
 
@@ -409,10 +409,10 @@ Key invariant: All evidence paths mentioned in dossier must match registry struc
 
 ## Reference Documentation
 
-- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
-- **Portfolio App Dossier — Architecture:** [docs/60-projects/portfolio-app/02-architecture.md](/docs/60-projects/portfolio-app/02-architecture.md)
-- **Registry Schema Guide:** [docs/70-reference/registry-schema-guide.md](/docs/70-reference/registry-schema-guide.md)
-- **ADR-0010 — Gold Standard Exemplar:** [docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
+- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
+- **Portfolio App Dossier — Architecture:** [docs/60-projects/portfolio-app/02-architecture.md](/60-projects/portfolio-app/02-architecture.md)
+- **Registry Schema Guide:** [docs/70-reference/registry-schema-guide.md](/70-reference/registry-schema-guide.md)
+- **ADR-0010 — Gold Standard Exemplar:** [docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar](/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md)
 - **Copilot Instructions (Portfolio App):** Section 8 — Phase 3 Stage 3.2
 
 ```

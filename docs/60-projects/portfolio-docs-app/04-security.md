@@ -40,8 +40,8 @@ This page documents the security posture of the Portfolio Docs App as a public-f
 
 The Portfolio Docs App follows a dedicated hardening plan that focuses on CI audit gates, host-level security headers, and publication safety controls. See the plan and ADR for the current scope and evidence checklist:
 
-- Implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/docs/40-security/portfolio-docs-hardening-implementation-plan.md)
-- ADR-0019: [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
+- Implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/40-security/portfolio-docs-hardening-implementation-plan.md)
+- ADR-0019: [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
 
 ## Host-level security headers
 

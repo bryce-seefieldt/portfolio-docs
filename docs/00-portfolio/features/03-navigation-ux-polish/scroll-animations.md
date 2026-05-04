@@ -75,7 +75,7 @@ tags: [portfolio, features, navigation, ux]
 
 ### ADRs
 
-- [`/10-architecture/adr/adr-0016-scroll-animations.md`](/docs/10-architecture/adr/adr-0016-scroll-animations.md)
+- [`/10-architecture/adr/adr-0016-scroll-animations.md`](/10-architecture/adr/adr-0016-scroll-animations.md)
 
 ### Runbooks
 
@@ -83,8 +83,8 @@ tags: [portfolio, features, navigation, ux]
 
 ### Additional internal references
 
-- [`/20-engineering/ux-design-system.md`](/docs/20-engineering/ux-design-system.md)
-- [`/70-reference/theme-system-reference.md`](/docs/70-reference/theme-system-reference.md)
+- [`/20-engineering/ux-design-system.md`](/20-engineering/ux-design-system.md)
+- [`/70-reference/theme-system-reference.md`](/70-reference/theme-system-reference.md)
 
 ### External reference links
 

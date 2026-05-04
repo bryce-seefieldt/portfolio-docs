@@ -93,30 +93,30 @@ Security posture changes must be reflected in:
 
 Use these documents to plan and govern React2Shell-class hardening work:
 
-- Implementation guide: [/docs/40-security/react2shell-hardening-implementation-guide.md](/docs/40-security/react2shell-hardening-implementation-guide.md)
-- ADR-0018: [/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md](/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md)
+- Implementation guide: [/docs/40-security/react2shell-hardening-implementation-guide.md](/40-security/react2shell-hardening-implementation-guide.md)
+- ADR-0018: [/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md](/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md)
 
 ## Portfolio Docs Hardening Program
 
-- Implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/docs/40-security/portfolio-docs-hardening-implementation-plan.md)
-- ADR-0019: [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
+- Implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/40-security/portfolio-docs-hardening-implementation-plan.md)
+- ADR-0019: [/docs/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md](/10-architecture/adr/adr-0019-portfolio-docs-hardening-baseline.md)
 
 ## Security Posture Deepening
 
 **New Documentation:**
 
-- **[Threat Model v2](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)** — Extended threat model covering deployment surface and runtime misconfiguration risks with STRIDE analysis, residual risks, and mitigation summary
-- **[Risk Register](/docs/40-security/risk-register.md)** — Inventory of known security risks with severity, mitigations, and acceptance status; quarterly review schedule
-- **[Security Policies & Governance](/docs/40-security/security-policies.md)** — Formal policies for dependency audit, secrets management, security headers, and incident response
+- **[Threat Model v2](/40-security/threat-models/portfolio-app-threat-model-v2.md)** — Extended threat model covering deployment surface and runtime misconfiguration risks with STRIDE analysis, residual risks, and mitigation summary
+- **[Risk Register](/40-security/risk-register.md)** — Inventory of known security risks with severity, mitigations, and acceptance status; quarterly review schedule
+- **[Security Policies & Governance](/40-security/security-policies.md)** — Formal policies for dependency audit, secrets management, security headers, and incident response
 
 **Operational & Implementation References:**
 
-- **[Security Hardening Implementation](/docs/60-projects/portfolio-app/04-security.md)** — OWASP security headers, CSP policy, environment variable security, and testing procedures
-- **[Dependency Vulnerability Runbook](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)** — Procedures for detecting, triaging, and remediating CVEs with MTTR targets
-- **[Secrets Incident Runbook](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)** — Deterministic response to suspected secret leaks or exfiltration
+- **[Security Hardening Implementation](/60-projects/portfolio-app/04-security.md)** — OWASP security headers, CSP policy, environment variable security, and testing procedures
+- **[Dependency Vulnerability Runbook](/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)** — Procedures for detecting, triaging, and remediating CVEs with MTTR targets
+- **[Secrets Incident Runbook](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)** — Deterministic response to suspected secret leaks or exfiltration
 
 **Portfolio App Dossier References:**
 
-- [Overview — Security Posture Hardening](/docs/60-projects/portfolio-app/01-overview.md)
-- [Architecture — Security References](/docs/60-projects/portfolio-app/02-architecture.md#out-of-scope)
-- [Operations — Security Monitoring](/docs/60-projects/portfolio-app/06-operations.md)
+- [Overview — Security Posture Hardening](/60-projects/portfolio-app/01-overview.md)
+- [Architecture — Security References](/60-projects/portfolio-app/02-architecture.md#out-of-scope)
+- [Operations — Security Monitoring](/60-projects/portfolio-app/06-operations.md)

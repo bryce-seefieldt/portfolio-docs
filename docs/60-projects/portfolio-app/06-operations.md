@@ -40,13 +40,13 @@ Security incidents follow structured runbooks for deterministic response:
 
 **Runbooks:**
 
-- **[Dependency Vulnerability Response](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)** — Detect, triage, and remediate CVEs with MTTR targets (Critical: 24h, High: 48h, Medium: 2 weeks, Low: 4 weeks)
-- **[Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)** — Contain and investigate suspected secret leaks; rotate credentials; prevent recurrence
+- **[Dependency Vulnerability Response](/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)** — Detect, triage, and remediate CVEs with MTTR targets (Critical: 24h, High: 48h, Medium: 2 weeks, Low: 4 weeks)
+- **[Secrets Incident Response](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)** — Contain and investigate suspected secret leaks; rotate credentials; prevent recurrence
 
 **Policies:**
 
-- **[Security Policies & Governance](/docs/40-security/security-policies.md)** — Formal policies for dependency audit, secrets management, security headers, and incident response
-- **[Risk Register](/docs/40-security/risk-register.md)** — Inventory of known risks with severity, mitigations, and acceptance status
+- **[Security Policies & Governance](/40-security/security-policies.md)** — Formal policies for dependency audit, secrets management, security headers, and incident response
+- **[Risk Register](/40-security/risk-register.md)** — Inventory of known risks with severity, mitigations, and acceptance status
 
 **MTTR Targets & Escalation:**
 
@@ -194,7 +194,7 @@ Covers:
 - Dependabot scans weekly; PRs created for all available updates
 - GitHub Security Alerts notify immediately of CVEs
 - `pnpm audit` policy enforced in CI
-- See [Dependency Vulnerability Runbook](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md) for response procedures
+- See [Dependency Vulnerability Runbook](/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md) for response procedures
 
 **Security Headers & CSP Monitoring:**
 
@@ -278,7 +278,7 @@ Run individual commands when debugging specific issues or during active developm
 
 **Rationale:** Local validation reduces PR iteration cycles by catching failures before CI runs. The verify script provides a single-command workflow that matches CI behavior while offering better error reporting and automatic formatting fixes.
 
-See [Testing: Local validation workflow](/docs/60-projects/portfolio-app/05-testing.md#local-validation-workflow-required) for detailed documentation of both approaches.
+See [Testing: Local validation workflow](/60-projects/portfolio-app/05-testing.md#local-validation-workflow-required) for detailed documentation of both approaches.
 
 ### Dependabot automation
 

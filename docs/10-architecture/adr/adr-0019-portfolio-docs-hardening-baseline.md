@@ -67,6 +67,6 @@ Adopt a docs-specific hardening baseline with the following controls:
 
 ## References
 
-- Docs hardening implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/docs/40-security/portfolio-docs-hardening-implementation-plan.md)
-- Security policies: [/docs/40-security/security-policies.md](/docs/40-security/security-policies.md)
-- React2Shell baseline ADR: [/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md](/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md)
+- Docs hardening implementation plan: [/docs/40-security/portfolio-docs-hardening-implementation-plan.md](/40-security/portfolio-docs-hardening-implementation-plan.md)
+- Security policies: [/docs/40-security/security-policies.md](/40-security/security-policies.md)
+- React2Shell baseline ADR: [/docs/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md](/10-architecture/adr/adr-0018-react2shell-hardening-baseline.md)

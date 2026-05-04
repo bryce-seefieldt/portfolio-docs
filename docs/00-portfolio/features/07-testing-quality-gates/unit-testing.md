@@ -88,11 +88,11 @@ tags: [portfolio, features, testing, unit]
 
 ### Runbooks
 
-- [`/50-operations/runbooks/rbk-portfolio-ci-triage.md`](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- [`/50-operations/runbooks/rbk-portfolio-ci-triage.md`](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 
 ### Additional internal references
 
-- [`/70-reference/testing-guide.md`](/docs/70-reference/testing-guide.md)
+- [`/70-reference/testing-guide.md`](/70-reference/testing-guide.md)
 
 ### External reference links
 

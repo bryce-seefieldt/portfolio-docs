@@ -80,7 +80,7 @@ tags: [portfolio, features, core-pages, projects]
 
 ### ADRs
 
-- [`/10-architecture/adr/adr-0011-data-driven-project-registry.md`](/docs/10-architecture/adr/adr-0011-data-driven-project-registry.md)
+- [`/10-architecture/adr/adr-0011-data-driven-project-registry.md`](/10-architecture/adr/adr-0011-data-driven-project-registry.md)
 
 ### Runbooks
 
@@ -88,8 +88,8 @@ tags: [portfolio, features, core-pages, projects]
 
 ### Additional internal references
 
-- [`/70-reference/registry-schema-guide.md`](/docs/70-reference/registry-schema-guide.md)
-- [`/20-engineering/ux-design-system.md`](/docs/20-engineering/ux-design-system.md)
+- [`/70-reference/registry-schema-guide.md`](/70-reference/registry-schema-guide.md)
+- [`/20-engineering/ux-design-system.md`](/20-engineering/ux-design-system.md)
 
 ### External reference links
 

@@ -16,9 +16,9 @@ Phase 5 professionalization is in progress. This release note documents the revi
 
 # Added
 
-- Reviewer guide: [/docs/00-portfolio/reviewer-guide.md](/docs/00-portfolio/reviewer-guide.md)
-- Evidence audit checklist: [/docs/70-reference/evidence-audit-checklist.md](/docs/70-reference/evidence-audit-checklist.md)
-- Known limitations: [/docs/00-portfolio/known-limitations.md](/docs/00-portfolio/known-limitations.md)
+- Reviewer guide: [/docs/00-portfolio/reviewer-guide.md](/00-portfolio/reviewer-guide.md)
+- Evidence audit checklist: [/docs/70-reference/evidence-audit-checklist.md](/70-reference/evidence-audit-checklist.md)
+- Known limitations: [/docs/00-portfolio/known-limitations.md](/00-portfolio/known-limitations.md)
 
 # Changed
 

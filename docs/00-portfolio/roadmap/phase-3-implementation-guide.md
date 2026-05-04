@@ -312,9 +312,9 @@ Before starting Phase 3, ensure:
 
 ## Reference Documentation
 
-- [Roadmap — Phase 3](/docs/00-portfolio/roadmap/index.md)
+- [Roadmap — Phase 3](/00-portfolio/roadmap/index.md)
 - [Session Context — Phase 3 Ready](https://github.com/bryce-seefieldt/portfolio-docs/tree/main/.copilot/session-context.md)
-- [ADR Index](/docs/10-architecture/adr/index.md)
+- [ADR Index](/10-architecture/adr/index.md)
 - [Portfolio App Dossier](docs/60-projects/portfolio-app/index.md)
 - [Reference Section](docs/70-reference/index.md)
 

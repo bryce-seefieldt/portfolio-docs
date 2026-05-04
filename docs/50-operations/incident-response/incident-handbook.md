@@ -7,7 +7,7 @@ tags: [operations, incident-response, runbook, handbook, reliability]
 
 ## Purpose
 
-Provide a consolidated incident response handbook that supports on-call responders with severity guidance, quick selectors, and operational patterns. This handbook complements the runbook catalog at [/docs/50-operations/runbooks](/docs/50-operations/runbooks/index.md).
+Provide a consolidated incident response handbook that supports on-call responders with severity guidance, quick selectors, and operational patterns. This handbook complements the runbook catalog at [/docs/50-operations/runbooks](/50-operations/runbooks/index.md).
 
 ## Scope
 
@@ -32,17 +32,17 @@ Match your scenario to the appropriate runbook:
 
 | I'm seeing...                              | Use this runbook                                                                                            |
 | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| ❌ Deployment shows "Failed" in Vercel     | [Deployment Failure](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md)                      |
-| ⚠️ Health endpoint returns 503             | [Service Degradation](/docs/50-operations/runbooks/rbk-portfolio-service-degradation.md)                    |
-| 🔴 All routes return 500                   | [Deployment Failure](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md)                      |
-| 🐌 Pages load slowly (>3s) but no errors   | [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)    |
-| 📦 Bundle size too large (>30MB)           | [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)    |
-| ❓ Unclear incident, need framework        | [General Incident Response](/docs/50-operations/runbooks/rbk-portfolio-incident-response.md)                |
-| 🔍 Want to understand monitoring setup     | [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md)                    |
-| ⚡ Want to improve performance proactively | [Performance Optimization](/docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md)          |
-| 🔐 CVE alert or dependency vulnerability   | [Dependency Vulnerability Response](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md) |
-| 🤖 Dependabot PR checks are failing        | [Dependabot PR CI Remediation](/docs/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md)            |
-| 🚨 Suspected secret leak in repo           | [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                 |
+| ❌ Deployment shows "Failed" in Vercel     | [Deployment Failure](/50-operations/runbooks/rbk-portfolio-deployment-failure.md)                      |
+| ⚠️ Health endpoint returns 503             | [Service Degradation](/50-operations/runbooks/rbk-portfolio-service-degradation.md)                    |
+| 🔴 All routes return 500                   | [Deployment Failure](/50-operations/runbooks/rbk-portfolio-deployment-failure.md)                      |
+| 🐌 Pages load slowly (>3s) but no errors   | [Performance Troubleshooting](/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)    |
+| 📦 Bundle size too large (>30MB)           | [Performance Troubleshooting](/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)    |
+| ❓ Unclear incident, need framework        | [General Incident Response](/50-operations/runbooks/rbk-portfolio-incident-response.md)                |
+| 🔍 Want to understand monitoring setup     | [Observability & Health Checks](/30-devops-platform/observability-health-checks.md)                    |
+| ⚡ Want to improve performance proactively | [Performance Optimization](/50-operations/runbooks/rbk-portfolio-performance-optimization.md)          |
+| 🔐 CVE alert or dependency vulnerability   | [Dependency Vulnerability Response](/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md) |
+| 🤖 Dependabot PR checks are failing        | [Dependabot PR CI Remediation](/50-operations/runbooks/rbk-dependabot-pr-ci-remediation.md)            |
+| 🚨 Suspected secret leak in repo           | [Secrets Incident Response](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                 |
 
 ---
 
@@ -56,14 +56,14 @@ Match your scenario to the appropriate runbook:
 
 1. **Page on-call engineer + VP Engineering** (Slack + SMS + phone)
 2. **Create incident channel:** `#incident-INC-YYYYMMDD-NNN`
-3. **Execute runbook:** [Deployment Failure](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md) if recent deployment, otherwise [General Incident Response](/docs/50-operations/runbooks/rbk-portfolio-incident-response.md)
+3. **Execute runbook:** [Deployment Failure](/50-operations/runbooks/rbk-portfolio-deployment-failure.md) if recent deployment, otherwise [General Incident Response](/50-operations/runbooks/rbk-portfolio-incident-response.md)
 4. **Post updates every 5 minutes**
 5. **All-clear when resolved**
 6. **Schedule postmortem within 24 hours**
 
 **MTTR Target:** 15 minutes
 
-**If Secrets Incident:** Execute [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) immediately; MTTR ≤5 min for critical secrets
+**If Secrets Incident:** Execute [Secrets Incident Response](/50-operations/runbooks/rbk-portfolio-secrets-incident.md) immediately; MTTR ≤5 min for critical secrets
 
 ### High Severity (SEV-2) — Urgent Response
 
@@ -72,14 +72,14 @@ Match your scenario to the appropriate runbook:
 **Quick Steps:**
 
 1. **Notify on-call engineer via Slack + PagerDuty**
-2. **Execute runbook:** [Service Degradation](/docs/50-operations/runbooks/rbk-portfolio-service-degradation.md) or [Deployment Failure](/docs/50-operations/runbooks/rbk-portfolio-deployment-failure.md)
+2. **Execute runbook:** [Service Degradation](/50-operations/runbooks/rbk-portfolio-service-degradation.md) or [Deployment Failure](/50-operations/runbooks/rbk-portfolio-deployment-failure.md)
 3. **Target resolution:** less than 1 hour
 4. **Post updates every 10 minutes**
 5. **Schedule postmortem within 48 hours**
 
 **MTTR Target:** 1 hour
 
-**If Dependency CVE (High):** Execute [Dependency Vulnerability Response](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md); MTTR 48 hours
+**If Dependency CVE (High):** Execute [Dependency Vulnerability Response](/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md); MTTR 48 hours
 
 ### Medium Severity (SEV-3) — Normal Response
 
@@ -89,7 +89,7 @@ Match your scenario to the appropriate runbook:
 
 1. **Notify team lead via Slack**
 2. **Create GitHub issue** to track
-3. **Execute runbook:** [Service Degradation](/docs/50-operations/runbooks/rbk-portfolio-service-degradation.md) or [Performance Troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)
+3. **Execute runbook:** [Service Degradation](/50-operations/runbooks/rbk-portfolio-service-degradation.md) or [Performance Troubleshooting](/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)
 4. **Investigate during business hours**
 5. **No formal postmortem** (document learnings in issue)
 

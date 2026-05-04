@@ -45,8 +45,8 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 **Evidence Artifacts:**
 
-- [Threat Model: Spoofing](/docs/40-security/threat-models/portfolio-app-threat-model.md#spoofing-identity)
-- [Dossier: Security](/docs/60-projects/portfolio-app/04-security.md)
+- [Threat Model: Spoofing](/40-security/threat-models/portfolio-app-threat-model.md#spoofing-identity)
+- [Dossier: Security](/60-projects/portfolio-app/04-security.md)
 
 ---
 
@@ -67,8 +67,8 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 **Evidence Artifacts:**
 
 - CI Workflow: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)
-- GitHub Rulesets: Verified in [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
-- Rollback Runbook: [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
+- GitHub Rulesets: Verified in [rbk-vercel-setup-and-promotion-validation.md](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
+- Rollback Runbook: [rbk-portfolio-rollback.md](/50-operations/runbooks/rbk-portfolio-rollback.md)
 
 ---
 
@@ -89,7 +89,7 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 - Updated CI Workflow: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L1-L17) (permissions now scoped per job)
 - CodeQL Workflow: [.github/workflows/codeql.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/codeql.yml) (permissions: `contents: read`, `security-events: write`)
-- Threat Model: [Tampering — Threat 2](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-modifies-ci-workflows-or-build-scripts-to-inject-malicious-code)
+- Threat Model: [Tampering — Threat 2](/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-modifies-ci-workflows-or-build-scripts-to-inject-malicious-code)
 
 ---
 
@@ -129,7 +129,7 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 **Evidence Artifacts:**
 
 - PR Template: [.github/PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md) (requires context + security statement)
-- Threat Model: [Repudiation](/docs/40-security/threat-models/portfolio-app-threat-model.md#repudiation-accountability)
+- Threat Model: [Repudiation](/40-security/threat-models/portfolio-app-threat-model.md#repudiation-accountability)
 
 ---
 
@@ -172,7 +172,7 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 **Evidence Artifacts:**
 
 - CI Workflow: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml) (no `env:` debug logging)
-- Threat Model: [Information Disclosure — Threat 2](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-reads-private-github-actions-logs-or-deployment-logs)
+- Threat Model: [Information Disclosure — Threat 2](/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-reads-private-github-actions-logs-or-deployment-logs)
 
 ---
 
@@ -192,7 +192,7 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 - Source Audit: [src/app/](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/) — all components are static; no dynamic HTML injection
 - Dependencies: [package.json](https://github.com/bryce-seefieldt/portfolio-app/blob/main/package.json) — no analytics or tracking libraries
-- Threat Model: [Information Disclosure — Threat 3](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-3-attacker-performs-content-injection-to-steal-data-or-redirect-users)
+- Threat Model: [Information Disclosure — Threat 3](/40-security/threat-models/portfolio-app-threat-model.md#threat-3-attacker-performs-content-injection-to-steal-data-or-redirect-users)
 
 ---
 
@@ -205,15 +205,15 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 | Vercel DDoS protection     | ✅       | ✅          | Built-in; Vercel dashboard shows DDoS protection enabled                                                    |
 | Static-first content model | ✅       | ✅          | No heavy compute per request; static Next.js optimization                                                   |
 | Minimal client JS          | ✅       | ✅          | **Target: < 50KB gzipped**; minimal React components (no heavy libraries)                                   |
-| Rollback readiness         | ✅       | ✅          | [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md) tested; ~1 min rollback |
+| Rollback readiness         | ✅       | ✅          | [rbk-portfolio-rollback.md](/50-operations/runbooks/rbk-portfolio-rollback.md) tested; ~1 min rollback |
 
 **Compliance Status:** ✅ **100% — All controls verified**
 
 **Evidence Artifacts:**
 
 - Vercel Config: [next.config.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/next.config.ts) (React Compiler enabled for optimization)
-- Rollback Runbook: [rbk-portfolio-rollback.md](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
-- Threat Model: [Denial of Service — Threat 1](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-1-attacker-floods-the-portfolio-app-domain-with-requests)
+- Rollback Runbook: [rbk-portfolio-rollback.md](/50-operations/runbooks/rbk-portfolio-rollback.md)
+- Threat Model: [Denial of Service — Threat 1](/40-security/threat-models/portfolio-app-threat-model.md#threat-1-attacker-floods-the-portfolio-app-domain-with-requests)
 
 ---
 
@@ -232,7 +232,7 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 - Smoke Tests: [tests/e2e/smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts) (validates 12 routes; Chromium + Firefox)
 - CI Workflow: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L96-L106) (smoke tests required)
-- Dossier: [02-architecture.md](/docs/60-projects/portfolio-app/02-architecture.md) (minimal JS strategy)
+- Dossier: [02-architecture.md](/60-projects/portfolio-app/02-architecture.md) (minimal JS strategy)
 
 ---
 
@@ -254,9 +254,9 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 **Evidence Artifacts:**
 
-- GitHub Rulesets: [rbk-vercel-setup-and-promotion-validation.md](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (setup verified)
+- GitHub Rulesets: [rbk-vercel-setup-and-promotion-validation.md](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md) (setup verified)
 - CI Workflow: [.github/workflows/ci.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L1-L17) (permissions scoped per Phase 2 enhancement)
-- Threat Model: [Elevation of Privilege — Threat 1](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-1-attacker-gains-elevated-permissions-in-the-github-organization-or-vercel)
+- Threat Model: [Elevation of Privilege — Threat 1](/40-security/threat-models/portfolio-app-threat-model.md#threat-1-attacker-gains-elevated-permissions-in-the-github-organization-or-vercel)
 
 ---
 
@@ -268,15 +268,15 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 | GitHub Rulesets require 1+ approval | ✅       | ✅          | Ruleset: `main-protection` enforces 1 approval minimum (configurable, currently 1)                                                                         |
 | Dismissal of stale reviews          | ✅       | ✅          | Enabled: stale reviews are dismissed if branch is updated                                                                                                  |
 | Required status checks              | ✅       | ✅          | Checks required: `ci / quality`, `ci / build`, `secrets-scan`, CodeQL (all must pass)                                                                      |
-| Reviewer guidance provided          | ✅       | ✅          | [ADR-0007](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) documents promotion gates and review responsibilities |
+| Reviewer guidance provided          | ✅       | ✅          | [ADR-0007](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) documents promotion gates and review responsibilities |
 
 **Compliance Status:** ✅ **100% — All controls verified**
 
 **Evidence Artifacts:**
 
 - PR Template: [.github/PULL_REQUEST_TEMPLATE.md](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
-- ADR: [ADR-0007: Portfolio App Hosting (Vercel) with Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
-- Threat Model: [Elevation of Privilege — Threat 2](/docs/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-escalates-from-a-feature-branch-to-main-via-social-engineering-or-process-bypass)
+- ADR: [ADR-0007: Portfolio App Hosting (Vercel) with Promotion Checks](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+- Threat Model: [Elevation of Privilege — Threat 2](/40-security/threat-models/portfolio-app-threat-model.md#threat-2-attacker-escalates-from-a-feature-branch-to-main-via-social-engineering-or-process-bypass)
 
 ---
 
@@ -290,7 +290,7 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 | **Least-Privilege CI Permissions**        | Tampering (T2), Elevation (E1)  | ✅ Complete | [ci.yml#L1-L17](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L1-L17)   |
 | **Pre-commit Hook (TruffleHog)**          | Information Disclosure (T1)     | ✅ Complete | [.pre-commit-config.yaml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.pre-commit-config.yaml) |
 | **Local Verification Scan**               | Information Disclosure (T1)     | ✅ Complete | Lightweight pattern-based scan; TruffleHog not run locally                                                    |
-| **Secrets Incident Runbook**              | Information Disclosure (T1, T2) | ✅ Complete | [rbk-portfolio-secrets-incident.md](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md)           |
+| **Secrets Incident Runbook**              | Information Disclosure (T1, T2) | ✅ Complete | [rbk-portfolio-secrets-incident.md](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)           |
 
 ---
 
@@ -430,29 +430,29 @@ The Portfolio App is **COMPLIANT** with baseline STRIDE mitigations and includes
 
 ### Threat Model
 
-- Primary: [Portfolio App Threat Model (STRIDE)](/docs/40-security/threat-models/portfolio-app-threat-model.md)
+- Primary: [Portfolio App Threat Model (STRIDE)](/40-security/threat-models/portfolio-app-threat-model.md)
 
 ### Dossiers
 
-- [Portfolio App Security Dossier](/docs/60-projects/portfolio-app/04-security.md)
-- [Portfolio App Architecture Dossier](/docs/60-projects/portfolio-app/02-architecture.md)
+- [Portfolio App Security Dossier](/60-projects/portfolio-app/04-security.md)
+- [Portfolio App Architecture Dossier](/60-projects/portfolio-app/02-architecture.md)
 
 ### ADRs
 
-- [ADR-0005: Portfolio App Stack (Next.js + TypeScript)](/docs/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md)
-- [ADR-0007: Portfolio App Hosting (Vercel) with Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+- [ADR-0005: Portfolio App Stack (Next.js + TypeScript)](/10-architecture/adr/adr-0005-portfolio-app-stack-nextjs-ts.md)
+- [ADR-0007: Portfolio App Hosting (Vercel) with Promotion Checks](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
 
 ### Runbooks
 
-- [Deploy](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
-- [Rollback](/docs/50-operations/runbooks/rbk-portfolio-rollback.md)
-- [CI Triage](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
-- [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) (Phase 2)
+- [Deploy](/50-operations/runbooks/rbk-portfolio-deploy.md)
+- [Rollback](/50-operations/runbooks/rbk-portfolio-rollback.md)
+- [CI Triage](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- [Secrets Incident Response](/50-operations/runbooks/rbk-portfolio-secrets-incident.md) (Phase 2)
 
 ### Phase 2 Planning
 
-- [Phase 2 Implementation Guide](/docs/00-portfolio/roadmap/phase-2-implementation-guide.md)
-- [Roadmap](/docs/00-portfolio/roadmap/index.md)
+- [Phase 2 Implementation Guide](/00-portfolio/roadmap/phase-2-implementation-guide.md)
+- [Roadmap](/00-portfolio/roadmap/index.md)
 
 ---
 

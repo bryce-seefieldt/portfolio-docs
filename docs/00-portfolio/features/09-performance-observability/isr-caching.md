@@ -77,11 +77,11 @@ tags: [portfolio, features, performance, caching]
 
 ### Runbooks
 
-- [`/50-operations/runbooks/rbk-portfolio-performance-optimization.md`](/docs/50-operations/runbooks/rbk-portfolio-performance-optimization.md)
+- [`/50-operations/runbooks/rbk-portfolio-performance-optimization.md`](/50-operations/runbooks/rbk-portfolio-performance-optimization.md)
 
 ### Additional internal references
 
-- [`/70-reference/performance-optimization-guide.md`](/docs/70-reference/performance-optimization-guide.md)
+- [`/70-reference/performance-optimization-guide.md`](/70-reference/performance-optimization-guide.md)
 
 ### External reference links
 

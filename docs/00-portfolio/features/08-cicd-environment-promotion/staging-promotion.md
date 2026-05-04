@@ -74,16 +74,16 @@ tags: [portfolio, features, cicd, staging]
 
 ### ADRs
 
-- [`/10-architecture/adr/adr-0013-multi-environment-deployment.md`](/docs/10-architecture/adr/adr-0013-multi-environment-deployment.md)
+- [`/10-architecture/adr/adr-0013-multi-environment-deployment.md`](/10-architecture/adr/adr-0013-multi-environment-deployment.md)
 
 ### Runbooks
 
-- [`/50-operations/runbooks/rbk-portfolio-deploy.md`](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
-- [`/50-operations/runbooks/rbk-portfolio-environment-promotion.md`](/docs/50-operations/runbooks/rbk-portfolio-environment-promotion.md)
+- [`/50-operations/runbooks/rbk-portfolio-deploy.md`](/50-operations/runbooks/rbk-portfolio-deploy.md)
+- [`/50-operations/runbooks/rbk-portfolio-environment-promotion.md`](/50-operations/runbooks/rbk-portfolio-environment-promotion.md)
 
 ### Additional internal references
 
-- [`/30-devops-platform/ci-cd-pipeline-overview.md`](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
+- [`/30-devops-platform/ci-cd-pipeline-overview.md`](/30-devops-platform/ci-cd-pipeline-overview.md)
 
 ### External reference links
 

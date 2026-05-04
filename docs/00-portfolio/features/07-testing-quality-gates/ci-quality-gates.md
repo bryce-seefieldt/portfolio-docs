@@ -87,12 +87,12 @@ tags: [portfolio, features, testing, quality]
 
 ### Runbooks
 
-- [`/50-operations/runbooks/rbk-portfolio-ci-triage.md`](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- [`/50-operations/runbooks/rbk-portfolio-ci-triage.md`](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 
 ### Additional internal references
 
-- [`/70-reference/testing-guide.md`](/docs/70-reference/testing-guide.md)
-- [`/30-devops-platform/ci-cd-pipeline-overview.md`](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
+- [`/70-reference/testing-guide.md`](/70-reference/testing-guide.md)
+- [`/30-devops-platform/ci-cd-pipeline-overview.md`](/30-devops-platform/ci-cd-pipeline-overview.md)
 
 ### External reference links
 

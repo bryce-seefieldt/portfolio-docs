@@ -83,8 +83,8 @@ tags: [portfolio, features, core-pages, contact]
 
 ### Additional internal references
 
-- [`/40-security/security-policies.md`](/docs/40-security/security-policies.md)
-- [`/70-reference/portfolio-app-config-reference.md`](/docs/70-reference/portfolio-app-config-reference.md)
+- [`/40-security/security-policies.md`](/40-security/security-policies.md)
+- [`/70-reference/portfolio-app-config-reference.md`](/70-reference/portfolio-app-config-reference.md)
 
 ### External reference links
 
