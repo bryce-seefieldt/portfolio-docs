@@ -30,7 +30,7 @@ The Portfolio App CI/CD pipeline enforces quality gates via GitHub Actions befor
 | ----------- | ----------- | ---------------------- | ---------------------------------- | -------------------------------- |
 | Preview     | PR branches | Auto on PR creation    | `*.vercel.app` (auto-generated)    | Feature validation and PR review |
 | Staging     | `staging`   | Manual (merge main)    | `staging-bns-portfolio.vercel.app` | Pre-production validation        |
-| Production  | `main`      | Auto (after CI passes) | `bns-portfolio.vercel.app`         | Live public site                 |
+| Production  | `main`      | Auto (after CI passes) | `bryce.seefieldt.ca`               | Live public site                 |
 
 **Deployment flow:** PR → Preview (auto) → Merge to main → CI runs → Production (auto) → Staging (manual) → Production validated
 
@@ -372,7 +372,7 @@ env:
    NEXT_PUBLIC_DOCS_BASE_URL: https://your-docs-domain.example
   NEXT_PUBLIC_GITHUB_URL: https://github.com/bryce-seefieldt/portfolio-app
   NEXT_PUBLIC_DOCS_GITHUB_URL: https://github.com/bryce-seefieldt/portfolio-docs
-  NEXT_PUBLIC_SITE_URL: https://bns-portfolio.vercel.app
+  NEXT_PUBLIC_SITE_URL: https://bryce.seefieldt.ca
 ```
 
 **Rationale**: Non-sensitive public URLs used for registry interpolation during CI builds

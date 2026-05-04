@@ -221,7 +221,7 @@ Document the architectural decision to adopt explicit three-tier environment sep
      - Command: `git checkout main && git pull && git merge staging && git push`
      - Result: Vercel automatically deploys to production
    - Step 3: Validate production deployment
-     - Test: Visit `https://bns-portfolio.vercel.app`
+     - Test: Visit `https://bryce.seefieldt.ca`
      - Check: Application loads; critical pages accessible
      - Verify: No error spikes in monitoring
    - Step 4: Log promotion event

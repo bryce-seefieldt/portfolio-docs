@@ -569,17 +569,17 @@ Update the team documentation with your actual URLs:
 ```markdown
 ## Production URLs (2026-01-16)
 
-- **Portfolio App Production:** https://bns-portfolio.vercel.app
-- **Portfolio App Staging (Preview):** https://staging-bns-portfolio-vercel.app
-- **Portfolio Docs Production:** https://bns-portfolio-docs.vercel.app
-- **Portfolio Docs Preview:** https://bns-portfolio-docs-git-\*.vercel.app (dynamic per PR)
+- **Portfolio App Production:** https://bryce.seefieldt.ca (canonical domain)
+- **Portfolio App Staging (Preview):** https://staging-bns-portfolio-vercel.app (example)
+- **Portfolio Docs Production:** https://bryce.seefieldt.ca/docs (canonical domain)
+- **Portfolio Docs Preview:** https://bns-portfolio-docs.vercel.app (Vercel preview origin)
 
 ### Environment Variables Configured
 
 | Variable                    | Preview                                          | Production                                       |
 | --------------------------- | ------------------------------------------------ | ------------------------------------------------ |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | https://bns-portfolio-docs.vercel.app            | https://bns-portfolio-docs.vercel.app            |
-| `NEXT_PUBLIC_SITE_URL`      | https://bns-portfolio.vercel.app                 | https://portfolio.yourdomain.com                 |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | https://bns-portfolio-docs.vercel.app/docs/      | https://bryce.seefieldt.ca/docs                 |
+| `NEXT_PUBLIC_SITE_URL`      | https://bns-portfolio.vercel.app                 | https://bryce.seefieldt.ca                      |
 | `NEXT_PUBLIC_GITHUB_URL`    | https://github.com/bryce-seefieldt/portfolio-app | https://github.com/bryce-seefieldt/portfolio-app |
 | ...                         | ...                                              | ...                                              |
 ```

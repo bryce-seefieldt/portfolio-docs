@@ -151,8 +151,8 @@ This is analogous to Next.js `NEXT_PUBLIC_*` convention.
 
 - **Purpose**: Base URL of the deployed site (SEO, sitemap, canonical URLs)
 - **Local**: `http://localhost:3000`
-- **Production**: `https://bns-portfolio-docs.vercel.app`
-- **Default**: `https://bns-portfolio-docs.vercel.app` (fallback if not set)
+- **Production**: `https://bryce.seefieldt.ca/docs` (canonical domain; preview: `https://bns-portfolio-docs.vercel.app`)
+- **Default**: `https://bryce.seefieldt.ca/docs` (fallback if not set)
 
 #### `DOCUSAURUS_BASE_URL`
 
@@ -170,7 +170,7 @@ This is analogous to Next.js `NEXT_PUBLIC_*` convention.
 
 - **Purpose**: URL of the Portfolio App for cross-linking from docs to live app
 - **Local**: `http://localhost:3000`
-- **Production**: `https://bns-portfolio-app.vercel.app`
+- **Production**: `https://bryce.seefieldt.ca` (canonical domain; preview: `https://bns-portfolio.vercel.app`)
 
 ### File Structure
 
@@ -196,12 +196,12 @@ DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
 Set environment variables in Vercel Dashboard under **Settings → Environment Variables**:
 
 ```
-DOCUSAURUS_SITE_URL=https://bns-portfolio-docs.vercel.app
-DOCUSAURUS_BASE_URL=/
+DOCUSAURUS_SITE_URL=https://bryce.seefieldt.ca/docs
+DOCUSAURUS_BASE_URL=/docs/
 DOCUSAURUS_GITHUB_ORG=bryce-seefieldt
 DOCUSAURUS_GITHUB_REPO_DOCS=portfolio-docs
 DOCUSAURUS_GITHUB_REPO_APP=portfolio-app
-DOCUSAURUS_PORTFOLIO_APP_URL=https://bns-portfolio-app.vercel.app
+DOCUSAURUS_PORTFOLIO_APP_URL=https://bryce.seefieldt.ca
 ```
 
 ### Full Documentation

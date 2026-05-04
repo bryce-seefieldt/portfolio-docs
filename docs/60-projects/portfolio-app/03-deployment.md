@@ -118,7 +118,7 @@ The Portfolio App operates across three tiers, each serving a distinct purpose i
 
 - **Purpose:** Live public site serving end users
 - **Trigger:** Automatic promotion after CI checks pass (Vercel Deployment Checks)
-- **Domain:** `https://bns-portfolio.vercel.app` (production domain)
+- **Domain:** `https://bryce.seefieldt.ca` (canonical production domain)
 - **Protection:**
   - GitHub Deployment Checks gate promotion (`ci / quality`, `ci / build`)
   - Pipeline prerequisites for successful promotion (`ci / test`, `ci / link-validation`)
@@ -378,7 +378,7 @@ git push origin main
 
 **What happens:**
 
-- Vercel automatically deploys to `https://bns-portfolio.vercel.app`
+- Vercel automatically deploys to `https://bryce.seefieldt.ca`
 - CI checks run on main branch
 - Production domain updates to latest deployment
 
@@ -386,7 +386,7 @@ git push origin main
 
 After production deployment, verify critical flows match staging validation:
 
-- [ ] Open `https://bns-portfolio.vercel.app`
+- [ ] Open `https://bryce.seefieldt.ca`
 - [ ] Validate same routes and flows as staging
 - [ ] Confirm evidence links and navigation work
 - [ ] Check browser console for errors
