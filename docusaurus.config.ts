@@ -15,11 +15,11 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url:
-    process.env.DOCUSAURUS_SITE_URL || 'https://bns-portfolio-docs.vercel.app',
+  url: process.env.DOCUSAURUS_SITE_URL || 'https://bryce.seefieldt.ca',
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: process.env.DOCUSAURUS_BASE_URL || '/',
+  // Docs are served at /docs/ under the main portfolio domain.
+  // Override with DOCUSAURUS_BASE_URL env var (e.g. '/' for standalone preview).
+  baseUrl: process.env.DOCUSAURUS_BASE_URL || '/docs/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -32,8 +32,7 @@ const config: Config = {
   // Custom fields for cross-repository linking
   customFields: {
     portfolioAppUrl:
-      process.env.DOCUSAURUS_PORTFOLIO_APP_URL ||
-      'https://bns-portfolio-app.vercel.app',
+      process.env.DOCUSAURUS_PORTFOLIO_APP_URL || 'https://bryce.seefieldt.ca',
     githubOrgUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}`,
     githubRepoDocsUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_DOCS || 'portfolio-docs'}`,
     githubRepoAppUrl: `https://github.com/${process.env.DOCUSAURUS_GITHUB_ORG || 'bryce-seefieldt'}/${process.env.DOCUSAURUS_GITHUB_REPO_APP || 'portfolio-app'}`,
@@ -91,6 +90,10 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          // Serve docs at baseUrl root (e.g. /docs/<doc-path> with baseUrl=/docs/).
+          // This avoids the double-path /docs/docs/... that would result from the
+          // default routeBasePath of 'docs' combined with baseUrl '/docs/'.
+          routeBasePath: '/',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
