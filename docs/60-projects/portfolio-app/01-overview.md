@@ -279,8 +279,8 @@ The GitHub Actions workflow orchestrates quality gates with job dependencies:
 quality (lint, format, typecheck, audit)
   ↓
 test (unit + E2E)
-  ↓
-link-validation (registry + evidence links)
+  ↘
+link-validation (registry + deterministic Playwright E2E)
   ↓
 build (Next.js compile + deployment gate)
 
@@ -290,7 +290,7 @@ PR-only: secrets-scan (TruffleHog)
 All jobs must pass; failures block subsequent stages. Tests are separated into distinct steps for clarity:
 
 - **Unit tests** validate data integrity, link construction, and slug validation
-- **E2E tests** validate route rendering, evidence link resolution, and component behavior
+- **E2E tests** validate route rendering, evidence-link DOM/href assertions, and component behavior
 
 See [CI/CD Pipeline Overview](/docs/devops-platform/ci-cd-pipeline-overview) for detailed job configuration and troubleshooting.
 

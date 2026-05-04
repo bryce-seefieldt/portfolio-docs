@@ -148,7 +148,8 @@ Responsibilities:
   - E2E tests: `pnpm test:e2e` (Playwright suite across Chromium and Firefox)
 - Link validation runs:
   - Registry validation: `pnpm registry:validate` (checks project metadata schema)
-  - Evidence link checks: `pnpm links:check` (Playwright smoke tests)
+  - Deterministic E2E gate: `pnpm links:check` (full Playwright E2E suite)
+  - Live external monitor: `pnpm links:check:external` (scheduled/manual, non-blocking)
   - Produces playwright-report artifact on failure for diagnostic use
 - Build runs `pnpm build` with frozen lockfile installs, then triggers Vercel deployment
 - If CI fails: follow the CI triage runbook: [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
@@ -159,7 +160,7 @@ Responsibilities:
 - **Required before production is considered complete**
 - Validation includes:
   - Manual smoke tests of critical routes (`/`, `/cv`, `/projects`, `/contact`)
-  - Evidence link resolution verification
+  - Evidence link rendering and expected-destination verification
   - Browser console error checks
   - Optional automated Playwright tests via: `PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm test:e2e`
 - If staging validation fails: fix via hotfix PR or rollback (see [rbk-portfolio-deploy.md](docs/50-operations/runbooks/rbk-portfolio-deploy.md))

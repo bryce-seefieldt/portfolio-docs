@@ -100,7 +100,7 @@ The Portfolio App operates across three tiers, each serving a distinct purpose i
 - **Domain:** Auto-generated Vercel URL per PR (e.g., `portfolio-app-git-feat-xyz.vercel.app`)
 - **Validation:**
   - Reviewers validate routing, rendering, and functionality
-  - Evidence links to Documentation App are verified
+  - Evidence links to Documentation App are rendered with expected destinations
   - CI checks run automatically
 
 ### Staging (`staging` branch)
@@ -110,7 +110,7 @@ The Portfolio App operates across three tiers, each serving a distinct purpose i
 - **Domain:** `https://staging-bns-portfolio.vercel.app`
 - **Validation:**
   - Full smoke test suite against staging URL
-  - Evidence link resolution and navigation flow verification
+  - Evidence link rendering/destination verification and navigation flow checks
   - Performance and accessibility spot checks
   - Manual exploratory testing for critical paths
 

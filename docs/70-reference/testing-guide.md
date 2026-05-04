@@ -12,7 +12,8 @@ This guide provides patterns and examples for writing tests in the Portfolio App
 ## Scope
 
 - Unit testing patterns with Vitest (registry validation, slug helpers, link construction)
-- E2E testing patterns with Playwright (component rendering, link resolution)
+- E2E testing patterns with Playwright (component rendering, route/API behavior, evidence-link DOM assertions)
+- Live external evidence-link monitoring patterns (best-effort HTTP reachability checks)
 - Running tests locally and in CI
 - Interpreting test output and coverage reports
 - Troubleshooting common test failures
@@ -26,15 +27,15 @@ The Portfolio App follows a testing pyramid: broad unit tests at the base, fewer
 ```mermaid
 graph TB
     subgraph E2E["E2E Tests (Playwright) - ~66 tests"]
-        E1["Evidence link resolution"]
+    E1["Evidence link DOM/href validation"]
         E2["Component rendering"]
         E3["Route coverage (user journeys)"]
         E4["Responsive design"]
     end
 
-    subgraph INT["Integration Tests (Future)"]
-        I1["API routes"]
-        I2["Data fetching"]
+  subgraph INT["Integration Monitor (External)"]
+    I1["Live HTTP checks (docs/github URLs)"]
+    I2["Scheduled + manual non-blocking workflow"]
     end
 
     subgraph UNIT["Unit Tests (Vitest)"]
@@ -498,7 +499,29 @@ test('echo endpoint rate limits repeated requests', async ({ request }) => {
 6. Responsive checks (mobile/tablet/desktop) for evidence content
 7. Security endpoints (`/api/csrf`, `/api/echo`) and CSP nonce headers
 
-### Evidence Link Resolution Tests (optional enhancement)
+Important behavior note:
+
+- Playwright E2E tests verify evidence link DOM presence and non-empty href attributes.
+- Playwright E2E tests do not perform remote connectivity checks against external docs or GitHub hosts.
+
+### External Evidence Link Monitor
+
+Use the external monitor for live reachability of external evidence URLs.
+
+- Local/manual command: `pnpm links:check:external`
+- CI workflow: `.github/workflows/external-link-monitor.yml`
+- Trigger modes:
+  - scheduled (`20 9 * * *`, daily UTC)
+  - manual (`workflow_dispatch`)
+- Scope:
+  - checks absolute http/https evidence URLs from the registry
+  - uses `HEAD` first with `GET` fallback for common server restrictions
+  - retries transient failures and reports a pass/fail summary
+- Governance:
+  - non-blocking by design for PR merge gates
+  - used for monitoring and triage, not deterministic merge blocking
+
+### Evidence Link Rendering Tests (optional enhancement)
 
 **Recommended additions**:
 
@@ -512,7 +535,7 @@ test('echo endpoint rate limits repeated requests', async ({ request }) => {
 ```typescript
 import { test, expect } from '@playwright/test';
 
-test.describe('Evidence Link Resolution', () => {
+test.describe('Evidence Link Rendering', () => {
   test('portfolio-app project page renders', async ({ page }) => {
     await page.goto('/projects/portfolio-app');
 
@@ -660,6 +683,17 @@ This ensures:
 2. Merge is blocked if CI fails
 3. Coverage reports are available for review
 
+### External Link Monitor Workflow (non-blocking)
+
+The Portfolio App also includes a separate workflow for live external evidence-link checks:
+
+- Workflow: `external-link-monitor`
+- Job: `check-external-evidence-links`
+- Trigger: schedule + manual dispatch
+- Command: `pnpm links:check:external`
+
+This workflow is intentionally separate from required PR checks to avoid flaky merges caused by third-party outages, anti-bot controls, or transient network conditions.
+
 ## Troubleshooting
 
 For CI check failures and coverage gate triage, see [docs/50-operations/runbooks/rbk-portfolio-ci-triage.md](docs/50-operations/runbooks/rbk-portfolio-ci-triage.md).
@@ -707,6 +741,17 @@ await expect(page.locator('text=Evidence Artifacts')).toBeVisible();
 **Problem**: Tests pass individually but fail when run together
 
 **Solution**: Ensure tests clean up state (clear cookies, logout). Use `test.beforeEach()` and `test.afterEach()` for setup/teardown.
+
+### External Monitor Failures
+
+**Problem**: `external-link-monitor` reports failed external URLs
+
+**Solution**:
+
+1. Re-run once to rule out transient network/provider issues.
+2. If failure persists, verify the URL in browser or with curl.
+3. If URL moved or was removed, update registry evidence data.
+4. If upstream host is degraded, track via issue/runbook and avoid destabilizing PR gates.
 
 ### Coverage Issues
 

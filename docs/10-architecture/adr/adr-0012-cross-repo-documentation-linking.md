@@ -268,7 +268,7 @@ export function githubUrl(path: string): string {
 ### Phase 3: Unit & E2E Tests (Stage 3.3)
 
 - `src/lib/__tests__/config.test.ts`: 18 tests verifying `docsUrl()`, `githubUrl()` behavior with env vars set/unset
-- `e2e/evidence-links.spec.ts`: 12 Playwright tests verifying evidence links resolve correctly
+- `e2e/evidence-links.spec.ts`: 12 Playwright tests verifying evidence link rendering and href assertions
 - CI workflow exports required variables for tests to pass
 
 ---
@@ -307,7 +307,7 @@ describe('docsUrl', () => {
 ### E2E Tests
 
 ```typescript
-test('evidence links resolve correctly', async ({ page }) => {
+test('evidence links render with expected href values', async ({ page }) => {
   await page.goto('/projects/portfolio-app');
   const docsLink = page.locator('a[href*="/docs/"]');
   await expect(docsLink).toHaveAttribute(
@@ -327,7 +327,7 @@ This decision is considered successful if:
 - ✅ Links work in CI with environment variables set
 - ✅ Links work in production with production domains
 - ✅ Unit tests verify helper functions return correct URLs
-- ✅ E2E tests verify evidence links resolve
+- ✅ E2E tests verify evidence links render with expected href values
 - ✅ Cloning the repo and updating `.env` makes all links portable
 - ✅ Adding new cross-repo links follows same pattern
 - ✅ No hardcoded domains in application code

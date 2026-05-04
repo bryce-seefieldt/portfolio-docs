@@ -66,12 +66,11 @@ If suspected, stop and treat as an incident.
 - PR readiness:
   - PR template completed with security note (“No secrets added”)
   - Vercel preview exists and routes render (`/`, `/cv`, `/projects`, one project detail)
-  - Evidence links to docs resolve
+  - Evidence link UI is present and href values look correct
+  - Optional: external monitor reviewed (`external-link-monitor` workflow)
 - CI governance:
   - Required checks green: `ci / quality`, `ci / build`
   - Branch ruleset active (e.g., `main-protection`) and required checks selected
-
-### 1) Local preflight validation (required)
 
 ### 1) Local preflight validation (required)
 
@@ -79,15 +78,15 @@ If suspected, stop and treat as an incident.
 
 ```bash
 pnpm install
-pnpm verify  # Runs all 8 checks with detailed error reporting
+pnpm verify  # Runs the full local verification suite with detailed error reporting
 ```
 
-This runs: environment check, auto-format, format validation, lint, typecheck, audit, secret scanning, registry validation, build, and smoke tests.
+This runs: environment check, auto-format, format validation, lint, typecheck, audit, secret scanning, registry validation, build, performance checks, unit tests, and Playwright E2E checks.
 
 **Alternative: Quick validation (skip tests):**
 
 ```bash
-pnpm verify:quick  # Runs checks 1-7, skips smoke tests
+pnpm verify:quick  # Skips tests/performance for faster local iteration
 ```
 
 **Alternative: Manual step-by-step:**
@@ -102,7 +101,8 @@ pnpm typecheck         # TypeScript validation
 pnpm audit --audit-level=high  # Dependency vulnerability gate
 pnpm registry:validate # Projects YAML schema check
 pnpm build             # Production build
-pnpm test              # Smoke tests (Playwright - 12 tests)
+pnpm test:e2e          # Playwright E2E suite
+pnpm links:check       # Registry+E2E gate equivalent used by CI link-validation job
  # Secrets scanning runs in CI on PRs (TruffleHog). Local verify uses a lightweight pattern scan.
 ```
 
@@ -121,7 +121,7 @@ pnpm dev
 Expected outcome:
 
 - all commands succeed with no errors.
-- smoke tests: 12/12 passing (6 routes × 2 browsers)
+- Playwright E2E checks pass.
 
 ### 2) Open a PR (required)
 
@@ -142,7 +142,7 @@ In the PR:
   - `/cv` renders correctly
   - `/projects` renders list
   - at least one `/projects/[slug]` renders and includes evidence links
-- validate /docs links resolve correctly (path or subdomain)
+- validate /docs links target the expected host/path (path strategy or subdomain strategy)
 
 ### 4) Merge to `main`
 
@@ -190,9 +190,11 @@ git push origin staging
    - [ ] At least one project detail page renders (e.g., `/projects/portfolio-app`)
    - [ ] Contact page renders (`/contact`)
 3. Verify evidence links:
-   - [ ] Click "View Documentation" or similar links
-   - [ ] Verify links resolve to Documentation App
-   - [ ] Check that project dossier links work
+
+- [ ] Evidence link elements render with non-empty href values
+- [ ] Click sample links to sanity-check expected destinations
+- [ ] Optional: use external monitor for live connectivity confirmation
+
 4. Check browser console:
    - [ ] No JavaScript errors
    - [ ] No failed network requests
@@ -201,18 +203,21 @@ git push origin staging
 **Automated validation (recommended):**
 
 ```bash
-# Run Playwright smoke tests against staging
-PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test
+# Run Playwright E2E tests against staging
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm test:e2e
 
 # Or run specific test file
-PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwright test tests/smoke.spec.ts
+PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm test:e2e:single
+
+# Optional: run live external link monitor (non-blocking)
+pnpm links:check:external
 ```
 
 **Expected outcome:**
 
 - All manual checks pass
 - Automated tests pass (if running)
-- No console errors or broken links
+- No console errors; external-link monitor results reviewed when connectivity confidence is required
 
 **If staging validation fails:**
 
@@ -245,8 +250,10 @@ PLAYWRIGHT_TEST_BASE_URL=https://staging-bns-portfolio.vercel.app pnpm playwrigh
 1. Open `https://bns-portfolio.vercel.app` in browser
 2. Verify same critical paths as staging:
    - [ ] Home, CV, Projects, Contact pages render
-   - [ ] Evidence links resolve correctly
-   - [ ] No console errors
+
+- [ ] Evidence links render correctly and navigate to expected destinations
+- [ ] No console errors
+
 3. **Compare with staging:**
    - [ ] Production behavior matches staging validation
    - [ ] No unexpected differences
@@ -303,8 +310,8 @@ Expected outcome:
 From the deployed environment (Preview or Production), validate behavior that depends on env:
 
 - Documentation link(s) resolve correctly:
-  - clicking “Docs” or “Evidence” navigates to the Documentation App host derived from `NEXT_PUBLIC_DOCS_BASE_URL`
-- Profile links resolve correctly:
+  - clicking “Docs” or “Evidence” navigates to the Documentation App host/path derived from `NEXT_PUBLIC_DOCS_BASE_URL`
+- Profile links navigate correctly:
   - GitHub/LinkedIn links (if present) go to the configured destinations
 - Optional mail link:
   - contact email (if configured) generates a correct `mailto:` link
@@ -320,7 +327,7 @@ If validation fails:
 Validate production:
 
 - core routes load (same set as preview)
-- evidence links to docs remain correct
+- evidence links to docs remain correct in UI and destination expectations
 - no broken images/assets
 
 ### 10) Record release evidence (recommended)
@@ -430,7 +437,9 @@ For detailed rollback procedures, see [rbk-portfolio-rollback.md](./rbk-portfoli
 - Promotion stuck “waiting for checks”:
   - ensure CI runs on push to main; confirm check names match imported checks
 - Broken evidence links:
-  - treat as regression; fix forward or rollback depending on severity
+  - distinguish between app-side regression (broken href/render) and external outage (monitor alert)
+  - app-side regression: treat as release blocker; fix forward or rollback
+  - external outage only: track operationally; do not weaken deterministic PR gates
 
 ## References
 

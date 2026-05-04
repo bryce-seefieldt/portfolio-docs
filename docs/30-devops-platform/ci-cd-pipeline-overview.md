@@ -15,6 +15,8 @@ Document the CI/CD pipeline architecture, job dependencies, test integration, an
 - Job sequence and dependencies
 - Quality gates (lint, format, typecheck, tests)
 - Test job integration (unit + E2E)
+- Link-validation integration (registry validation + full Playwright E2E suite)
+- External evidence-link monitoring (scheduled/manual, non-blocking)
 - Coverage reporting and artifacts
 - Build promotion and deployment
 
@@ -37,18 +39,24 @@ The Portfolio App CI/CD pipeline enforces quality gates via GitHub Actions befor
 ```mermaid
 graph TB
    Quality["Quality Job<br/>├─ Lint ESLint<br/>├─ Format check Prettier<br/>├─ Typecheck TypeScript<br/>├─ Dependency audit<br/>└─ Auto-format Dependabot PRs"]
-    Secrets["Secrets-Scan Job<br/>├─ TruffleHog scanning<br/>└─ Verified secrets only"]
+   Secrets["Secrets-Scan Job (PR only)<br/>├─ TruffleHog scanning<br/>└─ Verified secrets only"]
     Test["Test Job<br/>├─ Unit tests pnpm test:unit<br/>├─ E2E tests Playwright<br/>└─ Coverage reports artifacts"]
+   LinkValidation["Link-Validation Job<br/>├─ Registry validation<br/>└─ Full Playwright E2E via links:check"]
     Build["Build Job<br/>├─ pnpm build<br/>└─ Vercel deployment"]
+   ExternalMonitor["External Link Monitor<br/>├─ links:check:external<br/>└─ Scheduled/manual non-blocking"]
 
-    Quality --> Secrets
-    Secrets --> Test
-    Test --> Build
+   Quality --> Test
+   Quality --> LinkValidation
+   Test --> Build
+   LinkValidation --> Build
+   Secrets -.-> Build
 
     style Quality fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
     style Secrets fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
     style Test fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
+   style LinkValidation fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
     style Build fill:#339af0,stroke:#1971c2,stroke-width:2px,color:#fff
+   style ExternalMonitor fill:#ffd43b,stroke:#fab005,stroke-width:2px,color:#000
 ```
 
 ### Job Execution Details
@@ -74,7 +82,7 @@ graph TB
 2. **Setup pnpm**
 
    ```yaml
-   uses: pnpm/action-setup@v4
+   uses: pnpm/action-setup@903f9c1a6ebcba6cf41d87230be49611ac97822e
    with:
      version: '10.0.0'
    ```
@@ -191,9 +199,8 @@ trufflesecurity/trufflehog@main \
    pnpm test:unit
    ```
 
-   - Vitest with coverage reporting
-   - Coverage targets: ≥95% lines, functions, branches, statements
-   - Fails if coverage targets not met
+   - Vitest unit suite execution (`pnpm test:unit`)
+   - Fails if unit tests fail
 
 6. **Install Playwright browsers**
 
@@ -226,7 +233,7 @@ trufflesecurity/trufflehog@main \
 
 10. **Upload coverage reports** (if always)
     ```yaml
-    uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
     with:
       name: coverage-report
       path: coverage/
@@ -245,9 +252,9 @@ trufflesecurity/trufflehog@main \
 
 **Permissions**: `contents: read`
 
-**Dependencies**: Requires both `quality` and `test` jobs to pass
+**Dependencies**: Requires `quality`, `test`, and `link-validation` jobs to pass
 
-**Conditional**: `if: always() && needs.quality.result == 'success' && needs.test.result == 'success'`
+**Conditional**: `if: always() && needs.quality.result == 'success' && needs.test.result == 'success' && needs.link-validation.result == 'success'`
 
 **Steps**:
 
@@ -278,6 +285,47 @@ trufflesecurity/trufflehog@main \
 
 **Outcome**: Fails if build fails; deployment blocked until all gates pass
 
+#### 5. Link-Validation Job
+
+**Purpose**: Validate registry integrity and run deterministic Playwright E2E coverage as a dedicated gate.
+
+**Runs on**: `ubuntu-latest`
+
+**Timeout**: 15 minutes
+
+**Permissions**: `contents: read`
+
+**Dependencies**: Requires `quality` job to pass
+
+**Key steps**:
+
+1. `pnpm install --frozen-lockfile`
+2. `pnpm registry:validate`
+3. Install Playwright browsers
+4. Start dev server + wait-on readiness
+5. `pnpm links:check` (maps to full Playwright E2E suite)
+
+**Outcome**: Fails if registry validation or Playwright E2E checks fail.
+
+#### 6. External Link Monitor Workflow (separate, non-blocking)
+
+**Workflow**: `external-link-monitor`
+
+**Job**: `check-external-evidence-links`
+
+**Triggers**:
+
+- Daily schedule (`20 9 * * *` UTC)
+- Manual dispatch (`workflow_dispatch`)
+
+**Command**:
+
+```bash
+pnpm links:check:external
+```
+
+**Design intent**: monitor live external URL reachability without adding third-party uptime dependencies to required PR merge checks.
+
 ## Build Blocking & Merge Gates
 
 ### GitHub Ruleset Configuration
@@ -289,8 +337,11 @@ trufflesecurity/trufflehog@main \
 ```
 - ci / quality
 - ci / test
+- ci / link-validation
 - ci / build
 ```
+
+Note: `external-link-monitor` is intentionally non-blocking and not listed as a required PR merge check.
 
 **Dismiss Stale PR Reviews**: False (reviewers' approvals invalidated by new commits)
 
@@ -406,6 +457,15 @@ pnpm test:e2e:ui  # Debug in interactive UI
 - Ensure dev server starts: `pnpm dev`
 - Check port 3000 availability
 - Increase wait-on timeout if needed
+
+### External Link Monitor Failures
+
+Because this workflow is non-blocking, failures should be triaged operationally:
+
+1. Re-run once to rule out transient outages.
+2. Validate failed URLs manually.
+3. Update registry evidence URLs when targets move.
+4. Track persistent upstream outages in issue/runbook workflow.
 
 ### Build Job Failures
 

@@ -8,7 +8,7 @@ tags: [portfolio, features, evidence, links]
 ## Purpose
 
 - Feature name: Evidence link construction
-- Why this feature exists: Ensure evidence links resolve correctly across preview, staging, and production environments.
+- Why this feature exists: Ensure evidence links are constructed consistently across preview, staging, and production environments.
 
 ## Scope
 
@@ -46,8 +46,8 @@ tags: [portfolio, features, evidence, links]
 #### Manual
 
 - Steps: Open a project page and click dossier and ADR links.
-- What to look for: Links resolve to the expected docs base URL across environments.
-- Artifacts or reports to inspect: Environment variable values and E2E evidence link checks.
+- What to look for: Links point to the expected docs base URL across environments.
+- Artifacts or reports to inspect: Environment variable values, E2E evidence-link DOM assertions, and optional external-link monitor runs for live reachability.
 
 #### Tests
 
@@ -97,7 +97,7 @@ tags: [portfolio, features, evidence, links]
 
 ## Validation / Expected outcomes
 
-- Evidence links resolve correctly in preview, staging, and production.
+- Evidence links are built with the correct base URL and expected paths in preview, staging, and production.
 - Docs base URL changes do not require code changes.
 
 ## Failure modes / Troubleshooting
