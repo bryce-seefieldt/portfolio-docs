@@ -222,8 +222,8 @@ grep -r "NEXT_PUBLIC.*SECRET\|NEXT_PUBLIC.*KEY\|NEXT_PUBLIC.*TOKEN" src/
 | Least-privilege CI perms | ✅ Enforced  | [ci.yml job permissions](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml#L19-L22)   |
 | CodeQL scanning          | ✅ Enforced  | [codeql.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/codeql.yml)                   |
 | Dependabot updates       | ✅ Enabled   | [dependabot.yml](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/dependabot.yml)                     |
-| Threat model             | ✅ Complete  | [portfolio-app-threat-model-v2.md](/40-security/threat-models/portfolio-app-threat-model-v2.md)                    |
-| Incident response        | ✅ Ready     | [rbk-portfolio-secrets-incident.md](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                     |
+| Threat model             | ✅ Complete  | [portfolio-app-threat-model-v2.md](/40-security/threat-models/portfolio-app-threat-model-v2.md)                         |
+| Incident response        | ✅ Ready     | [rbk-portfolio-secrets-incident.md](/50-operations/runbooks/rbk-portfolio-secrets-incident.md)                          |
 | Unit tests               | ✅ Enforced  | [src/lib/**tests**/](https://github.com/bryce-seefieldt/portfolio-app/tree/main/src/lib/__tests__)                      |
 | E2E tests                | ✅ Enforced  | [tests/e2e](https://github.com/bryce-seefieldt/portfolio-app/tree/main/tests/e2e)                                       |
 | Frozen lockfiles         | ✅ Enforced  | [ci.yml build step](https://github.com/bryce-seefieldt/portfolio-app/blob/main/.github/workflows/ci.yml)                |

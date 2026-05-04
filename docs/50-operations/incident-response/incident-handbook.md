@@ -30,8 +30,8 @@ Provide a consolidated incident response handbook that supports on-call responde
 
 Match your scenario to the appropriate runbook:
 
-| I'm seeing...                              | Use this runbook                                                                                            |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| I'm seeing...                              | Use this runbook                                                                                       |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | ❌ Deployment shows "Failed" in Vercel     | [Deployment Failure](/50-operations/runbooks/rbk-portfolio-deployment-failure.md)                      |
 | ⚠️ Health endpoint returns 503             | [Service Degradation](/50-operations/runbooks/rbk-portfolio-service-degradation.md)                    |
 | 🔴 All routes return 500                   | [Deployment Failure](/50-operations/runbooks/rbk-portfolio-deployment-failure.md)                      |
