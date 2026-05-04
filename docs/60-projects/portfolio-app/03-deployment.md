@@ -143,13 +143,11 @@ Examples by environment:
 # Local development (docs running on localhost:3001)
 NEXT_PUBLIC_DOCS_BASE_URL=http://localhost:3001
 
-# Preview deployments (Vercel preview URL or dedicated preview docs domain)
-NEXT_PUBLIC_DOCS_BASE_URL=https://portfolio-docs-git-preview-branch.vercel.app
+# Preview deployments (Vercel preview URL for portfolio-docs)
+NEXT_PUBLIC_DOCS_BASE_URL=https://bns-portfolio-docs.vercel.app/docs
 
-# Production (final docs domain)
-NEXT_PUBLIC_DOCS_BASE_URL=https://docs.yourdomain.com
-# OR path-based:
-NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
+# Production (canonical path-based strategy)
+NEXT_PUBLIC_DOCS_BASE_URL=https://bryce.seefieldt.ca/docs
 
 **`NEXT_PUBLIC_SITE_URL`**
 
@@ -193,6 +191,36 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://yourdomain.com/docs
    - **Preview**: preview/staging URLs
    - **Development**: optional (can use `.env.local`)
 3. Redeploy after variable changes to apply
+
+### `/docs` path routing (vercel.json)
+
+The Portfolio App serves documentation at `/docs/*` via Vercel edge-layer rewrites defined in `vercel.json` — **not** via environment variables or `next.config.ts` rewrites.
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/docs",
+      "destination": "https://bns-portfolio-docs.vercel.app/docs"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "https://bns-portfolio-docs.vercel.app/docs/:path*"
+    }
+  ]
+}
+```
+
+**Why `vercel.json` (not `next.config.ts`):**
+
+- `next.config.ts` `rewrites()` are evaluated at **build time** and depend on env vars being present during build. If `DOCS_UPSTREAM_URL` was pointed at the same Vercel project's custom domain (`bryce.seefieldt.ca`), Vercel detects a circular hop and returns `508 INFINITE_LOOP_DETECTED`.
+- `vercel.json` rewrites are evaluated at **Vercel edge request time**, have no env var dependency, and cannot form loops between different Vercel projects.
+- The docs origin (`bns-portfolio-docs.vercel.app`) is not a secret and is safe to hardcode.
+
+**Do not:**
+
+- Set `DOCS_UPSTREAM_URL` in Vercel — this variable is deprecated and unused.
+- Add `/docs` rewrites back to `next.config.ts` — this caused the production loop incident.
 
 ## CI contract (GitHub Actions)
 

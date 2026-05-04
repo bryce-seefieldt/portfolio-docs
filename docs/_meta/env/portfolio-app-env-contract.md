@@ -24,12 +24,15 @@ Define the canonical environment variable contract for the **Portfolio App** (Ne
 **Purpose:** Base URL for the Documentation App evidence engine.  
 **Examples:**
 
-- Path strategy: `https://yourdomain.com/docs`
-- Subdomain strategy: `https://docs.yourdomain.com`
+- Local development: `http://localhost:3001`
+- Preview deployments: `https://bns-portfolio-docs.vercel.app/docs`
+- Production (path-based): `https://bryce.seefieldt.ca/docs`
 
 **Fallback behavior:** If unset, the app defaults to `"/docs"`. This is only correct if documentation is truly served at that path.
 
 **Used by:** `DOCS_BASE_URL` and `docsUrl()` helper.
+
+**Note on `/docs` routing:** The Portfolio App serves `/docs/*` via Vercel edge-layer rewrites in `vercel.json` — not via an env var. `NEXT_PUBLIC_DOCS_BASE_URL` controls how evidence links are constructed in the browser; the actual request routing to `bns-portfolio-docs.vercel.app` is handled separately at the edge. Do not set `DOCS_UPSTREAM_URL` in Vercel — it is deprecated and unused.
 
 ### Optional (recommended for production polish)
 
@@ -82,11 +85,13 @@ Set environment variables in Vercel Project Settings for:
 
 Minimum recommended in Vercel:
 
-- `NEXT_PUBLIC_DOCS_BASE_URL`
-- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_DOCS_BASE_URL` (e.g., `https://bryce.seefieldt.ca/docs` for production)
+- `NEXT_PUBLIC_SITE_URL` (e.g., `https://bryce.seefieldt.ca`)
 - `NEXT_PUBLIC_GITHUB_URL`
 - `NEXT_PUBLIC_LINKEDIN_URL`
 - Optional: `NEXT_PUBLIC_CONTACT_EMAIL`
+
+> **Do not set** `DOCS_UPSTREAM_URL` — this variable is deprecated. The `/docs` reverse-proxy rewrite is now handled by `vercel.json` at the Vercel edge layer with no env var dependency.
 
 ## CI determinism (required)
 

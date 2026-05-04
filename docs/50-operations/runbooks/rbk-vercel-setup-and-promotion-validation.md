@@ -113,30 +113,21 @@ On the **"Import Project"** page, configure:
 
 Before configuring Vercel, gather the following URLs:
 
-| Variable                    | Local Dev                  | Preview                                                                              | Production                                                     | Example   |
-| --------------------------- | -------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------- | --------- |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | `http://localhost:3001`    | `https://portfolio-docs-preview.vercel.app` OR `https://preview-docs.yourdomain.com` | `https://docs.yourdomain.com` OR `https://yourdomain.com/docs` | See below |
-| `NEXT_PUBLIC_SITE_URL`      | (optional)                 | `https://portfolio-app-git-main.vercel.app`                                          | `https://portfolio.yourdomain.com` (if using custom domain)    | See below |
-| `NEXT_PUBLIC_GITHUB_URL`    | (same across environments) | `https://github.com/bryce-seefieldt`                                                 | `https://github.com/bryce-seefieldt`                           | —         |
-| `NEXT_PUBLIC_LINKEDIN_URL`  | (same across environments) | `https://www.linkedin.com/in/your-handle/`                                           | `https://www.linkedin.com/in/your-handle/`                     | —         |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | (same across environments) | `your-email@example.com`                                                             | `your-email@example.com`                                       | —         |
+| Variable                    | Local Dev                  | Preview                                      | Production                                 | Example   |
+| --------------------------- | -------------------------- | -------------------------------------------- | ------------------------------------------ | --------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | `http://localhost:3001`    | `https://bns-portfolio-docs.vercel.app/docs` | `https://bryce.seefieldt.ca/docs`          | See below |
+| `NEXT_PUBLIC_SITE_URL`      | (optional)                 | `https://portfolio-app-git-main.vercel.app`  | `https://bryce.seefieldt.ca`               | See below |
+| `NEXT_PUBLIC_GITHUB_URL`    | (same across environments) | `https://github.com/bryce-seefieldt`         | `https://github.com/bryce-seefieldt`       | —         |
+| `NEXT_PUBLIC_LINKEDIN_URL`  | (same across environments) | `https://www.linkedin.com/in/your-handle/`   | `https://www.linkedin.com/in/your-handle/` | —         |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | (same across environments) | `your-email@example.com`                     | `your-email@example.com`                   | —         |
 
-**For NEXT_PUBLIC_DOCS_BASE_URL, decide your strategy:**
+**Domain strategy in use:** Path-based (`bryce.seefieldt.ca/docs`).
 
-**Option A: Subdomain (recommended for clarity)**
+**`NEXT_PUBLIC_DOCS_BASE_URL` routing note:**
 
-```
-Preview: https://portfolio-docs-git-preview.vercel.app
-Production: https://docs.yourdomain.com
-```
-
-**Option B: Path-based (simpler DNS)**
-
-```
-Production: https://yourdomain.com/docs
-```
-
-For now, **use Vercel's default preview URLs** and finalize domain strategy later.
+- This variable controls how evidence links are constructed in the browser — it is **not** used for request routing.
+- The actual `/docs/*` proxy (forwarding requests to `bns-portfolio-docs.vercel.app`) is handled by `vercel.json` edge rewrites and requires no env var.
+- **Do not set `DOCS_UPSTREAM_URL`** in Vercel — it is deprecated and unused. If set to the app's own domain it caused `INFINITE_LOOP_DETECTED` (508) in production.
 
 #### Step 2.2: Add environment variables to Vercel
 
@@ -151,25 +142,25 @@ For now, **use Vercel's default preview URLs** and finalize domain strategy late
 
 1. Click **"Add New"** for each variable:
 
-| Name                        | Value                                                                              | Environment Scope |
-| --------------------------- | ---------------------------------------------------------------------------------- | ----------------- |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | Portfolio Docs preview URL (e.g., `https://portfolio-docs-git-preview.vercel.app`) | **Preview**       |
-| `NEXT_PUBLIC_SITE_URL`      | (leave empty or use Vercel preview URL)                                            | **Preview**       |
-| `NEXT_PUBLIC_GITHUB_URL`    | Your GitHub profile URL                                                            | **Preview**       |
-| `NEXT_PUBLIC_LINKEDIN_URL`  | Your LinkedIn profile URL                                                          | **Preview**       |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email                                                          | **Preview**       |
+| Name                        | Value                                        | Environment Scope |
+| --------------------------- | -------------------------------------------- | ----------------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | `https://bns-portfolio-docs.vercel.app/docs` | **Preview**       |
+| `NEXT_PUBLIC_SITE_URL`      | (leave empty or use Vercel preview URL)      | **Preview**       |
+| `NEXT_PUBLIC_GITHUB_URL`    | Your GitHub profile URL                      | **Preview**       |
+| `NEXT_PUBLIC_LINKEDIN_URL`  | Your LinkedIn profile URL                    | **Preview**       |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email                    | **Preview**       |
 
 ##### Production (`main`)
 
 1. Click **"Add New"** for each variable:
 
-| Name                        | Value                                                            | Environment Scope |
-| --------------------------- | ---------------------------------------------------------------- | ----------------- |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | Final docs URL (subdomain or path-based)                         | **Production**    |
-| `NEXT_PUBLIC_SITE_URL`      | Your portfolio domain (e.g., `https://portfolio.yourdomain.com`) | **Production**    |
-| `NEXT_PUBLIC_GITHUB_URL`    | Your GitHub profile URL                                          | **Production**    |
-| `NEXT_PUBLIC_LINKEDIN_URL`  | Your LinkedIn profile URL                                        | **Production**    |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email                                        | **Production**    |
+| Name                        | Value                             | Environment Scope |
+| --------------------------- | --------------------------------- | ----------------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | `https://bryce.seefieldt.ca/docs` | **Production**    |
+| `NEXT_PUBLIC_SITE_URL`      | `https://bryce.seefieldt.ca`      | **Production**    |
+| `NEXT_PUBLIC_GITHUB_URL`    | Your GitHub profile URL           | **Production**    |
+| `NEXT_PUBLIC_LINKEDIN_URL`  | Your LinkedIn profile URL         | **Production**    |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email         | **Production**    |
 
 :::tip
 **Deployment Trigger:** After adding/modifying environment variables, you must redeploy:
