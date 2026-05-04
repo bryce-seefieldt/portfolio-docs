@@ -46,8 +46,8 @@ tags: [portfolio, features, core-pages, cv]
 #### Manual
 
 - Steps: Open `/cv`, scan timeline entries, click at least two proof links.
-- What to look for: Evidence links resolve correctly and match the described capability.
-- Artifacts or reports to inspect: Optional E2E route coverage in CI.
+- What to look for: Evidence links point to expected destinations and match the described capability.
+- Artifacts or reports to inspect: Optional E2E route coverage in CI; optional external-link monitor results for live reachability.
 
 #### Tests
 
@@ -98,7 +98,7 @@ tags: [portfolio, features, core-pages, cv]
 ## Validation / Expected outcomes
 
 - CV timeline renders without missing sections.
-- Evidence links are functional and relevant to each capability.
+- Evidence links are relevant to each capability and route to the intended destinations.
 
 ## Failure modes / Troubleshooting
 

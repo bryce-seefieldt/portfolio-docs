@@ -17,6 +17,7 @@ This runbook assumes Vercel and GitHub governance are already configured per [rb
 
 - `ci / quality` (lint, format:check, typecheck)
 - `ci / test` (unit tests, coverage, E2E tests)
+- `ci / link-validation` (registry validation + deterministic Playwright E2E gate)
 - `ci / build` (Next.js build)
 
 When any required check fails, this runbook provides deterministic diagnosis and fix procedures. See [rbk-portfolio-deploy.md](./rbk-portfolio-deploy.md) for the deploy workflow where CI gating is enforced.
@@ -82,6 +83,8 @@ Use this section when a dependency-automation update repeatedly fails CI for env
   - `pnpm test:unit`
   - `pnpm test:coverage`
   - `pnpm test:e2e`
+  - `pnpm links:check`
+  - `pnpm links:check:external`
 
 ## Procedure / Content
 
@@ -98,21 +101,25 @@ Use this section when a dependency-automation update repeatedly fails CI for env
 - `ci / build` job runs:
   - `pnpm install --frozen-lockfile`
   - `pnpm build`
-  - Playwright browser installation (`npx playwright install --with-deps`)
-  - Dev server startup (`pnpm dev &` + readiness check via `wait-on`)
-  - Smoke tests (`pnpm test` - 12 tests across Chromium + Firefox)
-  - depends on `ci / quality` being green
+  - depends on `ci / quality`, `ci / test`, and `ci / link-validation` being green
   - note: `secrets-scan` is not a strict dependency (only runs on PRs, but all PRs require it via branch protection)
 - `ci / test` job runs:
   - `pnpm test:unit`
   - `pnpm test:e2e`
   - uploads coverage artifacts from `pnpm test:coverage` when configured
+- `ci / link-validation` job runs:
+  - `pnpm registry:validate`
+  - Playwright install + dev server + readiness check
+  - `pnpm links:check` (full Playwright E2E suite)
+- `external-link-monitor` workflow runs separately:
+  - `pnpm links:check:external`
+  - scheduled + manual, non-blocking for PR merge
 
 ### 1) Identify the failing check and error class
 
 In the PR or `main` workflow run, identify:
 
-- failing job: `quality` or `build`
+- failing job: `quality`, `test`, `link-validation`, or `build`
 - failing step (lint vs format vs typecheck vs build)
 - affected file paths
 
@@ -139,7 +146,8 @@ pnpm lint
 pnpm format:check
 pnpm typecheck
 pnpm build
-pnpm test  # Smoke tests (Playwright)
+pnpm test:e2e
+pnpm links:check
 ```
 
 Use individual commands when you need to:
@@ -152,7 +160,7 @@ If local results differ from CI:
 
 - confirm Node and pnpm versions match project standards
 - ensure lockfile is committed and install is deterministic
-- for smoke test failures: ensure dev server is running (`pnpm dev`) or Playwright will start it automatically
+- for E2E/link-validation failures: ensure dev server is running (`pnpm dev`) or Playwright will start it automatically
 
 ### 3) Fix by failure type
 
@@ -254,9 +262,9 @@ pnpm build               # Expect: ✓ Compiled successfully
 - Clean and rebuild: `rm -rf .next node_modules/.cache && pnpm build`
 - Ensure `interpolate()` reads from `process.env` (fixed in commit `1a1e272`)
 
-#### E) Smoke test failures (`pnpm test`)
+#### E) Link-validation / E2E failures (`pnpm links:check` / `pnpm test:e2e`)
 
-Smoke tests are part of the current CI quality baseline.
+Deterministic Playwright checks are part of the required CI baseline.
 
 Symptoms:
 
@@ -281,17 +289,18 @@ Common failure modes:
    - Fix: Verify route exists and renders correctly locally
    - Check: Dynamic routes may need param fixes (Next.js 15 async params)
 
-4. **Evidence link resolution failures:**
+4. **Evidence link DOM assertion failures:**
    - Error: `a[href*="/docs/"]` locator not found
-   - Fix: Verify project pages include documentation links
-   - Check: `NEXT_PUBLIC_DOCS_BASE_URL` is configured correctly
+
+- Fix: Verify project pages include documentation links and non-empty href attributes
+- Check: `NEXT_PUBLIC_DOCS_BASE_URL` is configured correctly
 
 5. **Timeout failures:**
    - Error: Test timeout exceeded (default 30s per test)
    - Fix: Increase timeout in `playwright.config.ts` or optimize slow routes
    - CI: Reduce parallelism (already set to 1 worker in CI for stability)
 
-Debugging smoke tests:
+Debugging E2E/link-validation tests:
 
 ```bash
 # Local debugging
@@ -301,8 +310,26 @@ pnpm test:ui         # Opens Playwright UI mode
 # CI debugging
 # - Download HTML test report artifact from failed CI run
 # - Open playwright-report/index.html locally to see screenshots/traces
+```
 
-#### F) Unit test or coverage failures (`pnpm test:unit` / `pnpm test:coverage`)
+#### F) External monitor failures (`external-link-monitor` / `pnpm links:check:external`)
+
+This workflow is intentionally non-blocking for PR merges.
+
+Common causes:
+
+1. upstream docs or GitHub outage
+2. rate-limiting / anti-bot behavior
+3. URL changed in external system
+
+Response flow:
+
+1. re-run the workflow once to rule out transient noise
+2. verify failed URL manually
+3. if URL moved, update registry evidence URLs and re-run
+4. if upstream outage persists, track incident and avoid weakening required PR gates
+
+#### G) Unit test or coverage failures (`pnpm test:unit` / `pnpm test:coverage`)
 
 Symptoms:
 
@@ -314,14 +341,13 @@ Fix:
 - Run `pnpm test:unit` to reproduce and isolate the failing test
 - Run `pnpm test:coverage` to identify uncovered files or branches
 - Add or update unit tests for affected modules (pages, components, API handlers)
-```
 
 Fix workflow:
 
-- Reproduce locally with `pnpm test`
-- Check Playwright config (`playwright.config.ts`) for environment differences
-- Verify test file (`tests/e2e/smoke.spec.ts`) expectations match actual behavior
-- Update tests or fix routes as needed
+- Reproduce locally with `pnpm test:unit`
+- Use `pnpm test:coverage` to inspect uncovered areas
+- Verify failing unit test expectations against implementation behavior
+- Update tests or implementation with minimal scope
 - Re-run locally to confirm fix
 - Push and verify CI passes
 
@@ -356,7 +382,8 @@ pnpm lint
 pnpm format:check
 pnpm typecheck
 pnpm build
-pnpm test  # Smoke tests
+pnpm test:e2e
+pnpm links:check
 ```
 
 Commit and push to PR branch.
@@ -380,6 +407,8 @@ If the failure mode is likely to repeat:
 - Local and CI results converge (deterministic)
 - Required checks are green:
   - `ci / quality`
+  - `ci / test`
+  - `ci / link-validation`
   - `ci / build`
 - Production promotion proceeds once checks pass
 
@@ -400,7 +429,7 @@ If the fix is non-trivial and production is impacted:
   - reduce scope; fix incrementally; avoid mixing large refactors with feature changes
 
 - Merge is blocked because required checks are unavailable to select in the ruleset:
-  - ensure checks exist with the exact names `ci / quality` and `ci / build`
+  - ensure checks exist with the exact names `ci / quality`, `ci / test`, `ci / link-validation`, and `ci / build`
   - run the workflow on a PR and on `main` so GitHub can offer them as Required
 
 ### How to re-run checks

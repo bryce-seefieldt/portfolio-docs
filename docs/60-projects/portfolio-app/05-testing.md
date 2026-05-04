@@ -280,7 +280,7 @@ Note: This section distinguishes baseline controls from expanded controls for on
 
 ### Expanded coverage: Automated E2E tests with Playwright
 
-Playwright coverage includes evidence link resolution and route-level verification as part of the current baseline.
+Playwright coverage includes evidence-link DOM/href assertions and route-level verification as part of the current baseline.
 
 **Framework:** Playwright (multi-browser E2E testing)
 
@@ -318,6 +318,14 @@ pnpm exec playwright show-report    # View HTML test report
 
 - Tests run in `ci / test` job before build
 - Playwright browsers installed via `npx playwright install --with-deps`
+
+### External evidence-link monitor (non-blocking)
+
+- Workflow: `external-link-monitor`
+- Command: `pnpm links:check:external`
+- Trigger: daily schedule + manual dispatch
+- Purpose: best-effort live HTTP reachability checks for external evidence URLs
+- Governance: non-blocking for PR merge gates to avoid third-party uptime flakiness
 - Dev server started with `pnpm dev &` and readiness check via `wait-on http://localhost:3000`
 - Tests execute with `pnpm test:e2e`
 - HTML test reports generated (`.gitignored`)
