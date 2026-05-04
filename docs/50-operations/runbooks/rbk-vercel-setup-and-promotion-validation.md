@@ -578,8 +578,8 @@ Update the team documentation with your actual URLs:
 
 | Variable                    | Preview                                          | Production                                       |
 | --------------------------- | ------------------------------------------------ | ------------------------------------------------ |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | https://bns-portfolio-docs.vercel.app/docs/      | https://bryce.seefieldt.ca/docs                 |
-| `NEXT_PUBLIC_SITE_URL`      | https://bns-portfolio.vercel.app                 | https://bryce.seefieldt.ca                      |
+| `NEXT_PUBLIC_DOCS_BASE_URL` | https://bns-portfolio-docs.vercel.app/docs/      | https://bryce.seefieldt.ca/docs                  |
+| `NEXT_PUBLIC_SITE_URL`      | https://bns-portfolio.vercel.app                 | https://bryce.seefieldt.ca                       |
 | `NEXT_PUBLIC_GITHUB_URL`    | https://github.com/bryce-seefieldt/portfolio-app | https://github.com/bryce-seefieldt/portfolio-app |
 | ...                         | ...                                              | ...                                              |
 ```
