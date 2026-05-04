@@ -113,7 +113,7 @@ The Portfolio App introduces a reusable component library for standardized evide
 
 Together, these components embed evidence verification into the user experience, making "show your work" a visual, interactive expectation rather than a hidden link hunt.
 
-See [Architecture — Evidence Visualization Layer](/docs/60-projects/portfolio-app/02-architecture.md) for full details.
+See [Architecture — Evidence Visualization Layer](/60-projects/portfolio-app/02-architecture.md) for full details.
 
 ### Security Posture Hardening
 
@@ -127,7 +127,7 @@ The portfolio app security posture includes OWASP-recommended HTTP security head
 - Threat model v2 covering deployment, runtime, and supply chain threats
 - Formal dependency vulnerability audit policy with MTTR targets
 
-See [Security Hardening Documentation](/docs/60-projects/portfolio-app/04-security.md) for implementation details.
+See [Security Hardening Documentation](/60-projects/portfolio-app/04-security.md) for implementation details.
 
 ### User Experience & SEO Optimization
 
@@ -150,9 +150,9 @@ See comprehensive documentation in domain sections:
 
 See architectural decisions (ADRs):
 
-- [ADR-0014: Class-Based Dark Mode with CSS Variables](/docs/10-architecture/adr/adr-0014-class-based-dark-mode.md) - Class-based theming rationale
-- [ADR-0015: Open Graph + Twitter Cards + JSON-LD](/docs/10-architecture/adr/adr-0015-metadata-strategy.md) - Tri-layer metadata strategy
-- [ADR-0016: Scroll Animation Strategy (Intersection Observer)](/docs/10-architecture/adr/adr-0016-scroll-animations.md) - Performance-first animations
+- [ADR-0014: Class-Based Dark Mode with CSS Variables](/10-architecture/adr/adr-0014-class-based-dark-mode.md) - Class-based theming rationale
+- [ADR-0015: Open Graph + Twitter Cards + JSON-LD](/10-architecture/adr/adr-0015-metadata-strategy.md) - Tri-layer metadata strategy
+- [ADR-0016: Scroll Animation Strategy (Intersection Observer)](/10-architecture/adr/adr-0016-scroll-animations.md) - Performance-first animations
 
 ## Validation / Expected outcomes
 
@@ -256,7 +256,7 @@ The Portfolio App implements a comprehensive testing pyramid:
 - **Coverage targets:** ≥80% for `src/lib/` (utility functions), 100% route coverage for E2E
 - **CI integration:** Tests run on every PR and merge; failures block deployment
 
-See [Testing Guide](/docs/reference/testing-guide) for comprehensive patterns, setup, and troubleshooting. Implementation details are available in [Testing](/docs/60-projects/portfolio-app/05-testing.md).
+See [Testing Guide](/reference/testing-guide) for comprehensive patterns, setup, and troubleshooting. Implementation details are available in [Testing](/60-projects/portfolio-app/05-testing.md).
 
 ### Code Quality Gates
 
@@ -292,7 +292,7 @@ All jobs must pass; failures block subsequent stages. Tests are separated into d
 - **Unit tests** validate data integrity, link construction, and slug validation
 - **E2E tests** validate route rendering, evidence-link DOM/href assertions, and component behavior
 
-See [CI/CD Pipeline Overview](/docs/devops-platform/ci-cd-pipeline-overview) for detailed job configuration and troubleshooting.
+See [CI/CD Pipeline Overview](/devops-platform/ci-cd-pipeline-overview) for detailed job configuration and troubleshooting.
 
 ### Evidence of Quality
 

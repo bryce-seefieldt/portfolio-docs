@@ -9,7 +9,7 @@ tags: [portfolio, roadmap, planning, phase-3, stage-3.2, app, implementation]
 **Type:** Feature / Implementation  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.2  
-**Linked Issue:** [stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)  
+**Linked Issue:** [stage-3-2-docs-issue.md](/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)  
 **Duration Estimate:** 3–4 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-21  
@@ -424,9 +424,9 @@ Break the work into concrete, sequential phases with clear deliverables.
 
 ## Related Issues
 
-- **Linked:** [stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md) (companion documentation work)
+- **Linked:** [stage-3-2-docs-issue.md](/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md) (companion documentation work)
 - **Dependency:** stage-3-1-APP-ISSUE.md (completed) — registry must exist for this to consume
-- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md)
+- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/00-portfolio/roadmap/phase-3-implementation-guide.md)
 
 ---
 
@@ -488,7 +488,7 @@ After Stage 3.2 is complete:
   - Evidence: `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` all pass
   - Security: "No secrets added"
   - Closes: #[issue-number] (this issue)
-  - Reference companion: [stage-3-2-docs-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)
+  - Reference companion: [stage-3-2-docs-issue.md](/00-portfolio/roadmap/issues/stage-3-2-docs-issue.md)
 
 - **Merge:** Requires both CI checks to pass (`ci / quality`, `ci / build`)
 - **Post-merge:** Vercel auto-deploys preview and production
@@ -497,7 +497,7 @@ After Stage 3.2 is complete:
 
 ## Reference Documentation
 
-- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
+- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-32-evidenceblock-component--badges-34-hours)
 - **Portfolio App Copilot Instructions:** Section 8 — Phase 3 Stage 3.2
 - **Component Styling Reference:** Existing components (GoldStandardBadge.tsx, Section.tsx, Callout.tsx)
 - **Registry Reference:** src/lib/registry.ts (Project type, evidenceLinks helper)

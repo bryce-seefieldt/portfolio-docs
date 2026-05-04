@@ -86,13 +86,13 @@ tags: [portfolio, features, testing, e2e]
 
 ### Runbooks
 
-- [`/50-operations/runbooks/rbk-portfolio-deploy.md`](/docs/50-operations/runbooks/rbk-portfolio-deploy.md)
-- [`/50-operations/runbooks/rbk-portfolio-ci-triage.md`](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md)
+- [`/50-operations/runbooks/rbk-portfolio-deploy.md`](/50-operations/runbooks/rbk-portfolio-deploy.md)
+- [`/50-operations/runbooks/rbk-portfolio-ci-triage.md`](/50-operations/runbooks/rbk-portfolio-ci-triage.md)
 
 ### Additional internal references
 
-- [`/70-reference/testing-guide.md`](/docs/70-reference/testing-guide.md)
-- [`/30-devops-platform/observability-health-checks.md`](/docs/30-devops-platform/observability-health-checks.md)
+- [`/70-reference/testing-guide.md`](/70-reference/testing-guide.md)
+- [`/30-devops-platform/observability-health-checks.md`](/30-devops-platform/observability-health-checks.md)
 
 ### External reference links
 

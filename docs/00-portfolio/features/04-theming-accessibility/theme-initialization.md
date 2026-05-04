@@ -73,7 +73,7 @@ tags: [portfolio, features, theming, accessibility]
 
 ### ADRs
 
-- [`/10-architecture/adr/adr-0014-class-based-dark-mode.md`](/docs/10-architecture/adr/adr-0014-class-based-dark-mode.md)
+- [`/10-architecture/adr/adr-0014-class-based-dark-mode.md`](/10-architecture/adr/adr-0014-class-based-dark-mode.md)
 
 ### Runbooks
 
@@ -81,7 +81,7 @@ tags: [portfolio, features, theming, accessibility]
 
 ### Additional internal references
 
-- [`/70-reference/theme-system-reference.md`](/docs/70-reference/theme-system-reference.md)
+- [`/70-reference/theme-system-reference.md`](/70-reference/theme-system-reference.md)
 
 ### External reference links
 

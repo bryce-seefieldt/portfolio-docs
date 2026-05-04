@@ -41,20 +41,20 @@ Provide a concise, reviewer-first path to validate the portfolio quickly while k
 
 3. **Dossier validation**
    - Read the Portfolio App dossier entry page:
-     - [/docs/60-projects/portfolio-app/index.md](/docs/60-projects/portfolio-app/index.md)
+     - [/docs/60-projects/portfolio-app/index.md](/60-projects/portfolio-app/index.md)
 
 4. **Security & operations**
-   - Threat model index: [/docs/40-security/threat-models/index.md](/docs/40-security/threat-models/index.md)
-   - Runbooks index: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
+   - Threat model index: [/docs/40-security/threat-models/index.md](/40-security/threat-models/index.md)
+   - Runbooks index: [/docs/50-operations/runbooks/index.md](/50-operations/runbooks/index.md)
 
 5. **Testing & CI evidence**
-   - Testing guide: [/docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md)
-   - CI overview: [/docs/30-devops-platform/ci-cd-pipeline-overview.md](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
+   - Testing guide: [/docs/70-reference/testing-guide.md](/70-reference/testing-guide.md)
+   - CI overview: [/docs/30-devops-platform/ci-cd-pipeline-overview.md](/30-devops-platform/ci-cd-pipeline-overview.md)
 
 6. **Governance policies**
-   - Eligibility criteria: [/docs/00-portfolio/portfolio-eligibility-criteria.md](/docs/00-portfolio/portfolio-eligibility-criteria.md)
-   - Versioning policy: [/docs/00-portfolio/portfolio-versioning-policy.md](/docs/00-portfolio/portfolio-versioning-policy.md)
-   - Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/docs/00-portfolio/portfolio-change-intake.md)
+   - Eligibility criteria: [/docs/00-portfolio/portfolio-eligibility-criteria.md](/00-portfolio/portfolio-eligibility-criteria.md)
+   - Versioning policy: [/docs/00-portfolio/portfolio-versioning-policy.md](/00-portfolio/portfolio-versioning-policy.md)
+   - Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/00-portfolio/portfolio-change-intake.md)
 
 ## Validation / Expected outcomes
 
@@ -69,9 +69,9 @@ Provide a concise, reviewer-first path to validate the portfolio quickly while k
 
 ## References
 
-- Evidence audit checklist: [/docs/70-reference/evidence-audit-checklist.md](/docs/70-reference/evidence-audit-checklist.md)
-- Eligibility criteria: [/docs/00-portfolio/portfolio-eligibility-criteria.md](/docs/00-portfolio/portfolio-eligibility-criteria.md)
-- Versioning policy: [/docs/00-portfolio/portfolio-versioning-policy.md](/docs/00-portfolio/portfolio-versioning-policy.md)
-- Archival policy: [/docs/00-portfolio/portfolio-archival-policy.md](/docs/00-portfolio/portfolio-archival-policy.md)
-- Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/docs/00-portfolio/portfolio-change-intake.md)
-- Roadmap: [/docs/00-portfolio/roadmap/index.md](/docs/00-portfolio/roadmap/index.md)
+- Evidence audit checklist: [/docs/70-reference/evidence-audit-checklist.md](/70-reference/evidence-audit-checklist.md)
+- Eligibility criteria: [/docs/00-portfolio/portfolio-eligibility-criteria.md](/00-portfolio/portfolio-eligibility-criteria.md)
+- Versioning policy: [/docs/00-portfolio/portfolio-versioning-policy.md](/00-portfolio/portfolio-versioning-policy.md)
+- Archival policy: [/docs/00-portfolio/portfolio-archival-policy.md](/00-portfolio/portfolio-archival-policy.md)
+- Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/00-portfolio/portfolio-change-intake.md)
+- Roadmap: [/docs/00-portfolio/roadmap/index.md](/00-portfolio/roadmap/index.md)

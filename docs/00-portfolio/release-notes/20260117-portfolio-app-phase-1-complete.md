@@ -233,11 +233,11 @@ The Phase 1 release is valid when:
 
 ## Architecture & Governance References
 
-- [ADR-0007: Portfolio App Hosting on Vercel with Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
-- [ADR-0008: Portfolio App CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)
-- [Portfolio App Deployment Dossier](/docs/60-projects/portfolio-app/03-deployment.md)
-- [Vercel Setup Runbook](/docs/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
-- [GitHub Ruleset Configuration Guide](/docs/70-reference/portfolio-app-github-ruleset-config.md)
+- [ADR-0007: Portfolio App Hosting on Vercel with Promotion Checks](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md)
+- [ADR-0008: Portfolio App CI Quality Gates](/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md)
+- [Portfolio App Deployment Dossier](/60-projects/portfolio-app/03-deployment.md)
+- [Vercel Setup Runbook](/50-operations/runbooks/rbk-vercel-setup-and-promotion-validation.md)
+- [GitHub Ruleset Configuration Guide](/70-reference/portfolio-app-github-ruleset-config.md)
 
 ---
 

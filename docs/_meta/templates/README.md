@@ -646,13 +646,13 @@ A Phase Implementation Guide is complete when:
 
 See existing examples:
 
-- [Phase 2 Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md) — Sequential steps approach
-- [Phase 3 Implementation Guide](/docs/00-portfolio/phase-3-implementation-guide.md) — Modular stages approach
+- [Phase 2 Implementation Guide](/00-portfolio/phase-2-implementation-guide.md) — Sequential steps approach
+- [Phase 3 Implementation Guide](/00-portfolio/phase-3-implementation-guide.md) — Modular stages approach
 
 See existing examples:
 
-- [Phase 2 Implementation Guide](/docs/00-portfolio/phase-2-implementation-guide.md) — Sequential steps approach
-- [Phase 3 Implementation Guide](/docs/00-portfolio/phase-3-implementation-guide.md) — Modular stages approach
+- [Phase 2 Implementation Guide](/00-portfolio/phase-2-implementation-guide.md) — Sequential steps approach
+- [Phase 3 Implementation Guide](/00-portfolio/phase-3-implementation-guide.md) — Modular stages approach
 
 Both follow this template structure and serve as reference implementations.
 
@@ -801,11 +801,11 @@ Before marking the issue done:
 
 **App Implementation Example:**
 
-See [roadmap issues index](/docs/00-portfolio/roadmap/issues/) for active and completed stage issue records.
+See [roadmap issues index](/00-portfolio/roadmap/issues/) for active and completed stage issue records.
 
 **Documentation Example:**
 
-See [Phase 3 Implementation Guide](/docs/00-portfolio/roadmap/phase-3-implementation-guide/) for a full paired app/docs stage planning example.
+See [Phase 3 Implementation Guide](/00-portfolio/roadmap/phase-3-implementation-guide/) for a full paired app/docs stage planning example.
 
 ### Policy Consistency Requirements
 

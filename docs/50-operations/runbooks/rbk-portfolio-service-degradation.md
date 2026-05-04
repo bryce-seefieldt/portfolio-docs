@@ -626,7 +626,7 @@ vercel ls
 - [Vercel Deployments](https://vercel.com/bryce-seefieldts-projects/portfolio-app/deployments)
 - [Vercel Logs](https://vercel.com/bryce-seefieldts-projects/portfolio-app/logs)
 - [GitHub Repository](https://github.com/bryce-seefieldt/portfolio-app)
-- [Observability & Health Checks](/docs/30-devops-platform/observability-health-checks.md)
+- [Observability & Health Checks](/30-devops-platform/observability-health-checks.md)
 
 ### Related Runbooks
 

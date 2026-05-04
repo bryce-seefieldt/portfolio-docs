@@ -98,7 +98,7 @@ Adopt a React2Shell hardening baseline that combines rapid patching with defense
 
 ## References
 
-- React2Shell hardening guide: [/docs/40-security/react2shell-hardening-implementation-guide.md](/docs/40-security/react2shell-hardening-implementation-guide.md)
-- Security policies: [/docs/40-security/security-policies.md](/docs/40-security/security-policies.md)
-- Risk register: [/docs/40-security/risk-register.md](/docs/40-security/risk-register.md)
-- Portfolio App security controls: [/docs/40-security/portfolio-app-security-controls.md](/docs/40-security/portfolio-app-security-controls.md)
+- React2Shell hardening guide: [/docs/40-security/react2shell-hardening-implementation-guide.md](/40-security/react2shell-hardening-implementation-guide.md)
+- Security policies: [/docs/40-security/security-policies.md](/40-security/security-policies.md)
+- Risk register: [/docs/40-security/risk-register.md](/40-security/risk-register.md)
+- Portfolio App security controls: [/docs/40-security/portfolio-app-security-controls.md](/40-security/portfolio-app-security-controls.md)

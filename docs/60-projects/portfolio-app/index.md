@@ -82,10 +82,10 @@ Portfolio App must link to evidence pages for each project:
 
 ## Evidence map (review-first)
 
-- ADRs: [/docs/10-architecture/adr/](/docs/10-architecture/adr/index.md)
-- Threat model: [/docs/40-security/threat-models/portfolio-app-threat-model-v2.md](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)
-- Runbooks: [/docs/50-operations/runbooks/index.md](/docs/50-operations/runbooks/index.md)
-- CI/CD governance: [/docs/30-devops-platform/ci-cd-pipeline-overview.md](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
+- ADRs: [/docs/10-architecture/adr/](/10-architecture/adr/index.md)
+- Threat model: [/docs/40-security/threat-models/portfolio-app-threat-model-v2.md](/40-security/threat-models/portfolio-app-threat-model-v2.md)
+- Runbooks: [/docs/50-operations/runbooks/index.md](/50-operations/runbooks/index.md)
+- CI/CD governance: [/docs/30-devops-platform/ci-cd-pipeline-overview.md](/30-devops-platform/ci-cd-pipeline-overview.md)
 
 ## Reviewer path
 
@@ -93,7 +93,7 @@ Portfolio App must link to evidence pages for each project:
 - Review PR discipline and branch protection/ruleset settings to confirm required checks are enforced.
 - Validate build determinism locally with `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm build` (frozen lockfile).
 - Follow evidence links from the app into this dossier, ADR index, threat model, and runbooks to confirm traceability.
-- **Review the [Threat Model](/docs/40-security/threat-models/portfolio-app-threat-model-v2.md)** to understand security assumptions and mitigations across STRIDE categories.
+- **Review the [Threat Model](/40-security/threat-models/portfolio-app-threat-model-v2.md)** to understand security assumptions and mitigations across STRIDE categories.
 
 ## Validation / Expected outcomes
 

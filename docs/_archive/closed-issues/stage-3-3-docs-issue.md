@@ -19,7 +19,7 @@ tags:
 **Type:** Documentation / Reference  
 **Phase:** Phase 3 — Scaling & Governance  
 **Stage:** 3.3  
-**Linked Issue:** [stage-3-3-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-app-issue.md)  
+**Linked Issue:** [stage-3-3-app-issue.md](/00-portfolio/roadmap/issues/stage-3-3-app-issue.md)  
 **Duration Estimate:** 2–3 hours  
 **Assignee:** GitHub Copilot / Engineering Lead  
 **Created:** 2026-01-22  
@@ -29,7 +29,7 @@ tags:
 
 ## Overview
 
-This stage complements the app testing implementation ([stage-3-3-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-app-issue.md)) by documenting the testing strategy, updating the Portfolio App dossier with testing architecture, and providing reference guides for writing tests.
+This stage complements the app testing implementation ([stage-3-3-app-issue.md](/00-portfolio/roadmap/issues/stage-3-3-app-issue.md)) by documenting the testing strategy, updating the Portfolio App dossier with testing architecture, and providing reference guides for writing tests.
 
 While the app work creates unit tests (Vitest) and E2E tests (Playwright) for registry validation and evidence link resolution, this docs work ensures reviewers understand:
 
@@ -326,9 +326,9 @@ Tests run in GitHub Actions before build:
 
 #### See Also
 
-- **Testing Guide:** [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md)
-- **Testing Dossier:** [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md)
-- **Implementation:** [stage-3-3-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-app-issue.md)
+- **Testing Guide:** [docs/70-reference/testing-guide.md](/70-reference/testing-guide.md)
+- **Testing Dossier:** [docs/60-projects/portfolio-app/05-testing.md](/60-projects/portfolio-app/05-testing.md)
+- **Implementation:** [stage-3-3-app-issue.md](/00-portfolio/roadmap/issues/stage-3-3-app-issue.md)
 
 ````
 
@@ -596,13 +596,13 @@ test.describe('Feature Name', () => {
 
 **Links to:**
 
-- Testing Guide: [docs/70-reference/testing-guide.md](/docs/70-reference/testing-guide.md)
-- Testing Dossier: [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md)
-- CI/CD Pipeline: [docs/devops-platform/ci-cd-pipeline-overview.md](/docs/devops-platform/ci-cd-pipeline-overview)
+- Testing Guide: [docs/70-reference/testing-guide.md](/70-reference/testing-guide.md)
+- Testing Dossier: [docs/60-projects/portfolio-app/05-testing.md](/60-projects/portfolio-app/05-testing.md)
+- CI/CD Pipeline: [docs/devops-platform/ci-cd-pipeline-overview.md](/devops-platform/ci-cd-pipeline-overview)
 
 **Referenced by:**
 
-- Architecture page: [docs/60-projects/portfolio-app/02-architecture.md](/docs/60-projects/portfolio-app/02-architecture.md)
+- Architecture page: [docs/60-projects/portfolio-app/02-architecture.md](/60-projects/portfolio-app/02-architecture.md)
 - Copilot instructions: `.github/copilot-instructions.md`
 
 **Update required in:**
@@ -761,9 +761,9 @@ All updates must follow portfolio-docs authoring standards:
 
 ## Related Issues
 
-- **Linked:** [stage-3-3-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-app-issue.md) (companion implementation)
+- **Linked:** [stage-3-3-app-issue.md](/00-portfolio/roadmap/issues/stage-3-3-app-issue.md) (companion implementation)
 - **Dependency:** stage-3-2-docs-issue.md (completed) — evidence components documented
-- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-33-unit--e2e-tests-46-hours)
+- **Reference:** Phase 3 Implementation Guide: [docs/00-portfolio/roadmap/phase-3-implementation-guide.md](/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-33-unit--e2e-tests-46-hours)
 
 ---
 
@@ -790,14 +790,14 @@ It does NOT replace official Vitest/Playwright documentation. Engineers should r
 
 **Evidence Consistency:**
 
-All testing documentation references the actual test files created in [stage-3-3-app-issue.md](/docs/00-portfolio/roadmap/issues/stage-3-3-app-issue.md). No fictional examples.
+All testing documentation references the actual test files created in [stage-3-3-app-issue.md](/00-portfolio/roadmap/issues/stage-3-3-app-issue.md). No fictional examples.
 
 ---
 
 ## Reference Documentation
 
-- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/docs/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-33-unit--e2e-tests-46-hours)
-- **Portfolio App Dossier — Testing:** [docs/60-projects/portfolio-app/05-testing.md](/docs/60-projects/portfolio-app/05-testing.md)
-- **CI/CD Pipeline:** [docs/devops-platform/ci-cd-pipeline-overview.md](/docs/devops-platform/ci-cd-pipeline-overview)
+- **Phase 3 Implementation Guide:** [phase-3-implementation-guide.md](/00-portfolio/roadmap/phase-3-implementation-guide.md#stage-33-unit--e2e-tests-46-hours)
+- **Portfolio App Dossier — Testing:** [docs/60-projects/portfolio-app/05-testing.md](/60-projects/portfolio-app/05-testing.md)
+- **CI/CD Pipeline:** [docs/devops-platform/ci-cd-pipeline-overview.md](/devops-platform/ci-cd-pipeline-overview)
 - **Vitest Documentation:** https://vitest.dev
 - **Playwright Documentation:** https://playwright.dev

@@ -25,7 +25,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 - Vercel Speed Insights (Core Web Vitals): [portfolio-app/speed-insights](https://vercel.com/bryce-seefieldts-projects/portfolio-app/speed-insights)
 - Vercel Web Analytics (traffic): [portfolio-app/analytics](https://vercel.com/bryce-seefieldts-projects/portfolio-app/analytics)
 - Vercel docs: [Speed Insights](https://vercel.com/docs/speed-insights) | [Web Analytics](https://vercel.com/docs/analytics)
-- Troubleshooting: [Performance Troubleshooting Runbook](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)
+- Troubleshooting: [Performance Troubleshooting Runbook](/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md)
 
 ## Commands
 
@@ -83,7 +83,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 
 ## Notes
 
-- CI enforces 10% JS growth threshold; update baseline only with explicit justification. See [Bundle Size Regression troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md#bundle-size-regression) if failing.
+- CI enforces 10% JS growth threshold; update baseline only with explicit justification. See [Bundle Size Regression troubleshooting](/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md#bundle-size-regression) if failing.
 - Turbopack is enabled; keep `turbopack: {}` in next.config.ts to avoid webpack conflicts when analyzer plugin is present.
 - Both `@vercel/analytics` (traffic) and `@vercel/speed-insights` (performance) are installed; they serve different purposes.
 
@@ -93,7 +93,7 @@ Quick reference for performance work on the Portfolio App: how to analyze bundle
 
 1. Check Speed Insights → Real Experience Score
 2. If RES < 90 (orange/red): Click worst metric → identify problem routes/selectors
-3. Optimize identified pages/elements (see [Poor Speed Insights Scores troubleshooting](/docs/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90))
+3. Optimize identified pages/elements (see [Poor Speed Insights Scores troubleshooting](/50-operations/runbooks/rbk-portfolio-performance-troubleshooting.md#poor-speed-insights-scores-res--90))
 4. Redeploy → verify RES improves
 
 **"Which pages should I optimize first?"**

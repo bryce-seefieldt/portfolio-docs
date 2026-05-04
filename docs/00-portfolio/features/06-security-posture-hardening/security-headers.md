@@ -85,8 +85,8 @@ tags: [portfolio, features, security, headers]
 
 ### Additional internal references
 
-- [`/40-security/portfolio-app-security-controls.md`](/docs/40-security/portfolio-app-security-controls.md)
-- [`/40-security/security-policies.md`](/docs/40-security/security-policies.md)
+- [`/40-security/portfolio-app-security-controls.md`](/40-security/portfolio-app-security-controls.md)
+- [`/40-security/security-policies.md`](/40-security/security-policies.md)
 
 ### External reference links
 

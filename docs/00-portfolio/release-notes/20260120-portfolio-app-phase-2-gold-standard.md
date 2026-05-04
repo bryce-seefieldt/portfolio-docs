@@ -426,33 +426,33 @@ Phase 2 establishes credibility through one exemplary "gold standard" project. T
 
 ### Project Documentation
 
-- [Portfolio App Dossier](/docs/60-projects/portfolio-app/index.md) — Comprehensive project overview
-- [Portfolio App Index](/docs/60-projects/portfolio-app/index.md) — Current phase status and deliverables
-- [Architecture Documentation](/docs/60-projects/portfolio-app/02-architecture.md) — Tech stack and patterns
-- [Security Documentation](/docs/60-projects/portfolio-app/04-security.md) — Public-safety rules and controls
+- [Portfolio App Dossier](/60-projects/portfolio-app/index.md) — Comprehensive project overview
+- [Portfolio App Index](/60-projects/portfolio-app/index.md) — Current phase status and deliverables
+- [Architecture Documentation](/60-projects/portfolio-app/02-architecture.md) — Tech stack and patterns
+- [Security Documentation](/60-projects/portfolio-app/04-security.md) — Public-safety rules and controls
 
 ### Security & Operations
 
-- [Threat Model: Portfolio App](/docs/40-security/threat-models/portfolio-app-threat-model.md) — STRIDE analysis
-- [STRIDE Compliance Report](/docs/40-security/threat-models/portfolio-app-stride-compliance-report.md) — Mitigation status
-- [Operational Runbooks Index](/docs/50-operations/runbooks/index.md) — All operational procedures
-- [Deploy Runbook](/docs/50-operations/runbooks/rbk-portfolio-deploy.md) — Production deployment
-- [CI Triage Runbook](/docs/50-operations/runbooks/rbk-portfolio-ci-triage.md) — Build failure diagnosis
-- [Rollback Runbook](/docs/50-operations/runbooks/rbk-portfolio-rollback.md) — Emergency rollback
-- [Secrets Incident Response](/docs/50-operations/runbooks/rbk-portfolio-secrets-incident.md) — 5-phase incident procedure
+- [Threat Model: Portfolio App](/40-security/threat-models/portfolio-app-threat-model.md) — STRIDE analysis
+- [STRIDE Compliance Report](/40-security/threat-models/portfolio-app-stride-compliance-report.md) — Mitigation status
+- [Operational Runbooks Index](/50-operations/runbooks/index.md) — All operational procedures
+- [Deploy Runbook](/50-operations/runbooks/rbk-portfolio-deploy.md) — Production deployment
+- [CI Triage Runbook](/50-operations/runbooks/rbk-portfolio-ci-triage.md) — Build failure diagnosis
+- [Rollback Runbook](/50-operations/runbooks/rbk-portfolio-rollback.md) — Emergency rollback
+- [Secrets Incident Response](/50-operations/runbooks/rbk-portfolio-secrets-incident.md) — 5-phase incident procedure
 
 ### Architecture Decisions
 
-- [ADR Index](/docs/10-architecture/adr/index.md) — All architecture decisions
-- [ADR-0010: Portfolio App as Gold Standard Exemplar](/docs/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md) — Phase 2 strategy
-- [ADR-0009: React Compiler](/docs/10-architecture/adr/adr-0009-portfolio-app-react-compiler.md) — Automatic optimization
-- [ADR-0008: CI Quality Gates](/docs/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md) — CI pipeline design
-- [ADR-0007: Vercel Hosting with Promotion Checks](/docs/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) — Deployment strategy
+- [ADR Index](/10-architecture/adr/index.md) — All architecture decisions
+- [ADR-0010: Portfolio App as Gold Standard Exemplar](/10-architecture/adr/adr-0010-portfolio-app-as-gold-standard-exemplar.md) — Phase 2 strategy
+- [ADR-0009: React Compiler](/10-architecture/adr/adr-0009-portfolio-app-react-compiler.md) — Automatic optimization
+- [ADR-0008: CI Quality Gates](/10-architecture/adr/adr-0008-portfolio-app-ci-quality-gates.md) — CI pipeline design
+- [ADR-0007: Vercel Hosting with Promotion Checks](/10-architecture/adr/adr-0007-portfolio-app-hosting-vercel-with-promotion-checks.md) — Deployment strategy
 
 ### Related Release Notes
 
-- [Portfolio App Baseline (2026-01-10)](/docs/00-portfolio/release-notes/20260110-portfolio-app-baseline.md) — Initial delivery
-- [Portfolio App Phase 1 Complete (2026-01-17)](/docs/00-portfolio/release-notes/20260117-portfolio-app-phase-1-complete.md) — Foundation complete
+- [Portfolio App Baseline (2026-01-10)](/00-portfolio/release-notes/20260110-portfolio-app-baseline.md) — Initial delivery
+- [Portfolio App Phase 1 Complete (2026-01-17)](/00-portfolio/release-notes/20260117-portfolio-app-phase-1-complete.md) — Foundation complete
 
 ---
 

@@ -86,8 +86,8 @@ tags: [portfolio, features, documentation, evidence]
 
 ### Additional internal references
 
-- [`/70-reference/registry-schema-guide.md`](/docs/70-reference/registry-schema-guide.md)
-- [`/70-reference/portfolio-app-config-reference.md`](/docs/70-reference/portfolio-app-config-reference.md)
+- [`/70-reference/registry-schema-guide.md`](/70-reference/registry-schema-guide.md)
+- [`/70-reference/portfolio-app-config-reference.md`](/70-reference/portfolio-app-config-reference.md)
 
 ### External reference links
 

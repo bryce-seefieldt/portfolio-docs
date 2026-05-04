@@ -87,8 +87,8 @@ tags: [portfolio, features, evidence, links]
 
 ### Additional internal references
 
-- [`/70-reference/portfolio-app-config-reference.md`](/docs/70-reference/portfolio-app-config-reference.md)
-- [`/30-devops-platform/ci-cd-pipeline-overview.md`](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
+- [`/70-reference/portfolio-app-config-reference.md`](/70-reference/portfolio-app-config-reference.md)
+- [`/30-devops-platform/ci-cd-pipeline-overview.md`](/30-devops-platform/ci-cd-pipeline-overview.md)
 
 ### External reference links
 

@@ -82,12 +82,12 @@ tags: [portfolio, features, security, supply-chain]
 
 ### Runbooks
 
-- [`/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md`](/docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)
+- [`/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md`](/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md)
 
 ### Additional internal references
 
-- [`/40-security/security-policies.md`](/docs/40-security/security-policies.md)
-- [`/30-devops-platform/ci-cd-pipeline-overview.md`](/docs/30-devops-platform/ci-cd-pipeline-overview.md)
+- [`/40-security/security-policies.md`](/40-security/security-policies.md)
+- [`/30-devops-platform/ci-cd-pipeline-overview.md`](/30-devops-platform/ci-cd-pipeline-overview.md)
 
 ### External reference links
 

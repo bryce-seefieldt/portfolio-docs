@@ -16,12 +16,12 @@ Phase 6 establishes the long-term governance baseline for the portfolio. Inclusi
 
 # Added
 
-- Eligibility criteria: [/docs/00-portfolio/portfolio-eligibility-criteria.md](/docs/00-portfolio/portfolio-eligibility-criteria.md)
-- Versioning policy: [/docs/00-portfolio/portfolio-versioning-policy.md](/docs/00-portfolio/portfolio-versioning-policy.md)
-- Archival policy: [/docs/00-portfolio/portfolio-archival-policy.md](/docs/00-portfolio/portfolio-archival-policy.md)
-- Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/docs/00-portfolio/portfolio-change-intake.md)
-- ADR-0017: [/docs/10-architecture/adr/adr-0017-portfolio-versioning-and-lifecycle.md](/docs/10-architecture/adr/adr-0017-portfolio-versioning-and-lifecycle.md)
-- Archival runbook: [/docs/50-operations/runbooks/rbk-portfolio-archival.md](/docs/50-operations/runbooks/rbk-portfolio-archival.md)
+- Eligibility criteria: [/docs/00-portfolio/portfolio-eligibility-criteria.md](/00-portfolio/portfolio-eligibility-criteria.md)
+- Versioning policy: [/docs/00-portfolio/portfolio-versioning-policy.md](/00-portfolio/portfolio-versioning-policy.md)
+- Archival policy: [/docs/00-portfolio/portfolio-archival-policy.md](/00-portfolio/portfolio-archival-policy.md)
+- Change intake checklist: [/docs/00-portfolio/portfolio-change-intake.md](/00-portfolio/portfolio-change-intake.md)
+- ADR-0017: [/docs/10-architecture/adr/adr-0017-portfolio-versioning-and-lifecycle.md](/10-architecture/adr/adr-0017-portfolio-versioning-and-lifecycle.md)
+- Archival runbook: [/docs/50-operations/runbooks/rbk-portfolio-archival.md](/50-operations/runbooks/rbk-portfolio-archival.md)
 
 # Changed
 
