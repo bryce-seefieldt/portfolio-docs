@@ -241,13 +241,13 @@ pnpm links:check:external
    - [ ] Status: "Ready" (green checkmark)
    - [ ] Branch: `main`
    - [ ] Commit SHA matches your merged PR
-   - [ ] Production domain assigned: `https://bns-portfolio.vercel.app`
+   - [ ] Production domain assigned: `https://bryce.seefieldt.ca` (canonical domain)
 
 ### 8) Validate Production Deployment
 
 **Manual validation (required after staging passes):**
 
-1. Open `https://bns-portfolio.vercel.app` in browser
+1. Open `https://bryce.seefieldt.ca` in browser
 2. Verify same critical paths as staging:
    - [ ] Home, CV, Projects, Contact pages render
 

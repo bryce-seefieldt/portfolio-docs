@@ -339,8 +339,8 @@ curl -s https://portfolio-app.vercel.app/api/health | jq '.status'
 1. Go to [Vercel Project Settings → Environment Variables](https://vercel.com/bryce-seefieldts-projects/portfolio-app/settings/environment-variables)
 2. Check required variables are present:
    - `NEXT_PUBLIC_GITHUB_URL`: `https://github.com/bryce-seefieldt/portfolio-app`
-   - `NEXT_PUBLIC_DOCS_BASE_URL`: `https://bns-portfolio-docs.vercel.app`
-   - `NEXT_PUBLIC_SITE_URL`: `https://portfolio-app.vercel.app`
+   - `NEXT_PUBLIC_DOCS_BASE_URL`: `https://bryce.seefieldt.ca/docs` (or `https://bns-portfolio-docs.vercel.app` for preview)
+   - `NEXT_PUBLIC_SITE_URL`: `https://bryce.seefieldt.ca`
 3. If missing: Add variable with correct value
 4. If present but wrong: Edit variable value
 5. **Important:** After changing env vars, trigger redeploy:
@@ -381,7 +381,7 @@ vercel domains --clear-cache portfolio-app.vercel.app
 
 ```bash
 # Test docs site availability
-curl -I https://bns-portfolio-docs.vercel.app/
+curl -I https://bryce.seefieldt.ca/docs/
 
 # Test GitHub API
 curl -I https://api.github.com/repos/bryce-seefieldt/portfolio-app

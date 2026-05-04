@@ -86,8 +86,8 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
 
     **Decision references:**
 
-    - ADR-0011: [Data-Driven Registry Decision](https://bns-portfolio-docs.vercel.app/docs/architecture/adr/adr-0011-data-driven-project-registry)
-    - ADR-0012: [Cross-Repo Documentation Linking](https://bns-portfolio-docs.vercel.app/docs/architecture/adr/adr-0012-cross-repo-documentation-linking)
+    - ADR-0011: [Data-Driven Registry Decision](https://bryce.seefieldt.ca/docs/architecture/adr/adr-0011-data-driven-project-registry)
+    - ADR-0012: [Cross-Repo Documentation Linking](https://bryce.seefieldt.ca/docs/architecture/adr/adr-0012-cross-repo-documentation-linking)
     ```
 
 - [x] **Document registry YAML patterns**
@@ -106,7 +106,7 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
     - Environment variable contract (NEXT_PUBLIC_DOCS_BASE_URL, NEXT_PUBLIC_GITHUB_URL, etc.)
     - When to use relative vs. absolute URLs
     - Examples:
-      - ✅ `docsUrl("portfolio/roadmap")` → resolves to `https://bns-portfolio-docs.vercel.app/docs/portfolio/roadmap`
+      - ✅ `docsUrl("portfolio/roadmap")` → resolves to `https://bryce.seefieldt.ca/docs/portfolio/roadmap`
       - ✅ `githubUrl("portfolio-app")` → resolves to `https://github.com/bryce-seefieldt/portfolio-app/portfolio-app` (if env set)
       - ✅ `docsGithubUrl("blob/main/src/lib/registry.ts")` → resolves to docs repo blob URL
 
@@ -133,7 +133,7 @@ The app implementation is minimal for this stage because most Phase 3 decisions 
 
 - [x] **Add Phase 3 reference to README (optional)**
   - Content: Add bullet under "What This App Does" or "Architecture" section
-  - Example: `- Data-driven project registry (YAML + TypeScript validation); see [Registry Guide](https://bns-portfolio-docs.vercel.app/docs/reference/registry-schema-guide)`
+  - Example: `- Data-driven project registry (YAML + TypeScript validation); see [Registry Guide](https://bryce.seefieldt.ca/docs/reference/registry-schema-guide)`
 
 - [x] **Build and verify no broken links**
   - Command: `pnpm build` (local)

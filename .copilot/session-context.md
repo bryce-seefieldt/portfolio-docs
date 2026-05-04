@@ -173,7 +173,7 @@ All work in both repositories **MUST** use templates for proper governance and t
 **Portfolio-docs authoring (this repository):**
 
 - Hosted docs pages: use relative links starting with `/docs/`, include section prefix numbers (e.g., `00-portfolio`), and include `.md` extensions. Example: `/docs/10-architecture/adr/adr-0001-adopt-docusaurus-for-portfolio-docs.md`.
-- Docs hub pages (`index.md`): when constructing published URLs, omit `index.md` (e.g., `docs/00-portfolio/index.md` → `https://bns-portfolio-docs.vercel.app/docs/portfolio/`, built with `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/"`).
+- Docs hub pages (`index.md`): when constructing published URLs, omit `index.md` (e.g., `docs/00-portfolio/index.md` → `https://bryce.seefieldt.ca/docs/portfolio/`, built with `NEXT_PUBLIC_DOCS_BASE_URL + "docs/portfolio/"`). Preview version: `https://bns-portfolio-docs.vercel.app/docs/portfolio/`.
 - Non-hosted files (including anything under `docs/_meta`): link via GitHub blob URLs using repo/env variables (`https://github.com/${DOCUSAURUS_GITHUB_ORG}/${DOCUSAURUS_GITHUB_REPO_DOCS}/blob/main/<path>`). This rule also applies when portfolio-app links to `docs/_meta` content.
 - Env-first rule: For any deployed URLs (docs or app), build URLs from environment variables (`DOCUSAURUS_SITE_URL` + `DOCUSAURUS_BASE_URL`, `NEXT_PUBLIC_DOCS_BASE_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`). Do **not** hardcode production hosts. The only exception is internal `/docs/...` links inside authored content, which stay relative as above.
 
