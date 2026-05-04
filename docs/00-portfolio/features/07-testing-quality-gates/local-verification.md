@@ -16,6 +16,7 @@ tags: [portfolio, features, testing, verification]
 
 - `pnpm verify` and `pnpm verify:quick`
 - environment checks and registry validation
+- optional live external evidence-link monitoring via `pnpm links:check:external`
 
 ### Out of scope
 
@@ -47,6 +48,7 @@ tags: [portfolio, features, testing, verification]
 - Steps: Run `pnpm verify` and review output.
 - What to look for: All steps pass and summary reports success.
 - Artifacts or reports to inspect: Local output logs.
+- Optional step: Run `pnpm links:check:external` for best-effort live reachability checks of external evidence URLs.
 
 #### Tests
 
@@ -57,6 +59,7 @@ tags: [portfolio, features, testing, verification]
 
 - Verification script skips steps due to missing tools.
 - Local checks drift from CI checks.
+- External-link monitor can fail due to third-party outages/rate limits even when app logic is healthy.
 
 ### Long-term maintenance notes
 
@@ -91,6 +94,7 @@ tags: [portfolio, features, testing, verification]
 ## Validation / Expected outcomes
 
 - Local verification passes and mirrors CI checks.
+- Optional external monitor reports live evidence URL status without changing deterministic PR gate behavior.
 
 ## Failure modes / Troubleshooting
 

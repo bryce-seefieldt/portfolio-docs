@@ -48,7 +48,7 @@ tags: [portfolio, features, core-pages, landing]
 #### Manual
 
 - Steps: Open `/`, click “Start with the CV,” “Browse projects,” and “Open evidence docs.”
-- What to look for: CTA links resolve correctly, evidence callout lists a clear review path, featured cards show dossier links.
+- What to look for: Internal CTA routes load correctly; evidence links render with expected labels and non-empty `href` attributes; featured cards show dossier links.
 - Artifacts or reports to inspect: Optional Playwright E2E runs in CI showing core route coverage.
 
 #### Tests

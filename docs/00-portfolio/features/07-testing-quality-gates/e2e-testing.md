@@ -22,6 +22,7 @@ tags: [portfolio, features, testing, e2e]
 
 - unit test logic
 - performance budgets
+- live external URL reachability assertions (handled by a separate monitor)
 
 ## Prereqs / Inputs
 
@@ -40,6 +41,7 @@ tags: [portfolio, features, testing, e2e]
 ### Feature in action
 
 - Where to see it working: `pnpm test:e2e` in the app repo.
+- Related live monitor: `pnpm links:check:external` (scheduled/on-demand workflow, non-blocking for PRs).
 
 ### Confirmation Process
 
@@ -104,6 +106,7 @@ tags: [portfolio, features, testing, e2e]
 ## Failure modes / Troubleshooting
 
 - Browser failures: reinstall Playwright browsers or use CI runners.
+- External URL outage/noise: use the external-link monitor results for triage, not PR-blocking E2E failures.
 
 ## References
 
