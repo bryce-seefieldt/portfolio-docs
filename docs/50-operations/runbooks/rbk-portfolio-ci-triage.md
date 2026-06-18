@@ -28,6 +28,7 @@ When any required check fails, this runbook provides deterministic diagnosis and
 
 - `ci / quality` fails (lint, format:check, typecheck)
 - `ci / test` fails (unit tests, coverage, E2E tests)
+- `ci / link-validation` fails (registry validation, Playwright install, evidence-link checks)
 - `ci / build` fails (Next build)
 - Vercel promotion is blocked due to failing checks
 
@@ -103,9 +104,11 @@ Use this section when a dependency-automation update repeatedly fails CI for env
   - note: `secrets-scan` is not a strict dependency (only runs on PRs, but all PRs require it via branch protection)
 - `ci / test` job runs:
   - `pnpm test:unit`
+  - restore Playwright browser cache (`~/.cache/ms-playwright`)
   - `pnpm test:e2e`
   - uploads coverage artifacts from `pnpm test:coverage` when configured
 - `ci / link-validation` job runs:
+  - restore Playwright browser cache (`~/.cache/ms-playwright`)
   - `pnpm registry:validate`
   - Playwright install + dev server + readiness check
   - `pnpm links:check` (full Playwright E2E suite)
@@ -315,6 +318,16 @@ Common failure modes:
    - Error: Test timeout exceeded (default 30s per test)
    - Fix: Increase timeout in `playwright.config.ts` or optimize slow routes
    - CI: Reduce parallelism (already set to 1 worker in CI for stability)
+
+6. **Slow/cancelled Playwright install step (CI runtime bottleneck):**
+
+- Symptom: `Install Playwright browsers` consumes most job time or job is cancelled near timeout
+- Check: confirm cache restore step executes and is not skipped (`Restore Playwright browser cache`)
+- Fix:
+  - ensure cache key includes lockfile hash and restore key fallback
+  - keep `npx playwright install --with-deps` as an idempotent safety step after cache restore
+  - if recurrent on cold runners, increase job timeout before weakening coverage/gates
+- Guardrail: do not remove `ci / link-validation` or E2E gates to recover runtime
 
 Debugging E2E/link-validation tests:
 

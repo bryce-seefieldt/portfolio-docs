@@ -82,7 +82,7 @@ graph TB
 2. **Setup pnpm**
 
    ```yaml
-   uses: pnpm/action-setup@903f9c1a6ebcba6cf41d87230be49611ac97822e
+      uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271
    with:
      version: '10.0.0'
    ```
@@ -165,7 +165,7 @@ trufflesecurity/trufflehog@main \
 
 **Outcome**: Fails if verified secrets detected (blocks PR merge)
 
-**Evidence**: ADR-XXXX (secrets scanning strategy)
+**Evidence**: ADR-0008 (CI quality gates and baseline supply-chain controls)
 
 #### 3. Test Job
 
@@ -173,7 +173,7 @@ trufflesecurity/trufflehog@main \
 
 **Runs on**: `ubuntu-latest`
 
-**Timeout**: 15 minutes
+**Timeout**: 20 minutes
 
 **Permissions**: `contents: read`
 
@@ -193,7 +193,18 @@ trufflesecurity/trufflehog@main \
    pnpm install --frozen-lockfile
    ```
 
-5. **Run unit tests**
+5. **Restore Playwright browser cache**
+
+   ```yaml
+   uses: actions/cache@v4
+   with:
+     path: ~/.cache/ms-playwright
+     key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+     restore-keys: |
+       ${{ runner.os }}-playwright-
+   ```
+
+6. **Run unit tests**
 
    ```bash
    pnpm test:unit
@@ -202,36 +213,36 @@ trufflesecurity/trufflehog@main \
    - Vitest unit suite execution (`pnpm test:unit`)
    - Fails if unit tests fail
 
-6. **Install Playwright browsers**
+7. **Install Playwright browsers**
 
    ```bash
    npx playwright install --with-deps
    ```
 
-7. **Start dev server**
+8. **Start dev server**
 
    ```bash
    pnpm dev &
    ```
 
-8. **Wait for server readiness**
+9. **Wait for server readiness**
 
    ```bash
    npx wait-on http://localhost:3000
    ```
 
-9. **Run E2E tests**
+10. **Run E2E tests**
 
-   ```bash
-   pnpm test:e2e
-   ```
+```bash
+pnpm test:e2e
+```
 
-   - Multi-browser: Chromium, Firefox
-   - 66 tests covering core routes, slugs, 404s, metadata endpoints, evidence links, and security APIs
-   - 2 retries in CI, 0 locally
-   - HTML report generated
+- Multi-browser: Chromium, Firefox
+- 66 tests covering core routes, slugs, 404s, metadata endpoints, evidence links, and security APIs
+- 2 retries in CI, 0 locally
+- HTML report generated
 
-10. **Upload coverage reports** (if always)
+11. **Upload coverage reports** (if always)
     ```yaml
       uses: actions/upload-artifact@v7
     with:
@@ -240,7 +251,7 @@ trufflesecurity/trufflehog@main \
       retention-days: 7
     ```
 
-**Outcome**: Fails if any tests fail or coverage targets not met
+**Outcome**: Fails if unit or E2E tests fail; coverage artifacts are uploaded for analysis
 
 #### 4. Build Job
 
@@ -248,7 +259,7 @@ trufflesecurity/trufflehog@main \
 
 **Runs on**: `ubuntu-latest`
 
-**Timeout**: 15 minutes
+**Timeout**: 12 minutes
 
 **Permissions**: `contents: read`
 
@@ -291,7 +302,7 @@ trufflesecurity/trufflehog@main \
 
 **Runs on**: `ubuntu-latest`
 
-**Timeout**: 15 minutes
+**Timeout**: 20 minutes
 
 **Permissions**: `contents: read`
 
@@ -300,10 +311,11 @@ trufflesecurity/trufflehog@main \
 **Key steps**:
 
 1. `pnpm install --frozen-lockfile`
-2. `pnpm registry:validate`
-3. Install Playwright browsers
-4. Start dev server + wait-on readiness
-5. `pnpm links:check` (maps to full Playwright E2E suite)
+2. Restore Playwright browser cache (`~/.cache/ms-playwright`)
+3. `pnpm registry:validate`
+4. Install Playwright browsers
+5. Start dev server + wait-on readiness
+6. `pnpm links:check` (maps to full Playwright E2E suite)
 
 **Outcome**: Fails if registry validation or Playwright E2E checks fail.
 
@@ -356,7 +368,7 @@ Note: `external-link-monitor` is intentionally non-blocking and not listed as a 
 ### Promotion Path
 
 1. **Feature branch** → Create PR targeting `main`
-2. **CI runs** → Quality gate runs first, test gate runs second, build gate runs last
+2. **CI runs** → Quality runs first; test and link-validation run after quality; build runs last
 3. **All gates pass** → PR is ready for merge
 4. **Code review** → Human review + approval required
 5. **Merge to main** → Automatically triggers deployment via Vercel
@@ -487,21 +499,22 @@ pnpm registry:list  # List all projects
 ### Cache Strategy
 
 - **Dependencies**: Cached via `actions/setup-node@v6` with `cache: pnpm`
-- **Playwright browsers**: Installed fresh each run (pre-cached in runner images)
+- **Playwright browsers**: Restored from `actions/cache` (`~/.cache/ms-playwright`) and installed to ensure required binaries are present
 - **Build output**: Not cached between runs (fresh build each time)
 
 ### Parallelization
 
-- **Browsers**: E2E tests run in parallel across Chromium and Firefox
-- **Workers**: 1 worker in CI (sequential), unlimited locally
-- **Jobs**: Quality → Test → Build (sequential dependencies)
+- **Browsers**: E2E tests run against Chromium and Firefox projects
+- **Workers**: 1 worker in CI (deterministic, slower), unlimited locally
+- **Jobs**: Quality → (Test + Link-validation) → Build
 
 ### Runtime
 
-- Quality job: ~2 minutes
-- Test job: ~3-5 minutes (depends on E2E test duration)
-- Build job: ~2-3 minutes
-- **Total**: ~8-10 minutes (end-to-end)
+- Quality job: ~1-2 minutes
+- Test job: ~6-15 minutes (dominant variable is Playwright browser install on cold runners)
+- Link-validation job: ~6-15 minutes (same Playwright install sensitivity)
+- Build job: ~2-4 minutes
+- **Total**: workload-dependent; cold-run Playwright setup is usually the largest contributor
 
 ## Deployment Strategy
 
@@ -516,7 +529,7 @@ pnpm registry:list  # List all projects
 1. **PR created**: Vercel creates preview deployment
 2. **CI runs**: All GitHub checks must pass
 3. **Vercel checks run**: Promotion to production requires passing checks
-4. **Merge to main**: Triggers production deployment to `https://bryce-portfolio-app.vercel.app`
+4. **Merge to main**: Triggers production deployment (canonical domain: `https://bryce.seefieldt.ca`)
 
 ## Monitoring & Observability
 
