@@ -41,21 +41,92 @@ This runbook is used when automation is insufficient and a maintainer must repro
 
 ### 0) Optional fast path (scripted, `portfolio-app` only)
 
-If you are remediating an older/open Dependabot PR in `portfolio-app`, you can run the guided script first:
+If you are remediating an older/open Dependabot PR in `portfolio-app`, start with the guided script before switching to the manual workflow.
+
+Launch it from a branch that already contains `scripts/backport-pr-remediation.sh` (for example `main`). Do not start from the target Dependabot branch, because older PR branches may not contain the script.
 
 ```bash
 cd /path/to/portfolio-app
 pnpm pr:remediate
 ```
 
-The script prompts for:
+Show available options:
 
-- target PR number
-- source remediation PR number (defaults to `116`)
+```bash
+pnpm pr:remediate -- --help
+```
+
+#### What the script does
+
+- verifies `gh`, `git`, and a clean working tree before doing any branch mutations
+- defaults the target PR prompt to the oldest open PR in the repo
+- defaults the source PR prompt to the most recently closed PR in the repo
+- looks up non-merge commits from the source PR and suggests those as SHA candidates
+- checks out the target PR branch, cherry-picks the requested commit(s), optionally runs quick verification, pushes the branch, and refreshes PR checks
+
+#### Prompt behavior
+
+If you run the script without flags, it prompts for:
+
+- target PR number (defaults to oldest open PR when GH lookup succeeds)
+- source remediation PR number (defaults to most recently closed PR when GH lookup succeeds)
 - remediation commit SHA(s) to cherry-pick
 - whether to run quick verification before push
 
-The script then performs checkout, cherry-pick, push, and shows current PR checks.
+The SHA prompt is intentionally specific: provide non-merge commit SHA(s) from the source remediation PR. Merge commit SHAs are not valid for this flow and will fail `git cherry-pick` unless you manually provide merge-parent options.
+
+#### Supported CLI switches
+
+Use flags to skip some or all prompts:
+
+```bash
+pnpm pr:remediate -- \
+  --target-pr 117 \
+  --source-pr 120 \
+  --sha 95f091f \
+  --sha 191d221 \
+  --verify \
+  --yes
+```
+
+Supported switches:
+
+- `--repo` / `-r`: override the GitHub repo (`owner/name`)
+- `--target-pr` / `-t`: set the older open PR to update
+- `--source-pr` / `-s`: set the newer remediation PR to cherry-pick from
+- `--sha` / `-c`: add a non-merge remediation commit SHA (repeat for multiple commits; 7+ hex characters accepted)
+- `--verify`: run `pnpm verify:quick` after cherry-pick
+- `--no-verify`: skip quick verification explicitly
+- `--yes` / `-y`: skip the final confirmation prompt
+- `--help` / `-h`: print usage and exit
+
+Recommended patterns:
+
+```bash
+# Fully guided mode
+pnpm pr:remediate
+
+# Mostly automated with explicit PR numbers
+pnpm pr:remediate -- --target-pr 118 --source-pr 120
+
+# Fully non-interactive maintainer flow
+pnpm pr:remediate -- --target-pr 118 --source-pr 120 --sha 95f091f --sha 191d221 --verify --yes
+```
+
+#### Script-specific troubleshooting
+
+If the script stops during cherry-pick:
+
+- conflict during cherry-pick: resolve the file conflict, then run `git cherry-pick --continue`
+- empty cherry-pick after conflict resolution: run `git cherry-pick --skip` if the change is already present on the target branch
+- wrong SHA selected: abort with `git cherry-pick --abort`, then rerun the script using non-merge source commits
+- push denied to Dependabot branch: use the recovery flow in section 2.1 and open a maintainer-owned superseding PR
+
+If the script exits before branch mutation:
+
+- no default PR values shown: GH lookup returned no matching open/closed PRs, so enter values manually
+- `unknown option '--'`: invoke through pnpm as `pnpm pr:remediate -- <flags>`
+- invalid SHA: use the source PR commit list and choose regular commits, not merge commits
 
 If the script fails (conflicts, permission issues, or non-standard branch state), continue with the manual procedure below.
 
