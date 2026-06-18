@@ -621,7 +621,7 @@ The CI pipeline includes a `test` job that runs before the `build` job:
 test:
   name: test
   runs-on: ubuntu-latest
-  timeout-minutes: 15
+  timeout-minutes: 20
   needs: [quality]
   permissions:
     contents: read
@@ -631,7 +631,9 @@ test:
       uses: actions/checkout@v6
 
     - name: Setup pnpm
-      uses: pnpm/action-setup@v4
+      uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271
+      with:
+        version: '10.0.0'
 
     - name: Setup Node
       uses: actions/setup-node@v6
@@ -641,6 +643,14 @@ test:
 
     - name: Install deps
       run: pnpm install --frozen-lockfile
+
+    - name: Restore Playwright browser cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
 
     - name: Run unit tests
       run: pnpm test:unit
@@ -672,8 +682,8 @@ The `build` job depends on the `test` job:
 
 ```yaml
 build:
-  needs: [quality, test]
-  if: always() && needs.quality.result == 'success' && needs.test.result == 'success'
+  needs: [quality, test, link-validation]
+  if: always() && needs.quality.result == 'success' && needs.test.result == 'success' && needs.link-validation.result == 'success'
   # ...
 ```
 

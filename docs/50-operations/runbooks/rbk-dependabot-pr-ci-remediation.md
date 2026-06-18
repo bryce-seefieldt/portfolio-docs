@@ -39,6 +39,26 @@ This runbook is used when automation is insufficient and a maintainer must repro
 
 ## Procedure / Content
 
+### 0) Optional fast path (scripted, `portfolio-app` only)
+
+If you are remediating an older/open Dependabot PR in `portfolio-app`, you can run the guided script first:
+
+```bash
+cd /path/to/portfolio-app
+pnpm pr:remediate
+```
+
+The script prompts for:
+
+- target PR number
+- source remediation PR number (defaults to `116`)
+- remediation commit SHA(s) to cherry-pick
+- whether to run quick verification before push
+
+The script then performs checkout, cherry-pick, push, and shows current PR checks.
+
+If the script fails (conflicts, permission issues, or non-standard branch state), continue with the manual procedure below.
+
 ### 1) Identify the failing check and failing step
 
 From local shell:
@@ -75,6 +95,41 @@ Fallback (if checkout helper fails):
 git fetch origin pull/<PR_NUMBER>/head:dependabot-pr-<PR_NUMBER>
 git checkout dependabot-pr-<PR_NUMBER>
 ```
+
+#### 2.1) Recovery when PR head branch is deleted (closed/stale Dependabot PR)
+
+If `gh pr checkout` fails because the original head branch no longer exists, recover from the immutable PR ref and create a maintainer-owned recovery branch.
+
+Confirm state and head ref:
+
+```bash
+gh pr view <PR_NUMBER> --repo bryce-seefieldt/<REPO> --json state,headRefName,url
+git ls-remote --heads origin <HEAD_REF_NAME>
+```
+
+If the remote head is missing:
+
+```bash
+git fetch origin pull/<PR_NUMBER>/head:pr-<PR_NUMBER>-recovery
+git checkout -b fix/pr-<PR_NUMBER>-ci-recovery pr-<PR_NUMBER>-recovery
+```
+
+Apply known remediation commit(s) from a previously successful fix PR, then verify:
+
+```bash
+git cherry-pick <FIX_COMMIT_SHA>
+pnpm install --frozen-lockfile
+pnpm verify
+```
+
+Publish replacement branch and open a superseding PR:
+
+```bash
+git push -u origin fix/pr-<PR_NUMBER>-ci-recovery
+gh pr create --repo bryce-seefieldt/<REPO> --base main --head fix/pr-<PR_NUMBER>-ci-recovery
+```
+
+In the new PR description, explicitly state it supersedes the closed PR and link both PRs.
 
 ### 3) Reproduce failure locally
 
@@ -153,6 +208,40 @@ pnpm audit --audit-level=high
 - re-run strict audit and full verification
 
 3. Push remediation and rebase/retry Dependabot PR.
+
+#### 5.2) Known pattern: Actions-only Dependabot PR fails `ci / quality`
+
+Symptoms:
+
+- PR diff only updates workflow/action versions (for example `.github/workflows/*.yml`)
+- `ci / quality` still fails due dependency audit gate
+- baseline remediation already exists in a newer merged PR
+
+Responder flow:
+
+1. confirm failure is still audit-gate related:
+
+```bash
+gh pr checks <PR_NUMBER> --repo bryce-seefieldt/<REPO>
+gh pr view <PR_NUMBER> --repo bryce-seefieldt/<REPO> --json statusCheckRollup
+```
+
+2. checkout the open Dependabot PR and apply the known remediation commit:
+
+```bash
+gh pr checkout <PR_NUMBER> --repo bryce-seefieldt/<REPO>
+git cherry-pick <BASELINE_REMEDIATION_COMMIT_SHA>
+```
+
+3. push to the same PR branch (preferred when possible):
+
+```bash
+git push
+```
+
+4. if push to the Dependabot head is not allowed, follow section 2.1 recovery to open a superseding maintainer PR.
+
+This keeps older Dependabot PRs mergeable while preserving strict quality/audit gates.
 
 Guardrail:
 
