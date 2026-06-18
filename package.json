@@ -21,6 +21,7 @@
     "audit": "pnpm audit --audit-level=high",
     "verify": "./scripts/verify-docs-local.sh",
     "verify:quick": "./scripts/verify-docs-local.sh --skip-build",
+    "pr:remediate": "bash ./scripts/backport-pr-remediation.sh",
     "policy:check": "./scripts/policy-consistency-check.sh",
     "policy:check:strict": "./scripts/policy-consistency-check.sh --strict"
   },
