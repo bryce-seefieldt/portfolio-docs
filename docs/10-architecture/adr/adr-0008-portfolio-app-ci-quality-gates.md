@@ -69,6 +69,22 @@ ADR-0008: Portfolio App CI Quality Gates, Supply Chain Baselines, and GitHub Bra
 
 We will implement and enforce mandatory CI quality gates for the Portfolio App using GitHub Actions and protect `main` using GitHub **Rulesets**. CI will consist of two required checks with stable names: **`ci / quality`** (lint, formatting check, typecheck) and **`ci / build`** (production build). CI installs will use `pnpm install --frozen-lockfile` to guarantee deterministic dependency graphs and prevent unreviewed dependency drift. As baseline supply-chain hygiene for a public repo, we will enable CodeQL scanning and Dependabot updates (weekly cadence, grouped minor/patch updates; majors excluded by default). GitHub branch protection will use Rulesets (not classic branch protection) to require PR-based merges, enforce the required checks (`ci / quality`, `ci / build`), and block force pushes and branch deletion.
 
+### Decision amendment (2026-06-18)
+
+Following repeated Dependabot PR failures at the `ci / quality` audit gate, the Portfolio App baseline was remediated to restore deterministic high/critical audit pass behavior without weakening gates:
+
+- upgraded vulnerable direct dependencies to patched lines (including Next.js, Vitest, Wait-on, and jsdom)
+- strengthened `pnpm.overrides` for vulnerable transitive packages (including axios, undici, form-data, ws, and vite)
+- regenerated the lockfile to remove inherited high/critical baseline advisories
+
+Dependabot npm operating policy was tuned for lower drift and smaller, more frequent updates:
+
+- cadence updated from weekly to daily
+- automatic rebasing enabled
+- open PR concurrency reduced to 5
+
+No change was made to required check naming or merge/promotion policy. High/critical audit remains a blocking control in `ci / quality`.
+
 Key configuration choices (high-level; no secrets):
 
 - GitHub Actions workflow named `ci` with jobs named `quality` and `build` producing required checks:

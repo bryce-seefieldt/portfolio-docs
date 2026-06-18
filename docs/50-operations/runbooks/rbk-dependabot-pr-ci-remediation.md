@@ -19,7 +19,7 @@ This runbook is used when automation is insufficient and a maintainer must repro
 ### Use when
 
 - a Dependabot PR has one or more failed required checks
-- CI logs show non-transient failures (typecheck, lint, test, build, links)
+- CI logs show non-transient failures (typecheck, lint, audit gate, test, build, links)
 - re-running jobs does not resolve the failure
 
 ### Do not use when
@@ -109,6 +109,7 @@ Targeted diagnosis:
 pnpm lint
 pnpm format:check
 pnpm typecheck
+pnpm audit --audit-level=high
 pnpm test:unit
 pnpm test:e2e
 pnpm registry:validate
@@ -122,10 +123,40 @@ Decision matrix:
 | Failing check          | Typical root cause                                  | First local command                | Fix strategy                                         |
 | ---------------------- | --------------------------------------------------- | ---------------------------------- | ---------------------------------------------------- |
 | `ci / quality`         | lint, format, typecheck                             | `pnpm verify` or targeted commands | fix code/config; avoid policy weakening              |
+| `ci / quality` (audit) | high/critical vulnerabilities from baseline or PR   | `pnpm audit --audit-level=high`    | patch dependencies/overrides + lockfile; keep gate   |
 | `ci / test`            | unit or E2E regression (`portfolio-app`)            | `pnpm test:unit` / `pnpm test:e2e` | update code or tests to match intended behavior      |
 | `ci / link-validation` | stale/missing docs evidence links (`portfolio-app`) | `pnpm registry:validate`           | correct registry links and targets                   |
 | `ci / build`           | broken build, invalid config, routing/link errors   | `pnpm build`                       | fix root cause; do not bypass build gate             |
 | `secrets-scan`         | verified secret in PR diff                          | review scan output                 | rotate/revoke secret and remove from history/content |
+
+### 5.1) Known pattern: baseline audit drift blocks Dependabot PRs
+
+Symptoms:
+
+- Dependabot PR fails at `ci / quality` audit gate
+- Same strict audit command fails on `main`
+
+Responder flow:
+
+1. Validate whether failure is baseline or PR-specific:
+
+```bash
+# On current main
+pnpm audit --audit-level=high
+```
+
+2. If baseline fails, remediate baseline first:
+
+- upgrade direct vulnerable dependencies to patched versions
+- add targeted `pnpm.overrides` for vulnerable transitive chains
+- regenerate lockfile (`pnpm install`)
+- re-run strict audit and full verification
+
+3. Push remediation and rebase/retry Dependabot PR.
+
+Guardrail:
+
+- do not bypass high/critical audit with `|| true` in required CI gates
 
 ### 5) Known pattern: TypeScript 6 deprecation failures (`TS5101`)
 
@@ -180,5 +211,6 @@ If remediation introduces additional regressions:
 
 - `docs/50-operations/runbooks/rbk-docs-deploy.md`
 - `docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`
+- `docs/50-operations/runbooks/rbk-portfolio-dependency-vulnerability.md`
 - `docs/30-devops-platform/ci-cd-pipeline-overview.md`
 - `docs/50-operations/incident-response/incident-handbook.md`

@@ -41,21 +41,17 @@ Use this section when a dependency-automation update repeatedly fails CI for env
 
 ### Current temporary exception
 
-- Scope: `github-actions` Dependabot updates for `pnpm/action-setup`
-- Ignored range: `>=6.0.0 <7.0.0`
-- Owner: Maintainer on-call
-- Opened: 2026-05-01
-- Review/expiry date: 2026-06-01
-- Tracking issue: [#103](https://github.com/bryce-seefieldt/portfolio-docs/issues/103)
+- none active
 
-### Why this exception exists
+### Open a new exception only when all conditions are true
 
-- CI fails at `pnpm install --frozen-lockfile` with `ERR_PNPM_BROKEN_LOCKFILE` after the `pnpm/action-setup` v6 update.
-- The same commit installs successfully locally, indicating a CI setup compatibility issue rather than a deterministic project lockfile defect.
+1. failure reproduces in CI and local deterministic checks do not provide a safe same-day fix
+2. vulnerability or governance risk of immediate rollback is lower than temporary exception risk
+3. tracking issue includes explicit expiry and exit criteria
 
 ### Exit criteria (required to lift ignore)
 
-1. A focused validation PR that bumps `pnpm/action-setup` to v6 passes `ci/quality`, `ci/build`, and `ci/policy-consistency`.
+1. A focused validation PR for the affected dependency passes `ci / quality`, `ci / test`, `ci / link-validation`, and `ci / build`.
 2. No lockfile parser/install regression appears in reruns for the validation PR.
 3. At least one subsequent merged PR remains green with the upgraded action.
 
@@ -95,6 +91,8 @@ Use this section when a dependency-automation update repeatedly fails CI for env
   - `pnpm lint`
   - `pnpm format:check`
   - `pnpm typecheck`
+  - `pnpm audit --audit-level=high` (blocking)
+  - `pnpm audit --audit-level=low` (visibility only)
 - `ci / secrets-scan` job runs **on pull requests only** (not on push to main)
   - TruffleHog secret scanning with verified detectors
   - reason: TruffleHog requires a diff between base and head; direct pushes to main have identical references and would fail
@@ -145,6 +143,7 @@ pnpm install
 pnpm lint
 pnpm format:check
 pnpm typecheck
+pnpm audit --audit-level=high
 pnpm build
 pnpm test:e2e
 pnpm links:check
@@ -207,6 +206,23 @@ Fix:
 - correct typings or imports
 - avoid broad any usage unless explicitly justified
 - ensure tsconfig aligns with Next.js project structure
+
+#### C.1) Audit gate failures (`pnpm audit --audit-level=high`)
+
+Symptoms:
+
+- `ci / quality` fails at Audit gate with high/critical advisories
+- Dependabot PR fails with vulnerabilities that also reproduce on `main`
+
+Fix:
+
+- reproduce on current `main` first to identify baseline drift versus PR-introduced drift:
+  - `pnpm audit --audit-level=high`
+- if `main` also fails, treat as baseline remediation:
+  - upgrade vulnerable direct dependencies to patched ranges
+  - add targeted `pnpm.overrides` for vulnerable transitive chains
+  - regenerate lockfile and re-run strict audit
+- keep audit gate blocking; do not apply `|| true` to the high/critical gate
 
 #### D) Build failures (`build`)
 

@@ -180,7 +180,7 @@ This scaffolding is intentional and must remain stable unless governed by an ADR
 
 ### Dependabot PR CI failures
 
-When a Dependabot PR causes CI job failures (e.g., `ci / quality`, `ci / build`, `ci / policy-consistency`), treat it as a stop-the-line event. Do not merge with failing checks.
+When a Dependabot PR causes CI job failures (e.g., `ci / quality`, `ci / test`, `ci / link-validation`, `ci / build`), treat it as a stop-the-line event. Do not merge with failing checks.
 
 **Remediation procedure:** Follow [`docs/50-operations/runbooks/rbk-portfolio-ci-triage.md`](../docs/50-operations/runbooks/rbk-portfolio-ci-triage.md) — specifically the **Temporary Exception Policy (Dependabot)** section — for the full diagnosis and resolution procedure, including:
 
@@ -189,7 +189,9 @@ When a Dependabot PR causes CI job failures (e.g., `ci / quality`, `ci / build`,
 - exit criteria and expiry tracking required before lifting any exception
 - required tracking issue and calendar reminder
 
-**Current active exception:** `pnpm/action-setup` v6 (github-actions ecosystem) is ignored due to `ERR_PNPM_BROKEN_LOCKFILE` under the GitHub Actions runner. See tracking issue [#103](https://github.com/bryce-seefieldt/portfolio-docs/issues/103). Review/expiry: 2026-06-01.
+**Current active exception:** none.
+
+Previous temporary exceptions (for example, `pnpm/action-setup`) are closed unless a new failure is reproduced and a new tracking issue is opened with explicit expiry and exit criteria.
 
 ## 6) Public safety rules are mandatory
 
