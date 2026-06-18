@@ -23,6 +23,16 @@ Adopt a docs-specific hardening baseline with the following controls:
 - Treat MDX as code and keep it to a minimum; require review for new MDX usage.
 - Keep publication safety rules (no secrets, no internal endpoints) as enforceable SDLC policy.
 
+### Decision amendment (2026-06-18)
+
+Following repeated `pnpm audit --audit-level=high` failures in portfolio-docs verification, the dependency baseline was remediated without weakening gates:
+
+- added targeted `pnpm.overrides` entries for vulnerable transitive chains in Docusaurus/webpack tooling (including `shell-quote`, `fast-uri`, `@babel/plugin-transform-modules-systemjs`, and `ws`)
+- regenerated lockfile to ensure deterministic adoption of patched transitive versions
+- retained strict blocking behavior for high/critical audit findings in verify/CI
+
+This amendment clarifies that transitive override remediation is an approved hardening mechanism for docs-toolchain vulnerabilities when direct top-level upgrades are not immediately available.
+
 ## Rationale
 
 - **Docusaurus is static but still exposed:** the primary risks are supply chain and accidental disclosure.
