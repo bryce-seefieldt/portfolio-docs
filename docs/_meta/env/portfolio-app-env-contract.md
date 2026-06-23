@@ -42,10 +42,15 @@ Define the canonical environment variable contract for the **Portfolio App** (Ne
 **Example:** `https://yourdomain.com`  
 **Behavior:** If unset, the app does not guess a production domain.
 
+#### `NEXT_PUBLIC_GITHUB_BASE_URL`
+
+**Purpose:** Public link to GitHub profile or org (used for profile-facing links in page UI).  
+**Example:** `https://github.com/<handle>`
+
 #### `NEXT_PUBLIC_GITHUB_URL`
 
-**Purpose:** Public link to GitHub profile or org.  
-**Example:** `https://github.com/<handle>`
+**Purpose:** Public repository base URL (used for repo-path link construction helpers).  
+**Example:** `https://github.com/<handle>/<repo>`
 
 #### `NEXT_PUBLIC_LINKEDIN_URL`
 
@@ -87,6 +92,7 @@ Minimum recommended in Vercel:
 
 - `NEXT_PUBLIC_DOCS_BASE_URL` (e.g., `https://bryce.seefieldt.ca/docs` for production)
 - `NEXT_PUBLIC_SITE_URL` (e.g., `https://bryce.seefieldt.ca`)
+- `NEXT_PUBLIC_GITHUB_BASE_URL`
 - `NEXT_PUBLIC_GITHUB_URL`
 - `NEXT_PUBLIC_LINKEDIN_URL`
 - Optional: `NEXT_PUBLIC_CONTACT_EMAIL`

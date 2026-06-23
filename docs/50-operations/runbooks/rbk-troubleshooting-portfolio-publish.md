@@ -64,7 +64,7 @@ Provide fast fixes for the most common failures during project publishing under 
 - **Symptom:** CI job fails on link checks while local runs succeed.
 - **Cause:** Missing env vars in CI, transient network, or uncommitted changes.
 - **Fix:**
-  1. Confirm env vars in workflow match production (`NEXT_PUBLIC_DOCS_BASE_URL`, `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`, `NEXT_PUBLIC_SITE_URL`).
+  1. Confirm env vars in workflow match production (`NEXT_PUBLIC_DOCS_BASE_URL`, `NEXT_PUBLIC_GITHUB_BASE_URL`, `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`, `NEXT_PUBLIC_SITE_URL`).
   2. Download `playwright-report` artifact to see failing routes.
   3. Retry locally using `pnpm links:check` after `pnpm install --frozen-lockfile`.
   4. If still flaky, rerun CI once; otherwise fix underlying link.

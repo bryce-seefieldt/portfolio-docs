@@ -113,13 +113,14 @@ On the **"Import Project"** page, configure:
 
 Before configuring Vercel, gather the following URLs:
 
-| Variable                    | Local Dev                  | Preview                                      | Production                                 | Example   |
-| --------------------------- | -------------------------- | -------------------------------------------- | ------------------------------------------ | --------- |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | `http://localhost:3001`    | `https://bns-portfolio-docs.vercel.app/docs` | `https://bryce.seefieldt.ca/docs`          | See below |
-| `NEXT_PUBLIC_SITE_URL`      | (optional)                 | `https://portfolio-app-git-main.vercel.app`  | `https://bryce.seefieldt.ca`               | See below |
-| `NEXT_PUBLIC_GITHUB_URL`    | (same across environments) | `https://github.com/bryce-seefieldt`         | `https://github.com/bryce-seefieldt`       | —         |
-| `NEXT_PUBLIC_LINKEDIN_URL`  | (same across environments) | `https://www.linkedin.com/in/your-handle/`   | `https://www.linkedin.com/in/your-handle/` | —         |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | (same across environments) | `your-email@example.com`                     | `your-email@example.com`                   | —         |
+| Variable                      | Local Dev                  | Preview                                            | Production                                         | Example   |
+| ----------------------------- | -------------------------- | -------------------------------------------------- | -------------------------------------------------- | --------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL`   | `http://localhost:3001`    | `https://bns-portfolio-docs.vercel.app/docs`       | `https://bryce.seefieldt.ca/docs`                  | See below |
+| `NEXT_PUBLIC_SITE_URL`        | (optional)                 | `https://portfolio-app-git-main.vercel.app`        | `https://bryce.seefieldt.ca`                       | See below |
+| `NEXT_PUBLIC_GITHUB_BASE_URL` | (same across environments) | `https://github.com/bryce-seefieldt`               | `https://github.com/bryce-seefieldt`               | —         |
+| `NEXT_PUBLIC_GITHUB_URL`      | (same across environments) | `https://github.com/bryce-seefieldt/portfolio-app` | `https://github.com/bryce-seefieldt/portfolio-app` | —         |
+| `NEXT_PUBLIC_LINKEDIN_URL`    | (same across environments) | `https://www.linkedin.com/in/your-handle/`         | `https://www.linkedin.com/in/your-handle/`         | —         |
+| `NEXT_PUBLIC_CONTACT_EMAIL`   | (same across environments) | `your-email@example.com`                           | `your-email@example.com`                           | —         |
 
 **Domain strategy in use:** Path-based (`bryce.seefieldt.ca/docs`).
 
@@ -142,25 +143,27 @@ Before configuring Vercel, gather the following URLs:
 
 1. Click **"Add New"** for each variable:
 
-| Name                        | Value                                        | Environment Scope |
-| --------------------------- | -------------------------------------------- | ----------------- |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | `https://bns-portfolio-docs.vercel.app/docs` | **Preview**       |
-| `NEXT_PUBLIC_SITE_URL`      | (leave empty or use Vercel preview URL)      | **Preview**       |
-| `NEXT_PUBLIC_GITHUB_URL`    | Your GitHub profile URL                      | **Preview**       |
-| `NEXT_PUBLIC_LINKEDIN_URL`  | Your LinkedIn profile URL                    | **Preview**       |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email                    | **Preview**       |
+| Name                          | Value                                        | Environment Scope |
+| ----------------------------- | -------------------------------------------- | ----------------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL`   | `https://bns-portfolio-docs.vercel.app/docs` | **Preview**       |
+| `NEXT_PUBLIC_SITE_URL`        | (leave empty or use Vercel preview URL)      | **Preview**       |
+| `NEXT_PUBLIC_GITHUB_BASE_URL` | Your GitHub profile URL                      | **Preview**       |
+| `NEXT_PUBLIC_GITHUB_URL`      | Your portfolio-app repo URL                  | **Preview**       |
+| `NEXT_PUBLIC_LINKEDIN_URL`    | Your LinkedIn profile URL                    | **Preview**       |
+| `NEXT_PUBLIC_CONTACT_EMAIL`   | Your public contact email                    | **Preview**       |
 
 ##### Production (`main`)
 
 1. Click **"Add New"** for each variable:
 
-| Name                        | Value                             | Environment Scope |
-| --------------------------- | --------------------------------- | ----------------- |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | `https://bryce.seefieldt.ca/docs` | **Production**    |
-| `NEXT_PUBLIC_SITE_URL`      | `https://bryce.seefieldt.ca`      | **Production**    |
-| `NEXT_PUBLIC_GITHUB_URL`    | Your GitHub profile URL           | **Production**    |
-| `NEXT_PUBLIC_LINKEDIN_URL`  | Your LinkedIn profile URL         | **Production**    |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Your public contact email         | **Production**    |
+| Name                          | Value                             | Environment Scope |
+| ----------------------------- | --------------------------------- | ----------------- |
+| `NEXT_PUBLIC_DOCS_BASE_URL`   | `https://bryce.seefieldt.ca/docs` | **Production**    |
+| `NEXT_PUBLIC_SITE_URL`        | `https://bryce.seefieldt.ca`      | **Production**    |
+| `NEXT_PUBLIC_GITHUB_BASE_URL` | Your GitHub profile URL           | **Production**    |
+| `NEXT_PUBLIC_GITHUB_URL`      | Your portfolio-app repo URL       | **Production**    |
+| `NEXT_PUBLIC_LINKEDIN_URL`    | Your LinkedIn profile URL         | **Production**    |
+| `NEXT_PUBLIC_CONTACT_EMAIL`   | Your public contact email         | **Production**    |
 
 :::tip
 **Deployment Trigger:** After adding/modifying environment variables, you must redeploy:
@@ -467,7 +470,7 @@ Result: Deployments from the `staging` branch will now serve at the staging doma
 Monitor the GitHub Actions CI workflow for the following gates (should all show ✅ PASS):
 
 - **Environment validation** – Checks that all required env vars are defined
-  - **Required vars:** `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_DOCS_BASE_URL`
+  - **Required vars:** `NEXT_PUBLIC_GITHUB_BASE_URL`, `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_DOCS_BASE_URL`
   - ⚠️ **If this fails:** See **Troubleshooting** section → "CI workflow fails with missing environment variables"
 - **Registry check** – Verifies build artifacts can be pushed
 - **Build gate** – Compiles the application with `pnpm build`
@@ -567,12 +570,13 @@ Update the team documentation with your actual URLs:
 
 ### Environment Variables Configured
 
-| Variable                    | Preview                                          | Production                                       |
-| --------------------------- | ------------------------------------------------ | ------------------------------------------------ |
-| `NEXT_PUBLIC_DOCS_BASE_URL` | https://bns-portfolio-docs.vercel.app/docs/      | https://bryce.seefieldt.ca/docs                  |
-| `NEXT_PUBLIC_SITE_URL`      | https://bns-portfolio.vercel.app                 | https://bryce.seefieldt.ca                       |
-| `NEXT_PUBLIC_GITHUB_URL`    | https://github.com/bryce-seefieldt/portfolio-app | https://github.com/bryce-seefieldt/portfolio-app |
-| ...                         | ...                                              | ...                                              |
+| Variable                      | Preview                                          | Production                                       |
+| ----------------------------- | ------------------------------------------------ | ------------------------------------------------ |
+| `NEXT_PUBLIC_DOCS_BASE_URL`   | https://bns-portfolio-docs.vercel.app/docs/      | https://bryce.seefieldt.ca/docs                  |
+| `NEXT_PUBLIC_SITE_URL`        | https://bns-portfolio.vercel.app                 | https://bryce.seefieldt.ca                       |
+| `NEXT_PUBLIC_GITHUB_BASE_URL` | https://github.com/bryce-seefieldt               | https://github.com/bryce-seefieldt               |
+| `NEXT_PUBLIC_GITHUB_URL`      | https://github.com/bryce-seefieldt/portfolio-app | https://github.com/bryce-seefieldt/portfolio-app |
+| ...                           | ...                                              | ...                                              |
 ```
 
 #### Step 6.3: Mark deployment as complete
@@ -679,7 +683,7 @@ Status: Live — CI quality/build gates with frozen installs; **Vercel preview +
 
 - CI workflow fails on staging or main branch
 - Error message: `Environment validation failed: Missing required variables`
-- Specifically missing: `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`
+- Specifically missing: `NEXT_PUBLIC_GITHUB_BASE_URL`, `NEXT_PUBLIC_GITHUB_URL`, `NEXT_PUBLIC_DOCS_GITHUB_URL`
 
 **Root cause:**
 
@@ -697,7 +701,8 @@ These variables must be defined in **GitHub repository settings** so the CI work
 
 | Name                          | Value                     | Example                                             |
 | ----------------------------- | ------------------------- | --------------------------------------------------- |
-| `NEXT_PUBLIC_GITHUB_URL`      | Your GitHub profile URL   | `https://github.com/bryce-seefieldt`                |
+| `NEXT_PUBLIC_GITHUB_BASE_URL` | Your GitHub profile URL   | `https://github.com/bryce-seefieldt`                |
+| `NEXT_PUBLIC_GITHUB_URL`      | Your app repo URL         | `https://github.com/bryce-seefieldt/portfolio-app`  |
 | `NEXT_PUBLIC_DOCS_GITHUB_URL` | Your docs repo GitHub URL | `https://github.com/bryce-seefieldt/portfolio-docs` |
 
 **For each variable:**
@@ -714,7 +719,7 @@ If running workflows that deploy to Vercel, also add these to Vercel environment
 1. Go to Vercel dashboard → **portfolio-app** project
 2. Navigate to **Settings** → **Environment Variables**
 3. For each variable, click **"Add New"**:
-   - Name: `NEXT_PUBLIC_GITHUB_URL` or `NEXT_PUBLIC_DOCS_GITHUB_URL`
+   - Name: `NEXT_PUBLIC_GITHUB_BASE_URL` or `NEXT_PUBLIC_GITHUB_URL` or `NEXT_PUBLIC_DOCS_GITHUB_URL`
    - Value: (same as GitHub)
    - Environment scope: **All Environments** (or **Preview** + **Production** separately if preferred)
 4. Click **"Save"**
@@ -724,7 +729,8 @@ If running workflows that deploy to Vercel, also add these to Vercel environment
 Ensure your local `.env.local` file has these variables:
 
 ```env
-NEXT_PUBLIC_GITHUB_URL=https://github.com/bryce-seefieldt
+NEXT_PUBLIC_GITHUB_BASE_URL=https://github.com/bryce-seefieldt
+NEXT_PUBLIC_GITHUB_URL=https://github.com/bryce-seefieldt/portfolio-app
 NEXT_PUBLIC_DOCS_GITHUB_URL=https://github.com/bryce-seefieldt/portfolio-docs
 ```
 

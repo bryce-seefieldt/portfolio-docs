@@ -49,7 +49,7 @@ This page defines the Portfolio App as an enterprise-grade artifact: not only a 
 ### Reviewer journey (designed path)
 
 1. **Landing page**: concise proposition + “Start Here”
-2. **Interactive CV**: timeline, skills, impact, evidence links
+2. **Traditional CV**: experience, education, and technical skills in a scannable format
 3. **Projects**: curated list with “gold standard” project pages
 4. **Evidence**: links into Docusaurus (dossiers, ADRs, threat models, runbooks)
 5. **Operational credibility**: release notes, CI gates, deployment model
@@ -59,7 +59,7 @@ This page defines the Portfolio App as an enterprise-grade artifact: not only a 
 ### Minimum viable outcomes (MVP)
 
 - Fast, polished site with clear navigation
-- `/cv` conveys “senior full-stack + enterprise” capability
+- `/cv` presents accurate reverse-chronological experience, education, and skill coverage
 - `/projects` contains at least one “gold standard” project case study
 - Every project page includes:
   - what it is
@@ -178,7 +178,7 @@ See architectural decisions (ADRs):
 
 ## Executive Summary
 
-The Portfolio App is a production TypeScript web application that serves as an interactive CV and project showcase, intentionally designed to demonstrate enterprise-grade engineering discipline. Built with Next.js and deployed on Vercel with comprehensive CI/CD governance, it proves competency across modern web development, security hygiene, operational maturity, and evidence-first documentation practices.
+The Portfolio App is a production TypeScript web application that serves as a traditional CV and project showcase, intentionally designed to demonstrate enterprise-grade engineering discipline. Built with Next.js and deployed on Vercel with comprehensive CI/CD governance, it proves competency across modern web development, security hygiene, operational maturity, and evidence-first documentation practices.
 
 Key value: Not just a portfolio site—a working exemplar of how senior engineers build, secure, operate, and document production systems.
 

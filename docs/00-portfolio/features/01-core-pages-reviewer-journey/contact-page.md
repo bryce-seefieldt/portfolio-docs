@@ -24,7 +24,7 @@ tags: [portfolio, features, core-pages, contact]
 
 ## Prereqs / Inputs
 
-- `NEXT_PUBLIC_LINKEDIN_URL` or `NEXT_PUBLIC_GITHUB_URL` or `NEXT_PUBLIC_CONTACT_EMAIL`
+- `NEXT_PUBLIC_LINKEDIN_URL` or `NEXT_PUBLIC_GITHUB_BASE_URL` or `NEXT_PUBLIC_CONTACT_EMAIL`
 
 ## Procedure / Content
 
@@ -32,7 +32,7 @@ tags: [portfolio, features, core-pages, contact]
 
 - Feature name: Contact page (`/contact`)
 - Feature group: Core pages and reviewer journey
-- Technical summary: Renders static contact cards based on configured public environment variables.
+- Technical summary: Renders static contact cards based on configured public environment variables. External social links open in a new tab; `mailto:` remains same-tab.
 - Low-tech summary: A safe contact page that avoids forms and uses simple links.
 
 ### Feature in action
@@ -44,7 +44,7 @@ tags: [portfolio, features, core-pages, contact]
 #### Manual
 
 - Steps: Open `/contact`, verify that configured contact cards appear.
-- What to look for: Mailto links open a mail client, external links resolve correctly, and fallback text appears if nothing is set.
+- What to look for: Mailto links open a mail client, GitHub/LinkedIn links open in a new tab (`target="_blank"` + `rel="noopener noreferrer"`), and fallback text appears if nothing is set.
 - Artifacts or reports to inspect: Optional E2E route coverage in CI.
 
 #### Tests

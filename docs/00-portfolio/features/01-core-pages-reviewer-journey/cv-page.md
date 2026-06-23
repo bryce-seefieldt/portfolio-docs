@@ -1,6 +1,6 @@
 ---
 title: 'Feature: CV Page (/cv)'
-description: 'Evidence-first CV timeline with proof links and reviewer guidance.'
+description: 'Traditional, scannable CV focused on experience, education, and technical skills.'
 sidebar_position: 2
 tags: [portfolio, features, core-pages, cv]
 ---
@@ -8,25 +8,25 @@ tags: [portfolio, features, core-pages, cv]
 ## Purpose
 
 - Feature name: CV page (`/cv`)
-- Why this feature exists: Present an evidence-first CV that connects experience to verifiable artifacts.
+- Why this feature exists: Present a clean, traditional CV that hiring managers can scan quickly.
 
 ## Scope
 
 ### In scope
 
-- timeline entries with role summaries
-- proof links to dossiers, ADRs, runbooks, and threat models
-- reviewer guidance callouts
+- experience entries with role summaries and quantified outcomes
+- education history and technical skill categories
+- direct contact links and downloadable resume action
 
 ### Out of scope
 
-- projects registry management (covered in evidence-first content model)
+- project dossier deep-dive content (owned by `/projects` and docs pages)
 - global navigation and theming
 
 ## Prereqs / Inputs
 
-- CV data source populated (timeline entries and proofs)
-- docs base URL configured
+- canonical CV content maintained and current
+- profile links configured in public env vars
 
 ## Procedure / Content
 
@@ -34,8 +34,8 @@ tags: [portfolio, features, core-pages, cv]
 
 - Feature name: CV page (`/cv`)
 - Feature group: Core pages and reviewer journey
-- Technical summary: Renders timeline data into sections, with proof links built from configured docs URLs.
-- Low-tech summary: A resume page that links each claim to evidence.
+- Technical summary: Renders semantic CV sections (header, summary, experience, education, skills, references) in a single page component.
+- Low-tech summary: A straightforward resume page with accurate work history and contact information.
 
 ### Feature in action
 
@@ -45,9 +45,9 @@ tags: [portfolio, features, core-pages, cv]
 
 #### Manual
 
-- Steps: Open `/cv`, scan timeline entries, click at least two proof links.
-- What to look for: Evidence links point to expected destinations and match the described capability.
-- Artifacts or reports to inspect: Optional E2E route coverage in CI; optional external-link monitor results for live reachability.
+- Steps: Open `/cv`, confirm section order (summary, experience, education, skills), verify role titles/dates and key quantified outcomes.
+- What to look for: No evidence-hub callouts, no capability-tag walls, and no inflated role titles.
+- Artifacts or reports to inspect: Route smoke tests and unit tests for CV content structure.
 
 #### Tests
 
@@ -56,13 +56,13 @@ tags: [portfolio, features, core-pages, cv]
 
 ### Potential behavior if broken or misconfigured
 
-- Proof links route to incorrect docs sections.
-- Timeline entries are missing or render out of order.
+- Experience entries missing or rendered out of order.
+- Resume download link points to a missing PDF asset.
 
 ### Long-term maintenance notes
 
-- Keep proof links current as documentation moves.
-- Update timeline entries as experience changes to avoid stale claims.
+- Keep CV content synchronized with the canonical resume source.
+- When adding a new role or credential, preserve reverse-chronological ordering.
 
 ### Dependencies, libraries, tools
 
@@ -73,7 +73,6 @@ tags: [portfolio, features, core-pages, cv]
 ### Source code references (GitHub URLs)
 
 - [`/portfolio-app/src/app/cv/page.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/cv/page.tsx)
-- [`/portfolio-app/src/data/cv.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/data/cv.ts)
 - [`/portfolio-app/src/lib/config.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/config.ts)
 
 ### ADRs
@@ -97,13 +96,13 @@ tags: [portfolio, features, core-pages, cv]
 
 ## Validation / Expected outcomes
 
-- CV timeline renders without missing sections.
-- Evidence links are relevant to each capability and route to the intended destinations.
+- CV renders with expected semantic section hierarchy and complete role history.
+- Quantified outcomes and contact links are visible and accurate.
 
 ## Failure modes / Troubleshooting
 
-- Broken evidence links: update proof URLs in the CV data source.
-- Missing timeline entries: validate data export and rebuild.
+- Missing PDF link target: add `bryce-seefieldt-cv.pdf` to `/public`.
+- Incorrect or stale experience details: update CV source content and sync page text.
 
 ## References
 

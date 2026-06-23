@@ -1,6 +1,6 @@
 ---
 title: 'Project Dossier: Portfolio App'
-description: 'Enterprise-grade TypeScript portfolio web application (Next.js) serving as an interactive CV and a platform to showcase verified project evidence.'
+description: 'Enterprise-grade TypeScript portfolio web application (Next.js) serving as a traditional CV, project showcase, and evidence-linked engineering portfolio.'
 sidebar_position: 0
 tags: [projects, portfolio, nextjs, typescript, devops, security, operations]
 ---
@@ -20,7 +20,7 @@ tags: [projects, portfolio, nextjs, typescript, devops, security, operations]
 
 This dossier documents the **Portfolio App**: a production-quality TypeScript web application that serves as:
 
-- an **interactive CV** and professional public landing experience
+- a **traditional, scannable CV** and professional public landing experience
 - a platform to showcase **projects** (Python, Java, C++, etc.) with strong evidence and reproducibility
 - a working exemplar of **enterprise SDLC**, including CI quality gates, security hygiene, and operational readiness
 
