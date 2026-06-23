@@ -158,10 +158,15 @@ NEXT_PUBLIC_DOCS_BASE_URL=https://bryce.seefieldt.ca/docs
 
 ### Optional variables (recommended for production)
 
+**`NEXT_PUBLIC_GITHUB_BASE_URL`**
+
+- Public GitHub profile or org URL used for profile-facing links
+- Example: `https://github.com/your-handle`
+
 **`NEXT_PUBLIC_GITHUB_URL`**
 
-- Public GitHub profile or repo URL
-- Example: `https://github.com/your-handle`
+- Public GitHub repository base URL used for repo-path link construction
+- Example: `https://github.com/your-handle/portfolio-app`
 
 **`NEXT_PUBLIC_LINKEDIN_URL`**
 

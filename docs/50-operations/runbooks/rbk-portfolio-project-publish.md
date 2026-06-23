@@ -19,6 +19,7 @@ Operations and engineering collaborators who publish or review new projects. Ass
 - Local environment with Node 20+, pnpm (per `package.json#packageManager`), Playwright browsers (`npx playwright install --with-deps`)
 - Required env vars exported when running app commands locally:
   - `NEXT_PUBLIC_DOCS_BASE_URL`
+  - `NEXT_PUBLIC_GITHUB_BASE_URL`
   - `NEXT_PUBLIC_GITHUB_URL`
   - `NEXT_PUBLIC_DOCS_GITHUB_URL`
   - `NEXT_PUBLIC_SITE_URL`

@@ -26,7 +26,7 @@ tags: [portfolio, features, navigation, header]
 ## Prereqs / Inputs
 
 - docs base URL configured for evidence link
-- optional `NEXT_PUBLIC_GITHUB_URL` for GitHub link
+- optional `NEXT_PUBLIC_GITHUB_BASE_URL` for GitHub profile link
 
 ## Procedure / Content
 
@@ -97,7 +97,7 @@ tags: [portfolio, features, navigation, header]
 ## Validation / Expected outcomes
 
 - Navigation is consistent across routes and breakpoints.
-- Evidence link routes to the configured docs base URL.
+- Evidence link routes to the configured docs base URL and opens in a new tab.
 
 ## Failure modes / Troubleshooting
 

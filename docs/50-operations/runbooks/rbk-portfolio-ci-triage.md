@@ -257,6 +257,7 @@ Fix:
 ```bash
 # Verify required variables are set
 echo $NEXT_PUBLIC_DOCS_BASE_URL
+echo $NEXT_PUBLIC_GITHUB_BASE_URL
 echo $NEXT_PUBLIC_GITHUB_URL
 
 # Test registry interpolation

@@ -278,6 +278,7 @@ Required (recommended minimum):
 Recommended for production polish:
 
 - `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_GITHUB_BASE_URL`
 - `NEXT_PUBLIC_GITHUB_URL`
 - `NEXT_PUBLIC_LINKEDIN_URL`
 
@@ -291,19 +292,6 @@ Expected outcome:
 - No sensitive values are stored in any `NEXT_PUBLIC_*` variable
 
 **Note:** Staging uses Preview environment scope in Vercel because it's deployed from a non-main branch (`staging`).
-
-- `NEXT_PUBLIC_SITE_URL`
-- `NEXT_PUBLIC_GITHUB_URL`
-- `NEXT_PUBLIC_LINKEDIN_URL`
-
-Optional:
-
-- `NEXT_PUBLIC_CONTACT_EMAIL`
-
-Expected outcome:
-
-- Values are set for **Preview** and **Production** (unless intentionally different).
-- No sensitive values are stored in any `NEXT_PUBLIC_*` variable.
 
 #### B) Verify runtime behavior in the deployed site
 

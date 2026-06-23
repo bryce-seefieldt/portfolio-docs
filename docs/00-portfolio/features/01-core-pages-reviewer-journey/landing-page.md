@@ -28,7 +28,7 @@ tags: [portfolio, features, core-pages, landing]
 ## Prereqs / Inputs
 
 - `NEXT_PUBLIC_DOCS_BASE_URL` configured for evidence links
-- optional `NEXT_PUBLIC_GITHUB_URL` and `NEXT_PUBLIC_LINKEDIN_URL`
+- optional `NEXT_PUBLIC_GITHUB_BASE_URL` and `NEXT_PUBLIC_LINKEDIN_URL`
 
 ## Procedure / Content
 
@@ -48,7 +48,7 @@ tags: [portfolio, features, core-pages, landing]
 #### Manual
 
 - Steps: Open `/`, click “Start with the CV,” “Browse projects,” and “Open evidence docs.”
-- What to look for: Internal CTA routes load correctly; evidence links render with expected labels and non-empty `href` attributes; featured cards show dossier links.
+- What to look for: Internal CTA routes load correctly; evidence/docs links open in a new tab with non-empty `href` attributes; featured cards show dossier links.
 - Artifacts or reports to inspect: Optional Playwright E2E runs in CI showing core route coverage.
 
 #### Tests

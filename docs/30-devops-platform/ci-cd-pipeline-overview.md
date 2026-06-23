@@ -382,6 +382,7 @@ Note: `external-link-monitor` is intentionally non-blocking and not listed as a 
 ```yaml
 env:
    NEXT_PUBLIC_DOCS_BASE_URL: https://your-docs-domain.example
+   NEXT_PUBLIC_GITHUB_BASE_URL: https://github.com/bryce-seefieldt
   NEXT_PUBLIC_GITHUB_URL: https://github.com/bryce-seefieldt/portfolio-app
   NEXT_PUBLIC_DOCS_GITHUB_URL: https://github.com/bryce-seefieldt/portfolio-docs
   NEXT_PUBLIC_SITE_URL: https://bryce.seefieldt.ca

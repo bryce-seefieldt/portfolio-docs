@@ -55,7 +55,7 @@ Describe the Portfolio App architecture at a level that is:
 Current and optional route surface:
 
 - `/` — landing, “Start Here,” primary narrative
-- `/cv` — interactive CV (timeline + skill proof)
+- `/cv` — traditional CV (summary, experience, education, technical skills)
 - `/projects` — curated gallery
 - `/projects/[slug]` — project details (evidence links)
 - `/contact` — static contact method (no auth, no form initially)
@@ -69,8 +69,7 @@ Current and optional route surface:
 Use structured data for:
 
 - project list and metadata
-- CV timeline entries
-- skills and capability proof links
+- project evidence mappings
 - evidence links mapping to Docusaurus paths
 
 Recommended initial approach (low complexity):
@@ -515,7 +514,7 @@ Key paths and roles in the Portfolio App repo:
 
 - `src/app/*` — App Router pages and layouts (implemented routes):
   - `/` — landing
-  - `/cv` — interactive CV scaffold
+  - `/cv` — traditional CV scaffold
   - `/projects` — project index
   - `/projects/[slug]` — project details
   - `/contact` — static contact surface
@@ -583,7 +582,7 @@ Fixed header with:
 
 - Portfolio branding/logo (links to `/`)
 - CV, Projects, Evidence (Docs), Contact
-- Evidence link opens Documentation App in same/new tab
+- Evidence link opens Documentation App in a new tab (`target="_blank"`, `rel="noopener noreferrer"`)
 
 ### Footer
 
@@ -827,62 +826,27 @@ import { Callout } from '@/components/Callout';
 
 **Evidence**: See [PR #20](https://github.com/bryce-seefieldt/portfolio-app/pull/20) for implementation.
 
-### Data-Driven Content Pattern (CV Timeline)
+### Traditional CV Content Pattern
 
-**Purpose**: Separate data structure from presentation for maintainability and scalability.
+**Purpose**: Preserve resume accuracy and reviewer scan speed on the `/cv` route.
 
-**Location**: `src/data/cv.ts` (data), `src/app/cv/page.tsx` (presentation)
+**Location**: `src/app/cv/page.tsx`
 
-**Data Structure**:
+**Structure**:
 
-```typescript
-interface TimelineEntry {
-  title: string;
-  organization: string;
-  period: string;
-  description: string;
-  keyCapabilities: string[];
-  proofs: Array<{ text: string; href: string }>;
-}
-
-export const TIMELINE: TimelineEntry[] = [
-  {
-    title: 'Portfolio Program & Engineering Excellence',
-    organization: 'Portfolio Development Initiative',
-    period: '2026',
-    description: '...',
-    keyCapabilities: [
-      'Next.js & React (v19+)',
-      'TypeScript (strict mode)',
-      // ... more capabilities
-    ],
-    proofs: [
-      {
-        text: 'Portfolio App Dossier',
-        href: docsUrl('/docs/60-projects/portfolio-app/'),
-      },
-      // ... more proofs
-    ],
-  },
-  // ... more entries
-];
-```
-
-**Presentation Pattern**:
-
-- Map `TIMELINE` array to `Section` components
-- Render capabilities as rounded badge chips
-- Render proofs as underlined links with evidence prefix
-- Evidence Hubs section provides comprehensive navigation
+- Header (name, title, location, direct contact, profile links, PDF resume action)
+- Summary
+- Experience (reverse-chronological roles with quantified outcomes)
+- Education
+- Technical skills (grouped categories)
+- Optional closing line and references
 
 **Benefits**:
 
-- Easy to add new timeline entries without touching UI code
-- Type safety for all entries via TypeScript interface
-- Centralized data source enables future features (filtering, search, analytics)
-- Verifiable capability claims via structured proof links
-
-**Evidence**: See [PR #21](https://github.com/bryce-seefieldt/portfolio-app/pull/21) for implementation.
+- Aligns page behavior with recruiter/hiring-manager CV expectations
+- Reduces duplicated evidence-hub content (projects/docs own deep proof navigation)
+- Improves trust via role-title accuracy and concrete outcomes
+- Keeps content maintainable through a single canonical source file during updates
 
 ### Evidence-First UX Pattern
 
@@ -891,8 +855,8 @@ export const TIMELINE: TimelineEntry[] = [
 **Implementation**:
 
 1. **Project pages**: Each feature links to dossier, threat model, runbook, or ADR
-2. **CV page**: Each capability links to project evidence, architecture docs, or operational artifacts
-3. **Evidence Hubs**: Dedicated sections for comprehensive evidence navigation
+2. **CV page**: Contains concise career history and links out minimally (projects/docs/contact)
+3. **Documentation app**: Hosts deep evidence narratives and governance artifacts
 
 **Link Types**:
 
@@ -918,7 +882,6 @@ Current baseline:
 - Static project data in TypeScript (typed, version-controlled)
 - Manual content updates via code changes + PRs
 - Evidence links hardcoded per project
-- Data-driven CV timeline (`src/data/cv.ts`)
 - Gold standard conditional rendering (slug-based)
 
 Potential enhancements:
