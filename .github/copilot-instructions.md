@@ -125,6 +125,7 @@ This docs platform is itself a **first-class project** (and the first project do
 **Current work:** Maintenance mode with focus on keeping existing architecture, security posture, operations runbooks, and evidence artifacts aligned with live implementation.
 
 **Next Major Phase:** Phase 2 (Portfolio App Content & UI/UX Overhaul) — scheduled to begin immediately. Scope includes:
+
 - Full resume-driven CV page implementation
 - Homepage content overhaul with authentic narrative
 - Visual design and layout modernization (Tailwind + responsive improvements)
@@ -232,6 +233,7 @@ When resuming work on either repository:
 6. Follow the Definition of Done (listed in portfolio-app notes.md) for any new changes
 
 **Handoff complete.** Both repositories are stable, well-documented, and ready for Phase 2 work.
+
 - It may contain templates, style guides, taxonomy rules, and internal authoring procedures.
 - Do not move `_meta` into public docs. If you need to publish governance pages publicly later, create a dedicated public domain (e.g., `docs/80-governance/`) and copy curated content there.
 
