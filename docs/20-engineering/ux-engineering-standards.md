@@ -292,7 +292,7 @@ element.scrollTo({ top: 0, behavior: 'smooth' });
 
 1. **Color Contrast:** 4.5:1 minimum for normal text, 3:1 minimum for large text
 
-  Validate against active design tokens from the Design System reference (do not hardcode legacy palette assumptions).
+Validate against active design tokens from the Design System reference (do not hardcode legacy palette assumptions).
 
 2. **Keyboard Navigation:** All functionality accessible via keyboard
 
