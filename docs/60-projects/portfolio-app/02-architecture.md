@@ -572,7 +572,7 @@ Component organization:
 
 **Navigation enhancements:** Back-to-top button for long pages; sticky header for quick access to main navigation.
 
-**Full design system:** [UX Design System](../../20-engineering/ux-design-system.md) in engineering domain covers component patterns, layout strategies, accessibility standards, and best practices shared across portfolio projects.
+**UX standards reference:** [UX Engineering Standards](../../20-engineering/ux-design-system.md) in the engineering domain covers interaction behavior, accessibility standards, motion/performance, and best practices shared across portfolio projects.
 
 ## Navigation and information architecture
 
@@ -581,8 +581,8 @@ Component organization:
 Fixed header with:
 
 - Portfolio branding/logo (links to `/`)
-- CV, Projects, Evidence (Docs), Contact
-- Evidence link opens Documentation App in a new tab (`target="_blank"`, `rel="noopener noreferrer"`)
+- CV, Projects, Engineering Docs, Contact
+- Engineering Docs link opens the Documentation App in a new tab (`target="_blank"`, `rel="noopener noreferrer"`)
 
 ### Footer
 

@@ -1,20 +1,25 @@
 ---
-title: 'UX Design System & Patterns'
-description: 'Visual design system, component patterns, navigation architecture, and accessibility standards for portfolio applications.'
+title: 'UX Engineering Standards'
+description: 'Accessibility, interaction, motion, performance, responsive, and testing standards for portfolio applications.'
 sidebar_position: 5
-tags: [ux, design-system, accessibility, navigation, component-patterns]
+sidebar_label: 'UX Engineering Standards'
+tags: [ux, accessibility, interaction, performance, responsive, testing]
 ---
 
-# UX Design System & Patterns
+# UX Engineering Standards
 
 ## Purpose
 
-Define consistent UX patterns, visual design principles, and accessibility standards for portfolio applications. This enables:
+Define consistent behavior and quality standards for portfolio UX across accessibility, interaction, motion, performance, and responsive implementation. This enables:
 
 - **Consistency** across all portfolio pages and future projects
-- **Reusability** of tested patterns and components
+- **Reusability** of tested interaction and accessibility patterns
 - **Accessibility** compliance with WCAG AA standards
-- **Maintainability** through clear design documentation
+- **Maintainability** through clear UX engineering documentation
+
+For visual identity, tokens, and component materiality, see the **Design System reference**:
+
+- [Design System (engineering/design-system)](https://bryce.seefieldt.ca/docs/engineering/design-system)
 
 ---
 
@@ -22,150 +27,18 @@ Define consistent UX patterns, visual design principles, and accessibility stand
 
 ### In scope
 
-- Visual identity (color, typography, spacing)
-- Component patterns (buttons, links, cards, forms)
-- Layout components (header, footer, navigation)
-- Navigation architecture (sticky headers, responsive behavior)
+- Layout and navigation behavior (header, footer, route structure)
+- Navigation architecture (sticky behavior, keyboard access, responsive behavior)
 - Accessibility standards and validation
 - Animation strategy and performance
-- Theme system (dark/light mode patterns)
+- Theme consistency discipline (token-driven, class-safe implementation)
+- UX testing approach (manual + automated)
 
 ### Out of scope
 
-- Technical implementation details (see [Theme System Reference](../70-reference/theme-system-reference.md))
-- Specific project color overrides or custom themes
-- JavaScript framework specifics
-
----
-
-## Design System Overview
-
-### Visual Identity
-
-**Color Palette:**
-
-- **Primary:** Zinc scale (zinc-50 through zinc-950) for neutral UI
-- **Accent:** Blue for interactive elements, CTAs, links
-- **Semantic:** Status colors (green=success, amber=warning, red=error)
-
-**Why Zinc?**
-
-- Neutral, professional appearance
-- Works well in both light and dark modes
-- Large enough palette for subtle differentiation
-- Industry standard (matches Apple, GitHub, Vercel palettes)
-
-**Typography:**
-
-- System font stack: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
-- Responsive sizing: Base 16px, h1=32px, h2=24px, h3=20px, body=16px, caption=14px
-- Line-height: 1.5 for body (readability), 1.2 for headings
-- Font weights: Regular 400, Medium 500, Semibold 600
-
-**Spacing:**
-
-- Base unit: 4px (Tailwind default)
-- Common gaps: 8px (gap-2), 16px (gap-4), 24px (gap-6), 32px (gap-8)
-- Containers: `max-w-5xl` (64rem) for optimal line length
-
-**Breakpoints (Tailwind defaults):**
-
-```
-sm: 640px   (mobile)
-md: 768px   (tablet)
-lg: 1024px  (desktop)
-xl: 1280px  (large desktop)
-2xl: 1536px (ultra-wide)
-```
-
----
-
-## Component Patterns
-
-### Interactive Components
-
-**Buttons**
-
-Pattern: Zinc background, blue accent on hover/focus
-
-```tsx
-<button
-  className="rounded-lg px-4 py-2 bg-zinc-100 hover:bg-zinc-200 
-                   dark:bg-zinc-800 dark:hover:bg-zinc-700 
-                   transition-colors duration-200 focus:ring-2 focus:ring-blue-500"
->
-  Action
-</button>
-```
-
-**Key Patterns:**
-
-- Rounded corners (`rounded-lg`) for modern feel
-- Hover color change (not just opacity)
-- Focus ring for keyboard users
-- Dark mode variant via `dark:` prefix
-- 200ms transition for smooth feel
-
-**Links**
-
-Pattern: Text links with color change and underline on hover
-
-```tsx
-<a
-  href="/"
-  className="text-blue-600 hover:text-blue-800 dark:text-blue-400 
-                       dark:hover:text-blue-300 underline-offset-2"
->
-  Link text
-</a>
-```
-
-**Key Patterns:**
-
-- Semantic color (blue for links)
-- Underline visible in both states
-- Underline offset for readability
-- Dark mode color adjustment (lighter blue)
-
-**Form Inputs**
-
-Pattern: Bordered inputs with focus ring
-
-```tsx
-<input
-  type="text"
-  className="px-3 py-2 border border-zinc-300 dark:border-zinc-600 
-                              rounded-lg focus:ring-2 focus:ring-blue-500 
-                              focus:border-transparent"
-/>
-```
-
-**Key Patterns:**
-
-- Clear border (not just underline)
-- Focus ring to indicate interactive element
-- Padding for touch-friendly size (44px minimum)
-- Clear visual feedback
-
-**Cards**
-
-Pattern: Subtle shadow, border, and padding
-
-```tsx
-<div
-  className="rounded-lg border border-zinc-200 dark:border-zinc-800 
-                bg-white dark:bg-zinc-950 shadow-sm p-6"
->
-  Card content
-</div>
-```
-
-**Key Patterns:**
-
-- Subtle border (not filled background)
-- Small shadow for depth (not aggressive)
-- Consistent padding
-- Dark mode border instead of trying to darken white
+- Visual identity definitions (color palettes, typography specs, spacing scales)
+- Design-token authority and component visual specs (see Design System reference)
+- Framework-specific implementation details (see [Theme System Reference](../70-reference/theme-system-reference.md))
 
 ---
 
@@ -184,7 +57,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 **Implementation:**
 
 ```tsx
-<header className="border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-white dark:bg-zinc-950 z-40">
+<header className="sticky top-0 z-40">
   <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
     {/* Logo */}
     {/* Navigation */}
@@ -204,10 +77,11 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 **Primary Navigation:**
 
 - **Home** (/) - Landing page with proposition
-- **CV** (/cv) - Interactive timeline and skills
-- **Projects** (/projects) - Portfolio showcase
-- **Evidence (Docs)** - Documentation app link
+- **Work** (/projects) - Portfolio showcase
+- **CV** (/cv) - Career timeline and experience
+- **Engineering Docs** (external docs app)
 - **Contact** (/contact) - Contact information
+- **GitHub** (external repository link)
 
 **Navigation Behavior:**
 
@@ -236,7 +110,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 
 ```
 ┌──────────────────┐
-│ Logo      Theme  │  Header (all nav visible, no hamburger)
+│ Logo      Menu   │  Header with expandable mobile nav
 ├──────────────────┤
 │  Main content    │
 │  (full width,    │
@@ -244,9 +118,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 └──────────────────┘
 ```
 
-**Current approach:** All nav items remain visible on mobile (horizontal scroll if needed)
-
-**Future (Phase 5):** Hamburger menu for screens < 640px
+**Current approach:** Collapsible mobile navigation with an accessible menu toggle.
 
 ---
 
@@ -270,7 +142,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 }
 <Link
   href="/cv"
-  className="focus:ring-2 focus:ring-blue-500 focus:outline-none rounded"
+  className="focus-visible:outline focus-visible:outline-2 rounded"
 >
   CV
 </Link>;
@@ -278,7 +150,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 {
   /* Buttons use <button> */
 }
-<button className="focus:ring-2 focus:ring-blue-500 focus:outline-none rounded">
+<button className="focus-visible:outline focus-visible:outline-2 rounded">
   Action
 </button>;
 
@@ -292,19 +164,12 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 
 ### Mobile Responsiveness
 
-**Current Implementation (Phase 4.5):**
+**Current implementation:**
 
-- Horizontal scroll navigation on small screens
-- All links remain visible
-- Touch-friendly spacing (gap-4)
+- Collapsible navigation on small screens
+- All primary routes remain reachable via keyboard and touch
+- Touch-friendly spacing and targets
 - Theme toggle always visible
-
-**Future Enhancement (Phase 5):**
-
-- Hamburger menu for screens < md
-- Slide-in navigation drawer
-- Close drawer on link selection
-- Smooth animation for drawer toggle
 
 ---
 
@@ -425,13 +290,9 @@ element.scrollTo({ top: 0, behavior: 'smooth' });
 
 **Key Requirements:**
 
-1. **Color Contrast:** 4.5:1 minimum for normal text, 3:1 for large text
+1. **Color Contrast:** 4.5:1 minimum for normal text, 3:1 minimum for large text
 
-   ```
-   Light bg + dark text: #FFFFFF + #111827 = 16.1:1 ✅
-   Light bg + gray text: #FFFFFF + #595959 = 6.4:1 ✅
-   Dark bg + light text: #0A0A0A + #FFFFFF = 13.2:1 ✅
-   ```
+  Validate against active design tokens from the Design System reference (do not hardcode legacy palette assumptions).
 
 2. **Keyboard Navigation:** All functionality accessible via keyboard
 
@@ -484,7 +345,7 @@ element.scrollTo({ top: 0, behavior: 'smooth' });
 - Use CSS variables for all theme-dependent colors
 - Test all components in both light and dark modes
 - Verify contrast ratios in both modes
-- Use semantic color names (`--accent-primary`, not `--brand-blue`)
+- Use token-driven names and values defined in shared `globals.css` variable sets
 
 **DON'T:**
 
@@ -524,7 +385,7 @@ element.scrollTo({ top: 0, behavior: 'smooth' });
 ```tsx
 <nav className="flex items-center gap-4">
   {/* Existing items */}
-  <Link href="/new-section" className="text-sm hover:text-blue-600">
+  <Link href="/new-section" className="text-sm">
     New Section
   </Link>
 </nav>
@@ -549,6 +410,7 @@ element.scrollTo({ top: 0, behavior: 'smooth' });
 
 ## References
 
+- [Design System Reference](https://bryce.seefieldt.ca/docs/engineering/design-system)
 - [Theme System Technical Reference](../70-reference/theme-system-reference.md)
 - [WCAG 2.1 Level AA Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
