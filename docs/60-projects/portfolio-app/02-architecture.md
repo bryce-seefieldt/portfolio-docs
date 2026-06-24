@@ -317,7 +317,7 @@ graph TD
 
 ### References
 
-- **UX Strategy Guide:** [09-ux-strategy.md](../../20-engineering/ux-design-system.md) — Design decisions, navigation architecture, accessibility
+- **UX Strategy Guide:** [09-ux-strategy.md](../../20-engineering/ux-engineering-standards.md) — Design decisions, navigation architecture, accessibility
 - **SEO Strategy Guide:** [10-seo-strategy.md](../../70-reference/seo-metadata-guide.md) — Metadata architecture, structured data, optimization
 - **Theme System Guide:** [11-theme-system-guide.md](../../70-reference/theme-system-reference.md) — CSS variables, theme implementation, extension
 
@@ -572,7 +572,7 @@ Component organization:
 
 **Navigation enhancements:** Back-to-top button for long pages; sticky header for quick access to main navigation.
 
-**Full design system:** [UX Design System](../../20-engineering/ux-design-system.md) in engineering domain covers component patterns, layout strategies, accessibility standards, and best practices shared across portfolio projects.
+**UX standards reference:** [UX Engineering Standards](../../20-engineering/ux-engineering-standards.md) in the engineering domain covers interaction behavior, accessibility standards, motion/performance, and best practices shared across portfolio projects.
 
 ## Navigation and information architecture
 
@@ -581,8 +581,8 @@ Component organization:
 Fixed header with:
 
 - Portfolio branding/logo (links to `/`)
-- CV, Projects, Evidence (Docs), Contact
-- Evidence link opens Documentation App in a new tab (`target="_blank"`, `rel="noopener noreferrer"`)
+- CV, Projects, Engineering Docs, Contact
+- Engineering Docs link opens the Documentation App in a new tab (`target="_blank"`, `rel="noopener noreferrer"`)
 
 ### Footer
 

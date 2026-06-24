@@ -85,7 +85,7 @@ tags: [portfolio, features, core-pages, cv]
 
 ### Additional internal references
 
-- [`/20-engineering/ux-design-system.md`](/20-engineering/ux-design-system.md)
+- [`/20-engineering/ux-engineering-standards.md`](/20-engineering/ux-engineering-standards.md)
 - [`/70-reference/evidence-audit-checklist.md`](/70-reference/evidence-audit-checklist.md)
 
 ### External reference links

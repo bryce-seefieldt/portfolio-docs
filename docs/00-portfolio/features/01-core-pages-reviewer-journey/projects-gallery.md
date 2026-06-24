@@ -89,7 +89,7 @@ tags: [portfolio, features, core-pages, projects]
 ### Additional internal references
 
 - [`/70-reference/registry-schema-guide.md`](/70-reference/registry-schema-guide.md)
-- [`/20-engineering/ux-design-system.md`](/20-engineering/ux-design-system.md)
+- [`/20-engineering/ux-engineering-standards.md`](/20-engineering/ux-engineering-standards.md)
 
 ### External reference links
 

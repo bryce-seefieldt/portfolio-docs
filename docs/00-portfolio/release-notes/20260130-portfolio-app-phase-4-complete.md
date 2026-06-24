@@ -18,7 +18,7 @@ Phase 4 is complete. The portfolio now demonstrates enterprise-grade operational
 # Added
 
 - Observability & Health Checks guide: [/docs/30-devops-platform/observability-health-checks.md](/30-devops-platform/observability-health-checks.md)
-- UX design system guide: [/docs/20-engineering/ux-design-system.md](/20-engineering/ux-design-system.md)
+- UX design system guide: [/docs/20-engineering/ux-engineering-standards.md](/20-engineering/ux-engineering-standards.md)
 - SEO metadata reference: [/docs/70-reference/seo-metadata-guide.md](/70-reference/seo-metadata-guide.md)
 - Theme system reference: [/docs/70-reference/theme-system-reference.md](/70-reference/theme-system-reference.md)
 - ADRs for dark mode, metadata strategy, and scroll animations:

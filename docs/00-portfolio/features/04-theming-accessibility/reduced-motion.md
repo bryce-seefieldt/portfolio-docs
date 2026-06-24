@@ -82,7 +82,7 @@ tags: [portfolio, features, theming, accessibility]
 ### Additional internal references
 
 - [`/70-reference/theme-system-reference.md`](/70-reference/theme-system-reference.md)
-- [`/20-engineering/ux-design-system.md`](/20-engineering/ux-design-system.md)
+- [`/20-engineering/ux-engineering-standards.md`](/20-engineering/ux-engineering-standards.md)
 
 ### External reference links
 
