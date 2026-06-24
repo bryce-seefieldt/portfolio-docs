@@ -86,7 +86,7 @@ tags: [portfolio, features, evidence, components]
 
 ### Additional internal references
 
-- [`/20-engineering/ux-design-system.md`](/20-engineering/ux-design-system.md)
+- [`/20-engineering/ux-engineering-standards.md`](/20-engineering/ux-engineering-standards.md)
 - [`/70-reference/registry-schema-guide.md`](/70-reference/registry-schema-guide.md)
 
 ### External reference links

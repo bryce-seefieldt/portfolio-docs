@@ -9,7 +9,7 @@ tags: [theme, dark-mode, css-variables, tailwind, reference]
 
 ## Overview
 
-This is a technical reference for the **class-based dark mode** system using CSS variables and Tailwind CSS. For UX behavior standards, see [UX Engineering Standards](../20-engineering/ux-design-system.md).
+This is a technical reference for the **class-based dark mode** system using CSS variables and Tailwind CSS. For UX behavior standards, see [UX Engineering Standards](../20-engineering/ux-engineering-standards.md).
 
 ---
 

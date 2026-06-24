@@ -144,7 +144,7 @@ The portfolio app user experience includes dark mode theming, scroll animations,
 
 See comprehensive documentation in domain sections:
 
-- **Engineering Standards:** [UX Engineering Standards](../../20-engineering/ux-design-system.md) - Accessibility, interaction, motion, responsive, and testing standards
+- **Engineering Standards:** [UX Engineering Standards](../../20-engineering/ux-engineering-standards.md) - Accessibility, interaction, motion, responsive, and testing standards
 - **Reference:** [Theme System Reference](../../70-reference/theme-system-reference.md) - CSS variables catalog, theme switching mechanism, troubleshooting
 - **Reference:** [SEO & Social Metadata Reference](../../70-reference/seo-metadata-guide.md) - Metadata architecture, structured data, rich previews, optimization checklist
 
