@@ -1,6 +1,6 @@
 ---
 title: 'Feature: Theme Toggle'
-description: 'Class-based light and dark theme toggle with persistence.'
+description: 'Class-based light and dark mode switching through a physical switch control with persistence.'
 sidebar_position: 1
 tags: [portfolio, features, theming, accessibility]
 ---
@@ -14,9 +14,10 @@ tags: [portfolio, features, theming, accessibility]
 
 ### In scope
 
-- theme toggle UI and interaction
+- physical switch UI and interaction
 - persistence in local storage
 - system preference fallback
+- keyboard and focus-visible accessibility behavior
 
 ### Out of scope
 
@@ -34,8 +35,8 @@ tags: [portfolio, features, theming, accessibility]
 
 - Feature name: Theme toggle
 - Feature group: Theming and accessibility
-- Technical summary: Toggles the `dark` class on the root element and persists the setting in local storage.
-- Low-tech summary: A button that switches the site between light and dark modes.
+- Technical summary: A physical two-position switch toggles `html.light` and `html.dark` classes, persists state in localStorage, and supports keyboard operation with accessible labeling.
+- Low-tech summary: A mode switch in the header flips between dark and light themes and remembers the choice.
 
 ### Feature in action
 
@@ -45,23 +46,26 @@ tags: [portfolio, features, theming, accessibility]
 
 #### Manual
 
-- Steps: Toggle the theme, refresh the page, and verify the preference persists.
-- What to look for: Theme changes immediately, persists across reloads, and respects system preference on first load.
+- Steps: Toggle the switch in desktop and mobile nav, refresh, and verify persisted mode.
+- What to look for: Switch state and page theme stay aligned; mode persists across reloads; focus ring is visible during keyboard navigation.
 - Artifacts or reports to inspect: None.
 
 #### Tests
 
-- Unit tests: None specific.
+- Unit tests:
+  - [`/portfolio-app/src/components/__tests__/ThemeToggle.test.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/__tests__/ThemeToggle.test.tsx)
 - E2E tests: [`/portfolio-app/tests/e2e/routes.spec.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/routes.spec.ts) (route coverage only).
 
 ### Potential behavior if broken or misconfigured
 
 - Theme does not persist after reload.
 - Theme toggle causes hydration mismatch warnings.
+- Switch visual state drifts from active theme class.
 
 ### Long-term maintenance notes
 
 - Re-test after changes to layout or theme initialization scripts.
+- Keep switch labels and semantics aligned with mode names used in UI copy.
 
 ### Dependencies, libraries, tools
 
@@ -72,6 +76,7 @@ tags: [portfolio, features, theming, accessibility]
 ### Source code references (GitHub URLs)
 
 - [`/portfolio-app/src/components/ThemeToggle.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/ThemeToggle.tsx)
+- [`/portfolio-app/src/app/globals.css`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/globals.css)
 
 ### ADRs
 

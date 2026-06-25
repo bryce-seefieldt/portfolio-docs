@@ -16,7 +16,7 @@ tags: [portfolio, features, theming, accessibility, hero]
 
 - hero text/background contrast in both themes
 - dark-mode phosphor glow usage constraints
-- static-safe hero behavior (no required motion)
+- staged deploy indicator behavior and status readability
 - accessibility treatment for decorative instrumentation
 
 ### Out of scope
@@ -36,8 +36,8 @@ tags: [portfolio, features, theming, accessibility, hero]
 
 - Feature name: Hero contrast and motion safety
 - Feature group: Theming and accessibility
-- Technical summary: The hero uses token-driven colors and controlled glow so headline/subhead/CTA text remains legible in both dark and light modes; decorative instrumentation is non-essential and does not gate content.
-- Low-tech summary: The hero keeps the style without sacrificing readability or accessibility.
+- Technical summary: The hero uses token-driven contrast, constrained glow, and a one-time staged deploy indicator sequence. Core copy remains immediately legible and independent from motion behavior.
+- Low-tech summary: The hero looks animated and alive, but readability and access do not depend on the animation.
 
 ### Feature in action
 
@@ -47,8 +47,8 @@ tags: [portfolio, features, theming, accessibility, hero]
 
 #### Manual
 
-- Steps: Open `/` in dark and light mode, inspect headline/subhead/CTA contrast, test with reduced-motion preference enabled.
-- What to look for: Readable copy in both themes; glow is supportive (not blurry); no motion is required to understand hero content.
+- Steps: Open `/` in dark and light mode, inspect copy/control contrast, then observe pipeline progression from COMMIT to PRODUCTION.
+- What to look for: Stage colors remain distinguishable, pipeline progresses one-time in order, and final state holds on PRODUCTION.
 - Artifacts or reports to inspect: App verification run and visual QA screenshots.
 
 #### Tests
@@ -63,12 +63,13 @@ tags: [portfolio, features, theming, accessibility, hero]
 - Glow overwhelms text, reducing readability in dark mode.
 - Decorative visuals are interpreted as required state instead of optional ornament.
 - Theme variants diverge and one mode loses contrast.
+- Pipeline indicators sync incorrectly, masking sequence meaning.
 
 ### Long-term maintenance notes
 
 - Re-verify hero contrast whenever token values or glow intensity change.
 - Keep decorative elements `aria-hidden` unless they carry essential status meaning.
-- Keep reduced-motion handling conservative if hero motion is introduced later.
+- Post-spec timing language is the active contract: one-time sequence, 3 seconds per stage, final PRODUCTION hold.
 
 ### Dependencies, libraries, tools
 
@@ -81,6 +82,7 @@ tags: [portfolio, features, theming, accessibility, hero]
 - [`/portfolio-app/src/app/page.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/page.tsx)
 - [`/portfolio-app/src/app/globals.css`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/globals.css)
 - [`/portfolio-app/src/components/Readout.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/Readout.tsx)
+- [`/portfolio-app/src/components/DeployPipeline.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/DeployPipeline.tsx)
 
 ### ADRs
 
@@ -105,6 +107,7 @@ tags: [portfolio, features, theming, accessibility, hero]
 
 - Hero copy remains readable in both themes while preserving the cassette-futurism look.
 - Users with reduced-motion preferences experience equivalent functionality.
+- Deploy pipeline status remains legible and deterministic throughout the staged load sequence.
 
 ## Failure modes / Troubleshooting
 

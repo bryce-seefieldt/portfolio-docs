@@ -552,10 +552,10 @@ Component organization:
 
 ### Dark mode strategy
 
-- System preference-based (uses `prefers-color-scheme` media query)
-- No explicit toggle UI in Phase 1 (intentional minimalism)
-- All components use Tailwind `dark:` variants for dark mode styling
-- Future: consider explicit toggle with local storage (Phase 2+)
+- Dark-default with explicit light opt-in via root class (`html.light`)
+- Explicit physical switch control in navigation persists theme preference
+- Local storage persistence (`theme`) with hydration-safe initialization
+- Components consume tokenized CSS variables for both modes
 
 ### Styling patterns
 
@@ -566,11 +566,13 @@ Component organization:
 
 ### User Experience & Theme Architecture (Stage 4.5)
 
-**Dark mode theming:** Class-based dark/light mode system with localStorage persistence and system preference fallback. CSS variables define all colors; theme toggle in header switches `dark` class on `<html>`. See [ADR-0014: Class-Based Dark Mode with CSS Variables](docs/10-architecture/adr/adr-0014-class-based-dark-mode.md) for design decisions and [Theme System Reference](../../70-reference/theme-system-reference.md) for implementation details.
+**Dark mode theming:** Class-based dark/light mode system with localStorage persistence. CSS variables define palette and materiality values; a physical header switch toggles `html.light`/`html.dark` state.
 
-**Scroll animations:** Intersection Observer-based animations trigger fade-in effects as content enters viewport. Respects `prefers-reduced-motion` for accessibility. See [ADR-0016: Scroll Animation Strategy](docs/10-architecture/adr/adr-0016-scroll-animations.md) for performance reasoning.
+**Hero deploy sequence:** Home hero deploy LEDs run a one-time deterministic sequence (COMMIT -> CHECKS -> STAGING -> PRODUCTION) with post-spec timing at 3 seconds per stage and final hold on PRODUCTION.
 
-**Navigation enhancements:** Back-to-top button for long pages; sticky header for quick access to main navigation.
+**Navigation enhancements:** Raised control-strip header with stacked brand, control-style nav links, and physical theme switch. Mobile behavior remains collapsible with keyboard escape handling.
+
+**Footer theming:** Shared layout footer uses recessed panel treatment with control-style text links for evidence destinations.
 
 **UX standards reference:** [UX Engineering Standards](../../20-engineering/ux-engineering-standards.md) in the engineering domain covers interaction behavior, accessibility standards, motion/performance, and best practices shared across portfolio projects.
 
@@ -578,21 +580,21 @@ Component organization:
 
 ### Top navigation
 
-Fixed header with:
+Sticky header with:
 
-- Portfolio branding/logo (links to `/`)
-- CV, Projects, Engineering Docs, Contact
-- Engineering Docs link opens the Documentation App in a new tab (`target="_blank"`, `rel="noopener noreferrer"`)
+- stacked brand nameplate (`Bryce Seefieldt` / `Full-Stack Developer`)
+- Home, Work, CV, Docs, Contact, GitHub controls
+- physical switch theme mode control
+- docs and GitHub destinations open in new tabs with safe rel attributes
 
 ### Footer
 
-- Social links: GitHub, LinkedIn (if configured)
-- Documentation App link
-- Enterprise evidence model statement
+- Recessed panel container styled as a terminal-style base plate
+- Control-style links: GitHub, LinkedIn (if configured), Engineering Docs
+- Name/title and implementation statement copy
 
 ### Intentional omissions (current baseline)
 
-- No dark mode toggle (system preference only)
 - No authentication or user accounts
 - No in-app search (discovery remains docs-driven and evidence-first)
 

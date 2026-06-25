@@ -8,7 +8,7 @@ tags: [engineering, design, frontend, reference]
 
 # Design System
 
-> Maintainer note: this is the index/overview for the design-system reference cluster in the engineering domain. It is drafted as a stub during the Phase 2 redesign and filled in incrementally as phases land. Sibling pages (to be created as content stabilizes): `tokens.md`, `components.md`, `materiality-and-motion.md`. Follow the standard seven-part page shape on each.
+> Maintainer note: this page is the stable entrypoint for design-system references. Keep the source map current whenever component paths, control primitives, or motion behavior changes.
 
 ## Purpose
 
@@ -42,25 +42,28 @@ A stylized, accessible interface inspired by cassette futurism: phosphor-on-dark
 
 > Fill in / confirm exact paths during implementation. This map is the single most useful entry on this page for a maintainer or reviewer.
 
-| Concern                   | Source location                          | Notes                                                                 |
-| ------------------------- | ---------------------------------------- | --------------------------------------------------------------------- |
-| Color tokens (both modes) | `src/app/globals.css`                    | CSS custom properties under `:root` (dark default) and `html.light`   |
-| Tailwind token exposure   | Tailwind theme config                    | Maps tokens to `bg-*`, `text-*`, `border-*` utilities                 |
-| Typography (fonts)        | `src/app/layout.tsx`                     | `next/font` setup for Space Grotesk, Inter, JetBrains Mono → CSS vars |
-| Type scale                | `src/app/globals.css` / theme            | Scale utilities / heading classes                                     |
-| Phosphor glow utility     | `src/app/globals.css`                    | `.glow-accent` (dark-mode-only layered bloom)                         |
-| Panel primitive           | `src/components/Panel.tsx`               | Elevated + inset variants, rivets, sheen, bevel                       |
-| Readout primitive         | `src/components/Readout.tsx`             | Metric display; consumes glow utility                                 |
-| LabelTag primitive        | `src/components/LabelTag.tsx`            | Uppercase mono utilitarian labels/chips                               |
-| Dial primitive            | `src/components/Dial.tsx`                | Static analog gauge SVG; needle/tick math                             |
-| Hero composition          | `src/app/page.tsx`                       | Above-the-fold control-panel hero (copy, CTAs, pipeline, readouts)    |
-| Design preview            | `src/app/design-tokens-preview/page.tsx` | Isolated primitive preview (not in production nav)                    |
+| Concern                       | Source location                              | Notes                                                                       |
+| ----------------------------- | -------------------------------------------- | --------------------------------------------------------------------------- |
+| Color tokens (both modes)     | `src/app/globals.css`                        | CSS custom properties under `:root` (dark default) and `html.light`         |
+| Typography (fonts)            | `src/app/layout.tsx`                         | `next/font` setup for Space Grotesk, Inter, JetBrains Mono -> CSS vars      |
+| Type scale + glow utilities   | `src/app/globals.css`                        | `type-*`, `glow-accent`, control-strip/control-link classes                 |
+| Panel primitive               | `src/components/Panel.tsx`                   | Elevated + inset variants, rivets, sheen, bevel                             |
+| Readout primitive             | `src/components/Readout.tsx`                 | Long string compaction to prevent overlap with adjacent readouts            |
+| LabelTag primitive            | `src/components/LabelTag.tsx`                | Uppercase mono utilitarian labels/chips                                     |
+| Dial primitive                | `src/components/Dial.tsx`                    | Static analog gauge SVG; needle/tick math                                   |
+| ControlButton primitive       | `src/components/ControlButton.tsx`           | Reusable hardware CTA/control element for hero and nav                      |
+| Theme switch primitive        | `src/components/ThemeToggle.tsx`             | Physical DK/LT switch with localStorage persistence and html class toggling |
+| Deploy pipeline primitive     | `src/components/DeployPipeline.tsx`          | One-time staged LED sequence with post-spec timing (3s per stage)           |
+| Nav control strip composition | `src/components/NavigationEnhanced.tsx`      | Stacked brand, control links, mobile responsive behavior                    |
+| Footer recessed panel         | `src/app/layout.tsx` + `src/app/globals.css` | Inset footer surface with control-style text links                          |
+| Hero composition              | `src/app/page.tsx`                           | Above-the-fold split layout with clean copy area and instrumentation panel  |
+| Design preview                | `src/app/design-tokens-preview/page.tsx`     | Isolated primitive preview (not in production nav)                          |
 
 ## Sub-references
 
-- **Tokens** (`tokens.md`) — color values for both modes, Tailwind mapping, type scale, source paths. _(Populate after the token values are final.)_
-- **Components** (`components.md`) — each primitive's purpose, props, accessibility behavior, and source path. _(Populate as components stabilize through Phases 2B–2E.)_
-- **Materiality & motion** (`materiality-and-motion.md`) — the depth/texture conventions (single top-left light source, bevel/shadow approach, glow intensity) and the animation philosophy. _(Populate at the polish phase.)_
+- **Components** (`components.md`) — each primitive's purpose, props, accessibility behavior, and source path.
+- **Tokens** (`tokens.md`) — color values for both modes, mapping, type scale, source paths. _(Create when token documentation is fully normalized.)_
+- **Materiality & motion** (`materiality-and-motion.md`) — depth/texture conventions (single top-left light source, bevel/shadow approach, glow intensity) and animation philosophy. _(Create when final polish values are locked.)_
 
 ## Validation / Expected outcomes
 
@@ -77,4 +80,5 @@ A stylized, accessible interface inspired by cassette futurism: phosphor-on-dark
 
 - [ADR-0021: Visual Identity and Design-System Direction](/10-architecture/adr/adr-0021-visual-identity.md) — the durable decision and constraints.
 - [UX Engineering Standards](/20-engineering/ux-engineering-standards.md) — the accessibility, motion/performance, responsive, and testing standards every component here must meet.
+- [Design System: Components Reference](/20-engineering/design-system/components.md)
 - Portfolio App source: `globals.css`, `src/components/`, `layout.tsx`.

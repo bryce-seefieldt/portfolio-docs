@@ -36,6 +36,7 @@ Define how navigation and UX polish features are documented and validated.
 - [Feature: Back To Top](./back-to-top.md)
 - [Feature: Layout Primitives](./layout-primitives.md)
 - [Feature: Control-Panel Hero](./hero-control-panel.md)
+- [Feature: Footer Recessed Panel](./footer-recessed-panel.md)
 
 ### Governance focus
 

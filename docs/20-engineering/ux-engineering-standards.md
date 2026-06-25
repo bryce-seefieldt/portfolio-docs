@@ -57,7 +57,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 **Implementation:**
 
 ```tsx
-<header className="sticky top-0 z-40">
+<header className="control-strip sticky top-0 z-50">
   <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
     {/* Logo */}
     {/* Navigation */}
@@ -68,7 +68,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 **Key Patterns:**
 
 - `sticky top-0` (browser native, performant)
-- `z-40` (ensures above content, below modals if added)
+- `z-50` (ensures above content while preserving utility overlays)
 - Border below for visual separation
 - Background color required for sticky to not see-through
 
@@ -79,7 +79,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 - **Home** (/) - Landing page with proposition
 - **Work** (/projects) - Portfolio showcase
 - **CV** (/cv) - Career timeline and experience
-- **Engineering Docs** (external docs app)
+- **Docs** (external docs app)
 - **Contact** (/contact) - Contact information
 - **GitHub** (external repository link)
 
@@ -302,11 +302,15 @@ Validate against active design tokens from the Design System reference (do not h
 
 5. **Semantic HTML:** Proper heading hierarchy (h1-h6, no skipping levels)
 
-6. **ARIA Labels:** Screen reader text for icon-only buttons
+6. **ARIA Labels:** Screen reader text for icon-only or mode-switch controls
 
    ```tsx
-   <button aria-label="Toggle dark mode" onClick={toggleTheme}>
-     {/* Icon only */}
+   <button
+     type="button"
+     aria-label="Switch to dark theme"
+     onClick={toggleTheme}
+   >
+     {/* Physical switch track and thumb */}
    </button>
    ```
 
@@ -362,6 +366,7 @@ Validate against active design tokens from the Design System reference (do not h
 - Keep animations under 300ms for UI feedback
 - Respect `prefers-reduced-motion`
 - Test animations on actual mobile hardware
+- Keep status sequencing deterministic when motion conveys state
 
 **DON'T:**
 
@@ -369,6 +374,18 @@ Validate against active design tokens from the Design System reference (do not h
 - Chain animations without user input (jarring)
 - Use animations that block interaction
 - Assume fast networks (animations should work on 3G)
+- Use looping animations for state progress where one-time sequences are clearer
+
+### Hero Pipeline Timing Contract
+
+Current implementation contract for the deploy pipeline indicator in the home hero:
+
+- One-time sequence per page load
+- Stage cadence: 3 seconds per stage
+- Order: COMMIT -> CHECKS -> STAGING -> PRODUCTION
+- Final state: PRODUCTION remains active, previous stages remain off
+
+This post-spec timing contract supersedes earlier short-sequence draft guidance and is the baseline for UX validation.
 
 ### Navigation Extension Pattern
 
