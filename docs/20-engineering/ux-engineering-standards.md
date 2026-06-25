@@ -1,7 +1,7 @@
 ---
 title: 'UX Engineering Standards'
 description: 'Accessibility, interaction, motion, performance, responsive, and testing standards for portfolio applications.'
-sidebar_position: 5
+sidebar_position: 3
 sidebar_label: 'UX Engineering Standards'
 tags: [ux, accessibility, interaction, performance, responsive, testing]
 ---
@@ -19,7 +19,7 @@ Define consistent behavior and quality standards for portfolio UX across accessi
 
 For visual identity, tokens, and component materiality, see the **Design System reference**:
 
-- [Design System (engineering/design-system)](https://bryce.seefieldt.ca/docs/engineering/design-system)
+- [Design System](20-engineering/design-system/index.md)
 
 ---
 
