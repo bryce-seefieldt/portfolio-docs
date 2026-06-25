@@ -96,8 +96,8 @@ Adopt a cassette-futurism design system, delivered as a confident, clearly-a-web
 
 ## References
 
-- Related architecture pages: Design System reference (20-engineering) — owns _what the interface looks like_ (tokens, components, materiality).
-- UX Engineering Standards (20-engineering) — owns _how the interface must behave_ (accessibility, motion/performance, responsive, testing).
+- Related architecture pages: [Design System reference](/20-engineering/design-system/index.md) — owns _what the interface looks like_ (tokens, components, materiality).
+- [UX Engineering Standards](/20-engineering/ux-engineering-standards.md) — owns _how the interface must behave_ (accessibility, motion/performance, responsive, testing).
 - Related threat model(s): the live metrics dashboard's data-source threat-model delta (added when that phase lands).
 - Related runbook(s): (none specific to this decision).
 - Related CI/CD documentation: existing quality gates enforce lint/format/typecheck/build/tests on all design PRs.

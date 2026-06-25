@@ -29,6 +29,14 @@ Define how navigation and UX polish features are documented and validated.
 
 - Use the standard feature page fields and provide manual validation steps.
 
+### Current feature entries
+
+- [Feature: Navigation Header](./navigation-header.md)
+- [Feature: Scroll Reveal Animations](./scroll-animations.md)
+- [Feature: Back To Top](./back-to-top.md)
+- [Feature: Layout Primitives](./layout-primitives.md)
+- [Feature: Control-Panel Hero](./hero-control-panel.md)
+
 ### Governance focus
 
 - navigation must be consistent across breakpoints and always reachable

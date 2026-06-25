@@ -29,6 +29,14 @@ Define how theming and accessibility features are documented and validated.
 
 - Use the standard feature page fields and include accessibility checks.
 
+### Current feature entries
+
+- [Feature: Theme System](./theme-system.md)
+- [Feature: Theme Initialization](./theme-initialization.md)
+- [Feature: Theme Toggle](./theme-toggle.md)
+- [Feature: Reduced Motion Support](./reduced-motion.md)
+- [Feature: Hero Contrast and Motion Safety](./hero-contrast-motion.md)
+
 ### Governance focus
 
 - theme persistence must survive reloads without FOUC

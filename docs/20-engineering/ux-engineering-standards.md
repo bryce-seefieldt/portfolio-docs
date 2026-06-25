@@ -19,7 +19,7 @@ Define consistent behavior and quality standards for portfolio UX across accessi
 
 For visual identity, tokens, and component materiality, see the **Design System reference**:
 
-- [Design System](20-engineering/design-system/index.md)
+- [Design System](./design-system/index.md)
 
 ---
 

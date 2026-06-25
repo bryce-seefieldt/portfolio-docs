@@ -16,7 +16,7 @@ This is the authoritative reference for the Portfolio App's visual design system
 
 ### Boundary with UX Engineering Standards
 
-This reference owns **what the interface looks like**: the design tokens (color, typography, scale), the control-panel component primitives, and the materiality conventions. A separate page, **UX Engineering Standards** (engineering domain), owns **how the interface must behave**: accessibility (WCAG AA, keyboard, focus, ARIA, semantic HTML), motion and performance rules (`prefers-reduced-motion`, GPU-only animation), responsive/mobile-first doctrine, and testing approach. Every component documented here must meet the standards documented there. The two pages cross-link; neither duplicates the other.
+This reference owns **what the interface looks like**: the design tokens (color, typography, scale), the control-panel component primitives, and the materiality conventions. A separate page, **[UX Engineering Standards](/20-engineering/ux-engineering-standards.md)** (engineering domain), owns **how the interface must behave**: accessibility (WCAG AA, keyboard, focus, ARIA, semantic HTML), motion and performance rules (`prefers-reduced-motion`, GPU-only animation), responsive/mobile-first doctrine, and testing approach. Every component documented here must meet the standards documented there. The two pages cross-link; neither duplicates the other.
 
 ### How the redesign is documented (three complementary homes)
 
@@ -53,7 +53,7 @@ A stylized, accessible interface inspired by cassette futurism: phosphor-on-dark
 | Readout primitive         | `src/components/Readout.tsx`             | Metric display; consumes glow utility                                 |
 | LabelTag primitive        | `src/components/LabelTag.tsx`            | Uppercase mono utilitarian labels/chips                               |
 | Dial primitive            | `src/components/Dial.tsx`                | Static analog gauge SVG; needle/tick math                             |
-| Hero composition          | _(added in Phase 2B)_                    | Hero section + signature control-panel visual                         |
+| Hero composition          | `src/app/page.tsx`                       | Above-the-fold control-panel hero (copy, CTAs, pipeline, readouts)   |
 | Design preview            | `src/app/design-tokens-preview/page.tsx` | Isolated primitive preview (not in production nav)                    |
 
 ## Sub-references
@@ -75,6 +75,6 @@ A stylized, accessible interface inspired by cassette futurism: phosphor-on-dark
 
 ## References
 
-- ADR: Visual Identity and Design-System Direction (architecture domain) — the durable decision and constraints.
-- **UX Engineering Standards** (engineering domain) — the accessibility, motion/performance, responsive, and testing standards every component here must meet.
+- [ADR-0021: Visual Identity and Design-System Direction](/10-architecture/adr/adr-0021-visual-identity.md) — the durable decision and constraints.
+- [UX Engineering Standards](/20-engineering/ux-engineering-standards.md) — the accessibility, motion/performance, responsive, and testing standards every component here must meet.
 - Portfolio App source: `globals.css`, `src/components/`, `layout.tsx`.
