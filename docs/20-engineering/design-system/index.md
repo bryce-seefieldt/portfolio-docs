@@ -53,7 +53,7 @@ A stylized, accessible interface inspired by cassette futurism: phosphor-on-dark
 | Readout primitive         | `src/components/Readout.tsx`             | Metric display; consumes glow utility                                 |
 | LabelTag primitive        | `src/components/LabelTag.tsx`            | Uppercase mono utilitarian labels/chips                               |
 | Dial primitive            | `src/components/Dial.tsx`                | Static analog gauge SVG; needle/tick math                             |
-| Hero composition          | `src/app/page.tsx`                       | Above-the-fold control-panel hero (copy, CTAs, pipeline, readouts)   |
+| Hero composition          | `src/app/page.tsx`                       | Above-the-fold control-panel hero (copy, CTAs, pipeline, readouts)    |
 | Design preview            | `src/app/design-tokens-preview/page.tsx` | Isolated primitive preview (not in production nav)                    |
 
 ## Sub-references
