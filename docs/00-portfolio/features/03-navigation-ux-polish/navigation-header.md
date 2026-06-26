@@ -1,6 +1,6 @@
 ---
 title: 'Feature: Navigation Header'
-description: 'Sticky raised control strip with stacked brand, control-style navigation links, and responsive menu behavior.'
+description: 'Full-bleed raised control strip with stacked brand, control-style navigation links, and a cockpit-style theme rocker.'
 sidebar_position: 1
 tags: [portfolio, features, navigation, header]
 ---
@@ -18,7 +18,7 @@ tags: [portfolio, features, navigation, header]
 - raised control-strip materiality
 - stacked persistent brand nameplate
 - desktop navigation controls
-- mobile menu toggle and close behaviors
+- no hamburger/menu control in the desktop nav
 
 ### Out of scope
 
@@ -36,8 +36,8 @@ tags: [portfolio, features, navigation, header]
 
 - Feature name: Navigation header
 - Feature group: Navigation and UX polish
-- Technical summary: Client-side navigation component renders a raised control strip with compact control links, stacked branding, sticky-on-scroll shadow state, and mobile expansion behavior.
-- Low-tech summary: The header now reads like a control console while keeping routes easy to reach.
+- Technical summary: Client-side navigation component renders a full-bleed raised control strip with compact control links, stacked branding, sticky-on-scroll shadow state, and an inline cockpit-style theme rocker.
+- Low-tech summary: The header now reads like a control console while keeping routes easy to reach, without a hamburger menu.
 
 ### Feature in action
 
@@ -47,8 +47,8 @@ tags: [portfolio, features, navigation, header]
 
 #### Manual
 
-- Steps: Open any page, scroll to trigger sticky shadow, verify stacked brand text, test desktop and mobile link controls.
-- What to look for: Header stays visible, control strip styling persists across routes, menu opens/closes, links route correctly.
+- Steps: Open any page, scroll to trigger sticky shadow, verify stacked brand text, and confirm the inline controls route correctly.
+- What to look for: Header stays visible, the full-bleed control strip persists across routes, no stray menu button appears, and links route correctly.
 - Artifacts or reports to inspect: Optional route coverage in CI.
 
 #### Tests
@@ -62,7 +62,6 @@ tags: [portfolio, features, navigation, header]
 ### Potential behavior if broken or misconfigured
 
 - Navigation links route to the wrong pages.
-- Mobile menu does not close on selection or escape.
 - Sticky styling does not engage when scrolling.
 - Stacked brand regresses to outdated naming.
 
@@ -109,7 +108,7 @@ tags: [portfolio, features, navigation, header]
 ## Failure modes / Troubleshooting
 
 - Broken links: verify route paths and redeploy.
-- Mobile menu stuck open: check client-side event handling.
+- Stray menu button appears: confirm the nav only renders brand, links, and the theme rocker.
 
 ## References
 

@@ -259,7 +259,7 @@ Phase 4 Stage 4.5 introduces a comprehensive UX enhancement layer with dark mode
 
 **Components:**
 
-- `ThemeToggle.tsx` — Interactive light/dark mode switcher with sun/moon icons
+- `ThemeToggle.tsx` — Interactive light/dark mode rocker switch with cockpit-style backlight and sun/moon cues
 - `globals.css` — CSS variable definitions with smooth transitions
 - `layout.tsx` — Theme initialization script (prevents flash of unstyled content)
 
@@ -553,7 +553,7 @@ Component organization:
 ### Dark mode strategy
 
 - Dark-default with explicit light opt-in via root class (`html.light`)
-- Explicit physical switch control in navigation persists theme preference
+- Cockpit-style rocker control in navigation persists theme preference
 - Local storage persistence (`theme`) with hydration-safe initialization
 - Components consume tokenized CSS variables for both modes
 
@@ -566,11 +566,11 @@ Component organization:
 
 ### User Experience & Theme Architecture (Stage 4.5)
 
-**Dark mode theming:** Class-based dark/light mode system with localStorage persistence. CSS variables define palette and materiality values; a physical header switch toggles `html.light`/`html.dark` state.
+**Dark mode theming:** Class-based dark/light mode system with localStorage persistence. CSS variables define palette and materiality values; a cockpit-style header rocker toggles `html.light`/`html.dark` state.
 
-**Hero deploy sequence:** Home hero deploy LEDs run a one-time deterministic sequence (COMMIT -> CHECKS -> STAGING -> PRODUCTION) with post-spec timing at 3 seconds per stage and final hold on PRODUCTION.
+**Hero deploy sequence:** Home hero deploy LEDs run a one-time deterministic sequence (COMMIT -> CHECKS -> STAGING -> PRODUCTION) with post-spec timing at 1 second per stage and final hold on PRODUCTION.
 
-**Navigation enhancements:** Raised control-strip header with stacked brand, control-style nav links, and physical theme switch. Mobile behavior remains collapsible with keyboard escape handling.
+**Navigation enhancements:** Full-bleed control-strip header with stacked brand, control-style nav links, and cockpit-style theme rocker. The hamburger/menu pattern has been removed.
 
 **Footer theming:** Shared layout footer uses recessed panel treatment with control-style text links for evidence destinations.
 
@@ -584,7 +584,7 @@ Sticky header with:
 
 - stacked brand nameplate (`Bryce Seefieldt` / `Full-Stack Developer`)
 - Home, Work, CV, Docs, Contact, GitHub controls
-- physical switch theme mode control
+- cockpit-style rocker theme mode control
 - docs and GitHub destinations open in new tabs with safe rel attributes
 
 ### Footer

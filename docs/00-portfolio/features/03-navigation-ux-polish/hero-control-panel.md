@@ -72,7 +72,7 @@ tags: [portfolio, features, navigation, ux, hero]
 - Keep hero copy and CTA labels synchronized with product/content decisions.
 - Treat panel primitives as shared contracts; avoid one-off hero styling drift.
 - Re-check readout spacing and overflow whenever typography or panel grid changes.
-- Post-spec timing language is authoritative for current behavior: one-time sequence, 3 seconds per stage, final PRODUCTION hold.
+- Post-spec timing language is authoritative for current behavior: one-time sequence, 1 second per stage, earlier LEDs switch off as the next stage lights, and PRODUCTION holds at the end.
 
 ### Dependencies, libraries, tools
 

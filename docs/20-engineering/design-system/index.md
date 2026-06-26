@@ -42,22 +42,22 @@ A stylized, accessible interface inspired by cassette futurism: phosphor-on-dark
 
 > Fill in / confirm exact paths during implementation. This map is the single most useful entry on this page for a maintainer or reviewer.
 
-| Concern                       | Source location                              | Notes                                                                       |
-| ----------------------------- | -------------------------------------------- | --------------------------------------------------------------------------- |
-| Color tokens (both modes)     | `src/app/globals.css`                        | CSS custom properties under `:root` (dark default) and `html.light`         |
-| Typography (fonts)            | `src/app/layout.tsx`                         | `next/font` setup for Space Grotesk, Inter, JetBrains Mono -> CSS vars      |
-| Type scale + glow utilities   | `src/app/globals.css`                        | `type-*`, `glow-accent`, control-strip/control-link classes                 |
-| Panel primitive               | `src/components/Panel.tsx`                   | Elevated + inset variants, rivets, sheen, bevel                             |
-| Readout primitive             | `src/components/Readout.tsx`                 | Long string compaction to prevent overlap with adjacent readouts            |
-| LabelTag primitive            | `src/components/LabelTag.tsx`                | Uppercase mono utilitarian labels/chips                                     |
-| Dial primitive                | `src/components/Dial.tsx`                    | Static analog gauge SVG; needle/tick math                                   |
-| ControlButton primitive       | `src/components/ControlButton.tsx`           | Reusable hardware CTA/control element for hero and nav                      |
-| Theme switch primitive        | `src/components/ThemeToggle.tsx`             | Physical DK/LT switch with localStorage persistence and html class toggling |
-| Deploy pipeline primitive     | `src/components/DeployPipeline.tsx`          | One-time staged LED sequence with post-spec timing (3s per stage)           |
-| Nav control strip composition | `src/components/NavigationEnhanced.tsx`      | Stacked brand, control links, mobile responsive behavior                    |
-| Footer recessed panel         | `src/app/layout.tsx` + `src/app/globals.css` | Inset footer surface with control-style text links                          |
-| Hero composition              | `src/app/page.tsx`                           | Above-the-fold split layout with clean copy area and instrumentation panel  |
-| Design preview                | `src/app/design-tokens-preview/page.tsx`     | Isolated primitive preview (not in production nav)                          |
+| Concern                       | Source location                              | Notes                                                                              |
+| ----------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Color tokens (both modes)     | `src/app/globals.css`                        | CSS custom properties under `:root` (dark default) and `html.light`                |
+| Typography (fonts)            | `src/app/layout.tsx`                         | `next/font` setup for Space Grotesk, Inter, JetBrains Mono -> CSS vars             |
+| Type scale + glow utilities   | `src/app/globals.css`                        | `type-*`, `glow-accent`, control-strip/control-link classes                        |
+| Panel primitive               | `src/components/Panel.tsx`                   | Elevated + inset variants, rivets, sheen, bevel                                    |
+| Readout primitive             | `src/components/Readout.tsx`                 | Long string compaction to prevent overlap with adjacent readouts                   |
+| LabelTag primitive            | `src/components/LabelTag.tsx`                | Uppercase mono utilitarian labels/chips                                            |
+| Dial primitive                | `src/components/Dial.tsx`                    | Static analog gauge SVG; needle/tick math                                          |
+| ControlButton primitive       | `src/components/ControlButton.tsx`           | Deep hardware CTA/control element with inlaid labels for hero and nav              |
+| Theme switch primitive        | `src/components/ThemeToggle.tsx`             | Cockpit-style backlit rocker with localStorage persistence and html class toggling |
+| Deploy pipeline primitive     | `src/components/DeployPipeline.tsx`          | One-time staged LED sequence with post-spec timing (1s per stage)                  |
+| Nav control strip composition | `src/components/NavigationEnhanced.tsx`      | Full-bleed brand-and-controls control strip, no hamburger/menu toggle              |
+| Footer recessed panel         | `src/app/layout.tsx` + `src/app/globals.css` | Inset footer surface with control-style text links                                 |
+| Hero composition              | `src/app/page.tsx`                           | Above-the-fold split layout with clean copy area and instrumentation panel         |
+| Design preview                | `src/app/design-tokens-preview/page.tsx`     | Isolated primitive preview (not in production nav)                                 |
 
 ## Sub-references
 
