@@ -63,7 +63,9 @@ Motion behavior:
 
 Behavior:
 
-- Backlit rocker control with light/dark icon cues
+- Pivoting rocker control (tilt motion, no horizontal sliding thumb)
+- Backlight engages in dark mode and remains dim/off in light mode
+- Flanking sun/moon icons are recessed/engraved into the surrounding surface
 - Local storage persistence and `html.light` / `html.dark` toggling
 
 State model:
