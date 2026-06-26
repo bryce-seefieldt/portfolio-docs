@@ -16,6 +16,8 @@ tags: [portfolio, features, theming, accessibility]
 
 - reduced-motion media query handling
 - disabling non-essential transitions and animations
+- control-button and switch transition reduction
+- deploy pipeline LED transition reduction
 
 ### Out of scope
 
@@ -32,8 +34,8 @@ tags: [portfolio, features, theming, accessibility]
 
 - Feature name: Reduced motion support
 - Feature group: Theming and accessibility
-- Technical summary: Uses CSS and JS checks to reduce or disable animations when users prefer reduced motion.
-- Low-tech summary: The site reduces animations when the user requests it.
+- Technical summary: CSS `prefers-reduced-motion` handling removes non-essential transition effects (controls, switch thumb, pipeline transitions) while preserving functional state changes.
+- Low-tech summary: Motion-heavy polish is reduced, but controls still work and status changes remain understandable.
 
 ### Feature in action
 
@@ -44,7 +46,7 @@ tags: [portfolio, features, theming, accessibility]
 #### Manual
 
 - Steps: Enable reduced motion in OS settings and reload the page.
-- What to look for: Animations are minimized or disabled.
+- What to look for: Hover/press transitions become immediate, switch movement transition is removed, and deploy pipeline state shifts without glowing transition ramps.
 - Artifacts or reports to inspect: None.
 
 #### Tests
@@ -56,10 +58,12 @@ tags: [portfolio, features, theming, accessibility]
 
 - Animations still play for reduced-motion users.
 - Transitions do not disable in CSS.
+- Pipeline status appears to pulse or flicker instead of changing state discretely.
 
 ### Long-term maintenance notes
 
 - Re-test reduced-motion behavior after animation changes.
+- Include reduced-motion QA whenever hero sequencing timing is updated.
 
 ### Dependencies, libraries, tools
 
@@ -70,6 +74,7 @@ tags: [portfolio, features, theming, accessibility]
 
 - [`/portfolio-app/src/app/globals.css`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/globals.css)
 - [`/portfolio-app/src/components/ScrollFadeIn.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/ScrollFadeIn.tsx)
+- [`/portfolio-app/src/components/DeployPipeline.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/DeployPipeline.tsx)
 
 ### ADRs
 

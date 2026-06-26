@@ -1,6 +1,6 @@
 ---
 title: 'Feature: Navigation Header'
-description: 'Sticky navigation with desktop links and mobile menu.'
+description: 'Sticky raised control strip with stacked brand, control-style navigation links, and responsive menu behavior.'
 sidebar_position: 1
 tags: [portfolio, features, navigation, header]
 ---
@@ -15,7 +15,9 @@ tags: [portfolio, features, navigation, header]
 ### In scope
 
 - sticky header behavior on scroll
-- desktop navigation links
+- raised control-strip materiality
+- stacked persistent brand nameplate
+- desktop navigation controls
 - mobile menu toggle and close behaviors
 
 ### Out of scope
@@ -34,8 +36,8 @@ tags: [portfolio, features, navigation, header]
 
 - Feature name: Navigation header
 - Feature group: Navigation and UX polish
-- Technical summary: Client-side navigation component with sticky behavior, desktop links, and a mobile menu.
-- Low-tech summary: A header that helps reviewers move between pages quickly.
+- Technical summary: Client-side navigation component renders a raised control strip with compact control links, stacked branding, sticky-on-scroll shadow state, and mobile expansion behavior.
+- Low-tech summary: The header now reads like a control console while keeping routes easy to reach.
 
 ### Feature in action
 
@@ -45,13 +47,14 @@ tags: [portfolio, features, navigation, header]
 
 #### Manual
 
-- Steps: Open any page, scroll to trigger sticky shadow, open mobile menu, select a link.
-- What to look for: Header stays visible, menu opens/closes, links route correctly.
+- Steps: Open any page, scroll to trigger sticky shadow, verify stacked brand text, test desktop and mobile link controls.
+- What to look for: Header stays visible, control strip styling persists across routes, menu opens/closes, links route correctly.
 - Artifacts or reports to inspect: Optional route coverage in CI.
 
 #### Tests
 
-- Unit tests: None specific.
+- Unit tests:
+  - [`/portfolio-app/src/components/__tests__/NavigationEnhanced.test.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/__tests__/NavigationEnhanced.test.tsx)
 - E2E tests:
   - [`/portfolio-app/tests/e2e/routes.spec.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/routes.spec.ts)
   - [`/portfolio-app/tests/e2e/smoke.spec.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts)
@@ -61,11 +64,13 @@ tags: [portfolio, features, navigation, header]
 - Navigation links route to the wrong pages.
 - Mobile menu does not close on selection or escape.
 - Sticky styling does not engage when scrolling.
+- Stacked brand regresses to outdated naming.
 
 ### Long-term maintenance notes
 
 - Keep navigation entries aligned with core routes.
 - Update evidence link if docs base URL changes.
+- Keep link labels and control treatment consistent with `ControlButton` contracts.
 
 ### Dependencies, libraries, tools
 
@@ -76,6 +81,8 @@ tags: [portfolio, features, navigation, header]
 ### Source code references (GitHub URLs)
 
 - [`/portfolio-app/src/components/NavigationEnhanced.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/NavigationEnhanced.tsx)
+- [`/portfolio-app/src/components/ControlButton.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/ControlButton.tsx)
+- [`/portfolio-app/src/app/globals.css`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/globals.css)
 
 ### ADRs
 
