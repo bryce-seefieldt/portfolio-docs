@@ -35,7 +35,7 @@ tags: [portfolio, features, theming, accessibility]
 
 - Feature name: Theme toggle
 - Feature group: Theming and accessibility
-- Technical summary: A backlit cockpit-style rocker toggles `html.light` and `html.dark` classes, persists state in localStorage, and supports keyboard operation with accessible labeling.
+- Technical summary: A compact cockpit-style rocker (pivot/tilt, no sliding thumb) toggles `html.light` and `html.dark` classes, persists state in localStorage, and supports keyboard operation with accessible labeling.
 - Low-tech summary: A mode switch in the header flips between dark and light themes and remembers the choice.
 
 ### Feature in action
@@ -47,7 +47,7 @@ tags: [portfolio, features, theming, accessibility]
 #### Manual
 
 - Steps: Toggle the rocker in the header, refresh, and verify persisted mode.
-- What to look for: Switch state and page theme stay aligned; mode persists across reloads; focus ring is visible during keyboard navigation.
+- What to look for: The paddle tilts between states (no sliding track/knob), backlight is active in dark mode and dim/off in light mode, mode persists across reloads, and focus ring is visible during keyboard navigation.
 - Artifacts or reports to inspect: None.
 
 #### Tests
@@ -60,7 +60,7 @@ tags: [portfolio, features, theming, accessibility]
 
 - Theme does not persist after reload.
 - Theme toggle causes hydration mismatch warnings.
-- Rocker visual state drifts from active theme class.
+- Rocker tilt/backlight state drifts from active theme class.
 
 ### Long-term maintenance notes
 
