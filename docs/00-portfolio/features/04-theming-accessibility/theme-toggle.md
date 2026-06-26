@@ -1,6 +1,6 @@
 ---
 title: 'Feature: Theme Toggle'
-description: 'Class-based light and dark mode switching through a physical switch control with persistence.'
+description: 'Class-based light and dark mode switching through a cockpit-style rocker control with persistence.'
 sidebar_position: 1
 tags: [portfolio, features, theming, accessibility]
 ---
@@ -14,7 +14,7 @@ tags: [portfolio, features, theming, accessibility]
 
 ### In scope
 
-- physical switch UI and interaction
+- cockpit-style rocker UI and interaction
 - persistence in local storage
 - system preference fallback
 - keyboard and focus-visible accessibility behavior
@@ -35,7 +35,7 @@ tags: [portfolio, features, theming, accessibility]
 
 - Feature name: Theme toggle
 - Feature group: Theming and accessibility
-- Technical summary: A physical two-position switch toggles `html.light` and `html.dark` classes, persists state in localStorage, and supports keyboard operation with accessible labeling.
+- Technical summary: A backlit cockpit-style rocker toggles `html.light` and `html.dark` classes, persists state in localStorage, and supports keyboard operation with accessible labeling.
 - Low-tech summary: A mode switch in the header flips between dark and light themes and remembers the choice.
 
 ### Feature in action
@@ -46,7 +46,7 @@ tags: [portfolio, features, theming, accessibility]
 
 #### Manual
 
-- Steps: Toggle the switch in desktop and mobile nav, refresh, and verify persisted mode.
+- Steps: Toggle the rocker in the header, refresh, and verify persisted mode.
 - What to look for: Switch state and page theme stay aligned; mode persists across reloads; focus ring is visible during keyboard navigation.
 - Artifacts or reports to inspect: None.
 
@@ -60,12 +60,12 @@ tags: [portfolio, features, theming, accessibility]
 
 - Theme does not persist after reload.
 - Theme toggle causes hydration mismatch warnings.
-- Switch visual state drifts from active theme class.
+- Rocker visual state drifts from active theme class.
 
 ### Long-term maintenance notes
 
 - Re-test after changes to layout or theme initialization scripts.
-- Keep switch labels and semantics aligned with mode names used in UI copy.
+- Keep rocker labels and semantics aligned with mode names used in UI copy.
 
 ### Dependencies, libraries, tools
 

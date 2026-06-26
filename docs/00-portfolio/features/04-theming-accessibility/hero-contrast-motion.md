@@ -69,7 +69,7 @@ tags: [portfolio, features, theming, accessibility, hero]
 
 - Re-verify hero contrast whenever token values or glow intensity change.
 - Keep decorative elements `aria-hidden` unless they carry essential status meaning.
-- Post-spec timing language is the active contract: one-time sequence, 3 seconds per stage, final PRODUCTION hold.
+- Post-spec timing language is the active contract: one-time sequence, 1 second per stage, final PRODUCTION hold.
 
 ### Dependencies, libraries, tools
 

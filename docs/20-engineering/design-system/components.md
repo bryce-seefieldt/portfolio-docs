@@ -30,9 +30,10 @@ Document the reusable UI primitives that define the Phase 2 control-surface lang
 
 ### ControlButton
 
-- Purpose: Reusable physical hardware-style CTA and control link used in hero and navigation.
+- Purpose: Reusable deep hardware-style CTA and control link used in hero and navigation.
 - Source: `portfolio-app/src/components/ControlButton.tsx`
 - Styling contract: Uses `control-button` and optional compact variant classes from `portfolio-app/src/app/globals.css`.
+- Materiality: Deep outset bevel, layered elevation shadow, subtle sheen, and inlaid/engraved label treatment.
 
 Props:
 
@@ -49,16 +50,21 @@ Accessibility behavior:
 
 Motion behavior:
 
-- Default mode: hover elevation and active depress affordance
-- Reduced motion: transitions removed by reduced-motion media query
+- Default mode: hover energizes the face and active depresses the hardware
+- Reduced motion: transitions removed by reduced-motion media query; pressed state remains static
 
 ---
 
-### ThemeToggle (Physical Switch)
+### ThemeToggle (Cockpit Rocker)
 
 - Purpose: Global mode switch between dark-default and explicit light mode.
 - Source: `portfolio-app/src/components/ThemeToggle.tsx`
 - Styling contract: `control-switch` family classes in `portfolio-app/src/app/globals.css`.
+
+Behavior:
+
+- Backlit rocker control with light/dark icon cues
+- Local storage persistence and `html.light` / `html.dark` toggling
 
 State model:
 
@@ -69,13 +75,13 @@ State model:
 Accessibility behavior:
 
 - Real `<button type="button">`
-- Dynamic `aria-label` announces target mode (switch to dark/light)
+- Dynamic `aria-label` announces the toggle as light/dark mode control
 - Keyboard operable with visible focus state
 
 Motion behavior:
 
-- Default mode: thumb movement transition
-- Reduced motion: thumb transition removed
+- Default mode: rocker movement transition
+- Reduced motion: rocker transition removed
 
 ---
 
@@ -88,9 +94,9 @@ Motion behavior:
 Behavior contract (post-spec timing):
 
 - Runs one time after load
-- Active stage shifts every 3 seconds
+- Active stage shifts every 1 second
 - Sequence: COMMIT -> CHECKS -> STAGING -> PRODUCTION
-- Final state: only PRODUCTION remains active; other stages remain off
+- Final state: PRODUCTION remains active after the sequence; earlier stages turn off as the next stage lights
 
 Color mapping:
 

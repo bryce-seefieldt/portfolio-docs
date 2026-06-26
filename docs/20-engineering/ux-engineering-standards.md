@@ -118,7 +118,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 └──────────────────┘
 ```
 
-**Current approach:** Collapsible mobile navigation with an accessible menu toggle.
+**Current approach:** Full-bleed control-strip navigation with inline route controls and no hamburger/menu toggle.
 
 ---
 
@@ -166,7 +166,7 @@ The portfolio uses a sticky (not fixed) header to keep navigation accessible whi
 
 **Current implementation:**
 
-- Collapsible navigation on small screens
+- Full-bleed navigation surface with inline controls
 - All primary routes remain reachable via keyboard and touch
 - Touch-friendly spacing and targets
 - Theme toggle always visible
@@ -307,10 +307,10 @@ Validate against active design tokens from the Design System reference (do not h
    ```tsx
    <button
      type="button"
-     aria-label="Switch to dark theme"
+     aria-label="Toggle light/dark theme"
      onClick={toggleTheme}
    >
-     {/* Physical switch track and thumb */}
+     {/* Cockpit-style rocker control */}
    </button>
    ```
 
@@ -381,9 +381,9 @@ Validate against active design tokens from the Design System reference (do not h
 Current implementation contract for the deploy pipeline indicator in the home hero:
 
 - One-time sequence per page load
-- Stage cadence: 3 seconds per stage
+- Stage cadence: 1 second per stage
 - Order: COMMIT -> CHECKS -> STAGING -> PRODUCTION
-- Final state: PRODUCTION remains active, previous stages remain off
+- Final state: PRODUCTION remains active, previous stages turn off as the sequence advances
 
 This post-spec timing contract supersedes earlier short-sequence draft guidance and is the baseline for UX validation.
 
