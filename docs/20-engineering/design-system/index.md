@@ -57,7 +57,7 @@ The interface presents one coherent hardware fiction in two states: light mode i
 | Panel primitive               | `src/components/Panel.tsx`                         | Elevated + inset variants, rivets, sheen, bevel                                     |
 | Readout primitive             | `src/components/Readout.tsx`                       | Long string compaction to prevent overlap with adjacent readouts                    |
 | LabelTag primitive            | `src/components/LabelTag.tsx`                      | Uppercase mono utilitarian labels/chips                                             |
-| Dial primitive                | `src/components/Dial.tsx`                          | Generic analog gauge primitive used by legacy/control contexts                       |
+| Dial primitive                | `src/components/Dial.tsx`                          | Generic analog gauge primitive used by legacy/control contexts                      |
 | ControlButton primitive       | `src/components/ControlButton.tsx`                 | Deep hardware CTA/control element with inlaid labels for hero and nav               |
 | Theme switch primitive        | `src/components/ThemeToggle.tsx`                   | Cockpit-style backlit rocker with localStorage persistence and html class toggling  |
 | Deploy pipeline primitive     | `src/components/DeployPipeline.tsx`                | One-time staged LED sequence with post-spec timing (1s per stage)                   |
@@ -67,8 +67,8 @@ The interface presents one coherent hardware fiction in two states: light mode i
 | Home module composition       | `src/app/page.tsx`                                 | Module 01-06 order and section-level panel grammar                                  |
 | Operating principles panel    | `src/components/home/OperatingPrinciplesPanel.tsx` | Accessible annunciator (`radiogroup`/`radio`) plus `aria-live` CRT detail           |
 | By-the-numbers cluster        | `src/components/home/ByTheNumbersCluster.tsx`      | Banked inset instrumentation (seven-segment, nixie, bar, gauge, lamps)              |
-| Keycap primitive              | `src/components/Keycap.tsx`                        | Reusable raised key with tokenized cap/legend variants and state classes             |
-| Keypad primitive              | `src/components/Keypad.tsx`                        | Inset panel keypad composition built from `Keycap` descriptors                        |
+| Keycap primitive              | `src/components/Keycap.tsx`                        | Reusable raised key with tokenized cap/legend variants and state classes            |
+| Keypad primitive              | `src/components/Keypad.tsx`                        | Inset panel keypad composition built from `Keycap` descriptors                      |
 | Career era cards              | `src/components/home/CareerEraCards.tsx`           | Four channel-strip style cards for era highlights                                   |
 | Design preview                | `src/app/design-tokens-preview/page.tsx`           | Isolated primitive preview (not in production nav)                                  |
 
