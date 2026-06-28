@@ -36,28 +36,39 @@ Out of scope: the _behavioral_ standards every component must meet (accessibilit
 
 ## The aesthetic in two sentences
 
-A stylized, accessible interface inspired by cassette futurism: phosphor-on-dark "powered-on" theming, control-panel framing, CRT-style readouts, and analog instrumentation, rendered with CSS and inline SVG. It is confident and clearly a website, not a photoreal hardware reproduction, and readability always wins.
+The interface presents one coherent hardware fiction in two states: light mode is warm beige institutional hardware in daylight (powered down), and dark mode is the same hardware powered on with phosphor instrumentation. It is stylized and confidently web-native (not photoreal), and readability always wins.
+
+## Phase 2C token lock (current)
+
+- Light mode palette (locked): `#E8E2D0` page base, `#D4CBB3` surface, `#C9BFA3` inset surface, `#1A1814` primary ink, `#A34722` accent, `#9A958A` line.
+- Dark mode palette (locked): `#0A0A0A` page base, `#1A1814` surface, `#211E18` inset surface, `#E8E2D0` warm-cream ink, `#00FF41` phosphor accent, `#003311` divider line.
+- Type registers (locked): Space Grotesk (display), Inter (body), JetBrains Mono (mono/readouts), Departure Mono (pixel accent labels and counters).
+- Panel grammar (locked): prose on clean background, data in inset panels, interactive controls in raised/outset panels.
 
 ## Source map (where the design lives in `portfolio-app`)
 
 > Fill in / confirm exact paths during implementation. This map is the single most useful entry on this page for a maintainer or reviewer.
 
-| Concern                       | Source location                              | Notes                                                                              |
-| ----------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Color tokens (both modes)     | `src/app/globals.css`                        | CSS custom properties under `:root` (dark default) and `html.light`                |
-| Typography (fonts)            | `src/app/layout.tsx`                         | `next/font` setup for Space Grotesk, Inter, JetBrains Mono -> CSS vars             |
-| Type scale + glow utilities   | `src/app/globals.css`                        | `type-*`, `glow-accent`, control-strip/control-link classes                        |
-| Panel primitive               | `src/components/Panel.tsx`                   | Elevated + inset variants, rivets, sheen, bevel                                    |
-| Readout primitive             | `src/components/Readout.tsx`                 | Long string compaction to prevent overlap with adjacent readouts                   |
-| LabelTag primitive            | `src/components/LabelTag.tsx`                | Uppercase mono utilitarian labels/chips                                            |
-| Dial primitive                | `src/components/Dial.tsx`                    | Static analog gauge SVG; needle/tick math                                          |
-| ControlButton primitive       | `src/components/ControlButton.tsx`           | Deep hardware CTA/control element with inlaid labels for hero and nav              |
-| Theme switch primitive        | `src/components/ThemeToggle.tsx`             | Cockpit-style backlit rocker with localStorage persistence and html class toggling |
-| Deploy pipeline primitive     | `src/components/DeployPipeline.tsx`          | One-time staged LED sequence with post-spec timing (1s per stage)                  |
-| Nav control strip composition | `src/components/NavigationEnhanced.tsx`      | Full-bleed brand-and-controls control strip, no hamburger/menu toggle              |
-| Footer recessed panel         | `src/app/layout.tsx` + `src/app/globals.css` | Inset footer surface with control-style text links                                 |
-| Hero composition              | `src/app/page.tsx`                           | Above-the-fold split layout with clean copy area and instrumentation panel         |
-| Design preview                | `src/app/design-tokens-preview/page.tsx`     | Isolated primitive preview (not in production nav)                                 |
+| Concern                       | Source location                                    | Notes                                                                               |
+| ----------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Color tokens (both modes)     | `src/app/globals.css`                              | Phase 2C lock under `:root` (dark powered-on) and `html.light` (beige powered-down) |
+| Typography (fonts)            | `src/app/layout.tsx`                               | `next/font` setup for Space Grotesk, Inter, JetBrains Mono, Departure Mono          |
+| Type scale + glow utilities   | `src/app/globals.css`                              | `type-*`, `type-register-pixel`, `glow-accent`, control-strip/control-link classes  |
+| Panel primitive               | `src/components/Panel.tsx`                         | Elevated + inset variants, rivets, sheen, bevel                                     |
+| Readout primitive             | `src/components/Readout.tsx`                       | Long string compaction to prevent overlap with adjacent readouts                    |
+| LabelTag primitive            | `src/components/LabelTag.tsx`                      | Uppercase mono utilitarian labels/chips                                             |
+| Dial primitive                | `src/components/Dial.tsx`                          | Static analog gauge SVG; needle/tick math                                           |
+| ControlButton primitive       | `src/components/ControlButton.tsx`                 | Deep hardware CTA/control element with inlaid labels for hero and nav               |
+| Theme switch primitive        | `src/components/ThemeToggle.tsx`                   | Cockpit-style backlit rocker with localStorage persistence and html class toggling  |
+| Deploy pipeline primitive     | `src/components/DeployPipeline.tsx`                | One-time staged LED sequence with post-spec timing (1s per stage)                   |
+| Nav control strip composition | `src/components/NavigationEnhanced.tsx`            | Full-bleed brand-and-controls control strip, no hamburger/menu toggle               |
+| Footer recessed panel         | `src/app/layout.tsx` + `src/app/globals.css`       | Inset footer surface with control-style text links                                  |
+| Hero composition              | `src/app/page.tsx`                                 | Above-the-fold split layout with clean copy area and instrumentation panel          |
+| Home module composition       | `src/app/page.tsx`                                 | Module 01-06 order and section-level panel grammar                                  |
+| Operating principles panel    | `src/components/home/OperatingPrinciplesPanel.tsx` | Accessible annunciator (`radiogroup`/`radio`) plus `aria-live` CRT detail           |
+| By-the-numbers cluster        | `src/components/home/ByTheNumbersCluster.tsx`      | Banked inset instrumentation (seven-segment, nixie, bar, gauge, lamps)              |
+| Career era cards              | `src/components/home/CareerEraCards.tsx`           | Four channel-strip style cards for era highlights                                   |
+| Design preview                | `src/app/design-tokens-preview/page.tsx`           | Isolated primitive preview (not in production nav)                                  |
 
 ## Sub-references
 

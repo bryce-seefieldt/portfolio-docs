@@ -1,6 +1,6 @@
 ---
 title: 'Feature: Landing Page (/)'
-description: 'Landing page with evaluation path, evidence callouts, and key entry points.'
+description: 'Landing page with six ordered modules (arc, principles, instrumentation, highlights, work, contact) and control-panel hero framing.'
 sidebar_position: 1
 tags: [portfolio, features, core-pages, landing]
 ---
@@ -14,11 +14,10 @@ tags: [portfolio, features, core-pages, landing]
 
 ### In scope
 
-- hero narrative and value proposition
-- reviewer evaluation path callout
-- primary calls to action (CTAs)
-  - e.g. CV, Projects, Evidence Docs
-- featured work highlights
+- control-panel hero (module 00) with physical CTAs and deploy instrumentation
+- module sequence below hero: 01 Arc, 02 Operating Principles, 03 By the Numbers, 04 Career Highlights, 05 Selected Work, 06 Contact
+- panel grammar application: prose on clean background, data in inset panels, interactive cards/controls in raised panels
+- home-specific instrumentation components (annunciator panel, clustered bank readouts, era cards)
 
 ### Out of scope
 
@@ -36,8 +35,8 @@ tags: [portfolio, features, core-pages, landing]
 
 - Feature name: Landing page (`/`)
 - Feature group: Core pages and reviewer journey
-- Technical summary: Server-rendered Next.js route that composes CTA buttons, evidence callouts, and featured project cards using shared layout components.
-- Low-tech summary: The home page tells reviewers what to look at first and gives quick links to proof.
+- Technical summary: Server-rendered route composing six content modules beneath the hero, with a client-side accessible annunciator (`radiogroup` + `aria-live`) and reusable instrument/card sub-components for narrative and evidence framing.
+- Low-tech summary: The page tells a clear story first, then shows proof through interactive principles, numbers, highlights, and inspectable work links.
 
 ### Feature in action
 
@@ -47,27 +46,30 @@ tags: [portfolio, features, core-pages, landing]
 
 #### Manual
 
-- Steps: Open `/`, click “Start with the CV,” “Browse projects,” and “Open evidence docs.”
-- What to look for: Internal CTA routes load correctly; evidence/docs links open in a new tab with non-empty `href` attributes; featured cards show dossier links.
+- Steps: Open `/`, review modules in order, toggle one principle tile, and verify contact/work controls.
+- What to look for: All six module labels appear; Module 02 keyboard interaction works (arrow keys on tiles); Module 03 stats are readable text even without motion; Module 04 era cards stack cleanly on mobile.
 - Artifacts or reports to inspect: Optional Playwright E2E runs in CI showing core route coverage.
 
 #### Tests
 
 - Unit tests: [`/portfolio-app/src/lib/__tests__/config.test.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/__tests__/config.test.ts)
+- Unit tests: [`/portfolio-app/src/app/__tests__/page.test.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/__tests__/page.test.tsx)
+- Unit tests: [`/portfolio-app/src/components/__tests__/OperatingPrinciplesPanel.test.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/__tests__/OperatingPrinciplesPanel.test.tsx)
 - E2E tests:
   - [`/portfolio-app/tests/e2e/routes.spec.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/routes.spec.ts)
   - [`/portfolio-app/tests/e2e/smoke.spec.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/tests/e2e/smoke.spec.ts)
 
 ### Potential behavior if broken or misconfigured
 
-- Evidence links route to the wrong docs base URL.
-- CTAs are missing or point to invalid routes.
-- Featured work section shows empty or stale content.
+- Module order drifts from the intended narrative flow.
+- Annunciator interaction loses keyboard semantics or live-region updates.
+- Instrument labels display decoratively but lose readable text values.
 
 ### Long-term maintenance notes
 
-- Keep the evaluation path aligned with the reviewer guide and evidence structure.
-- Update featured work as projects change or new gold-standard entries exist.
+- Preserve the module ordering and panel grammar; avoid collapsing back into generic card stacks.
+- Keep Module 03 figures aligned with canonical bio docs (no age metrics).
+- Keep home instrumentation components reusable and documented in the design-system source map.
 
 ### Dependencies, libraries, tools
 
@@ -78,8 +80,9 @@ tags: [portfolio, features, core-pages, landing]
 ### Source code references (GitHub URLs)
 
 - [`/portfolio-app/src/app/page.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/app/page.tsx)
-- [`/portfolio-app/src/components/Callout.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/Callout.tsx)
-- [`/portfolio-app/src/components/Section.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/Section.tsx)
+- [`/portfolio-app/src/components/home/OperatingPrinciplesPanel.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/home/OperatingPrinciplesPanel.tsx)
+- [`/portfolio-app/src/components/home/ByTheNumbersCluster.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/home/ByTheNumbersCluster.tsx)
+- [`/portfolio-app/src/components/home/CareerEraCards.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/home/CareerEraCards.tsx)
 - [`/portfolio-app/src/components/ScrollFadeIn.tsx`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/components/ScrollFadeIn.tsx)
 - [`/portfolio-app/src/lib/config.ts`](https://github.com/bryce-seefieldt/portfolio-app/blob/main/src/lib/config.ts)
 
@@ -104,8 +107,8 @@ tags: [portfolio, features, core-pages, landing]
 
 ## Validation / Expected outcomes
 
-- Reviewers can reach `/cv`, `/projects`, and docs within two clicks.
-- Evidence callouts match the current documentation structure.
+- Reviewers can understand the narrative-to-proof flow without leaving `/`.
+- Module 02, 03, and 04 present principles, quantified evidence, and highlights without sacrificing readability.
 
 ## Failure modes / Troubleshooting
 
