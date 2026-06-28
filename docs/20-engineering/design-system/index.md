@@ -52,6 +52,7 @@ The interface presents one coherent hardware fiction in two states: light mode i
 | Concern                       | Source location                                    | Notes                                                                               |
 | ----------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | Color tokens (both modes)     | `src/app/globals.css`                              | Phase 2C lock under `:root` (dark powered-on) and `html.light` (beige powered-down) |
+| Elevation tokens (both modes) | `src/app/globals.css`                              | Theme-aware depth recipe (`--elevation-*`, `--panel-*`, `--edge-*`, `--lift-halo`)  |
 | Typography (fonts)            | `src/app/layout.tsx`                               | `next/font` setup for Space Grotesk, Inter, JetBrains Mono, Departure Mono          |
 | Type scale + glow utilities   | `src/app/globals.css`                              | `type-*`, `type-register-pixel`, `glow-accent`, control-strip/control-link classes  |
 | Panel primitive               | `src/components/Panel.tsx`                         | Elevated + inset variants, rivets, sheen, bevel                                     |
@@ -70,7 +71,14 @@ The interface presents one coherent hardware fiction in two states: light mode i
 | Keycap primitive              | `src/components/Keycap.tsx`                        | Reusable raised key with tokenized cap/legend variants and state classes            |
 | Keypad primitive              | `src/components/Keypad.tsx`                        | Inset panel keypad composition built from `Keycap` descriptors                      |
 | Career era cards              | `src/components/home/CareerEraCards.tsx`           | Four channel-strip style cards for era highlights                                   |
-| Design preview                | `src/app/design-tokens-preview/page.tsx`           | Isolated primitive preview (not in production nav)                                  |
+| Design preview                | `src/app/design-tokens-preview/page.tsx`           | Canonical rendered component gallery (keep complete and in-sync with component PRs) |
+
+### Phase 2C.2 implementation notes
+
+- Dark-mode realism uses a **lift-with-light** approach: depth separation comes from edge highlights and lift halos in addition to shadow stacks, rather than relying on black-on-black drop shadows.
+- Elevation behavior is now centrally tunable through theme-aware token groups in `globals.css`, and consumed by panel, control-button, dial, and keycap/keypad treatments.
+- Keycap palette now includes the original 8 roles plus an expanded `--key2-*` secondary set per theme, with AA-verified cap/legend pairs.
+- `src/app/design-tokens-preview/page.tsx` is the canonical component gallery. Every reusable design-system component must be represented there, and updates belong in the same PR as component changes.
 
 ### Phase 2C.1 implementation note
 
