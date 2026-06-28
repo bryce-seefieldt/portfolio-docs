@@ -82,6 +82,17 @@ Adopt a cassette-futurism design system, delivered as a confident, clearly-a-web
 - What migration considerations exist: cross-links must be established between the Design System reference (what it looks like) and UX Engineering Standards (how it behaves); neither duplicates the other.
 - Deferral: true dimensional realism via WebGL/Three.js is deferred to a later phase and, if pursued, scoped to a single hero centerpiece rather than the whole site, to contain cost. It is an enhancement, never a dependency.
 
+### Follow-up note (Phase 2C refinement)
+
+In Phase 2C (2026-06), the token conventions were explicitly locked to reduce drift and enforce a coherent two-state hardware fiction:
+
+- light mode locked to Beige/Institutional palette (warm cream base, burnt-orange accent),
+- dark mode locked to phosphor-on-near-black with warm-cream ink,
+- typography expanded to four registers by adding Departure Mono as a sparse accent face,
+- panel grammar formalized: prose on clean background, data in inset panels, controls in raised panels.
+
+This refines and operationalizes the original decision without changing ADR status or intent.
+
 ## Validation / Expected outcomes
 
 - The redesigned interface maintains WCAG AA in both themes and does not regress the performance budget (Lighthouse and Core Web Vitals targets hold).
