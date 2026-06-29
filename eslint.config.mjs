@@ -46,8 +46,6 @@ export default [
     },
     plugins: {
       '@typescript-eslint': tseslint,
-      react: react,
-      'react-hooks': reactHooks,
     },
     rules: {
       // TypeScript recommended rules
@@ -61,16 +59,40 @@ export default [
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
 
+      // General best practices
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-debugger': 'error',
+      'no-unused-vars': 'off', // Using @typescript-eslint/no-unused-vars instead
+    },
+  },
+  {
+    files: ['**/*.{jsx,tsx}'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        console: 'readonly',
+      },
+    },
+    plugins: {
+      react: react,
+      'react-hooks': reactHooks,
+    },
+    rules: {
       // React recommended rules
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off', // Not needed in React 19
       'react/prop-types': 'off', // Using TypeScript for prop types
-
-      // General best practices
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'no-debugger': 'error',
-      'no-unused-vars': 'off', // Using @typescript-eslint/no-unused-vars instead
     },
     settings: {
       react: {
