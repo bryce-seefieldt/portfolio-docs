@@ -114,10 +114,7 @@ interface EvidenceBlockProps {
 
 ```typescript
 type BadgeType =
-  | 'docs-available'
-  | 'threat-model'
-  | 'gold-standard'
-  | 'adr-complete';
+  'docs-available' | 'threat-model' | 'gold-standard' | 'adr-complete';
 
 interface VerificationBadgeProps {
   type: BadgeType;

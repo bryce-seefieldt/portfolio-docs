@@ -149,9 +149,7 @@ None (no dependencies need removal for this stage)
 // Example test structure for registry validation
 describe('Registry Validation', () => {
   it('should accept valid project entries', () => {
-    const validProject = {
-      /* valid schema */
-    };
+    const validProject = {/* valid schema */};
     expect(() => validateProject(validProject)).not.toThrow();
   });
 
