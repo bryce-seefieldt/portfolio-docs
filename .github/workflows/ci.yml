@@ -62,7 +62,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Auto-format for Dependabot PRs
-        if: ${{ github.actor == 'dependabot[bot]' }}
+        if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
         run: |
           pnpm format:write || true
           if [ -n "$(git status --porcelain)" ]; then
@@ -70,7 +70,7 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add -A
             git commit -m "chore: auto-format (CI)"
-            git push
+            git push origin HEAD:${{ github.head_ref }}
           fi
 
       - name: Lint
