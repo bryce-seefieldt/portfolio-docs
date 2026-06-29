@@ -220,9 +220,7 @@ export default {
   darkMode: 'class', // Use .dark class (not media query)
   theme: {
     extend: {
-      colors: {
-        /* Custom color definitions if needed */
-      },
+      colors: {/* Custom color definitions if needed */},
     },
   },
 };

@@ -146,12 +146,8 @@ tags: ['reference', 'social-metadata', 'open-graph', 'twitter-cards', 'seo']
     return {
       title: project.title,
       description: project.summary,
-      openGraph: {
-        /* ... */
-      },
-      twitter: {
-        /* ... */
-      },
+      openGraph: {/* ... */},
+      twitter: {/* ... */},
     };
   }
   ```

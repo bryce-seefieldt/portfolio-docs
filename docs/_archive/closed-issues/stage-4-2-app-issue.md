@@ -294,9 +294,7 @@ Next.js Image component will be configured to:
       enabled: process.env.ANALYZE === 'true',
     });
 
-    const nextConfig: NextConfig = {
-      /* ... */
-    };
+    const nextConfig: NextConfig = {/* ... */};
 
     export default withBundleAnalyzer(nextConfig);
     ```
