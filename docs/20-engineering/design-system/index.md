@@ -71,6 +71,8 @@ The interface presents one coherent hardware fiction in two states: light mode i
 | Keycap primitive              | `src/components/Keycap.tsx`                        | Reusable raised key with tokenized cap/legend variants, sidewalls, and state classes |
 | Keypad primitive              | `src/components/Keypad.tsx`                        | Inset panel keypad composition built from `Keycap` descriptors                       |
 | Career era cards              | `src/components/home/CareerEraCards.tsx`           | Four channel-strip style cards for era highlights                                    |
+| Tech stack keyboard           | `src/components/home/TechStackKeyboard.tsx`        | Interactive radiogroup keyboard with 21 curated tech-stack keys and CRT detail panel  |
+| Tech stack icons              | `src/icons/TechStackIcons.tsx`                      | 16 vendored Simple Icons SVGs + 5 text legends (Java, AWS, Azure, REST, SQL Server)   |
 | Design preview                | `src/app/design-tokens-preview/page.tsx`           | Canonical rendered component gallery (keep complete and in-sync with component PRs)  |
 
 ### Phase 2C.2 implementation notes
@@ -92,6 +94,16 @@ The interface presents one coherent hardware fiction in two states: light mode i
 
 - `Keycap` and `Keypad` are currently **design-tokens preview primitives only** (see `src/app/design-tokens-preview/page.tsx`).
 - Home-page integration was intentionally deferred in this phase; `src/app/page.tsx` contains TODO markers for future copy and lead-slot promotion decisions.
+
+### Phase 2C.4 implementation notes
+
+- TechStackKeyboard is the first production home-page module using Keycap/Keypad as interactive components (not preview-only).
+- Keycap width-ratio bug fixed: proportional sizing now uses `--keycap-unit` CSS variable (`3.78rem = base 3.2rem + gap 0.58rem`) with explicit width calcs on `.keycap--1u|1-25u|1-5u|2u` size classes.
+- TechStackKeyboard implements the OperatingPrinciplesPanel radiogroup + CRT pattern (accessible annunciator with `aria-live=polite` detail region) for interactive tech-stack browsing.
+- 21 curated keys organized into 6 categories (languages, frontend, backend, data, cloud, tooling), each with hardcoded blurbs.
+- Icon assets: 16 Simple Icons SVGs vendored as React components; 5 text legends used for missing or semantically incorrect icons (Java, AWS, Azure, REST, SQL Server).
+- Keyboard navigation: arrows/Home/End for traversal, Enter/Space for selection; focus-visible states on all keys.
+- Reduced-motion safe: no animation complexity, only CSS state-based styling.
 
 ## Sub-references
 
