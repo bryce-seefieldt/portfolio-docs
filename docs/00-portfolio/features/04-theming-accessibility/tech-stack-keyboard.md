@@ -117,7 +117,7 @@ sidebar_position: 6
 - [Vendored tech stack icons](https://github.com/bryce-seefieldt/portfolio-app/blob/feat/phase2c4-tech-stack-keyboard/src/icons/TechStackIcons.tsx)
 - [Home page integration](https://github.com/bryce-seefieldt/portfolio-app/blob/feat/phase2c4-tech-stack-keyboard/src/app/page.tsx#L90-L95)
 - [Keycap width-ratio fixes in globals.css](https://github.com/bryce-seefieldt/portfolio-app/blob/feat/phase2c4-tech-stack-keyboard/src/app/globals.css#L1160-L1165)
-- [ESLint config override for safe object injection](https://github.com/bryce-seefieldt/portfolio-app/blob/feat/phase2c4-tech-stack-keyboard/eslint.config.mjs#L10-L14)
+- [Inline scoped suppressions for object-injection lint rule](https://github.com/bryce-seefieldt/portfolio-app/blob/feat/phase2c4-tech-stack-keyboard/src/components/home/TechStackKeyboard.tsx#L276)
 
 ### ADRs
 
