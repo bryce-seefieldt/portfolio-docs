@@ -71,8 +71,8 @@ The interface presents one coherent hardware fiction in two states: light mode i
 | Keycap primitive              | `src/components/Keycap.tsx`                        | Reusable raised key with tokenized cap/legend variants, sidewalls, and state classes |
 | Keypad primitive              | `src/components/Keypad.tsx`                        | Inset panel keypad composition built from `Keycap` descriptors                       |
 | Career era cards              | `src/components/home/CareerEraCards.tsx`           | Four channel-strip style cards for era highlights                                    |
-| Tech stack keyboard           | `src/components/home/TechStackKeyboard.tsx`        | Interactive radiogroup keyboard with 21 curated tech-stack keys and CRT detail panel  |
-| Tech stack icons              | `src/icons/TechStackIcons.tsx`                      | 16 vendored Simple Icons SVGs + 5 text legends (Java, AWS, Azure, REST, SQL Server)   |
+| Tech stack keyboard           | `src/components/home/TechStackKeyboard.tsx`        | Interactive radiogroup keyboard with 21 curated tech-stack keys and CRT detail panel |
+| Tech stack icons              | `src/icons/TechStackIcons.tsx`                     | 16 vendored Simple Icons SVGs + 5 text legends (Java, AWS, Azure, REST, SQL Server)  |
 | Design preview                | `src/app/design-tokens-preview/page.tsx`           | Canonical rendered component gallery (keep complete and in-sync with component PRs)  |
 
 ### Phase 2C.2 implementation notes

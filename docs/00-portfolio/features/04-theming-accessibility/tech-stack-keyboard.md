@@ -82,7 +82,7 @@ sidebar_position: 6
 #### Tests
 
 - Unit tests: none (component is light on logic; mostly UI/state)
-- E2E tests: 
+- E2E tests:
   - [smoke.spec.ts](https://github.com/bryce-seefieldt/portfolio-app/blob/feat/phase2c4-tech-stack-keyboard/tests/e2e/smoke.spec.ts#L69) — home page renders without errors
   - [smoke.spec.ts: Resilience checks › Reduced motion](https://github.com/bryce-seefieldt/portfolio-app/blob/feat/phase2c4-tech-stack-keyboard/tests/e2e/smoke.spec.ts#L55) — reduced-motion CSS respected
 
@@ -152,14 +152,14 @@ sidebar_position: 6
 
 ## Failure modes / Troubleshooting
 
-| Symptom | Root Cause | Fix |
-|---------|-----------|-----|
-| All keys same size | `--keycap-unit` not set or `.keycap--Xu` classes using `grid-column: span` | Update `globals.css` size classes to use `width: calc(X * var(--keycap-unit))` |
-| Detail panel blank | `selectedId` state not synced to CRT region; aria-live not present | Add aria-live="polite" to detail region; wire onClick to `setSelectedId` |
-| Keyboard nav broken | `onKeyDown` handler not attached or `tabIndex` logic broken | Verify all keys have `tabIndex={isActive ? 0 : -1}` and `onKeyDown` prop |
-| Color contrast fails | depth-language endpoints not validated; keycap + legend pair fails AA | Run contrast checker on cap color against legend color; adjust `--depth-*` tokens if needed |
-| Missing icon renders as broken image | SVG path incorrect or icon doesn't exist in Simple Icons | Use text legend fallback (Java, AWS, Azure, REST, SQL Server) instead |
-| Screen reader doesn't announce updates | aria-live missing or value is "off" not "polite" | Verify detail panel has `role="status"` and `aria-live="polite"` |
+| Symptom                                | Root Cause                                                                 | Fix                                                                                         |
+| -------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| All keys same size                     | `--keycap-unit` not set or `.keycap--Xu` classes using `grid-column: span` | Update `globals.css` size classes to use `width: calc(X * var(--keycap-unit))`              |
+| Detail panel blank                     | `selectedId` state not synced to CRT region; aria-live not present         | Add aria-live="polite" to detail region; wire onClick to `setSelectedId`                    |
+| Keyboard nav broken                    | `onKeyDown` handler not attached or `tabIndex` logic broken                | Verify all keys have `tabIndex={isActive ? 0 : -1}` and `onKeyDown` prop                    |
+| Color contrast fails                   | depth-language endpoints not validated; keycap + legend pair fails AA      | Run contrast checker on cap color against legend color; adjust `--depth-*` tokens if needed |
+| Missing icon renders as broken image   | SVG path incorrect or icon doesn't exist in Simple Icons                   | Use text legend fallback (Java, AWS, Azure, REST, SQL Server) instead                       |
+| Screen reader doesn't announce updates | aria-live missing or value is "off" not "polite"                           | Verify detail panel has `role="status"` and `aria-live="polite"`                            |
 
 ## References
 
