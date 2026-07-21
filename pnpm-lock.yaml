@@ -12,7 +12,7 @@ overrides:
   svgo: ^3.3.3
   dompurify: ^3.3.2
   flatted: ^3.4.2
-  shell-quote: ^1.8.4
+  shell-quote: ^1.9.0
   fast-uri: ^3.1.2
   '@babel/plugin-transform-modules-systemjs': ^7.29.4
   webpack-dev-server@5>ws: ^8.21.0
